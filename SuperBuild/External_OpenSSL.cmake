@@ -68,7 +68,7 @@ if(NOT DEFINED OPENSSL_LIBRARIES
     # Workaround linking error when building against non-system zlib on macOS
     # See https://github.com/openssl/openssl/pull/12238
     set(OpenSSL_1.1.1g_URL https://github.com/jiaqiwang969/slicer-openssl/archive/refs/tags/openssl-1.1.1g-pr12238.tar.gz)
-    set(OpenSSL_1.1.1g_MD5 4765dcd60bcbed784c59ad7c2ca2b841)
+    set(OpenSSL_1.1.1g_MD5 9f085db2ac4c02aa6eefd04af8109df9)
 
     if(NOT DEFINED OpenSSL_${OPENSSL_DOWNLOAD_VERSION}_URL)
       message(FATAL_ERROR "There is no source version of OpenSSL ${OPENSSL_DOWNLOAD_VERSION} available.
