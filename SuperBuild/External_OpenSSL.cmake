@@ -48,7 +48,7 @@ if(NOT DEFINED OPENSSL_LIBRARIES
     # Starting with Qt 5.12.4, official Qt binaries are build against OpenSSL 1.1.1
     # See https://www.qt.io/blog/2019/06/17/qt-5-12-4-released-support-openssl-1-1-1
     if("${Qt5_VERSION_MAJOR}.${Qt5_VERSION_MINOR}.${Qt5_VERSION_PATCH}" VERSION_GREATER_EQUAL "5.12.4")
-      set(_default_version "1.0.2n")
+      set(_default_version "1.1.1g")
     else()
       set(_default_version "1.0.2n")
     endif()
@@ -67,7 +67,7 @@ if(NOT DEFINED OPENSSL_LIBRARIES
 
     # Workaround linking error when building against non-system zlib on macOS
     # See https://github.com/openssl/openssl/pull/12238
-    set(OpenSSL_1.1.1g_URL https://github.com/Slicer/Slicer-OpenSSL/releases/download/sources/openssl-1.1.1g-pr12238.tar.gz)
+    set(OpenSSL_1.1.1g_URL https://github.com/jiaqiwang969/slicer-openssl/archive/refs/tags/openssl-1.1.1g-pr12238.tar.gz)
     set(OpenSSL_1.1.1g_MD5 4765dcd60bcbed784c59ad7c2ca2b841)
 
     if(NOT DEFINED OpenSSL_${OPENSSL_DOWNLOAD_VERSION}_URL)
