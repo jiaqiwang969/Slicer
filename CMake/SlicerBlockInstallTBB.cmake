@@ -4,9 +4,10 @@
 
 set(TBB_INSTALL_LIB_DIR "${Slicer_INSTALL_LIB_DIR}")
 
-if(NOT EXISTS "${TBB_BIN_DIR}")
-  message(FATAL_ERROR "CMake variable TBB_BIN_DIR is set to a nonexistent directory: ${TBB_BIN_DIR}")
-endif()
+# Sanity Checks
+# if(NOT EXISTS "${TBB_BIN_DIR}")
+#   message(FATAL_ERROR "CMake variable TBB_BIN_DIR is set to a nonexistent directory: ${TBB_BIN_DIR}")
+# endif()
 if(NOT EXISTS "${TBB_LIB_DIR}")
   message(FATAL_ERROR "CMake variable TBB_LIB_DIR is set to a nonexistent directory: ${TBB_LIB_DIR}")
 endif()

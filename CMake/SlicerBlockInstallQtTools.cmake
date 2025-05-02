@@ -45,10 +45,40 @@ if(Slicer_BUILD_I18N_SUPPORT)
     lrelease
     lupdate
   )
+
+  # Find qt tools
+  find_program(QT_LINGUIST_EXECUTABLE linguist)
+  find_program(QT_LRELEASE_EXECUTABLE lrelease)
+  find_program(QT_LUPDATE_EXECUTABLE lupdate)
+  find_program(QT_LCONVERT_EXECUTABLE lconvert)
+
+  if(NOT QT_LCONVERT_EXECUTABLE)
+    message(FATAL_ERROR "Qt tool lconvert not found in PATH. Please ensure qttools are installed and in PATH.")
+  endif()
+  if(NOT QT_LRELEASE_EXECUTABLE)
+    message(FATAL_ERROR "Qt tool lrelease not found in PATH. Please ensure qttools are installed and in PATH.")
+  endif()
+
+  # Ensure subsequent calls refer to the found tools
+  set(QT_LCONVERT_EXECUTABLE ${QT_LCONVERT_EXECUTABLE} CACHE FILEPATH "Path to Qt lconvert tool" FORCE)
+  set(QT_LRELEASE_EXECUTABLE ${QT_LRELEASE_EXECUTABLE} CACHE FILEPATH "Path to Qt lrelease tool" FORCE)
+  set(QT_LUPDATE_EXECUTABLE ${QT_LUPDATE_EXECUTABLE} CACHE FILEPATH "Path to Qt lupdate tool" FORCE)
+
 endif()
 
 foreach(tool IN LISTS Slicer_INSTALLED_QT_TOOLS)
-  set(tool_executable ${qt_root_dir}/bin/${tool}${CMAKE_EXECUTABLE_SUFFIX})
+  if (tool STREQUAL "lconvert")
+    set(tool_executable ${QT_LCONVERT_EXECUTABLE})
+  elseif (tool STREQUAL "lrelease")
+    set(tool_executable ${QT_LRELEASE_EXECUTABLE})
+  elseif (tool STREQUAL "lupdate")
+    set(tool_executable ${QT_LUPDATE_EXECUTABLE})
+  elseif (tool STREQUAL "linguist")
+    set(tool_executable ${QT_LINGUIST_EXECUTABLE})
+  else()
+    message(FATAL_ERROR "Unknown Qt tool requested for installation: ${tool}")
+  endif()
+
   if(NOT EXISTS "${tool_executable}")
     message(FATAL_ERROR "Qt tool ${tool} not found: ${tool_executable}")
   endif()

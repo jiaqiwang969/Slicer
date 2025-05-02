@@ -46,7 +46,15 @@ macro(SlicerMacroGetOperatingSystemArchitectureBitness)
   set(${MY_VAR_PREFIX}_BITNESS 32)
   if(CMAKE_SIZEOF_VOID_P EQUAL 8)
     set(${MY_VAR_PREFIX}_BITNESS 64)
-    set(${MY_VAR_PREFIX}_ARCHITECTURE amd64)
+    # 进一步检查处理器架构
+    if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
+      set(${MY_VAR_PREFIX}_ARCHITECTURE "aarch64")
+    elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "arm64") # 有些系统可能报告为 arm64
+       set(${MY_VAR_PREFIX}_ARCHITECTURE "aarch64") # 统一为 aarch64
+    else()
+       # 默认为 amd64 (或其他 64 位架构，如果需要支持的话)
+       set(${MY_VAR_PREFIX}_ARCHITECTURE "amd64")
+    endif()
   endif()
 
   if(CMAKE_SYSTEM_NAME STREQUAL "Windows")

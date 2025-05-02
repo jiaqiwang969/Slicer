@@ -30,7 +30,8 @@ if(Slicer_USE_CTKAPPLAUNCHER)
       set(CTKAPPLAUNCHER_ARCHITECTURE "i386")
       set(md5 "3bbe3823b6950f342dd922fab32d643d")
     elseif("${CTKAPPLAUNCHER_OS}" STREQUAL "linux")
-      set(md5 "627d3634d806d1bc38e92e084f3f4f03")
+      set(md5 "7bf705f410ce32e265a80b43c877c36e")
+      #set(md5 "627d3634d806d1bc38e92e084f3f4f03")
     elseif("${CTKAPPLAUNCHER_OS}" STREQUAL "macosx")
       set(md5 "c50f5b765d7060bed16b6f669300b680")
     endif()
@@ -40,7 +41,7 @@ if(Slicer_USE_CTKAPPLAUNCHER)
     set(CTKAppLauncherFileName CTKAppLauncher-${launcher_version}-${CTKAPPLAUNCHER_OS}-${CTKAPPLAUNCHER_ARCHITECTURE}.tar.gz)
     ExternalProject_Add(${proj}
       ${${proj}_EP_ARGS}
-      URL https://github.com/commontk/AppLauncher/releases/download/v${launcher_version}/${CTKAppLauncherFileName}
+      URL https://github.com/jiaqiwang969/AppLauncher/releases/download/v${launcher_version}/${CTKAppLauncherFileName}
       URL_MD5 ${md5}
       DOWNLOAD_DIR ${CMAKE_BINARY_DIR}
       SOURCE_DIR ${EP_BINARY_DIR}

@@ -1,4 +1,3 @@
-
 #
 # This module will add a target named 'packageupload'.
 #
@@ -111,7 +110,7 @@ if(NOT PACKAGEUPLOAD)
     CTEST_MODEL
     # Variables set by SlicerMacroExtractRepositoryInfo
     Slicer_REVISION
-    Slicer_WC_LAST_CHANGED_DATE
+    # Slicer_WC_LAST_CHANGED_DATE # Commented out for Nix build - not available in non-git source
     Slicer_WC_URL
     )
     if(NOT DEFINED ${varname})

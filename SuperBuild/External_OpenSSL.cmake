@@ -48,7 +48,7 @@ if(NOT DEFINED OPENSSL_LIBRARIES
     # Starting with Qt 5.12.4, official Qt binaries are build against OpenSSL 1.1.1
     # See https://www.qt.io/blog/2019/06/17/qt-5-12-4-released-support-openssl-1-1-1
     if("${Qt5_VERSION_MAJOR}.${Qt5_VERSION_MINOR}.${Qt5_VERSION_PATCH}" VERSION_GREATER_EQUAL "5.12.4")
-      set(_default_version "1.1.1g")
+      set(_default_version "1.0.2n")
     else()
       set(_default_version "1.0.2n")
     endif()
