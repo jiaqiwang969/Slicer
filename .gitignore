@@ -37,3 +37,6 @@ Modules/CLI/*/*_tr.h
 
 
 build
+temp
+miniSlicer/build
+result

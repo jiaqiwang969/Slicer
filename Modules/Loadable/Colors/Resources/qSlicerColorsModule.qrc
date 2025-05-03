@@ -1,7 +1,0 @@
-<!DOCTYPE RCC><RCC version="1.0">
-  <qresource>
-    <file>Icons/Colors.png</file>
-    <file>Icons/SlicerCopyColor.png</file>
-    <file>Icons/SlicerNewColor.png</file>
-  </qresource>
-</RCC>

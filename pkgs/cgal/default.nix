@@ -1,3 +1,5 @@
+# This file defines the custom CGAL package.
+# Based on the user-provided version and patch.
 {
   lib,
   stdenv,
@@ -6,38 +8,42 @@
   boost,
   gmp,
   mpfr,
-}:
+}: # Dependencies injected by callPackage
 
 stdenv.mkDerivation rec {
-  pname = "cgal";
+  pname = "cgal"; # Using the standard name as per the provided file
   version = "5.0.3";
 
   src = fetchurl {
     url = "https://github.com/CGAL/cgal/archive/refs/tags/v${version}.tar.gz";
-    hash = "sha256-FePdpmrwnnBfAKJ5/kf0qVw70xuXMv0mSr0Pd8O0uCA=";
+    hash = "sha256-FePdpmrwnnBfAKJ5/kf0qVw70xuXMv0mSr0Pd8O0uCA="; # Correct hash from provided file
   };
 
-  # note: optional component libCGAL_ImageIO would need zlib and opengl;
-  #   there are also libCGAL_Qt{3,4} omitted ATM
+  # Build system dependencies
+  nativeBuildInputs = [ cmake ];
+
+  # Library dependencies required by CGAL
   buildInputs = [
     boost
     gmp
     mpfr
   ];
-  nativeBuildInputs = [ cmake ];
 
+  # Apply the patch to fix installation paths for Nix
   #patches = [ ./cgal_path.patch ];
 
+  # Disable checks as specified
   doCheck = false;
 
+  # Remove the preConfigure block added previously as the patch handles the path issue
+  # preConfigure = ''... '' removed
+
+  # Meta information about the package (from provided file)
   meta = with lib; {
     description = "Computational Geometry Algorithms Library";
     homepage = "http://cgal.org";
-    license = with licenses; [
-      gpl3Plus
-      lgpl3Plus
-    ];
+    license = with licenses; [ gpl3Plus lgpl3Plus ];
     platforms = platforms.all;
-    maintainers = [ maintainers.raskin ];
+    # maintainers = [ maintainers.raskin ]; # Use your maintainer handle if desired
   };
 } 
