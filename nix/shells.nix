@@ -13,6 +13,7 @@
       pkgs.gnumake
       pkgs.cmake
       pkgs.gcc    # Using GCC from pkgs (currently 24.05)
+      pkgs.git    # Add git for ExternalProject/FetchContent
     ];
 
     buildInputs = [
@@ -112,7 +113,7 @@
 
       # --- CMake Helper Functions ---
       configure_slicer_full() {
-        local source_dir="''${1:-.}" 
+        local source_dir="''${1:-.}"
         local build_dir="''${2:-./build-slicer-full}"
         local install_prefix="''${3:-$build_dir/install}"
 
@@ -136,21 +137,35 @@
         local source_dir="''${1:-.}"
         local build_dir="''${2:-./build-slicer-mini}"
         local install_prefix="''${3:-$build_dir/install}"
-        local extension_source_dir="$source_dir/Modules/Scripted/Home" # Assuming Home module location
+        # Resolve source_dir to an absolute path relative to PWD
+        # Check if readlink exists, otherwise use python alternative for wider compatibility
+        local absolute_source_dir
+        if command -v readlink &> /dev/null; then
+            absolute_source_dir="$(readlink -f "$source_dir")"
+        elif command -v python &> /dev/null; then
+            absolute_source_dir="$(python -c "import os, sys; print(os.path.abspath(sys.argv[1]))" "$source_dir")"
+        else
+            echo "Error: Cannot resolve absolute path. Need 'readlink' or 'python'." >&2
+            return 1
+        fi
+        local slicer_source_path="$absolute_source_dir/Slicer" # Path to the Slicer subdirectory
 
         echo "Configuring Slicer (Minimal)..."
-        echo "Source Dir: $source_dir"
+        echo "Source Dir: $absolute_source_dir"
         echo "Build Dir:  $build_dir"
         echo "Install Prefix: $install_prefix"
+        # Adjust Extension Dir calculation to use absolute path
+        local extension_source_dir="$absolute_source_dir/Modules/Scripted/Home" # Assuming Home module location
         echo "Extension Dir: $extension_source_dir"
 
         mkdir -p "$build_dir"
-        cmake -S "$source_dir" -B "$build_dir" \
+        # Use absolute paths for -S and -Dslicersources_SOURCE_DIR
+        cmake -S "$absolute_source_dir" -B "$build_dir" \
           -DCMAKE_INSTALL_PREFIX="$install_prefix" \
           -DCMAKE_BUILD_TYPE=Release \
           -DSlicer_CMake_HTTPS_Supported:BOOL=TRUE \
           -DSlicer_WC_LAST_CHANGED_DATE=1970-01-01 \
-          -Dslicersources_SOURCE_DIR:PATH=${PWD}/Slicer # Use local Slicer source
+          -Dslicersources_SOURCE_DIR:PATH="$slicer_source_path" # Use absolute Slicer source path
 
         echo "Configuration complete. cd '$build_dir' and run 'make' or 'make install'."
       }
@@ -175,9 +190,9 @@
       echo -e "
 CMake Helper Usage (run from project root):
   configure_slicer_mini ./miniSlicer ./build/build-mini ./build/install-mini
-  cd ./build/build-mini && make -j$(nproc)  
+  cd ./build/build-mini && make -j$(nproc)
   or
-  configure_slicer_full ./miniSlicer ./build/build-full ./build/install-full
+  configure_slicer_full ./miniSlicer/Slicer ./build/build-full ./build/install-full
   cd ./build/build-full && make -j$(nproc)
 "
     '';
@@ -209,4 +224,4 @@ CMake Helper Usage (run from project root):
     '';
   };
 
-} 
+}

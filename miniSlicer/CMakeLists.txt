@@ -12,6 +12,7 @@ set (EP_GIT_PROTOCOL "https")
 # Slicer sources
 include(FetchContent)
 if(NOT DEFINED slicersources_SOURCE_DIR)
+  message(STATUS "Downloading Slicer sources using FetchContent...")
   # Download Slicer sources and set variables slicersources_SOURCE_DIR and slicersources_BINARY_DIR
   FetchContent_Populate(slicersources
     GIT_REPOSITORY ${EP_GIT_PROTOCOL}://github.com/jiaqiwang969/Slicer
@@ -19,6 +20,7 @@ if(NOT DEFINED slicersources_SOURCE_DIR)
     GIT_PROGRESS   1
     )
 else()
+  message(STATUS "Using local Slicer sources from: ${slicersources_SOURCE_DIR}")
   set(slicersources_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/slicersources-subbuild)
 endif()
 
