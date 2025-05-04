@@ -14,6 +14,7 @@
       pkgs.cmake
       pkgs.gcc    # Using GCC from pkgs (currently 24.05)
       pkgs.git    # Add git for ExternalProject/FetchContent
+      pkgs.ccache  # <--- 添加 ccache
     ];
 
     buildInputs = [
@@ -42,8 +43,18 @@
     ];
 
     shellHook = ''
+      # --- ccache 配置 (Simpler Method) ---
+      export CCACHE_DIR="''${XDG_CACHE_HOME:-$HOME/.cache}/ccache-nix" # 指定缓存目录 (可选)
+      # Ensure ccache wrapper is found first in PATH
+      export PATH="${pkgs.ccache}/bin:$PATH"
+      # Remove explicit CC/CXX overrides and CMake launcher settings
+      # Let ccache wrapper handle the compiler interception via PATH
+      # ------------------------------------
+
       # Clear potential conflicting variables
       unset CGAL_DIR BOOST_ROOT CMAKE_PREFIX_PATH WXWIDGETS_CONFIG_EXECUTABLE GMP_INCLUDE_DIR GMP_LIBRARIES MPFR_INCLUDE_DIR MPFR_LIBRARIES GLUT_INCLUDE_DIR GLUT_glut_LIBRARY OPENAL_INCLUDE_DIR OPENAL_LIBRARY
+      # Unset compiler variables in case they were set previously
+      unset CC CXX CMAKE_C_COMPILER_LAUNCHER CMAKE_CXX_COMPILER_LAUNCHER
 
       # Set CGAL paths (custom)
       export CGAL_DIR="${myCgal}/lib/cmake/CGAL"
@@ -130,7 +141,7 @@
           -DSlicer_WC_LAST_CHANGED_DATE=1970-01-01
           # Add other Slicer full build flags here
 
-        echo "Configuration complete. cd '$build_dir' and run 'make' or 'make install'."
+        echo "Configuration complete. cd '$build_dir' and run 'make -j$(nproc)' or 'make install'."
       }
 
       configure_slicer_mini() {
@@ -167,9 +178,9 @@
           -DSlicer_WC_LAST_CHANGED_DATE=1970-01-01 \
           -Dslicersources_SOURCE_DIR:PATH="$slicer_source_path" # Use absolute Slicer source path
 
-        echo "Configuration complete. cd '$build_dir' and run 'make' or 'make install'."
+        echo "Configuration complete. cd '$build_dir' and run 'make -j$(nproc)' or 'make install'."
       }
-      # --- End CMake Helper Functions ---
+      # --- End CMake Helper Functions ---ss
 
       echo "=== Environment Summary (Custom CGAL ${myCgal.version}) ==="
       echo "GCC Version: $(${pkgs.gcc}/bin/gcc --version | head -n1)"
@@ -195,6 +206,8 @@ CMake Helper Usage (run from project root):
   configure_slicer_full ./miniSlicer/Slicer ./build/build-full ./build/install-full
   cd ./build/build-full && make -j$(nproc)
 "
+      echo "Compiler cache (ccache) enabled."
+      echo "CCACHE_DIR: $CCACHE_DIR"
     '';
   };
 

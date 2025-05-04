@@ -103,6 +103,7 @@ option(Slicer_BUILD_PARAMETERSERIALIZER_SUPPORT "Build application with paramete
 option(Slicer_USE_PYTHONQT                      "Build application with Python support"               ON)
 option(Slicer_USE_QtTesting                     "Build application with QtTesting support"            OFF)
 option(Slicer_USE_SimpleITK                     "Build application with SimpleITK support"            OFF)
+option(Slicer_USE_VMTK                          "Build Slicer with VMTK support"                      ON)
 
 option(Slicer_BUILD_BRAINSTOOLS                 "Build application with BRAINSTools module"           OFF)
 option(Slicer_BUILD_DataStore                   "Build application with DataStore module"             OFF)
@@ -136,6 +137,11 @@ set(Slicer_QTSCRIPTEDMODULES_DISABLED
   PerformanceTests
   SampleData
   VectorToScalarVolume
+  WebServer
+  # DICOM       # Re-enable core DICOM module
+  # DICOMPlugin # Re-enable DICOM plugin framework
+  # DICOMLib    # Re-enable core DICOM library to fix ModuleNotFoundError
+
   )
 
 # Enable/Disable Slicer custom modules: To create a new module, use the SlicerExtensionWizard.
@@ -144,6 +150,30 @@ set(Slicer_EXTENSION_SOURCE_DIRS
   #${miniSlicer_SOURCE_DIR}/Modules/Loadable/MyLoadableModule
   ${miniSlicer_SOURCE_DIR}/Modules/Scripted/Home
   )
+
+# --- Add SlicerExtraMarkups Extension Source Directory ---
+set(EXTRAMARKUPS_EXTENSION_SRC_REL "SlicerExtraMarkups")
+get_filename_component(EXTRAMARKUPS_SOURCE_DIR ${EXTRAMARKUPS_EXTENSION_SRC_REL} ABSOLUTE BASE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+if(EXISTS "${EXTRAMARKUPS_SOURCE_DIR}/CMakeLists.txt")
+  message(STATUS "Adding SlicerExtraMarkups extension source directory to Slicer build: ${EXTRAMARKUPS_SOURCE_DIR}")
+  list(APPEND Slicer_EXTENSION_SOURCE_DIRS ${EXTRAMARKUPS_SOURCE_DIR})
+else()
+  message(WARNING "SlicerExtraMarkups extension source directory not found at expected location: ${EXTRAMARKUPS_SOURCE_DIR}. Build might fail.")
+endif()
+# --- End Add SlicerExtraMarkups Extension ---
+
+# --- Add SlicerVMTK Extension Source Directory ---
+# Calculate path relative to this CMakeLists.txt
+set(VMTK_EXTENSION_SRC_REL "SlicerExtension-VMTK") 
+get_filename_component(VMTK_EXTENSION_SOURCE_DIR ${VMTK_EXTENSION_SRC_REL} ABSOLUTE BASE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+
+if(EXISTS "${VMTK_EXTENSION_SOURCE_DIR}/CMakeLists.txt")
+  message(STATUS "Adding SlicerVMTK extension source directory to Slicer build: ${VMTK_EXTENSION_SOURCE_DIR}")
+  list(APPEND Slicer_EXTENSION_SOURCE_DIRS ${VMTK_EXTENSION_SOURCE_DIR})
+else()
+  message(WARNING "SlicerVMTK extension source directory not found at expected location: ${VMTK_EXTENSION_SOURCE_DIR}. VMTK modules will not be built.")
+endif()
+# --- End Add SlicerVMTK Extension ---
 
 # Add remote extension source directories
 

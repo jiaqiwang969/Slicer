@@ -62,8 +62,17 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
         # Get references to relevant underlying modules
         # NA
 
+        # --- Get UI elements defined in Home.ui ---
+        # Assuming 'loadMRHeadButton' and 'statusLabel' are defined in Home.ui
+        if not hasattr(self.ui, 'loadMRHeadButton'):
+            print("WARNING: loadMRHeadButton not found in UI definition!")
+            self.ui.loadMRHeadButton = None # Avoid errors later
+        if not hasattr(self.ui, 'statusLabel'):
+            print("WARNING: statusLabel not found in UI definition!")
+            self.ui.statusLabel = None # Avoid errors later
+
         # Create logic class
-        self.logic = HomeLogic()
+        self.logic = HomeLogic(self.ui.statusLabel) # Pass label for status updates
 
         # Dark palette does not propagate on its own
         # See https://github.com/KitwareMedical/SlicerCustomAppTemplate/issues/72
@@ -75,6 +84,28 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
 
         # Apply style
         self.applyApplicationStyle()
+
+        # --- Add Hello World Button --- 
+        self.helloButton = qt.QPushButton("Say Hello to wjq")
+        # Add the button to the main layout of the loaded UI widget
+        # Assuming the top-level widget in Home.ui has a layout accessible via self.uiWidget.layout()
+        # If Home.ui has a specific named layout (e.g., 'verticalLayout'), use that instead:
+        # e.g., self.ui.verticalLayout.addWidget(self.helloButton)
+        if self.uiWidget.layout() is not None:
+            self.uiWidget.layout().addWidget(self.helloButton)
+        else:
+            # Fallback: Create a new layout if none exists (less likely for a loaded UI)
+            fallbackLayout = qt.QVBoxLayout(self.uiWidget)
+            fallbackLayout.addWidget(self.helloButton)
+            print("HomeWidget: Added Hello button to a fallback layout.")
+
+        self.helloButton.clicked.connect(self.onHelloButtonClicked)
+        # --- End Hello World Button ---
+
+        # --- Connect signals for UI elements from Home.ui ---
+        if self.ui.loadMRHeadButton:
+            self.ui.loadMRHeadButton.clicked.connect(self.onLoadMRHeadClicked)
+        # --- End Connect signals ---
 
     def cleanup(self):
         """Called when the application closes and the module widget is destroyed."""
@@ -167,10 +198,70 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
         # slicer.util.findChild(sliceWidget, "FitToWindowToolButton").visible = False
         # slicer.util.findChild(sliceWidget, "SliceOffsetSlider").spinBoxVisible = False
 
+    # --- Slot for Hello World Button --- 
+    def onHelloButtonClicked(self):
+        """Called when the 'Say Hello' button is clicked."""
+        qt.QMessageBox.information(self.uiWidget, "Greeting", "Hello World from miniSlicer!")
+    # --- End Slot --- 
+
+    # --- Slot for Load MRHead Button --- 
+    def onLoadMRHeadClicked(self):
+        """Called when the 'Load MRHead Data' button is clicked."""
+        # Prevent double-clicks or clicks while loading
+        if self.ui.loadMRHeadButton:
+            self.ui.loadMRHeadButton.enabled = False
+        # Run loading in logic, re-enable button when done (via status update perhaps)
+        self.logic.loadMRHeadData()
+        # Consider enabling the button after a short delay or via a signal from logic if loading is long
+        # For simplicity here, we re-enable immediately after triggering logic
+        if self.ui.loadMRHeadButton:
+             self.ui.loadMRHeadButton.enabled = True
+    # --- End Slot ---
+
 
 class HomeLogic(ScriptedLoadableModuleLogic):
     """
     Implements underlying logic for the Home module.
+    Handles data loading and updates status.
     """
+    def __init__(self, statusLabel: Optional[qt.QLabel] = None):
+        ScriptedLoadableModuleLogic.__init__(self)
+        self.statusLabel = statusLabel
+
+    def _updateStatus(self, message: str):
+        """Helper to update the status label if it exists."""
+        if self.statusLabel:
+            self.statusLabel.text = f"Status: {message}"
+        print(f"HomeLogic Status: {message}") # Also print to console
+
+    def loadMRHeadData(self):
+        """Loads the MRHead sample data."""
+        self._updateStatus("Loading MRHead data...")
+        slicer.app.processEvents() # Allow UI to update status before potentially blocking operation
+        try:
+            sampleDataLogic = slicer.modules.sampledata.logic()
+            # Ensure SampleData module is available
+            if not sampleDataLogic:
+                raise RuntimeError("SampleData module logic not found.")
+            
+            mrHeadVolumeNode = sampleDataLogic.downloadMRHead()
+            if mrHeadVolumeNode:
+                self._updateStatus("MRHead data loaded successfully.")
+                # Optional: Center the 3D view on the loaded volume
+                slicer.app.layoutManager().resetThreeDViews()
+                threeDView = slicer.app.layoutManager().threeDWidget(0).threeDView()
+                threeDView.resetFocalPoint()
+            else:
+                # Check if node already exists (downloadMRHead might return None if already present)
+                existingNode = slicer.mrmlScene.GetFirstNodeByName("MRHead")
+                if existingNode:
+                    self._updateStatus("MRHead data already loaded.")
+                else:
+                    self._updateStatus("Failed to load MRHead data (download failed?).")
+        except Exception as e:
+            self._updateStatus(f"Error loading MRHead data: {e}")
+            slicer.util.errorDisplay(f"Failed to load MRHead data: {e}")
+        finally:
+             slicer.app.processEvents() # Allow UI to update after loading attempt
 
     pass
