@@ -97,6 +97,12 @@
       # Ensure X11 libraries can be found
       export LD_LIBRARY_PATH="${pkgs.xorg.libX11}/lib:${pkgs.xorg.libXext}/lib:${pkgs.xorg.libXi}/lib:${pkgs.xorg.libXmu}/lib:$LD_LIBRARY_PATH"
 
+      # Add gcc runtime libraries (libstdc++ etc.) so wrapped binaries like PythonSlicer can start
+      stdcpp_path="$(${pkgs.gcc}/bin/gcc -print-file-name=libstdc++.so)"
+      if [[ -n "$stdcpp_path" && -f "$stdcpp_path" ]]; then
+        export LD_LIBRARY_PATH="$(dirname "$stdcpp_path"):$LD_LIBRARY_PATH"
+      fi
+
       # Set display variable if not set
       if [[ -z "$DISPLAY" ]]; then
         export DISPLAY=:0

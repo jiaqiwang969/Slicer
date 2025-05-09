@@ -135,7 +135,7 @@ set(Slicer_QTSCRIPTEDMODULES_DISABLED
   Endoscopy
   LabelStatistics
   PerformanceTests
-  SampleData
+  #SampleData
   VectorToScalarVolume
   WebServer
   # DICOM       # Re-enable core DICOM module
@@ -162,6 +162,8 @@ else()
 endif()
 # --- End Add SlicerExtraMarkups Extension ---
 
+
+
 # --- Add SlicerVMTK Extension Source Directory ---
 # Calculate path relative to this CMakeLists.txt
 set(VMTK_EXTENSION_SRC_REL "SlicerExtension-VMTK") 
@@ -174,6 +176,39 @@ else()
   message(WARNING "SlicerVMTK extension source directory not found at expected location: ${VMTK_EXTENSION_SOURCE_DIR}. VMTK modules will not be built.")
 endif()
 # --- End Add SlicerVMTK Extension ---
+
+# --- Add Slicer-SurfaceWrapSolidify Extension Source Directory ---
+set(SURFACEWRAPSOUDIFY_EXTENSION_SRC_REL "Slicer-SurfaceWrapSolidify")
+get_filename_component(SURFACEWRAPSOUDIFY_SOURCE_DIR ${SURFACEWRAPSOUDIFY_EXTENSION_SRC_REL} ABSOLUTE BASE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+if(EXISTS "${SURFACEWRAPSOUDIFY_SOURCE_DIR}/CMakeLists.txt")
+  message(STATUS "Adding Slicer-SurfaceWrapSolidify extension source directory to Slicer build: ${SURFACEWRAPSOUDIFY_SOURCE_DIR}")
+  list(APPEND Slicer_EXTENSION_SOURCE_DIRS ${SURFACEWRAPSOUDIFY_SOURCE_DIR})
+else()
+  message(WARNING "Slicer-SurfaceWrapSolidify extension source directory not found at expected location: ${SURFACEWRAPSOUDIFY_SOURCE_DIR}. Build might fail.")
+endif()
+# --- End Add Slicer-SurfaceWrapSolidify Extension ---
+
+# --- Add LanguageTools Extension Source Directory ---
+set(LANGUAGETOOLS_EXTENSION_SRC_REL "LanguageTools")
+get_filename_component(LANGUAGETOOLS_SOURCE_DIR ${LANGUAGETOOLS_EXTENSION_SRC_REL} ABSOLUTE BASE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+if(EXISTS "${LANGUAGETOOLS_SOURCE_DIR}/CMakeLists.txt")
+  message(STATUS "Adding LanguageTools extension source directory to Slicer build: ${LANGUAGETOOLS_SOURCE_DIR}")
+  list(APPEND Slicer_EXTENSION_SOURCE_DIRS ${LANGUAGETOOLS_SOURCE_DIR})
+else()
+  message(WARNING "LanguageTools extension source directory not found at expected location: ${LANGUAGETOOLS_SOURCE_DIR}. Build might fail.")
+endif()
+# --- End Add LanguageTools Extension ---
+
+# --- Add SlicerSurfaceToolbox Extension Source Directory ---
+set(SURFACETOOLBOX_EXTENSION_SRC_REL "SlicerSurfaceToolbox")
+get_filename_component(SURFACETOOLBOX_SOURCE_DIR ${SURFACETOOLBOX_EXTENSION_SRC_REL} ABSOLUTE BASE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+if(EXISTS "${SURFACETOOLBOX_SOURCE_DIR}/CMakeLists.txt")
+  message(STATUS "Adding SlicerSurfaceToolbox extension source directory to Slicer build: ${SURFACETOOLBOX_SOURCE_DIR}")
+  list(APPEND Slicer_EXTENSION_SOURCE_DIRS ${SURFACETOOLBOX_SOURCE_DIR})
+else()
+  message(WARNING "SlicerSurfaceToolbox extension source directory not found at expected location: ${SURFACETOOLBOX_SOURCE_DIR}. Build might fail.")
+endif()
+# --- End Add SlicerSurfaceToolbox Extension ---
 
 # Add remote extension source directories
 

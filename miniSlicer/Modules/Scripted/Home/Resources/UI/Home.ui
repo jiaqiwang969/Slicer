@@ -6,22 +6,112 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>300</width>
-    <height>434</height>
+    <width>320</width> <!- Adjusted width for more fields ->
+    <height>500</height> <!- Adjusted height for more fields ->
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QPushButton" name="loadMRHeadButton">
-     <property name="text">
-      <string>Load MRHead Data</string>
+    <widget class="QGroupBox" name="importConvertGroup">
+     <property name="title">
+      <string>STL 导入与分割转换</string>
      </property>
+     <layout class="QFormLayout" name="formLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="stlFileLabel">
+        <property name="text">
+         <string>STL 文件:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayoutStlFile">
+        <item>
+         <widget class="QLineEdit" name="stlFileLineEdit">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="selectStlFileButton">
+          <property name="text">
+           <string>选择文件</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="modelNameLabel">
+        <property name="text">
+         <string>模型节点名称:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="modelNameLineEdit">
+        <property name="text">
+         <string>ImportedSTLModel</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="segmentationNameLabel">
+        <property name="text">
+         <string>分割节点名称:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="segmentationNameLineEdit">
+        <property name="text">
+         <string>ConvertedSegmentation</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="segmentNameLabel">
+        <property name="text">
+         <string>Segment 名称:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="segmentNameLineEdit">
+        <property name="text">
+         <string>ImportedSegment</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="segmentColorLabel">
+        <property name="text">
+         <string>Segment 颜色 (R,G,B):</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLineEdit" name="segmentColorLineEdit">
+        <property name="text">
+         <string>1.0,0.75,0.6</string> <!- Example: Light Salmon ->
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QPushButton" name="processStlButton">
+        <property name="text">
+         <string>导入并转换为分割</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>
     <widget class="QLabel" name="statusLabel">
      <property name="text">
-      <string>Status: No data loaded</string>
+      <string>状态: 未加载数据</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -53,7 +143,12 @@
    <header>qSlicerWidget.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>QGroupBox</class>
+   <extends>QGroupBox</extends>
+   <header>QtWidgets/qgroupbox.h</header>
+  </customwidget>
  </customwidgets>
  <resources/>
  <connections/>
-</ui>
+</ui> 
