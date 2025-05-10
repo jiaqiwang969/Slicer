@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>320</width> <!- Adjusted width for more fields ->
-    <height>500</height> <!- Adjusted height for more fields ->
+    <width>300</width>
+    <height>630</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QGroupBox" name="importConvertGroup">
+    <widget class="QGroupBox" name="importStlGroup">
      <property name="title">
-      <string>STL 导入与分割转换</string>
+      <string>STL 导入</string>
      </property>
      <layout class="QFormLayout" name="formLayout">
       <item row="0" column="0">
@@ -25,7 +25,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <layout class="QHBoxLayout" name="horizontalLayoutStlFile">
+       <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="QLineEdit" name="stlFileLineEdit">
           <property name="readOnly">
@@ -56,58 +56,119 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="segmentationNameLabel">
-        <property name="text">
-         <string>分割节点名称:</string>
-        </property>
-       </widget>
-      </item>
       <item row="2" column="1">
-       <widget class="QLineEdit" name="segmentationNameLineEdit">
-        <property name="text">
-         <string>ConvertedSegmentation</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="segmentNameLabel">
-        <property name="text">
-         <string>Segment 名称:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLineEdit" name="segmentNameLineEdit">
-        <property name="text">
-         <string>ImportedSegment</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="segmentColorLabel">
-        <property name="text">
-         <string>Segment 颜色 (R,G,B):</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="QLineEdit" name="segmentColorLineEdit">
-        <property name="text">
-         <string>1.0,0.75,0.6</string> <!- Example: Light Salmon ->
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="1">
        <widget class="QPushButton" name="processStlButton">
         <property name="text">
-         <string>导入并转换为分割</string>
+         <string>导入 STL 文件</string>
         </property>
        </widget>
       </item>
      </layout>
     </widget>
    </item>
+   <item>
+    <widget class="QGroupBox" name="modelToSegGroup">
+     <property name="title">
+      <string>模型转分割</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="sourceModelLabel">
+        <property name="text">
+         <string>源模型:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="qMRMLNodeComboBox" name="sourceModelNodeComboBox">
+        <property name="nodeTypes">
+         <stringlist>
+          <string>vtkMRMLModelNode</string>
+         </stringlist>
+        </property>
+        <property name="showChildNodeTypes">
+         <bool>false</bool>
+        </property>
+        <property name="addEnabled">
+         <bool>false</bool>
+        </property>
+        <property name="removeEnabled">
+         <bool>false</bool>
+        </property>
+        <property name="editEnabled">
+         <bool>false</bool>
+        </property>
+        <property name="renameEnabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="segmentationNameLabel">
+        <property name="text">
+         <string>分割节点名称:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="segmentationNameLineEdit">
+        <property name="text">
+         <string>ConvertedSegmentation</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="segmentNameLabel_seg">
+        <property name="text">
+         <string>Segment 名称:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="segmentNameLineEdit_seg">
+        <property name="text">
+         <string>ImportedSegment</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="segmentColorLabel_seg">
+        <property name="text">
+         <string>Segment 颜色 (R,G,B):</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="segmentColorLineEdit_seg">
+        <property name="text">
+         <string>1.0,0.75,0.6</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QPushButton" name="convertToSegmentationButton">
+        <property name="text">
+         <string>转换为分割</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="resetViewsToFitModelsButton">
+     <property name="text">
+      <string>视图适应模型</string>
+     </property>
+    </widget>
+   </item>
+   <!-- item>
+    <widget class="QPushButton" name="loadMRHeadButton">
+     <property name="text">
+      <string>Load MRHead Data</string>
+     </property>
+    </widget>
+   </item -->
    <item>
     <widget class="QLabel" name="statusLabel">
      <property name="text">
@@ -148,7 +209,12 @@
    <extends>QGroupBox</extends>
    <header>QtWidgets/qgroupbox.h</header>
   </customwidget>
+  <customwidget>
+   <class>qMRMLNodeComboBox</class>
+   <extends>qMRMLWidget</extends>
+   <header>qMRMLNodeComboBox.h</header>
+  </customwidget>
  </customwidgets>
  <resources/>
  <connections/>
-</ui> 
+</ui>
