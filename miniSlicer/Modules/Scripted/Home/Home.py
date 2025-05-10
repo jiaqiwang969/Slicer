@@ -28,6 +28,16 @@ except AttributeError:
 # Import to ensure the files are available through the Qt resource system
 from Resources import HomeResources  # noqa: F401
 
+# Segment Editor widget class
+import qSlicerSegmentationsModuleWidgetsPythonQt
+slicer_segment_editor_widget_class = qSlicerSegmentationsModuleWidgetsPythonQt.qMRMLSegmentEditorWidget
+# Data module widget class (for Subject Hierarchy / Data module)
+try:
+    import qSlicerDataModuleWidgetsPythonQt
+    slicer_data_widget_class = qSlicerDataModuleWidgetsPythonQt.qSlicerDataModuleWidget
+except Exception:
+    slicer_data_widget_class = None  # Fallback if bindings not available
+
 
 class Home(ScriptedLoadableModule):
     """The home module allows to orchestrate and style the overall application workflow.
@@ -71,9 +81,61 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
         """Called when the application opens the module the first time and the widget is initialized."""
         ScriptedLoadableModuleWidget.setup(self)
 
+        # --- Create main tab widget ---
         self.uiWidget = slicer.util.loadUI(self.resourcePath("UI/Home.ui"))
-        self.layout.addWidget(self.uiWidget)
+        # Capture child widgets before we build other tabs (we will need importStlGroup etc.)
         self.ui = slicer.util.childWidgetVariables(self.uiWidget)
+
+        self.mainTabWidget = qt.QTabWidget()
+        self.mainTabWidget.setTabPosition(qt.QTabWidget.North)
+
+        # Prepare a container page for Data tab (regardless of which data view implementation we use)
+        dataPage = qt.QWidget()
+        dataPageLayout = qt.QVBoxLayout(dataPage)
+        dataPageLayout.setContentsMargins(4, 4, 4, 4)
+        dataPageLayout.setSpacing(4)
+
+        contentWidget = None
+
+        if slicer_data_widget_class:
+            try:
+                contentWidget = slicer_data_widget_class()
+                contentWidget.setMRMLScene(slicer.mrmlScene)
+            except Exception:
+                contentWidget = None
+
+        if contentWidget is None:
+            try:
+                import qSlicerSubjectHierarchyModuleWidgetsPythonQt as _shW
+                SubjectHierarchyTreeView = _shW.qMRMLSubjectHierarchyTreeView
+                contentWidget = SubjectHierarchyTreeView()
+                contentWidget.setMRMLScene(slicer.mrmlScene)
+            except Exception:
+                contentWidget = None
+
+        if contentWidget:
+            dataPageLayout.addWidget(contentWidget, 1)  # stretch 1 so it expands
+
+        # ---- 工具组 ----
+        toolGroup = qt.QGroupBox("模型工具")
+        toolLayout = qt.QVBoxLayout(toolGroup)
+
+        if hasattr(self.ui, 'importStlGroup'):
+            self.ui.importStlGroup.setParent(toolGroup)
+            toolLayout.addWidget(self.ui.importStlGroup)
+        if hasattr(self.ui, 'resetViewsToFitModelsButton'):
+            self.ui.resetViewsToFitModelsButton.setParent(toolGroup)
+            toolLayout.addWidget(self.ui.resetViewsToFitModelsButton)
+
+        dataPageLayout.addWidget(toolGroup, 0)
+
+        self.mainTabWidget.addTab(dataPage, "数据")
+        data_tab_added = True
+
+        # Finally, add 前处理 tab (always added last so Data is on the left)
+        self.mainTabWidget.addTab(self.uiWidget, "前处理")
+
+        self.layout.addWidget(self.mainTabWidget)
 
         print("DEBUG: Attributes in self.ui after childWidgetVariables:")
         if self.ui:
@@ -90,9 +152,6 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
         required_ui_elements = [
             'importStlGroup', 'stlFileLabel', 'stlFileLineEdit', 'selectStlFileButton',
             'modelNameLabel', 'modelNameLineEdit', 'processStlButton',
-            'modelToSegGroup', 'sourceModelLabel', 'sourceModelNodeComboBox',
-            'segmentationNameLabel', 'segmentationNameLineEdit',
-            'segmentNameLabel_seg', 'segmentColorLabel_seg', 'segmentColorLineEdit_seg', 'convertToSegmentationButton',
             'resetViewsToFitModelsButton',
             'segmentEditorDisplayGroupBox', # We need the group box. Its layout is defined in the UI.
             'statusLabel'
@@ -108,11 +167,13 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
         self.setCustomUIVisible(True)
         self.applyApplicationStyle()
 
-        # Connect signals for existing UI elements (STL import, ModelToSeg, ResetViews)
-        if hasattr(self.ui, 'selectStlFileButton'): self.ui.selectStlFileButton.clicked.connect(self.onSelectStlFileClicked)
-        if hasattr(self.ui, 'processStlButton'): self.ui.processStlButton.clicked.connect(self.onProcessStlClicked)
-        if hasattr(self.ui, 'convertToSegmentationButton'): self.ui.convertToSegmentationButton.clicked.connect(self.onConvertToSegmentationClicked)
-        if hasattr(self.ui, 'resetViewsToFitModelsButton'): self.ui.resetViewsToFitModelsButton.clicked.connect(self.onResetViewsToFitModelsClicked)
+        # Connect signals for existing UI elements (STL import, ResetViews)
+        if hasattr(self.ui, 'selectStlFileButton'):
+            self.ui.selectStlFileButton.clicked.connect(self.onSelectStlFileClicked)
+        if hasattr(self.ui, 'processStlButton'):
+            self.ui.processStlButton.clicked.connect(self.onProcessStlClicked)
+        if hasattr(self.ui, 'resetViewsToFitModelsButton'):
+            self.ui.resetViewsToFitModelsButton.clicked.connect(self.onResetViewsToFitModelsClicked)
 
         # --- Segment Editor Setup ---
         # Get/Create Segment Editor Parameter Node
@@ -190,6 +251,8 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
             self.ui.sourceModelNodeComboBox.noneEnabled = True 
             self.ui.sourceModelNodeComboBox.showHidden = False
             self.ui.sourceModelNodeComboBox.showChildNodeTypes = False
+
+        # --- 不再需要运行时 reparent（已在 dataPageCreation 中完成） ---
 
     def cleanup(self):
         """Called when the application closes and the module widget is destroyed."""
@@ -338,62 +401,6 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
         slicer.app.processEvents()
     # --- End Slots for STL Import and Conversion ---
 
-    # --- Slots for Model to Segmentation Conversion ---
-    def onConvertToSegmentationClicked(self):
-        """Handles the model to segmentation conversion process."""
-        # Check for required UI elements first
-        required_conversion_ui = [
-            'sourceModelNodeComboBox', 'segmentationNameLineEdit',
-            'segmentNameLineEdit_seg', 'segmentColorLineEdit_seg', 'convertToSegmentationButton'
-        ]
-        for ui_name in required_conversion_ui:
-            if not hasattr(self.ui, ui_name) or getattr(self.ui, ui_name) is None:
-                qt.QMessageBox.critical(self.parent, "内部错误", f"UI元素 '{ui_name}' 丢失，无法执行转换。")
-                return
-
-        sourceModelNode = self.ui.sourceModelNodeComboBox.currentNode()
-        segmentationName = self.ui.segmentationNameLineEdit.text
-        segmentNameInSeg = self.ui.segmentNameLineEdit_seg.text
-        colorStr = self.ui.segmentColorLineEdit_seg.text
-
-        if not sourceModelNode:
-            qt.QMessageBox.warning(self.uiWidget, "输入错误", "请先选择一个源模型节点。")
-            return
-
-        if not (segmentationName and segmentNameInSeg):
-            qt.QMessageBox.warning(self.uiWidget, "输入错误", "分割节点名称和Segment名称不能为空。")
-            return
-        
-        try:
-            colorList = [float(c.strip()) for c in colorStr.split(',')]
-            if len(colorList) != 3:
-                raise ValueError("颜色格式应为 R,G,B (例如: 1.0,0.5,0.0)")
-        except ValueError as e:
-            qt.QMessageBox.warning(self.uiWidget, "输入错误", f"无效的颜色格式: {e}")
-            return
-
-        self.ui.convertToSegmentationButton.enabled = False
-        self.logic._updateStatus("开始将模型转换为分割...")
-        slicer.app.processEvents()
-
-        success, message = self.logic.convertModelToSegmentation(
-            sourceModelNode, # Pass the node object directly
-            segmentationName,
-            segmentNameInSeg,
-            colorList
-        )
-
-        self.logic._updateStatus(message)
-
-        if success:
-            qt.QMessageBox.information(self.uiWidget, "成功", message)
-        else:
-            qt.QMessageBox.critical(self.uiWidget, "失败", message)
-        
-        self.ui.convertToSegmentationButton.enabled = True
-        slicer.app.processEvents()
-    # --- End Slots for Model to Segmentation Conversion ---
-
     # --- Slot for Resetting Views to Fit Models ---
     def onResetViewsToFitModelsClicked(self):
         """Resets all views to fit the currently visible models in the scene."""
@@ -505,84 +512,6 @@ class HomeLogic(ScriptedLoadableModuleLogic):
                  self._updateStatus(f"错误处理：先前提取的 loaded_node 不是有效的 MRML 节点 (类型: {type(loaded_node).__name__})，无法按预期清理。")
             
             return None, error_msg
-
-    def convertModelToSegmentation(self, source_model_node: slicer.vtkMRMLModelNode, 
-                                 segmentation_node_name: str, 
-                                 segment_name_in_segmentation: str, 
-                                 segment_color: list[float]):
-        """
-        Converts a given model node to a new segmentation node.
-        Returns (bool, str): Success status and a message.
-        """
-        if not source_model_node:
-            return False, "源模型节点无效。"
-        
-        source_model_name = source_model_node.GetName()
-        self._updateStatus(f"开始将模型 '{source_model_name}' 转换为分割 '{segmentation_node_name}'...")
-        slicer.app.processEvents()
-        
-        segmentation_node = None # Initialize for cleanup
-        try:
-            existing_segmentation_node = slicer.mrmlScene.GetFirstNodeByName(segmentation_node_name)
-            if existing_segmentation_node:
-                self._updateStatus(f"分割节点 '{segmentation_node_name}' 已存在。正在删除旧节点...")
-                slicer.mrmlScene.RemoveNode(existing_segmentation_node)
-
-            # Create new segmentation node
-            segmentation_node = slicer.mrmlScene.AddNewNodeByClass("vtkMRMLSegmentationNode", segmentation_node_name)
-            if not segmentation_node:
-                raise RuntimeError(f"创建 vtkMRMLSegmentationNode '{segmentation_node_name}' 失败。")
-            
-            segmentation_node.CreateDefaultDisplayNodes() # Important for visualization
-            
-            # Import model into the new segment
-            # The AddEmptySegment method is part of vtkSegmentation object, not the node itself.
-            segment_id = segmentation_node.GetSegmentation().AddEmptySegment(segment_name_in_segmentation)
-            if not segment_id: # AddEmptySegment returns an empty string on failure
-                raise RuntimeError(f"未能向分割 '{segmentation_node_name}' 添加名为 '{segment_name_in_segmentation}' 的空 Segment。")
-
-            success_import_to_seg = slicer.modules.segmentations.logic().ImportModelToSegmentationNode(
-                source_model_node, segmentation_node, segment_id
-            )
-            
-            if not success_import_to_seg:
-                # Attempt to clean up the failed segment and segmentation node
-                if segmentation_node.GetSegmentation().GetSegment(segment_id):
-                    segmentation_node.GetSegmentation().RemoveSegment(segment_id)
-                if slicer.mrmlScene.IsNodePresent(segmentation_node):
-                    slicer.mrmlScene.RemoveNode(segmentation_node)
-                raise RuntimeError(f"从模型 '{source_model_name}' 导入到分割 Segment '{segment_name_in_segmentation}' 失败。")
-            
-            # Set color for the new segment
-            segment = segmentation_node.GetSegmentation().GetSegment(segment_id)
-            if segment:
-                segment.SetColor(segment_color[0], segment_color[1], segment_color[2]) 
-            else:
-                self._updateStatus(f"警告: 未能获取 Segment '{segment_id}' ({segment_name_in_segmentation}) 来设置颜色。")
-
-            # Optional: Hide the source model node after conversion
-            # source_model_node.GetDisplayNode().SetVisibility(False)
-            
-            self._updateStatus(f"模型 '{source_model_name}' 已成功转换为分割: '{segmentation_node.GetName()}' (Segment: '{segment_name_in_segmentation}')")
-            
-            # Reset views to better show the new segmentation
-            slicer.util.resetSliceViews()
-            layoutManager = slicer.app.layoutManager()
-            if layoutManager:
-                for threeDViewIndex in range(layoutManager.threeDViewCount):
-                    threeDWidget = layoutManager.threeDWidget(threeDViewIndex)
-                    if threeDWidget:
-                        threeDView = threeDWidget.threeDView()
-                        threeDView.resetFocalPoint() # Centers view on all visible data
-            
-            return True, f"模型 '{source_model_name}' 已成功转换为分割 '{segmentation_node_name}'."
-
-        except Exception as e:
-            error_msg = f"模型 '{source_model_name}' 到分割转换失败: {type(e).__name__} - {e}"
-            self._updateStatus(error_msg)
-            if segmentation_node and slicer.mrmlScene.IsNodePresent(segmentation_node):
-                slicer.mrmlScene.RemoveNode(segmentation_node) # Cleanup
-            return False, error_msg
 
     def resetViewsToFitAllModels(self):
         """Resets 3D and slice views to fit all currently visible model nodes in the scene."""
