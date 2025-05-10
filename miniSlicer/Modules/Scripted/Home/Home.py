@@ -12,6 +12,7 @@ from slicer.util import VTKObservationMixin
 import os
 import vtk # Added for vtk.vtkBoundingBox
 import math # Added for math.sin, math.radians
+import sys
 
 # Attempt to import the specific Slicer module that provides the Segment Editor Widget bindings
 try:
@@ -28,9 +29,15 @@ except AttributeError:
 # Import to ensure the files are available through the Qt resource system
 from Resources import HomeResources  # noqa: F401
 
-# Segment Editor widget class
-import qSlicerSegmentationsModuleWidgetsPythonQt
-slicer_segment_editor_widget_class = qSlicerSegmentationsModuleWidgetsPythonQt.qMRMLSegmentEditorWidget
+# Segment Editor widget class - ensure it's imported if not already available
+if slicer_segment_editor_widget_class is None:
+    try:
+        import qSlicerSegmentationsModuleWidgetsPythonQt
+        slicer_segment_editor_widget_class = qSlicerSegmentationsModuleWidgetsPythonQt.qMRMLSegmentEditorWidget
+    except ImportError:
+        print("WARNING: Unable to import qSlicerSegmentationsModuleWidgetsPythonQt on second attempt. Segment Editor features will be disabled.")
+        slicer_segment_editor_widget_class = None
+
 # Data module widget class (for Subject Hierarchy / Data module)
 try:
     import qSlicerDataModuleWidgetsPythonQt
@@ -239,6 +246,9 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
                 print("ERROR: self.segmentEditorNode is None, cannot configure editor widget.")
         # --- End Segment Editor Setup ---
 
+        # --- Register Custom Segment Editor Effects ---
+        self.registerWrapSolidifyEffect()
+
         # Configure sourceModelNodeComboBox (this was for ModelToSeg)
         if hasattr(self.ui, 'sourceModelNodeComboBox') and self.ui.sourceModelNodeComboBox:
             self.ui.sourceModelNodeComboBox.nodeTypes = ["vtkMRMLModelNode"]
@@ -412,6 +422,82 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
         self.logic._updateStatus("视图已重置。")
         slicer.app.processEvents()
     # --- End Slot for Resetting Views to Fit Models ---
+
+    def registerWrapSolidifyEffect(self):
+        """Registers the Wrap Solidify effect for the Segment Editor."""
+        try:
+            print("DEBUG: 开始注册 'Wrap Solidify' Segment Editor 效果...")
+            import qSlicerSegmentationsEditorEffectsPythonQt as qSlicerSegmentationsEditorEffects
+            effectFactory = qSlicerSegmentationsEditorEffects.qSlicerSegmentEditorEffectFactory.instance()
+            print(f"DEBUG: 已获取 SegmentEditorEffectFactory 实例: {effectFactory}")
+
+            # 计算效果脚本可能所在的路径
+            moduleDir = os.path.dirname(slicer.util.modulePath(self.moduleName))
+            primaryDir = os.path.join(moduleDir, "Resources", "SegmentEditorEffects", "WrapSolidify")
+            primaryPath = os.path.join(primaryDir, "SegmentEditorEffect.py")
+            print(f"DEBUG: 主要查找路径: {primaryPath}")
+
+            effectPath = primaryPath
+            if not os.path.exists(effectPath):
+                fallbackDir = os.path.join(moduleDir, "Resources", "WrapSolidify")
+                fallbackPath = os.path.join(fallbackDir, "SegmentEditorEffect.py")
+                print(f"DEBUG: 主要路径不存在，尝试备用路径: {fallbackPath}")
+                if os.path.exists(fallbackPath):
+                    effectPath = fallbackPath
+                else:
+                    # 进一步尝试通过已安装的 SegmentEditorWrapSolidifyLib 包来定位脚本
+                    try:
+                        import importlib
+                        wrap_lib_spec = importlib.util.find_spec("SegmentEditorWrapSolidifyLib")
+                        if wrap_lib_spec and wrap_lib_spec.origin:
+                            candidate_lib_dir = os.path.dirname(wrap_lib_spec.origin)
+                            candidate_effect_path = os.path.join(candidate_lib_dir, "SegmentEditorEffect.py")
+                            print(f"DEBUG: 尝试通过 SegmentEditorWrapSolidifyLib 定位脚本: {candidate_effect_path}")
+                            if os.path.exists(candidate_effect_path):
+                                effectPath = candidate_effect_path
+                            else:
+                                print("DEBUG: 通过 SegmentEditorWrapSolidifyLib 仍未找到脚本。")
+                        else:
+                            print("DEBUG: 未检测到 SegmentEditorWrapSolidifyLib 模块规格，跳过此途径。")
+                    except Exception as e_lib:
+                        print(f"DEBUG: 通过 importlib 检测 SegmentEditorWrapSolidifyLib 失败: {e_lib}")
+
+                    # 如果仍未找到，放弃注册
+                    if not os.path.exists(effectPath):
+                        print("WARNING: 未找到 'Wrap Solidify' 脚本文件，放弃注册。")
+                        return
+
+            # 检查是否已注册（遍历 registeredEffects 列表）
+            already_registered = False
+            try:
+                for eff in effectFactory.registeredEffects():
+                    if eff and hasattr(eff, "name") and eff.name == "Wrap Solidify":
+                        already_registered = True
+                        break
+            except Exception as e_check:
+                print(f"DEBUG: 检测已注册效果时异常: {e_check}. 将忽略并尝试直接注册。")
+
+            if already_registered:
+                print("INFO: 'Wrap Solidify' 效果已在工厂中注册，跳过重复注册。")
+                return
+
+            # 执行脚本注册
+            instance = qSlicerSegmentationsEditorEffects.qSlicerSegmentEditorScriptedEffect(None)
+            instance.setPythonSource(effectPath.replace('\\', '/'))
+            instance.self().register()
+            print(f"INFO: 成功从 {effectPath} 注册 'Wrap Solidify' 效果。")
+
+            # 如果本模块已嵌入 SegmentEditorWidget，则刷新其效果列表以立即显示新效果
+            try:
+                if hasattr(self, "segmentEditorWidget") and self.segmentEditorWidget:
+                    print("DEBUG: 调用 segmentEditorWidget.updateEffectList() 以刷新效果按钮。")
+                    self.segmentEditorWidget.updateEffectList()
+            except Exception as e_upd:
+                print(f"WARNING: 更新 SegmentEditorWidget 效果列表时出错: {e_upd}")
+        except ImportError as e:
+            print(f"ERROR: 导入 SegmentEditor 效果绑定失败: {e}")
+        except Exception as e:
+            print(f"ERROR: 注册 'Wrap Solidify' 效果时发生异常: {type(e).__name__} - {e}")
 
 
 class HomeLogic(ScriptedLoadableModuleLogic):
