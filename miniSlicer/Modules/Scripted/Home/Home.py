@@ -136,11 +136,31 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
 
         dataPageLayout.addWidget(toolGroup, 0)
 
-        self.mainTabWidget.addTab(dataPage, "数据")
+        self.mainTabWidget.addTab(dataPage, "模型导入")
         data_tab_added = True
 
-        # Finally, add 前处理 tab (always added last so Data is on the left)
-        self.mainTabWidget.addTab(self.uiWidget, "前处理")
+        # Finally, add 声腔提取 tab (always added last so 模型导入 is on the left)
+        self.mainTabWidget.addTab(self.uiWidget, "声腔提取")
+
+        # --- 新建 "中心线提取" 页签，直接实例化原始 ExtractCenterlineWidget ---
+        centerlinePage = qt.QWidget()
+        # Create tab container with its own logic
+        try:
+            from ExtractCenterline import ExtractCenterlineWidget
+            centerlineLayout = qt.QVBoxLayout(centerlinePage)
+            centerlineLayout.setContentsMargins(0, 0, 0, 0)
+            # 实例化原始模块小部件并嵌入
+            ecWidget = ExtractCenterlineWidget(centerlinePage)
+            ecWidget.setup()  # 调用其 setup 构建完整 GUI
+            centerlineLayout.addWidget(ecWidget)
+        except Exception as e:
+            centerlineLayout = qt.QVBoxLayout(centerlinePage)
+            errLab = qt.QLabel(f"无法加载原始 ExtractCenterlineWidget: {type(e).__name__} - {e}")
+            errLab.setWordWrap(True)
+            centerlineLayout.addWidget(errLab)
+            import traceback; traceback.print_exc()
+
+        self.mainTabWidget.addTab(centerlinePage, "中心线提取")
 
         self.layout.addWidget(self.mainTabWidget)
 
