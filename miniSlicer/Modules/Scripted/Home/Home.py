@@ -13,6 +13,18 @@ import os
 import vtk # Added for vtk.vtkBoundingBox
 import math # Added for math.sin, math.radians
 
+# Attempt to import the specific Slicer module that provides the Segment Editor Widget bindings
+try:
+    import qSlicerSegmentationsModuleWidgetsPythonQt
+    slicer_segment_editor_widget_class = qSlicerSegmentationsModuleWidgetsPythonQt.qMRMLSegmentEditorWidget
+    print("DEBUG: Successfully imported qSlicerSegmentationsModuleWidgetsPythonQt and got qMRMLSegmentEditorWidget class.")
+except ImportError:
+    print("ERROR: Could not import qSlicerSegmentationsModuleWidgetsPythonQt. Segment Editor cannot be created.")
+    slicer_segment_editor_widget_class = None
+except AttributeError:
+    print("ERROR: qSlicerSegmentationsModuleWidgetsPythonQt imported, but qMRMLSegmentEditorWidget not found within it.")
+    slicer_segment_editor_widget_class = None
+
 # Import to ensure the files are available through the Qt resource system
 from Resources import HomeResources  # noqa: F401
 
@@ -52,73 +64,121 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
         """Called when the application opens the module the first time and the widget is initialized."""
         ScriptedLoadableModuleWidget.__init__(self, parent)
         VTKObservationMixin.__init__(self)
+        self.segmentEditorNode = None
+        self.segmentEditorWidget = None # Initialize members
 
     def setup(self):
         """Called when the application opens the module the first time and the widget is initialized."""
         ScriptedLoadableModuleWidget.setup(self)
 
-        # Load widget from .ui file (created by Qt Designer)
         self.uiWidget = slicer.util.loadUI(self.resourcePath("UI/Home.ui"))
         self.layout.addWidget(self.uiWidget)
         self.ui = slicer.util.childWidgetVariables(self.uiWidget)
 
-        # Check if UI elements from Home.ui are present, to avoid errors if .ui file is out of sync
-        # For STL Import Section (now defined in .ui)
+        print("DEBUG: Attributes in self.ui after childWidgetVariables:")
+        if self.ui:
+            for attr_name in dir(self.ui):
+                if not attr_name.startswith("__") and not callable(getattr(self.ui, attr_name)):
+                    widget_instance = getattr(self.ui, attr_name)
+                    if isinstance(widget_instance, qt.QObject):
+                        print(f"  - {attr_name} (ObjectName: {widget_instance.objectName}, Type: {type(widget_instance).__name__})")
+                    else:
+                        print(f"  - {attr_name} (Type: {type(widget_instance).__name__})")
+        else:
+            print("DEBUG: self.ui object is None or empty.")
+
         required_ui_elements = [
             'importStlGroup', 'stlFileLabel', 'stlFileLineEdit', 'selectStlFileButton',
             'modelNameLabel', 'modelNameLineEdit', 'processStlButton',
-            # For Model to Segmentation Section (now defined in .ui)
             'modelToSegGroup', 'sourceModelLabel', 'sourceModelNodeComboBox',
             'segmentationNameLabel', 'segmentationNameLineEdit',
-            'segmentNameLabel_seg', 'segmentNameLineEdit_seg',
-            'segmentColorLabel_seg', 'segmentColorLineEdit_seg', 'convertToSegmentationButton',
-            'resetViewsToFitModelsButton', # Added new button
-            'statusLabel' # statusLabel is also used by this logic
+            'segmentNameLabel_seg', 'segmentColorLabel_seg', 'segmentColorLineEdit_seg', 'convertToSegmentationButton',
+            'resetViewsToFitModelsButton',
+            'segmentEditorDisplayGroupBox', # We need the group box. Its layout is defined in the UI.
+            'statusLabel'
         ]
         for attr_name in required_ui_elements:
             if not hasattr(self.ui, attr_name):
                 errorMessage = f"HomeWidget.setup: UI element '{attr_name}' not found. Check Home.ui."
                 print(f"ERROR: {errorMessage}")
-                # Optionally, raise an exception or disable functionality
-                # For now, we'll print and let it potentially fail later if accessed
-                # To be more robust, one might create a dummy widget or disable the feature here.
-                # setattr(self.ui, attr_name, None) # Example of setting to None to avoid AttributeError later, but might hide issues
-
-        if not hasattr(self.ui, 'statusLabel'): # specific check for statusLabel if logic depends on it
-            print("WARNING: statusLabel not found in UI definition! Status updates will not be visible.")
-            # self.ui.statusLabel = None # This was the old behavior, handled by loop above now
         
         self.logic = HomeLogic(self.ui.statusLabel if hasattr(self.ui, 'statusLabel') else None)
-
-        # Dark palette does not propagate on its own
-        # See https://github.com/KitwareMedical/SlicerCustomAppTemplate/issues/72
         self.uiWidget.setPalette(slicer.util.mainWindow().style().standardPalette())
-
-        # Remove unneeded UI elements
         self.modifyWindowUI()
         self.setCustomUIVisible(True)
-
-        # Apply style
         self.applyApplicationStyle()
 
-        # --- Add STL Import and Conversion Section --- (This section is now removed as UI is in .ui file)
-        # Programmatic creation of these elements is deleted.
-        # They are now accessed via self.ui.elementName if defined in Home.ui
+        # Connect signals for existing UI elements (STL import, ModelToSeg, ResetViews)
+        if hasattr(self.ui, 'selectStlFileButton'): self.ui.selectStlFileButton.clicked.connect(self.onSelectStlFileClicked)
+        if hasattr(self.ui, 'processStlButton'): self.ui.processStlButton.clicked.connect(self.onProcessStlClicked)
+        if hasattr(self.ui, 'convertToSegmentationButton'): self.ui.convertToSegmentationButton.clicked.connect(self.onConvertToSegmentationClicked)
+        if hasattr(self.ui, 'resetViewsToFitModelsButton'): self.ui.resetViewsToFitModelsButton.clicked.connect(self.onResetViewsToFitModelsClicked)
 
-        # Connect signals for UI elements (now from self.ui)
-        if hasattr(self.ui, 'selectStlFileButton') and self.ui.selectStlFileButton:
-            self.ui.selectStlFileButton.clicked.connect(self.onSelectStlFileClicked)
-        if hasattr(self.ui, 'processStlButton') and self.ui.processStlButton:
-            self.ui.processStlButton.clicked.connect(self.onProcessStlClicked)
-        # Connect new button for model to segmentation conversion
-        if hasattr(self.ui, 'convertToSegmentationButton') and self.ui.convertToSegmentationButton:
-            self.ui.convertToSegmentationButton.clicked.connect(self.onConvertToSegmentationClicked)
+        # --- Segment Editor Setup ---
+        # Get/Create Segment Editor Parameter Node
+        parameterNodeSingletonTag = "EditorHomeParameterNode"
+        self.segmentEditorNode = slicer.mrmlScene.GetSingletonNode(parameterNodeSingletonTag, "vtkMRMLSegmentEditorNode")
+        if not self.segmentEditorNode:
+            self.segmentEditorNode = slicer.mrmlScene.AddNewNodeByClass("vtkMRMLSegmentEditorNode", parameterNodeSingletonTag)
+            self.segmentEditorNode.SetSingletonTag(parameterNodeSingletonTag)
         
-        # Connect new button for resetting views
-        if hasattr(self.ui, 'resetViewsToFitModelsButton') and self.ui.resetViewsToFitModelsButton:
-            self.ui.resetViewsToFitModelsButton.clicked.connect(self.onResetViewsToFitModelsClicked)
-        
-        # Configure sourceModelNodeComboBox
+        if self.segmentEditorNode:
+            try:
+                self.segmentEditorNode.SetMaskMode(slicer.vtkMRMLSegmentationNode.EditAllowedEverywhere)
+                self.segmentEditorNode.SetOverwriteMode(slicer.vtkMRMLSegmentEditorNode.OverwriteAllSegments)
+            except AttributeError as e:
+                print(f"ERROR setting SegmentEditorNode modes (EditAllowedEverywhere/OverwriteAllSegments): {e}. Using default integer values.")
+                self.segmentEditorNode.SetMaskMode(0) # Fallback for EditAllowedEverywhere
+                self.segmentEditorNode.SetOverwriteMode(0) # Fallback for OverwriteAllSegments
+
+        # Instantiate qMRMLSegmentEditorWidget using the correctly imported class
+        if slicer_segment_editor_widget_class and self.segmentEditorNode:
+            try:
+                print(f"DEBUG: Attempting to instantiate Segment Editor Widget using: {slicer_segment_editor_widget_class}")
+                self.segmentEditorWidget = slicer_segment_editor_widget_class() # No parent here yet
+                
+                if self.segmentEditorWidget:
+                    print(f"DEBUG: Successfully instantiated Segment Editor Widget. ObjectName: {self.segmentEditorWidget.objectName}")
+                    self.segmentEditorWidget.setMRMLScene(slicer.mrmlScene)
+                    self.segmentEditorWidget.setMRMLSegmentEditorNode(self.segmentEditorNode)
+                    print("DEBUG: MRMLScene and SegmentEditorNode set for the editor widget.")
+
+                    # Add it to our Home.ui layout
+                    segment_editor_groupbox = getattr(self.ui, 'segmentEditorDisplayGroupBox', None)
+                    if segment_editor_groupbox:
+                        target_layout = segment_editor_groupbox.layout() # This is the QVBoxLayout named segmentEditorLayout in the .ui
+                        if target_layout and isinstance(target_layout, qt.QLayout):
+                            print(f"DEBUG: Found layout '{target_layout.objectName}' in segmentEditorDisplayGroupBox. Adding editor widget.")
+                            target_layout.addWidget(self.segmentEditorWidget)
+                            # Parentage should be handled by addWidget, but explicitly setting size policy is good.
+                            self.segmentEditorWidget.setSizePolicy(qt.QSizePolicy.Expanding, qt.QSizePolicy.Expanding)
+                            self.segmentEditorWidget.setVisible(True)
+                            print("DEBUG: Segment Editor Widget added to layout and made visible.")
+                        else:
+                            # 如果在 UI 中未能获取到布局，则在运行时创建一个新的垂直布局并添加到 groupBox
+                            print(f"INFO: segmentEditorDisplayGroupBox.layout() is {type(target_layout).__name__ if target_layout else 'None'}. Programmatically creating and setting QVBoxLayout for it.")
+                            new_layout = qt.QVBoxLayout(segment_editor_groupbox)
+                            new_layout.setObjectName("segmentEditorLayout_auto")
+                            new_layout.addWidget(self.segmentEditorWidget)
+                            self.segmentEditorWidget.setSizePolicy(qt.QSizePolicy.Expanding, qt.QSizePolicy.Expanding)
+                            self.segmentEditorWidget.setVisible(True)
+                            print("DEBUG: 运行时创建布局并成功嵌入 Segment Editor Widget。")
+                    else:
+                        print("ERROR: segmentEditorDisplayGroupBox not found in self.ui, cannot embed editor widget.")
+                        self.segmentEditorWidget = None # Failed to place it
+                else:
+                    print("ERROR: Instantiation of Segment Editor Widget returned None.")
+            except Exception as e:
+                print(f"ERROR: Exception during qSlicerSegmentEditorWidget instantiation or setup: {e}")
+                self.segmentEditorWidget = None
+        else:
+            if not slicer_segment_editor_widget_class:
+                print("ERROR: Segment Editor Widget class (slicer_segment_editor_widget_class) not available for instantiation.")
+            if not self.segmentEditorNode:
+                print("ERROR: self.segmentEditorNode is None, cannot configure editor widget.")
+        # --- End Segment Editor Setup ---
+
+        # Configure sourceModelNodeComboBox (this was for ModelToSeg)
         if hasattr(self.ui, 'sourceModelNodeComboBox') and self.ui.sourceModelNodeComboBox:
             self.ui.sourceModelNodeComboBox.nodeTypes = ["vtkMRMLModelNode"]
             self.ui.sourceModelNodeComboBox.setMRMLScene(slicer.mrmlScene)
@@ -127,11 +187,9 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
             self.ui.sourceModelNodeComboBox.removeEnabled = False
             self.ui.sourceModelNodeComboBox.editEnabled = False
             self.ui.sourceModelNodeComboBox.renameEnabled = False
-            self.ui.sourceModelNodeComboBox.setNoneEnabled(True)
+            self.ui.sourceModelNodeComboBox.noneEnabled = True 
             self.ui.sourceModelNodeComboBox.showHidden = False
             self.ui.sourceModelNodeComboBox.showChildNodeTypes = False
-
-        # --- End STL Import and Conversion Section ---
 
     def cleanup(self):
         """Called when the application closes and the module widget is destroyed."""

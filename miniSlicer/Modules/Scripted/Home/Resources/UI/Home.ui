@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>300</width>
-    <height>630</height>
+    <height>800</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -162,13 +162,13 @@
      </property>
     </widget>
    </item>
-   <!-- item>
-    <widget class="QPushButton" name="loadMRHeadButton">
-     <property name="text">
-      <string>Load MRHead Data</string>
+   <item>
+    <widget class="QGroupBox" name="segmentEditorDisplayGroupBox">
+     <property name="title">
+      <string>编辑器视图</string>
      </property>
     </widget>
-   </item -->
+   </item>
    <item>
     <widget class="QLabel" name="statusLabel">
      <property name="text">
