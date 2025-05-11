@@ -13,6 +13,8 @@ import os
 import vtk # Added for vtk.vtkBoundingBox
 import math # Added for math.sin, math.radians
 import sys
+import csv  # For contour export
+import numpy as np  # Numerical computations
 
 # Attempt to import the specific Slicer module that provides the Segment Editor Widget bindings
 try:
@@ -187,7 +189,7 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
 
         self.mainTabWidget.addTab(centerlinePage, "中心线提取")
 
-        # --- 新建 "剖面提取" 页签，复用原生 Markups 模块 GUI ---
+        # --- 新建 "中心线编辑" 页签，复用原生 Markups 模块 GUI ---
         sectionPage = qt.QWidget()
         sectionLayout = qt.QVBoxLayout(sectionPage)
         sectionLayout.setContentsMargins(0, 0, 0, 0)
@@ -237,7 +239,103 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
             sectionLayout.addWidget(errLab)
             import traceback; traceback.print_exc()
 
-        self.mainTabWidget.addTab(sectionPage, "剖面提取")
+        self.mainTabWidget.addTab(sectionPage, "中心线编辑")
+
+        # ---------- 构建 剖面提取 UI ----------
+        profilePage = qt.QWidget()
+        profileLayout = qt.QVBoxLayout(profilePage)
+        profileLayout.setContentsMargins(0, 0, 0, 0)
+        profileLayout.setSpacing(0)
+
+        # 输入节点选择
+        inputGroup = qt.QGroupBox("输入数据")
+        inputForm = qt.QFormLayout(inputGroup)
+
+        self.profile_modelCombo = slicer.qMRMLNodeComboBox()
+        self.profile_modelCombo.nodeTypes = ["vtkMRMLModelNode"]
+        self.profile_modelCombo.selectNodeUponCreation = True
+        self.profile_modelCombo.addEnabled = False
+        self.profile_modelCombo.removeEnabled = False
+        self.profile_modelCombo.renameEnabled = False
+        self.profile_modelCombo.noneEnabled = False
+        self.profile_modelCombo.setMRMLScene(slicer.mrmlScene)
+
+        self.profile_curveCombo = slicer.qMRMLNodeComboBox()
+        self.profile_curveCombo.nodeTypes = ["vtkMRMLMarkupsCurveNode"]
+        self.profile_curveCombo.selectNodeUponCreation = True
+        self.profile_curveCombo.addEnabled = False
+        self.profile_curveCombo.removeEnabled = False
+        self.profile_curveCombo.renameEnabled = False
+        self.profile_curveCombo.noneEnabled = False
+        self.profile_curveCombo.setMRMLScene(slicer.mrmlScene)
+
+        self.profile_endpointsCombo = slicer.qMRMLNodeComboBox()
+        self.profile_endpointsCombo.nodeTypes = ["vtkMRMLMarkupsFiducialNode"]
+        self.profile_endpointsCombo.selectNodeUponCreation = True
+        self.profile_endpointsCombo.addEnabled = False
+        self.profile_endpointsCombo.removeEnabled = False
+        self.profile_endpointsCombo.renameEnabled = False
+        self.profile_endpointsCombo.noneEnabled = True
+        self.profile_endpointsCombo.setMRMLScene(slicer.mrmlScene)
+
+        inputForm.addRow("模型:", self.profile_modelCombo)
+        inputForm.addRow("中心线曲线:", self.profile_curveCombo)
+        inputForm.addRow("端点 Fiducial:", self.profile_endpointsCombo)
+
+        # 输出设置
+        outputGroup = qt.QGroupBox("输出设置")
+        outputForm = qt.QFormLayout(outputGroup)
+
+        pathLayout = qt.QHBoxLayout()
+        self.profile_outputDirLine = qt.QLineEdit()
+        browseBtn = qt.QPushButton("浏览…")
+        pathLayout.addWidget(self.profile_outputDirLine)
+        pathLayout.addWidget(browseBtn)
+
+        self.profile_csvNameLine = qt.QLineEdit("contour_auto.csv")
+
+        outputForm.addRow("文件夹:", pathLayout)
+        outputForm.addRow("CSV 文件名:", self.profile_csvNameLine)
+
+        # 选项
+        optionsGroup = qt.QGroupBox("选项")
+        optionsLayout = qt.QVBoxLayout(optionsGroup)
+        self.profile_clockwiseCheck = qt.QCheckBox("顺时针轮廓排序")
+        self.profile_useCmCheck = qt.QCheckBox("输出 cm 单位 (mm→cm)")
+        self.profile_scaleRadiusCheck = qt.QCheckBox("按等效半径归一化")
+        self.profile_useCmCheck.setChecked(True)
+        self.profile_scaleRadiusCheck.setChecked(True)
+        optionsLayout.addWidget(self.profile_clockwiseCheck)
+        optionsLayout.addWidget(self.profile_useCmCheck)
+        optionsLayout.addWidget(self.profile_scaleRadiusCheck)
+
+        # 执行按钮 & 状态
+        runLayout = qt.QHBoxLayout()
+        self.btn_generateVtk = qt.QPushButton("生成 VTK")
+        self.btn_vtk2curve = qt.QPushButton("VTK → ClosedCurve")
+        self.btn_curve2csv = qt.QPushButton("ClosedCurve → CSV")
+        self.btn_vtk2curve.enabled = False
+        self.btn_curve2csv.enabled = False
+        self.profile_statusLabel = qt.QLabel()
+        runLayout.addWidget(self.btn_generateVtk)
+        runLayout.addWidget(self.btn_vtk2curve)
+        runLayout.addWidget(self.btn_curve2csv)
+        runLayout.addWidget(self.profile_statusLabel, 1)
+
+        # 组装到主布局
+        profileLayout.addWidget(inputGroup)
+        profileLayout.addWidget(outputGroup)
+        profileLayout.addWidget(optionsGroup)
+        profileLayout.addLayout(runLayout)
+        profileLayout.addStretch(1)
+
+        self.mainTabWidget.addTab(profilePage, "剖面提取")
+
+        # 连接信号
+        browseBtn.clicked.connect(self.onBrowseProfileOutputDir)
+        self.btn_generateVtk.clicked.connect(self.onGenerateVtks)
+        self.btn_vtk2curve.clicked.connect(self.onVtkToCurves)
+        self.btn_curve2csv.clicked.connect(self.onCurvesToCsv)
 
         self.layout.addWidget(self.mainTabWidget)
 
@@ -607,6 +705,153 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
         except Exception as e:
             print(f"ERROR: 注册 'Wrap Solidify' 效果时发生异常: {type(e).__name__} - {e}")
 
+    def onBrowseProfileOutputDir(self):
+        dirPath = qt.QFileDialog.getExistingDirectory(self.parent, "选择输出文件夹")
+        if dirPath:
+            self.profile_outputDirLine.setText(dirPath)
+
+    def onGenerateVtks(self):
+        """第一步：根据用户当前选择，调用逻辑层切割模型并生成 ClosedCurve。
+
+        目前直接复用 HomeLogic.extractContoursToCsv，启用 saveVtk=True，但把 CSV
+        写入到临时文件（preview_<name>.csv），以便后续步骤可再次输出最终 CSV。
+        同时在 UI 上缓存相关参数，并启用后续按钮。
+        """
+        # 基本校验
+        modelNode = self.profile_modelCombo.currentNode()
+        curveNode = self.profile_curveCombo.currentNode()
+        endpointsNode = self.profile_endpointsCombo.currentNode()
+        if modelNode is None or curveNode is None:
+            slicer.util.errorDisplay("请先选择有效的模型节点和中心线曲线节点！")
+            return
+
+        # 输出文件夹
+        outputDir = self.profile_outputDirLine.text.strip()
+        if not outputDir:
+            slicer.util.errorDisplay("请指定输出文件夹！")
+            return
+
+        # 生成一个临时的 CSV 名称，避免和最终导出冲突
+        previewCsvName = os.path.splitext(self.profile_csvNameLine.text.strip() or "contour_auto.csv")[0]
+        previewCsvName = f"preview_{previewCsvName}.csv"
+
+        # 选项
+        clockwise = self.profile_clockwiseCheck.isChecked()
+        useCm = self.profile_useCmCheck.isChecked()
+        scaleByRadius = self.profile_scaleRadiusCheck.isChecked()
+
+        # 如果端点节点存在，则默认使用
+        useEndpoints = bool(endpointsNode and endpointsNode.GetNumberOfControlPoints() >= 2)
+
+        success, msg = self.logic.extractContoursToCsv(
+            modelNode,
+            curveNode,
+            endpointsNode,
+            useEndpoints,
+            outputDir,
+            previewCsvName,
+            clockwise,
+            useCm,
+            scaleByRadius,
+            saveVtk=True,
+        )
+
+        # UI 反馈
+        self.profile_statusLabel.setText(msg)
+        slicer.app.processEvents()
+
+        if success:
+            # 缓存参数，供后续 CSV 导出使用
+            self._profile_cache = {
+                "modelNode": modelNode,
+                "curveNode": curveNode,
+                "endpointsNode": endpointsNode,
+                "useEndpoints": useEndpoints,
+                "outputDir": outputDir,
+                "clockwise": clockwise,
+                "useCm": useCm,
+                "scaleByRadius": scaleByRadius,
+            }
+            # 更新按钮状态
+            self.btn_curve2csv.enabled = True
+            self.btn_generateVtk.enabled = True  # 仍可重新运行
+        else:
+            self.btn_curve2csv.enabled = False
+
+    def onVtkToCurves(self):
+        """第二步：将场景中名为 Slice_* 的 vtkMRMLModelode 转换为 ClosedCurve。
+
+        如果在第一步已直接生成 ClosedCurve，则此步骤可以跳过，直接启用下一步。
+        这里实现一个简易转换：遍历所有 ModelNode，若 PolyData 是平面且点数较少，
+        则认为是截面并生成对应的 ClosedCurve。
+        """
+        # 搜索候选模型节点
+        candidateModels = []
+        for node in slicer.util.getNodesByClass("vtkMRMLModelNode"):
+            name = node.GetName() or ""
+            if name.lower().startswith("slicecurve_") or name.lower().startswith("slice_"):
+                candidateModels.append(node)
+
+        if not candidateModels:
+            slicer.util.infoDisplay("未找到需要转换的 VTK 模型节点。若已直接生成 ClosedCurve，可跳过此步骤。")
+            self.btn_curve2csv.enabled = True
+            return
+
+        created = 0
+        for mdl in candidateModels:
+            pd = mdl.GetPolyData()
+            if pd is None or pd.GetNumberOfPoints() < 3:
+                continue
+            curveNode = slicer.mrmlScene.AddNewNodeByClass('vtkMRMLMarkupsClosedCurveNode', f"{mdl.GetName()}_CC")
+            curveNode.CreateDefaultDisplayNodes()
+            for i in range(pd.GetNumberOfPoints()):
+                curveNode.AddControlPointWorld(pd.GetPoint(i))
+            created += 1
+
+        msg = f"已从 {len(candidateModels)} 个模型节点中创建 {created} 条 ClosedCurve。"
+        self.profile_statusLabel.setText(msg)
+        slicer.app.processEvents()
+
+        # 启用下一步按钮
+        if created > 0:
+            self.btn_curve2csv.enabled = True
+        else:
+            self.btn_curve2csv.enabled = False
+
+    def onCurvesToCsv(self):
+        """第三步：使用缓存参数重新调用 extractContoursToCsv，仅输出最终 CSV。
+
+        为保证性能与一致性，这里不重新切割模型，而沿用第一步中的参数，但关闭 saveVtk，
+        并使用用户指定的 CSV 文件名。
+        """
+        if not hasattr(self, "_profile_cache"):
+            slicer.util.errorDisplay("请先执行第一步生成截面！")
+            return
+
+        params = self._profile_cache
+        outputDir = params["outputDir"]
+        csvName = self.profile_csvNameLine.text.strip() or "contour_auto.csv"
+
+        success, msg = self.logic.extractContoursToCsv(
+            params["modelNode"],
+            params["curveNode"],
+            params["endpointsNode"],
+            params["useEndpoints"],
+            outputDir,
+            csvName,
+            params["clockwise"],
+            params["useCm"],
+            params["scaleByRadius"],
+            saveVtk=False,
+        )
+
+        self.profile_statusLabel.setText(msg)
+        slicer.app.processEvents()
+
+        if success:
+            slicer.util.infoDisplay("剖面已成功导出 CSV！")
+        else:
+            slicer.util.errorDisplay("CSV 导出失败，请检查日志。")
 
 class HomeLogic(ScriptedLoadableModuleLogic):
     """
@@ -925,4 +1170,215 @@ class HomeLogic(ScriptedLoadableModuleLogic):
 
         slicer.app.processEvents() # Ensure UI updates after view changes
 
+    def extractContoursToCsv(self, modelNode, curveNode, endpointsNode, useEndpoints, outputDir, csvName, clockwise, useCm, scaleByRadius, saveVtk):
+        """Extract contour slices along centerline and save to CSV.
+
+        Parameters
+        ----------
+        modelNode : vtkMRMLModelNode
+            Closed lumen model to be cut.
+        curveNode : vtkMRMLMarkupsCurveNode
+            Centerline curve (control points serve as section centers).
+        endpointsNode : vtkMRMLMarkupsFiducialNode | None
+            Two-point fiducial defining explicit endpoints (optional).
+        useEndpoints : bool
+            If True, prepend/append the endpoints to centerline list.
+        outputDir : str
+            Directory to save CSV.
+        csvName : str
+            File name of CSV.
+        clockwise, useCm, scaleByRadius : bool
+            Export options, see UI.
+
+        Returns
+        -------
+        (bool, str)
+            Success flag and message.
+        """
+        try:
+            # Validate nodes
+            if modelNode is None or curveNode is None:
+                return False, "模型或中心线节点为空。"
+
+            # Obtain vtkPolyData from model or segmentation
+            if isinstance(modelNode, slicer.vtkMRMLSegmentationNode):
+                segIds = vtk.vtkStringArray()
+                modelNode.GetSegmentation().GetSegmentIDs(segIds)
+                if segIds.GetNumberOfValues() == 0:
+                    return False, "分割节点中没有 Segment。"
+                segId = segIds.GetValue(0)
+
+                # 确保存在闭合曲面
+                polyData = vtk.vtkPolyData()
+                success = modelNode.GetClosedSurfaceRepresentation(segId, polyData)
+                if (not success) or polyData.GetNumberOfPoints() == 0:
+                    return False, "无法从分割节点获取有效闭合曲面表示。"
+            else:
+                polyData = modelNode.GetPolyData()
+            if polyData is None or polyData.GetNumberOfPoints() == 0:
+                return False, "模型 PolyData 无效或为空。"
+
+            numCurvePts = curveNode.GetNumberOfControlPoints()
+            if numCurvePts < 3:
+                return False, "中心线控制点不足 3 个。"
+
+            # Build points list (numpy Nx3)
+            pts_list = []
+
+            if useEndpoints and endpointsNode is not None and endpointsNode.GetNumberOfControlPoints() >= 2:
+                pts_list.append(np.array(endpointsNode.GetNthControlPointPositionWorld(0)))
+
+            # curve control points
+            for i in range(numCurvePts):
+                pts_list.append(np.array(curveNode.GetNthControlPointPositionWorld(i)))
+
+            if useEndpoints and endpointsNode is not None and endpointsNode.GetNumberOfControlPoints() >= 2:
+                pts_list.append(np.array(endpointsNode.GetNthControlPointPositionWorld(1)))
+
+            pts = np.vstack(pts_list)
+
+            if pts.shape[0] < 3:
+                return False, "截面点数不足 3，无法计算切向量。"
+
+            # Helper functions
+            EPS = 1e-6
+
+            def normalize(v):
+                n = np.linalg.norm(v)
+                return v / n if n > EPS else np.array([1.0, 0.0, 0.0])
+
+            # Compute tangents (3-point moving average)
+            v = np.zeros_like(pts)
+            v[1:-1] = (pts[2:] - pts[:-2]) * 0.5
+            v[0] = pts[1] - pts[0]
+            v[-1] = pts[-1] - pts[-2]
+
+            t = np.zeros_like(pts)
+            t[1:-1] = (v[:-2] + v[1:-1] + v[2:]) / 3.0
+            t[0] = t[1]
+            t[-1] = t[-2]
+            tangents = np.array([normalize(vec) for vec in t])
+
+            # Prepare cutter
+            plane = vtk.vtkPlane()
+            cutter = vtk.vtkCutter()
+            cutter.SetInputData(polyData)
+            cutter.SetCutFunction(plane)
+
+            # Utils
+            def compute_reference_axes(n_vec):
+                ref = np.array([0, 0, 1]) if abs(n_vec[2]) < 0.9 else np.array([0, 1, 0])
+                t_axis = normalize(np.cross(n_vec, ref) * np.array([1, -1, 1]))
+                b_axis = np.cross(n_vec, t_axis)
+                return t_axis, b_axis
+
+            def equivalent_radius(pd):
+                tf = vtk.vtkTriangleFilter()
+                tf.SetInputData(pd)
+                tf.Update()
+                mp = vtk.vtkMassProperties()
+                mp.SetInputConnection(tf.GetOutputPort())
+                mp.Update()
+                area = mp.GetSurfaceArea()
+                return math.sqrt(area / math.pi) if area > 0 else 1.0
+
+            # Ensure output directory
+            os.makedirs(outputDir, exist_ok=True)
+            outputCsv = os.path.join(outputDir, csvName)
+
+            saved = 0
+            centerline_out = []
+
+            with open(outputCsv, 'w', newline='') as f_csv:
+                writer = csv.writer(f_csv, delimiter=';')
+
+                for idx, (P, N) in enumerate(zip(pts, tangents)):
+                    plane.SetOrigin(*P)
+                    plane.SetNormal(*N)
+                    cutter.Update()
+
+                    slicePoly = vtk.vtkPolyData()
+                    slicePoly.DeepCopy(cutter.GetOutput())
+
+                    if slicePoly.GetNumberOfPoints() < 3:
+                        self._updateStatus(f"Slice {idx:03d}: 无交线，跳过")
+                        continue
+
+                    pts_np = np.array([slicePoly.GetPoint(i) for i in range(slicePoly.GetNumberOfPoints())])
+
+                    N_vec = normalize(N)
+                    t_axis, b_axis = compute_reference_axes(N_vec)
+
+                    local_y = (pts_np - P) @ t_axis
+                    local_z = (pts_np - P) @ b_axis
+
+                    # Optional scaling
+                    if scaleByRadius:
+                        r_mm = equivalent_radius(slicePoly)
+                        if r_mm > EPS:
+                            local_y /= r_mm
+                            local_z /= r_mm
+                    scale_val = 1.0 if not scaleByRadius else equivalent_radius(slicePoly) / (10.0 if useCm else 1.0)
+
+                    # Sort by angle
+                    angles = np.arctan2(local_z, local_y)
+                    sort_idx = np.argsort(angles)
+                    if clockwise:
+                        sort_idx = sort_idx[::-1]
+                    local_y = local_y[sort_idx]
+                    local_z = local_z[sort_idx]
+
+                    # Unit conversion
+                    P_out = P / 10.0 if useCm else P.copy()
+
+                    writer.writerow([P_out[0], t_axis[0], scale_val, *local_y])
+                    writer.writerow([P_out[1], t_axis[1], scale_val, *local_z])
+
+                    # --- 可视化并可选保存 VTK ---
+                    if saveVtk:
+                        # 使用 Markups ClosedCurve 以便后续交互编辑
+                        curveNode = slicer.mrmlScene.AddNewNodeByClass('vtkMRMLMarkupsClosedCurveNode', f'SliceCurve_{idx:03d}')
+                        curveNode.CreateDefaultDisplayNodes()
+                        disp = curveNode.GetDisplayNode()
+                        if disp:
+                            disp.SetColor(0.2, 1.0, 0.4)
+                            disp.SetOpacity(0.6)
+
+                        # 添加控制点（保持顺序）
+                        ordered_pts = pts_np[sort_idx]
+                        for pt in ordered_pts:
+                            curveNode.AddControlPointWorld(pt.tolist())
+
+                        # 可选保存为 .mrk.json 文件
+                        jsonPath = os.path.join(outputDir, f'SliceCurve_{idx:03d}.mrk.json')
+                        try:
+                            slicer.util.saveNode(curveNode, jsonPath)
+                        except Exception:
+                            pass
+
+                    saved += 1
+                    centerline_out.append(P_out.tolist())
+
+            if saved == 0:
+                return False, "未能生成任何截面，CSV 未创建。"
+
+            self._updateStatus(f"共写入 {saved} 条截面 → {outputCsv}")
+
+            # 额外保存中心线
+            cl_path = os.path.join(outputDir, 'centerline.csv')
+            with open(cl_path, 'w', newline='') as fcl:
+                w = csv.writer(fcl, delimiter=';')
+                w.writerow(['X', 'Y', 'Z'])
+                w.writerows(centerline_out)
+
+            return True, f"剖面提取完成，{saved} 条截面已保存到 {outputCsv}"
+
+        except Exception as e:
+            import traceback, io
+            tb = io.StringIO()
+            traceback.print_exc(file=tb)
+            self._updateStatus(tb.getvalue())
+            return False, f"剖面提取失败: {type(e).__name__}: {e}"
+
     pass
+
