@@ -83,6 +83,8 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
         VTKObservationMixin.__init__(self)
         self.segmentEditorNode = None
         self.segmentEditorWidget = None # Initialize members
+        # 新增：保存 Markups 小部件以便在 cleanup 中调用 exit()
+        self.markupsModuleWidget = None
 
     def setup(self):
         """Called when the application opens the module the first time and the widget is initialized."""
@@ -146,13 +148,36 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
         centerlinePage = qt.QWidget()
         # Create tab container with its own logic
         try:
-            from ExtractCenterline import ExtractCenterlineWidget
             centerlineLayout = qt.QVBoxLayout(centerlinePage)
             centerlineLayout.setContentsMargins(0, 0, 0, 0)
-            # 实例化原始模块小部件并嵌入
-            ecWidget = ExtractCenterlineWidget(centerlinePage)
-            ecWidget.setup()  # 调用其 setup 构建完整 GUI
-            centerlineLayout.addWidget(ecWidget)
+
+            # 尝试通过 Slicer API 获取 ExtractCenterline 模块小部件（新实例优先）
+            centerlineModuleWidgetInstance = None # Python 模块实例或 C++ QWidget
+            try:
+                centerlineModuleWidgetInstance = slicer.util.getNewModuleWidget('ExtractCenterline')
+            except Exception as e_new:
+                print(f"INFO: getNewModuleWidget('ExtractCenterline') 失败: {type(e_new).__name__}: {e_new}，尝试回退至 getModuleWidget().")
+                centerlineModuleWidgetInstance = slicer.util.getModuleWidget('ExtractCenterline')
+
+            if centerlineModuleWidgetInstance is None:
+                raise RuntimeError("获取 ExtractCenterline 模块 GUI 失败，返回 None。")
+
+            # 对于脚本模块, .parent 是实际的 QWidget
+            if hasattr(centerlineModuleWidgetInstance, 'parent') and centerlineModuleWidgetInstance.parent is not None:
+                widget_to_add = centerlineModuleWidgetInstance.parent
+                widget_to_add.setParent(centerlinePage) # 确保父级
+                centerlineLayout.addWidget(widget_to_add)
+                widget_to_add.show()
+                print(f"DEBUG: ExtractCenterline.parent (type: {type(widget_to_add).__name__}) added to layout.")
+            elif isinstance(centerlineModuleWidgetInstance, qt.QWidget):
+                 # 回退：如果脚本模块实例本身就是 QWidget (不常见但以防万一)
+                centerlineModuleWidgetInstance.setParent(centerlinePage)
+                centerlineLayout.addWidget(centerlineModuleWidgetInstance)
+                centerlineModuleWidgetInstance.show()
+                print(f"DEBUG: ExtractCenterline (widgetInstance itself, type: {type(centerlineModuleWidgetInstance).__name__}) added to layout.")
+            else:
+                raise TypeError(f"无法从 ExtractCenterline (type: {type(centerlineModuleWidgetInstance).__name__}) 获取可添加到布局的 QWidget")
+
         except Exception as e:
             centerlineLayout = qt.QVBoxLayout(centerlinePage)
             errLab = qt.QLabel(f"无法加载原始 ExtractCenterlineWidget: {type(e).__name__} - {e}")
@@ -161,6 +186,58 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
             import traceback; traceback.print_exc()
 
         self.mainTabWidget.addTab(centerlinePage, "中心线提取")
+
+        # --- 新建 "剖面提取" 页签，复用原生 Markups 模块 GUI ---
+        sectionPage = qt.QWidget()
+        sectionLayout = qt.QVBoxLayout(sectionPage)
+        sectionLayout.setContentsMargins(0, 0, 0, 0)
+        sectionLayout.setSpacing(0)
+        try:
+            # 优先尝试创建一个新的 Markups 模块小部件实例，避免影响主模块面板
+            try:
+                markupsModuleWidgetInstance = slicer.util.getNewModuleWidget('Markups')
+            except Exception as e_new:
+                print(f"INFO: getNewModuleWidget('Markups') failed with {type(e_new).__name__}: {e_new}. 尝试退回至 getModuleWidget().")
+                markupsModuleWidgetInstance = slicer.util.getModuleWidget('Markups')
+
+            if markupsModuleWidgetInstance is None:
+                raise RuntimeError("从 Slicer 获取 Markups 模块小部件失败，返回 None。")
+
+            # 对于 C++ 模块 (如 qSlicerMarkupsModuleWidget), slicer.util 返回的实例本身
+            # 在 C++ 层面是 QWidget。我们直接传递它给 addWidget。
+            # Python 的 isinstance(obj, qt.QWidget) 对这些封装类可能返回 False。
+            try:
+                markupsModuleWidgetInstance.setParent(sectionPage) # 确保父级
+                sectionLayout.addWidget(markupsModuleWidgetInstance)
+                markupsModuleWidgetInstance.show()
+                print(f"DEBUG: Markups widget (type: {type(markupsModuleWidgetInstance).__name__}) successfully added to layout and shown.")
+                # >>>>>>> 新增：正确初始化 Markups 小部件，使其内部面板处于激活状态 <<<<<<<
+                try:
+                    # 设置 MRML 场景
+                    if hasattr(markupsModuleWidgetInstance, "setMRMLScene"):
+                        markupsModuleWidgetInstance.setMRMLScene(slicer.mrmlScene)
+                    # 调用 enter()，模拟 Slicer 切换到该模块时的流程
+                    if hasattr(markupsModuleWidgetInstance, "enter"):
+                        markupsModuleWidgetInstance.enter()
+                except Exception as e_init_mk:
+                    print(f"WARNING: 初始化 Markups 小部件时调用 setMRMLScene/enter 失败: {type(e_init_mk).__name__}: {e_init_mk}")
+                # 保存引用，便于后续 cleanup 调用 exit()
+                self.markupsModuleWidget = markupsModuleWidgetInstance
+            except Exception as e_add_markups:
+                print(f"ERROR: Failed to add/show Markups widget. Type: {type(markupsModuleWidgetInstance).__name__}. Error: {e_add_markups}")
+                # 如果 addWidget 失败 (例如，因为类型不匹配导致 ValueError)，则会在这里捕获
+                # 并可以显示占位符
+                errLab = qt.QLabel(f"无法嵌入 Markups 模块界面: {type(e_add_markups).__name__}")
+                errLab.setWordWrap(True)
+                sectionLayout.addWidget(errLab)
+
+        except Exception as e:
+            errLab = qt.QLabel(f"无法加载 Markups 模块小部件: {type(e).__name__} - {e}")
+            errLab.setWordWrap(True)
+            sectionLayout.addWidget(errLab)
+            import traceback; traceback.print_exc()
+
+        self.mainTabWidget.addTab(sectionPage, "剖面提取")
 
         self.layout.addWidget(self.mainTabWidget)
 
@@ -286,7 +363,18 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
 
     def cleanup(self):
         """Called when the application closes and the module widget is destroyed."""
-        pass
+        # 如果嵌入的 Markups 小部件存在，则调用其 exit() 进行清理
+        if hasattr(self, "markupsModuleWidget") and self.markupsModuleWidget is not None:
+            try:
+                if hasattr(self.markupsModuleWidget, "exit"):
+                    self.markupsModuleWidget.exit()
+            except Exception as e_exit_mk:
+                print(f"WARNING: 调用 Markups 小部件 exit() 时发生异常: {type(e_exit_mk).__name__}: {e_exit_mk}")
+        # 调用父类 cleanup（当前为空实现，留作兼容）
+        try:
+            ScriptedLoadableModuleWidget.cleanup(self)
+        except Exception:
+            pass
 
     def setSlicerUIVisible(self, visible: bool):
         exemptToolbars = [
