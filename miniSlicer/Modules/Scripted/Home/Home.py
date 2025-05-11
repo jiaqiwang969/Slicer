@@ -711,112 +711,238 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
             self.profile_outputDirLine.setText(dirPath)
 
     def onGenerateVtks(self):
-        """第一步：根据用户当前选择，调用逻辑层切割模型并生成 ClosedCurve。
+        """第一步：根据用户输入切割模型并将轮廓直接保存为 .vtk 文件。
 
-        目前直接复用 HomeLogic.extractContoursToCsv，启用 saveVtk=True，但把 CSV
-        写入到临时文件（preview_<name>.csv），以便后续步骤可再次输出最终 CSV。
-        同时在 UI 上缓存相关参数，并启用后续按钮。
+        不创建 ClosedCurve，仅在场景中生成中间 ModelNode（便于可视化），
+        同时把每个轮廓保存为 VTK PolyData 文件，供第二步转换为 ClosedCurve。
         """
-        # 基本校验
+
+        import numpy as _np  # 局部引用，避免与模块顶层命名冲突
+
+        # ---- 0. 基本校验 ----
         modelNode = self.profile_modelCombo.currentNode()
         curveNode = self.profile_curveCombo.currentNode()
         endpointsNode = self.profile_endpointsCombo.currentNode()
+
         if modelNode is None or curveNode is None:
             slicer.util.errorDisplay("请先选择有效的模型节点和中心线曲线节点！")
             return
 
-        # 输出文件夹
         outputDir = self.profile_outputDirLine.text.strip()
         if not outputDir:
             slicer.util.errorDisplay("请指定输出文件夹！")
             return
 
-        # 生成一个临时的 CSV 名称，避免和最终导出冲突
-        previewCsvName = os.path.splitext(self.profile_csvNameLine.text.strip() or "contour_auto.csv")[0]
-        previewCsvName = f"preview_{previewCsvName}.csv"
+        os.makedirs(outputDir, exist_ok=True)
 
-        # 选项
-        clockwise = self.profile_clockwiseCheck.isChecked()
-        useCm = self.profile_useCmCheck.isChecked()
-        scaleByRadius = self.profile_scaleRadiusCheck.isChecked()
+        clockwiseContour = self.profile_clockwiseCheck.isChecked()
+        # 是否使用端点：若端点节点存在且点数≥2，则采用 UI 复选框（目前默认总使用）
+        use_curve_endpoints = True
+        if endpointsNode is None or endpointsNode.GetNumberOfControlPoints() < 2:
+            use_curve_endpoints = True  # 如果没有额外端点节点，则使用曲线自身端点
 
-        # 如果端点节点存在，则默认使用
-        useEndpoints = bool(endpointsNode and endpointsNode.GetNumberOfControlPoints() >= 2)
-
-        success, msg = self.logic.extractContoursToCsv(
-            modelNode,
-            curveNode,
-            endpointsNode,
-            useEndpoints,
-            outputDir,
-            previewCsvName,
-            clockwise,
-            useCm,
-            scaleByRadius,
-            saveVtk=True,
-        )
-
-        # UI 反馈
-        self.profile_statusLabel.setText(msg)
-        slicer.app.processEvents()
-
-        if success:
-            # 缓存参数，供后续 CSV 导出使用
-            self._profile_cache = {
-                "modelNode": modelNode,
-                "curveNode": curveNode,
-                "endpointsNode": endpointsNode,
-                "useEndpoints": useEndpoints,
-                "outputDir": outputDir,
-                "clockwise": clockwise,
-                "useCm": useCm,
-                "scaleByRadius": scaleByRadius,
-            }
-            # 更新按钮状态
-            self.btn_curve2csv.enabled = True
-            self.btn_generateVtk.enabled = True  # 仍可重新运行
-        else:
-            self.btn_curve2csv.enabled = False
-
-    def onVtkToCurves(self):
-        """第二步：将场景中名为 Slice_* 的 vtkMRMLModelode 转换为 ClosedCurve。
-
-        如果在第一步已直接生成 ClosedCurve，则此步骤可以跳过，直接启用下一步。
-        这里实现一个简易转换：遍历所有 ModelNode，若 PolyData 是平面且点数较少，
-        则认为是截面并生成对应的 ClosedCurve。
-        """
-        # 搜索候选模型节点
-        candidateModels = []
-        for node in slicer.util.getNodesByClass("vtkMRMLModelNode"):
-            name = node.GetName() or ""
-            if name.lower().startswith("slicecurve_") or name.lower().startswith("slice_"):
-                candidateModels.append(node)
-
-        if not candidateModels:
-            slicer.util.infoDisplay("未找到需要转换的 VTK 模型节点。若已直接生成 ClosedCurve，可跳过此步骤。")
-            self.btn_curve2csv.enabled = True
+        # ---- 1. 获取曲线控制点 ----
+        nCurve = curveNode.GetNumberOfControlPoints()
+        if nCurve < 3:
+            slicer.util.errorDisplay("中心线控制点不足 3，无法计算切向量！")
             return
 
-        created = 0
-        for mdl in candidateModels:
-            pd = mdl.GetPolyData()
-            if pd is None or pd.GetNumberOfPoints() < 3:
-                continue
-            curveNode = slicer.mrmlScene.AddNewNodeByClass('vtkMRMLMarkupsClosedCurveNode', f"{mdl.GetName()}_CC")
-            curveNode.CreateDefaultDisplayNodes()
-            for i in range(pd.GetNumberOfPoints()):
-                curveNode.AddControlPointWorld(pd.GetPoint(i))
-            created += 1
+        pts = _np.array([curveNode.GetNthControlPointPositionWorld(i) for i in range(nCurve)])
 
-        msg = f"已从 {len(candidateModels)} 个模型节点中创建 {created} 条 ClosedCurve。"
+        if not use_curve_endpoints and pts.shape[0] > 2:
+            pts = pts[1:-1]
+
+        # 如果 endpointsNode 提供两端点并且启用端点，则在曲线点前后补充
+        if endpointsNode and endpointsNode.GetNumberOfControlPoints() >= 2 and use_curve_endpoints:
+            start_pt = _np.array(endpointsNode.GetNthControlPointPositionWorld(0))
+            end_pt = _np.array(endpointsNode.GetNthControlPointPositionWorld(1))
+            pts = _np.vstack([start_pt, pts, end_pt])
+
+        # ---- 2. 计算切向量 ----
+        v = _np.zeros_like(pts)
+        if len(pts) >= 3:
+            v[1:-1] = (pts[2:] - pts[:-2]) * 0.5
+        v[0] = pts[1] - pts[0]
+        v[-1] = pts[-1] - pts[-2]
+
+        t = _np.zeros_like(v)
+        if len(pts) >= 3:
+            t[1:-1] = (v[:-2] + v[1:-1] + v[2:]) / 3
+        if len(pts) >= 2:
+            t[0] = t[1]
+            t[-1] = t[-2]
+
+        norm = _np.linalg.norm(t, axis=1)
+        norm[norm == 0] = 1
+        t = t / norm[:, None]
+
+        # ---- 3. cutter 设置 ----
+        plane = vtk.vtkPlane()
+        cutter = vtk.vtkCutter()
+        cutter.SetInputData(modelNode.GetPolyData())
+        cutter.SetCutFunction(plane)
+
+        # ---- 4. 循环切割并保存 ----
+        saved = 0
+        for i, (P, N) in enumerate(zip(pts, t)):
+            plane.SetOrigin(*P); plane.SetNormal(*N)
+            cutter.Update()
+
+            poly = vtk.vtkPolyData(); poly.DeepCopy(cutter.GetOutput())
+            if poly.GetNumberOfPoints() < 3:
+                slicer.util.logMessage(f"[!] Slice {i:03d}: 无交线，跳过")
+                continue
+
+            # 若点数>3，则根据极角排序保证顺序一致性
+            if poly.GetNumberOfPoints() > 3:
+                pts_np = _np.array([poly.GetPoint(j) for j in range(poly.GetNumberOfPoints())])
+
+                # 生成局部基
+                ref = _np.array([0, 0, 1]) if abs(N[2]) < 0.9 else _np.array([0, 1, 0])
+                t_axis = _np.cross(N, ref); t_axis[1] *= -1
+                t_axis = t_axis / (_np.linalg.norm(t_axis) or 1)
+                b_axis = _np.cross(N, t_axis)
+
+                local_y = (pts_np - P) @ t_axis
+                local_z = (pts_np - P) @ b_axis
+                angles = _np.arctan2(local_z, local_y)
+                order = _np.argsort(angles)
+                if clockwiseContour:
+                    order = order[::-1]
+
+                # 重新构建 PolyData
+                reorder_pts = vtk.vtkPoints()
+                for idx in order:
+                    reorder_pts.InsertNextPoint(pts_np[idx])
+
+                poly2 = vtk.vtkPolyData(); poly2.SetPoints(reorder_pts)
+                poly2.Allocate()
+                line = vtk.vtkPolyLine()
+                line.GetPointIds().SetNumberOfIds(len(order))
+                for k in range(len(order)):
+                    line.GetPointIds().SetId(k, k)
+                poly2.InsertNextCell(line.GetCellType(), line.GetPointIds())
+                poly = poly2
+
+            # 在场景中创建可视化模型节点
+            mdl_name = f"SliceContour_{i:03d}"
+            mdl = slicer.mrmlScene.AddNewNodeByClass('vtkMRMLModelNode', mdl_name)
+            mdl.SetAndObservePolyData(poly)
+            mdl.CreateDefaultDisplayNodes()
+            if mdl.GetDisplayNode():
+                mdl.GetDisplayNode().SetColor(0.2, 1.0, 0.4)
+                mdl.GetDisplayNode().SetOpacity(0.6)
+
+            # 保存 .vtk 文件
+            out_path = os.path.join(outputDir, f"{mdl_name}.vtk")
+            try:
+                slicer.util.saveNode(mdl, out_path)
+                saved += 1
+            except Exception as _e:
+                slicer.util.logMessage(f"保存 {out_path} 失败: {_e}")
+
+        msg = f"共保存 {saved} 个 VTK 轮廓到 {outputDir}" if saved else "未能生成任何 VTK 轮廓。"
+
         self.profile_statusLabel.setText(msg)
         slicer.app.processEvents()
 
-        # 启用下一步按钮
-        if created > 0:
-            self.btn_curve2csv.enabled = True
+        # 缓存参数供后续使用（即使没保存成功，也缓存，便于调试）
+        self._profile_cache = {
+            "modelNode": modelNode,
+            "curveNode": curveNode,
+            "endpointsNode": endpointsNode,
+            "useEndpoints": use_curve_endpoints,
+            "outputDir": outputDir,
+            "clockwise": clockwiseContour,
+            "useCm": self.profile_useCmCheck.isChecked(),
+            "scaleByRadius": self.profile_scaleRadiusCheck.isChecked(),
+        }
+
+        # 更新按钮状态
+        self.btn_vtk2curve.enabled = saved > 0
+        self.btn_curve2csv.enabled = False  # 需等待第二步完成
+        if saved == 0:
+            slicer.util.errorDisplay(msg)
         else:
+            slicer.util.infoDisplay(msg)
+
+    def onVtkToCurves(self):
+        """第二步：把由 onGenerateVtks 生成的 `SliceContour_###` 模型转为 ClosedCurve。
+
+        处理流程：
+        1. 收集名称匹配 "SliceContour_###" 的 `vtkMRMLModelNode`，按编号升序排序。
+        2. 对每个节点读取 PolyData 点序列，依次添加到新建 `vtkMRMLMarkupsClosedCurveNode`。
+        3. 设置基本显示属性，命名保持编号一致，如 `SliceCurve_###`。
+        4. 统计并在 UI 中反馈，若成功至少 1 条即启用 CSV 导出按钮。
+        """
+
+        import re
+
+        # ---- 1. 收集并排序 ----
+        pattern = re.compile(r"^SliceContour_(\d{3,})$", re.IGNORECASE)
+        model_nodes = []
+        for node in slicer.util.getNodesByClass("vtkMRMLModelNode"):
+            name = node.GetName() or ""
+            m = pattern.match(name)
+            if m:
+                idx = int(m.group(1))
+                model_nodes.append((idx, node))
+
+        if not model_nodes:
+            slicer.util.infoDisplay("未找到任何 SliceContour_### VTK 模型，无法转换！")
             self.btn_curve2csv.enabled = False
+            return
+
+        # 根据编号排序
+        model_nodes.sort(key=lambda x: x[0])
+
+        # ---- 2. 转换 ----
+        created = 0
+        # 在整个批量过程中暂停视图渲染，末尾自动恢复
+        with slicer.util.RenderBlocker():
+            for idx, mdl in model_nodes:
+                pd = mdl.GetPolyData()
+                if pd is None or pd.GetNumberOfPoints() < 3:
+                    continue
+
+                # 已存在对应 ClosedCurve 则跳过
+                existing = slicer.mrmlScene.GetFirstNodeByName(f"SliceCurve_{idx:03d}")
+                if existing and isinstance(existing, slicer.vtkMRMLMarkupsClosedCurveNode):
+                    continue
+
+                curveNode = slicer.mrmlScene.AddNewNodeByClass('vtkMRMLMarkupsClosedCurveNode', f"SliceCurve_{idx:03d}")
+                curveNode.CreateDefaultDisplayNodes()
+                disp = curveNode.GetDisplayNode()
+                if disp:
+                    disp.SetColor(1.0, 0.8, 0.2)
+                    disp.SetOpacity(0.8)
+                    # 缩小控制点与线宽
+                    try:
+                        if hasattr(disp, "SetGlyphScale"):
+                            disp.SetGlyphScale(0.5)
+                        if hasattr(disp, "SetLineThickness"):
+                            disp.SetLineThickness(0.5)
+                    except Exception as _e_disp:
+                        slicer.util.logMessage(f"设置 ClosedCurve 显示属性时发生异常: {_e_disp}")
+
+                # 批量添加控制点，使用 NodeModify 上下文抑制多次 Modified 事件
+                with slicer.util.NodeModify(curveNode):
+                    for i in range(pd.GetNumberOfPoints()):
+                        curveNode.AddControlPointWorld(pd.GetPoint(i))
+
+                created += 1
+
+        # ---- 3. 结果反馈 ----
+        msg = f"已创建 {created} 条 ClosedCurve" if created else "所有轮廓已存在，无需转换。"
+        self.profile_statusLabel.setText(msg)
+        slicer.app.processEvents()
+
+        # ---- 4. 按钮状态 ----
+        self.btn_curve2csv.enabled = created > 0
+        if created > 0:
+            slicer.util.infoDisplay(msg)
+        else:
+            slicer.util.infoDisplay(msg)
 
     def onCurvesToCsv(self):
         """第三步：使用缓存参数重新调用 extractContoursToCsv，仅输出最终 CSV。
