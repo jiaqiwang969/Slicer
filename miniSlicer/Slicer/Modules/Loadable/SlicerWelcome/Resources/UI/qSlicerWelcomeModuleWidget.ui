@@ -1,0 +1,564 @@
+<ui version="4.0">
+ <class>qSlicerWelcomeModuleWidget</class>
+ <widget class="qSlicerWidget" name="qSlicerWelcomeModuleWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>463</width>
+    <height>2368</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>欢迎</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_12">
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>&amp;lt;html&amp;gt;&amp;lt;head/&amp;gt;&amp;lt;body&amp;gt;&amp;lt;p align="center"&amp;gt;&amp;lt;span style=" font-size:22pt; color:#afb7d5;"&amp;gt;欢迎&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="ButtonsFrame">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <property name="leftMargin">
+       <number>4</number>
+      </property>
+      <property name="topMargin">
+       <number>4</number>
+      </property>
+      <property name="rightMargin">
+       <number>4</number>
+      </property>
+      <property name="bottomMargin">
+       <number>4</number>
+      </property>
+      <property name="spacing">
+       <number>4</number>
+      </property>
+      <item row="3" column="0" colspan="2">
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QPushButton" name="OpenExtensionsManagerButton">
+          <property name="toolTip">
+           <string>打开“扩展管理器”向导，以查找、下载和安装 Slicer 扩展。&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;扩展是一个交付包，捆绑一个或多个 Slicer 模块。&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;安装扩展后，相关模块将在模块选择器中可用。</string>
+          </property>
+          <property name="text">
+           <string>安装扩展</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc">
+            <normaloff>:/Icons/ExtensionDefaultIcon.png</normaloff>:/Icons/ExtensionDefaultIcon.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="LoadSampleDataButton">
+          <property name="text">
+           <string>下载示例数据</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../qSlicerWelcomeModule.qrc">
+            <normaloff>:/Images/SlicerWWW-Original.png</normaloff>:/Images/SlicerWWW-Original.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>29</width>
+            <height>22</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="2" column="0" colspan="2">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QPushButton" name="LoadNonDicomDataButton">
+          <property name="text">
+           <string>添加数据</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc">
+            <normaloff>:/Icons/Small/SlicerLoadData.png</normaloff>:/Icons/Small/SlicerLoadData.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="LoadDicomDataButton">
+          <property name="text">
+           <string>添加 DICOM 数据</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc">
+            <normaloff>:/Icons/Small/SlicerLoadDICOM.png</normaloff>:/Icons/Small/SlicerLoadDICOM.png</iconset>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="4" column="0">
+       <widget class="QPushButton" name="EditApplicationSettingsButton">
+        <property name="text">
+         <string>自定义 Slicer</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../qSlicerWelcomeModule.qrc">
+          <normaloff>:/Images/SlicerAdvancedGear-Original.png</normaloff>:/Images/SlicerAdvancedGear-Original.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>22</width>
+          <height>22</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QPushButton" name="ExploreLoadedDataPushButton">
+        <property name="text">
+         <string>探索添加的数据</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../qSlicerWelcomeModule.qrc">
+          <normaloff>:/Images/WelcomeSubjectHierarchy.png</normaloff>:/Images/WelcomeSubjectHierarchy.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>22</width>
+          <height>21</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="2">
+       <widget class="QPushButton" name="ApplicationUpdateAvailableButton">
+        <property name="toolTip">
+         <string>有新版本的应用程序可用。点击按钮前往下载页面。</string>
+        </property>
+        <property name="text">
+         <string />
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="ctkCollapsibleButton" name="FeedbackCollapsibleWidget">
+     <property name="text">
+      <string>反馈</string>
+     </property>
+     <property name="collapsed">
+      <bool>false</bool>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_13">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="ctkFittedTextBrowser" name="feedbackTextBrowser">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Ignored" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="html">
+         <string>&amp;lt;table border="0" align="center" cellspacing="0" cellpadding="5"&amp;gt;&amp;lt;tr&amp;gt;&amp;lt;td style=" vertical-align:middle;"&amp;gt;&amp;lt;p&amp;gt;&amp;lt;a href="https://discourse.slicer.org"&amp;gt;&amp;lt;img src="qrc:Icons/Chat.png" width="64" style="vertical-align: middle;" /&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;td style=" vertical-align:middle;"&amp;gt;&amp;lt;p&amp;gt;在 &amp;lt;a href="https://discourse.slicer.org"&amp;gt;Slicer 论坛&amp;lt;/a&amp;gt; 与我们分享您的故事，并告诉我们 3D Slicer 如何促进了您的研究。&amp;lt;/p&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&amp;lt;/table&amp;gt;&amp;lt;p&amp;gt;我们始终希望改进 3D Slicer，若您有问题或想提交错误报告，请打开 &amp;lt;b&amp;gt;帮助 -&amp;gt; 报告错误&amp;lt;/b&amp;gt;。&amp;lt;/p&amp;gt;</string>
+        </property>
+        <property name="openExternalLinks">
+         <bool>true</bool>
+        </property>
+        <property name="collapsed">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="ctkCollapsibleButton" name="WelcomeAndAboutCollapsibleWidget">
+     <property name="text">
+      <string>关于</string>
+     </property>
+     <property name="collapsed">
+      <bool>false</bool>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="ctkFittedTextBrowser" name="aboutTextBrowser">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Ignored" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="html">
+         <string>&amp;lt;p&amp;gt;&amp;lt;b&amp;gt;3D Slicer&amp;lt;/b&amp;gt; 是一个免费的开源软件平台，用于医学图像处理和图像数据的 3D 可视化。该模块包含一些基本信息和有用链接，以帮助您开始使用 Slicer。有关更多信息，请访问我们的网站 &amp;lt;a href="https://www.slicer.org"&amp;gt;https://www.slicer.org&amp;lt;/a&amp;gt;.&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;&amp;lt;b&amp;gt;3D Slicer&amp;lt;/b&amp;gt; 根据 BSD 风格许可证分发；有关贡献和软件许可证协议的详细信息，请参见 &amp;lt;a href="https://github.com/Slicer/Slicer/blob/main/License.txt"&amp;gt;3D Slicer 软件许可证协议&amp;lt;/a&amp;gt;。该软件仅为研究目的设计，未经过食品和药物管理局或任何其他机构的审查或批准。&amp;lt;/p&amp;gt;</string>
+        </property>
+        <property name="openExternalLinks">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="ctkCollapsibleButton" name="OtherUsefulHintsCollapsibleWidget">
+     <property name="text">
+      <string>文档与教程</string>
+     </property>
+     <property name="collapsed">
+      <bool>false</bool>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_9">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="ctkFittedTextBrowser" name="documentationTextBrowser">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Ignored" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="html">
+         <string>&amp;lt;p&amp;gt;&amp;lt;b&amp;gt;文档&amp;lt;/b&amp;gt;&amp;lt;/p&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://slicer.readthedocs.io/en/latest/"&amp;gt;文档&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://slicer.readthedocs.io/en/latest/user_guide/getting_started.html#quick-start"&amp;gt;快速开始&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://slicer.readthedocs.io/en/latest/user_guide/get_help.html"&amp;gt;获取帮助&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://slicer.readthedocs.io/en/latest/user_guide/user_interface.html"&amp;gt;用户界面&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://slicer.readthedocs.io/en/latest/user_guide/user_interface.html#mouse-keyboard-shortcuts"&amp;gt;鼠标按钮、&amp;quot;热键&amp;quot; 和键盘快捷键&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://slicer.readthedocs.io/en/latest/user_guide/getting_started.html#tutorials"&amp;gt;浏览教程&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;&amp;lt;p&amp;gt;&amp;lt;b&amp;gt;联系我们&amp;lt;/p&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://discourse.slicer.org/"&amp;gt;访问 Slicer 论坛&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://www.linkedin.com/feed/hashtag/?keywords=3dslicer"&amp;gt;在 LinkedIn 上加入我们&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://discourse.slicer.org/c/support/feature-requests/9"&amp;gt;搜索功能请求&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://slicer.readthedocs.io/en/latest/user_guide/get_help.html#i-want-to-report-a-problem"&amp;gt;报告错误&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;&amp;lt;p&amp;gt;&amp;lt;b&amp;gt;关于 3D Slicer&amp;lt;/p&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://github.com/Slicer/Slicer/blob/main/License.txt"&amp;gt;查看许可证&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://slicer.readthedocs.io/en/latest/user_guide/about.html#how-to-cite"&amp;gt;如何引用&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://scholar.google.com/scholar?&amp;amp;as_sdt=1%2C22&amp;amp;as_vis=1&amp;amp;q=%28%223D+Slicer%22+OR+%22slicer+org%22+OR+Slicer3D%29+-Slic3r+&amp;amp;btnG="&amp;gt;Slicer 发表的文献&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://slicer.readthedocs.io/en/latest/user_guide/about.html#acknowledgments"&amp;gt;致谢&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;</string>
+        </property>
+        <property name="openExternalLinks">
+         <bool>true</bool>
+        </property>
+        <property name="collapsed">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="ctkCollapsibleButton" name="AutomaticUpdatesCollapsibleWidget">
+     <property name="toolTip">
+      <string>点击按钮立即检查更新。请注意，将记录匿名使用统计信息。</string>
+     </property>
+     <property name="text">
+      <string>更新</string>
+     </property>
+     <property name="collapsed">
+      <bool>false</bool>
+     </property>
+     <layout class="QFormLayout" name="formLayout">
+      <property name="horizontalSpacing">
+       <number>6</number>
+      </property>
+      <property name="verticalSpacing">
+       <number>6</number>
+      </property>
+      <property name="topMargin">
+       <number>6</number>
+      </property>
+      <property name="rightMargin">
+       <number>6</number>
+      </property>
+      <property name="bottomMargin">
+       <number>6</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>检查更新： </string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QCheckBox" name="CheckForUpdatesAutomaticallyCheckBox">
+          <property name="toolTip">
+           <string>定期检查更新。请注意，将记录匿名使用统计信息。如果复选框显示为部分选中，则表示仅对应用程序或扩展检查自动更新，而不是两者 - 点击复选框以启用/禁用所有自动更新检查。</string>
+          </property>
+          <property name="text">
+           <string>自动</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="CheckForUpdatesNowButton">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string>点击按钮立即检查更新。请注意，将记录匿名使用统计信息。</string>
+          </property>
+          <property name="text">
+           <string>立即检查</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>应用程序更新： </string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="ApplicationUpdateStatusButton">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="toolTip">
+         <string />
+        </property>
+        <property name="text">
+         <string>暂无信息可用。</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>22</width>
+          <height>22</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>扩展更新： </string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="ExtensionUpdatesStatusButton">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="toolTip">
+         <string>打开“扩展管理器”向导，以查找、下载和安装 Slicer 扩展。&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;扩展是一个交付包，捆绑一个或多个 Slicer 模块。&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;安装扩展后，相关模块将在模块选择器中可用。</string>
+        </property>
+        <property name="text">
+         <string>暂无信息可用。</string>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>22</width>
+          <height>22</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0" colspan="2">
+       <spacer name="verticalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>358</width>
+          <height>8</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="ctkCollapsibleButton" name="AcknowledgmentCollapsibleWidget">
+     <property name="text">
+      <string>致谢</string>
+     </property>
+     <property name="collapsed">
+      <bool>false</bool>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_11">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="ctkFittedTextBrowser" name="acknowledgmentTextBrowser">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Ignored" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="html">
+         <string>&amp;lt;table align="center" cellspacing="0" cellpadding="5"&amp;gt;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;&amp;lt;p align="center"&amp;gt;&amp;lt;a href="https://www.na-mic.org/"&amp;gt;&amp;lt;img src="qrc:Logos/NAMIC.png" width="80" style="vertical-align: middle;" /&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;a href="https://www.na-mic.org/"&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&amp;lt;p align="center"&amp;gt;&amp;lt;a href="https://nac.spl.harvard.edu/"&amp;gt;&amp;lt;img src="qrc:Logos/NAC.png" style="vertical-align: middle;" /&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;a href="https://nac.spl.harvard.edu/"&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&amp;lt;p align="center"&amp;gt;&amp;lt;a href="https://www.ncigt.org/"&amp;gt;&amp;lt;img src="qrc:Logos/NCIGT.png" style="vertical-align: middle;" /&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;a href="https://www.ncigt.org/"&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;&amp;lt;td&amp;gt;&amp;lt;p align="center"&amp;gt;&amp;lt;a href="https://www.spl.harvard.edu/"&amp;gt;&amp;lt;img src="qrc:Logos/SPL.png" style="vertical-align: middle;" /&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;a href="https://www.spl.harvard.edu/"&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&amp;lt;/table&amp;gt;&amp;lt;p&amp;gt;3D Slicer 的开发得到了 &amp;lt;a href="https://www.na-mic.org/"&amp;gt;NA-MIC&amp;lt;/a&amp;gt;、&amp;lt;a href="https://nac.spl.harvard.edu/"&amp;gt;NAC&amp;lt;/a&amp;gt;、&amp;lt;a href="https://www.ncigt.org/"&amp;gt;NCIGT&amp;lt;/a&amp;gt;、&amp;lt;a href="https://www.spl.harvard.edu"&amp;gt;SPL&amp;lt;/a&amp;gt; 和 &amp;lt;a href="https://slicer.readthedocs.io/en/latest/user_guide/about.html#acknowledgments"&amp;gt;Slicer 社区&amp;lt;/a&amp;gt;的支持。详细信息请见 &amp;lt;a href="https://www.slicer.org"&amp;gt;https://www.slicer.org&amp;lt;/a&amp;gt;.&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;我们还要衷心感谢 Slicer 用户社区的成员，他们帮助我们设计了这个欢迎模块的内容，并且他们的反馈持续改善了功能、可用性和 Slicer 用户体验。&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;该模块由 Kitware, Inc. 的 Jean-Christophe Fillion-Robin 和 Julien Finet 以及 Brigham and Women's Hospital 的 Wendy Plesniak、Sonia Pujol、Steve Pieper 和 Ron Kikinis 开发。&amp;lt;/p&amp;gt;</string>
+        </property>
+        <property name="openExternalLinks">
+         <bool>true</bool>
+        </property>
+        <property name="collapsed">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="VerticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::MinimumExpanding</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="0" margin="0" />
+ <customwidgets>
+  <customwidget>
+   <class>qSlicerWidget</class>
+   <extends>QWidget</extends>
+   <header>qSlicerWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ctkCollapsibleButton</class>
+   <extends>QWidget</extends>
+   <header>ctkCollapsibleButton.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ctkFittedTextBrowser</class>
+   <extends>QTextBrowser</extends>
+   <header>ctkFittedTextBrowser.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../qSlicerWelcomeModule.qrc" />
+  <include location="../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc" />
+  <include location="../../../../../Resources/qSlicer.qrc" />
+ </resources>
+ <connections />
+</ui>

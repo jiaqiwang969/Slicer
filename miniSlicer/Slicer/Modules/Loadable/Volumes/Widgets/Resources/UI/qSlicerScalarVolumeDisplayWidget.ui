@@ -1,0 +1,290 @@
+<ui version="4.0">
+ <class>qSlicerScalarVolumeDisplayWidget</class>
+ <widget class="qSlicerWidget" name="qSlicerScalarVolumeDisplayWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>302</width>
+    <height>224</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>标量体积显示</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item row="0" column="0" colspan="2">
+    <widget class="QGroupBox" name="PresetsGroupBox">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string>预设：</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="LookupTableLabel">
+     <property name="text">
+      <string>查找表：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="qMRMLColorTableComboBox" name="ColorTableComboBox">
+     <property name="toolTip">
+      <string>选择标量体积到颜色的颜色映射。</string>
+     </property>
+     <property name="showChildNodeTypes">
+      <bool>true</bool>
+     </property>
+     <property name="addEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="removeEnabled">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="InterpolateLabel">
+     <property name="text">
+      <string>插值：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QCheckBox" name="InterpolateCheckbox">
+     <property name="toolTip">
+      <string>选中时，切片视图将显示通过输入体积的线性插值切片。未选中表示最近邻重采样。</string>
+     </property>
+     <property name="text">
+      <string />
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="InvertDisplayScalarRangeLabel">
+     <property name="text">
+      <string>反转：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QCheckBox" name="InvertDisplayScalarRangeCheckbox">
+     <property name="toolTip">
+      <string>反转查找表中颜色的顺序以显示该体积。</string>
+     </property>
+     <property name="text">
+      <string />
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0" colspan="2">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string />
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="qMRMLWindowLevelWidget" name="MRMLWindowLevelWidget" />
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="5" column="0" colspan="2">
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string />
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="qMRMLVolumeThresholdWidget" name="MRMLVolumeThresholdWidget" />
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="6" column="0" colspan="2">
+    <widget class="ctkCollapsibleGroupBox" name="HistogramGroupBox">
+     <property name="toolTip">
+      <string>显示像素数量（y轴）与图像强度（x轴）在当前窗口/级别和阈值映射背景下的关系。</string>
+     </property>
+     <property name="title">
+      <string>直方图</string>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_21">
+      <item>
+       <widget class="ctkTransferFunctionView" name="TransferFunctionView">
+        <property name="minimumHeight">
+         <number>150</number>
+        </property>
+        <property name="maximumHeight">
+         <number>150</number>
+        </property>
+        <property name="horizontalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="frameStyle">
+         <set>QFrame::StyledPanel|QFrame::Sunken</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="histogramLabelsLayout">
+        <item>
+         <widget class="QLabel" name="MinValueLabel">
+          <property name="text">
+           <string>0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="CenterValueLabel">
+          <property name="text">
+           <string>0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="MaxValueLabel">
+          <property name="text">
+           <string>0</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>qMRMLColorTableComboBox</class>
+   <extends>qMRMLNodeComboBox</extends>
+   <header>qMRMLColorTableComboBox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLNodeComboBox</class>
+   <extends>QWidget</extends>
+   <header>qMRMLNodeComboBox.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLVolumeThresholdWidget</class>
+   <extends>QWidget</extends>
+   <header>qMRMLVolumeThresholdWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLWindowLevelWidget</class>
+   <extends>QWidget</extends>
+   <header>qMRMLWindowLevelWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>qSlicerWidget</class>
+   <extends>QWidget</extends>
+   <header>qSlicerWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ctkCollapsibleGroupBox</class>
+   <extends>QGroupBox</extends>
+   <header>ctkCollapsibleGroupBox.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ctkTransferFunctionView</class>
+   <extends>QGraphicsView</extends>
+   <header>ctkTransferFunctionView.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../../../Resources/qSlicerVolumesModule.qrc" />
+ </resources>
+ <connections>
+  <connection>
+   <sender>qSlicerScalarVolumeDisplayWidget</sender>
+   <signal>mrmlSceneChanged(vtkMRMLScene*)</signal>
+   <receiver>ColorTableComboBox</receiver>
+   <slot>setMRMLScene(vtkMRMLScene*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>299</x>
+     <y>273</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>271</x>
+     <y>17</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

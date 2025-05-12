@@ -1,0 +1,192 @@
+<ui version="4.0">
+ <class>qMRMLMarkupsFiducialProjectionPropertyWidget</class>
+ <widget class="QWidget" name="qMRMLMarkupsFiducialProjectionPropertyWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>280</width>
+    <height>102</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>qMRML标记基准投影属性小部件</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <property name="labelAlignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+   <property name="formAlignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>5</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item row="1" column="0">
+    <widget class="QLabel" name="point2DProjectionLabel">
+     <property name="toolTip">
+      <string>如果启用，则所有控制点将在2D查看器中显示，通过投影到切片平面。</string>
+     </property>
+     <property name="text">
+      <string>投影可见性：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="pointProjectionColorLabel">
+     <property name="toolTip">
+      <string>2D查看器上投影控制点的颜色</string>
+     </property>
+     <property name="text">
+      <string>投影颜色：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="ctkColorPickerButton" name="pointProjectionColorPickerButton">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>2D查看器上投影控制点的颜色。仅在未选中“使用标记颜色”时使用，否则投影使用所选或未选中的标记颜色。</string>
+     </property>
+     <property name="color">
+      <color>
+       <red>255</red>
+       <green>255</green>
+       <blue>255</blue>
+      </color>
+     </property>
+     <property name="displayColorName">
+      <bool>false</bool>
+     </property>
+     <property name="dialogOptions">
+      <set>ctkColorPickerButton::UseCTKColorDialog</set>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="pointOutlinedBehindSlicePlaneLabel">
+     <property name="toolTip">
+      <string>投影控制点在切片平面上方时显示为填充（不透明度 = 投影不透明度），在切片平面后面时显示为轮廓，在切片平面内时显示为完全不透明。某些图形（Dash2D、Cross2D、Starburst）不使用轮廓。</string>
+     </property>
+     <property name="text">
+      <string>切片平面后轮廓：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QCheckBox" name="pointOutlinedBehindSlicePlaneCheckBox">
+     <property name="toolTip">
+      <string>投影控制点在切片平面上方时显示为填充（不透明度 = 投影不透明度），在切片平面后面时显示为轮廓，在切片平面内时显示为完全不透明。某些图形（Dash2D、Cross2D、Starburst）不使用轮廓。</string>
+     </property>
+     <property name="text">
+      <string />
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="pointUseFiducialColorLabel">
+     <property name="toolTip">
+      <string>使用与标记相同的颜色</string>
+     </property>
+     <property name="text">
+      <string>使用标记颜色：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QCheckBox" name="pointUseFiducialColorCheckBox">
+     <property name="toolTip">
+      <string>使用与标记相同的颜色</string>
+     </property>
+     <property name="text">
+      <string />
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="ctkCheckBox" name="point2DProjectionCheckBox">
+       <property name="toolTip">
+        <string>如果启用，则所有控制点将在2D查看器中显示，通过投影到切片平面。</string>
+       </property>
+       <property name="indicatorIconSize">
+        <size>
+         <width>23</width>
+         <height>23</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="projectionOpacityLabel">
+       <property name="text">
+        <string>不透明度：</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="ctkSliderWidget" name="projectionOpacitySliderWidget">
+       <property name="toolTip">
+        <string>投影的不透明度。</string>
+       </property>
+       <property name="singleStep">
+        <double>0.100000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>1.000000000000000</double>
+       </property>
+       <property name="value">
+        <double>0.600000000000000</double>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ctkCheckBox</class>
+   <extends>QCheckBox</extends>
+   <header>ctkCheckBox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkColorPickerButton</class>
+   <extends>QPushButton</extends>
+   <header>ctkColorPickerButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkSliderWidget</class>
+   <extends>QWidget</extends>
+   <header>ctkSliderWidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc" />
+ </resources>
+ <connections />
+</ui>

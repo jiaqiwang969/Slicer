@@ -1,0 +1,120 @@
+<ui version="4.0">
+ <class>qMRMLMarkupsAngleMeasurementsWidget</class>
+ <widget class="QWidget" name="qMRMLMarkupsAngleMeasurementsWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>431</width>
+    <height>120</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>角度属性</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="ctkCollapsibleButton" name="angleMeasurementModeCollapsibleButton" native="true">
+     <property name="text" stdset="0">
+      <string>角度设置</string>
+     </property>
+     <property name="checked" stdset="0">
+      <bool>false</bool>
+     </property>
+     <property name="collapsed" stdset="0">
+      <bool>true</bool>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <property name="leftMargin">
+       <number>9</number>
+      </property>
+      <property name="rightMargin">
+       <number>9</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_8">
+        <property name="text">
+         <string>测量模式：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="angleMeasurementModeComboBox">
+        <property name="toolTip">
+         <string>&amp;lt;html&amp;gt;&amp;lt;head/&amp;gt;&amp;lt;body&amp;gt;&amp;lt;p&amp;gt;- 最小：最小非定向角度，范围为 [0..180)&amp;lt;br/&amp;gt;- 定向有符号：定向角度 [-180..180)，使用右手法则的旋转轴&amp;lt;br/&amp;gt;- 定向正：定向角度 [0..360)，使用右手法则的旋转轴&amp;lt;/p&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>最小</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>定向有符号</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>定向正</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>旋转轴：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="qMRMLCoordinatesWidget" name="rotationAxisCoordinatesWidget" native="true">
+        <property name="toolTip">
+         <string>RAS坐标系中的旋转轴方向。用于定义使用右手法则的定向角度模式中的方向。</string>
+        </property>
+        <property name="minimum" stdset="0">
+         <double>-1.000000000000000</double>
+        </property>
+        <property name="maximum" stdset="0">
+         <double>1.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ctkCollapsibleButton</class>
+   <extends>QWidget</extends>
+   <header>ctkCollapsibleButton.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ctkCoordinatesWidget</class>
+   <extends>QWidget</extends>
+   <header>ctkCoordinatesWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLCoordinatesWidget</class>
+   <extends>ctkCoordinatesWidget</extends>
+   <header>qMRMLCoordinatesWidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources />
+ <connections />
+</ui>

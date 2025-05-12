@@ -1,0 +1,1858 @@
+<ui version="4.0">
+ <class>qMRMLSliceControllerWidget</class>
+ <widget class="ctkPopupWidget" name="qMRMLSliceControllerWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>422</width>
+    <height>175</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>切片控制器</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <item row="2" column="1">
+    <widget class="QToolButton" name="LabelMapVisibilityButton">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="popupMode">
+      <enum>QToolButton::ToolButtonPopupMode::MenuButtonPopup</enum>
+     </property>
+     <property name="autoRaise">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="4">
+    <widget class="qMRMLNodeComboBox" name="LabelMapComboBox" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+       <horstretch>1</horstretch>
+       <verstretch>1</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>65</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>选择标签图</string>
+     </property>
+     <property name="nodeTypes" stdset="0">
+      <stringlist notr="true">
+       <string>标签图体积节点 (vtkMRMLLabelMapVolumeNode)</string>
+      </stringlist>
+     </property>
+     <property name="noneEnabled" stdset="0">
+      <bool>true</bool>
+     </property>
+     <property name="addEnabled" stdset="0">
+      <bool>false</bool>
+     </property>
+     <property name="removeEnabled" stdset="0">
+      <bool>false</bool>
+     </property>
+     <property name="editEnabled" stdset="0">
+      <bool>true</bool>
+     </property>
+     <property name="renameEnabled" stdset="0">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="3">
+    <widget class="QToolButton" name="SegmentationOutlineButton">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string />
+     </property>
+     <property name="autoRaise">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QToolButton" name="SegmentationVisibilityButton">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string />
+     </property>
+     <property name="popupMode">
+      <enum>QToolButton::ToolButtonPopupMode::MenuButtonPopup</enum>
+     </property>
+     <property name="autoRaise">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="3">
+    <widget class="QToolButton" name="LabelMapOutlineButton">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="autoRaise">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1" rowspan="2">
+    <widget class="ctkSliderWidget" name="ForegroundOpacitySlider" native="true">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="singleStep" stdset="0">
+      <double>0.100000000000000</double>
+     </property>
+     <property name="pageStep" stdset="0">
+      <double>1.000000000000000</double>
+     </property>
+     <property name="maximum" stdset="0">
+      <double>1.000000000000000</double>
+     </property>
+     <property name="value" stdset="0">
+      <double>1.000000000000000</double>
+     </property>
+     <property name="popupSlider" stdset="0">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="2">
+    <widget class="ctkSliderWidget" name="LabelMapOpacitySlider" native="true">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="singleStep" stdset="0">
+      <double>0.100000000000000</double>
+     </property>
+     <property name="pageStep" stdset="0">
+      <double>1.000000000000000</double>
+     </property>
+     <property name="maximum" stdset="0">
+      <double>1.000000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="4">
+    <widget class="qMRMLNodeComboBox" name="ForegroundComboBox" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+       <horstretch>1</horstretch>
+       <verstretch>1</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>65</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>选择前景</string>
+     </property>
+     <property name="nodeTypes" stdset="0">
+      <stringlist notr="true">
+       <string>体积节点 (vtkMRMLVolumeNode)</string>
+      </stringlist>
+     </property>
+     <property name="noneEnabled" stdset="0">
+      <bool>true</bool>
+     </property>
+     <property name="addEnabled" stdset="0">
+      <bool>false</bool>
+     </property>
+     <property name="removeEnabled" stdset="0">
+      <bool>false</bool>
+     </property>
+     <property name="editEnabled" stdset="0">
+      <bool>true</bool>
+     </property>
+     <property name="renameEnabled" stdset="0">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="3">
+    <widget class="QToolButton" name="ForegroundInterpolationButton">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="autoRaise">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <widget class="ctkSliderWidget" name="SegmentationOpacitySlider" native="true">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="singleStep" stdset="0">
+      <double>0.100000000000000</double>
+     </property>
+     <property name="pageStep" stdset="0">
+      <double>1.000000000000000</double>
+     </property>
+     <property name="maximum" stdset="0">
+      <double>1.000000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="4">
+    <widget class="qMRMLSegmentSelectorWidget" name="SegmentSelectorWidget" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+       <horstretch>1</horstretch>
+       <verstretch>1</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>65</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="editEnabled" stdset="0">
+      <bool>true</bool>
+     </property>
+     <property name="multiSelection" stdset="0">
+      <bool>true</bool>
+     </property>
+     <property name="horizontalLayout" stdset="0">
+      <bool>false</bool>
+     </property>
+     <property name="selectNodeUponCreation" stdset="0">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="2">
+    <widget class="ctkSliderWidget" name="BackgroundOpacitySlider" native="true">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="singleStep" stdset="0">
+      <double>0.100000000000000</double>
+     </property>
+     <property name="pageStep" stdset="0">
+      <double>1.000000000000000</double>
+     </property>
+     <property name="maximum" stdset="0">
+      <double>1.000000000000000</double>
+     </property>
+     <property name="value" stdset="0">
+      <double>1.000000000000000</double>
+     </property>
+     <property name="popupSlider" stdset="0">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="3">
+    <widget class="QToolButton" name="BackgroundInterpolationButton">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="popupMode">
+      <enum>QToolButton::ToolButtonPopupMode::DelayedPopup</enum>
+     </property>
+     <property name="autoRaise">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="4">
+    <widget class="qMRMLNodeComboBox" name="BackgroundComboBox" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+       <horstretch>1</horstretch>
+       <verstretch>1</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>65</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>选择背景</string>
+     </property>
+     <property name="nodeTypes" stdset="0">
+      <stringlist notr="true">
+       <string>体积节点 (vtkMRMLVolumeNode)</string>
+      </stringlist>
+     </property>
+     <property name="noneEnabled" stdset="0">
+      <bool>true</bool>
+     </property>
+     <property name="addEnabled" stdset="0">
+      <bool>false</bool>
+     </property>
+     <property name="removeEnabled" stdset="0">
+      <bool>false</bool>
+     </property>
+     <property name="editEnabled" stdset="0">
+      <bool>true</bool>
+     </property>
+     <property name="renameEnabled" stdset="0">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="LabelMapIconLabel">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string />
+     </property>
+     <property name="pixmap">
+      <pixmap resource="../qMRMLWidgets.qrc">:/Icons/SliceViewerLB.png</pixmap>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="ForegroundIconLabel">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string />
+     </property>
+     <property name="pixmap">
+      <pixmap resource="../qMRMLWidgets.qrc">:/Icons/SliceViewerFG.png</pixmap>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="BackgroundIconLabel">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string />
+     </property>
+     <property name="pixmap">
+      <pixmap resource="../qMRMLWidgets.qrc">:/Icons/SliceViewerBG.png</pixmap>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="5">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>2</number>
+     </property>
+     <item>
+      <widget class="ctkExpandButton" name="MoreButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+       <property name="mirrorOnExpand" stdset="0">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QFrame" name="SliceFrame">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QToolButton" name="SliceLinkButton">
+          <property name="toolTip">
+           <string>链接切片视图。同步同一视图组中所有切片视图的属性。</string>
+          </property>
+          <property name="text">
+           <string />
+          </property>
+          <property name="icon">
+           <iconset resource="../qMRMLWidgets.qrc">
+            <normaloff>:/Icons/LinkOff.png</normaloff>
+            <normalon>:/Icons/LinkOn.png</normalon>:/Icons/LinkOff.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="SliceVisibilityButton">
+          <property name="toolTip">
+           <string>切换3D视图中的切片可见性。</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="popupMode">
+           <enum>QToolButton::ToolButtonPopupMode::MenuButtonPopup</enum>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="ctkComboBox" name="SliceOrientationSelector">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Ignored">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>65</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>切片方向（轴向、矢状、冠状、重格式化）。</string>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QComboBox::SizeAdjustPolicy::AdjustToContents</enum>
+          </property>
+          <item>
+           <property name="text">
+            <string>轴向</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>矢状</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>冠状</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>重格式化</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="LightBoxToolButton">
+          <property name="toolTip">
+           <string>灯箱视图。</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../qMRMLWidgets.qrc">
+            <normaloff>:/Icons/LayoutLightboxView.png</normaloff>:/Icons/LayoutLightboxView.png</iconset>
+          </property>
+          <property name="popupMode">
+           <enum>QToolButton::ToolButtonPopupMode::InstantPopup</enum>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="ShowReformatWidgetToolButton">
+          <property name="toolTip">
+           <string>在3D视图中显示重格式化小部件</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../qMRMLWidgets.qrc">
+            <normaloff>:/Icons/SliceWidgetOn.png</normaloff>
+            <normalon>:/Icons/SliceWidgetOff.png</normalon>:/Icons/SliceWidgetOn.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="SliceCompositeButton">
+          <property name="icon">
+           <iconset resource="../qMRMLWidgets.qrc">
+            <normaloff>:/Icons/SlicesComposite.png</normaloff>:/Icons/SlicesComposite.png</iconset>
+          </property>
+          <property name="popupMode">
+           <enum>QToolButton::ToolButtonPopupMode::InstantPopup</enum>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="SliceSpacingButton">
+          <property name="toolTip">
+           <string>切片间距可以由用户或上下文自动或手动设置</string>
+          </property>
+          <property name="text">
+           <string />
+          </property>
+          <property name="icon">
+           <iconset resource="../qMRMLWidgets.qrc">
+            <normaloff>:/Icons/SlicerAutomaticSliceSpacing.png</normaloff>:/Icons/SlicerAutomaticSliceSpacing.png</iconset>
+          </property>
+          <property name="popupMode">
+           <enum>QToolButton::ToolButtonPopupMode::InstantPopup</enum>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="SliceRotateToVolumePlaneButton">
+          <property name="icon">
+           <iconset resource="../qMRMLWidgets.qrc">
+            <normaloff>:/Icons/SlicerRotateToPixelSpace.png</normaloff>:/Icons/SlicerRotateToPixelSpace.png</iconset>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="OrientationMarkerButton">
+          <property name="toolTip">
+           <string>显示方向标记</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../qMRMLWidgets.qrc">
+            <normaloff>:/Icons/OrientationMarker.png</normaloff>:/Icons/OrientationMarker.png</iconset>
+          </property>
+          <property name="popupMode">
+           <enum>QToolButton::ToolButtonPopupMode::InstantPopup</enum>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="RulerButton">
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../qMRMLWidgets.qrc">
+            <normaloff>:/Icons/Ruler.png</normaloff>:/Icons/Ruler.png</iconset>
+          </property>
+          <property name="popupMode">
+           <enum>QToolButton::ToolButtonPopupMode::InstantPopup</enum>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="EnableSlabReconstructionButton">
+          <property name="toolTip">
+           <string>启用厚层重建 (TSR)。TSR用于合并一定范围内的连续切片。</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../qMRMLWidgets.qrc">
+            <normaloff>:/Icons/SlabReconstruction.png</normaloff>:/Icons/SlabReconstruction.png</iconset>
+          </property>
+          <property name="popupMode">
+           <enum>QToolButton::ToolButtonPopupMode::InstantPopup</enum>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="SliceMoreOptionButton">
+          <property name="toolTip">
+           <string>高级选项</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../qMRMLWidgets.qrc">
+            <normaloff>:/Icons/SliceMoreOptions.png</normaloff>:/Icons/SliceMoreOptions.png</iconset>
+          </property>
+          <property name="popupMode">
+           <enum>QToolButton::ToolButtonPopupMode::InstantPopup</enum>
+          </property>
+          <property name="autoRaise">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="ctkDynamicSpacer" name="DynamicSpacer" native="true">
+          <property name="activeSizePolicy" stdset="0">
+           <sizepolicy hsizetype="Minimum" vsizetype="Ignored">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="inactiveSizePolicy" stdset="0">
+           <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="active" stdset="0">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="SegmentationIconLabel">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string />
+     </property>
+     <property name="pixmap">
+      <pixmap resource="../qMRMLWidgets.qrc">:/Icons/SliceViewerSEG.png</pixmap>
+     </property>
+    </widget>
+   </item>
+  </layout>
+  <action name="actionHotLinked">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>热链接</string>
+   </property>
+   <property name="toolTip">
+    <string>设置链接行为为热链接控件。当开启时，切片交互会立即影响其他切片。当关闭时，切片交互在交互完成后影响其他切片。</string>
+   </property>
+  </action>
+  <action name="actionFit_to_window">
+   <property name="icon">
+    <iconset resource="../qMRMLWidgets.qrc">
+     <normaloff>:/Icons/SlicesFitToWindow.png</normaloff>:/Icons/SlicesFitToWindow.png</iconset>
+   </property>
+   <property name="text">
+    <string>适应窗口</string>
+   </property>
+   <property name="toolTip">
+    <string>重置视野。调整切片视图的视野以匹配最低体积层的范围（背景，然后是前景，再然后是标签）。</string>
+   </property>
+  </action>
+  <action name="actionRotate_to_volume_plane">
+   <property name="icon">
+    <iconset resource="../qMRMLWidgets.qrc">
+     <normaloff>:/Icons/SlicerRotateToPixelSpace.png</normaloff>:/Icons/SlicerRotateToPixelSpace.png</iconset>
+   </property>
+   <property name="text">
+    <string>旋转到体积平面</string>
+   </property>
+   <property name="toolTip">
+    <string>旋转到体积平面</string>
+   </property>
+  </action>
+  <action name="actionLabelMapOutline">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../qMRMLWidgets.qrc">
+     <normaloff>:/Icons/SlicesLabelNoOutline.png</normaloff>
+     <normalon>:/Icons/SlicesLabelOutline.png</normalon>:/Icons/SlicesLabelNoOutline.png</iconset>
+   </property>
+   <property name="text">
+    <string>隐藏标签图轮廓</string>
+   </property>
+   <property name="toolTip">
+    <string>在显示标签图体积的区域轮廓或填充之间切换。</string>
+   </property>
+  </action>
+  <action name="actionShow_reformat_widget">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../qMRMLWidgets.qrc">
+     <normaloff>:/Icons/SliceWidgetOff.png</normaloff>
+     <normalon>:/Icons/SliceWidgetOn.png</normalon>:/Icons/SliceWidgetOff.png</iconset>
+   </property>
+   <property name="text">
+    <string>显示重格式化小部件</string>
+   </property>
+  </action>
+  <action name="actionEnable_slab_reconstruction_widget">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>启用厚层重建</string>
+   </property>
+  </action>
+  <action name="actionSlabReconstructionInteractive">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>交互式</string>
+   </property>
+  </action>
+  <action name="actionOrientationMarkerTypeCube">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>立方体</string>
+   </property>
+  </action>
+  <action name="actionOrientationMarkerTypeHuman">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>人</string>
+   </property>
+  </action>
+  <action name="actionOrientationMarkerTypeAxes">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>坐标轴</string>
+   </property>
+  </action>
+  <action name="actionCompositingAlpha_blend">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>alpha混合</string>
+   </property>
+  </action>
+  <action name="actionCompositingReverse_alpha_blend">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>反向alpha混合</string>
+   </property>
+  </action>
+  <action name="actionCompositingAdd">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>加</string>
+   </property>
+  </action>
+  <action name="actionCompositingSubtract">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>减</string>
+   </property>
+  </action>
+  <action name="actionSliceSpacingModeAutomatic">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../qMRMLWidgets.qrc">
+     <normaloff>:/Icons/SlicerManualSliceSpacing.png</normaloff>
+     <normalon>:/Icons/SlicerAutomaticSliceSpacing.png</normalon>:/Icons/SlicerManualSliceSpacing.png</iconset>
+   </property>
+   <property name="text">
+    <string>自动</string>
+   </property>
+  </action>
+  <action name="actionSliceModelModeVolumes">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>视野，间距匹配体积</string>
+   </property>
+  </action>
+  <action name="actionSliceModelMode2D">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>视野，间距匹配2D</string>
+   </property>
+  </action>
+  <action name="actionSliceModelMode2D_Volumes">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>视野匹配2D，间距匹配体积</string>
+   </property>
+  </action>
+  <action name="actionSliceModelModeVolumes_2D">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>视野匹配体积，间距匹配2D视图</string>
+   </property>
+  </action>
+  <action name="actionLightbox1x1_view">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>1x1视图</string>
+   </property>
+  </action>
+  <action name="actionLightbox1x2_view">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>1x2视图</string>
+   </property>
+  </action>
+  <action name="actionLightbox1x3_view">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>1x3视图</string>
+   </property>
+  </action>
+  <action name="actionLightbox1x4_view">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>1x4视图</string>
+   </property>
+  </action>
+  <action name="actionLightbox1x6_view">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>1x6视图</string>
+   </property>
+  </action>
+  <action name="actionLightbox1x8_view">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>1x8视图</string>
+   </property>
+  </action>
+  <action name="actionLightbox2x2_view">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>2x2视图</string>
+   </property>
+  </action>
+  <action name="actionLightbox3x3_view">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>3x3视图</string>
+   </property>
+  </action>
+  <action name="actionLightbox6x6_view">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>6x6视图</string>
+   </property>
+  </action>
+  <action name="actionAdjustDisplayForeground_volume">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>前景体积</string>
+   </property>
+  </action>
+  <action name="actionAdjustDisplayBackground_volume">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>背景体积</string>
+   </property>
+  </action>
+  <action name="actionAdjustDisplayLabel_map_volume">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>标签图体积</string>
+   </property>
+  </action>
+  <action name="actionForegroundInterpolation">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../qMRMLWidgets.qrc">
+     <normaloff>:/Icons/SliceInterpolationOff.png</normaloff>
+     <normalon>:/Icons/SliceInterpolationOn.png</normalon>:/Icons/SliceInterpolationOff.png</iconset>
+   </property>
+   <property name="text">
+    <string>插值前景</string>
+   </property>
+  </action>
+  <action name="actionBackgroundInterpolation">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../qMRMLWidgets.qrc">
+     <normaloff>:/Icons/SliceInterpolationOff.png</normaloff>
+     <normalon>:/Icons/SliceInterpolationOn.png</normalon>:/Icons/SliceInterpolationOff.png</iconset>
+   </property>
+   <property name="text">
+    <string>插值背景</string>
+   </property>
+  </action>
+  <action name="actionLabelMapVisibility">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../qMRMLWidgets.qrc">
+     <normaloff>:/Icons/VisibleOn.png</normaloff>
+     <normalon>:/Icons/VisibleOff.png</normalon>:/Icons/VisibleOn.png</iconset>
+   </property>
+   <property name="text">
+    <string>显示标签图</string>
+   </property>
+   <property name="toolTip">
+    <string>切换标签图可见性</string>
+   </property>
+  </action>
+  <action name="actionForegroundVisibility">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../qMRMLWidgets.qrc">
+     <normaloff>:/Icons/VisibleOn.png</normaloff>
+     <normalon>:/Icons/VisibleOff.png</normalon>:/Icons/VisibleOn.png</iconset>
+   </property>
+   <property name="text">
+    <string>显示前景</string>
+   </property>
+   <property name="toolTip">
+    <string>切换前景可见性</string>
+   </property>
+  </action>
+  <action name="actionBackgroundVisibility">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../qMRMLWidgets.qrc">
+     <normaloff>:/Icons/VisibleOn.png</normaloff>
+     <normalon>:/Icons/VisibleOff.png</normalon>:/Icons/VisibleOn.png</iconset>
+   </property>
+   <property name="text">
+    <string>显示背景</string>
+   </property>
+   <property name="toolTip">
+    <string>切换背景可见性</string>
+   </property>
+  </action>
+  <action name="actionShow_in_3D">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../qMRMLWidgets.qrc">
+     <normaloff>:/Icons/VisibleOff.png</normaloff>
+     <normalon>:/Icons/VisibleOn.png</normalon>:/Icons/VisibleOff.png</iconset>
+   </property>
+   <property name="text">
+    <string>在3D中显示</string>
+   </property>
+   <property name="toolTip">
+    <string>切换3D视图中的切片可见性</string>
+   </property>
+  </action>
+  <action name="actionLockNormalToCamera">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>锁定法线到相机</string>
+   </property>
+   <property name="toolTip">
+    <string>锁定重格式化小部件的法线到相机。</string>
+   </property>
+  </action>
+  <action name="actionOrientationMarkerTypeNone">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>无方向标记</string>
+   </property>
+   <property name="toolTip">
+    <string>隐藏方向标记</string>
+   </property>
+  </action>
+  <action name="actionOrientationMarkerSizeSmall">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>小</string>
+   </property>
+   <property name="toolTip">
+    <string>将方向标记大小设置为小</string>
+   </property>
+  </action>
+  <action name="actionOrientationMarkerSizeMedium">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>中</string>
+   </property>
+   <property name="toolTip">
+    <string>将方向标记大小设置为中</string>
+   </property>
+  </action>
+  <action name="actionOrientationMarkerSizeLarge">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>大</string>
+   </property>
+   <property name="toolTip">
+    <string>将方向标记大小设置为大</string>
+   </property>
+  </action>
+  <action name="actionRulerTypeNone">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>无标尺</string>
+   </property>
+   <property name="toolTip">
+    <string>隐藏标尺</string>
+   </property>
+  </action>
+  <action name="actionRulerTypeThin">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>细</string>
+   </property>
+   <property name="toolTip">
+    <string>显示细标尺</string>
+   </property>
+  </action>
+  <action name="actionRulerTypeThick">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>粗</string>
+   </property>
+   <property name="toolTip">
+    <string>显示粗标尺</string>
+   </property>
+  </action>
+  <action name="actionRulerColorWhite">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>白色标尺</string>
+   </property>
+  </action>
+  <action name="actionRulerColorBlack">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>黑色标尺</string>
+   </property>
+  </action>
+  <action name="actionRulerColorYellow">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>黄色标尺</string>
+   </property>
+  </action>
+  <action name="actionSlabReconstructionMax">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>最大</string>
+   </property>
+   <property name="toolTip">
+    <string>将层重建类型设置为最大</string>
+   </property>
+  </action>
+  <action name="actionSlabReconstructionMin">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>最小</string>
+   </property>
+   <property name="toolTip">
+    <string>将层重建类型设置为最小</string>
+   </property>
+  </action>
+  <action name="actionSlabReconstructionMean">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>平均</string>
+   </property>
+   <property name="toolTip">
+    <string>将层重建类型设置为平均</string>
+   </property>
+  </action>
+  <action name="actionSlabReconstructionSum">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>总和</string>
+   </property>
+   <property name="toolTip">
+    <string>将层重建类型设置为总和</string>
+   </property>
+  </action>
+  <action name="actionSegmentationOutlineFill">
+   <property name="icon">
+    <iconset resource="../qMRMLWidgets.qrc">
+     <normaloff>:/Icons/SlicesLabelOutlineAndFill.png</normaloff>:/Icons/SlicesLabelOutlineAndFill.png</iconset>
+   </property>
+   <property name="text">
+    <string>切换分割轮廓/填充</string>
+   </property>
+   <property name="toolTip">
+    <string>在仅显示分割轮廓、轮廓和填充、仅填充状态之间切换</string>
+   </property>
+  </action>
+  <action name="actionSegmentationVisibility">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../qMRMLWidgets.qrc">
+     <normaloff>:/Icons/VisibleOn.png</normaloff>
+     <normalon>:/Icons/VisibleOff.png</normalon>:/Icons/VisibleOn.png</iconset>
+   </property>
+   <property name="text">
+    <string>显示分割</string>
+   </property>
+   <property name="toolTip">
+    <string>切换分割可见性</string>
+   </property>
+  </action>
+  <action name="actionClipToBackground">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>裁剪到背景</string>
+   </property>
+   <property name="toolTip">
+    <string>控制图层混合是否会裁剪渲染到背景体积</string>
+   </property>
+  </action>
+  <action name="actionSliceEdgeVisibility3D">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../qMRMLWidgets.qrc">
+     <normaloff>:/Icons/VisibleOff.png</normaloff>
+     <normalon>:/Icons/VisibleOn.png</normalon>:/Icons/VisibleOff.png</iconset>
+   </property>
+   <property name="text">
+    <string>显示切片边缘</string>
+   </property>
+   <property name="toolTip">
+    <string>在3D视图中显示切片边缘</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>qMRMLNodeComboBox</class>
+   <extends>QWidget</extends>
+   <header>qMRMLNodeComboBox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLWidget</class>
+   <extends>QWidget</extends>
+   <header>qMRMLWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLSegmentSelectorWidget</class>
+   <extends>qMRMLWidget</extends>
+   <header>qMRMLSegmentSelectorWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ctkComboBox</class>
+   <extends>QComboBox</extends>
+   <header>ctkComboBox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkDynamicSpacer</class>
+   <extends>QWidget</extends>
+   <header>ctkDynamicSpacer.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkExpandButton</class>
+   <extends>QToolButton</extends>
+   <header>ctkExpandButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkPopupWidget</class>
+   <extends>QFrame</extends>
+   <header>ctkPopupWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ctkSliderWidget</class>
+   <extends>QWidget</extends>
+   <header>ctkSliderWidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../qMRMLWidgets.qrc" />
+  <include location="../qMRMLWidgets.qrc" />
+ </resources>
+ <connections>
+  <connection>
+   <sender>LabelMapComboBox</sender>
+   <signal>currentNodeChanged(bool)</signal>
+   <receiver>LabelMapIconLabel</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ForegroundComboBox</sender>
+   <signal>currentNodeChanged(bool)</signal>
+   <receiver>ForegroundIconLabel</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>BackgroundComboBox</sender>
+   <signal>currentNodeChanged(bool)</signal>
+   <receiver>BackgroundIconLabel</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>BackgroundComboBox</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>LightBoxToolButton</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>7</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>140</x>
+     <y>14</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>ShowReformatWidgetToolButton</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1</x>
+     <y>1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>161</x>
+     <y>1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>SliceCompositeButton</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1</x>
+     <y>1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>184</x>
+     <y>1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>SliceSpacingButton</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>9</x>
+     <y>4</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>216</x>
+     <y>19</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>SliceRotateToVolumePlaneButton</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>8</x>
+     <y>8</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>241</x>
+     <y>7</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>SegmentationIconLabel</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>LabelMapIconLabel</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>ForegroundIconLabel</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>BackgroundIconLabel</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>SegmentationVisibilityButton</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1</x>
+     <y>1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>46</x>
+     <y>48</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>SegmentationOpacitySlider</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>8</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>234</x>
+     <y>51</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>LabelMapVisibilityButton</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1</x>
+     <y>1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>23</x>
+     <y>74</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>LabelMapOpacitySlider</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>8</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>129</x>
+     <y>77</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>ForegroundOpacitySlider</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>6</x>
+     <y>12</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>23</x>
+     <y>130</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>BackgroundOpacitySlider</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1</x>
+     <y>1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>129</x>
+     <y>130</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>SegmentationOutlineButton</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>10</x>
+     <y>11</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>257</x>
+     <y>48</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>LabelMapOutlineButton</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>10</x>
+     <y>11</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>235</x>
+     <y>74</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>ForegroundInterpolationButton</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>9</x>
+     <y>22</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>235</x>
+     <y>101</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>BackgroundInterpolationButton</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>11</x>
+     <y>7</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>235</x>
+     <y>127</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>SegmentSelectorWidget</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>LabelMapComboBox</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>8</x>
+     <y>21</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>258</x>
+     <y>77</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>ForegroundComboBox</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>7</x>
+     <y>7</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>258</x>
+     <y>103</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>DynamicSpacer</receiver>
+   <slot>setActive(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>7</x>
+     <y>11</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>321</x>
+     <y>2</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>OrientationMarkerButton</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>6</x>
+     <y>11</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>264</x>
+     <y>11</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>RulerButton</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>9</x>
+     <y>15</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>276</x>
+     <y>1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>MoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>EnableSlabReconstructionButton</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

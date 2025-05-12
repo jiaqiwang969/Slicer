@@ -1,0 +1,147 @@
+<ui version="4.0">
+ <class>qSlicerVolumeRenderingSettingsPanel</class>
+ <widget class="ctkSettingsPanel" name="qSlicerVolumeRenderingSettingsPanel">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>345</width>
+    <height>156</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>体积渲染设置</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <property name="fieldGrowthPolicy">
+    <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+   </property>
+   <item row="0" column="0">
+    <widget class="QLabel" name="RenderingMethodLabel">
+     <property name="text">
+      <string>默认渲染方法：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QComboBox" name="RenderingMethodComboBox">
+     <property name="toolTip">
+      <string>默认渲染方法</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="QualityControlLabel">
+     <property name="text">
+      <string>默认质量：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="GPUMemoryLabel">
+     <property name="text">
+      <string>GPU 内存大小：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="qSlicerGPUMemoryComboBox" name="GPUMemoryComboBox">
+     <property name="toolTip">
+      <string>分配给图形卡的体积渲染内存量</string>
+     </property>
+     <property name="currentIndex">
+      <number>-1</number>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QComboBox" name="QualityControlComboBox">
+     <property name="toolTip">
+      <string>质量控制方法</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="InteractiveSpeedLabel">
+     <property name="text">
+      <string>默认交互速度：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="ctkSliderWidget" name="InteractiveSpeedSlider">
+     <property name="decimals">
+      <number>0</number>
+     </property>
+     <property name="minimum">
+      <double>1.000000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>100.000000000000000</double>
+     </property>
+     <property name="value">
+      <double>8.000000000000000</double>
+     </property>
+     <property name="suffix">
+      <string> 帧每秒</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="SurfaceSmoothingLabel">
+     <property name="text">
+      <string>默认表面平滑：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QCheckBox" name="SurfaceSmoothingCheckBox">
+     <property name="toolTip">
+      <string>减少木纹伪影，使表面看起来更光滑。</string>
+     </property>
+     <property name="text">
+      <string />
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="FramerateLabel_2">
+     <property name="text">
+      <string>自动释放资源：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QCheckBox" name="AutoReleaseGraphicsResourcesCheckBox">
+     <property name="toolTip">
+      <string>当不显示时立即从图形内存中卸载体积。减少内存使用，但使切换体积可见性变慢。</string>
+     </property>
+     <property name="text">
+      <string />
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ctkSettingsPanel</class>
+   <extends>QWidget</extends>
+   <header>ctkSettingsPanel.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ctkSliderWidget</class>
+   <extends>QWidget</extends>
+   <header>ctkSliderWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>qSlicerGPUMemoryComboBox</class>
+   <extends>QComboBox</extends>
+   <header>qSlicerGPUMemoryComboBox.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources />
+ <connections />
+</ui>

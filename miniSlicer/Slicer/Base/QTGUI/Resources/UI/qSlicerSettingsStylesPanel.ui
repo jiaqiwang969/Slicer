@@ -1,0 +1,233 @@
+<ui version="4.0">
+ <class>qSlicerSettingsStylesPanel</class>
+ <widget class="ctkSettingsPanel" name="qSlicerSettingsStylesPanel">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>469</width>
+    <height>227</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>样式设置</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <property name="fieldGrowthPolicy">
+    <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+   </property>
+   <item row="6" column="0">
+    <widget class="QLabel" name="AdditionalModulePathsLabel">
+     <property name="text">
+      <string>额外样式路径：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QWidget" name="AdditionalStylePathsWidget" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <property name="margin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="qSlicerDirectoryListView" name="AdditionalStylePathsView" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="toolTip">
+         <string />
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="title">
+         <string>路径</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <widget class="QPushButton" name="AddAdditionalStylePathButton">
+           <property name="toolTip">
+            <string>&amp;lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&amp;gt;</string>
+           </property>
+           <property name="text">
+            <string>添加</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="RemoveAdditionalStylePathButton">
+           <property name="toolTip">
+            <string>&amp;lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&amp;gt;</string>
+           </property>
+           <property name="text">
+            <string>移除</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="ctkExpandButton" name="AdditionalStylePathMoreButton">
+        <property name="toolTip">
+         <string>&amp;lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&amp;gt;</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+        <property name="mirrorOnExpand">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="StyleLabel">
+     <property name="text">
+      <string>样式</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QComboBox" name="StyleComboBox">
+     <property name="toolTip">
+      <string>&amp;lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&amp;gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="ShowToolTipsLabel">
+     <property name="text">
+      <string>禁用工具提示：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QCheckBox" name="ShowToolTipsCheckBox">
+     <property name="toolTip">
+      <string>&amp;lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&amp;gt;</string>
+     </property>
+     <property name="text">
+      <string />
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="FontLabel">
+     <property name="text">
+      <string>字体和大小：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="ctkFontButton" name="FontButton">
+     <property name="toolTip">
+      <string>&amp;lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&amp;gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="ShowToolButtonTextLabel">
+     <property name="text">
+      <string>在工具栏按钮的图标下显示文本：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QCheckBox" name="ShowToolButtonTextCheckBox">
+     <property name="toolTip">
+      <string>&amp;lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&amp;gt;</string>
+     </property>
+     <property name="text">
+      <string />
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="RestoreUILabel">
+     <property name="text">
+      <string>退出时保存用户界面大小和位置：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QCheckBox" name="RestoreUICheckBox">
+     <property name="toolTip">
+      <string>&amp;lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&amp;gt;</string>
+     </property>
+     <property name="text">
+      <string />
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+     <property name="tristate">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ctkExpandButton</class>
+   <extends>QToolButton</extends>
+   <header>ctkExpandButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkFontButton</class>
+   <extends>QPushButton</extends>
+   <header>ctkFontButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkSettingsPanel</class>
+   <extends>QWidget</extends>
+   <header>ctkSettingsPanel.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>qSlicerDirectoryListView</class>
+   <extends>QWidget</extends>
+   <header>qSlicerDirectoryListView.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources />
+ <connections>
+  <connection>
+   <sender>AdditionalStylePathMoreButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>groupBox</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>640</x>
+     <y>427</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>617</x>
+     <y>471</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

@@ -1,0 +1,407 @@
+<ui version="4.0">
+ <class>qMRMLSegmentationFileExportWidget</class>
+ <widget class="qMRMLWidget" name="qMRMLSegmentationFileExportWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>298</width>
+    <height>259</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>qMRML分割文件导出小部件</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <property name="leftMargin">
+    <number>4</number>
+   </property>
+   <property name="topMargin">
+    <number>4</number>
+   </property>
+   <property name="rightMargin">
+    <number>4</number>
+   </property>
+   <property name="bottomMargin">
+    <number>4</number>
+   </property>
+   <property name="spacing">
+    <number>4</number>
+   </property>
+   <item row="3" column="0">
+    <widget class="QLabel" name="VisibleSegmentsOnlyLabel">
+     <property name="text">
+      <string>仅可见分割：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="1">
+    <widget class="ctkDoubleSpinBox" name="SizeScaleSpinBox">
+     <property name="focusPolicy">
+      <enum>Qt::TabFocus</enum>
+     </property>
+     <property name="toolTip">
+      <string>调整导出模型的大小。导出模型中的点坐标将乘以此数字。默认情况下，Slicer 使用毫米作为坐标单位。</string>
+     </property>
+     <property name="decimals">
+      <number>3</number>
+     </property>
+     <property name="decimalsOption">
+      <set>ctkDoubleSpinBox::DecimalsByKey|ctkDoubleSpinBox::DecimalsByShortcuts</set>
+     </property>
+     <property name="minimum">
+      <double>0.000001000000000</double>
+     </property>
+     <property name="maximum">
+      <double>1000000.000000000000000</double>
+     </property>
+     <property name="singleStep">
+      <double>0.100000000000000</double>
+     </property>
+     <property name="value">
+      <double>1.000000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="1">
+    <layout class="QHBoxLayout" name="ColorTableLayout">
+     <item>
+      <widget class="QCheckBox" name="UseColorTableValuesCheckBox">
+       <property name="text">
+        <string />
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="qMRMLNodeComboBox" name="ColorTableNodeSelector">
+       <property name="nodeTypes">
+        <stringlist notr="true">
+         <string>颜色表节点 (vtkMRMLColorTableNode)</string>
+        </stringlist>
+       </property>
+       <property name="noneEnabled">
+        <bool>true</bool>
+       </property>
+       <property name="addEnabled">
+        <bool>false</bool>
+       </property>
+       <property name="removeEnabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="DestinationFoldeLabel">
+     <property name="text">
+      <string>目标文件夹：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="1">
+    <widget class="QComboBox" name="CoordinateSystemComboBox">
+     <property name="toolTip">
+      <string>输出模型的 XYZ 轴映射到 LPS（左后上）或 RAS（右前上）患者轴方向。LPS 更常用。</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>LPS（左后上）</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>RAS（右前上）</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="12" column="0">
+    <widget class="QLabel" name="UseColorTableValuesLabel">
+     <property name="text">
+      <string>使用颜色表值：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="FileFormatLabel">
+     <property name="text">
+      <string>文件格式：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="0">
+    <widget class="QLabel" name="CoordinateSystemLabel">
+     <property name="text">
+      <string>坐标系统：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QCheckBox" name="VisibleSegmentsOnlyCheckBox">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="toolTip">
+      <string>仅导出当前可见的分割。</string>
+     </property>
+     <property name="text">
+      <string />
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="MergeIntoSingleFileLabel">
+     <property name="text">
+      <string>合并为单个文件：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="15" column="0" colspan="2">
+    <widget class="QPushButton" name="ExportToFilesButton">
+     <property name="text">
+      <string>导出</string>
+     </property>
+    </widget>
+   </item>
+   <item row="13" column="1">
+    <widget class="QCheckBox" name="ShowDestinationFolderOnExportCompleteCheckBox">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="toolTip">
+      <string>导出完成后打开目标文件夹。</string>
+     </property>
+     <property name="text">
+      <string />
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <layout class="QHBoxLayout" name="HorizontalLayout">
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="ctkDirectoryButton" name="DestinationFolderButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::TabFocus</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="ShowDestinationFolderButton">
+       <property name="toolTip">
+        <string>浏览目标文件夹</string>
+       </property>
+       <property name="text">
+        <string />
+       </property>
+       <property name="icon">
+        <iconset resource="../../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc">
+         <normaloff>:/Icons/Go.png</normaloff>:/Icons/Go.png</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="9" column="0">
+    <widget class="QLabel" name="SizeScaleLabel">
+     <property name="text">
+      <string>尺寸比例：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QCheckBox" name="MergeIntoSingleOBJFileCheckBox">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="toolTip">
+        <string>将所有分割导出到单个 OBJ 文件。对于 OBJ 文件始终启用，因为可以根据材料区分分割。</string>
+       </property>
+       <property name="text">
+        <string />
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="MergeIntoSingleSTLFileCheckBox">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>将所有分割导出到单个输出 STL 文件。</string>
+       </property>
+       <property name="text">
+        <string />
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="11" column="1">
+    <widget class="QCheckBox" name="UseCompressionCheckBox">
+     <property name="text">
+      <string />
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QComboBox" name="FileFormatComboBox">
+     <item>
+      <property name="text">
+       <string>STL（立体光刻）</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>OBJ（对象文件）</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>NRRD（命名的原始数据）</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>NIFTI（医学图像格式）</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="11" column="0">
+    <widget class="QLabel" name="UseCompressionLabel">
+     <property name="text">
+      <string>使用压缩：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="13" column="0">
+    <widget class="QLabel" name="ShowDestinationFolderOnExportCompleteLabel">
+     <property name="text">
+      <string>显示目标文件夹：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="ReferenceVolumeLabel">
+     <property name="text">
+      <string>参考体积：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="qMRMLNodeComboBox" name="ReferenceVolumeComboBox">
+     <property name="nodeTypes">
+      <stringlist notr="true">
+       <string>体积节点 (vtkMRMLVolumeNode)</string>
+      </stringlist>
+     </property>
+     <property name="noneEnabled">
+      <bool>true</bool>
+     </property>
+     <property name="addEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="removeEnabled">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ctkDirectoryButton</class>
+   <extends>QWidget</extends>
+   <header>ctkDirectoryButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkDoubleSpinBox</class>
+   <extends>QWidget</extends>
+   <header>ctkDoubleSpinBox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLNodeComboBox</class>
+   <extends>QWidget</extends>
+   <header>qMRMLNodeComboBox.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLWidget</class>
+   <extends>QWidget</extends>
+   <header>qMRMLWidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>DestinationFolderButton</tabstop>
+  <tabstop>ShowDestinationFolderButton</tabstop>
+  <tabstop>FileFormatComboBox</tabstop>
+  <tabstop>SizeScaleSpinBox</tabstop>
+  <tabstop>CoordinateSystemComboBox</tabstop>
+  <tabstop>ExportToFilesButton</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc" />
+ </resources>
+ <connections>
+  <connection>
+   <sender>qMRMLSegmentationFileExportWidget</sender>
+   <signal>mrmlSceneChanged(vtkMRMLScene*)</signal>
+   <receiver>ColorTableNodeSelector</receiver>
+   <slot>setMRMLScene(vtkMRMLScene*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>169</x>
+     <y>122</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>281</x>
+     <y>200</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>qMRMLSegmentationFileExportWidget</sender>
+   <signal>mrmlSceneChanged(vtkMRMLScene*)</signal>
+   <receiver>ReferenceVolumeComboBox</receiver>
+   <slot>setMRMLScene(vtkMRMLScene*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>148</x>
+     <y>114</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>293</x>
+     <y>73</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

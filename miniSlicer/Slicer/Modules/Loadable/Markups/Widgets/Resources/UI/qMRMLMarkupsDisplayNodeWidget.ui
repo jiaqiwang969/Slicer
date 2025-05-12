@@ -1,0 +1,772 @@
+<ui version="4.0">
+ <class>qMRMLMarkupsDisplayNodeWidget</class>
+ <widget class="qMRMLWidget" name="qMRMLMarkupsDisplayNodeWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>368</width>
+    <height>186</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>标记显示属性</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item row="0" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QCheckBox" name="VisibilityCheckBox">
+       <property name="toolTip">
+        <string>所选节点在所有视图中的整体可见性</string>
+       </property>
+       <property name="text">
+        <string />
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="opacityLabel">
+       <property name="text">
+        <string>不透明度：</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="ctkSliderWidget" name="opacitySliderWidget">
+       <property name="singleStep">
+        <double>0.100000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>1.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="VisibilityLabel">
+     <property name="text">
+      <string>可见性：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QPushButton" name="glyphSizeIsAbsoluteButton">
+       <property name="toolTip">
+        <string>如果按钮被按下，则控制点图形大小以物理长度单位指定，否则以窗口大小的百分比指定</string>
+       </property>
+       <property name="text">
+        <string>绝对</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="ctkSliderWidget" name="glyphScaleSliderWidget">
+       <property name="singleStep">
+        <double>0.100000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>30.000000000000000</double>
+       </property>
+       <property name="suffix">
+        <string> %</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="qMRMLSliderWidget" name="glyphSizeSliderWidget">
+       <property name="singleStep">
+        <double>0.100000000000000</double>
+       </property>
+       <property name="pageStep">
+        <double>1.000000000000000</double>
+       </property>
+       <property name="value">
+        <double>5.000000000000000</double>
+       </property>
+       <property name="quantity">
+        <string notr="true">长度</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="10" column="0" colspan="2">
+    <widget class="ctkCollapsibleGroupBox" name="SliceDisplayCollapsibleGroupBox">
+     <property name="title">
+      <string>高级</string>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+     <property name="collapsed">
+      <bool>true</bool>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>5</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item row="12" column="0" colspan="2">
+       <widget class="ctkCollapsibleGroupBox" name="TextDisplayGroupBox">
+        <property name="title">
+         <string>文本显示</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_5">
+         <item row="0" column="1">
+          <layout class="QHBoxLayout" name="horizontalLayout_8">
+           <item>
+            <widget class="QComboBox" name="TextFontFamilyComboBox" />
+           </item>
+           <item>
+            <widget class="QCheckBox" name="TextBoldCheckBox">
+             <property name="text">
+              <string>粗体</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="TextItalicCheckBox">
+             <property name="text">
+              <string>斜体</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="TextShadowCheckBox">
+             <property name="text">
+              <string>阴影</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_3">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>字体：</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <layout class="QHBoxLayout" name="horizontalLayout_7">
+           <item>
+            <widget class="ctkColorPickerButton" name="TextBackgroundColorPickerButton">
+             <property name="displayColorName">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>不透明度</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="ctkSliderWidget" name="TextBackgroundOpacitySlider">
+             <property name="singleStep">
+              <double>0.010000000000000</double>
+             </property>
+             <property name="pageStep">
+              <double>0.100000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>背景：</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QComboBox" name="glyphTypeComboBox" />
+      </item>
+      <item row="0" column="1">
+       <widget class="qMRMLDisplayNodeViewComboBox" name="DisplayNodeViewComboBox">
+        <property name="toolTip">
+         <string>选择显示此节点的视图。所有未选中将显示在所有 3D 和 2D 视图中。</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="activeColorPickerLabel">
+        <property name="text">
+         <string>活动颜色：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="14" column="0" colspan="2">
+       <widget class="ctkCollapsibleGroupBox" name="TwoDDisplayGroupBox">
+        <property name="title">
+         <string>2D 显示</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_4">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="qMRMLMarkupsFiducialProjectionPropertyWidget" name="pointFiducialProjectionWidget" />
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="FillLabel">
+        <property name="text">
+         <string>填充：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="glyphTypeLabel">
+        <property name="text">
+         <string>图形类型：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item>
+         <widget class="QCheckBox" name="OutlineVisibilityCheckBox">
+          <property name="text">
+           <string />
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="OpacityLabel2">
+          <property name="text">
+           <string>不透明度：</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="ctkSliderWidget" name="OutlineOpacitySliderWidget">
+          <property name="singleStep">
+           <double>0.010000000000000</double>
+          </property>
+          <property name="pageStep">
+           <double>0.100000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>1.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="DisplayNodeViewLabel">
+        <property name="text">
+         <string>视图：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="unselectedColorLabel">
+        <property name="text">
+         <string>未选中颜色：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="OutlineLabel">
+        <property name="text">
+         <string>轮廓：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="11" column="1">
+       <widget class="QCheckBox" name="PointLabelsVisibilityCheckBox">
+        <property name="toolTip">
+         <string>显示控制点标签</string>
+        </property>
+        <property name="text">
+         <string />
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="ctkColorPickerButton" name="selectedColorPickerButton">
+        <property name="displayColorName">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QPushButton" name="curveLineSizeIsAbsoluteButton">
+          <property name="toolTip">
+           <string>如果按钮被按下，则线条厚度以物理长度单位指定，否则以图形大小的百分比指定</string>
+          </property>
+          <property name="text">
+           <string>绝对</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="ctkSliderWidget" name="curveLineThicknessSliderWidget">
+          <property name="singleStep">
+           <double>1.000000000000000</double>
+          </property>
+          <property name="pageStep">
+           <double>5.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>100.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>20.000000000000000</double>
+          </property>
+          <property name="suffix">
+           <string> %</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="qMRMLSliderWidget" name="curveLineDiameterSliderWidget">
+          <property name="singleStep">
+           <double>0.100000000000000</double>
+          </property>
+          <property name="pageStep">
+           <double>1.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>5.000000000000000</double>
+          </property>
+          <property name="quantity">
+           <string notr="true">长度</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="lineThicknessLabel">
+        <property name="text">
+         <string>线条厚度：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="selectedColorLabel">
+        <property name="text">
+         <string>选中颜色：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <widget class="QCheckBox" name="FillVisibilityCheckBox">
+          <property name="text">
+           <string />
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="OpacityLabel3">
+          <property name="text">
+           <string>不透明度：</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="ctkSliderWidget" name="FillOpacitySliderWidget">
+          <property name="singleStep">
+           <double>0.010000000000000</double>
+          </property>
+          <property name="pageStep">
+           <double>0.100000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>1.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="11" column="0">
+       <widget class="QLabel" name="PointLabelsVisibilityLabel">
+        <property name="text">
+         <string>控制点标签：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="ctkColorPickerButton" name="unselectedColorPickerButton">
+        <property name="displayColorName">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="13" column="0" colspan="2">
+       <widget class="ctkCollapsibleGroupBox" name="ThreeDDisplayGroupBox">
+        <property name="title">
+         <string>3D 显示</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>5</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item row="1" column="0">
+          <widget class="QLabel" name="OccludedVisibilityLabel">
+           <property name="text">
+            <string>遮挡可见性：</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <item>
+            <widget class="QCheckBox" name="OccludedVisibilityCheckBox">
+             <property name="text">
+              <string />
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="OpacityLabel">
+             <property name="text">
+              <string>不透明度：</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="ctkSliderWidget" name="OccludedOpacitySliderWidget">
+             <property name="singleStep">
+              <double>0.010000000000000</double>
+             </property>
+             <property name="pageStep">
+              <double>0.100000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="PointLabelsVisibilityLabel_2">
+           <property name="text">
+            <string>放置模式：</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QComboBox" name="SnapModeComboBox" />
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="8" column="0">
+       <widget class="QLabel" name="PropertiesLabelVisibilityLabel">
+        <property name="text">
+         <string>属性标签：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="ctkColorPickerButton" name="activeColorPickerButton">
+        <property name="displayColorName">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="1">
+       <widget class="QCheckBox" name="PropertiesLabelVisibilityCheckBox">
+        <property name="toolTip">
+         <string>显示节点名称和测量值</string>
+        </property>
+        <property name="text">
+         <string />
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="glyphScaleLabel">
+     <property name="text">
+      <string>图形大小：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <widget class="ctkSliderWidget" name="textScaleSliderWidget">
+     <property name="singleStep">
+      <double>0.100000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>20.000000000000000</double>
+     </property>
+     <property name="suffix">
+      <string> %</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="textScaleLabel">
+     <property name="text">
+      <string>文本大小：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="0" colspan="2">
+    <widget class="ctkCollapsibleGroupBox" name="ScalarsCollapsibleGroupBox">
+     <property name="title">
+      <string>标量</string>
+     </property>
+     <property name="collapsed">
+      <bool>true</bool>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="qMRMLScalarsDisplayWidget" name="ScalarsDisplayWidget" />
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="8" column="0" colspan="2">
+    <widget class="ctkCollapsibleGroupBox" name="CollapsibleGroupBox">
+     <property name="title">
+      <string>交互句柄</string>
+     </property>
+     <property name="collapsed">
+      <bool>true</bool>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="qMRMLMarkupsInteractionHandleWidget" name="InteractionHandleWidget" />
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>qMRMLCheckableNodeComboBox</class>
+   <extends>qMRMLNodeComboBox</extends>
+   <header>qMRMLCheckableNodeComboBox.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLDisplayNodeViewComboBox</class>
+   <extends>qMRMLCheckableNodeComboBox</extends>
+   <header>qMRMLDisplayNodeViewComboBox.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLNodeComboBox</class>
+   <extends>QWidget</extends>
+   <header>qMRMLNodeComboBox.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLScalarsDisplayWidget</class>
+   <extends>qMRMLWidget</extends>
+   <header>qMRMLScalarsDisplayWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLSliderWidget</class>
+   <extends>ctkSliderWidget</extends>
+   <header>qMRMLSliderWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLWidget</class>
+   <extends>QWidget</extends>
+   <header>qMRMLWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLMarkupsFiducialProjectionPropertyWidget</class>
+   <extends>qMRMLWidget</extends>
+   <header>qMRMLMarkupsFiducialProjectionPropertyWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLMarkupsInteractionHandleWidget</class>
+   <extends>qMRMLWidget</extends>
+   <header>qMRMLMarkupsInteractionHandleWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ctkCollapsibleGroupBox</class>
+   <extends>QGroupBox</extends>
+   <header>ctkCollapsibleGroupBox.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ctkColorPickerButton</class>
+   <extends>QPushButton</extends>
+   <header>ctkColorPickerButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkSliderWidget</class>
+   <extends>QWidget</extends>
+   <header>ctkSliderWidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources />
+ <connections>
+  <connection>
+   <sender>glyphSizeIsAbsoluteButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>glyphScaleSliderWidget</receiver>
+   <slot>setHidden(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>181</x>
+     <y>53</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>273</x>
+     <y>52</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>glyphSizeIsAbsoluteButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>glyphSizeSliderWidget</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>181</x>
+     <y>53</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>351</x>
+     <y>52</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>qMRMLMarkupsDisplayNodeWidget</sender>
+   <signal>mrmlSceneChanged(vtkMRMLScene*)</signal>
+   <receiver>ScalarsDisplayWidget</receiver>
+   <slot>setMRMLScene(vtkMRMLScene*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>100</x>
+     <y>7</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>81</x>
+     <y>197</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>curveLineSizeIsAbsoluteButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>curveLineThicknessSliderWidget</receiver>
+   <slot>setHidden(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>227</x>
+     <y>249</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>270</x>
+     <y>257</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>curveLineSizeIsAbsoluteButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>curveLineDiameterSliderWidget</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>249</x>
+     <y>245</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>315</x>
+     <y>245</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>qMRMLMarkupsDisplayNodeWidget</sender>
+   <signal>mrmlSceneChanged(vtkMRMLScene*)</signal>
+   <receiver>InteractionHandleWidget</receiver>
+   <slot>setMRMLScene(vtkMRMLScene*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>179</x>
+     <y>370</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>179</x>
+     <y>129</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

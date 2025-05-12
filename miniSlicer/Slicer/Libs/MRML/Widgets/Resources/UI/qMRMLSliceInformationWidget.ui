@@ -1,0 +1,355 @@
+<ui version="4.0">
+ <class>qMRMLSliceInformationWidget</class>
+ <widget class="qMRMLWidget" name="qMRMLSliceInformationWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>471</width>
+    <height>312</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>切片信息</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <property name="fieldGrowthPolicy">
+    <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+   </property>
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>布局名称：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QLineEdit" name="LayoutNameLineEdit">
+     <property name="toolTip">
+      <string>切片名称</string>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>方向：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QComboBox" name="SliceOrientationSelector">
+     <property name="toolTip">
+      <string>切片方向 (轴向、矢状、冠状、重格式化)</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>轴向</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>矢状</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>冠状</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>重格式化</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>切片可见性：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QToolButton" name="SliceVisibilityToggle">
+     <property name="toolTip">
+      <string>切换切片在 3D 场景中的可见性</string>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../qMRMLWidgets.qrc">
+       <normaloff>:/Icons/VisibleOff.png</normaloff>
+       <normalon>:/Icons/VisibleOn.png</normalon>:/Icons/VisibleOff.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>小部件可见性：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="QToolButton" name="WidgetVisibilityToggle">
+     <property name="toolTip">
+      <string>切换重格式化小部件在 3D 场景中的可见性</string>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../qMRMLWidgets.qrc">
+       <normaloff>:/Icons/VisibleOff.png</normaloff>
+       <normalon>:/Icons/VisibleOn.png</normalon>:/Icons/VisibleOff.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="label_6">
+     <property name="toolTip">
+      <string>切片的维度。</string>
+     </property>
+     <property name="text">
+      <string>维度：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="ctkCoordinatesWidget" name="DimensionWidget">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="decimals">
+      <number>0</number>
+     </property>
+     <property name="minimum">
+      <double>0.000000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>1000000.000000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="label_7">
+     <property name="toolTip">
+      <string>切片的视野</string>
+     </property>
+     <property name="text">
+      <string>视野：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="ctkCoordinatesWidget" name="FieldOfViewWidget">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="minimum">
+      <double>0.000000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="0">
+    <widget class="QLabel" name="label_8">
+     <property name="toolTip">
+      <string>灯箱布局（行，列）</string>
+     </property>
+     <property name="text">
+      <string>灯箱布局：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <widget class="QSpinBox" name="LightboxLayoutRowsSpinBox">
+       <property name="toolTip">
+        <string>灯箱中的行数</string>
+       </property>
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>6</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="LightboxLayoutColumnsSpinBox">
+       <property name="toolTip">
+        <string>灯箱中的列数</string>
+       </property>
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>6</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="9" column="0">
+    <widget class="QLabel" name="label_9">
+     <property name="toolTip">
+      <string>切片间距可以由用户或上下文自动或手动设置</string>
+     </property>
+     <property name="text">
+      <string>切片间距模式：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QRadioButton" name="AutomaticSliceSpacingRadioButton">
+       <property name="text">
+        <string>自动</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="PrescribedSliceSpacingRadioButton">
+       <property name="text">
+        <string>手动</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="10" column="0">
+    <widget class="QLabel" name="label_10">
+     <property name="text">
+      <string>手动间距：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="1">
+    <widget class="ctkDoubleSpinBox" name="PrescribedSpacingSpinBox">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="toolTip">
+      <string>当切片间距由用户或上下文手动设置时使用手动间距</string>
+     </property>
+     <property name="decimals">
+      <number>1</number>
+     </property>
+     <property name="value">
+      <double>1.000000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="label_11">
+     <property name="text">
+      <string>视图组：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <widget class="QSpinBox" name="ViewGroupSpinBox">
+     <property name="toolTip">
+      <string>在具有相同组索引的视图中，导航和链接属性是同步的。</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>qMRMLWidget</class>
+   <extends>QWidget</extends>
+   <header>qMRMLWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ctkCoordinatesWidget</class>
+   <extends>QWidget</extends>
+   <header>ctkCoordinatesWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkDoubleSpinBox</class>
+   <extends>QWidget</extends>
+   <header>ctkDoubleSpinBox.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../qMRMLWidgets.qrc" />
+ </resources>
+ <connections>
+  <connection>
+   <sender>PrescribedSliceSpacingRadioButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>label_10</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>453</x>
+     <y>255</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>72</x>
+     <y>281</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>PrescribedSliceSpacingRadioButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>PrescribedSpacingSpinBox</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>507</x>
+     <y>261</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>244</x>
+     <y>282</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

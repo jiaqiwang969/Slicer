@@ -1,0 +1,601 @@
+<ui version="4.0">
+ <class>qSlicerSettingsViewsPanel</class>
+ <widget class="ctkSettingsPanel" name="qSlicerSettingsViewsPanel">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>360</width>
+    <height>520</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>视图设置</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>340</width>
+        <height>500</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="ctkCollapsibleGroupBox" name="CollapsibleGroupBox">
+         <property name="title">
+          <string>切片查看器默认设置</string>
+         </property>
+         <layout class="QFormLayout" name="formLayout_2">
+          <property name="fieldGrowthPolicy">
+           <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+          </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="SliceOrientationMarkerLabel">
+            <property name="text">
+             <string>方向标记：</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="ctkComboBox" name="SliceOrientationMarkerTypeComboBox" />
+            </item>
+            <item>
+             <widget class="ctkComboBox" name="SliceOrientationMarkerSizeComboBox">
+              <property name="currentIndex">
+               <number>1</number>
+              </property>
+              <item>
+               <property name="text">
+                <string>小</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>中</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>大</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="SliceRulerLabel">
+            <property name="text">
+             <string>尺子：</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="ctkComboBox" name="SliceRulerTypeComboBox">
+            <item>
+             <property name="text">
+              <string>无</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>瘦</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>厚</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="SliceViewOrientationLabel">
+            <property name="text">
+             <string>视图方向：</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="ctkComboBox" name="SliceViewOrientationComboBox">
+            <property name="currentIndex">
+             <number>-1</number>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="SliceViewOrientationLabel_2">
+            <property name="text">
+             <string>在 3D 中显示切片边缘：</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="ctkCheckBox" name="SliceEdgeVisibility3DCheckBox">
+            <property name="toolTip">
+             <string>在 3D 视图中显示切片时显示彩色边框。</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="ctkCollapsibleGroupBox" name="CollapsibleGroupBox_2">
+         <property name="title">
+          <string>3D 查看器默认设置</string>
+         </property>
+         <layout class="QFormLayout" name="formLayout_3">
+          <property name="fieldGrowthPolicy">
+           <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+          </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="ThreeDBoxVisibilityLabel">
+            <property name="text">
+             <string>显示 3D 立方体：</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="ctkCheckBox" name="ThreeDBoxVisibilityCheckBox">
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="ThreeDAxisLabelsVisibilityLabel">
+            <property name="text">
+             <string>显示 3D 坐标轴标签：</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="ctkCheckBox" name="ThreeDAxisLabelsVisibilityCheckBox">
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="ThreeDOrientationMarkerLabel">
+            <property name="text">
+             <string>方向标记：</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <widget class="ctkComboBox" name="ThreeDOrientationMarkerTypeComboBox">
+              <item>
+               <property name="text">
+                <string>无</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>立方体</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>人</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>坐标轴</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="ctkComboBox" name="ThreeDOrientationMarkerSizeComboBox">
+              <property name="currentIndex">
+               <number>1</number>
+              </property>
+              <item>
+               <property name="text">
+                <string>小</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>中</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>大</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>使用正投影：</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="ctkCheckBox" name="ThreeDUseOrthographicProjectionCheckBox" />
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="ThreeDRulerTypeLabel">
+            <property name="text">
+             <string>尺子：</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="ctkComboBox" name="ThreeDRulerTypeComboBox">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>尺子仅在使用正投影模式时显示。</string>
+            </property>
+            <item>
+             <property name="text">
+              <string>无</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>瘦</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>厚</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="ThreeDUseDepthPeelingLabel">
+            <property name="text">
+             <string>使用深度剥离：</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="ctkCheckBox" name="ThreeDUseDepthPeelingCheckBox">
+            <property name="toolTip">
+             <string>启用深度剥离可以改善透明模型的渲染，但会增加计算成本。</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="ThreeDShadowsVisibilityLabel">
+            <property name="text">
+             <string>阴影可见性：</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="ctkCheckBox" name="ThreeDShadowsVisibilityCheckBox">
+            <property name="toolTip">
+             <string>默认显示阴影以改善深度感知</string>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <widget class="QLabel" name="ThreeDAmbientShadowsSizeScaleLabel">
+            <property name="text">
+             <string>尺寸比例：</string>
+            </property>
+            <property name="indent">
+             <number>10</number>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <widget class="ctkSliderWidget" name="ThreeDAmbientShadowsSizeScaleSlider" native="true">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="singleStep" stdset="0">
+             <double>0.010000000000000</double>
+            </property>
+            <property name="pageStep" stdset="0">
+             <double>0.100000000000000</double>
+            </property>
+            <property name="minimum" stdset="0">
+             <double>-3.000000000000000</double>
+            </property>
+            <property name="maximum" stdset="0">
+             <double>3.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="0">
+           <widget class="QLabel" name="ThreeDAmbientShadowsVolumeOpacityThresholdLabel">
+            <property name="text">
+             <string>体积不透明度阈值：</string>
+            </property>
+            <property name="indent">
+             <number>10</number>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="1">
+           <widget class="ctkSliderWidget" name="ThreeDAmbientShadowsVolumeOpacityThresholdSlider" native="true">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="decimals" stdset="0">
+             <number>2</number>
+            </property>
+            <property name="singleStep" stdset="0">
+             <double>0.010000000000000</double>
+            </property>
+            <property name="pageStep" stdset="0">
+             <double>0.100000000000000</double>
+            </property>
+            <property name="maximum" stdset="0">
+             <double>1.000000000000000</double>
+            </property>
+            <property name="value" stdset="0">
+             <double>0.250000000000000</double>
+            </property>
+            <property name="suffix" stdset="0">
+             <string />
+            </property>
+           </widget>
+          </item>
+          <item row="10" column="0">
+           <widget class="QLabel" name="ThreeDAmbientShadowsIntensityScaleLabel">
+            <property name="text">
+             <string>强度比例：</string>
+            </property>
+            <property name="indent">
+             <number>10</number>
+            </property>
+           </widget>
+          </item>
+          <item row="10" column="1">
+           <widget class="ctkSliderWidget" name="ThreeDAmbientShadowsIntensityScaleSlider" native="true">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="singleStep" stdset="0">
+             <double>0.010000000000000</double>
+            </property>
+            <property name="pageStep" stdset="0">
+             <double>0.100000000000000</double>
+            </property>
+            <property name="minimum" stdset="0">
+             <double>0.000000000000000</double>
+            </property>
+            <property name="maximum" stdset="0">
+             <double>3.000000000000000</double>
+            </property>
+            <property name="value" stdset="0">
+             <double>1.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="11" column="0">
+           <widget class="QLabel" name="ThreeDAmbientShadowsIntensityShiftLabel">
+            <property name="text">
+             <string>强度偏移：</string>
+            </property>
+            <property name="indent">
+             <number>10</number>
+            </property>
+           </widget>
+          </item>
+          <item row="11" column="1">
+           <widget class="ctkSliderWidget" name="ThreeDAmbientShadowsIntensityShiftSlider" native="true">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="singleStep" stdset="0">
+             <double>0.010000000000000</double>
+            </property>
+            <property name="pageStep" stdset="0">
+             <double>0.100000000000000</double>
+            </property>
+            <property name="minimum" stdset="0">
+             <double>0.000000000000000</double>
+            </property>
+            <property name="maximum" stdset="0">
+             <double>1.000000000000000</double>
+            </property>
+            <property name="value" stdset="0">
+             <double>0.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLabel" name="MSAALabel">
+           <property name="text">
+            <string>多重采样 (MSAA)：</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="MSAAComboBox">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>&lt;DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ctkCheckBox</class>
+   <extends>QCheckBox</extends>
+   <header>ctkCheckBox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkCollapsibleGroupBox</class>
+   <extends>QGroupBox</extends>
+   <header>ctkCollapsibleGroupBox.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ctkComboBox</class>
+   <extends>QComboBox</extends>
+   <header>ctkComboBox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkSettingsPanel</class>
+   <extends>QWidget</extends>
+   <header>ctkSettingsPanel.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ctkSliderWidget</class>
+   <extends>QWidget</extends>
+   <header>ctkSliderWidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources />
+ <connections>
+  <connection>
+   <sender>ThreeDUseOrthographicProjectionCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>ThreeDRulerTypeComboBox</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>439</x>
+     <y>228</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>439</x>
+     <y>257</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ThreeDShadowsVisibilityCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>ThreeDAmbientShadowsSizeScaleSlider</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>189</x>
+     <y>289</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>315</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ThreeDShadowsVisibilityCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>ThreeDAmbientShadowsVolumeOpacityThresholdSlider</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>305</x>
+     <y>292</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>314</x>
+     <y>336</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ThreeDShadowsVisibilityCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>ThreeDAmbientShadowsIntensityScaleSlider</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>305</x>
+     <y>292</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>314</x>
+     <y>360</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ThreeDShadowsVisibilityCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>ThreeDAmbientShadowsIntensityShiftSlider</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>305</x>
+     <y>292</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>314</x>
+     <y>384</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

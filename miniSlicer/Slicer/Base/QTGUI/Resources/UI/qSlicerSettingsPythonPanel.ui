@@ -1,0 +1,148 @@
+<ui version="4.0">
+ <class>qSlicerSettingsPythonPanel</class>
+ <widget class="ctkSettingsPanel" name="qSlicerSettingsPythonPanel">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>370</width>
+    <height>220</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Python</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="GeneralGroupBox">
+     <property name="title">
+      <string>一般</string>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+     <layout class="QFormLayout" name="formLayout_2">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="EditorLabel">
+        <property name="text">
+         <string>.py 文件的编辑器：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="ctkPathLineEdit" name="EditorPathLineEdit">
+        <property name="toolTip">
+         <string>选择一个可执行文件来编辑 .py 文件。如果留空，则将启动与 .py 文件关联的默认程序。</string>
+        </property>
+        <property name="settingKey">
+         <string>PythonEditor</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="ShellDisplayGroupBox">
+     <property name="title">
+      <string>Python 控制台</string>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+     <layout class="QFormLayout" name="formLayout">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="DockableWindowLabel">
+        <property name="text">
+         <string>在可停靠窗口中显示：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="ctkCheckBox" name="DockableWindowCheckBox">
+        <property name="toolTip">
+         <string>在可以放置在主窗口内的窗口中显示 Python 控制台。如果禁用，则 Python 控制台将作为独立窗口显示。</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="PromptFontLabel">
+        <property name="text">
+         <string>字体：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="ctkFontButton" name="ConsoleFontButton">
+        <property name="text">
+         <string />
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="LogLevelLabel">
+        <property name="text">
+         <string>日志级别：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QComboBox" name="ConsoleLogLevelComboBox">
+        <property name="toolTip">
+         <string>此级别及以上的日志消息将在 Python 控制台中显示。</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ctkCheckBox</class>
+   <extends>QCheckBox</extends>
+   <header>ctkCheckBox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkFontButton</class>
+   <extends>QPushButton</extends>
+   <header>ctkFontButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkPathLineEdit</class>
+   <extends>QWidget</extends>
+   <header>ctkPathLineEdit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkSettingsPanel</class>
+   <extends>QWidget</extends>
+   <header>ctkSettingsPanel.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources />
+ <connections />
+</ui>

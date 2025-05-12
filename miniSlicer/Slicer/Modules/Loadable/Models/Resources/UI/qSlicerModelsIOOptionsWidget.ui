@@ -1,0 +1,75 @@
+<ui version="4.0">
+ <class>qSlicerModelsIOOptionsWidget</class>
+ <widget class="qSlicerWidget" name="qSlicerModelsIOOptionsWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>151</width>
+    <height>19</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>模型选项</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>坐标系统：</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QComboBox" name="coordinateSystemComboBox">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="toolTip">
+      <string>使用 LPS（左后上）以更好地与大多数软件兼容（这是默认设置）。使用 RAS（右前上）以更好地与早期 Slicer 版本兼容。如果文件中定义了坐标系统，则使用该坐标系统，此选项将被忽略。</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>默认</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>分支端点。“未选择”的控制点用作源，“已选择”的控制点用作目标。</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>选择一个模型或分割节点</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>qSlicerWidget</class>
+   <extends>QWidget</extends>
+   <header>qSlicerWidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources />
+ <connections />
+</ui>

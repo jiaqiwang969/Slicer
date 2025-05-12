@@ -1,0 +1,169 @@
+<ui version="4.0">
+ <class>qSlicerSettingsCachePanel</class>
+ <widget class="ctkSettingsPanel" name="qSlicerSettingsCachePanel">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>329</width>
+    <height>267</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>缓存</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <property name="fieldGrowthPolicy">
+    <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+   </property>
+   <item row="1" column="0">
+    <widget class="QLabel" name="CachePathLabel">
+     <property name="toolTip">
+      <string>下载文件的缓存目录</string>
+     </property>
+     <property name="text">
+      <string>缓存位置：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="UsedCacheSizeLabel">
+       <property name="text">
+        <string>~0MB 已使用</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="FreeCacheSizeLabel">
+       <property name="text">
+        <string>~200MB 可用</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="UsageLabel">
+     <property name="toolTip">
+      <string>当前缓存使用情况</string>
+     </property>
+     <property name="text">
+      <string>缓存使用情况：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QSpinBox" name="CacheSizeSpinBox">
+     <property name="suffix">
+      <string>MB</string>
+     </property>
+     <property name="minimum">
+      <number>1</number>
+     </property>
+     <property name="maximum">
+      <number>999999999</number>
+     </property>
+     <property name="singleStep">
+      <number>10</number>
+     </property>
+     <property name="value">
+      <number>200</number>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="CacheSizeLabel">
+     <property name="toolTip">
+      <string>下载文件专用缓存的上限</string>
+     </property>
+     <property name="text">
+      <string>缓存大小：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QSpinBox" name="CacheFreeBufferSpinBox">
+     <property name="suffix">
+      <string>MB</string>
+     </property>
+     <property name="maximum">
+      <number>999999999</number>
+     </property>
+     <property name="singleStep">
+      <number>10</number>
+     </property>
+     <property name="value">
+      <number>10</number>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="CacheFreeBufferLabel">
+     <property name="toolTip">
+      <string>应保持的空闲空间。应为下载文件的典型大小。</string>
+     </property>
+     <property name="text">
+      <string>缓存空闲缓冲区：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="ForceRedownloadLabel">
+     <property name="toolTip">
+      <string>控制文件是否必须下载，即使它已经在缓存中</string>
+     </property>
+     <property name="text">
+      <string>强制重新下载：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <widget class="QCheckBox" name="ForceRedownloadCheckBox">
+     <property name="text">
+      <string />
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1">
+    <widget class="QListWidget" name="FilesListWidget" />
+   </item>
+   <item row="8" column="0">
+    <widget class="QLabel" name="FilesListLabel">
+     <property name="text">
+      <string>缓存中的文件：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="1">
+    <widget class="QPushButton" name="ClearCachePushButton">
+     <property name="toolTip">
+      <string>删除缓存目录中的所有文件</string>
+     </property>
+     <property name="text">
+      <string>清除缓存</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="ctkDirectoryButton" name="CachePathButton" />
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ctkDirectoryButton</class>
+   <extends>QWidget</extends>
+   <header>ctkDirectoryButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkSettingsPanel</class>
+   <extends>QWidget</extends>
+   <header>ctkSettingsPanel.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources />
+ <connections />
+</ui>

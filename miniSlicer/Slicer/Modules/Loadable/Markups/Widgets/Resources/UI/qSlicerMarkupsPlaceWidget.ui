@@ -1,0 +1,224 @@
+<ui version="4.0">
+ <class>qSlicerMarkupsPlaceWidget</class>
+ <widget class="qSlicerWidget" name="qSlicerMarkupsPlaceWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>151</width>
+    <height>30</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>放置标记</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="ctkColorPickerButton" name="ColorButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="toolTip">
+      <string>选择显示颜色。</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="displayColorName">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QToolButton" name="PlaceButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+      <property name="popupMode">
+        <enum>QToolButton::MenuButtonPopup</enum>
+      </property>
+      <property name="toolTip">
+      <string>放置控制点</string>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../../../Resources/qSlicerMarkupsModule.qrc">
+       <normaloff>:/Icons/MarkupsFiducialMouseModePlace.png</normaloff>:/Icons/MarkupsFiducialMouseModePlace.png</iconset>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QToolButton" name="DeleteButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="popupMode">
+      <enum>QToolButton::MenuButtonPopup</enum>
+     </property>
+     <property name="toolTip">
+      <string>删除最后添加的控制点</string>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../../../Resources/qSlicerMarkupsModule.qrc">
+       <normaloff>:/Icons/MarkupsDelete.png</normaloff>:/Icons/MarkupsDelete.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QToolButton" name="MoreButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="toolTip">
+      <string>点击获取更多选项</string>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../../../../../../Libs/MRML/Widgets/Resources/qMRMLWidgets.qrc">
+       <normaloff>:/Icons/SliceMoreOptions.png</normaloff>:/Icons/SliceMoreOptions.png</iconset>
+     </property>
+     <property name="popupMode">
+      <enum>QToolButton::InstantPopup</enum>
+     </property>
+    </widget>
+   </item>
+  </layout>
+  <action name="ActionPlacePersistentPoint">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>放置多个控制点</string>
+   </property>
+   <property name="toolTip">
+    <string>放置多个控制点</string>
+   </property>
+  </action>
+  <action name="ActionDeleteAll">
+   <property name="icon">
+    <iconset resource="../../../Resources/qSlicerMarkupsModule.qrc">
+     <normaloff>:/Icons/MarkupsDeleteAllRows.png</normaloff>:/Icons/MarkupsDeleteAllRows.png</iconset>
+   </property>
+   <property name="text">
+    <string>删除所有控制点</string>
+   </property>
+   <property name="toolTip">
+    <string>删除列表中的所有控制点</string>
+   </property>
+  </action>
+  <action name="ActionUnsetLast">
+   <property name="icon">
+    <iconset resource="../../../Resources/qSlicerMarkupsModule.qrc">
+     <normaloff>:/Icons/MarkupsUnset.png</normaloff>:/Icons/MarkupsUnset.png</iconset>
+   </property>
+    <property name="text">
+    <string>清除最后控制点位置</string>
+   </property>
+   <property name="toolTip">
+    <string>清除最后放置的控制点的位置（控制点不会被删除）。</string>
+   </property>
+  </action>
+  <action name="ActionUnsetAll">
+   <property name="icon">
+    <iconset resource="../../../Resources/qSlicerMarkupsModule.qrc">
+     <normaloff>:/Icons/MarkupsUnsetAll.png</normaloff>:/Icons/MarkupsUnsetAll.png
+    </iconset>
+   </property>
+   <property name="text">
+    <string>清除所有控制点位置</string>
+   </property>
+   <property name="toolTip">
+    <string>清除列表中所有控制点的位置（控制点不会被删除）。</string>
+   </property>
+  </action>
+  <action name="ActionVisibility">
+   <property name="icon">
+    <iconset resource="../../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc">
+     <normaloff>:/Icons/Small/SlicerInvisible.png</normaloff>
+     <normalon>:/Icons/Small/SlicerVisible.png</normalon>:/Icons/Small/SlicerInvisible.png</iconset>
+   </property>
+   <property name="text">
+    <string>可见性</string>
+   </property>
+   <property name="toolTip">
+    <string>切换标记可见性</string>
+   </property>
+  </action>
+  <action name="ActionLocked">
+   <property name="icon">
+    <iconset resource="../../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc">
+     <normaloff>:/Icons/Small/SlicerUnlock.png</normaloff>
+     <normalon>:/Icons/Small/SlicerLock.png</normalon>:/Icons/Small/SlicerUnlock.png</iconset>
+   </property>
+   <property name="text">
+    <string>锁定</string>
+   </property>
+   <property name="toolTip">
+    <string>切换控制点位置锁定</string>
+   </property>
+  </action>
+  <action name="ActionFixedNumberOfControlPoints">
+   <property name="icon">
+    <iconset resource="../../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc">
+     <normaloff>:/Icons/Small/SlicerPointNumberUnlock.png</normaloff>
+     <normalon>:/Icons/Small/SlicerPointNumberLock.png</normalon>:/Icons/Small/SlicerPointNumberUnlock.png</iconset>
+   </property>
+   <property name="text">
+    <string>控制点数量锁定</string>
+   </property>
+   <property name="toolTip">
+    <string>切换控制点数量锁定。如果锁定，则无法添加或删除控制点。可以取消设置控制点的位置，而不是删除。</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>qSlicerWidget</class>
+   <extends>QWidget</extends>
+   <header>qSlicerWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ctkColorPickerButton</class>
+   <extends>QPushButton</extends>
+   <header>ctkColorPickerButton.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../../../../../../Libs/MRML/Widgets/Resources/qMRMLWidgets.qrc" />
+  <include location="../../../Resources/qSlicerMarkupsModule.qrc" />
+  <include location="../../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc" />
+ </resources>
+ <connections />
+</ui>

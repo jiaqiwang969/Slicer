@@ -1,0 +1,179 @@
+<ui version="4.0">
+ <class>qMRMLScalarsDisplayWidget</class>
+ <widget class="QWidget" name="qMRMLScalarsDisplayWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>270</width>
+    <height>165</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>标量显示</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QLabel" name="ScalarsVisibilityLabel">
+     <property name="text">
+      <string>可见性：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QCheckBox" name="ScalarsVisibilityCheckBox">
+     <property name="text">
+      <string />
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="ActiveScalarLabel">
+     <property name="text">
+      <string>活动标量：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1" colspan="2">
+    <widget class="ctkVTKDataSetArrayComboBox" name="ActiveScalarComboBox" />
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="ScalarsColorTableLabel">
+     <property name="text">
+      <string>颜色表：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1" colspan="2">
+    <widget class="qMRMLColorTableComboBox" name="ScalarsColorNodeComboBox" />
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="ScalarRangeModeLabel">
+     <property name="text">
+      <string>标量范围模式：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1" colspan="2">
+    <widget class="QComboBox" name="DisplayedScalarRangeModeComboBox">
+     <property name="toolTip">
+      <string>设置标量范围模式标志。数据（自动）根据数据的标量范围更新显示标量范围。直接颜色映射选项绕过查找表，使用标量值作为 RGB 颜色。</string>
+     </property>
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+     <item>
+      <property name="text">
+       <string>手动</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>数据标量范围（自动）</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>颜色表（LUT）</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>数据类型</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>直接颜色映射</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="DisplayedScalarRangeLabel">
+     <property name="text">
+      <string>显示范围：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1" colspan="2">
+    <widget class="qMRMLRangeWidget" name="DisplayedScalarRangeWidget">
+     <property name="toolTip">
+      <string>设置显示标量范围，当选择显示选项时使用。</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="ThresholdLabel">
+     <property name="text">
+      <string>阈值：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QCheckBox" name="ThresholdCheckBox">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="toolTip">
+      <string>根据标量值对显示模型应用阈值处理。某些单元的法线可能会翻转，在这种情况下，您应该在表示选项中将“背面”和“正面”设置为关闭，以可视化所有单元。</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="2">
+    <widget class="ctkRangeWidget" name="ThresholdRangeWidget">
+     <property name="toolTip">
+      <string>用于阈值处理标量值的范围。</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>qMRMLColorTableComboBox</class>
+   <extends>qMRMLNodeComboBox</extends>
+   <header>qMRMLColorTableComboBox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLNodeComboBox</class>
+   <extends>QWidget</extends>
+   <header>qMRMLNodeComboBox.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLRangeWidget</class>
+   <extends>ctkRangeWidget</extends>
+   <header>qMRMLRangeWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkVTKDataSetArrayComboBox</class>
+   <extends>QComboBox</extends>
+   <header>ctkVTKDataSetArrayComboBox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkRangeWidget</class>
+   <extends>QWidget</extends>
+   <header>ctkRangeWidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../qMRMLWidgets.qrc" />
+ </resources>
+ <connections />
+</ui>

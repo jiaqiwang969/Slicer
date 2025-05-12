@@ -1,0 +1,93 @@
+<ui version="4.0">
+ <class>qMRMLSliceVerticalControllerWidget</class>
+ <widget class="qMRMLWidget" name="qMRMLSliceVerticalControllerWidget">
+  <property name="enabled">
+   <bool>false</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>84</width>
+    <height>319</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>16777215</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>垂直切片控制器</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="qMRMLSliderWidget" name="SliceVerticalOffsetSlider">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QSlider::groove:vertical { 背景颜色: 黑色; 边距: 0px 0px 0px 0px; 边框: 无; 宽度: 12px; } QSlider::handle:vertical { 背景颜色: rgba(200, 200, 200, 200); 边框宽度: 1px; 上边距: -5px; 下边距: -5px; 高度: 50px; 边框半径: 5px; } QSlider::handle:vertical:hover { 背景颜色: rgba(150, 150, 150, 200); 边框半径: 5px; } QSlider::handle:vertical:pressed { 背景颜色: rgba(0, 150, 150, 200); 边框半径: 5px; }</string>
+     </property>
+     <property name="spinBoxVisible">
+      <bool>false</bool>
+     </property>
+     <property name="quantity">
+      <string notr="true">长度</string>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>qMRMLSliderWidget</class>
+   <extends>ctkSliderWidget</extends>
+   <header>qMRMLSliderWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLWidget</class>
+   <extends>QWidget</extends>
+   <header>qMRMLWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ctkSliderWidget</class>
+   <extends>QWidget</extends>
+   <header>ctkSliderWidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources />
+ <connections />
+</ui>

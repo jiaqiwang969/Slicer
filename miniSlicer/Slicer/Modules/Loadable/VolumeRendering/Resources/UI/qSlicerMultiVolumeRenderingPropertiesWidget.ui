@@ -1,0 +1,66 @@
+<ui version="4.0">
+ <class>qSlicerMultiVolumeRenderingPropertiesWidget</class>
+ <widget class="QWidget" name="qSlicerMultiVolumeRenderingPropertiesWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>236</width>
+    <height>44</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>多体积 GPU 光线投射</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QLabel" name="RenderingTechniqueLabel">
+     <property name="text">
+      <string>技术：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QComboBox" name="RenderingTechniqueComboBox">
+     <property name="toolTip">
+      <string>选择当前体积可见视图的光线投射技术</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="SurfaceSmoothingLabel">
+     <property name="toolTip">
+      <string>通过对光线投射应用随机噪声来去除木纹伪影的选项</string>
+     </property>
+     <property name="text">
+      <string>表面平滑：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QCheckBox" name="SurfaceSmoothingCheckBox">
+     <property name="toolTip">
+      <string>通过对光线投射应用随机噪声来去除木纹伪影的选项</string>
+     </property>
+     <property name="text">
+      <string />
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources />
+ <connections />
+</ui>

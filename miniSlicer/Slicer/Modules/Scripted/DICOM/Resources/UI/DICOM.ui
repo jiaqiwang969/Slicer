@@ -1,0 +1,309 @@
+<ui version="4.0">
+ <class>UtilTest</class>
+ <widget class="QWidget" name="UtilTest">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>622</width>
+    <height>663</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="leftMargin">
+    <number>3</number>
+   </property>
+   <property name="topMargin">
+    <number>3</number>
+   </property>
+   <property name="rightMargin">
+    <number>3</number>
+   </property>
+   <property name="bottomMargin">
+    <number>3</number>
+   </property>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="ctkMenuButton" name="importButton">
+       <property name="toolTip">
+        <string>将文件导入到 DICOM 数据库</string>
+       </property>
+       <property name="text">
+        <string>    导入 DICOM 文件</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc">
+         <normaloff>:/Icons/Medium/SlicerImportDICOM.png</normaloff>:/Icons/Medium/SlicerImportDICOM.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>64</width>
+         <height>32</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="ctkMenuButton" name="showBrowserButton">
+       <property name="toolTip">
+        <string>将文件导入到 DICOM 数据库</string>
+       </property>
+       <property name="text">
+        <string>    显示 DICOM 数据库</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc">
+         <normaloff>:/Icons/Medium/SlicerDatabase.png</normaloff>:/Icons/Medium/SlicerDatabase.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>64</width>
+         <height>32</height>
+        </size>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>6</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QLabel" name="loadedDataLabel">
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>已加载数据</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="qMRMLSubjectHierarchyTreeView" name="subjectHierarchyTree">
+     <property name="multiSelection">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="ctkCollapsibleButton" name="networkingFrame">
+     <property name="text">
+      <string>DICOM 网络</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="queryServerLabel">
+        <property name="text">
+         <string>从远程服务器拉取数据：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="queryServerButton">
+        <property name="toolTip">
+         <string>查询并检索远程服务器上的 DICOM 数据集</string>
+        </property>
+        <property name="text">
+         <string>查询并检索</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="storageListenerLabel">
+        <property name="text">
+         <string>存储监听器：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QCheckBox" name="toggleListener">
+          <property name="toolTip">
+           <string>启用 DICOM 监听服务器以接收图像 (C-Store SCP)</string>
+          </property>
+          <property name="text">
+           <string />
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Preferred</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>10</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="listenerStateLabel">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string />
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="runListenerAtStartLabel">
+        <property name="text">
+         <string>启动时启动存储监听器：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QCheckBox" name="runListenerAtStart">
+        <property name="toolTip">
+         <string>在应用程序启动时自动启动监听器</string>
+        </property>
+        <property name="text">
+         <string />
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="ctkCollapsibleButton" name="browserSettingsFrame">
+     <property name="text">
+      <string>DICOM 数据库设置</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="databaseDirectoryLabel">
+        <property name="text">
+         <string>数据库位置：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="ctkDirectoryButton" name="directoryButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="browserAutoHideLabel">
+        <property name="text">
+         <string>自动隐藏浏览器窗口：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="databaseMaintenanceLabel">
+        <property name="text">
+         <string>维护：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QCheckBox" name="browserAutoHideCheckBox">
+        <property name="toolTip">
+         <string>数据加载后隐藏 DICOM 数据库浏览器</string>
+        </property>
+        <property name="text">
+         <string />
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="repairDatabaseButton">
+        <property name="toolTip">
+         <string>如果未在磁盘上找到引用的 DICOM 文件，则从 DICOM 数据库中删除所有项目。</string>
+        </property>
+        <property name="text">
+         <string>删除不可用的数据集</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QPushButton" name="clearDatabaseButton">
+        <property name="toolTip">
+         <string>从数据库中删除所有数据以及在导入过程中复制到数据库中的所有文件。</string>
+        </property>
+        <property name="text">
+         <string>删除所有数据集</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="ctkCollapsibleButton" name="dicomPluginsFrame">
+     <property name="text">
+      <string>DICOM 插件</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout" />
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>qMRMLSubjectHierarchyTreeView</class>
+   <extends>QTreeView</extends>
+   <header>qMRMLSubjectHierarchyTreeView.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkCollapsibleButton</class>
+   <extends>QWidget</extends>
+   <header>ctkCollapsibleButton.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ctkDirectoryButton</class>
+   <extends>QWidget</extends>
+   <header>ctkDirectoryButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkMenuButton</class>
+   <extends>QPushButton</extends>
+   <header>ctkMenuButton.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc" />
+ </resources>
+ <connections />
+</ui>

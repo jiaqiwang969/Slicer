@@ -1,0 +1,268 @@
+<ui version="4.0">
+ <class>qSlicerSettingsGeneralPanel</class>
+ <widget class="ctkSettingsPanel" name="qSlicerSettingsGeneralPanel">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>415</width>
+    <height>306</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>一般</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="DefaultScenePathLabel">
+     <property name="toolTip">
+      <string>默认场景保存目录</string>
+     </property>
+     <property name="text">
+      <string>默认场景位置：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="ctkDirectoryButton" name="DefaultScenePathButton" />
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="ShowSplashScreenLabel">
+     <property name="text">
+      <string>禁用启动画面：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QCheckBox" name="ShowSplashScreenCheckBox">
+     <property name="text">
+      <string />
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="ctkLanguageComboBox" name="LanguageComboBox" />
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="LanguageLabel">
+     <property name="text">
+      <string>语言</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="ConfirmRestartLabel">
+     <property name="text">
+      <string>重启时确认：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="QCheckBox" name="ConfirmRestartCheckBox">
+     <property name="text">
+      <string />
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="ConfirmExitLabel">
+     <property name="text">
+      <string>退出时确认：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QCheckBox" name="ConfirmExitCheckBox">
+     <property name="text">
+      <string />
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="ConfirmSceneCloseLabel">
+     <property name="text">
+      <string>关闭场景时确认：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QCheckBox" name="ConfirmSceneCloseCheckBox">
+     <property name="text">
+      <string />
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="0">
+    <widget class="QLabel" name="DocumentationBaseURLLabel">
+     <property name="text">
+      <string>文档基础 URL：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="1">
+    <widget class="QLineEdit" name="DocumentationBaseURLLineEdit">
+     <property name="toolTip">
+      <string>指定文档位置。\n可用占位符：{language}，{version}。\n默认： https://slicer.readthedocs.io/{language}/{version}</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="1">
+    <widget class="QSpinBox" name="NumOfRecentlyLoadedFiles">
+     <property name="minimum">
+      <number>1</number>
+     </property>
+     <property name="maximum">
+      <number>50</number>
+     </property>
+     <property name="value">
+      <number>10</number>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="0">
+    <widget class="QLabel" name="NumOfRecentlyLoadedFilesLabel">
+     <property name="text">
+      <string>“最近”菜单项的最大数量：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="SlicerRCFileLabel">
+     <property name="toolTip">
+      <string>应用启动后执行的 Python 脚本</string>
+     </property>
+     <property name="text">
+      <string>应用启动脚本：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLineEdit" name="SlicerRCFileValueLabel">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="frame">
+        <bool>true</bool>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="SlicerRCFileOpenButton">
+       <property name="toolTip">
+        <string>打开 Slicer 资源文件</string>
+       </property>
+       <property name="text">
+        <string />
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="10" column="0">
+    <widget class="QLabel" name="DocumentationBaseURLLabel_2">
+     <property name="text">
+      <string>模块文档 URL：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="1">
+    <widget class="QLineEdit" name="ModuleDocumentationURLLineEdit">
+     <property name="toolTip">
+      <string>指定模块文档的 URL。\n可用占位符：{documentationbaseurl}，{lowercasemodulename}。\n默认：{documentationbaseurl}/user_guide/modules/{lowercasemodulename}.html</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="ApplicationAutoUpdateCheckLabel">
+     <property name="text">
+      <string>自动检查更新：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <widget class="QCheckBox" name="ApplicationAutoUpdateCheckCheckBox">
+     <property name="toolTip">
+      <string>定期检查可用的应用更新</string>
+     </property>
+     <property name="text">
+      <string />
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="0">
+    <widget class="QLabel" name="ApplicationUpdateServerURLLabel">
+     <property name="text">
+      <string>更新服务器 URL：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1">
+    <widget class="QLineEdit" name="ApplicationUpdateServerURLLineEdit">
+     <property name="toolTip">
+      <string>提供最新可用应用版本信息的服务器地址。</string>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="0">
+    <widget class="QLabel" name="MaxFileNameLengthLabel">
+     <property name="text">
+      <string>最大文件名长度：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="1">
+    <widget class="QSpinBox" name="MaximumFileNameLengthSpinBox">
+     <property name="toolTip">
+      <string>限制文件名的最大长度。为了与 Windows 系统兼容，建议使用较低的值，例如 50。设置更高的值以允许使用与长节点名称匹配的较长文件名。</string>
+     </property>
+     <property name="minimum">
+      <number>8</number>
+     </property>
+     <property name="maximum">
+      <number>4000</number>
+     </property>
+     <property name="value">
+      <number>1000</number>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ctkDirectoryButton</class>
+   <extends>QWidget</extends>
+   <header>ctkDirectoryButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkLanguageComboBox</class>
+   <extends>QComboBox</extends>
+   <header>ctkLanguageComboBox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkSettingsPanel</class>
+   <extends>QWidget</extends>
+   <header>ctkSettingsPanel.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources />
+ <connections />
+</ui>

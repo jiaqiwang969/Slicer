@@ -1,0 +1,1083 @@
+<ui version="4.0">
+ <class>qSlicerMarkupsModule</class>
+ <widget class="qSlicerWidget" name="qSlicerMarkupsModule">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>276</width>
+    <height>294</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>标注</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <layout class="QVBoxLayout" name="markupsModuleVerticalLayout">
+     <item>
+      <widget class="QGroupBox" name="createMarkupsGroupBox">
+       <property name="title">
+        <string>创建标注：</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="ctkExpandableWidget" name="ResizableFrame">
+       <property name="orientations">
+        <set>Qt::Vertical</set>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>3</number>
+        </property>
+        <item>
+         <widget class="qMRMLSubjectHierarchyTreeView" name="activeMarkupTreeView">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="dragDropMode">
+           <enum>QAbstractItemView::InternalMove</enum>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::ExtendedSelection</enum>
+          </property>
+          <property name="indentation">
+           <number>8</number>
+          </property>
+          <property name="editMenuActionVisible">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="qMRMLCollapsibleButton" name="displayCollapsibleButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>显示</string>
+       </property>
+       <property name="collapsed">
+        <bool>true</bool>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="qMRMLMarkupsDisplayNodeWidget" name="markupsDisplayWidget" />
+        </item>
+        <item>
+         <widget class="ctkCollapsibleGroupBox" name="ColorLegendCollapsibleGroupBox">
+          <property name="toolTip">
+           <string>选定标量部分的颜色表的颜色图例。</string>
+          </property>
+          <property name="title">
+           <string>颜色图例</string>
+          </property>
+          <property name="collapsed">
+           <bool>true</bool>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_2">
+           <item row="0" column="0">
+            <widget class="qMRMLColorLegendDisplayNodeWidget" name="ColorLegendDisplayNodeWidget" />
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QPushButton" name="saveToDefaultDisplayPropertiesPushButton">
+            <property name="toolTip">
+             <string>将当前显示属性设置保存为默认值，重启 Slicer 时将保存（请参见应用程序设置）</string>
+            </property>
+            <property name="text">
+             <string>保存为默认值</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="resetToDefaultDisplayPropertiesPushButton">
+            <property name="toolTip">
+             <string>使用默认显示属性。</string>
+            </property>
+            <property name="text">
+             <string>重置为默认值</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="ctkCollapsibleButton" name="controlPointsCollapsibleButton">
+       <property name="text">
+        <string>控制点</string>
+       </property>
+       <property name="collapsed">
+        <bool>true</bool>
+       </property>
+       <layout class="QFormLayout" name="formLayout">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>交互：</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QPushButton" name="listLockedUnlockedPushButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>启用/禁用切片和 3D 视图中的所有交互。</string>
+            </property>
+            <property name="text">
+             <string />
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>:Icons/Medium/SlicerUnlock.png</normaloff>:Icons/Medium/SlicerUnlock.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="fixedNumberOfControlPointsPushButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>输出</string>
+            </property>
+            <property name="text">
+             <string />
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>:Icons/Medium/SlicerPointNumberUnlock.png</normaloff>:Icons/Medium/SlicerPointNumberUnlock.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>跳过切片：</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QComboBox" name="jumpModeComboBox">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string>偏移：设置切片平面位置。居中：设置切片平面位置并将切片视图居中于控制点。</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>无</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>偏移</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>居中</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>显示切片交集：</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="ctkCheckBox" name="sliceIntersectionsVisibilityCheckBox">
+          <property name="toolTip">
+           <string>显示其他切片平面如何与每个切片平面相交。</string>
+          </property>
+          <property name="text">
+           <string />
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0" colspan="2">
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <widget class="ctkMenuButton" name="visibilityAllControlPointsInListMenuButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>64</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>切换列表中所有控制点的可见性标志。使用下拉菜单将所有设置为可见或不可见。</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="ctkMenuButton" name="selectedAllControlPointsInListMenuButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>64</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>切换列表中所有控制点的选中标志。使用下拉菜单将所有设置为选中或未选中。</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="ctkMenuButton" name="lockAllControlPointsInListMenuButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>64</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>切换列表中所有控制点的锁定标志。使用下拉菜单将所有设置为锁定或解锁。</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="missingControlPointPushButton">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>跳过在活动列表中放置高亮的控制点（将清除当前位置信息）。</string>
+            </property>
+            <property name="text">
+             <string />
+            </property>
+            <property name="icon">
+             <iconset resource="../qSlicerMarkupsModule.qrc">
+              <normaloff>:/Icons/MarkupsMissing.png</normaloff>:/Icons/MarkupsMissing.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="unsetControlPointPushButton">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>清除活动列表中高亮控制点的位置信息（控制点不会被删除）。</string>
+            </property>
+            <property name="text">
+             <string />
+            </property>
+            <property name="icon">
+             <iconset resource="../qSlicerMarkupsModule.qrc">
+              <normaloff>:/Icons/MarkupsUnset.png</normaloff>:/Icons/MarkupsUnset.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="deleteControlPointPushButton">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>从活动列表中删除高亮的控制点</string>
+            </property>
+            <property name="text">
+             <string />
+            </property>
+            <property name="icon">
+             <iconset resource="../qSlicerMarkupsModule.qrc">
+              <normaloff>:/Icons/MarkupsDeleteSelectedRows.png</normaloff>:/Icons/MarkupsDeleteSelectedRows.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="deleteAllControlPointsInListPushButton">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="toolTip">
+             <string>从活动列表中移除所有控制点</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../qSlicerMarkupsModule.qrc">
+              <normaloff>:/Icons/MarkupsDeleteAllRows.png</normaloff>:/Icons/MarkupsDeleteAllRows.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="CutControlPointsToolButton">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string>剪切</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="CopyControlPointsToolButton">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string>复制</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="PasteControlPointsToolButton">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string>粘贴</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_coords">
+          <property name="text">
+           <string>坐标：  </string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QComboBox" name="coordinatesComboBox">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string>设置控制点位置的可见性和坐标系统。</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>世界</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>本地</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>隐藏</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="5" column="0" colspan="2">
+         <widget class="QTableWidget" name="activeMarkupTableWidget">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>250</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>当前活动标注节点中的控制点。右键单击一行以进行删除、跳过、复制、移动。</string>
+          </property>
+          <property name="accessibleName">
+           <string>活动标注控制点表</string>
+          </property>
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+         </widget>
+        </item>
+        <item row="6" column="0" colspan="2">
+         <widget class="ctkCollapsibleGroupBox" name="advancedCollapsibleButton">
+          <property name="toolTip">
+           <string>显示、命名、体积交互、上下移动、添加</string>
+          </property>
+          <property name="title">
+           <string>高级</string>
+          </property>
+          <property name="collapsed">
+           <bool>true</bool>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_7">
+             <item>
+              <widget class="QPushButton" name="moveControlPointUpPushButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>30</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>32</width>
+                 <height>32</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>将高亮的控制点在列表中向上移动一个位置</string>
+               </property>
+               <property name="text">
+                <string />
+               </property>
+               <property name="icon">
+                <iconset resource="../qSlicerMarkupsModule.qrc">
+                 <normaloff>:/Icons/MarkupsMoveUp.png</normaloff>:/Icons/MarkupsMoveUp.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="moveControlPointDownPushButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>30</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>32</width>
+                 <height>32</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>将高亮的控制点在列表中向下移动一个位置</string>
+               </property>
+               <property name="text">
+                <string />
+               </property>
+               <property name="icon">
+                <iconset resource="../qSlicerMarkupsModule.qrc">
+                 <normaloff>:/Icons/MarkupsMoveDown.png</normaloff>:/Icons/MarkupsMoveDown.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="addControlPointPushButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>30</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>32</width>
+                 <height>32</height>
+                </size>
+               </property>
+               <property name="toolTip">
+                <string>在原点向活动列表添加一个新的控制点</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../qSlicerMarkupsModule.qrc">
+                 <normaloff>:/Icons/MarkupsAddFiducial.png</normaloff>:/Icons/MarkupsAddFiducial.png</iconset>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="ctkCollapsibleGroupBox" name="namingCollapsibleGroupBox">
+             <property name="title">
+              <string>命名</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout">
+              <item row="2" column="0">
+               <widget class="QLabel" name="nameFormatLabel">
+                <property name="toolTip">
+                 <string>网络</string>
+                </property>
+                <property name="text">
+                 <string>名称格式</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLineEdit" name="nameFormatLineEdit">
+                <property name="toolTip">
+                 <string>创建新控制点名称的格式，使用 sprintf 格式样式。%N 被替换为列表名称，%S 被替换为标注的短名称，%d 被替换为整数。</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="3">
+               <widget class="QPushButton" name="resetNameFormatToDefaultPushButton">
+                <property name="toolTip">
+                 <string>将名称格式字段重置为默认值。</string>
+                </property>
+                <property name="text">
+                 <string>重置</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QPushButton" name="renameAllWithCurrentNameFormatPushButton">
+                <property name="toolTip">
+                 <string>根据当前名称格式重命名此列表中的所有控制点，尽量保留数字。</string>
+                </property>
+                <property name="text">
+                 <string>应用</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="ctkCollapsibleButton" name="measurementsCollapsibleButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>测量</string>
+       </property>
+       <property name="collapsed">
+        <bool>true</bool>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_7">
+        <item>
+         <widget class="QLabel" name="measurementsLabel">
+          <property name="text">
+           <string>无测量</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="ctkCollapsibleGroupBox" name="MeasurementSettingsCollapsibleGroupBox">
+          <property name="title">
+           <string>测量设置</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_8">
+           <property name="leftMargin">
+            <number>4</number>
+           </property>
+           <property name="topMargin">
+            <number>4</number>
+           </property>
+           <property name="rightMargin">
+            <number>4</number>
+           </property>
+           <property name="bottomMargin">
+            <number>4</number>
+           </property>
+           <item>
+            <widget class="QTableWidget" name="measurementSettingsTableWidget">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="sizeAdjustPolicy">
+              <enum>QAbstractScrollArea::AdjustToContents</enum>
+             </property>
+             <property name="editTriggers">
+              <set>QAbstractItemView::NoEditTriggers</set>
+             </property>
+             <property name="selectionMode">
+              <enum>QAbstractItemView::NoSelection</enum>
+             </property>
+             <property name="showGrid">
+              <bool>false</bool>
+             </property>
+             <property name="columnCount">
+              <number>2</number>
+             </property>
+             <attribute name="horizontalHeaderHighlightSections">
+              <bool>false</bool>
+             </attribute>
+             <attribute name="verticalHeaderVisible">
+              <bool>false</bool>
+             </attribute>
+             <column />
+             <column />
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="qMRMLCollapsibleButton" name="exportImportCollapsibleButton">
+       <property name="text">
+        <string>导出/导入表</string>
+       </property>
+       <property name="collapsed">
+        <bool>true</bool>
+       </property>
+       <layout class="QFormLayout" name="formLayout_2">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>操作：</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QRadioButton" name="tableExportRadioButton">
+            <property name="text">
+             <string>导出</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="tableImportRadioButton">
+            <property name="text">
+             <string>导入</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="exportImportTableLabel">
+          <property name="text">
+           <string>表：</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="qMRMLNodeComboBox" name="exportedImportedNodeComboBox">
+          <property name="nodeTypes">
+           <stringlist notr="true">
+            <string>网络模型：</string>
+           </stringlist>
+          </property>
+          <property name="editEnabled">
+           <bool>true</bool>
+          </property>
+          <property name="renameEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0" colspan="2">
+         <widget class="QPushButton" name="exportImportPushButton">
+          <property name="text">
+           <string>应用</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0" colspan="2">
+         <widget class="ctkCollapsibleGroupBox" name="CollapsibleGroupBox">
+          <property name="title">
+           <string>高级</string>
+          </property>
+          <property name="collapsed">
+           <bool>true</bool>
+          </property>
+          <layout class="QFormLayout" name="formLayout_3">
+           <property name="horizontalSpacing">
+            <number>4</number>
+           </property>
+           <property name="verticalSpacing">
+            <number>4</number>
+           </property>
+           <property name="leftMargin">
+            <number>4</number>
+           </property>
+           <property name="topMargin">
+            <number>4</number>
+           </property>
+           <property name="rightMargin">
+            <number>4</number>
+           </property>
+           <property name="bottomMargin">
+            <number>4</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_5">
+             <property name="text">
+              <string>导出坐标系统：</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item>
+              <widget class="QRadioButton" name="rasExportRadioButton">
+               <property name="text">
+                <string>快速中心线网络提取的结果。</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QRadioButton" name="lpsExportRadioButton">
+               <property name="text">
+                <string>网络属性：</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="ctkDynamicSpacer" name="DynamicSpacer">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>1</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>qMRMLCollapsibleButton</class>
+   <extends>ctkCollapsibleButton</extends>
+   <header>qMRMLCollapsibleButton.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLNodeComboBox</class>
+   <extends>QWidget</extends>
+   <header>qMRMLNodeComboBox.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLWidget</class>
+   <extends>QWidget</extends>
+   <header>qMRMLWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>qSlicerWidget</class>
+   <extends>QWidget</extends>
+   <header>qSlicerWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLColorLegendDisplayNodeWidget</class>
+   <extends>qMRMLWidget</extends>
+   <header>qMRMLColorLegendDisplayNodeWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLMarkupsDisplayNodeWidget</class>
+   <extends>qMRMLWidget</extends>
+   <header>qMRMLMarkupsDisplayNodeWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLSubjectHierarchyTreeView</class>
+   <extends>QTreeView</extends>
+   <header>qMRMLSubjectHierarchyTreeView.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkCheckBox</class>
+   <extends>QCheckBox</extends>
+   <header>ctkCheckBox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkCollapsibleButton</class>
+   <extends>QWidget</extends>
+   <header>ctkCollapsibleButton.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ctkCollapsibleGroupBox</class>
+   <extends>QGroupBox</extends>
+   <header>ctkCollapsibleGroupBox.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ctkDynamicSpacer</class>
+   <extends>QWidget</extends>
+   <header>ctkDynamicSpacer.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkExpandableWidget</class>
+   <extends>QFrame</extends>
+   <header>ctkExpandableWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ctkMenuButton</class>
+   <extends>QPushButton</extends>
+   <header>ctkMenuButton.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../qSlicerMarkupsModule.qrc" />
+ </resources>
+ <connections>
+  <connection>
+   <sender>qSlicerMarkupsModule</sender>
+   <signal>mrmlSceneChanged(vtkMRMLScene*)</signal>
+   <receiver>activeMarkupTreeView</receiver>
+   <slot>setMRMLScene(vtkMRMLScene*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>219</x>
+     <y>91</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>qSlicerMarkupsModule</sender>
+   <signal>mrmlSceneChanged(vtkMRMLScene*)</signal>
+   <receiver>exportedImportedNodeComboBox</receiver>
+   <slot>setMRMLScene(vtkMRMLScene*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>168</x>
+     <y>262</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>197</x>
+     <y>387</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>qSlicerMarkupsModule</sender>
+   <signal>mrmlSceneChanged(vtkMRMLScene*)</signal>
+   <receiver>markupsDisplayWidget</receiver>
+   <slot>setMRMLScene(vtkMRMLScene*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>76</x>
+     <y>2</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>128</x>
+     <y>259</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

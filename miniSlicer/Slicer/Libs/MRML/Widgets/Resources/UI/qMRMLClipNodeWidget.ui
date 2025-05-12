@@ -1,0 +1,107 @@
+<ui version="4.0">
+ <class>qMRMLClipNodeWidget</class>
+ <widget class="qMRMLWidget" name="qMRMLClipNodeWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>415</width>
+    <height>55</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>剪切</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item row="0" column="2">
+    <widget class="QRadioButton" name="IntersectionRadioButton">
+     <property name="toolTip">
+      <string>使用由切片平面定义的正空间和/或负空间的交集来剪切模型。</string>
+     </property>
+     <property name="text">
+      <string>交集</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../qMRMLWidgets.qrc">
+       <normaloff>:/Icons/ClippingIntersection.png</normaloff>:/Icons/ClippingIntersection.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QRadioButton" name="UnionRadioButton">
+     <property name="toolTip">
+      <string>使用由切片平面定义的正空间和/或负空间的并集来剪切模型。</string>
+     </property>
+     <property name="text">
+      <string>并集</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../qMRMLWidgets.qrc">
+       <normaloff>:/Icons/ClippingUnion.png</normaloff>:/Icons/ClippingUnion.png</iconset>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="ClippingTypeLabel">
+     <property name="toolTip">
+      <string>当使用多个切片平面时，此选项控制使用正空间和/或负空间的并集或交集来剪切模型。模型中选定空间内的部分被保留，选定空间外的部分被剪切掉。</string>
+     </property>
+     <property name="text">
+      <string>剪切类型：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="3">
+    <widget class="QFrame" name="ClipNodeFrame">
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>qMRMLWidget</class>
+   <extends>QWidget</extends>
+   <header>qMRMLWidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../qMRMLWidgets.qrc" />
+ </resources>
+ <connections />
+</ui>

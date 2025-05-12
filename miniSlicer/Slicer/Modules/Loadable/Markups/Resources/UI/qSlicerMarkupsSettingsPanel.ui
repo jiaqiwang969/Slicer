@@ -1,0 +1,251 @@
+<ui version="4.0">
+ <class>qSlicerMarkupsSettingsPanel</class>
+ <widget class="ctkSettingsPanel" name="qSlicerMarkupsSettingsPanel">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>345</width>
+    <height>204</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>标记设置</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <property name="fieldGrowthPolicy">
+    <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+   </property>
+   <item row="0" column="0">
+    <widget class="QLabel" name="defaultGlyphTypeLabel">
+     <property name="text">
+      <string>默认符号类型：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QComboBox" name="defaultGlyphTypeComboBox">
+     <property name="toolTip">
+      <string>用于标记的符号</string>
+     </property>
+     <property name="currentIndex">
+      <number>12</number>
+     </property>
+     <item>
+      <property name="text">
+       <string>二维顶点</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>二维虚线</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>二维交叉</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>粗交叉2D</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>二维三角形</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>二维正方形</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>二维圆形</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>二维菱形</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>二维箭头</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>粗箭头2D</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>带钩箭头2D</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>星形爆炸2D</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>三维球体</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="defaultSelectedColorLabel">
+     <property name="text">
+      <string>默认选中颜色：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="ctkColorPickerButton" name="defaultSelectedColorPickerButton">
+     <property name="color">
+      <color>
+       <red>68</red>
+       <green>172</green>
+       <blue>100</blue>
+      </color>
+     </property>
+     <property name="displayColorName">
+      <bool>false</bool>
+     </property>
+     <property name="dialogOptions">
+      <set>ctkColorPickerButton::UseCTKColorDialog</set>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="defaultUnselectedColorLabel">
+     <property name="text">
+      <string>默认未选中颜色：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="ctkColorPickerButton" name="defaultUnselectedColorPickerButton">
+     <property name="color">
+      <color>
+       <red>188</red>
+       <green>65</green>
+       <blue>28</blue>
+      </color>
+     </property>
+     <property name="displayColorName">
+      <bool>false</bool>
+     </property>
+     <property name="dialogOptions">
+      <set>ctkColorPickerButton::UseCTKColorDialog</set>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="defaultGlyphScaleLabel">
+     <property name="text">
+      <string>默认符号比例：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="ctkSliderWidget" name="defaultGlyphScaleSliderWidget">
+     <property name="toolTip">
+      <string>默认符号比例</string>
+     </property>
+     <property name="singleStep">
+      <double>0.100000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>20.000000000000000</double>
+     </property>
+     <property name="value">
+      <double>5.000000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="defaultTextScaleLabel">
+     <property name="text">
+      <string>默认文本比例：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="ctkSliderWidget" name="defaultTextScaleSliderWidget">
+     <property name="toolTip">
+      <string>默认文本比例</string>
+     </property>
+     <property name="singleStep">
+      <double>0.100000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>20.000000000000000</double>
+     </property>
+     <property name="value">
+      <double>4.500000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="defaultOpacityLabel">
+     <property name="text">
+      <string>默认不透明度：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="ctkSliderWidget" name="defaultOpacitySliderWidget">
+     <property name="singleStep">
+      <double>0.100000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>1.000000000000000</double>
+     </property>
+     <property name="value">
+      <double>1.000000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="defaultActiveColorLabel">
+     <property name="text">
+      <string>默认激活颜色：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="ctkColorPickerButton" name="defaultActiveColorPickerButton">
+     <property name="displayColorName">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ctkColorPickerButton</class>
+   <extends>QPushButton</extends>
+   <header>ctkColorPickerButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ctkSettingsPanel</class>
+   <extends>QWidget</extends>
+   <header>ctkSettingsPanel.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ctkSliderWidget</class>
+   <extends>QWidget</extends>
+   <header>ctkSliderWidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources />
+ <connections />
+</ui>

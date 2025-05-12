@@ -1,0 +1,152 @@
+<ui version="4.0">
+ <class>qSlicerErrorReportDialog</class>
+ <widget class="QDialog" name="qSlicerErrorReportDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>607</width>
+    <height>638</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>1</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>报告错误和请求增强功能</string>
+  </property>
+  <layout class="QFormLayout" name="formLayout">
+   <property name="fieldGrowthPolicy">
+    <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+   </property>
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="InstructionsLabel">
+     <property name="text">
+      <string>&amp;lt;html&amp;gt;&amp;lt;head/&amp;gt;&amp;lt;body&amp;gt;&amp;lt;p&amp;gt;&amp;lt;span style=" font-weight:600;"&amp;gt;问题和功能请求：&amp;lt;/span&amp;gt;访问 &amp;lt;a href="https://discourse.slicer.org"&amp;gt;&amp;lt;span style=" text-decoration: underline;"&amp;gt;Slicer 论坛&amp;lt;/span&amp;gt;&amp;lt;/a&amp;gt;.&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;&amp;lt;span style=" font-weight:600;"&amp;gt;错误报告：&amp;lt;/span&amp;gt;&amp;lt;a href="https://discourse.slicer.org/new-topic?body=Problem%20report%20for%20[appname-version-platform]:%20[please%20describe%20expected%20and%20actual%20behavior]&amp;amp;category=support"&amp;gt;&amp;lt;span style=" text-decoration: underline;"&amp;gt;在 Slicer 论坛发布新主题&amp;lt;/span&amp;gt;&amp;lt;/a&amp;gt;以告知我们您的问题，或向 &amp;lt;a href="https://issues.slicer.org"&amp;gt;&amp;lt;span style=" text-decoration: underline;"&amp;gt;3D Slicer 错误跟踪器&amp;lt;/span&amp;gt;&amp;lt;/a&amp;gt;提交错误报告。描述导致错误的步骤，并附上日志消息。&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;&amp;lt;span style=" font-weight:600;"&amp;gt;警告 - 如果您处理患者数据：&amp;lt;/span&amp;gt;请检查日志消息中是否包含可能识别患者的信息。将日志消息发送给特定人员，而不是在邮件列表或网站上公开分享。&amp;lt;/p&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;</string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::RichText</enum>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="openExternalLinks">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="RecentLogFilesLabel">
+     <property name="text">
+      <string>最近的日志文件：</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0" colspan="2">
+    <widget class="QPlainTextEdit" name="LogText">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+       <horstretch>0</horstretch>
+       <verstretch>1</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>50</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0" colspan="2">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="ctkPushButton" name="LogCopyToClipboardPushButton">
+       <property name="text">
+        <string>复制日志到剪贴板</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="ctkPushButton" name="LogFileOpenPushButton">
+       <property name="text">
+        <string>在编辑器中打开日志</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="ctkPushButton" name="LogOpenFileLocationPushButton">
+       <property name="text">
+        <string>打开日志位置</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="LogFileEditCheckBox">
+       <property name="text">
+        <string>编辑日志</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDialogButtonBox" name="ButtonBox">
+       <property name="standardButtons">
+        <set>QDialogButtonBox::Close</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="0" colspan="2">
+    <widget class="QTableWidget" name="RecentLogFilesComboBox">
+     <property name="sizeAdjustPolicy">
+      <enum>QAbstractScrollArea::AdjustIgnored</enum>
+     </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <attribute name="horizontalHeaderCascadingSectionResizes">
+      <bool>false</bool>
+     </attribute>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="RecentLogFilesLabel_2">
+     <property name="text">
+      <string>日志文件内容：</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ctkPushButton</class>
+   <extends>QPushButton</extends>
+   <header>ctkPushButton.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../SlicerApp.qrc" />
+  <include location="../../../QTGUI/Resources/qSlicerBaseQTGUI.qrc" />
+ </resources>
+ <connections />
+</ui>

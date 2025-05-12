@@ -1,0 +1,262 @@
+<ui version="4.0">
+ <class>qMRMLUnitWidget</class>
+ <widget class="qMRMLWidget" name="qMRMLUnitWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>296</width>
+    <height>283</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>单位小部件</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <item row="1" column="0">
+    <widget class="QLabel" name="PresetLabel">
+     <property name="text">
+      <string>预设</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="qMRMLNodeComboBox" name="PresetNodeComboBox">
+     <property name="nodeTypes">
+      <stringlist notr="true">
+       <string>单位节点 (vtkMRMLUnitNode)</string>
+      </stringlist>
+     </property>
+     <property name="showHidden">
+      <bool>true</bool>
+     </property>
+     <property name="baseName">
+      <string />
+     </property>
+     <property name="noneEnabled">
+      <bool>true</bool>
+     </property>
+     <property name="addEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="removeEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="selectNodeUponCreation">
+      <bool>false</bool>
+     </property>
+     <property name="noneDisplay">
+      <string>选择一个预设</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="PrefixLabel">
+     <property name="text">
+      <string>前缀</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QLineEdit" name="PrefixLineEdit">
+     <property name="toolTip">
+      <string>&amp;lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&amp;gt;\n&amp;lt;html&amp;gt;&amp;lt;head&amp;gt;&amp;lt;meta name="qrichtext" content="1" /&amp;gt;&amp;lt;style type="text/css"&amp;gt;\np, li { white-space: pre-wrap; }\n&amp;lt;/style&amp;gt;&amp;lt;/head&amp;gt;&amp;lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&amp;gt;\n&amp;lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&amp;gt;&amp;lt;span style=" font-size:8pt;"&amp;gt;设置单位的前缀。&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;\n&amp;lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&amp;gt;&amp;lt;span style=" font-size:8pt;"&amp;gt;单位前缀将在应用程序中显示在单位值之前。例如，前缀 &amp;quot;&amp;lt;/span&amp;gt;&amp;lt;span style=" font-size:8pt; font-weight:600;"&amp;gt;$&amp;lt;/span&amp;gt;&amp;lt;span style=" font-size:8pt;"&amp;gt;&amp;quot; 可以在单位前使用。&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="SuffixLabel">
+     <property name="text">
+      <string>后缀</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QLineEdit" name="SuffixLineEdit">
+     <property name="toolTip">
+      <string>&amp;lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&amp;gt;\n&amp;lt;html&amp;gt;&amp;lt;head&amp;gt;&amp;lt;meta name="qrichtext" content="1" /&amp;gt;&amp;lt;style type="text/css"&amp;gt;\np, li { white-space: pre-wrap; }\n&amp;lt;/style&amp;gt;&amp;lt;/head&amp;gt;&amp;lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&amp;gt;\n&amp;lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&amp;gt;&amp;lt;span style=" font-size:8pt;"&amp;gt;设置单位的后缀。例如，单位 &amp;lt;/span&amp;gt;&amp;lt;span style=" font-size:8pt; font-weight:600;"&amp;gt;米&amp;lt;/span&amp;gt;&amp;lt;span style=" font-size:8pt;"&amp;gt; 的后缀应该是 &amp;lt;/span&amp;gt;&amp;lt;span style=" font-size:8pt; font-weight:600;"&amp;gt;m&amp;lt;/span&amp;gt;&amp;lt;span style=" font-size:8pt;"&amp;gt;.&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="0">
+    <widget class="QLabel" name="MaximumValueLabel">
+     <property name="text">
+      <string>最大值</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="1">
+    <widget class="ctkDoubleSpinBox" name="MaximumSpinBox">
+     <property name="toolTip">
+      <string>&amp;lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&amp;gt;\n&amp;lt;html&amp;gt;&amp;lt;head&amp;gt;&amp;lt;meta name="qrichtext" content="1" /&amp;gt;&amp;lt;style type="text/css"&amp;gt;\np, li { white-space: pre-wrap; }\n&amp;lt;/style&amp;gt;&amp;lt;/head&amp;gt;&amp;lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&amp;gt;\n&amp;lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&amp;gt;&amp;lt;span style=" font-size:8pt;"&amp;gt;设置单位的最大值。&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;\n&amp;lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&amp;gt;&amp;lt;span style=" font-size:8pt;"&amp;gt;例如，速度单位（以 &amp;lt;/span&amp;gt;&amp;lt;span style=" font-size:8pt; font-weight:600;"&amp;gt;米每秒&amp;lt;/span&amp;gt;&amp;lt;span style=" font-size:8pt; font-weight:600; vertical-align:super;"&amp;gt;-1&amp;lt;/span&amp;gt;&amp;lt;span style=" font-size:8pt;"&amp;gt;）的最大值应该是 3e6。&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;</string>
+     </property>
+     <property name="decimals">
+      <number>3</number>
+     </property>
+     <property name="decimalsOption">
+      <set>ctkDoubleSpinBox::DecimalsByShortcuts|ctkDoubleSpinBox::InsertDecimals</set>
+     </property>
+     <property name="minimum">
+      <double>-10000.000000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>10000.000000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="PrecisionLabel">
+     <property name="text">
+      <string>精度</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <widget class="QSpinBox" name="PrecisionSpinBox">
+     <property name="toolTip">
+      <string>&amp;lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&amp;gt;\n&amp;lt;html&amp;gt;&amp;lt;head&amp;gt;&amp;lt;meta name="qrichtext" content="1" /&amp;gt;&amp;lt;style type="text/css"&amp;gt;\np, li { white-space: pre-wrap; }\n&amp;lt;/style&amp;gt;&amp;lt;/head&amp;gt;&amp;lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&amp;gt;\n&amp;lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&amp;gt;&amp;lt;span style=" font-size:8pt;"&amp;gt;设置单位的精度（即有效数字的数量）。&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;\n&amp;lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&amp;gt;&amp;lt;span style=" font-size:8pt;"&amp;gt;这用于 GUI 确定当前单位可以输入多少位数字。例如，精度为 3 时，1.0123 将被四舍五入为 1.112。&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;</string>
+     </property>
+     <property name="minimum">
+      <number>0</number>
+     </property>
+     <property name="maximum">
+      <number>16</number>
+     </property>
+     <property name="value">
+      <number>3</number>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="0">
+    <widget class="QLabel" name="MinimumValueLabel">
+     <property name="text">
+      <string>最小值</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1">
+    <widget class="ctkDoubleSpinBox" name="MinimumSpinBox">
+     <property name="toolTip">
+      <string>&amp;lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&amp;gt;\n&amp;lt;html&amp;gt;&amp;lt;head&amp;gt;&amp;lt;meta name="qrichtext" content="1" /&amp;gt;&amp;lt;style type="text/css"&amp;gt;\np, li { white-space: pre-wrap; }\n&amp;lt;/style&amp;gt;&amp;lt;/head&amp;gt;&amp;lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&amp;gt;\n&amp;lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&amp;gt;设置单位的最小值。&amp;lt;/p&amp;gt;\n&amp;lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&amp;gt;例如，温度单位（以 &amp;lt;span style=" font-weight:600;"&amp;gt;开尔文&amp;lt;/span&amp;gt;）的最小值应该是 0。&amp;lt;/p&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;</string>
+     </property>
+     <property name="decimals">
+      <number>3</number>
+     </property>
+     <property name="decimalsOption">
+      <set>ctkDoubleSpinBox::DecimalsByShortcuts|ctkDoubleSpinBox::InsertDecimals</set>
+     </property>
+     <property name="minimum">
+      <double>-10000.000000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>10000.000000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="NameLabel">
+     <property name="text">
+      <string>名称</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QLineEdit" name="NameLineEdit" />
+   </item>
+   <item row="2" column="0" colspan="2">
+    <widget class="Line" name="SeparationLine">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="QuantityLabel">
+     <property name="text">
+      <string>数量</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="QLineEdit" name="QuantityLineEdit">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="0">
+    <widget class="QLabel" name="CoefficientLabel">
+     <property name="text">
+      <string>系数</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="1">
+    <widget class="ctkDoubleSpinBox" name="CoefficientSpinBox">
+     <property name="decimalsOption">
+      <set>ctkDoubleSpinBox::DecimalsByKey|ctkDoubleSpinBox::DecimalsByShortcuts|ctkDoubleSpinBox::DecimalsByValue|ctkDoubleSpinBox::InsertDecimals</set>
+     </property>
+     <property name="minimum">
+      <double>-10000.000000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>10000.000000000000000</double>
+     </property>
+     <property name="value">
+      <double>1.000000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="0">
+    <widget class="QLabel" name="OffsetLabel">
+     <property name="text">
+      <string>偏移</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="1">
+    <widget class="ctkDoubleSpinBox" name="OffsetSpinBox">
+     <property name="decimals">
+      <number>0</number>
+     </property>
+     <property name="decimalsOption">
+      <set>ctkDoubleSpinBox::DecimalsByKey|ctkDoubleSpinBox::DecimalsByShortcuts|ctkDoubleSpinBox::DecimalsByValue|ctkDoubleSpinBox::InsertDecimals</set>
+     </property>
+     <property name="minimum">
+      <double>-10000.000000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>10000.000000000000000</double>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>qMRMLNodeComboBox</class>
+   <extends>QWidget</extends>
+   <header>qMRMLNodeComboBox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLWidget</class>
+   <extends>QWidget</extends>
+   <header>qMRMLWidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ctkDoubleSpinBox</class>
+   <extends>QWidget</extends>
+   <header>ctkDoubleSpinBox.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources />
+ <connections />
+</ui>

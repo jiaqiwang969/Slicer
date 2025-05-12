@@ -1,0 +1,236 @@
+<ui version="4.0">
+ <class>qMRMLPlotViewControllerWidget</class>
+ <widget class="ctkPopupWidget" name="qMRMLPlotViewControllerWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>308</width>
+    <height>118</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>绘图视图控制器</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="1" column="0">
+    <layout class="QGridLayout" name="contentLayout">
+     <item row="0" column="1">
+      <layout class="QHBoxLayout" name="hboxLayout">
+        <item>
+          <widget class="qMRMLNodeComboBox" name="plotChartComboBox">
+           <property name="toolTip">
+            <string>选择处理绘图的一般属性的PlotChartNode，并允许选择多个PlotSeriesNodes。</string>
+           </property>
+           <property name="nodeTypes">
+            <stringlist notr="true">
+             <string>绘图图表节点 (vtkMRMLPlotChartNode)</string>
+            </stringlist>
+           </property>
+           <property name="noneEnabled">
+            <bool>false</bool>
+           </property>
+           <property name="addEnabled">
+            <bool>true</bool>
+           </property>
+           <property name="removeEnabled">
+            <bool>true</bool>
+           </property>
+           <property name="renameEnabled">
+            <bool>true</bool>
+           </property>
+           <property name="editEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+        </item>
+        <item>
+          <widget class="QPushButton" name="exportPushButton">
+           <property name="toolTip">
+            <string>导出绘图为SVG文件</string>
+           </property>
+           <property name="text">
+            <string>导出...</string>
+           </property>
+          </widget>
+        </item>
+      </layout>
+     </item>
+     <item row="1" column="1">
+      <widget class="qMRMLCheckableNodeComboBox" name="plotSeriesComboBox">
+       <property name="toolTip">
+        <string>向当前图表添加/移除绘图数据系列。</string>
+       </property>
+       <property name="nodeTypes">
+        <stringlist notr="true">
+         <string>绘图系列节点 (vtkMRMLPlotSeriesNode)</string>
+        </stringlist>
+       </property>
+       <property name="noneEnabled">
+        <bool>false</bool>
+       </property>
+       <property name="addEnabled">
+        <bool>true</bool>
+       </property>
+       <property name="removeEnabled">
+        <bool>true</bool>
+       </property>
+       <property name="editEnabled">
+        <bool>false</bool>
+       </property>
+       <property name="renameEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>绘图图表：</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>绘图数据系列：</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>绘图类型：</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QComboBox" name="plotTypeComboBox">
+       <property name="toolTip">
+        <string>此下拉框允许更改所有活动的PlotSeriesNodes的类型。如果选择了一个值，所有由PlotChartNode引用的PlotSeriesNodes将更新为新值。</string>
+       </property>
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>线</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>条形</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>散点</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>散点条形</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>交互模式：</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QComboBox" name="interactionModeComboBox">
+       <property name="toolTip">
+        <string>在鼠标左键单击和拖动时执行的操作。</string>
+       </property>
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>平移视图</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>选择点</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>自由手绘选择点</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>移动点</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+  <action name="actionShow_Grid">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>网格</string>
+   </property>
+   <property name="toolTip">
+    <string>显示网格</string>
+   </property>
+  </action>
+  <action name="actionShow_Legend">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>图例</string>
+   </property>
+   <property name="toolTip">
+    <string>显示图例</string>
+   </property>
+  </action>
+  <action name="actionFit_to_window">
+   <property name="icon">
+    <iconset resource="../qMRMLWidgets.qrc">
+     <normaloff>:/Icons/SlicesFitToWindow.png</normaloff>:/Icons/SlicesFitToWindow.png</iconset>
+   </property>
+   <property name="text">
+    <string>适应窗口</string>
+   </property>
+   <property name="toolTip">
+    <string>调整绘图查看器的视野以匹配绘图坐标轴的范围</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>qMRMLCheckableNodeComboBox</class>
+   <extends>qMRMLNodeComboBox</extends>
+   <header>qMRMLCheckableNodeComboBox.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLNodeComboBox</class>
+   <extends>QWidget</extends>
+   <header>qMRMLNodeComboBox.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ctkPopupWidget</class>
+   <extends>QFrame</extends>
+   <header>ctkPopupWidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../qMRMLWidgets.qrc" />
+ </resources>
+ <connections />
+</ui>
