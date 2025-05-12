@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLMarkupsLabelWidget</class>
  <widget class="QWidget" name="qMRMLMarkupsLabelWidget">
@@ -11,7 +10,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>表单</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">
@@ -29,7 +28,7 @@
    <item>
     <widget class="ctkCollapsibleButton" name="labelCollapsibleButton">
      <property name="text">
-      <string>Label settings:</string>
+      <string>标签设置:</string>
      </property>
      <property name="checked">
       <bool>true</bool>
@@ -41,7 +40,7 @@
       <item row="1" column="0">
        <widget class="QLabel" name="labelLabel">
         <property name="text">
-         <string>Label:</string>
+         <string>标签:</string>
         </property>
        </widget>
       </item>
@@ -54,28 +53,21 @@
          </sizepolicy>
         </property>
         <property name="plainText">
-         <string/>
+         <string />
         </property>
        </widget>
       </item>
       <item row="0" column="0">
        <widget class="QLabel" name="ThreeDTipDimensionModeLabel">
         <property name="text">
-         <string>3D tip
-dimension mode:</string>
+         <string>3D 提示维度模式：</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="QComboBox" name="ThreeDTipDimensionModeComboBox">
         <property name="toolTip">
-         <string>Adapt the arrow tip dimensions in 3D view, for improved representations.
-
-View scale factor : the tip's height is 6 times the millimeter per pixel view scale factor,
-Line length : the tip's height is 3% of the line length,
-Fixed : the tip's height is 1.0 mm.
-
-The tip's height is always 3 times the tip's radius.</string>
+         <string>调整 3D 视图中的箭头提示尺寸，以改善表示。\n\n视图缩放因子：提示的高度是每像素毫米视图缩放因子的 6 倍，\n线长度：提示的高度是线长度的 3%，\n固定：提示的高度为 1.0 毫米。\n\n提示的高度始终是提示半径的 3 倍。</string>
         </property>
        </widget>
       </item>
@@ -92,6 +84,6 @@ The tip's height is always 3 times the tip's radius.</string>
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
- <connections/>
+ <resources />
+ <connections />
 </ui>

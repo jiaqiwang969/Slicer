@@ -40,6 +40,7 @@
       pkgs.ffmpeg_6.dev
       pkgs.qt5Full       # Slicer needs Qt5
       pkgs.vulkan-loader
+      pkgs.libxml2
     ];
 
     shellHook = ''
@@ -227,9 +228,12 @@ CMake Helper Usage (run from project root):
       pkgs.python3Packages.numpy
       pkgs.python3Packages.trimesh
       pkgs.python3Packages.rtree
+      pkgs.python3Packages.openai          # Add OpenAI Python SDK
+      pkgs.python3Packages.aiofiles
       pkgs.python3Packages.pip
       pkgs.python3Packages.cookiecutter
       myJinja2Github             # Custom jinja2-github
+      pkgs.libxml2
     ];
 
     shellHook = ''
@@ -244,3 +248,4 @@ CMake Helper Usage (run from project root):
   };
 
 }
+

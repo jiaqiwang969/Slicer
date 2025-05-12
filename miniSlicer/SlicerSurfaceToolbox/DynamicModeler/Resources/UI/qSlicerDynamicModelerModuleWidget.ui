@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerDynamicModelerModuleWidget</class>
  <widget class="qSlicerWidget" name="qSlicerDynamicModelerModuleWidget">
@@ -11,7 +10,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>表单</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -25,7 +24,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Create:</string>
+        <string>创建：</string>
        </property>
       </widget>
      </item>
@@ -38,7 +37,7 @@
      </property>
      <property name="nodeTypes">
       <stringlist>
-       <string>vtkMRMLDynamicModelerNode</string>
+       <string>动态建模节点 (vtkMRMLDynamicModelerNode)</string>
       </stringlist>
      </property>
      <attribute name="headerVisible">
@@ -52,9 +51,9 @@
       <bool>false</bool>
      </property>
      <property name="text">
-      <string>Input nodes</string>
+      <string>输入节点</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_3"/>
+     <layout class="QVBoxLayout" name="verticalLayout_3" />
     </widget>
    </item>
    <item>
@@ -63,9 +62,9 @@
       <bool>false</bool>
      </property>
      <property name="text">
-      <string>Parameters</string>
+      <string>参数</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_4"/>
+     <layout class="QVBoxLayout" name="verticalLayout_4" />
     </widget>
    </item>
    <item>
@@ -74,9 +73,9 @@
       <bool>false</bool>
      </property>
      <property name="text">
-      <string>Output nodes</string>
+      <string>输出节点</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_5"/>
+     <layout class="QVBoxLayout" name="verticalLayout_5" />
     </widget>
    </item>
    <item>
@@ -85,7 +84,7 @@
       <bool>false</bool>
      </property>
      <property name="text">
-      <string>Apply</string>
+      <string>应用</string>
      </property>
      <property name="checkable">
       <bool>false</bool>
@@ -132,7 +131,7 @@
    <header>ctkPushButton.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources />
  <connections>
   <connection>
    <sender>qSlicerDynamicModelerModuleWidget</sender>

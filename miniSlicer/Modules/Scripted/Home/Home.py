@@ -419,7 +419,9 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
                             print("DEBUG: Segment Editor Widget added to layout and made visible.")
                         else:
                             # 如果在 UI 中未能获取到布局，则在运行时创建一个新的垂直布局并添加到 groupBox
-                            print(f"INFO: segmentEditorDisplayGroupBox.layout() is {type(target_layout).__name__ if target_layout else 'None'}. Programmatically creating and setting QVBoxLayout for it.")
+                            print(
+                                f"INFO: segmentEditorDisplayGroupBox.layout() is {type(target_layout).__name__ if target_layout else 'None'}. Programmatically creating and setting QVBoxLayout for it."
+                            )
                             new_layout = qt.QVBoxLayout(segment_editor_groupbox)
                             new_layout.setObjectName("segmentEditorLayout_auto")
                             new_layout.addWidget(self.segmentEditorWidget)
@@ -945,39 +947,113 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
             slicer.util.infoDisplay(msg)
 
     def onCurvesToCsv(self):
-        """第三步：使用缓存参数重新调用 extractContoursToCsv，仅输出最终 CSV。
+        """第三步：遍历 SliceCurve_### ClosedCurve 节点并导出 CSV。
 
-        为保证性能与一致性，这里不重新切割模型，而沿用第一步中的参数，但关闭 saveVtk，
-        并使用用户指定的 CSV 文件名。
+        不再重新切割模型，直接使用用户（可能已编辑）的 ClosedCurve 数据。
+        CSV 格式与前两步保持一致：两行/截面，包含中心点、参考轴、缩放因子及轮廓点投影坐标。
         """
+
+        import re, csv as _csv, numpy as _np, math, vtk
+
         if not hasattr(self, "_profile_cache"):
-            slicer.util.errorDisplay("请先执行第一步生成截面！")
+            slicer.util.errorDisplay("请先执行前两步生成并转换截面！")
             return
 
         params = self._profile_cache
+
         outputDir = params["outputDir"]
         csvName = self.profile_csvNameLine.text.strip() or "contour_auto.csv"
 
-        success, msg = self.logic.extractContoursToCsv(
-            params["modelNode"],
-            params["curveNode"],
-            params["endpointsNode"],
-            params["useEndpoints"],
-            outputDir,
-            csvName,
-            params["clockwise"],
-            params["useCm"],
-            params["scaleByRadius"],
-            saveVtk=False,
-        )
+        clockwise = params["clockwise"]
+        useCm = params["useCm"]
+        scaleByRadius = params["scaleByRadius"]
+
+        # ---- 1. 收集曲线 ----
+        pattern = re.compile(r"^SliceCurve_(\d{3,})$", re.IGNORECASE)
+        curve_nodes = []
+        for node in slicer.util.getNodesByClass("vtkMRMLMarkupsClosedCurveNode"):
+            m = pattern.match(node.GetName() or "")
+            if m:
+                idx = int(m.group(1))
+                curve_nodes.append((idx, node))
+
+        if not curve_nodes:
+            slicer.util.errorDisplay("未找到任何 SliceCurve_### 曲线，无法导出！")
+            return
+
+        curve_nodes.sort(key=lambda x: x[0])
+
+        os.makedirs(outputDir, exist_ok=True)
+        outputCsvPath = os.path.join(outputDir, csvName)
+
+        saved = 0
+        centerline_out = []
+
+        with open(outputCsvPath, "w", newline="") as f_csv:
+            writer = _csv.writer(f_csv, delimiter=";")
+
+            for idx, curveNode in curve_nodes:
+                n_pts = curveNode.GetNumberOfControlPoints()
+                if n_pts < 3:
+                    continue
+
+                pts_np = _np.array([curveNode.GetNthControlPointPositionWorld(i) for i in range(n_pts)])
+
+                # ---- 2. 计算平面法向 (PCA) ----
+                pts_centered = pts_np - pts_np.mean(axis=0)
+                cov = _np.cov(pts_centered.T)
+                eig_vals, eig_vecs = _np.linalg.eigh(cov)
+                N = eig_vecs[:, 0]            # 最小特征值对应向量
+                N = N / (_np.linalg.norm(N) or 1)
+
+                # ---- 3. 参考轴 t_axis, b_axis ----
+                ref = _np.array([0, 0, 1]) if abs(N[2]) < 0.9 else _np.array([0, 1, 0])
+                t_axis = _np.cross(N, ref); t_axis[1] *= -1
+                t_axis = t_axis / (_np.linalg.norm(t_axis) or 1)
+                b_axis = _np.cross(N, t_axis)
+
+                # ---- 4. 投影（保持 ClosedCurve 原有点顺序） ----
+                local_y_ord = (pts_np - pts_np.mean(axis=0)) @ t_axis
+                local_z_ord = (pts_np - pts_np.mean(axis=0)) @ b_axis
+
+                # ---- 5. 计算缩放因子 ----
+                scale_val = 1.0
+                if scaleByRadius:
+                    # 计算投影后多边形面积 (shoelace)
+                    x2d, y2d = local_y_ord, local_z_ord
+                    area2d = 0.5 * abs(_np.dot(x2d, _np.roll(y2d, -1)) - _np.dot(y2d, _np.roll(x2d, -1)))
+                    r_mm = math.sqrt(area2d / math.pi) if area2d > 0 else 1.0
+                    if r_mm > 1e-6:
+                        local_y_ord /= r_mm
+                        local_z_ord /= r_mm
+                    scale_val = r_mm / (10.0 if useCm else 1.0)
+
+                # ---- 6. 导出 ----
+                centroid = pts_np.mean(axis=0)
+                P_out = centroid / 10.0 if useCm else centroid.copy()
+
+                writer.writerow([P_out[0], t_axis[0], scale_val, *_np.round(local_y_ord, 6)])
+                writer.writerow([P_out[1], t_axis[1], scale_val, *_np.round(local_z_ord, 6)])
+
+                saved += 1
+                centerline_out.append(P_out.tolist())
+
+        # 额外保存中心点序列
+        cl_path = os.path.join(outputDir, "centerline_from_curves.csv")
+        with open(cl_path, "w", newline="") as fcl:
+            w = _csv.writer(fcl, delimiter=";")
+            w.writerow(["X", "Y", "Z"])
+            w.writerows(centerline_out)
+
+        msg = f"已导出 {saved} 条曲线到 {outputCsvPath}" if saved else "CSV 导出失败，未处理曲线。"
 
         self.profile_statusLabel.setText(msg)
         slicer.app.processEvents()
 
-        if success:
-            slicer.util.infoDisplay("剖面已成功导出 CSV！")
+        if saved:
+            slicer.util.infoDisplay(msg)
         else:
-            slicer.util.errorDisplay("CSV 导出失败，请检查日志。")
+            slicer.util.errorDisplay(msg)
 
 class HomeLogic(ScriptedLoadableModuleLogic):
     """
@@ -1061,7 +1137,7 @@ class HomeLogic(ScriptedLoadableModuleLogic):
                     threeDWidget = layoutManager.threeDWidget(threeDViewIndex)
                     if threeDWidget:
                         threeDView = threeDWidget.threeDView()
-                        threeDView.resetFocalPoint()
+                threeDView.resetFocalPoint()
             
             return loaded_node, f"STL 文件 '{stl_file_path}' 已成功导入为 '{loaded_node.GetName()}'."
 
@@ -1155,19 +1231,18 @@ class HomeLogic(ScriptedLoadableModuleLogic):
                             if math.sin(view_angle_rad / 2.0) > 1e-6: # Avoid division by zero for tiny angles
                                 new_distance = bounds_radius / math.sin(view_angle_rad / 2.0)
                             else:
-                                new_distance = bounds_radius * 5 # Fallback if angle is too small, pull back further
-                            
+                                new_distance = bounds_radius * 5  # Fallback if angle is too small, pull back further
+
                             if vtk_camera.GetParallelProjection():
                                 # For parallel projection, adjust parallel scale
                                 # Parallel scale is half of the viewport height in world coordinates.
                                 # We want the largest dimension of the bounds to fit.
-                                vtk_camera.SetParallelScale(max(height, width) / 2.0) # A common approach
+                                vtk_camera.SetParallelScale(max(height, width) / 2.0)  # A common approach
                                 # Or more precisely, if fitting to bounds_radius in the view angle context:
                                 # vtk_camera.SetParallelScale(bounds_radius)
                             else:
-                                # For perspective projection, set the distance
-                                # The new_distance calculation is for perspective.
-                                pass # new_distance will be used below
+                                # For perspective projection, we'll apply new_distance below via position update.
+                                pass
 
                             # Get view plane normal (direction from focal point to camera)
                             view_plane_normal = list(vtk_camera.GetViewPlaneNormal())

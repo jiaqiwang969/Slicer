@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>CrossSectionAnalysis</class>
  <widget class="qMRMLWidget" name="CrossSectionAnalysis">
@@ -17,7 +16,7 @@
    </sizepolicy>
   </property>
   <property name="toolTip">
-   <string/>
+   <string />
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -25,7 +24,7 @@
      <item row="0" column="0">
       <widget class="QLabel" name="parameterSetLabel">
        <property name="text">
-        <string>Parameter set:</string>
+        <string>参数集：</string>
        </property>
       </widget>
      </item>
@@ -49,21 +48,21 @@
           </sizepolicy>
          </property>
          <property name="toolTip">
-          <string>A parameter set groups parameters that define a named study distinctly.</string>
+          <string>参数集将定义一个命名研究的参数分组。</string>
          </property>
          <property name="nodeTypes">
           <stringlist notr="true">
-           <string>vtkMRMLScriptedModuleNode</string>
+           <string>脚本模块节点 (vtkMRMLScriptedModuleNode)</string>
           </stringlist>
          </property>
          <property name="showHidden">
           <bool>true</bool>
          </property>
          <property name="hideChildNodeTypes">
-          <stringlist notr="true"/>
+          <stringlist notr="true" />
          </property>
          <property name="baseName">
-          <string notr="true">CrossSectionAnalysis</string>
+          <string notr="true">横截面分析</string>
          </property>
          <property name="noneEnabled">
           <bool>false</bool>
@@ -72,7 +71,7 @@
           <bool>true</bool>
          </property>
          <property name="interactionNodeSingletonTag">
-          <string notr="true"/>
+          <string notr="true" />
          </property>
          <property name="selectNodeUponCreation">
           <bool>true</bool>
@@ -94,7 +93,7 @@
           </size>
          </property>
          <property name="toolTip">
-          <string>Update the segment editor and the slice views with the input segmentation and volume if any.</string>
+          <string>如果有，使用输入分割和体积更新分割编辑器和切片视图。</string>
          </property>
          <property name="text">
           <string>↺</string>
@@ -114,34 +113,29 @@
       </sizepolicy>
      </property>
      <property name="locale">
-      <locale language="English" country="UnitedStates"/>
+      <locale language="English" country="UnitedStates" />
      </property>
      <property name="text">
-      <string>Parameters</string>
+      <string>参数</string>
      </property>
      <layout class="QFormLayout" name="parametersFormLayout">
       <item row="0" column="0">
        <widget class="QLabel" name="inputCenterLineLabel">
         <property name="text">
-         <string>Centerline source:</string>
+         <string>中心线来源：</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="qMRMLNodeComboBox" name="inputCenterlineSelector">
         <property name="toolTip">
-         <string>The centerline source may be:
-
-- a centerline curve created by 'Extract centerline' module,
-- a centerline model created by 'Extract centerline' module,
-- an arbitrary open markups curve,
-- an invisible centerline of a shape markups node used as a tube.</string>
+         <string>中心线来源可以是：</string>
         </property>
         <property name="nodeTypes">
          <stringlist notr="true">
-          <string>vtkMRMLModelNode</string>
-          <string>vtkMRMLMarkupsCurveNode</string>
-          <string>vtkMRMLMarkupsShapeNode</string>
+          <string>模型节点 (vtkMRMLModelNode)</string>
+          <string>标记曲线节点 (vtkMRMLMarkupsCurveNode)</string>
+          <string>标记形状节点 (vtkMRMLMarkupsShapeNode)</string>
          </stringlist>
         </property>
         <property name="showChildNodeTypes">
@@ -167,10 +161,10 @@
       <item row="1" column="0">
        <widget class="QLabel" name="segmentationLabel">
         <property name="locale">
-         <locale language="English" country="UnitedStates"/>
+         <locale language="English" country="UnitedStates" />
         </property>
         <property name="text">
-         <string>Input lumen surface:</string>
+         <string>输入腔体表面：</string>
         </property>
        </widget>
       </item>
@@ -179,16 +173,15 @@
         <item>
          <widget class="qMRMLNodeComboBox" name="segmentationSelector">
           <property name="toolTip">
-           <string>Input segmentation or model node, required for computing cross-sectional area.
-The input centerline is expected to be inside the lumen surface.</string>
+           <string>输入分割或模型节点，计算横截面积所必需。</string>
           </property>
           <property name="locale">
-           <locale language="English" country="UnitedStates"/>
+           <locale language="English" country="UnitedStates" />
           </property>
           <property name="nodeTypes">
            <stringlist notr="true">
-            <string>vtkMRMLSegmentationNode</string>
-            <string>vtkMRMLModelNode</string>
+            <string>分割节点 (vtkMRMLSegmentationNode)</string>
+            <string>模型节点 (vtkMRMLModelNode)</string>
            </stringlist>
           </property>
           <property name="noneEnabled">
@@ -211,7 +204,7 @@ The input centerline is expected to be inside the lumen surface.</string>
         <item>
          <widget class="qMRMLSegmentSelectorWidget" name="segmentSelector">
           <property name="toolTip">
-           <string>Select an input segment node</string>
+           <string>选择一个输入段节点</string>
           </property>
           <property name="segmentationNodeSelectorVisible">
            <bool>false</bool>
@@ -226,7 +219,7 @@ The input centerline is expected to be inside the lumen surface.</string>
       <item row="2" column="0">
        <widget class="QLabel" name="outputTableLabel">
         <property name="text">
-         <string>Output table:</string>
+         <string>输出表：</string>
         </property>
        </widget>
       </item>
@@ -235,11 +228,11 @@ The input centerline is expected to be inside the lumen surface.</string>
         <item>
          <widget class="qMRMLNodeComboBox" name="outputTableSelector">
           <property name="toolTip">
-           <string>Pick the output table to the algorithm.</string>
+           <string>选择算法的输出表。</string>
           </property>
           <property name="nodeTypes">
            <stringlist notr="true">
-            <string>vtkMRMLTableNode</string>
+            <string>表节点 (vtkMRMLTableNode)</string>
            </stringlist>
           </property>
           <property name="showChildNodeTypes">
@@ -265,10 +258,10 @@ The input centerline is expected to be inside the lumen surface.</string>
         <item>
          <widget class="QToolButton" name="toggleTableLayoutButton">
           <property name="toolTip">
-           <string>Toggle between the table layout and the previous one.</string>
+           <string>在表格布局和之前的布局之间切换。</string>
           </property>
           <property name="text">
-           <string>show</string>
+           <string>显示</string>
           </property>
          </widget>
         </item>
@@ -277,7 +270,7 @@ The input centerline is expected to be inside the lumen surface.</string>
       <item row="4" column="0">
        <widget class="QLabel" name="outputPlotSeriesLabel">
         <property name="text">
-         <string>Output plot series:</string>
+         <string>输出绘图系列：</string>
         </property>
        </widget>
       </item>
@@ -286,11 +279,11 @@ The input centerline is expected to be inside the lumen surface.</string>
         <item>
          <widget class="qMRMLNodeComboBox" name="outputPlotSeriesSelector">
           <property name="toolTip">
-           <string>Pick the output plot series to the algorithm.</string>
+           <string>选择算法的输出绘图系列。</string>
           </property>
           <property name="nodeTypes">
            <stringlist notr="true">
-            <string>vtkMRMLPlotSeriesNode</string>
+            <string>绘图系列节点 (vtkMRMLPlotSeriesNode)</string>
            </stringlist>
           </property>
           <property name="noneEnabled">
@@ -307,7 +300,7 @@ The input centerline is expected to be inside the lumen surface.</string>
         <item>
          <widget class="QComboBox" name="outputPlotSeriesTypeComboBox">
           <property name="toolTip">
-           <string>Select the plot's Y axis</string>
+           <string>选择绘图的 Y 轴</string>
           </property>
           <property name="currentIndex">
            <number>-1</number>
@@ -320,10 +313,10 @@ The input centerline is expected to be inside the lumen surface.</string>
         <item>
          <widget class="QToolButton" name="togglePlotLayoutButton">
           <property name="toolTip">
-           <string>Toggle between the plot layout and the previous one.</string>
+           <string>在绘图布局和之前的布局之间切换。</string>
           </property>
           <property name="text">
-           <string>show</string>
+           <string>显示</string>
           </property>
          </widget>
         </item>
@@ -338,7 +331,7 @@ The input centerline is expected to be inside the lumen surface.</string>
          </sizepolicy>
         </property>
         <property name="title">
-         <string>Tools / Options</string>
+         <string>工具 / 选项</string>
         </property>
         <property name="collapsed">
          <bool>true</bool>
@@ -365,7 +358,7 @@ The input centerline is expected to be inside the lumen surface.</string>
             </sizepolicy>
            </property>
            <property name="toolTip">
-            <string/>
+            <string />
            </property>
            <property name="tabPosition">
             <enum>QTabWidget::North</enum>
@@ -378,10 +371,10 @@ The input centerline is expected to be inside the lumen surface.</string>
            </property>
            <widget class="QWidget" name="surfaceInformationTab">
             <property name="toolTip">
-             <string>Manage connected regions of the lumen surface.</string>
+             <string>管理腔体表面的连接区域。</string>
             </property>
             <attribute name="title">
-             <string>Tab 1</string>
+             <string>标签 1</string>
             </attribute>
             <layout class="QHBoxLayout" name="horizontalLayout_6">
              <item>
@@ -389,16 +382,10 @@ The input centerline is expected to be inside the lumen surface.</string>
                <item row="0" column="0">
                 <widget class="QToolButton" name="surfaceInformationGetToolButton">
                  <property name="toolTip">
-                  <string>Get the number of distinct connected regions in the lumen surface.
-
-Ideally, there should be only one region. More regions may indicate the presence of holes in the lumen and/or distinct regions outside of the lumen. Holes in the lumen mean inaccurate cross-section area measurement.
-
-When unwanted regions have been fixed, typically using the 'Paint' effect of the 'Segment editor', this function may be executed again. A 'fast fix' function is also provided.
-
-After a complete repair of the lumen surface, the centerlines must be extracted again so that the 'Maximum inscribed sphere' radius arrays get updated.</string>
+                  <string>获取腔体表面中不同连接区域的数量。</string>
                  </property>
                  <property name="text">
-                  <string>Get:</string>
+                  <string>获取：</string>
                  </property>
                 </widget>
                </item>
@@ -413,7 +400,7 @@ After a complete repair of the lumen surface, the centerlines must be extracted 
                     </sizepolicy>
                    </property>
                    <property name="toolTip">
-                    <string>Cycle through the identified distinct regions.</string>
+                    <string>循环浏览识别出的不同区域。</string>
                    </property>
                    <property name="minimum">
                     <number>0</number>
@@ -435,20 +422,20 @@ After a complete repair of the lumen surface, the centerlines must be extracted 
                     </sizepolicy>
                    </property>
                    <property name="toolTip">
-                    <string>Indicates the size of the selected region. Low values suggest a parasite region.</string>
+                    <string>表示所选区域的大小。低值可能表示寄生区域。</string>
                    </property>
                    <property name="text">
-                    <string/>
+                    <string />
                    </property>
                   </widget>
                  </item>
                  <item>
                   <widget class="QToolButton" name="surfaceInformationGoToToolButton">
                    <property name="toolTip">
-                    <string>If toggled, the selected region is centred in all slice views, except in the ideal case where there is one single region.</string>
+                    <string>如果切换，所选区域将在所有切片视图中居中，理想情况下只有一个区域。</string>
                    </property>
                    <property name="text">
-                    <string>go to</string>
+                    <string>转到</string>
                    </property>
                    <property name="checkable">
                     <bool>true</bool>
@@ -458,14 +445,10 @@ After a complete repair of the lumen surface, the centerlines must be extracted 
                  <item>
                   <widget class="QToolButton" name="surfaceInformationPaintToolButton">
                    <property name="toolTip">
-                    <string>Activate the 'Paint' effect of the 'Segment editor'.
-
-This is available if the lumen surface is a segmentation.
-
-The 'Sphere' brush is enforced. Further customisation can be performed in the 'Segment editor'.</string>
+                    <string>激活“分割编辑器”的“绘画”效果。</string>
                    </property>
                    <property name="text">
-                    <string>paint</string>
+                    <string>绘画</string>
                    </property>
                    <property name="checkable">
                     <bool>true</bool>
@@ -475,10 +458,10 @@ The 'Sphere' brush is enforced. Further customisation can be performed in the 'S
                  <item>
                   <widget class="QToolButton" name="surfaceInformationFastFixToolButton">
                    <property name="toolTip">
-                    <string>Replace the segment by the largest region.</string>
+                    <string>用最大区域替换该段。</string>
                    </property>
                    <property name="text">
-                    <string>fast fix</string>
+                    <string>快速修复</string>
                    </property>
                   </widget>
                  </item>
@@ -490,10 +473,10 @@ The 'Sphere' brush is enforced. Further customisation can be performed in the 'S
            </widget>
            <widget class="QWidget" name="coordinatesTab">
             <property name="toolTip">
-             <string>Specify how to output point coordinates of the centerline.</string>
+             <string>指定如何输出中心线的点坐标。</string>
             </property>
             <attribute name="title">
-             <string>Tab 2</string>
+             <string>标签 2</string>
             </attribute>
             <layout class="QVBoxLayout" name="verticalLayout_4">
              <item>
@@ -501,10 +484,10 @@ The 'Sphere' brush is enforced. Further customisation can be performed in the 'S
                <item row="0" column="0">
                 <widget class="QLabel" name="segmentationLabel_2">
                  <property name="locale">
-                  <locale language="English" country="UnitedStates"/>
+                  <locale language="English" country="UnitedStates" />
                  </property>
                  <property name="text">
-                  <string>Coordinate system:</string>
+                  <string>坐标系统：</string>
                  </property>
                 </widget>
                </item>
@@ -513,10 +496,10 @@ The 'Sphere' brush is enforced. Further customisation can be performed in the 'S
                  <item>
                   <widget class="QRadioButton" name="radioRAS">
                    <property name="toolTip">
-                    <string>Right-Anterior-Superior coordinate system. Used in the Slicer scene.</string>
+                    <string>右前上坐标系统。用于 Slicer 场景。</string>
                    </property>
                    <property name="text">
-                    <string>RAS (Slicer convention)</string>
+                    <string>RAS (Slicer 约定)</string>
                    </property>
                    <property name="checked">
                     <bool>true</bool>
@@ -526,10 +509,10 @@ The 'Sphere' brush is enforced. Further customisation can be performed in the 'S
                  <item>
                   <widget class="QRadioButton" name="radioLPS">
                    <property name="toolTip">
-                    <string>Left-Posterior-Superior coordinate system. Used commonly in files.</string>
+                    <string>左后上坐标系统。常用于文件中。</string>
                    </property>
                    <property name="text">
-                    <string>LPS (DICOM convention)</string>
+                    <string>LPS (DICOM 约定)</string>
                    </property>
                    <property name="checked">
                     <bool>false</bool>
@@ -541,20 +524,20 @@ The 'Sphere' brush is enforced. Further customisation can be performed in the 'S
                <item row="1" column="0">
                 <widget class="QLabel" name="segmentationLabel_3">
                  <property name="locale">
-                  <locale language="English" country="UnitedStates"/>
+                  <locale language="English" country="UnitedStates" />
                  </property>
                  <property name="text">
-                  <string>Split coordinates:</string>
+                  <string>拆分坐标：</string>
                  </property>
                 </widget>
                </item>
                <item row="1" column="1">
                 <widget class="QCheckBox" name="distinctColumnsCheckBox">
                  <property name="toolTip">
-                  <string>Split coordinate system values into three separate table columns.</string>
+                  <string>将坐标系统值拆分为三个单独的表列。</string>
                  </property>
                  <property name="text">
-                  <string/>
+                  <string />
                  </property>
                 </widget>
                </item>
@@ -573,10 +556,10 @@ The 'Sphere' brush is enforced. Further customisation can be performed in the 'S
          <bool>false</bool>
         </property>
         <property name="toolTip">
-         <string>Run the algorithm.</string>
+         <string>运行算法。</string>
         </property>
         <property name="text">
-         <string>Apply</string>
+         <string>应用</string>
         </property>
        </widget>
       </item>
@@ -592,7 +575,7 @@ The 'Sphere' brush is enforced. Further customisation can be performed in the 'S
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Browse cross-sections</string>
+      <string>浏览横截面</string>
      </property>
      <property name="collapsed">
       <bool>false</bool>
@@ -606,20 +589,20 @@ The 'Sphere' brush is enforced. Further customisation can be performed in the 'S
            <enum>Qt::LeftToRight</enum>
           </property>
           <property name="locale">
-           <locale language="English" country="UnitedStates"/>
+           <locale language="English" country="UnitedStates" />
           </property>
           <property name="text">
-           <string>Point index:</string>
+           <string>点索引：</string>
           </property>
          </widget>
         </item>
         <item row="0" column="1">
          <widget class="ctkSliderWidget" name="moveToPointSliderWidget">
           <property name="toolTip">
-           <string>Point of the centerline where the selected slice view should be moved</string>
+           <string>中心线的点，所选切片视图应移动到该点</string>
           </property>
           <property name="locale">
-           <locale language="English" country="UnitedStates"/>
+           <locale language="English" country="UnitedStates" />
           </property>
           <property name="decimals">
            <number>0</number>
@@ -629,10 +612,10 @@ The 'Sphere' brush is enforced. Further customisation can be performed in the 'S
         <item row="1" column="0">
          <widget class="QLabel" name="moveSliceViewLabel">
           <property name="locale">
-           <locale language="English" country="UnitedStates"/>
+           <locale language="English" country="UnitedStates" />
           </property>
           <property name="text">
-           <string>Move slice view:</string>
+           <string>移动切片视图：</string>
           </property>
          </widget>
         </item>
@@ -641,14 +624,14 @@ The 'Sphere' brush is enforced. Further customisation can be performed in the 'S
           <item row="0" column="1">
            <widget class="qMRMLNodeComboBox" name="axialSliceViewSelector">
             <property name="toolTip">
-             <string>Move this slice view to a point along the centerline</string>
+             <string>将此切片视图移动到中心线上的一个点</string>
             </property>
             <property name="locale">
-             <locale language="English" country="UnitedStates"/>
+             <locale language="English" country="UnitedStates" />
             </property>
             <property name="nodeTypes">
              <stringlist notr="true">
-              <string>vtkMRMLSliceNode</string>
+              <string>切片节点 (vtkMRMLSliceNode)</string>
              </stringlist>
             </property>
             <property name="noneEnabled">
@@ -665,10 +648,10 @@ The 'Sphere' brush is enforced. Further customisation can be performed in the 'S
           <item row="0" column="3">
            <widget class="QToolButton" name="jumpCentredInSliceNodeCheckBox">
             <property name="toolTip">
-             <string>Center the selected point in the slice view</string>
+             <string>在切片视图中居中所选点</string>
             </property>
             <property name="text">
-             <string>centered</string>
+             <string>居中</string>
             </property>
             <property name="checkable">
              <bool>true</bool>
@@ -681,10 +664,10 @@ The 'Sphere' brush is enforced. Further customisation can be performed in the 'S
           <item row="0" column="4">
            <widget class="QToolButton" name="orthogonalReformatInSliceNodeCheckBox">
             <property name="toolTip">
-             <string>Orient the slice view orthogonal to the centerline</string>
+             <string>将切片视图定向为与中心线垂直</string>
             </property>
             <property name="text">
-             <string>orthogonal</string>
+             <string>垂直</string>
             </property>
             <property name="checkable">
              <bool>true</bool>
@@ -697,7 +680,7 @@ The 'Sphere' brush is enforced. Further customisation can be performed in the 'S
           <item row="0" column="0">
            <widget class="QLabel" name="axialLabel">
             <property name="text">
-             <string>Axial:</string>
+             <string>轴向：</string>
             </property>
            </widget>
           </item>
@@ -707,13 +690,13 @@ The 'Sphere' brush is enforced. Further customisation can be performed in the 'S
              <bool>false</bool>
             </property>
             <property name="toolTip">
-             <string>Rotation angle for longitudinal slice view</string>
+             <string>纵向切片视图的旋转角度</string>
             </property>
             <property name="statusTip">
-             <string/>
+             <string />
             </property>
             <property name="locale">
-             <locale language="English" country="UnitedStates"/>
+             <locale language="English" country="UnitedStates" />
             </property>
             <property name="decimals">
              <number>0</number>
@@ -725,21 +708,21 @@ The 'Sphere' brush is enforced. Further customisation can be performed in the 'S
              <double>180.000000000000000</double>
             </property>
             <property name="suffix">
-             <string> deg</string>
+             <string> 度</string>
             </property>
            </widget>
           </item>
           <item row="1" column="1">
            <widget class="qMRMLNodeComboBox" name="longitudinalSliceViewSelector">
             <property name="toolTip">
-             <string>Move this slice view to a point along the centerline</string>
+             <string>将此切片视图移动到中心线上的一个点</string>
             </property>
             <property name="locale">
-             <locale language="English" country="UnitedStates"/>
+             <locale language="English" country="UnitedStates" />
             </property>
             <property name="nodeTypes">
              <stringlist notr="true">
-              <string>vtkMRMLSliceNode</string>
+              <string>切片节点 (vtkMRMLSliceNode)</string>
              </stringlist>
             </property>
             <property name="noneEnabled">
@@ -756,20 +739,20 @@ The 'Sphere' brush is enforced. Further customisation can be performed in the 'S
           <item row="2" column="0">
            <widget class="QLabel" name="rotateLabel">
             <property name="toolTip">
-             <string/>
+             <string />
             </property>
             <property name="text">
-             <string>Rotate:</string>
+             <string>旋转：</string>
             </property>
            </widget>
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="longitudinalLabel">
             <property name="toolTip">
-             <string>Longitudinal</string>
+             <string>纵向</string>
             </property>
             <property name="text">
-             <string>Long.:</string>
+             <string>纵.：</string>
             </property>
            </widget>
           </item>
@@ -778,7 +761,7 @@ The 'Sphere' brush is enforced. Further customisation can be performed in the 'S
         <item row="2" column="1">
          <widget class="ctkCollapsibleGroupBox" name="spinFlipCollapsibleGroupBox">
           <property name="title">
-           <string>Spin / Flip</string>
+           <string>旋转 / 翻转</string>
           </property>
           <property name="collapsed">
            <bool>true</bool>
@@ -802,7 +785,7 @@ The 'Sphere' brush is enforced. Further customisation can be performed in the 'S
            <item row="0" column="0">
             <widget class="QLabel" name="axialSpinFlipLabel">
              <property name="text">
-              <string>Axial:</string>
+              <string>轴向：</string>
              </property>
             </widget>
            </item>
@@ -812,13 +795,13 @@ The 'Sphere' brush is enforced. Further customisation can be performed in the 'S
               <bool>false</bool>
              </property>
              <property name="toolTip">
-              <string>Rotate slice view around its Z-axis to restore anatomic orientation</string>
+              <string>绕其 Z 轴旋转切片视图以恢复解剖方向</string>
              </property>
              <property name="statusTip">
-              <string/>
+              <string />
              </property>
              <property name="locale">
-              <locale language="English" country="UnitedStates"/>
+              <locale language="English" country="UnitedStates" />
              </property>
              <property name="decimals">
               <number>0</number>
@@ -830,14 +813,14 @@ The 'Sphere' brush is enforced. Further customisation can be performed in the 'S
               <double>180.000000000000000</double>
              </property>
              <property name="suffix">
-              <string> deg</string>
+              <string> 度</string>
              </property>
             </widget>
            </item>
            <item row="1" column="0">
             <widget class="QLabel" name="longitudinalSpinFlipLabel">
              <property name="text">
-              <string>Long.:</string>
+              <string>纵.：</string>
              </property>
             </widget>
            </item>
@@ -847,13 +830,13 @@ The 'Sphere' brush is enforced. Further customisation can be performed in the 'S
               <bool>false</bool>
              </property>
              <property name="toolTip">
-              <string>Rotate slice view around its Z-axis to restore anatomic orientation</string>
+              <string>绕其 Z 轴旋转切片视图以恢复解剖方向</string>
              </property>
              <property name="statusTip">
-              <string/>
+              <string />
              </property>
              <property name="locale">
-              <locale language="English" country="UnitedStates"/>
+              <locale language="English" country="UnitedStates" />
              </property>
              <property name="decimals">
               <number>0</number>
@@ -865,14 +848,14 @@ The 'Sphere' brush is enforced. Further customisation can be performed in the 'S
               <double>180.000000000000000</double>
              </property>
              <property name="suffix">
-              <string> deg</string>
+              <string> 度</string>
              </property>
             </widget>
            </item>
            <item row="2" column="0">
             <widget class="QLabel" name="flipLabel">
              <property name="text">
-              <string>Flip:</string>
+              <string>翻转：</string>
              </property>
             </widget>
            </item>
@@ -881,24 +864,20 @@ The 'Sphere' brush is enforced. Further customisation can be performed in the 'S
              <item>
               <widget class="QCheckBox" name="axialSliceHorizontalFlipCheckBox">
                <property name="toolTip">
-                <string>Flip the slice view horizontally.
-
-Concerns orthogonal reformat in axial navigation.</string>
+                <string>水平翻转切片视图。</string>
                </property>
                <property name="text">
-                <string>Horizontal</string>
+                <string>水平</string>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QCheckBox" name="axialSliceVerticalFlipCheckBox">
                <property name="toolTip">
-                <string>Flip the slice view vertically.
-
-Concerns orthogonal reformat in axial navigation.</string>
+                <string>垂直翻转切片视图。</string>
                </property>
                <property name="text">
-                <string>Vertical</string>
+                <string>垂直</string>
                </property>
               </widget>
              </item>
@@ -910,10 +889,10 @@ Concerns orthogonal reformat in axial navigation.</string>
         <item row="3" column="0">
          <widget class="QLabel" name="distanceLabel">
           <property name="locale">
-           <locale language="English" country="UnitedStates"/>
+           <locale language="English" country="UnitedStates" />
           </property>
           <property name="text">
-           <string>Distance from origin:</string>
+           <string>距离原点：</string>
           </property>
          </widget>
         </item>
@@ -922,23 +901,23 @@ Concerns orthogonal reformat in axial navigation.</string>
           <item>
            <widget class="QLabel" name="distanceValueLabel">
             <property name="toolTip">
-             <string>Cumulative distance from start of centerline</string>
+             <string>从中心线起点的累计距离</string>
             </property>
             <property name="locale">
-             <locale language="English" country="UnitedStates"/>
+             <locale language="English" country="UnitedStates" />
             </property>
             <property name="text">
-             <string/>
+             <string />
             </property>
            </widget>
           </item>
           <item>
            <widget class="QToolButton" name="useCurrentPointAsOriginButton">
             <property name="toolTip">
-             <string>Set the current point as origin</string>
+             <string>将当前点设为原点</string>
             </property>
             <property name="text">
-             <string>set</string>
+             <string>设置</string>
             </property>
             <property name="checkable">
              <bool>false</bool>
@@ -948,10 +927,10 @@ Concerns orthogonal reformat in axial navigation.</string>
           <item>
            <widget class="QToolButton" name="goToOriginButton">
             <property name="toolTip">
-             <string>Go to origin point</string>
+             <string>转到原点</string>
             </property>
             <property name="text">
-             <string>go to</string>
+             <string>转到</string>
             </property>
             <property name="checkable">
              <bool>false</bool>
@@ -963,23 +942,23 @@ Concerns orthogonal reformat in axial navigation.</string>
         <item row="4" column="0">
          <widget class="QLabel" name="coordinatesLabel">
           <property name="locale">
-           <locale language="English" country="UnitedStates"/>
+           <locale language="English" country="UnitedStates" />
           </property>
           <property name="text">
-           <string>Coordinates:</string>
+           <string>坐标：</string>
           </property>
          </widget>
         </item>
         <item row="4" column="1">
          <widget class="QLabel" name="coordinatesValueLabel">
           <property name="toolTip">
-           <string>RAS coordinate of selected point</string>
+           <string>所选点的 RAS 坐标</string>
           </property>
           <property name="locale">
-           <locale language="English" country="UnitedStates"/>
+           <locale language="English" country="UnitedStates" />
           </property>
           <property name="text">
-           <string/>
+           <string />
           </property>
           <property name="scaledContents">
            <bool>false</bool>
@@ -992,10 +971,10 @@ Concerns orthogonal reformat in axial navigation.</string>
         <item row="5" column="0">
          <widget class="QLabel" name="diameterLabel">
           <property name="locale">
-           <locale language="English" country="UnitedStates"/>
+           <locale language="English" country="UnitedStates" />
           </property>
           <property name="text">
-           <string>Diameter (MIS):</string>
+           <string>直径 (MIS)：</string>
           </property>
          </widget>
         </item>
@@ -1004,43 +983,43 @@ Concerns orthogonal reformat in axial navigation.</string>
           <item>
            <widget class="QLabel" name="diameterValueLabel">
             <property name="toolTip">
-             <string>Maximum inscribed sphere (MIS) diameter at selected point.</string>
+             <string>所选点的最大内切球 (MIS) 直径。</string>
             </property>
             <property name="locale">
-             <locale language="English" country="UnitedStates"/>
+             <locale language="English" country="UnitedStates" />
             </property>
             <property name="text">
-             <string/>
+             <string />
             </property>
            </widget>
           </item>
           <item>
            <widget class="QToolButton" name="moveToMinimumMISDiameterButton">
             <property name="toolTip">
-             <string>Jump to the smallest MIS diameter point.</string>
+             <string>跳转到最小 MIS 直径点。</string>
             </property>
             <property name="text">
-             <string>min</string>
+             <string>最小</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QToolButton" name="moveToMaximumMISDiameterButton">
             <property name="toolTip">
-             <string>Jump to the largest MIS diameter point.</string>
+             <string>跳转到最大 MIS 直径点。</string>
             </property>
             <property name="text">
-             <string>max</string>
+             <string>最大</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QToolButton" name="showMISDiameterButton">
             <property name="toolTip">
-             <string>Show the maximum inscribed sphere diameter.</string>
+             <string>显示最大内切球直径。</string>
             </property>
             <property name="text">
-             <string>show</string>
+             <string>显示</string>
             </property>
             <property name="checkable">
              <bool>true</bool>
@@ -1052,7 +1031,7 @@ Concerns orthogonal reformat in axial navigation.</string>
         <item row="6" column="0">
          <widget class="QLabel" name="surfaceAreaLabel">
           <property name="text">
-           <string>Cross-section area:</string>
+           <string>横截面面积：</string>
           </property>
          </widget>
         </item>
@@ -1061,10 +1040,10 @@ Concerns orthogonal reformat in axial navigation.</string>
           <item>
            <widget class="QLabel" name="surfaceAreaValueLabel">
             <property name="toolTip">
-             <string>Area of the cross-section</string>
+             <string>横截面的面积</string>
             </property>
             <property name="text">
-             <string/>
+             <string />
             </property>
            </widget>
           </item>
@@ -1074,10 +1053,10 @@ Concerns orthogonal reformat in axial navigation.</string>
              <bool>false</bool>
             </property>
             <property name="toolTip">
-             <string>Jump to the smallest cross-section area point.</string>
+             <string>跳转到最小横截面面积点。</string>
             </property>
             <property name="text">
-             <string>min</string>
+             <string>最小</string>
             </property>
            </widget>
           </item>
@@ -1087,10 +1066,10 @@ Concerns orthogonal reformat in axial navigation.</string>
              <bool>false</bool>
             </property>
             <property name="toolTip">
-             <string>Jump to the largest cross-section area point.</string>
+             <string>跳转到最大横截面面积点。</string>
             </property>
             <property name="text">
-             <string>max</string>
+             <string>最大</string>
             </property>
            </widget>
           </item>
@@ -1100,10 +1079,10 @@ Concerns orthogonal reformat in axial navigation.</string>
              <bool>false</bool>
             </property>
             <property name="toolTip">
-             <string>Show cross-section at current point. Requires input lumen surface.</string>
+             <string>在当前点显示横截面。需要输入腔体表面。</string>
             </property>
             <property name="text">
-             <string>show</string>
+             <string>显示</string>
             </property>
             <property name="checkable">
              <bool>true</bool>
@@ -1115,41 +1094,37 @@ Concerns orthogonal reformat in axial navigation.</string>
         <item row="7" column="0">
          <widget class="QLabel" name="derivedDiameterLabel">
           <property name="text">
-           <string>Diameter (CE):</string>
+           <string>直径 (CE)：</string>
           </property>
          </widget>
         </item>
         <item row="7" column="1">
          <widget class="QLabel" name="derivedDiameterValueLabel">
           <property name="toolTip">
-           <string>Circular equivalent (CE) diameter: that of a circle having the surface area of the cross-section.
-
-The absolute and percent difference with the maximum inscribed sphere (MIS) diameter are also provided.
-
-Caution: values at bifurcations may not have clinical meaning.</string>
+           <string>圆形等效 (CE) 直径：具有横截面面积的圆的直径。</string>
           </property>
           <property name="text">
-           <string/>
+           <string />
           </property>
          </widget>
         </item>
         <item row="8" column="0">
          <widget class="QLabel" name="orientationLabel">
           <property name="toolTip">
-           <string/>
+           <string />
           </property>
           <property name="text">
-           <string>Orientation:</string>
+           <string>方向：</string>
           </property>
          </widget>
         </item>
         <item row="8" column="1">
          <widget class="QLabel" name="orientationValueLabel">
           <property name="toolTip">
-           <string>Angles are in Slicer's coordinate system</string>
+           <string>角度在 Slicer 的坐标系统中</string>
           </property>
           <property name="text">
-           <string/>
+           <string />
           </property>
          </widget>
         </item>
@@ -1158,23 +1133,23 @@ Caution: values at bifurcations may not have clinical meaning.</string>
       <item>
        <widget class="QGroupBox" name="wallGroupBox">
         <property name="title">
-         <string/>
+         <string />
         </property>
         <layout class="QGridLayout" name="gridLayout_2">
          <item row="0" column="1">
           <widget class="QLabel" name="diameterColumnLabel">
            <property name="toolTip">
-            <string>Circular equivalent diameter, derived from the surface area.</string>
+            <string>圆形等效直径，源自表面积。</string>
            </property>
            <property name="text">
-            <string>Diameter (CE)</string>
+            <string>直径 (CE)</string>
            </property>
           </widget>
          </item>
          <item row="3" column="1">
           <widget class="QLabel" name="lumenDiameterValueLabel">
            <property name="text">
-            <string/>
+            <string />
            </property>
           </widget>
          </item>
@@ -1187,7 +1162,7 @@ Caution: values at bifurcations may not have clinical meaning.</string>
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Lumen:</string>
+            <string>腔体：</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1203,7 +1178,7 @@ Caution: values at bifurcations may not have clinical meaning.</string>
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Stenosis:</string>
+            <string>狭窄：</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1213,21 +1188,21 @@ Caution: values at bifurcations may not have clinical meaning.</string>
          <item row="1" column="1">
           <widget class="QLabel" name="wallDiameterValueLabel">
            <property name="text">
-            <string/>
+            <string />
            </property>
           </widget>
          </item>
          <item row="3" column="2">
           <widget class="QLabel" name="lumenSurfaceAreaValueLabel">
            <property name="text">
-            <string/>
+            <string />
            </property>
           </widget>
          </item>
          <item row="0" column="2">
           <widget class="QLabel" name="surfaceAreaColumnLabel">
            <property name="text">
-            <string>Surface area</string>
+            <string>表面积</string>
            </property>
           </widget>
          </item>
@@ -1240,7 +1215,7 @@ Caution: values at bifurcations may not have clinical meaning.</string>
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Wall:</string>
+            <string>壁：</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1252,7 +1227,7 @@ Caution: values at bifurcations may not have clinical meaning.</string>
            <item>
             <widget class="QLabel" name="diameterStenosisValueLabel">
              <property name="text">
-              <string/>
+              <string />
              </property>
             </widget>
            </item>
@@ -1276,7 +1251,7 @@ Caution: values at bifurcations may not have clinical meaning.</string>
            <item>
             <widget class="QLabel" name="surfaceAreaStenosisValueLabel">
              <property name="text">
-              <string/>
+              <string />
              </property>
             </widget>
            </item>
@@ -1302,10 +1277,10 @@ Caution: values at bifurcations may not have clinical meaning.</string>
               </sizepolicy>
              </property>
              <property name="toolTip">
-              <string>Jump to the maximum stenosis point by surface area.</string>
+              <string>按表面积跳转到最大狭窄点。</string>
              </property>
              <property name="text">
-              <string>max</string>
+              <string>最大</string>
              </property>
             </widget>
            </item>
@@ -1316,7 +1291,7 @@ Caution: values at bifurcations may not have clinical meaning.</string>
            <item>
             <widget class="QLabel" name="wallSurfaceAreaValueLabel">
              <property name="text">
-              <string/>
+              <string />
              </property>
             </widget>
            </item>
@@ -1336,14 +1311,14 @@ Caution: values at bifurcations may not have clinical meaning.</string>
            <item>
             <widget class="QToolButton" name="minWallSurfaceAreaButton">
              <property name="text">
-              <string>min</string>
+              <string>最小</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QToolButton" name="maxWallSurfaceAreaButton">
              <property name="text">
-              <string>max</string>
+              <string>最大</string>
              </property>
             </widget>
            </item>
@@ -1406,7 +1381,7 @@ Caution: values at bifurcations may not have clinical meaning.</string>
    <header>qMRMLSegmentSelectorWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources />
  <connections>
   <connection>
    <sender>CrossSectionAnalysis</sender>

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>SegmentEditorWrapSolidify</class>
  <widget class="qMRMLWidget" name="SegmentEditorWrapSolidify">
@@ -26,7 +25,7 @@
    <item row="1" column="0">
     <widget class="QLabel" name="label_7">
      <property name="text">
-      <string>Region:</string>
+      <string>区域:</string>
      </property>
     </widget>
    </item>
@@ -57,7 +56,7 @@
    <item row="3" column="0">
     <widget class="QLabel" name="label_11">
      <property name="text">
-      <string>Create shell:</string>
+      <string>创建外壳:</string>
      </property>
     </widget>
    </item>
@@ -88,21 +87,21 @@
       <item row="2" column="1">
        <widget class="QLabel" name="label_16">
         <property name="text">
-         <string>Preserve surface cracks:</string>
+         <string>保留表面裂纹:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="QLabel" name="label_17">
         <property name="text">
-         <string>Offset direction:</string>
+         <string>偏移方向:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="3">
        <widget class="QRadioButton" name="shellOffsetOutsideRadioButton">
         <property name="text">
-         <string>outside</string>
+         <string>外部</string>
         </property>
        </widget>
       </item>
@@ -122,7 +121,7 @@
       <item row="0" column="0">
        <widget class="QCheckBox" name="createShellCheckBox">
         <property name="toolTip">
-         <string>Hollow out the solidified object and keep only a thin outer shell.</string>
+         <string>挖空固化对象并仅保留薄外壳。</string>
         </property>
         <property name="text">
          <string> </string>
@@ -132,31 +131,31 @@
       <item row="1" column="2">
        <widget class="QRadioButton" name="shellOffsetInsideRadioButton">
         <property name="text">
-         <string>inside</string>
+         <string>内部</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="QLabel" name="label_12">
         <property name="text">
-         <string>Thickness:</string>
+         <string>厚度:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="2">
        <widget class="QCheckBox" name="shellPreserveCracksCheckBox">
         <property name="toolTip">
-         <string>Leaves gaps in the created shell where the original segment had surface cracks. Increase remesh oversampling if thin cracks are not preserved.</string>
+         <string>在原始分段存在表面裂纹处，在创建的外壳中保留间隙。如果薄裂纹未保留，请增加重新网格化过采样。</string>
         </property>
         <property name="text">
-         <string/>
+         <string />
         </property>
        </widget>
       </item>
       <item row="0" column="2" colspan="3">
        <widget class="qMRMLSliderWidget" name="shellThicknessSlider">
         <property name="toolTip">
-         <string>Thickness of the output shell. If value is positive then extracted surface is used as outer surface, otherwise it will be used as inner surface.  If the value is smaller than the segmentation's resolution then the result may appear fragmented and so a model output or larger shell thickness must be chosen. If surface cracks do not need to be preserved then shell can be created using &quot;Hollow&quot; segment editor effect.</string>
+         <string>输出外壳的厚度。如果值为正，则提取的表面用作外表面，否则用作内表面。如果值小于分割的</string>
         </property>
         <property name="singleStep">
          <double>0.100000000000000</double>
@@ -168,7 +167,7 @@
          <double>20.000000000000000</double>
         </property>
         <property name="quantity">
-         <string>length</string>
+         <string>长度</string>
         </property>
        </widget>
       </item>
@@ -178,7 +177,7 @@
    <item row="5" column="0">
     <widget class="QLabel" name="label_13">
      <property name="text">
-      <string>Output:</string>
+      <string>输出:</string>
      </property>
     </widget>
    </item>
@@ -210,11 +209,11 @@
         </property>
         <property name="nodeTypes">
          <stringlist>
-          <string>vtkMRMLModelNode</string>
+          <string>模型节点 (vtkMRMLModelNode)</string>
          </stringlist>
         </property>
         <property name="baseName">
-         <string>Model</string>
+         <string>模型</string>
         </property>
         <property name="noneEnabled">
          <bool>true</bool>
@@ -223,28 +222,28 @@
          <bool>true</bool>
         </property>
         <property name="noneDisplay">
-         <string>Create new Model</string>
+         <string>创建新模型</string>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QRadioButton" name="outputNewSegmentRadioButton">
         <property name="text">
-         <string>New segment</string>
+         <string>新分段</string>
         </property>
        </widget>
       </item>
       <item row="0" column="0">
        <widget class="QRadioButton" name="outputSegmentRadioButton">
         <property name="text">
-         <string>Overwrite segment</string>
+         <string>覆盖分段</string>
         </property>
        </widget>
       </item>
       <item row="2" column="0">
        <widget class="QRadioButton" name="outputModelRadioButton">
         <property name="text">
-         <string>Model:</string>
+         <string>模型:</string>
         </property>
        </widget>
       </item>
@@ -254,7 +253,7 @@
    <item row="6" column="0" colspan="2">
     <widget class="ctkCollapsibleGroupBox" name="advancedSettingsFrame">
      <property name="title">
-      <string>Advanced</string>
+      <string>高级</string>
      </property>
      <property name="collapsed">
       <bool>true</bool>
@@ -266,7 +265,7 @@
       <item row="0" column="1" colspan="2">
        <widget class="qMRMLSliderWidget" name="smoothingFactorSlider">
         <property name="toolTip">
-         <string>Smoothing Factor used for operation, as the a surface representation of the segmentation will be used for this algorithm.</string>
+         <string>操作中使用的平滑因子，因为分割的表面表示将用于此算法。</string>
         </property>
         <property name="singleStep">
          <double>0.050000000000000</double>
@@ -285,7 +284,7 @@
       <item row="1" column="1" colspan="2">
        <widget class="ctkSliderWidget" name="remeshOversamplingSlider">
         <property name="toolTip">
-         <string>Thickness of the output shell. If the value is very small then it may significantly increase the computation time and may appear fractured if output is segmentation.</string>
+         <string>输出外壳的厚度。如果值非常小，则可能会显著增加计算时间，并且如果输出是分割，则可能会出现断裂。</string>
         </property>
         <property name="singleStep">
          <double>0.100000000000000</double>
@@ -310,7 +309,7 @@
       <item row="7" column="0">
        <widget class="QLabel" name="label_6">
         <property name="text">
-         <string>Save intermediate results:</string>
+         <string>保存中间结果:</string>
         </property>
        </widget>
       </item>
@@ -335,7 +334,7 @@
       <item row="7" column="1">
        <widget class="QCheckBox" name="saveIntermediateResultsCheckBox">
         <property name="toolTip">
-         <string>Save intermediate results as models. Useful for diagnostics of the solidification process.</string>
+         <string>将中间结果另存为模型。有助于固化过程的诊断。</string>
         </property>
         <property name="text">
          <string>  </string>
@@ -345,7 +344,7 @@
       <item row="2" column="1" colspan="2">
        <widget class="ctkSliderWidget" name="iterationsSlider">
         <property name="toolTip">
-         <string>Increase this value if output seems not completely converged to input. Increases computation time.</string>
+         <string>如果输出似乎未完全收敛到输入，则增加此值。增加计算时间。</string>
         </property>
         <property name="decimals">
          <number>0</number>
@@ -364,21 +363,21 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>Smoothing factor:</string>
+         <string>平滑因子:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_14">
         <property name="text">
-         <string>Oversampling:</string>
+         <string>过采样:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="label_5">
         <property name="text">
-         <string>Number of iterations:</string>
+         <string>迭代次数:</string>
         </property>
        </widget>
       </item>
@@ -388,7 +387,7 @@
    <item row="7" column="0" colspan="2">
     <widget class="QPushButton" name="applyButton">
      <property name="text">
-      <string>Apply</string>
+      <string>应用</string>
      </property>
     </widget>
    </item>
@@ -413,28 +412,28 @@
       <item row="2" column="0">
        <widget class="QRadioButton" name="regionSegmentRadioButton">
         <property name="text">
-         <string>Custom:</string>
+         <string>自定义:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QRadioButton" name="regionLargestCavityRadioButton">
         <property name="text">
-         <string>Largest cavity</string>
+         <string>最大空腔</string>
         </property>
        </widget>
       </item>
       <item row="0" column="0">
        <widget class="QRadioButton" name="regionOuterSurfaceRadioButton">
         <property name="text">
-         <string>Outer surface</string>
+         <string>外表面</string>
         </property>
        </widget>
       </item>
       <item row="0" column="3">
        <widget class="qMRMLSliderWidget" name="carveHolesInOuterSurfaceDiameterSlider">
         <property name="toolTip">
-         <string>Cavities with smaller diameter than this threshold will not be carved out.</string>
+         <string>直径小于此阈值的空腔将不会被挖空。</string>
         </property>
         <property name="singleStep">
          <double>0.100000000000000</double>
@@ -446,34 +445,34 @@
          <double>100.000000000000000</double>
         </property>
         <property name="quantity">
-         <string>length</string>
+         <string>长度</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="QCheckBox" name="carveHolesInOuterSurfaceCheckBox">
         <property name="toolTip">
-         <string>Propagate surface deeper into concave regions</string>
+         <string>将表面更深地传播到凹形区域</string>
         </property>
         <property name="text">
-         <string>Carve holes:</string>
+         <string>挖孔:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="QCheckBox" name="splitCavitiesCheckBox">
         <property name="toolTip">
-         <string>Propagate surface deeper into concave regions</string>
+         <string>将表面更深地传播到凹形区域</string>
         </property>
         <property name="text">
-         <string>Split cavities:</string>
+         <string>分割空腔:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="3">
        <widget class="qMRMLSliderWidget" name="splitCavitiesDiameterSlider">
         <property name="toolTip">
-         <string>Cavities with smaller diameter than this threshold will not be carved out.</string>
+         <string>直径小于此阈值的空腔将不会被挖空。</string>
         </property>
         <property name="singleStep">
          <double>0.100000000000000</double>
@@ -485,7 +484,7 @@
          <double>100.000000000000000</double>
         </property>
         <property name="quantity">
-         <string>length</string>
+         <string>长度</string>
         </property>
        </widget>
       </item>
@@ -541,7 +540,7 @@
    <header>qMRMLSegmentSelectorWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources />
  <connections>
   <connection>
    <sender>SegmentEditorWrapSolidify</sender>

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerStenosisMeasurement3DModuleWidget</class>
  <widget class="qSlicerWidget" name="qSlicerStenosisMeasurement3DModuleWidget">
@@ -11,7 +10,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>窗体</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -19,22 +18,22 @@
      <item row="0" column="0">
       <widget class="QLabel" name="inputShapeLabel">
        <property name="text">
-        <string>Wall surface:</string>
+        <string>管壁表面:</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
       <widget class="qMRMLNodeComboBox" name="inputShapeSelector">
        <property name="toolTip">
-        <string>Select an input shape (tube) node, drawn to represent the vascular wall.</string>
+        <string>选择一个输入的形状（管状）节点，用于表示血管壁。</string>
        </property>
        <property name="nodeTypes">
         <stringlist notr="true">
-         <string>vtkMRMLMarkupsShapeNode</string>
+         <string>标记形状节点 (vtkMRMLMarkupsShapeNode)</string>
         </stringlist>
        </property>
        <property name="baseName">
-        <string>Tube</string>
+        <string>管状模型</string>
        </property>
        <property name="noneEnabled">
         <bool>true</bool>
@@ -56,17 +55,17 @@
      <item row="1" column="1">
       <widget class="qMRMLNodeComboBox" name="inputFiducialSelector">
        <property name="toolTip">
-        <string>Select an input markups fiducial node.
+        <string>选择一个输入的标记点节点。
 
-The first and second points are the boundaries between which the analysis will be performed. They should not be at the very ends of the wall surface for accurate results.</string>
+第一和第二个点是执行分析的边界。为了获得准确的结果，它们不应位于管壁表面的最末端。</string>
        </property>
        <property name="nodeTypes">
         <stringlist notr="true">
-         <string>vtkMRMLMarkupsFiducialNode</string>
+         <string>标记点节点 (vtkMRMLMarkupsFiducialNode)</string>
         </stringlist>
        </property>
        <property name="baseName">
-        <string>P</string>
+        <string>点</string>
        </property>
        <property name="noneEnabled">
         <bool>true</bool>
@@ -91,23 +90,23 @@ The first and second points are the boundaries between which the analysis will b
      <item row="1" column="0">
       <widget class="QLabel" name="inputFiducialLabel">
        <property name="text">
-        <string>Boundary node:</string>
+        <string>边界节点:</string>
        </property>
       </widget>
      </item>
      <item row="3" column="0">
       <widget class="QLabel" name="inputSegmentLabel">
        <property name="text">
-        <string>Lumen surface:</string>
+        <string>管腔表面:</string>
        </property>
       </widget>
      </item>
      <item row="3" column="1">
       <widget class="qMRMLSegmentSelectorWidget" name="inputSegmentSelector">
        <property name="toolTip">
-        <string>Select a segment representing the vascular lumen.
+        <string>选择一个代表血管管腔的分割。
 
-This should ideally exceed the wall surface a little, and must not be bifurcated for accurate results.</string>
+理想情况下，它应略微超出管壁表面，并且为了获得准确结果，不得有分叉。</string>
        </property>
        <property name="noneEnabled">
         <bool>true</bool>
@@ -125,10 +124,10 @@ This should ideally exceed the wall surface a little, and must not be bifurcated
    <item>
     <widget class="ctkCollapsibleButton" name="resultCollapsibleButton">
      <property name="toolTip">
-      <string/>
+      <string />
      </property>
      <property name="text">
-      <string>Result</string>
+      <string>结果</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
@@ -136,70 +135,70 @@ This should ideally exceed the wall surface a little, and must not be bifurcated
         <item row="0" column="0">
          <widget class="QLabel" name="wallLabel">
           <property name="text">
-           <string>Wall:</string>
+           <string>管壁:</string>
           </property>
          </widget>
         </item>
         <item row="0" column="1">
          <widget class="QLabel" name="wallResultLabel">
           <property name="text">
-           <string/>
+           <string />
           </property>
          </widget>
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="lumenLabel">
           <property name="text">
-           <string>Lumen:</string>
+           <string>管腔:</string>
           </property>
          </widget>
         </item>
         <item row="1" column="1">
          <widget class="QLabel" name="lumenResultLabel">
           <property name="text">
-           <string/>
+           <string />
           </property>
          </widget>
         </item>
         <item row="2" column="0">
          <widget class="QLabel" name="lesionLabel">
           <property name="text">
-           <string>Lesion:</string>
+           <string>病变:</string>
           </property>
          </widget>
         </item>
         <item row="2" column="1">
          <widget class="QLabel" name="lesionResultLabel">
           <property name="text">
-           <string/>
+           <string />
           </property>
          </widget>
         </item>
         <item row="3" column="0">
          <widget class="QLabel" name="stenosisLabel">
           <property name="text">
-           <string>Stenosis:</string>
+           <string>狭窄程度:</string>
           </property>
          </widget>
         </item>
         <item row="3" column="1">
          <widget class="QLabel" name="stenosisResultLabel">
           <property name="text">
-           <string/>
+           <string />
           </property>
          </widget>
         </item>
         <item row="4" column="0">
          <widget class="QLabel" name="lengthLabel">
           <property name="text">
-           <string>Length:</string>
+           <string>长度:</string>
           </property>
          </widget>
         </item>
         <item row="4" column="1">
          <widget class="QLabel" name="lengthResultLabel">
           <property name="text">
-           <string/>
+           <string />
           </property>
          </widget>
         </item>
@@ -208,7 +207,7 @@ This should ideally exceed the wall surface a little, and must not be bifurcated
       <item>
        <widget class="ctkCollapsibleButton" name="modelCollapsibleButton">
         <property name="text">
-         <string>Model</string>
+         <string>模型</string>
         </property>
         <property name="flat">
          <bool>true</bool>
@@ -219,22 +218,22 @@ This should ideally exceed the wall surface a little, and must not be bifurcated
            <item row="1" column="0">
             <widget class="QLabel" name="wallModelLabel">
              <property name="text">
-              <string>Wall:</string>
+              <string>管壁:</string>
              </property>
             </widget>
            </item>
            <item row="1" column="1">
             <widget class="qMRMLNodeComboBox" name="wallModelSelector">
              <property name="toolTip">
-              <string>Show the wall between the boundary points as a model.</string>
+              <string>将边界点之间的管壁显示为模型。</string>
              </property>
              <property name="nodeTypes">
               <stringlist notr="true">
-               <string>vtkMRMLModelNode</string>
+               <string>模型节点 (vtkMRMLModelNode)</string>
               </stringlist>
              </property>
              <property name="baseName">
-              <string>Wall</string>
+              <string>管壁</string>
              </property>
              <property name="noneEnabled">
               <bool>true</bool>
@@ -250,22 +249,22 @@ This should ideally exceed the wall surface a little, and must not be bifurcated
            <item row="2" column="0">
             <widget class="QLabel" name="lumenModelLabel">
              <property name="text">
-              <string>Lumen:</string>
+              <string>管腔:</string>
              </property>
             </widget>
            </item>
            <item row="2" column="1">
             <widget class="qMRMLNodeComboBox" name="lumenModelSelector">
              <property name="toolTip">
-              <string>Show the lumen between the boundary points as a model.</string>
+              <string>将边界点之间的管腔显示为模型。</string>
              </property>
              <property name="nodeTypes">
               <stringlist notr="true">
-               <string>vtkMRMLModelNode</string>
+               <string>模型节点 (vtkMRMLModelNode)</string>
               </stringlist>
              </property>
              <property name="baseName">
-              <string>Lumen</string>
+              <string>管腔</string>
              </property>
              <property name="noneEnabled">
               <bool>true</bool>
@@ -302,13 +301,13 @@ This should ideally exceed the wall surface a little, and must not be bifurcated
    <item>
     <widget class="QPushButton" name="applyButton">
      <property name="enabled">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="toolTip">
-      <string>Run the algorithm.</string>
+      <string>运行算法。</string>
      </property>
      <property name="text">
-      <string>Apply</string>
+      <string>应用</string>
      </property>
     </widget>
    </item>
@@ -345,7 +344,7 @@ This should ideally exceed the wall surface a little, and must not be bifurcated
    <header>qMRMLSegmentSelectorWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources />
  <connections>
   <connection>
    <sender>qSlicerStenosisMeasurement3DModuleWidget</sender>

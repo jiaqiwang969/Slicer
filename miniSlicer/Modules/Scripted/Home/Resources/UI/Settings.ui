@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>设置</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="2" column="0">
@@ -27,7 +27,7 @@
    <item row="1" column="0">
     <widget class="QCheckBox" name="CustomStyleCheckBox">
      <property name="text">
-      <string>Use custom QSS</string>
+      <string>启用自定义样式表</string>
      </property>
      <property name="checked">
       <bool>true</bool>
@@ -37,7 +37,7 @@
    <item row="0" column="0">
     <widget class="QCheckBox" name="CustomUICheckBox">
      <property name="text">
-      <string>Hide Slicer Interface</string>
+      <string>隐藏 Slicer 界面</string>
      </property>
      <property name="checked">
       <bool>true</bool>

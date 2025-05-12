@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>GuidedVeinSegmentation</class>
  <widget class="qMRMLWidget" name="GuidedVeinSegmentation">
@@ -16,7 +15,7 @@
      <item row="0" column="0">
       <widget class="QLabel" name="parameterSetLabel">
        <property name="text">
-        <string>Parameter set:</string>
+        <string>参数集：</string>
        </property>
       </widget>
      </item>
@@ -40,21 +39,21 @@
           </sizepolicy>
          </property>
          <property name="toolTip">
-          <string>A parameter set groups parameters that define a named study distinctly.</string>
+          <string>参数集将定义一个命名研究的参数分组。</string>
          </property>
          <property name="nodeTypes">
           <stringlist notr="true">
-           <string>vtkMRMLScriptedModuleNode</string>
+           <string>脚本模块节点 (vtkMRMLScriptedModuleNode)</string>
           </stringlist>
          </property>
          <property name="showHidden">
           <bool>true</bool>
          </property>
          <property name="hideChildNodeTypes">
-          <stringlist notr="true"/>
+          <stringlist notr="true" />
          </property>
          <property name="baseName">
-          <string notr="true">GuidedVeinSegmentation</string>
+          <string notr="true">应用</string>
          </property>
          <property name="noneEnabled">
           <bool>false</bool>
@@ -63,7 +62,7 @@
           <bool>true</bool>
          </property>
          <property name="interactionNodeSingletonTag">
-          <string notr="true"/>
+          <string notr="true" />
          </property>
          <property name="selectNodeUponCreation">
           <bool>true</bool>
@@ -85,7 +84,7 @@
           </size>
          </property>
          <property name="toolTip">
-          <string>Update the segment editor and the slice views with the input segmentation and volume if any.</string>
+          <string>如果有输入分割和体积，更新分割编辑器和切片视图。</string>
          </property>
          <property name="text">
           <string>↺</string>
@@ -99,24 +98,24 @@
    <item>
     <widget class="ctkCollapsibleButton" name="inputCollapsibleButton">
      <property name="text">
-      <string>Inputs</string>
+      <string>输入</string>
      </property>
      <layout class="QFormLayout" name="formLayout_2">
       <item row="0" column="0">
        <widget class="QLabel" name="curveLabel">
         <property name="text">
-         <string>Open curve:</string>
+         <string>开放曲线：</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="qMRMLNodeComboBox" name="curveSelector">
         <property name="toolTip">
-         <string>Select an open markups curve.</string>
+         <string>选择一个开放的标记曲线。</string>
         </property>
         <property name="nodeTypes">
          <stringlist notr="true">
-          <string>vtkMRMLMarkupsCurveNode</string>
+          <string>标记曲线节点 (vtkMRMLMarkupsCurveNode)</string>
          </stringlist>
         </property>
         <property name="showChildNodeTypes">
@@ -142,18 +141,18 @@
       <item row="1" column="0">
        <widget class="QLabel" name="volumeLabel">
         <property name="text">
-         <string>Volume:</string>
+         <string>体积：</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="qMRMLNodeComboBox" name="volumeSelector">
         <property name="toolTip">
-         <string>Select a volume.</string>
+         <string>选择一个体积。</string>
         </property>
         <property name="nodeTypes">
          <stringlist notr="true">
-          <string>vtkMRMLScalarVolumeNode</string>
+          <string>标量体积节点 (vtkMRMLScalarVolumeNode)</string>
          </stringlist>
         </property>
         <property name="showChildNodeTypes">
@@ -179,18 +178,18 @@
       <item row="2" column="0">
        <widget class="QLabel" name="segmentationLabel">
         <property name="text">
-         <string>Segmentation:</string>
+         <string>分割：</string>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
        <widget class="qMRMLNodeComboBox" name="segmentationSelector">
         <property name="toolTip">
-         <string>Select a segmentation to contain the output.</string>
+         <string>选择一个分割以包含输出。</string>
         </property>
         <property name="nodeTypes">
          <stringlist notr="true">
-          <string>vtkMRMLSegmentationNode</string>
+          <string>分割节点 (vtkMRMLSegmentationNode)</string>
          </stringlist>
         </property>
         <property name="showChildNodeTypes">
@@ -232,7 +231,7 @@
    <item>
     <widget class="ctkCollapsibleButton" name="parameterCollapsibleButton">
      <property name="text">
-      <string>Parameters</string>
+      <string>参数</string>
      </property>
      <property name="collapsed">
       <bool>false</bool>
@@ -243,7 +242,7 @@
         <item row="0" column="0">
          <widget class="QLabel" name="shellMarginLabel">
           <property name="text">
-           <string>Shell margin:</string>
+           <string>外壳边缘：</string>
           </property>
          </widget>
         </item>
@@ -256,10 +255,10 @@
            </sizepolicy>
           </property>
           <property name="toolTip">
-           <string>Margin of a temporary shell around the input curve.</string>
+           <string>输入曲线周围临时外壳的边缘。</string>
           </property>
           <property name="suffix">
-           <string> mm</string>
+           <string> 毫米</string>
           </property>
           <property name="minimum">
            <double>0.100000000000000</double>
@@ -284,10 +283,10 @@
            </sizepolicy>
           </property>
           <property name="toolTip">
-           <string>For the 'Smoothing::RemoveExtrusion' effect of the 'Segment editor'.</string>
+           <string>用于“分割编辑器”的“Smoothing::RemoveExtrusion”效果。</string>
           </property>
           <property name="suffix">
-           <string> mm</string>
+           <string> 毫米</string>
           </property>
           <property name="minimum">
            <double>0.100000000000000</double>
@@ -306,8 +305,7 @@
         <item row="2" column="0">
          <widget class="QLabel" name="gaussianStandardDeviationLabel">
           <property name="text">
-           <string>Gaussian standard
-deviation:</string>
+           <string>高斯标准差：</string>
           </property>
          </widget>
         </item>
@@ -320,10 +318,10 @@ deviation:</string>
            </sizepolicy>
           </property>
           <property name="toolTip">
-           <string>For the 'Smoothing::Gaussian' effect of the 'Segment editor'.</string>
+           <string>用于“分割编辑器”的“Smoothing::Gaussian”效果。</string>
           </property>
           <property name="suffix">
-           <string> mm</string>
+           <string> 毫米</string>
           </property>
           <property name="minimum">
            <double>0.100000000000000</double>
@@ -342,7 +340,7 @@ deviation:</string>
         <item row="1" column="0">
          <widget class="QLabel" name="extrusionKernelSizeLabel">
           <property name="text">
-           <string>Extrusion kernel size:</string>
+           <string>挤出核大小：</string>
           </property>
          </widget>
         </item>
@@ -351,7 +349,7 @@ deviation:</string>
       <item>
        <widget class="ctkCollapsibleButton" name="optionCollapsibleButton">
         <property name="text">
-         <string>Options</string>
+         <string>选项</string>
         </property>
         <property name="collapsed">
          <bool>false</bool>
@@ -369,10 +367,10 @@ deviation:</string>
             </sizepolicy>
            </property>
            <property name="toolTip">
-            <string>Dimension of the primary seed around the input curve.</string>
+            <string>输入曲线周围主要种子的尺寸。</string>
            </property>
            <property name="suffix">
-            <string> mm</string>
+            <string> 毫米</string>
            </property>
            <property name="minimum">
             <double>0.500000000000000</double>
@@ -391,7 +389,7 @@ deviation:</string>
          <item row="0" column="0">
           <widget class="QLabel" name="seedRadiusLabel">
            <property name="text">
-            <string>Seed radius:</string>
+            <string>种子半径：</string>
            </property>
           </widget>
          </item>
@@ -404,10 +402,10 @@ deviation:</string>
             </sizepolicy>
            </property>
            <property name="toolTip">
-            <string>Thickness of a temporary shell around the input curve.</string>
+            <string>输入曲线周围临时外壳的厚度。</string>
            </property>
            <property name="suffix">
-            <string> mm</string>
+            <string> 毫米</string>
            </property>
            <property name="minimum">
             <double>0.100000000000000</double>
@@ -426,17 +424,17 @@ deviation:</string>
          <item row="1" column="0">
           <widget class="QLabel" name="shellThicknessLabel">
            <property name="text">
-            <string>Shell thickness:</string>
+            <string>外壳厚度：</string>
            </property>
           </widget>
          </item>
          <item row="2" column="1">
           <widget class="QCheckBox" name="subtractOtherSegmentsCheckBox">
            <property name="toolTip">
-            <string>Subtract overlapping parts of other segments from the resulting vein segment.</string>
+            <string>从结果静脉段中减去其他段的重叠部分。</string>
            </property>
            <property name="text">
-            <string/>
+            <string />
            </property>
            <property name="checked">
             <bool>true</bool>
@@ -446,7 +444,7 @@ deviation:</string>
          <item row="2" column="0">
           <widget class="QLabel" name="subtractOtherSegmentsLabel">
            <property name="text">
-            <string>Remove overlaps:</string>
+            <string>移除重叠：</string>
            </property>
           </widget>
          </item>
@@ -462,10 +460,10 @@ deviation:</string>
       <bool>true</bool>
      </property>
      <property name="toolTip">
-      <string>Run the algorithm.</string>
+      <string>运行算法。</string>
      </property>
      <property name="text">
-      <string>Apply</string>
+      <string>应用</string>
      </property>
     </widget>
    </item>
@@ -491,7 +489,7 @@ deviation:</string>
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources />
  <connections>
   <connection>
    <sender>GuidedVeinSegmentation</sender>

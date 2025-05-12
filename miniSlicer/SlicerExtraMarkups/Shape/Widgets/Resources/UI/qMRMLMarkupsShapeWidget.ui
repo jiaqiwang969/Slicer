@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLMarkupsShapeWidget</class>
  <widget class="QWidget" name="qMRMLMarkupsShapeWidget">
@@ -17,7 +16,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>表单</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">
@@ -35,7 +34,7 @@
    <item>
     <widget class="ctkCollapsibleButton" name="shapeCollapsibleButton">
      <property name="text">
-      <string>Shape Settings</string>
+      <string>形状设置</string>
      </property>
      <property name="checked">
       <bool>true</bool>
@@ -55,55 +54,49 @@
         <item row="1" column="0">
          <widget class="QLabel" name="shapeNameLabel">
           <property name="text">
-           <string>Shape:</string>
+           <string>形状：</string>
           </property>
          </widget>
         </item>
         <item row="2" column="0">
          <widget class="QLabel" name="radiusModeLabel">
           <property name="text">
-           <string>Radius
-mode:</string>
+           <string>半径模式：</string>
           </property>
          </widget>
         </item>
         <item row="2" column="1">
          <widget class="QComboBox" name="radiusModeComboBox">
           <property name="toolTip">
-           <string>Centered : first control point is the center, the line length is its radius.
-Circumferential : both control points lie on the circumference, the line length is the diameter.
-</string>
+           <string>中心：第一个控制点是中心，线长度是其半径。\n周长：两个控制点位于周长上，线长度是直径。</string>
           </property>
          </widget>
         </item>
         <item row="3" column="1">
          <widget class="QComboBox" name="drawModeComboBox">
           <property name="toolTip">
-           <string>Intersection : draw the intersection of a slice view with the shape in 3D space.
-
-Projection : draw the projection of control points on a slice view.</string>
+           <string>交集：绘制切片视图与 3D 空间中形状的交集。\n\n投影：绘制控制点在切片视图上的投影。</string>
           </property>
          </widget>
         </item>
         <item row="3" column="0">
          <widget class="QLabel" name="drawModeLabel">
           <property name="text">
-           <string>Slice view
-mode:</string>
+           <string>切片视图模式：</string>
           </property>
          </widget>
         </item>
         <item row="4" column="0">
          <widget class="QLabel" name="resolutionLabel">
           <property name="text">
-           <string>Resolution:</string>
+           <string>分辨率：</string>
           </property>
          </widget>
         </item>
         <item row="4" column="1">
          <widget class="ctkSliderWidget" name="resolutionSliderWidget">
           <property name="toolTip">
-           <string/>
+           <string />
           </property>
           <property name="decimals">
            <number>0</number>
@@ -128,12 +121,12 @@ mode:</string>
         <item row="1" column="1">
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
-           <widget class="QComboBox" name="shapeNameComboBox"/>
+           <widget class="QComboBox" name="shapeNameComboBox" />
           </item>
           <item>
            <widget class="QToolButton" name="tubeMenuOptionButton">
             <property name="toolTip">
-             <string>Menu</string>
+             <string>菜单</string>
             </property>
             <property name="text">
              <string>◈</string>
@@ -160,11 +153,11 @@ mode:</string>
          <item row="0" column="1">
           <widget class="qMRMLNodeComboBox" name="resliceInputSelector">
            <property name="toolTip">
-            <string>Use this node to show meaningful control points in a single slice.</string>
+            <string>使用此节点在单个切片中显示有意义的控制点。</string>
            </property>
            <property name="nodeTypes">
             <stringlist>
-             <string>vtkMRMLSliceNode</string>
+             <string>切片节点 (vtkMRMLSliceNode)</string>
             </stringlist>
            </property>
            <property name="noneEnabled">
@@ -184,10 +177,10 @@ mode:</string>
          <item row="0" column="0">
           <widget class="QPushButton" name="reslicePushButton">
            <property name="toolTip">
-            <string>Reslice the selected node to show meaningful control points in a single slice.</string>
+            <string>重新切片所选节点以在单个切片中显示有意义的控制点。</string>
            </property>
            <property name="text">
-            <string>Reslice:</string>
+            <string>重新切片：</string>
            </property>
           </widget>
          </item>
@@ -199,43 +192,42 @@ mode:</string>
         <item row="5" column="0">
          <widget class="QLabel" name="parametricCrossSectionRadiusLabel">
           <property name="text">
-           <string>Cross-section
-radius:</string>
+           <string>横截面半径：</string>
           </property>
          </widget>
         </item>
         <item row="3" column="0">
          <widget class="QLabel" name="parametricRadiusLabel">
           <property name="text">
-           <string>Radius:</string>
+           <string>半径：</string>
           </property>
          </widget>
         </item>
         <item row="4" column="0">
          <widget class="QLabel" name="parametricRingRadiusLabel">
           <property name="text">
-           <string>Ring radius:</string>
+           <string>环半径：</string>
           </property>
          </widget>
         </item>
         <item row="2" column="0">
          <widget class="QLabel" name="parametricN2Label">
           <property name="text">
-           <string>N2:</string>
+           <string>N2：</string>
           </property>
          </widget>
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="parametricN1Label">
           <property name="text">
-           <string>N1:</string>
+           <string>N1：</string>
           </property>
          </widget>
         </item>
         <item row="0" column="0">
          <widget class="QLabel" name="parametricNLabel">
           <property name="text">
-           <string>N:</string>
+           <string>N：</string>
           </property>
          </widget>
         </item>
@@ -351,10 +343,10 @@ radius:</string>
            </sizepolicy>
           </property>
           <property name="toolTip">
-           <string>Show the scalar distribution as a color gradient, if any.</string>
+           <string>如果有，显示标量分布为颜色渐变。</string>
           </property>
           <property name="text">
-           <string>Scalar visibility</string>
+           <string>标量可见性</string>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -370,12 +362,10 @@ radius:</string>
            </sizepolicy>
           </property>
           <property name="toolTip">
-           <string>Resize the parametric shape such that each control point is at equidistance from rhe centre.
-
-The distance of the active control point from the centre is used as reference. Click on a axis control point to make it the active control point.</string>
+           <string>调整参数形状，使每个控制点与中心等距。\n\n活动控制点与中心的距离作为参考。单击轴控制点使其成为活动控制点。</string>
           </property>
           <property name="text">
-           <string>Isotropic rescaling</string>
+           <string>各向同性缩放</string>
           </property>
          </widget>
         </item>
@@ -390,7 +380,7 @@ The distance of the active control point from the centre is used as reference. C
          </sizepolicy>
         </property>
         <property name="text">
-         <string>Advanced parameters</string>
+         <string>高级参数</string>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
@@ -398,14 +388,14 @@ The distance of the active control point from the centre is used as reference. C
            <item row="1" column="0">
             <widget class="QLabel" name="parametricsULabel">
              <property name="text">
-              <string>U:</string>
+              <string>U：</string>
              </property>
             </widget>
            </item>
            <item row="2" column="0">
             <widget class="QLabel" name="parametricsVLabel">
              <property name="text">
-              <string>V:</string>
+              <string>V：</string>
              </property>
             </widget>
            </item>
@@ -426,12 +416,12 @@ The distance of the active control point from the centre is used as reference. C
            <item row="0" column="0">
             <widget class="QLabel" name="parametricScalarModeLabel">
              <property name="text">
-              <string>Scalar mode:</string>
+              <string>标量模式：</string>
              </property>
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QComboBox" name="parametricScalarModeComboBox"/>
+            <widget class="QComboBox" name="parametricScalarModeComboBox" />
            </item>
           </layout>
          </item>
@@ -444,7 +434,7 @@ The distance of the active control point from the centre is used as reference. C
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Clockwise ordering</string>
+            <string>顺时针排序</string>
            </property>
            <property name="checkable">
             <bool>true</bool>
@@ -454,7 +444,7 @@ The distance of the active control point from the centre is used as reference. C
          <item>
           <widget class="ctkCollapsibleButton" name="parametricsMoreCollapsibleButton">
            <property name="text">
-            <string>More</string>
+            <string>更多</string>
            </property>
            <property name="flat">
             <bool>true</bool>
@@ -465,7 +455,7 @@ The distance of the active control point from the centre is used as reference. C
               <item row="0" column="0">
                <widget class="QLabel" name="parametricsWLabel">
                 <property name="text">
-                 <string>W:</string>
+                 <string>W：</string>
                 </property>
                </widget>
               </item>
@@ -489,7 +479,7 @@ The distance of the active control point from the centre is used as reference. C
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>TwistU</string>
+                 <string>扭曲U</string>
                 </property>
                 <property name="checkable">
                  <bool>true</bool>
@@ -505,7 +495,7 @@ The distance of the active control point from the centre is used as reference. C
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>JoinV</string>
+                 <string>连接V</string>
                 </property>
                 <property name="checkable">
                  <bool>true</bool>
@@ -521,7 +511,7 @@ The distance of the active control point from the centre is used as reference. C
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>JoinU</string>
+                 <string>连接U</string>
                 </property>
                 <property name="checkable">
                  <bool>true</bool>
@@ -537,7 +527,7 @@ The distance of the active control point from the centre is used as reference. C
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>TwistV</string>
+                 <string>扭曲V</string>
                 </property>
                 <property name="checkable">
                  <bool>true</bool>
@@ -553,7 +543,7 @@ The distance of the active control point from the centre is used as reference. C
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>JoinW</string>
+                 <string>连接W</string>
                 </property>
                 <property name="checkable">
                  <bool>true</bool>
@@ -569,7 +559,7 @@ The distance of the active control point from the centre is used as reference. C
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>TwistW</string>
+                 <string>扭曲W</string>
                 </property>
                 <property name="checkable">
                  <bool>true</bool>
@@ -618,7 +608,7 @@ The distance of the active control point from the centre is used as reference. C
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources />
  <connections>
   <connection>
    <sender>resliceMRMLWidget</sender>

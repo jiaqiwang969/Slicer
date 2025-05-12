@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerBranchClipperModuleWidget</class>
  <widget class="qSlicerWidget" name="qSlicerBranchClipperModuleWidget">
@@ -11,13 +10,13 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string/>
+   <string />
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="ctkCollapsibleButton" name="inputCollapsibleButton">
      <property name="text">
-      <string>Inputs</string>
+      <string>输入</string>
      </property>
      <property name="collapsed">
       <bool>false</bool>
@@ -26,18 +25,18 @@
       <item row="1" column="0">
        <widget class="QLabel" name="inputCenterLineLabel">
         <property name="text">
-         <string>Centerline model:</string>
+         <string>中心线模型:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="qMRMLNodeComboBox" name="inputCenterlineSelector">
         <property name="toolTip">
-         <string>Pick the input centerline model.</string>
+         <string>选择输入的中心线模型。</string>
         </property>
         <property name="nodeTypes">
          <stringlist notr="true">
-          <string>vtkMRMLModelNode</string>
+          <string>模型节点 (vtkMRMLModelNode)</string>
          </stringlist>
         </property>
         <property name="showChildNodeTypes">
@@ -63,10 +62,10 @@
       <item row="4" column="0">
        <widget class="QLabel" name="surfaceLabel">
         <property name="locale">
-         <locale language="English" country="UnitedStates"/>
+         <locale language="English" country="UnitedStates" />
         </property>
         <property name="text">
-         <string>Tube tree:</string>
+         <string>管树模型:</string>
         </property>
        </widget>
       </item>
@@ -75,15 +74,15 @@
         <item>
          <widget class="qMRMLNodeComboBox" name="surfaceSelector">
           <property name="toolTip">
-           <string>Pick an input segmentation or model node.</string>
+           <string>选择输入的分割节点或模型节点。</string>
           </property>
           <property name="locale">
-           <locale language="English" country="UnitedStates"/>
+           <locale language="English" country="UnitedStates" />
           </property>
           <property name="nodeTypes">
            <stringlist notr="true">
-            <string>vtkMRMLSegmentationNode</string>
-            <string>vtkMRMLModelNode</string>
+            <string>分割节点 (vtkMRMLSegmentationNode)</string>
+            <string>模型节点 (vtkMRMLModelNode)</string>
            </stringlist>
           </property>
           <property name="noneEnabled">
@@ -106,7 +105,7 @@
         <item>
          <widget class="qMRMLSegmentSelectorWidget" name="segmentSelector">
           <property name="toolTip">
-           <string>Select an input segment.</string>
+           <string>选择一个输入分割。</string>
           </property>
           <property name="noneEnabled">
            <bool>true</bool>
@@ -151,10 +150,10 @@
         </sizepolicy>
        </property>
        <property name="toolTip">
-        <string>Create a segment for each branch.</string>
+        <string>为每个分支创建分割。</string>
        </property>
        <property name="text">
-        <string>Create branch segments</string>
+        <string>创建分支分割</string>
        </property>
        <property name="checkable">
         <bool>true</bool>
@@ -170,10 +169,10 @@
         </sizepolicy>
        </property>
        <property name="toolTip">
-        <string>Create a model of each bifurcation splitting line.</string>
+        <string>为每个分叉的分裂线创建模型。</string>
        </property>
        <property name="text">
-        <string>Create bifurcation profiles</string>
+        <string>创建分叉轮廓</string>
        </property>
        <property name="checkable">
         <bool>true</bool>
@@ -188,10 +187,10 @@
       <bool>true</bool>
      </property>
      <property name="toolTip">
-      <string>Run the algorithm.</string>
+      <string>运行算法。</string>
      </property>
      <property name="text">
-      <string>Apply</string>
+      <string>应用</string>
      </property>
     </widget>
    </item>
@@ -228,7 +227,7 @@
    <header>qMRMLSegmentSelectorWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources />
  <connections>
   <connection>
    <sender>qSlicerBranchClipperModuleWidget</sender>
