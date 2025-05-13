@@ -149,6 +149,7 @@ set(Slicer_EXTENSION_SOURCE_DIRS
   #${miniSlicer_SOURCE_DIR}/Modules/CLI/MyCLIModule
   #${miniSlicer_SOURCE_DIR}/Modules/Loadable/MyLoadableModule
   ${miniSlicer_SOURCE_DIR}/Modules/Scripted/Home
+  ${miniSlicer_SOURCE_DIR}/Modules/Scripted/VTL3dBridge
   )
 
 # --- Add SlicerExtraMarkups Extension Source Directory ---

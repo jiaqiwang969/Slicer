@@ -5,7 +5,14 @@
 }: {
 
   # Default C++ development shell
-  default = pkgs.mkShell {
+  default = let
+    wxqtDrv = pkgs.callPackage ./modules/wxqt.nix {
+      qtbase = pkgs.qt5.qtbase;
+      qttools = pkgs.qt5.qttools;
+      libGL   = pkgs.libGL;
+      libGLU  = pkgs.libGLU;
+    };
+  in pkgs.mkShell {
     name = "vtl3d-env-custom-cgal";
 
     nativeBuildInputs = [
@@ -18,7 +25,7 @@
     ];
 
     buildInputs = [
-      pkgs.wxGTK32
+      wxqtDrv
       pkgs.eigen
       pkgs.boost
       myCgal            # Custom CGAL
@@ -46,8 +53,8 @@
     shellHook = ''
       # --- ccache 配置 (Simpler Method) ---
       export CCACHE_DIR="''${XDG_CACHE_HOME:-$HOME/.cache}/ccache-nix" # 指定缓存目录 (可选)
-      # Ensure ccache wrapper is found first in PATH
-      export PATH="${pkgs.ccache}/bin:$PATH"
+      # Ensure wxqt and ccache binaries appear early in PATH
+      export PATH="${wxqtDrv}/bin:${pkgs.ccache}/bin:$PATH"
       # Remove explicit CC/CXX overrides and CMake launcher settings
       # Let ccache wrapper handle the compiler interception via PATH
       # ------------------------------------
@@ -66,7 +73,7 @@
       export BOOST_LIBRARYDIR="${pkgs.boost}/lib"
 
       # Set WxWidgets config path
-      export wxWidgets_CONFIG_EXECUTABLE="${pkgs.wxGTK32}/bin/wx-config"
+      export wxWidgets_CONFIG_EXECUTABLE="${wxqtDrv}/bin/wx-config"
 
       # Set FFmpeg paths
       export FFMPEG_INCLUDE_DIR="${pkgs.ffmpeg_6.dev}/include"
@@ -74,7 +81,7 @@
       export PKG_CONFIG_PATH="${pkgs.ffmpeg_6.dev}/lib/pkgconfig:$PKG_CONFIG_PATH"
 
       # Set CMAKE_PREFIX_PATH including custom CGAL and Qt5
-      export CMAKE_PREFIX_PATH="${myCgal}/lib/cmake/CGAL:${pkgs.boost}:${pkgs.wxGTK32}:${pkgs.eigen}:${pkgs.gmp}:${pkgs.mpfr}:${pkgs.freeglut}:${pkgs.openal}:${pkgs.libGL}:${pkgs.libGLU}:${pkgs.glew}:${pkgs.ffmpeg_6}:${pkgs.qt5Full}"
+      export CMAKE_PREFIX_PATH="${myCgal}/lib/cmake/CGAL:${pkgs.boost}:${wxqtDrv}:${pkgs.eigen}:${pkgs.gmp}:${pkgs.mpfr}:${pkgs.freeglut}:${pkgs.openal}:${pkgs.libGL}:${pkgs.libGLU}:${pkgs.glew}:${pkgs.ffmpeg_6}:${pkgs.qt5Full}"
 
       # Set GMP and MPFR paths
       export GMP_INCLUDE_DIR="${pkgs.gmp.dev}/include"
@@ -192,7 +199,7 @@
       echo "=== Environment Summary (Custom CGAL ${myCgal.version}) ==="
       echo "GCC Version: $(${pkgs.gcc}/bin/gcc --version | head -n1)"
       echo "Boost Version: ${pkgs.boost.version}"
-      echo "WxWidgets Version: $(${pkgs.wxGTK32}/bin/wx-config --version)"
+      echo "WxWidgets (Qt) Version: $(${wxqtDrv}/bin/wx-config --version)"
       echo "CGAL Version: ${myCgal.version} (custom build)"
       echo "Eigen Version: ${pkgs.eigen.version}"
       echo "FFmpeg Version: ${pkgs.ffmpeg_6.version}"
