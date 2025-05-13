@@ -1,102 +1,84 @@
-# miniSlicer for VTL3D
+# miniSlicer for VTL3D Integration
 
-本仓库用于在 Nix 环境下构建、开发与本地化定制 3D Slicer（miniSlicer）。
+本仓库旨在将 VTL3d 有限元分析软件深度集成到定制的 3D Slicer 版本 (miniSlicer) 中。
+当前主要工作集中在**第二阶段：通过 C++ Loadable Module (`VTL3dViewer`) 嵌入 VTL3d 的原生 wxWidgets GUI**。
 
-## TODO
+## 当前状态 (Phase 2 - Part 1: Module Skeleton)
 
-1. 确认已编译或下载的 **VTL3d** 可执行文件能够在命令行生成所需 CSV 结果。
-2. 在 `miniSlicer/Modules/Scripted/` 新建目录 `VTL3dBridge/`。
-3. 创建 `VTL3dBridge/CMakeLists.txt`，并确保该模块被 Slicer 主项目识别与编译。
-4. 编写 `VTL3dBridge.py`，实现 `ScriptedLoadableModule`、`Widget`、`Logic` 三个类。
-5. 在 Widget 中添加：
-   - `ctkPathLineEdit`：选择 **VTL3d 可执行文件**路径（默认自动探测）。
-   - `ctkPathLineEdit`：选择 **CSV 输出目录**。
-   - `qt.QPushButton`：**Run VTL3d**。
-6. 在 Logic 中：
-   - 使用 `subprocess.run()` 调用 VTL3d，可选 `--csv <outDir>` 参数。
-   - 阻塞等待进程结束并验证 CSV 文件是否生成。
-7. 解析生成的 CSV：
-   - 创建 `vtkMRMLTableNode`，将数据列填充到表格。
-   - 使用 `slicer.modules.tables.logic().AddDefaultTableView()` 自动展示结果。
-8. 为可能的异常（可执行文件不存在、CSV 缺失、解析错误）提供消息框反馈。
-9. 利用 `QSettings` 记忆用户上次选择的路径。
-10. 编译／运行 miniSlicer，验证按钮流程在 Linux/macOS 环境成功执行并显示结果表。
-11. 更新本 `README.md`，记录使用步骤与演示 GIF，提交 PR。
+我们已经成功完成了以下工作：
 
-## 下一阶段：深度嵌入 VTL3d 原生 GUI
+1.  **VTL3d GUI 作为共享库 (`libVTL3dGui.so`)**:
+    *   VTL3d 的 wxWidgets GUI 部分已编译为一个独立的共享库。
+    *   该库通过 `VTL3dFactory.cpp` 暴露了工厂函数 `CreateVTL3dMainWindow(QWidget* parent)`，用于创建并返回 VTL3d 主窗口的 QWidget 封装。
+    *   相关的构建逻辑位于 `miniSlicer/Slicer/Modules/Loadable/VTL3dViewer/VTL3D_1.0/CMakeLists.txt`。
 
-以下工作可并行推进，完成后即可在 miniSlicer 内直接显示 VTL3d 的 wxWidgets 界面。
+2.  **Slicer Loadable Module `VTL3dViewer` 骨架**:
+    *   创建了名为 `VTL3dViewer` 的 C++ Loadable Module，其源码位于 `miniSlicer/Slicer/Modules/Loadable/VTL3dViewer/`。
+    *   `VTL3D_1.0` (包含 `libVTL3dGui.so` 的构建) 已作为 `VTL3dViewer` 模块的一个子项目，在其 `CMakeLists.txt` 中通过 `add_subdirectory(VTL3D_1.0)` 进行构建。
+    *   `VTL3dViewer` 模块的 CMake 配置 (`miniSlicer/Slicer/Modules/Loadable/VTL3dViewer/CMakeLists.txt`) 负责构建模块自身并链接到 `libVTL3dGui.so`。
+    *   模块的 C++ 骨架代码 (`qSlicerVTL3dViewerModule.h/cxx`, `qSlicerVTL3dViewerModuleWidget.h/cxx`, `vtkSlicerVTL3dViewerModuleLogic.h/cxx`) 已按照 Slicer 规范进行了修正，解决了编译和链接问题。
 
-1. **编译 wxQt**  
-   已在 `nix/shells.nix` 的 `wxqtDrv` 实现，`nix develop` 即可获取依赖环境。
+3.  **集成与构建流程**:
+    *   `VTL3dViewer` 模块已添加到 `miniSlicer/Slicer/Modules/Loadable/CMakeLists.txt` 中，作为 Slicer 内置模块进行统一构建。
+    *   顶层的 `miniSlicer/CMakeLists.txt` 不再直接管理 `VTL3D_1.0` 的构建，此任务已下放给 `VTL3dViewer` 模块。
+    *   整个 `miniSlicer` 项目（包含 `VTL3dViewer` 及其子项目 `VTL3D_1.0`）已能在 Nix 环境下成功编译。
 
-2. **将 VTL3d GUI 打包为共享库**  
-   - 在 `miniSlicer/VTL3D_1.0` CMake 中改用 `add_library(VTL3dGui SHARED …)`；  
-   - 去除主循环，仅保留 UI，暴露 `extern "C" QWidget* CreateVTL3dMainWindow(QWidget* parent=nullptr);`;  
-   - 对应 derivation 写在 `nix/modules/vtl3d-gui.nix`，产物为 `libVTL3dGui.so`。
+**简而言之，`VTL3dViewer` 模块的C++框架已经搭建完毕并可以成功编译，其依赖的 `libVTL3dGui.so` 也作为其一部分正确构建和链接。**
 
-3. **创建 C++ Loadable 模块 `VTL3dViewer`**  
-   使用 ExtensionWizard 模板，Widget 内通过 `QLibrary` 动态加载 `libVTL3dGui.so`，调用工厂函数并用 `QWidget::createWindowContainer()` 嵌入。
+## 下一步核心任务 (Phase 2 - Part 2: GUI Embedding)
 
-4. **集成至 flake**  
-   - 在 `flake.nix` 的 `packages` 输出 `wxqt`、`vtl3dGui`;  
-   - 在 `devShells.default.buildInputs` 加入 `vtl3dGui` 便于调试。
+接下来的工作重点是在 `qSlicerVTL3dViewerModuleWidget` 中实现 VTL3d GUI 的实际嵌入：
 
-5. **验证与调试**  
-   - `patchelf --print-rpath libVTL3dGui.so` 确认 RPATH 含 wxQt 路径；  
-   - 若界面空白，检查 `wx-config` 是否指向 Qt 版本；  
-   - macOS 需为嵌入窗口调用 `setAttribute(Qt::WA_NativeWindow)` 以避免渲染黑屏。
+1.  **动态加载 `libVTL3dGui.so`**:
+    *   在 `qSlicerVTL3dViewerModuleWidget::setup()` 方法 (位于 `miniSlicer/Slicer/Modules/Loadable/VTL3dViewer/qSlicerVTL3dViewerModuleWidget.cxx`) 中。
+    *   确定 `libVTL3dGui.so` 在构建树和安装树中的相对或绝对路径。
+        *   构建树中，它可能位于 `.../build-mini/Slicer-build/Modules/Loadable/VTL3dViewer/VTL3D_1.0/bin` (Windows DLL) 或 `.../build-mini/Slicer-build/Modules/Loadable/VTL3dViewer/VTL3D_1.0/lib` (Linux .so)。更可靠地，它可以是相对于 `libqSlicerVTL3dViewerModule.so` 的路径。
+    *   使用 `QLibrary` 类加载该共享库。
 
-> 完成以上步骤后，即可在 miniSlicer 中打开 "VTL3dViewer" 模块并直接操作 VTL3d 原生界面，后续可继续桥接 MRML 事件与数据。
+2.  **解析工厂函数符号**:
+    *   从加载的 `QLibrary` 实例中解析出 `CreateVTL3dMainWindow` 函数的地址。
+    *   定义正确的函数指针类型 `typedef QWidget* (*CreateVTL3dMainWindowFunc)(QWidget* parent);`。
 
-为了确认 **wxQt+OpenGL** 组件与 **VTL3d GUI** 在本机环境中能够以共享库形式正确编译、链接并被 Slicer SuperBuild 识别，我们进行了一次最小复现的"干净构建"实验。它相当于
+3.  **调用工厂函数并嵌入 GUI**:
+    *   调用解析得到的 `CreateVTL3dMainWindowFunc` 函数，将 `qSlicerVTL3dViewerModuleWidget` 实例 (`this`) 或其一个子 `QWidget` 作为父窗口指针传递给它。
+    *   获取返回的 `QWidget*` (它包装了 VTL3d 的 wxWidgets 主窗口)。
+    *   将这个返回的 `QWidget*` 添加到 `qSlicerVTL3dViewerModuleWidget` 的布局中，替换掉当前的占位符 `QLabel`。
 
-1. 先单独把 `VTL3D_1.0` 目录当成普通 CMake 项目编译，确保 `libVTL3dGui.so` 本身没有缺头文件或库缺失；
-2. 再把 miniSlicer 整个 SuperBuild 跑到只编译 `VTL3dGui` 目标，验证它与 Slicer 其他第三方依赖（VTK、Qt、ITK 等）共存，且能被安装到输出树；
+4.  **库生命周期管理**:
+    *   考虑将 `QLibrary` 对象作为 `qSlicerVTL3dViewerModuleWidgetPrivate` 的成员变量，以确保 `libVTL3dGui.so` 在 `VTL3dViewer` 模块界面存在期间保持加载状态，在 Widget 销毁时自动卸载。
 
-这样一来就证明：
-• wxWidgets 的 Qt 后端和 OpenGL 组件参数设置正确；
-• 我们移除执行入口 (`Application.cpp`) 后，`libVTL3dGui.so` 作为纯 UI 库可被其他模块安全加载；
-• 后续只需写一个 Loadable 模块动态加载此库，即可在 Slicer 内嵌 VTL3d 原生界面。
+5.  **错误处理与用户反馈**:
+    *   为库加载失败、符号解析失败或工厂函数返回空等情况提供明确的错误提示 (例如，使用 `QMessageBox`)。
 
-### 本地编译验证（已通过）
+## 编译与测试步骤 (当前阶段)
+
+在进行下一步开发前，确保当前模块骨架能稳定编译：
+
+1.  **确保顶层 `miniSlicer/CMakeLists.txt` 中已移除对旧 `VTL3D_1.0` 路径的 `add_subdirectory` 调用。**
+2.  **清理构建目录 (强烈建议)**:
+    ```bash
+    # From your workspace root (/home/jqwang/Work/02-Slicer)
+    rm -rf ./build/build-mini
+    ```
+3.  **重新配置 CMake (使用你的脚本)**:
+    ```bash
+    # From your workspace root
+    ./configure_slicer_mini ./miniSlicer ./build/build-mini ./build/install-mini
+    ```
+4.  **构建项目 (或仅构建目标模块)**:
+    ```bash
+    # From your workspace root
+    cd ./build/build-mini
+    make -j$(nproc)
+    # 或者只构建 VTL3dViewer 模块及其依赖 (VTL3dGui 会自动作为依赖被构建):
+    # make qSlicerVTL3dViewerModule -j$(nproc)
+    # (如果使用 cmake --build, 目标名可能不同，如 cmake --build . --target qSlicerVTL3dViewerModule)
+    ```
+
+完成 GUI 嵌入后，后续可进一步开发 Slicer 场景与嵌入的 VTL3d GUI 之间的数据交互功能。
 
 ```bash
-# 1) 进入 nix 开发环境（aarch64）
-$ nix develop
-
-# 2) 独立构建 VTL3dGui
-$ rm -rf build-vtl && mkdir build-vtl
-$ cmake -S miniSlicer/VTL3D_1.0 -B build-vtl -DCMAKE_BUILD_TYPE=Release
-$ cmake --build build-vtl -j$(nproc)
-# → 生成 build-vtl/libVTL3dGui.so 且包含 CreateVTL3dMainWindow 符号
-
-# 3) 在 miniSlicer SuperBuild 内编译
-$ rm -rf build-mini && mkdir build-mini
-$ cmake -S miniSlicer -B build-mini -DCMAKE_BUILD_TYPE=Release
-$ cmake --build build-mini --target VTL3dGui -j$(nproc)
-$ find build-mini -name libVTL3dGui.so | head
-build-mini/VTL3D_1.0/libVTL3dGui.so  # ✅ 库成功集成
+nix develop
+configure_slicer_mini ./miniSlicer ./build/build-mini ./build/install-mini
+cd ./build/build-mini && make -j16
 ```
-
-上述流程在 aarch64-linux 平台已验证通过，确保 wxQt OpenGL 组件齐全并无符号冲突，可作为后续 Loadable 模块开发的基础。
-
-## TODO
-
-<!--
-- [ ] 在 CI 中启用 `impure-derivations`：于 `nix build` / `nix develop` / Garnix 配置里追加 `--extra-experimental-features impure-derivations`，以允许外网下载与 `ExternalProject` 步骤。
-- [ ] 完成 UI 与帮助文档的全面中文化校对；解决残留占位符与专业术语一致性。
-- [ ] 集成 VocalTractLab 3D 的有限元（FEM）求解模块，支持声学场与组织动力学仿真。
-- [ ] 构建并验证复杂声道（多分支管道）模型的加载、网格划分与后处理流程。
-- [ ] 在 x86_64 Linux 环境下完成基础与扩展示例 CI；后续补充 Windows、macOS (x86_64 / arm64) 的交叉构建或 GitHub Actions matrix 测试。
-- [ ] 引入 CUDA / ROCm 条件编译选项，评估 GPU 加速 FEM 计算可行性。
-- [ ] 优化 Nix derivation 产物体积，使用 `stripDebug` 与 `patchelf --shrink-rpath` 等策略，降低二进制发布大小。
-- [ ] 发布 Cachix 二进制缓存，减少 CI 构建时间。
-- [ ] 撰写用户手册与开发者文档，整理模块接口与插件示例。
--->
-
-<!--
-## TODO
-
-- [ ] …（添加更多待办） 
---> 

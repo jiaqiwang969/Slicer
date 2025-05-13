@@ -1,4 +1,3 @@
-
 include(${Slicer_CMAKE_DIR}/SlicerMacroBuildLoadableModule.cmake)
 
 # "A depends on B" comment in the module list means that
@@ -29,6 +28,7 @@ set(qtmodules
   ViewControllers
   Volumes
   VolumeRendering # Volume Rendering depends of Volumes
+  VTL3dViewer # VTL3dViewer depends on Slicer(自定义)
   )
 if(Slicer_BUILD_CLI_SUPPORT)
   list(APPEND qtmodules
@@ -44,3 +44,4 @@ foreach(module ${qtmodules})
     add_subdirectory(${module})
   endif()
 endforeach()
+

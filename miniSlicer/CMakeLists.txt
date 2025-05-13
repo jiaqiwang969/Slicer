@@ -153,7 +153,7 @@ set(Slicer_EXTENSION_SOURCE_DIRS
   )
 
 # --- Build VTL3d GUI library -------------------------------------------------
-add_subdirectory(${miniSlicer_SOURCE_DIR}/VTL3D_1.0)
+#add_subdirectory(${miniSlicer_SOURCE_DIR}/VTL3D_1.0)
 # ---------------------------------------------------------------------------
 
 # --- Add SlicerExtraMarkups Extension Source Directory ---
