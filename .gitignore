@@ -56,3 +56,7 @@ script/temp
 *.xz
 *.tar.gz
 
+# 本地临时构建目录
+build-vtl
+build-mini
+

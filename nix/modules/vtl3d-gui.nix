@@ -11,17 +11,14 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ cmake ninja pkg-config ];
   buildInputs      = [ wxqt eigen boost cgal ];
 
+  dontWrapQtApps = true;
+
   cmakeFlags = [
     "-DwxWidgets_CONFIG_EXECUTABLE=${wxqt}/bin/wx-config"
     "-DBUILD_SHARED_LIBS=ON"
   ];
 
-  # 安装库与头文件
-  installPhase = ''
-    mkdir -p $out/lib $out/include
-    cp libVTL3dGui.so $out/lib/ || true
-    cp -r Backend *.h $out/include/ || true
-  '';
+  # 采用 default installPhase (make install)
 
   meta = with lib; {
     description = "VTL3d GUI library built with wxQt backend";

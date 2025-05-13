@@ -26,6 +26,9 @@ cmake_minimum_required (VERSION 3.8)
 
 project ("VocalTractLabGui")
 
+# 生成共享库而非可执行
+set(BUILD_SHARED_LIBS ON)
+
 # Request the required wxWidgets libs
 if (MSVC)
 set(wxWidgets_ROOT_DIR C:/wxwidgets-3.1.5)
@@ -63,21 +66,23 @@ file(GLOB all_SRCS
   "*.h"
   "Backend/*.cpp"
   "*.cpp"
+  "VTL3dFactory.cpp"
 )
 
-add_executable(
-  VocalTractLab WIN32 
-   ${all_SRCS}
-)
+# 从源列表中移除独立可执行入口文件
+list(REMOVE_ITEM all_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/Application.cpp)
+
+# 构建共享库
+add_library(VTL3dGui SHARED ${all_SRCS})
 
 if (MSVC)
-target_link_libraries(VocalTractLab 
+target_link_libraries(VTL3dGui 
   ${wxWidgets_LIBRARIES} 
   CGAL::CGAL
   Eigen3::Eigen
 )
 elseif(UNIX)
-target_link_libraries(VocalTractLab 
+target_link_libraries(VTL3dGui 
   ${wxWidgets_LIBRARIES} 
   CGAL::CGAL
   Eigen3::Eigen
@@ -86,3 +91,10 @@ target_link_libraries(VocalTractLab
   ${OPENAL_LIBRARY} 
 )
 endif()
+
+# 安装头文件与库
+install(TARGETS VTL3dGui
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib
+  RUNTIME DESTINATION bin)
+install(FILES MainWindow.h DESTINATION include/VTL3dGui)

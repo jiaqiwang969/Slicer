@@ -152,6 +152,10 @@ set(Slicer_EXTENSION_SOURCE_DIRS
   ${miniSlicer_SOURCE_DIR}/Modules/Scripted/VTL3dBridge
   )
 
+# --- Build VTL3d GUI library -------------------------------------------------
+add_subdirectory(${miniSlicer_SOURCE_DIR}/VTL3D_1.0)
+# ---------------------------------------------------------------------------
+
 # --- Add SlicerExtraMarkups Extension Source Directory ---
 set(EXTRAMARKUPS_EXTENSION_SRC_REL "SlicerExtraMarkups")
 get_filename_component(EXTRAMARKUPS_SOURCE_DIR ${EXTRAMARKUPS_EXTENSION_SRC_REL} ABSOLUTE BASE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
