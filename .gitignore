@@ -46,3 +46,13 @@ script/temp
 
 # Do not ignore .env files
 !.env
+# 排除压缩文件夹
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+*.bz2
+*.xz
+*.tar.gz
+
