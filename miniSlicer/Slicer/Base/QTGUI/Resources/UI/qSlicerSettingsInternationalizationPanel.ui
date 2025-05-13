@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerSettingsInternationalizationPanel</class>
  <widget class="ctkSettingsPanel" name="qSlicerSettingsInternationalizationPanel">
@@ -10,20 +11,20 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>国际化</string>
+   <string>Internationalization</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
    <item row="0" column="0">
     <widget class="QLabel" name="InternationalizationEnabledLabel">
      <property name="text">
-      <string>启用国际化：</string>
+      <string>Enable Internationalization:</string>
      </property>
     </widget>
    </item>
    <item row="0" column="1">
     <widget class="QCheckBox" name="InternationalizationEnabledCheckBox">
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
@@ -37,6 +38,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

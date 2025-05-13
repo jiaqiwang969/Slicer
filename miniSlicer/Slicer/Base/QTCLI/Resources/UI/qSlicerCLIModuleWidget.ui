@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerCLIModuleWidget</class>
  <widget class="qSlicerWidget" name="qSlicerCLIModuleWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>模块</string>
+   <string>Module</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <property name="margin">
@@ -43,7 +44,7 @@
        <item>
         <widget class="ctkCollapsibleButton" name="ModuleCollapsibleButton" native="true">
          <property name="text" stdset="0">
-          <string>模块标题</string>
+          <string>Module Title</string>
          </property>
          <layout class="QVBoxLayout" name="VerticalLayout">
           <property name="margin">
@@ -55,7 +56,7 @@
              <widget class="qMRMLNodeComboBox" name="MRMLCommandLineModuleNodeSelector" native="true">
               <property name="nodeTypes" stdset="0">
                <stringlist notr="true">
-                <string>命令行模块节点 (vtkMRMLCommandLineModuleNode)</string>
+                <string>vtkMRMLCommandLineModuleNode</string>
                </stringlist>
               </property>
               <property name="showHidden" stdset="0">
@@ -66,7 +67,7 @@
             <item row="0" column="0">
              <widget class="QLabel" name="ParameterSetLabel">
               <property name="text">
-               <string>参数集：</string>
+               <string>Parameter set:</string>
               </property>
              </widget>
             </item>
@@ -90,7 +91,7 @@
     </widget>
    </item>
    <item>
-    <widget class="qSlicerCLIProgressBar" name="CLIProgressBar" native="true" />
+    <widget class="qSlicerCLIProgressBar" name="CLIProgressBar" native="true"/>
    </item>
    <item>
     <layout class="QHBoxLayout" name="ButtonLayout">
@@ -100,10 +101,10 @@
         <bool>false</bool>
        </property>
        <property name="toolTip">
-        <string>重置参数为默认值。</string>
+        <string>Reset parameters to default.</string>
        </property>
        <property name="text">
-        <string>恢复默认值</string>
+        <string>Restore Defaults</string>
        </property>
       </widget>
      </item>
@@ -113,7 +114,7 @@
         <bool>false</bool>
        </property>
        <property name="text">
-        <string>自动运行</string>
+        <string>AutoRun</string>
        </property>
        <property name="checkable">
         <bool>true</bool>
@@ -139,10 +140,10 @@
         <bool>false</bool>
        </property>
        <property name="toolTip">
-        <string>取消模块执行</string>
+        <string>Cancel the execution of the module</string>
        </property>
        <property name="text">
-        <string>取消</string>
+        <string>Cancel</string>
        </property>
       </widget>
      </item>
@@ -152,10 +153,10 @@
         <bool>false</bool>
        </property>
        <property name="toolTip">
-        <string>执行模块</string>
+        <string>Execute the module</string>
        </property>
        <property name="text">
-        <string>应用</string>
+        <string>Apply</string>
        </property>
       </widget>
      </item>
@@ -193,5 +194,5 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
 </ui>

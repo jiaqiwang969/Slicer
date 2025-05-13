@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerSegmentationsModule</class>
  <widget class="qSlicerWidget" name="qSlicerSegmentationsModule">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>分割</string>
+   <string>Segmentations</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -71,11 +72,11 @@
         </property>
         <property name="nodeTypes">
          <stringlist notr="true">
-          <string>分割节点 (vtkMRMLSegmentationNode)</string>
+          <string>vtkMRMLSegmentationNode</string>
          </stringlist>
         </property>
         <property name="hideChildNodeTypes">
-         <stringlist notr="true" />
+         <stringlist notr="true"/>
         </property>
         <property name="idColumnVisible">
          <bool>false</bool>
@@ -88,14 +89,14 @@
         </property>
         <property name="pluginAllowList">
          <stringlist notr="true">
-          <string>分割</string>
-          <string>文件夹</string>
-          <string>可见性</string>
+          <string>Segmentations</string>
+          <string>Folder</string>
+          <string>Visibility</string>
          </stringlist>
         </property>
         <property name="excludeItemAttributeNamesFilter">
          <stringlist notr="true">
-          <string>分割ID</string>
+          <string>segmentID</string>
          </stringlist>
         </property>
        </widget>
@@ -111,17 +112,17 @@
      <item row="0" column="1">
       <widget class="QLabel" name="label_ReferenceVolumeName">
        <property name="text">
-        <string />
+        <string/>
        </property>
       </widget>
      </item>
      <item row="0" column="0">
       <widget class="QLabel" name="label_ReferenceVolumeText">
        <property name="toolTip">
-        <string>用于设置分割几何体的节点（原点、间距、轴方向和默认范围）</string>
+        <string>Node that was used for setting the segmentation geometry (origin, spacing, axis directions, and default extent)</string>
        </property>
        <property name="text">
-        <string>源几何体：</string>
+        <string> Source geometry:</string>
        </property>
       </widget>
      </item>
@@ -156,10 +157,10 @@
         <item>
          <widget class="QPushButton" name="pushButton_AddSegment">
           <property name="toolTip">
-           <string>添加空分割</string>
+           <string>Add empty segment</string>
           </property>
           <property name="text">
-           <string>添加分割</string>
+           <string>Add segment</string>
           </property>
           <property name="icon">
            <iconset resource="../../Widgets/Resources/qSlicerSegmentationsModuleWidgets.qrc">
@@ -170,10 +171,10 @@
         <item>
          <widget class="QPushButton" name="pushButton_RemoveSelected">
           <property name="toolTip">
-           <string>移除选中的分割</string>
+           <string>Remove selected segment</string>
           </property>
           <property name="text">
-           <string>移除选中项</string>
+           <string>Remove selected</string>
           </property>
           <property name="icon">
            <iconset resource="../../Widgets/Resources/qSlicerSegmentationsModuleWidgets.qrc">
@@ -182,12 +183,12 @@
          </widget>
         </item>
         <item>
-         <widget class="qMRMLSegmentationShow3DButton" name="show3DButton" />
+         <widget class="qMRMLSegmentationShow3DButton" name="show3DButton"/>
         </item>
         <item>
          <widget class="QToolButton" name="toolButton_Edit">
           <property name="toolTip">
-           <string>转到分割编辑器模块</string>
+           <string>Go to Segment Editor module</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -216,10 +217,10 @@
    <item>
     <widget class="ctkCollapsibleButton" name="CollapsibleButton_Display">
      <property name="toolTip">
-      <string>分割（所有分割）的显示设置</string>
+      <string>Display settings for the segmentation (all segments)</string>
      </property>
      <property name="text">
-      <string>显示</string>
+      <string>Display</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <property name="leftMargin">
@@ -238,7 +239,7 @@
        <number>4</number>
       </property>
       <item row="0" column="0">
-       <widget class="qMRMLSegmentationDisplayNodeWidget" name="SegmentationDisplayNodeWidget" />
+       <widget class="qMRMLSegmentationDisplayNodeWidget" name="SegmentationDisplayNodeWidget"/>
       </item>
      </layout>
     </widget>
@@ -246,10 +247,10 @@
    <item>
     <widget class="ctkCollapsibleButton" name="CollapsibleButton_Representations">
      <property name="toolTip">
-      <string>可用和现有表示的列表，以及创建或更新它们</string>
+      <string>List of representations to see available and existing ones, and creating or updating them</string>
      </property>
      <property name="text">
-      <string>表示</string>
+      <string>Representations</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
       <property name="leftMargin">
@@ -268,7 +269,7 @@
        <number>4</number>
       </property>
       <item row="0" column="0">
-       <widget class="qMRMLSegmentationRepresentationsListView" name="RepresentationsListView" />
+       <widget class="qMRMLSegmentationRepresentationsListView" name="RepresentationsListView"/>
       </item>
      </layout>
     </widget>
@@ -276,7 +277,7 @@
    <item>
     <widget class="ctkCollapsibleButton" name="CollapsibleButton_CopyMoveSegment">
      <property name="text">
-      <string>复制/移动分割</string>
+      <string>Copy/move segments</string>
      </property>
      <property name="checked">
       <bool>false</bool>
@@ -317,7 +318,7 @@
            </size>
           </property>
           <property name="text">
-           <string>当前分割</string>
+           <string>Current segmentation</string>
           </property>
          </widget>
         </item>
@@ -359,7 +360,7 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>从当前分割移动到其他分割节点</string>
+           <string>Move from current segmentation to other Segmentation node</string>
           </property>
           <property name="text">
            <string>&gt;</string>
@@ -387,7 +388,7 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>从当前分割复制到其他节点（用于复制的分割节点和用于导入/导出的模型或标签图节点）</string>
+           <string>Copy from current segmentation to other node (Segmentation node for copy and Model or Labelmap node for import/export)</string>
           </property>
           <property name="text">
            <string>+&gt;</string>
@@ -415,7 +416,7 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>从其他节点复制到当前分割（用于复制的分割节点和用于导入/导出的模型或标签图节点）</string>
+           <string>Copy to current segmentation from other node (Segmentation node for copy and Model or Labelmap node for import/export)</string>
           </property>
           <property name="text">
            <string>&lt;+</string>
@@ -443,7 +444,7 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>从其他分割节点移动到当前分割</string>
+           <string>Move to current segmentation from other Segmentation node</string>
           </property>
           <property name="text">
            <string>&lt;</string>
@@ -468,11 +469,11 @@
              </size>
             </property>
             <property name="toolTip">
-             <string>选择分割节点以复制/移动分割。</string>
+             <string>Select Segmentation node to copy/move segments to/from.</string>
             </property>
             <property name="nodeTypes">
              <stringlist notr="true">
-              <string>分割节点 (vtkMRMLSegmentationNode)</string>
+              <string>vtkMRMLSegmentationNode</string>
              </stringlist>
             </property>
             <property name="noneEnabled">
@@ -509,7 +510,7 @@
    <item>
     <widget class="ctkCollapsibleButton" name="CollapsibleButton_ImportExportSegment">
      <property name="text">
-      <string>导出/导入模型和标签图</string>
+      <string>Export/import models and labelmaps</string>
      </property>
      <property name="checked">
       <bool>true</bool>
@@ -536,15 +537,15 @@
       <item row="3" column="1" colspan="2">
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="qMRMLSubjectHierarchyComboBox" name="SubjectHierarchyComboBox_ImportExport" />
+         <widget class="qMRMLSubjectHierarchyComboBox" name="SubjectHierarchyComboBox_ImportExport"/>
         </item>
         <item>
          <widget class="QPushButton" name="pushButton_ClearSelection">
           <property name="toolTip">
-           <string>清除选择，表示应创建新节点</string>
+           <string>Clear selection indicating that a new node should be created</string>
           </property>
           <property name="text">
-           <string />
+           <string/>
           </property>
           <property name="icon">
            <iconset resource="../../Widgets/Resources/qSlicerSegmentationsModuleWidgets.qrc">
@@ -557,14 +558,14 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>操作：</string>
+         <string>Operation:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="QRadioButton" name="radioButton_Labelmap">
         <property name="text">
-         <string>标签图</string>
+         <string>Labelmap</string>
         </property>
         <property name="checked">
          <bool>true</bool>
@@ -574,49 +575,49 @@
       <item row="1" column="2">
        <widget class="QRadioButton" name="radioButton_Model">
         <property name="text">
-         <string>模型</string>
+         <string>Models</string>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_ImportExportType">
         <property name="text">
-         <string>类型：</string>
+         <string>Type:</string>
         </property>
        </widget>
       </item>
       <item row="3" column="0">
        <widget class="QLabel" name="label_ImportExportNode">
         <property name="text">
-         <string>输出：</string>
+         <string>Output:</string>
         </property>
        </widget>
       </item>
       <item row="5" column="0" colspan="3">
        <widget class="ctkPushButton" name="PushButton_ImportExport">
         <property name="text">
-         <string>应用</string>
+         <string>Apply</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="QRadioButton" name="radioButton_Export">
         <property name="text">
-         <string>导出</string>
+         <string>Export</string>
         </property>
        </widget>
       </item>
       <item row="0" column="2">
        <widget class="QRadioButton" name="radioButton_Import">
         <property name="text">
-         <string>导入</string>
+         <string>Import</string>
         </property>
        </widget>
       </item>
       <item row="4" column="0" colspan="3">
        <widget class="ctkCollapsibleGroupBox" name="CollapsibleGroupBox_ImporExportAdvanced">
         <property name="title">
-         <string>高级</string>
+         <string>Advanced</string>
         </property>
         <property name="collapsed">
          <bool>true</bool>
@@ -646,7 +647,7 @@
          <item row="0" column="0">
           <widget class="QLabel" name="label_4">
            <property name="text">
-            <string>导出的分割：</string>
+            <string>Exported segments:</string>
            </property>
           </widget>
          </item>
@@ -654,12 +655,12 @@
           <widget class="ctkComboBox" name="ComboBox_ExportedSegments">
            <item>
             <property name="text">
-             <string>全部</string>
+             <string>All</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>可见</string>
+             <string>Visible</string>
             </property>
            </item>
           </widget>
@@ -667,21 +668,21 @@
          <item row="1" column="0">
           <widget class="QLabel" name="label_6">
            <property name="toolTip">
-            <string>导出的标签图几何体将与该体积的几何体匹配</string>
+            <string>Exported labelmap geometry will match this volume's geometry</string>
            </property>
            <property name="text">
-            <string>参考体积：</string>
+            <string>Reference volume:</string>
            </property>
           </widget>
          </item>
          <item row="1" column="1">
           <widget class="qMRMLNodeComboBox" name="MRMLNodeComboBox_ExportLabelmapReferenceVolume">
            <property name="toolTip">
-            <string>导出的标签图几何体将与该体积的几何体匹配</string>
+            <string>Exported labelmap geometry will match this volume's geometry</string>
            </property>
            <property name="nodeTypes">
             <stringlist notr="true">
-             <string>体积节点 (vtkMRMLVolumeNode)</string>
+             <string>vtkMRMLVolumeNode</string>
             </stringlist>
            </property>
            <property name="noneEnabled">
@@ -698,7 +699,7 @@
          <item row="2" column="0">
           <widget class="QLabel" name="UseColorTableValuesLabel">
            <property name="text">
-            <string>使用颜色表值：</string>
+            <string>Use color table values:</string>
            </property>
           </widget>
          </item>
@@ -707,7 +708,7 @@
            <item>
             <widget class="QCheckBox" name="UseColorTableValuesCheckBox">
              <property name="text">
-              <string />
+              <string/>
              </property>
             </widget>
            </item>
@@ -715,7 +716,7 @@
             <widget class="qMRMLNodeComboBox" name="ColorTableNodeSelector">
              <property name="nodeTypes">
               <stringlist notr="true">
-               <string>颜色表节点 (vtkMRMLColorTableNode)</string>
+               <string>vtkMRMLColorTableNode</string>
               </stringlist>
              </property>
              <property name="addEnabled">
@@ -731,20 +732,20 @@
          <item row="3" column="1">
           <widget class="ctkComboBox" name="ComboBox_TerminologyContext">
            <property name="toolTip">
-            <string>导入的标签图的标签将映射到此上下文的术语条目</string>
+            <string>Labels of the imported labelmap will be mapped to terminology entries of this context</string>
            </property>
            <property name="sizeAdjustPolicy">
             <enum>QComboBox::AdjustToMinimumContentsLengthWithIcon</enum>
            </property>
            <property name="defaultText">
-            <string>选择术语...</string>
+            <string>Choose terminology...</string>
            </property>
           </widget>
          </item>
          <item row="3" column="0">
           <widget class="QLabel" name="label_TerminologyContext">
            <property name="text">
-            <string>术语上下文：</string>
+            <string>Terminology context:</string>
            </property>
           </widget>
          </item>
@@ -757,7 +758,7 @@
    <item>
     <widget class="ctkCollapsibleButton" name="CollapsibleButton_ExportToFiles">
      <property name="text">
-      <string>导出到文件</string>
+      <string>Export to files</string>
      </property>
      <property name="collapsed">
       <bool>true</bool>
@@ -779,7 +780,7 @@
        <number>4</number>
       </property>
       <item>
-       <widget class="qMRMLSegmentationFileExportWidget" name="ExportToFilesWidget" />
+       <widget class="qMRMLSegmentationFileExportWidget" name="ExportToFilesWidget"/>
       </item>
      </layout>
     </widget>
@@ -800,7 +801,7 @@
    <item>
     <widget class="ctkCollapsibleButton" name="CollapsibleButton_BinaryLabelmapLayers">
      <property name="text">
-      <string>二进制标签图层</string>
+      <string>Binary labelmap layers</string>
      </property>
      <property name="collapsed">
       <bool>true</bool>
@@ -809,7 +810,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label_LayerCountText">
         <property name="text">
-         <string>层数：</string>
+         <string>Number of layers:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -826,17 +827,17 @@
       <item row="2" column="0">
        <widget class="QLabel" name="label_OverwriteSegmentsText">
         <property name="toolTip">
-         <string>强制所有分割到单层将修改重叠的分割。多个分割重叠的区域将分配给靠近分割列表末尾的分割。</string>
+         <string>Forcing all segments to a single layer will modify overlapping segments. Regions where multiple segments overlap will be assigned to the segment closest to the end of the segment list.</string>
         </property>
         <property name="text">
-         <string>强制合并为单层：</string>
+         <string>Force collapse to single layer:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_SegmentCountText">
         <property name="text">
-         <string>分割数：</string>
+         <string>Number of segments:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -852,10 +853,10 @@
          </sizepolicy>
         </property>
         <property name="toolTip">
-         <string>通过将分割移动到共享层来最小化层数以减少内存使用。除非存在重叠的分割并强制合并为单层，否则分割内容不会被修改。</string>
+         <string>Minimize the number of layers by moving segments to shared layers to minimize memory usage. Contents of segments are not modified unless there are overlapping segments and collapsing to a single layer is forced.</string>
         </property>
         <property name="text">
-         <string>合并标签图层</string>
+         <string>Collapse labelmap layers</string>
         </property>
        </widget>
       </item>
@@ -878,7 +879,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
@@ -977,7 +978,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../Widgets/Resources/qSlicerSegmentationsModuleWidgets.qrc" />
+  <include location="../../Widgets/Resources/qSlicerSegmentationsModuleWidgets.qrc"/>
  </resources>
  <connections>
   <connection>

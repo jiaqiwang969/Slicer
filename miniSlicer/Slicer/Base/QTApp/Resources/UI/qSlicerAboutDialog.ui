@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerAboutDialog</class>
  <widget class="QDialog" name="qSlicerAboutDialog">
@@ -16,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>关于 3D Slicer</string>
+   <string>About 3D Slicer</string>
   </property>
   <layout class="QGridLayout" name="gridLayout" columnstretch="1,1,0">
    <property name="margin">
@@ -132,5 +133,5 @@
    <header>ctkThumbnailLabel.h</header>
   </customwidget>
  </customwidgets>
- <connections />
+ <connections/>
 </ui>

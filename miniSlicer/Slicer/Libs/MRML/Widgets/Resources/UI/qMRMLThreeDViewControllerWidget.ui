@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLThreeDViewControllerWidget</class>
  <widget class="QWidget" name="qMRMLThreeDViewControllerWidget">
@@ -16,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>3D视图控制器</string>
+   <string>3D View Controller</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <property name="leftMargin">
@@ -55,10 +56,10 @@
         <bool>false</bool>
        </property>
        <property name="toolTip">
-        <string>略微缩小场景</string>
+        <string>Zoom out of the scene by a small amount.</string>
        </property>
        <property name="text">
-        <string />
+        <string/>
        </property>
        <property name="icon">
         <iconset resource="../qMRMLWidgets.qrc">
@@ -75,10 +76,10 @@
         <bool>false</bool>
        </property>
        <property name="toolTip">
-        <string>旋转3D视图</string>
+        <string>Spin the 3D view.</string>
        </property>
        <property name="text">
-        <string />
+        <string/>
        </property>
        <property name="icon">
         <iconset resource="../qMRMLWidgets.qrc">
@@ -95,10 +96,10 @@
         <bool>false</bool>
        </property>
        <property name="toolTip">
-        <string>摇动3D视图</string>
+        <string>Rock the 3D view.</string>
        </property>
        <property name="text">
-        <string />
+        <string/>
        </property>
        <property name="icon">
         <iconset resource="../qMRMLWidgets.qrc">
@@ -115,10 +116,10 @@
         <bool>false</bool>
        </property>
        <property name="toolTip">
-        <string>切换3D视图中元素的可见性</string>
+        <string>Toggle visibility of elements in the 3D view.</string>
        </property>
        <property name="text">
-        <string />
+        <string/>
        </property>
        <property name="icon">
         <iconset resource="../qMRMLWidgets.qrc">
@@ -135,10 +136,10 @@
         <bool>false</bool>
        </property>
        <property name="toolTip">
-        <string>定位标记</string>
+        <string>Orientation marker</string>
        </property>
        <property name="text">
-        <string />
+        <string/>
        </property>
        <property name="icon">
         <iconset resource="../qMRMLWidgets.qrc">
@@ -155,10 +156,10 @@
         <bool>false</bool>
        </property>
        <property name="toolTip">
-        <string>略微放大场景</string>
+        <string>Zoom in on the scene by a small amount.</string>
        </property>
        <property name="text">
-        <string />
+        <string/>
        </property>
        <property name="icon">
         <iconset resource="../qMRMLWidgets.qrc">
@@ -175,7 +176,7 @@
         <bool>false</bool>
        </property>
        <property name="text">
-        <string />
+        <string/>
        </property>
        <property name="icon">
         <iconset resource="../qMRMLWidgets.qrc">
@@ -192,10 +193,10 @@
         <bool>false</bool>
        </property>
        <property name="toolTip">
-        <string>显示阴影以改善深度感知</string>
+        <string>Display shadows for improved depth perception</string>
        </property>
        <property name="text">
-        <string />
+        <string/>
        </property>
        <property name="icon">
         <iconset resource="../qMRMLWidgets.qrc">
@@ -212,7 +213,7 @@
         <bool>false</bool>
        </property>
        <property name="toolTip">
-        <string>显示标尺。仅在正投影模式下可用。</string>
+        <string>Show ruler. Only available in orthographic projection mode.</string>
        </property>
        <property name="text">
         <string>...</string>
@@ -232,10 +233,10 @@
         <bool>false</bool>
        </property>
        <property name="toolTip">
-        <string>在3D视图中切换正投影和透视渲染。</string>
+        <string>Toggle between orthographic and perspective rendering in the 3D view.</string>
        </property>
        <property name="text">
-        <string />
+        <string/>
        </property>
        <property name="icon">
         <iconset resource="../qMRMLWidgets.qrc">
@@ -253,17 +254,17 @@
         <bool>false</bool>
        </property>
        <property name="toolTip">
-        <string>居中视图</string>
+        <string>Center view</string>
        </property>
       </widget>
      </item>
      <item row="0" column="0">
       <widget class="QToolButton" name="ViewLinkButton">
        <property name="toolTip">
-        <string>链接3D视图。同步同一视图组中所有3D视图的属性。</string>
+        <string>Link 3D views. Synchronizes properties of all 3D views in the same view group.</string>
        </property>
        <property name="text">
-        <string />
+        <string/>
        </property>
        <property name="icon">
         <iconset resource="../qMRMLWidgets.qrc">
@@ -292,7 +293,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>无立体</string>
+    <string>No Stereo</string>
    </property>
   </action>
   <action name="actionSwitchToRedBlueStereo">
@@ -300,7 +301,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>红/蓝</string>
+    <string>Red/blue</string>
    </property>
   </action>
   <action name="actionSwitchToAnaglyphStereo">
@@ -308,7 +309,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>立体图</string>
+    <string>Anaglyph</string>
    </property>
   </action>
   <action name="actionSwitchToQuadBufferStereo">
@@ -316,7 +317,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>四缓冲</string>
+    <string>QuadBuffer</string>
    </property>
   </action>
   <action name="actionSwitchToInterlacedStereo">
@@ -324,10 +325,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>交错</string>
+    <string>Interlaced</string>
    </property>
    <property name="toolTip">
-    <string>切换到交错立体模式</string>
+    <string>Switch to Interlaced stereo mode</string>
    </property>
   </action>
   <action name="actionSet3DAxisVisible">
@@ -338,7 +339,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>3D立方体</string>
+    <string>3D cube</string>
    </property>
   </action>
   <action name="actionSet3DAxisLabelVisible">
@@ -349,7 +350,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>3D坐标轴标签</string>
+    <string>3D axis label</string>
    </property>
   </action>
   <action name="actionSetLightBlueBackground">
@@ -360,10 +361,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>浅蓝色背景</string>
+    <string>Light blue background</string>
    </property>
    <property name="toolTip">
-    <string>设置浅蓝色背景</string>
+    <string>Set light blue background</string>
    </property>
   </action>
   <action name="actionSetBlackBackground">
@@ -371,10 +372,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>黑色背景</string>
+    <string>Black background</string>
    </property>
    <property name="toolTip">
-    <string>设置黑色背景</string>
+    <string>Set black background</string>
    </property>
   </action>
   <action name="actionSetWhiteBackground">
@@ -382,10 +383,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>白色背景</string>
+    <string>White background</string>
    </property>
    <property name="toolTip">
-    <string>设置白色背景</string>
+    <string>Set white background</string>
    </property>
   </action>
   <action name="actionCenter">
@@ -394,10 +395,10 @@
      <normaloff>:/Icons/ViewCenter.png</normaloff>:/Icons/ViewCenter.png</iconset>
    </property>
    <property name="text">
-    <string>居中</string>
+    <string>Center</string>
    </property>
    <property name="toolTip">
-    <string>居中视图</string>
+    <string>Center view</string>
    </property>
   </action>
   <action name="actionUseDepthPeeling">
@@ -405,10 +406,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>使用深度剥离</string>
+    <string>Use depth peeling</string>
    </property>
    <property name="toolTip">
-    <string>深度剥离用于按顺序渲染透明表面模型</string>
+    <string>Depth peeling is used to render transparent surface models in order</string>
    </property>
   </action>
   <action name="actionSetFPSVisible">
@@ -420,7 +421,7 @@
      <normaloff>:/Icons/ViewFPS.png</normaloff>:/Icons/ViewFPS.png</iconset>
    </property>
    <property name="text">
-    <string>显示/隐藏每秒帧数 (FPS)</string>
+    <string>Show/Hide frames per second (FPS)</string>
    </property>
   </action>
   <action name="actionSwitchToUserDefinedStereo_1">
@@ -428,10 +429,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>用户定义 1</string>
+    <string>User Defined 1</string>
    </property>
    <property name="toolTip">
-    <string>切换到用户定义的立体模式 1</string>
+    <string>Switch to user defined stereo mode 1</string>
    </property>
   </action>
   <action name="actionSwitchToUserDefinedStereo_2">
@@ -439,10 +440,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>用户定义 2</string>
+    <string>User Defined 2</string>
    </property>
    <property name="toolTip">
-    <string>切换到用户定义的立体模式 2</string>
+    <string>Switch to user defined stereo mode 2</string>
    </property>
   </action>
   <action name="actionSwitchToUserDefinedStereo_3">
@@ -450,10 +451,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>用户定义 3</string>
+    <string>User Defined 3</string>
    </property>
    <property name="toolTip">
-    <string>切换到用户定义的立体模式 3</string>
+    <string>Switch to user defined stereo mode 3</string>
    </property>
   </action>
   <action name="actionOrientationMarkerTypeNone">
@@ -461,10 +462,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>无定位标记</string>
+    <string>No orientation marker</string>
    </property>
    <property name="toolTip">
-    <string>隐藏定位标记</string>
+    <string>Hide orientation marker</string>
    </property>
   </action>
   <action name="actionOrientationMarkerTypeCube">
@@ -472,10 +473,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>立方体</string>
+    <string>Cube</string>
    </property>
    <property name="toolTip">
-    <string>显示立方体定位标记</string>
+    <string>Show cube orientation marker</string>
    </property>
   </action>
   <action name="actionOrientationMarkerTypeHuman">
@@ -483,10 +484,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>人形</string>
+    <string>Human</string>
    </property>
    <property name="toolTip">
-    <string>显示人形定位标记</string>
+    <string>Show human-shaped orientation marker</string>
    </property>
   </action>
   <action name="actionOrientationMarkerTypeAxes">
@@ -494,10 +495,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>坐标轴</string>
+    <string>Axes</string>
    </property>
    <property name="toolTip">
-    <string>显示坐标轴定位标记</string>
+    <string>Show axes orientation marker</string>
    </property>
   </action>
   <action name="actionOrientationMarkerSizeSmall">
@@ -505,10 +506,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>小</string>
+    <string>Small</string>
    </property>
    <property name="toolTip">
-    <string>小定位标记尺寸</string>
+    <string>Small orientation marker size</string>
    </property>
   </action>
   <action name="actionOrientationMarkerSizeMedium">
@@ -516,10 +517,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>中</string>
+    <string>Medium</string>
    </property>
    <property name="toolTip">
-    <string>中定位标记尺寸</string>
+    <string>Medium orientation marker size</string>
    </property>
   </action>
   <action name="actionOrientationMarkerSizeLarge">
@@ -527,10 +528,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>大</string>
+    <string>Large</string>
    </property>
    <property name="toolTip">
-    <string>大定位标记尺寸</string>
+    <string>Large orientation marker size</string>
    </property>
   </action>
   <action name="actionRulerTypeNone">
@@ -538,10 +539,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>无标尺</string>
+    <string>No ruler</string>
    </property>
    <property name="toolTip">
-    <string>隐藏标尺</string>
+    <string>Hide ruler</string>
    </property>
   </action>
   <action name="actionRulerTypeThin">
@@ -549,10 +550,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>细</string>
+    <string>Thin</string>
    </property>
    <property name="toolTip">
-    <string>显示细标尺</string>
+    <string>Show thin ruler</string>
    </property>
   </action>
   <action name="actionRulerTypeThick">
@@ -560,10 +561,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>粗</string>
+    <string>Thick</string>
    </property>
    <property name="toolTip">
-    <string>显示粗标尺</string>
+    <string>Show thick ruler</string>
    </property>
   </action>
   <action name="actionRulerColorWhite">
@@ -571,7 +572,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>白色标尺</string>
+    <string>White ruler</string>
    </property>
   </action>
   <action name="actionRulerColorBlack">
@@ -579,7 +580,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>黑色标尺</string>
+    <string>Black ruler</string>
    </property>
   </action>
   <action name="actionRulerColorYellow">
@@ -587,7 +588,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>黄色标尺</string>
+    <string>Yellow ruler</string>
    </property>
   </action>
   <action name="actionStereo">
@@ -596,10 +597,10 @@
      <normaloff>:/Icons/ViewStereo.png</normaloff>:/Icons/ViewStereo.png</iconset>
    </property>
    <property name="text">
-    <string>立体观看</string>
+    <string>Stereo viewing</string>
    </property>
    <property name="toolTip">
-    <string>选择立体观看模式</string>
+    <string>Select stereo viewing mode</string>
    </property>
   </action>
   <action name="actionShadowsVisibility">
@@ -607,10 +608,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>阴影可见性</string>
+    <string>Shadows visibility</string>
    </property>
    <property name="toolTip">
-    <string>使物体投射阴影以改善深度感知</string>
+    <string>Make objects cast shadows to improve depth perception</string>
    </property>
   </action>
  </widget>
@@ -622,7 +623,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../qMRMLWidgets.qrc" />
+  <include location="../qMRMLWidgets.qrc"/>
  </resources>
- <connections />
+ <connections/>
 </ui>

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerSceneViewsModuleWidget</class>
  <widget class="qSlicerWidget" name="qSlicerSceneViewsModuleWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>场景视图</string>
+   <string>SceneViews</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="1" column="0">
@@ -41,11 +42,11 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>场景视图</string>
+      <string>SceneViews</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QTableWidget" name="SceneViewTableWidget" />
+       <widget class="QTableWidget" name="SceneViewTableWidget"/>
       </item>
      </layout>
     </widget>
@@ -72,7 +73,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../qSlicerSceneViewsModule.qrc" />
+  <include location="../qSlicerSceneViewsModule.qrc"/>
  </resources>
- <connections />
+ <connections/>
 </ui>

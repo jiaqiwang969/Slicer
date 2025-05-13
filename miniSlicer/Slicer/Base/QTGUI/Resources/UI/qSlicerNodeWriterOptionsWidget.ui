@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerNodeWriterOptionsWidget</class>
  <widget class="QWidget" name="qSlicerNodeWriterOptionsWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>节点写入选项</string>
+   <string>Node Writer Options</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <property name="margin">
@@ -19,7 +20,7 @@
    <item>
     <widget class="QCheckBox" name="UseCompressionCheckBox">
      <property name="text">
-      <string>压缩</string>
+      <string>Compress</string>
      </property>
     </widget>
    </item>
@@ -35,6 +36,6 @@
    </item>
   </layout>
  </widget>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

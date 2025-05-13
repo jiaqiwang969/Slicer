@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerColorsModuleWidget</class>
  <widget class="qSlicerWidget" name="qSlicerColorsModuleWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>颜色</string>
+   <string>Colors</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../qSlicerColorsModule.qrc">
@@ -23,7 +24,7 @@
       <bool>true</bool>
      </property>
      <property name="text">
-      <string>颜色图例</string>
+      <string>Color legend</string>
      </property>
      <property name="collapsed">
       <bool>true</bool>
@@ -41,8 +42,8 @@
           </property>
           <property name="nodeTypes">
            <stringlist notr="true">
-            <string>标量体积节点 (vtkMRMLScalarVolumeNode)</string>
-            <string>模型节点 (vtkMRMLModelNode)</string>
+            <string>vtkMRMLScalarVolumeNode</string>
+            <string>vtkMRMLModelNode</string>
            </stringlist>
           </property>
           <property name="addEnabled">
@@ -59,42 +60,42 @@
         <item row="0" column="0">
          <widget class="QLabel" name="DisplayableNodeLabel">
           <property name="text">
-           <string>可显示节点：</string>
+           <string>Displayable node:</string>
           </property>
          </widget>
         </item>
         <item row="3" column="0" colspan="2">
-         <widget class="qMRMLColorLegendDisplayNodeWidget" name="ColorLegendDisplayNodeWidget" />
+         <widget class="qMRMLColorLegendDisplayNodeWidget" name="ColorLegendDisplayNodeWidget"/>
         </item>
         <item row="2" column="1">
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
            <widget class="QPushButton" name="CreateColorLegendButton">
             <property name="toolTip">
-             <string>为选定的可显示节点创建颜色图例。</string>
+             <string>Create color legend for the selected displayable node.</string>
             </property>
             <property name="text">
-             <string>创建</string>
+             <string>Create</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="UseCurrentColorsButton">
             <property name="toolTip">
-             <string>对于选定的可显示节点使用当前选定的颜色。</string>
+             <string>Use the currently selected colors for the selected displayable node.</string>
             </property>
             <property name="text">
-             <string>使用当前颜色</string>
+             <string>Use current colors</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="DeleteColorLegendButton">
             <property name="toolTip">
-             <string>删除选定可显示节点的颜色图例。</string>
+             <string>Delete the color legend for the selected displayable node.</string>
             </property>
             <property name="text">
-             <string>删除</string>
+             <string>Delete</string>
             </property>
            </widget>
           </item>
@@ -103,7 +104,7 @@
         <item row="2" column="0">
          <widget class="QLabel" name="DisplayableNodeLabel_2">
           <property name="text">
-           <string>颜色图例：</string>
+           <string>Color legend:</string>
           </property>
          </widget>
         </item>
@@ -130,7 +131,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="ColorTableLabel">
         <property name="text">
-         <string>颜色：</string>
+         <string>Colors:</string>
         </property>
        </widget>
       </item>
@@ -149,20 +150,20 @@
         <item>
          <widget class="QToolButton" name="CopyColorNodeButton">
           <property name="toolTip">
-           <string>复制当前颜色节点以允许编辑颜色、标量范围、大小。</string>
+           <string>Duplicate the current color node to allow editing colors, scalar range, size.</string>
           </property>
           <property name="text">
-           <string />
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QToolButton" name="AddColorTableNodeButton">
           <property name="toolTip">
-           <string>添加新的空颜色表节点。</string>
+           <string>Add new empty color table node.</string>
           </property>
           <property name="text">
-           <string />
+           <string/>
           </property>
          </widget>
         </item>
@@ -174,7 +175,7 @@
    <item row="1" column="0" colspan="3">
     <widget class="ctkCollapsibleButton" name="EditColorsCollapsibleButton">
      <property name="text">
-      <string>颜色表</string>
+      <string>Color table</string>
      </property>
      <property name="checked">
       <bool>true</bool>
@@ -229,7 +230,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>颜色数量：</string>
+            <string>Number of colors: </string>
            </property>
           </widget>
          </item>
@@ -242,24 +243,24 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>隐藏空颜色：</string>
+            <string>Hide empty colors: </string>
            </property>
           </widget>
          </item>
          <item row="1" column="1">
           <widget class="QCheckBox" name="HideInvalidColorsCheckBox">
            <property name="toolTip">
-            <string>显示/隐藏下面列表中的未命名颜色条目。</string>
+            <string>Show/Hide the unnamed color entries in the list below.</string>
            </property>
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="2" column="0">
           <widget class="QLabel" name="LUTRangeLabel">
            <property name="text">
-            <string>标量范围：</string>
+            <string>Scalar Range:</string>
            </property>
           </widget>
          </item>
@@ -269,7 +270,7 @@
             <bool>false</bool>
            </property>
            <property name="toolTip">
-            <string>映射到完整颜色范围的标量范围。</string>
+            <string>The range of scalars that are mapped to the full range of colors.</string>
            </property>
            <property name="minimum">
             <double>-150.000000000000000</double>
@@ -313,20 +314,20 @@
            <item>
             <widget class="QToolButton" name="AddNewColorButton">
              <property name="toolTip">
-              <string>向颜色表添加新颜色</string>
+              <string>Add new color to color table</string>
              </property>
              <property name="text">
-              <string />
+              <string/>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QToolButton" name="RemoveCurrentColorButton">
              <property name="toolTip">
-              <string>删除当前选定的颜色</string>
+              <string>Delete currently selected color</string>
              </property>
              <property name="text">
-              <string />
+              <string/>
              </property>
             </widget>
            </item>
@@ -414,8 +415,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../qSlicerColorsModule.qrc" />
-  <include location="../../../../../Libs/MRML/Widgets/Resources/qMRMLWidgets.qrc" />
+  <include location="../qSlicerColorsModule.qrc"/>
+  <include location="../../../../../Libs/MRML/Widgets/Resources/qMRMLWidgets.qrc"/>
  </resources>
  <connections>
   <connection>

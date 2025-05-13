@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerModulePanel</class>
  <widget class="qSlicerWidget" name="qSlicerModulePanel">
@@ -16,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>模块面板</string>
+   <string>Module Panel</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="sizeConstraint">
@@ -73,7 +74,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>帮助与致谢</string>
+          <string>Help &amp;&amp; Acknowledgement</string>
          </property>
          <property name="collapsed">
           <bool>true</bool>
@@ -89,7 +90,7 @@
             </property>
             <widget class="QWidget" name="HelpTab">
              <attribute name="title">
-              <string>帮助</string>
+              <string>Help</string>
              </attribute>
              <layout class="QVBoxLayout" name="verticalLayout">
               <property name="margin">
@@ -106,7 +107,7 @@
             </widget>
             <widget class="QWidget" name="AcknowledgementTab">
              <attribute name="title">
-              <string>致谢</string>
+              <string>Acknowledgement</string>
              </attribute>
              <layout class="QVBoxLayout" name="verticalLayout_2">
               <property name="margin">
@@ -167,6 +168,6 @@
    <header>ctkFittedTextBrowser.h</header>
   </customwidget>
  </customwidgets>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

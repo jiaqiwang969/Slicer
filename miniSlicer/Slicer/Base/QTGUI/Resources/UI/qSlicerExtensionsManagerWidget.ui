@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerExtensionsManagerWidget</class>
  <widget class="QWidget" name="qSlicerExtensionsManagerWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Slicer 扩展管理器</string>
+   <string>Slicer Extensions Manager</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <property name="margin">
@@ -33,7 +34,7 @@
         <normaloff>:/Icons/Extension.png</normaloff>:/Icons/Extension.png</iconset>
       </attribute>
       <attribute name="title">
-       <string />
+       <string/>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout">
        <property name="margin">
@@ -41,7 +42,7 @@
        </property>
        <item>
         <widget class="QStackedWidget" name="ManageExtensionsPager">
-         <widget class="qSlicerExtensionsLocalWidget" name="ExtensionsLocalWidget" />
+         <widget class="qSlicerExtensionsLocalWidget" name="ExtensionsLocalWidget"/>
         </widget>
        </item>
       </layout>
@@ -52,7 +53,7 @@
         <normaloff>:/Icons/DownloadExtension.png</normaloff>:/Icons/DownloadExtension.png</iconset>
       </attribute>
       <attribute name="title">
-       <string>安装扩展</string>
+       <string>Install Extensions</string>
       </attribute>
       <layout class="QVBoxLayout" name="InstallExtensionsTabLayout">
        <property name="margin">
@@ -73,7 +74,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../qSlicerBaseQTGUI.qrc" />
+  <include location="../qSlicerBaseQTGUI.qrc"/>
  </resources>
- <connections />
+ <connections/>
 </ui>

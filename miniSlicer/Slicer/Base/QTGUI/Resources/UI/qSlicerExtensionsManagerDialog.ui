@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerExtensionsManagerDialog</class>
  <widget class="QDialog" name="qSlicerExtensionsManagerDialog">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>扩展管理器</string>
+   <string>Extensions Manager</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../qSlicerBaseQTGUI.qrc">
@@ -32,7 +33,7 @@
      <item>
       <widget class="QLabel" name="RestartRequestedLabel">
        <property name="text">
-        <string>&amp;lt;font color="red"&amp;gt;* 请求重启&amp;lt;/font&amp;gt;</string>
+        <string>&lt;font color=&quot;red&quot;&gt;* Restart requested&lt;/font&gt;</string>
        </property>
       </widget>
      </item>
@@ -72,7 +73,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../qSlicerBaseQTGUI.qrc" />
+  <include location="../qSlicerBaseQTGUI.qrc"/>
  </resources>
  <connections>
   <connection>

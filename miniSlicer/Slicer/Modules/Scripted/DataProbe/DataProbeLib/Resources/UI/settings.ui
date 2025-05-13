@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>Settings</class>
  <widget class="QWidget" name="Settings">
@@ -16,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>切片视图注释设置</string>
+   <string>Slice View Annotations Settings</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <property name="sizeConstraint">
@@ -33,14 +34,14 @@
      <item>
       <widget class="QCheckBox" name="sliceViewAnnotationsCheckBox">
        <property name="text">
-        <string>启用切片视图注释</string>
+        <string>Enable Slice View Annotations</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="ctkCollapsibleButton" name="cornerTextParametersCollapsibleButton">
        <property name="text">
-        <string>角落文本注释</string>
+        <string>Corner Text Annotation</string>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
@@ -48,13 +49,13 @@
           <item>
            <widget class="QGroupBox" name="activateCornersGroupBox">
             <property name="title">
-             <string>活动角落</string>
+             <string>Active Corners</string>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_5">
              <item>
               <widget class="QCheckBox" name="topLeftCheckBox">
                <property name="text">
-                <string>左上</string>
+                <string>Top Left</string>
                </property>
                <property name="checked">
                 <bool>true</bool>
@@ -64,7 +65,7 @@
              <item>
               <widget class="QCheckBox" name="topRightCheckBox">
                <property name="text">
-                <string>右上</string>
+                <string>Top Right</string>
                </property>
                <property name="checked">
                 <bool>true</bool>
@@ -74,7 +75,7 @@
              <item>
               <widget class="QCheckBox" name="bottomLeftCheckBox">
                <property name="text">
-                <string>左下</string>
+                <string>Bottom Left</string>
                </property>
                <property name="checked">
                 <bool>true</bool>
@@ -100,13 +101,13 @@
           <item>
            <widget class="ctkCollapsibleGroupBox" name="annotationsAmountGroupBox">
             <property name="title">
-             <string>数量</string>
+             <string>Amount</string>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_2">
              <item>
               <widget class="QLabel" name="label">
                <property name="text">
-                <string>注释显示级别：</string>
+                <string>Annotation Display Level:</string>
                </property>
               </widget>
              </item>
@@ -153,20 +154,20 @@
           <item>
            <widget class="ctkCollapsibleGroupBox" name="fontPropertiesGroupBox">
             <property name="title">
-             <string>字体属性</string>
+             <string>Font Properties</string>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_3">
              <item>
               <widget class="QLabel" name="fontFamilyLabel">
                <property name="text">
-                <string>字体系列：</string>
+                <string>Font Family: </string>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QRadioButton" name="timesFontRadioButton">
                <property name="text">
-                <string>泰晤士</string>
+                <string>Times</string>
                </property>
                <property name="checked">
                 <bool>true</bool>
@@ -199,7 +200,7 @@
              <item>
               <widget class="QLabel" name="fontSizeLabel">
                <property name="text">
-                <string>字体大小：</string>
+                <string>Font Size: </string>
                </property>
               </widget>
              </item>
@@ -232,16 +233,16 @@
           <item>
            <widget class="ctkCollapsibleGroupBox" name="dicomAnnotationsCollapsibleGroupBox">
             <property name="title">
-             <string>DICOM 注释</string>
+             <string>DICOM Annotations</string>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_7">
              <item>
               <widget class="QCheckBox" name="backgroundPersistenceCheckBox">
                <property name="toolTip">
-                <string>如果前景体积不是 DICOM，则显示背景体积 DICOM 注释。</string>
+                <string>Show background volume DICOM annotations if foreground volume is non-DICOM.</string>
                </property>
                <property name="text">
-                <string>背景 DICOM 注释持久性</string>
+                <string>Background DICOM annotations persistence</string>
                </property>
               </widget>
              </item>
@@ -258,7 +259,7 @@
    <item>
     <widget class="QPushButton" name="restoreDefaultsButton">
      <property name="text">
-      <string>恢复默认设置</string>
+      <string>Restore Defaults</string>
      </property>
     </widget>
    </item>
@@ -291,6 +292,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

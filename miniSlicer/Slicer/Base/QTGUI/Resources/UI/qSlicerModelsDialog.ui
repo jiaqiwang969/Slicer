@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerModelsDialog</class>
  <widget class="QDialog" name="qSlicerModelsDialog">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>添加 3D 模型</string>
+   <string>Add a 3D model</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1">
    <item>
@@ -22,7 +23,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>添加模型文件</string>
+      <string>Add Model file(s)</string>
      </property>
      <property name="iconSize">
       <size>
@@ -44,7 +45,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>添加模型目录</string>
+      <string>Add Model directory</string>
      </property>
      <property name="iconSize">
       <size>
@@ -59,6 +60,6 @@
    </item>
   </layout>
  </widget>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

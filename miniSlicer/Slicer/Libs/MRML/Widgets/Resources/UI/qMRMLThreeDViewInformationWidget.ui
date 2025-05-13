@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLThreeDViewInformationWidget</class>
  <widget class="qMRMLWidget" name="qMRMLThreeDViewInformationWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>三维视图信息</string>
+   <string>3D View Information</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
    <property name="fieldGrowthPolicy">
@@ -22,14 +23,14 @@
    <item row="0" column="0">
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>布局名称：</string>
+      <string>Layout Name:</string>
      </property>
     </widget>
    </item>
    <item row="0" column="1">
     <widget class="QLineEdit" name="LayoutNameLineEdit">
      <property name="toolTip">
-      <string>切片名称</string>
+      <string>Name of the slice</string>
      </property>
      <property name="readOnly">
       <bool>true</bool>
@@ -39,14 +40,14 @@
    <item row="2" column="0">
     <widget class="QLabel" name="label_11">
      <property name="text">
-      <string>视图组：</string>
+      <string>View group:</string>
      </property>
     </widget>
    </item>
    <item row="2" column="1">
     <widget class="QSpinBox" name="ViewGroupSpinBox">
      <property name="toolTip">
-      <string>在具有相同组索引的视图中，导航和链接属性是同步的。</string>
+      <string>Navigation and linked properties are synchronized in views that has the same group index.</string>
      </property>
     </widget>
    </item>
@@ -61,7 +62,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../qMRMLWidgets.qrc" />
+  <include location="../qMRMLWidgets.qrc"/>
  </resources>
- <connections />
+ <connections/>
 </ui>

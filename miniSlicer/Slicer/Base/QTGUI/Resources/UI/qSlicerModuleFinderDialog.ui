@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerModuleFinderDialog</class>
  <widget class="QDialog" name="qSlicerModuleFinderDialog">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>模块查找器</string>
+   <string>Module finder</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="1" column="0">
@@ -76,10 +77,10 @@
         <enum>Qt::NoFocus</enum>
        </property>
        <property name="toolTip">
-        <string>在全文中搜索（模块名称和描述）。如果未选中，则仅搜索模块名称。</string>
+        <string>Search in full text (module name and description). If unchecked then only module names are searched.</string>
        </property>
        <property name="text">
-        <string>&amp;全文</string>
+        <string>&amp;Full text</string>
        </property>
       </widget>
      </item>
@@ -89,10 +90,10 @@
         <enum>Qt::NoFocus</enum>
        </property>
        <property name="toolTip">
-        <string>显示内置模块。取消选中可以更容易找到扩展提供的模块。</string>
+        <string>Show built-in modules. Unchecking makes it easier to find modules provided by extensions.</string>
        </property>
        <property name="text">
-        <string>&amp;内置</string>
+        <string>&amp;Built-in</string>
        </property>
        <property name="checked">
         <bool>true</bool>
@@ -105,10 +106,10 @@
         <enum>Qt::NoFocus</enum>
        </property>
        <property name="toolTip">
-        <string>显示测试模块。对软件测试和故障排除很有用。</string>
+        <string>Show testing modules. Useful for software testing and troubleshooting.</string>
        </property>
        <property name="text">
-        <string>&amp;测试</string>
+        <string>&amp;Testing</string>
        </property>
       </widget>
      </item>
@@ -132,7 +133,7 @@
   <tabstop>ModuleListView</tabstop>
   <tabstop>ButtonBox</tabstop>
  </tabstops>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>ButtonBox</sender>

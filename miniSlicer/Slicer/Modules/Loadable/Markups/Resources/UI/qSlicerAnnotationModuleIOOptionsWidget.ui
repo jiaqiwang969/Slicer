@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerAnnotationModuleIOOptionsWidget</class>
  <widget class="qSlicerWidget" name="qSlicerAnnotationModuleIOOptionsWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>体积选项</string>
+   <string>Volume Options</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <property name="margin">
@@ -29,7 +30,7 @@
    <item>
     <widget class="QRadioButton" name="FiducialRadioButton">
      <property name="text">
-      <string>基准点</string>
+      <string>Fiducial</string>
      </property>
      <property name="checked">
        <bool>true</bool>
@@ -39,14 +40,14 @@
    <item>
     <widget class="QRadioButton" name="RulerRadioButton">
      <property name="text">
-      <string>尺子</string>
+      <string>Ruler</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QRadioButton" name="ROIRadioButton">
      <property name="text">
-      <string>感兴趣区域</string>
+      <string>ROI</string>
      </property>
     </widget>
    </item>
@@ -60,6 +61,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

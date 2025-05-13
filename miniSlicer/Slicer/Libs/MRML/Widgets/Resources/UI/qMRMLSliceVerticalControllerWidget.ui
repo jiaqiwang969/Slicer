@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLSliceVerticalControllerWidget</class>
  <widget class="qMRMLWidget" name="qMRMLSliceVerticalControllerWidget">
@@ -31,7 +32,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>垂直切片控制器</string>
+   <string>Vertical Slice Controller</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">
@@ -55,13 +56,37 @@
       </sizepolicy>
      </property>
      <property name="styleSheet">
-      <string notr="true">QSlider::groove:vertical { 背景颜色: 黑色; 边距: 0px 0px 0px 0px; 边框: 无; 宽度: 12px; } QSlider::handle:vertical { 背景颜色: rgba(200, 200, 200, 200); 边框宽度: 1px; 上边距: -5px; 下边距: -5px; 高度: 50px; 边框半径: 5px; } QSlider::handle:vertical:hover { 背景颜色: rgba(150, 150, 150, 200); 边框半径: 5px; } QSlider::handle:vertical:pressed { 背景颜色: rgba(0, 150, 150, 200); 边框半径: 5px; }</string>
+      <string notr="true">QSlider::groove:vertical {
+	background-color: black;
+    margin: 0px 0px 0px 0px;
+	border: none;
+	 width: 12px;
+}
+
+QSlider::handle:vertical {
+	background-color: rgba(200, 200, 200, 200);;
+	border-width: 1px;
+   margin-top: -5px;
+	margin-bottom: -5px;
+	height: 50px;
+	border-radius: 5px;
+}
+
+QSlider::handle:vertical:hover {
+	background-color: rgba(150, 150, 150, 200);
+    border-radius: 5px;
+}
+
+QSlider::handle:vertical:pressed {
+	background-color: rgba(0, 150, 150, 200);
+    border-radius: 5px;
+}</string>
      </property>
      <property name="spinBoxVisible">
       <bool>false</bool>
      </property>
      <property name="quantity">
-      <string notr="true">长度</string>
+      <string notr="true">length</string>
      </property>
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -88,6 +113,6 @@
    <header>ctkSliderWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

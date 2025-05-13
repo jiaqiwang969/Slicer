@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerTemplateKeyModuleWidget</class>
  <widget class="qSlicerWidget" name="qSlicerTemplateKeyModuleWidget">
@@ -10,17 +11,17 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>模板键</string>
+   <string>TemplateKey</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="ctkCollapsibleButton" name="CTKCollapsibleButton" native="true">
      <property name="text" stdset="0">
-      <string>显示</string>
+      <string>Display</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
-       <widget class="qSlicerTemplateKeyFooBarWidget" name="FooBar" native="true" />
+       <widget class="qSlicerTemplateKeyFooBarWidget" name="FooBar" native="true"/>
       </item>
      </layout>
     </widget>
@@ -60,6 +61,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

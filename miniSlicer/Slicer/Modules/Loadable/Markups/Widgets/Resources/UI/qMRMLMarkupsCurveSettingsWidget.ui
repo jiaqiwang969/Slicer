@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLMarkupsCurveSettingsWidget</class>
  <widget class="QWidget" name="qMRMLMarkupsCurveSettingsWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>曲线设置</string>
+   <string>Curve Settings</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">
@@ -28,7 +29,7 @@
    <item>
     <widget class="ctkCollapsibleButton" name="curveSettingsCollapseButton" native="true">
      <property name="text" stdset="0">
-      <string>曲线设置</string>
+      <string>Curve Settings</string>
      </property>
      <property name="collapsed" stdset="0">
       <bool>true</bool>
@@ -54,17 +55,17 @@
            <item row="0" column="0">
             <widget class="QLabel" name="label_7">
              <property name="text">
-              <string>曲线类型：</string>
+              <string>Curve Type:</string>
              </property>
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QComboBox" name="curveTypeComboBox" />
+            <widget class="QComboBox" name="curveTypeComboBox"/>
            </item>
            <item row="1" column="0">
             <widget class="QLabel" name="label_4">
              <property name="text">
-              <string>限制到模型：</string>
+              <string>Constrain to Model:</string>
              </property>
             </widget>
            </item>
@@ -72,7 +73,7 @@
             <widget class="qMRMLNodeComboBox" name="modelNodeSelector" native="true">
              <property name="nodeTypes" stdset="0">
               <stringlist notr="true">
-               <string>模型节点 (vtkMRMLModelNode)</string>
+               <string>vtkMRMLModelNode</string>
               </stringlist>
              </property>
              <property name="noneEnabled" stdset="0">
@@ -85,7 +86,7 @@
          <item>
           <widget class="ctkCollapsibleGroupBox" name="surfaceCurveCollapsibleButton">
            <property name="title">
-            <string>表面</string>
+            <string>Surface</string>
            </property>
            <property name="collapsed" stdset="0">
             <bool>false</bool>
@@ -94,14 +95,14 @@
             <item row="0" column="0">
              <widget class="QLabel" name="label_5">
               <property name="text">
-               <string>代价函数：</string>
+               <string>Cost function:</string>
               </property>
              </widget>
             </item>
             <item row="1" column="0">
              <widget class="QLabel" name="label_6">
               <property name="text">
-               <string>距离加权函数：</string>
+               <string>Distance weighting function:</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -111,7 +112,7 @@
             <item row="1" column="1">
              <widget class="QWidget" name="scalarFunctionWidget" native="true">
               <property name="styleSheet">
-               <string notr="true" />
+               <string notr="true"/>
               </property>
               <layout class="QHBoxLayout" name="horizontalLayout_3">
                <property name="spacing">
@@ -138,7 +139,7 @@
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>距离 / (</string>
+                  <string>distance / (</string>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -160,10 +161,10 @@
                   </size>
                  </property>
                  <property name="toolTip">
-                  <string>&amp;lt;html&amp;gt;&amp;lt;head/&amp;gt;&amp;lt;body&amp;gt;&amp;lt;p align="justify"&amp;gt;用于计算路径寻找的标量权重的函数。当前活动的点标量可以通过变量名 &amp;quot;activeScalar&amp;quot; 访问。所有其他标量可以作为变量访问，前提是它们不包含任何非法字符 (&amp;quot;./* 等)。&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;示例函数： &amp;quot;activeScalar*activeScalar&amp;quot;, &amp;quot;exp(activeScalar)&amp;quot;, &amp;quot;1.0-activeScalar&amp;quot;, &amp;quot;scalarA*scalarB&amp;quot;&amp;lt;/p&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;justify&quot;&gt;Function used to calculate scalar weights for pathfinding. The currently active point scalar can be accessed using the &amp;quot;activeScalar&amp;quot; variable name. All other scalars can be accessed as variables provided that they don't contain any illegal characters (&amp;quot;./* etc.).&lt;/p&gt;&lt;p&gt;Example functions: &amp;quot;activeScalar*activeScalar&amp;quot;, &amp;quot;exp(activeScalar)&amp;quot;, &amp;quot;1.0-activeScalar&amp;quot;, &amp;quot;scalarA*scalarB&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="text">
-                  <string>中心线模型：</string>
+                  <string>activeScalar</string>
                  </property>
                 </widget>
                </item>
@@ -184,7 +185,7 @@
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QComboBox" name="costFunctionComboBox" />
+             <widget class="QComboBox" name="costFunctionComboBox"/>
             </item>
            </layout>
           </widget>
@@ -192,7 +193,7 @@
          <item>
           <widget class="ctkCollapsibleGroupBox" name="CurveSettingsAdvancedOptionCollapsibleGroupBox">
            <property name="title">
-            <string>高级</string>
+            <string>Advanced</string>
            </property>
            <property name="checked">
             <bool>false</bool>
@@ -207,14 +208,14 @@
             <item row="0" column="0">
              <widget class="QLabel" name="projectCurveMaxSearchRadiusLabel">
               <property name="text">
-               <string>最大投影距离：</string>
+               <string>Maximum projection distance:</string>
               </property>
              </widget>
             </item>
             <item row="0" column="1">
              <widget class="ctkSliderWidget" name="projectCurveMaxSearchRadiusSliderWidget" native="true">
               <property name="toolTip">
-               <string>选择最大投影距离作为边界框大小的百分比。</string>
+               <string>Select the maximum projection distance as percentage of bounding box size.</string>
               </property>
               <property name="singleStep" stdset="0">
                <double>0.100000000000000</double>
@@ -245,10 +246,10 @@
    <item>
     <widget class="ctkCollapsibleButton" name="resampleCurveCollapsibleButton" native="true">
      <property name="toolTip">
-      <string>使用指定的点数重新采样曲线。</string>
+      <string>Resample a curve with the number of points specified.</string>
      </property>
      <property name="text" stdset="0">
-      <string>重新采样</string>
+      <string>Resample</string>
      </property>
      <property name="collapsed" stdset="0">
       <bool>true</bool>
@@ -257,17 +258,17 @@
       <item row="0" column="0">
        <widget class="QLabel" name="resampleCurveOutputNodeLabel">
         <property name="text">
-         <string>输出节点： </string>
+         <string>Output node: </string>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="resampleCurveNumerOfOutputPointsLabel">
         <property name="toolTip">
-         <string>选择重新采样曲线上的点数。 </string>
+         <string>Select the number of points on the resampled curve. </string>
         </property>
         <property name="text">
-         <string>重新采样点数： </string>
+         <string>Number of resampled points: </string>
         </property>
        </widget>
       </item>
@@ -277,7 +278,7 @@
          <enum>Qt::TabFocus</enum>
         </property>
         <property name="toolTip">
-         <string>活动曲线将使用指定的点数进行重新采样。</string>
+         <string>The active curve will be resamples with the number of points specified.</string>
         </property>
         <property name="decimals" stdset="0">
          <number>0</number>
@@ -299,11 +300,11 @@
       <item row="0" column="1">
        <widget class="qMRMLNodeComboBox" name="resampleCurveOutputNodeSelector" native="true">
         <property name="toolTip">
-         <string>选择一个节点以存储重新采样的曲线 </string>
+         <string>Select a node to store the resampled curve </string>
         </property>
         <property name="nodeTypes" stdset="0">
          <stringlist notr="true">
-          <string>曲线节点 (vtkMRMLMarkupsCurveNode)</string>
+          <string>vtkMRMLMarkupsCurveNode</string>
          </stringlist>
         </property>
         <property name="noneEnabled" stdset="0">
@@ -322,17 +323,17 @@
          <bool>true</bool>
         </property>
         <property name="noneDisplay" stdset="0">
-         <string>(覆盖当前节点)</string>
+         <string>(Overwrite current node)</string>
         </property>
        </widget>
       </item>
       <item row="4" column="0" colspan="3">
        <widget class="QPushButton" name="resampleCurveButton">
         <property name="toolTip">
-         <string>使用指定的点数重新采样活动曲线。</string>
+         <string>Resamples the active curve with the number of points specified.</string>
         </property>
         <property name="text">
-         <string>重新采样曲线</string>
+         <string>Resample curve</string>
         </property>
        </widget>
       </item>
@@ -371,7 +372,7 @@
    <header>ctkDoubleSpinBox.h</header>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
  </connections>
 </ui>

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>UtilTest</class>
  <widget class="QWidget" name="UtilTest">
@@ -27,10 +28,10 @@
      <item>
       <widget class="ctkMenuButton" name="importButton">
        <property name="toolTip">
-        <string>将文件导入到 DICOM 数据库</string>
+        <string>Import files into DICOM database</string>
        </property>
        <property name="text">
-        <string>    导入 DICOM 文件</string>
+        <string>    Import DICOM files</string>
        </property>
        <property name="icon">
         <iconset resource="../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc">
@@ -47,10 +48,10 @@
      <item>
       <widget class="ctkMenuButton" name="showBrowserButton">
        <property name="toolTip">
-        <string>将文件导入到 DICOM 数据库</string>
+        <string>Import files into DICOM database</string>
        </property>
        <property name="text">
-        <string>    显示 DICOM 数据库</string>
+        <string>    Show DICOM database</string>
        </property>
        <property name="icon">
         <iconset resource="../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc">
@@ -95,7 +96,7 @@
       </font>
      </property>
      <property name="text">
-      <string>已加载数据</string>
+      <string>Loaded data</string>
      </property>
     </widget>
    </item>
@@ -109,30 +110,30 @@
    <item>
     <widget class="ctkCollapsibleButton" name="networkingFrame">
      <property name="text">
-      <string>DICOM 网络</string>
+      <string>DICOM networking</string>
      </property>
      <layout class="QFormLayout" name="formLayout">
       <item row="0" column="0">
        <widget class="QLabel" name="queryServerLabel">
         <property name="text">
-         <string>从远程服务器拉取数据：</string>
+         <string>Pull data from remote server:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="QPushButton" name="queryServerButton">
         <property name="toolTip">
-         <string>查询并检索远程服务器上的 DICOM 数据集</string>
+         <string>Query and retrieve DICOM data sets from remote server</string>
         </property>
         <property name="text">
-         <string>查询并检索</string>
+         <string>Query and retrieve</string>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="storageListenerLabel">
         <property name="text">
-         <string>存储监听器：</string>
+         <string>Storage listener:</string>
         </property>
        </widget>
       </item>
@@ -141,10 +142,10 @@
         <item>
          <widget class="QCheckBox" name="toggleListener">
           <property name="toolTip">
-           <string>启用 DICOM 监听服务器以接收图像 (C-Store SCP)</string>
+           <string>Enable DICOM listening server to receive images (C-Store SCP)</string>
           </property>
           <property name="text">
-           <string />
+           <string/>
           </property>
          </widget>
         </item>
@@ -173,7 +174,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string />
+           <string/>
           </property>
          </widget>
         </item>
@@ -182,17 +183,17 @@
       <item row="2" column="0">
        <widget class="QLabel" name="runListenerAtStartLabel">
         <property name="text">
-         <string>启动时启动存储监听器：</string>
+         <string>Start storage listener on startup:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
        <widget class="QCheckBox" name="runListenerAtStart">
         <property name="toolTip">
-         <string>在应用程序启动时自动启动监听器</string>
+         <string>Automatically start listener on application startup</string>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
@@ -202,13 +203,13 @@
    <item>
     <widget class="ctkCollapsibleButton" name="browserSettingsFrame">
      <property name="text">
-      <string>DICOM 数据库设置</string>
+      <string>DICOM database settings</string>
      </property>
      <layout class="QFormLayout" name="formLayout_2">
       <item row="0" column="0">
        <widget class="QLabel" name="databaseDirectoryLabel">
         <property name="text">
-         <string>数据库位置：</string>
+         <string>Database location:</string>
         </property>
        </widget>
       </item>
@@ -225,44 +226,44 @@
       <item row="1" column="0">
        <widget class="QLabel" name="browserAutoHideLabel">
         <property name="text">
-         <string>自动隐藏浏览器窗口：</string>
+         <string>Auto-hide browser window:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="databaseMaintenanceLabel">
         <property name="text">
-         <string>维护：</string>
+         <string>Maintenance:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="QCheckBox" name="browserAutoHideCheckBox">
         <property name="toolTip">
-         <string>数据加载后隐藏 DICOM 数据库浏览器</string>
+         <string>Hide DICOM database browser after data loaded</string>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
        <widget class="QPushButton" name="repairDatabaseButton">
         <property name="toolTip">
-         <string>如果未在磁盘上找到引用的 DICOM 文件，则从 DICOM 数据库中删除所有项目。</string>
+         <string>Remove all items from the DICOM database if referenced DICOM file is not found on disk.</string>
         </property>
         <property name="text">
-         <string>删除不可用的数据集</string>
+         <string>Remove unavailable data sets</string>
         </property>
        </widget>
       </item>
       <item row="3" column="1">
        <widget class="QPushButton" name="clearDatabaseButton">
         <property name="toolTip">
-         <string>从数据库中删除所有数据以及在导入过程中复制到数据库中的所有文件。</string>
+         <string>Removes all data from the database and all files that were copied into the database during import.</string>
         </property>
         <property name="text">
-         <string>删除所有数据集</string>
+         <string>Remove all data sets</string>
         </property>
        </widget>
       </item>
@@ -272,9 +273,9 @@
    <item>
     <widget class="ctkCollapsibleButton" name="dicomPluginsFrame">
      <property name="text">
-      <string>DICOM 插件</string>
+      <string>DICOM plugins</string>
      </property>
-     <layout class="QGridLayout" name="gridLayout" />
+     <layout class="QGridLayout" name="gridLayout"/>
     </widget>
    </item>
   </layout>
@@ -303,7 +304,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc" />
+  <include location="../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc"/>
  </resources>
- <connections />
+ <connections/>
 </ui>

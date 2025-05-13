@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLSegmentationRepresentationsListView</class>
  <widget class="QWidget" name="qMRMLSegmentationRepresentationsListView">
@@ -22,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>qMRML分割表示列表视图</string>
+   <string>qMRMLSegmentationRepresentationsListView</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="margin">
@@ -49,15 +50,15 @@
       </font>
      </property>
      <property name="text">
-      <string>未选择节点</string>
+      <string>No node selected</string>
      </property>
     </widget>
    </item>
    <item row="1" column="0">
-    <widget class="QListWidget" name="RepresentationsList" />
+    <widget class="QListWidget" name="RepresentationsList"/>
    </item>
   </layout>
  </widget>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

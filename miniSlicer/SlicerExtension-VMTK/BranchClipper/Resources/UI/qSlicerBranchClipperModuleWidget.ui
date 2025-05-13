@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerBranchClipperModuleWidget</class>
  <widget class="qSlicerWidget" name="qSlicerBranchClipperModuleWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string />
+   <string/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -36,7 +37,7 @@
         </property>
         <property name="nodeTypes">
          <stringlist notr="true">
-          <string>模型节点 (vtkMRMLModelNode)</string>
+          <string>vtkMRMLModelNode</string>
          </stringlist>
         </property>
         <property name="showChildNodeTypes">
@@ -62,7 +63,7 @@
       <item row="4" column="0">
        <widget class="QLabel" name="surfaceLabel">
         <property name="locale">
-         <locale language="English" country="UnitedStates" />
+         <locale language="English" country="UnitedStates"/>
         </property>
         <property name="text">
          <string>管树模型:</string>
@@ -77,12 +78,12 @@
            <string>选择输入的分割节点或模型节点。</string>
           </property>
           <property name="locale">
-           <locale language="English" country="UnitedStates" />
+           <locale language="English" country="UnitedStates"/>
           </property>
           <property name="nodeTypes">
            <stringlist notr="true">
-            <string>分割节点 (vtkMRMLSegmentationNode)</string>
-            <string>模型节点 (vtkMRMLModelNode)</string>
+            <string>vtkMRMLSegmentationNode</string>
+            <string>vtkMRMLModelNode</string>
            </stringlist>
           </property>
           <property name="noneEnabled">
@@ -227,7 +228,7 @@
    <header>qMRMLSegmentSelectorWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>qSlicerBranchClipperModuleWidget</sender>

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLVolumeThresholdWidget</class>
  <widget class="QWidget" name="qMRMLVolumeThresholdWidget">
@@ -16,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>体积阈值处理</string>
+   <string>Volume Thresholding</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="margin">
@@ -25,7 +26,7 @@
    <item row="0" column="0">
     <widget class="QLabel" name="ThresholdLabel">
      <property name="text">
-      <string>阈值：</string>
+      <string>Threshold: </string>
      </property>
     </widget>
    </item>
@@ -33,17 +34,17 @@
     <widget class="QComboBox" name="AutoManualComboBox">
      <item>
       <property name="text">
-       <string>自动</string>
+       <string>Auto</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>手动</string>
+       <string>Manual</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>关闭</string>
+       <string>Off</string>
       </property>
      </item>
     </widget>
@@ -51,7 +52,7 @@
    <item row="1" column="0" colspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="ctkRangeWidget" name="VolumeThresholdRangeWidget" />
+      <widget class="ctkRangeWidget" name="VolumeThresholdRangeWidget"/>
      </item>
      <item>
       <widget class="QToolButton" name="RangeButton">
@@ -78,6 +79,6 @@
    <header>ctkRangeWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

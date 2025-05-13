@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLClipNodeDisplayWidget</class>
  <widget class="qMRMLWidget" name="qMRMLClipNodeDisplayWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>qMRML剪辑节点显示小部件</string>
+   <string>qMRMLClipNodeDisplayWidget</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
@@ -28,63 +29,63 @@
    <item row="3" column="1">
     <widget class="QCheckBox" name="checkBox_ClippingKeepWholeCells">
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
    <item row="0" column="0">
     <widget class="QLabel" name="label_Clipping">
      <property name="text">
-      <string>剪辑：</string>
+      <string>Clipping:</string>
      </property>
     </widget>
    </item>
    <item row="1" column="0">
     <widget class="QLabel" name="label_ClippingCapping">
      <property name="text">
-      <string>盖子可见性：</string>
+      <string>Cap visibility:</string>
      </property>
     </widget>
    </item>
    <item row="1" column="2">
     <widget class="QLabel" name="label_ClippingCapOpacity">
      <property name="text">
-      <string>不透明度：</string>
+      <string>Opacity:</string>
      </property>
     </widget>
    </item>
    <item row="2" column="0">
     <widget class="QLabel" name="label_ClippingOutline">
      <property name="text">
-      <string>轮廓可见性：</string>
+      <string>Outline visibility:</string>
      </property>
     </widget>
    </item>
    <item row="1" column="1">
     <widget class="QCheckBox" name="checkBox_ClippingCapping">
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
    <item row="3" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>仅保留完整细胞：</string>
+      <string>Keep only whole cells:</string>
      </property>
     </widget>
    </item>
    <item row="2" column="1">
     <widget class="QCheckBox" name="checkBox_ClippingOutline">
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
    <item row="0" column="1">
     <widget class="QCheckBox" name="checkBox_Clipping">
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
@@ -122,6 +123,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

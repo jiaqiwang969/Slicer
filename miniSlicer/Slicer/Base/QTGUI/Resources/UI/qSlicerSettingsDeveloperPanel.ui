@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerSettingsDeveloperPanel</class>
  <widget class="ctkSettingsPanel" name="qSlicerSettingsDeveloperPanel">
@@ -10,51 +11,51 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>开发者</string>
+   <string>Developer</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
    <item row="0" column="0">
     <widget class="QLabel" name="DeveloperModeEnabledLabel">
      <property name="text">
-      <string>启用开发者模式：</string>
+      <string>Enable developer mode:</string>
      </property>
     </widget>
    </item>
    <item row="0" column="1">
     <widget class="QCheckBox" name="DeveloperModeEnabledCheckBox">
      <property name="toolTip">
-      <string>在开发者模式下运行应用程序：测试模块显示在模块列表中，Reload&amp;Test部分显示在脚本模块用户界面中，CLI模块的输入和输出文件在模块执行后不会被删除</string>
+      <string>Run the application in developer mode: testing modules are shown in the module list, Reload&amp;Test section is shown in scripted modules user interface, CLI module input and output files are not deleted after module execution</string>
      </property>
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
    <item row="2" column="0">
     <widget class="QLabel" name="QtTestingEnabledLabel">
      <property name="text">
-      <string>启用 QtTesting：</string>
+      <string>Enable QtTesting:</string>
      </property>
     </widget>
    </item>
    <item row="2" column="1">
     <widget class="QCheckBox" name="QtTestingEnabledCheckBox">
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
    <item row="6" column="0">
     <widget class="QLabel" name="SelfTestMessageDelayLabel">
      <property name="text">
-      <string>自检消息延迟：</string>
+      <string>Self-test message delay:</string>
      </property>
     </widget>
    </item>
    <item row="6" column="1">
     <widget class="ctkSliderWidget" name="SelfTestMessageDelaySlider">
      <property name="toolTip">
-      <string>在恢复自检执行和隐藏显示给用户的消息之前等待的时间</string>
+      <string>Time to wait before resuming self-test execution and hiding messages displayed to the user</string>
      </property>
      <property name="decimals">
       <number>0</number>
@@ -69,14 +70,14 @@
       <double>2000.000000000000000</double>
      </property>
      <property name="suffix">
-      <string>毫秒</string>
+      <string>ms</string>
      </property>
     </widget>
    </item>
    <item row="5" column="0">
     <widget class="QLabel" name="QtDesignerLabel">
      <property name="text">
-      <string>Qt Designer：</string>
+      <string>Qt Designer:</string>
      </property>
     </widget>
    </item>
@@ -85,7 +86,7 @@
      <item>
       <widget class="QPushButton" name="QtDesignerButton">
        <property name="text">
-        <string>启动</string>
+        <string>launch</string>
        </property>
       </widget>
      </item>
@@ -107,17 +108,17 @@
    <item row="1" column="0">
     <widget class="QLabel" name="DeveloperModeEnabledLabel_2">
      <property name="text">
-      <string>保留 CLI 模块数据文件：</string>
+      <string>Preserve CLI module data files:</string>
      </property>
     </widget>
    </item>
    <item row="1" column="1">
     <widget class="QCheckBox" name="PreserveCLIModuleDataFilesCheckBox">
      <property name="toolTip">
-      <string>保留在 CLI 模块执行期间创建的输入和数据文件</string>
+      <string>Preserve input and data files created during CLI module execution</string>
      </property>
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
@@ -136,6 +137,6 @@
    <header>ctkSliderWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

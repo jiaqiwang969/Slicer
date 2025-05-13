@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerCamerasModuleWidget</class>
  <widget class="qSlicerWidget" name="qSlicerCamerasModuleWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>相机</string>
+   <string>Cameras</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../qSlicerModulesCore.qrc">
@@ -26,7 +27,7 @@
    <item row="0" column="0">
     <widget class="ctkCollapsibleButton" name="CameraCollapsibleWidget">
      <property name="text">
-      <string>摄像机</string>
+      <string>Camera</string>
      </property>
      <property name="contentsFrameShape">
       <enum>QFrame::StyledPanel</enum>
@@ -35,7 +36,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="ViewNodeLabel">
         <property name="text">
-         <string>视图：</string>
+         <string>View:</string>
         </property>
        </widget>
       </item>
@@ -43,7 +44,7 @@
        <widget class="qMRMLNodeComboBox" name="ViewNodeSelector">
         <property name="nodeTypes">
          <stringlist notr="true">
-          <string>视图节点 (vtkMRMLViewNode)</string>
+          <string>vtkMRMLViewNode</string>
          </stringlist>
         </property>
         <property name="showHidden">
@@ -63,7 +64,7 @@
       <item row="1" column="0">
        <widget class="QLabel" name="CameraNodeLabel">
         <property name="text">
-         <string>摄像机：</string>
+         <string>Camera:</string>
         </property>
        </widget>
       </item>
@@ -71,7 +72,7 @@
        <widget class="qMRMLNodeComboBox" name="CameraNodeSelector">
         <property name="nodeTypes">
          <stringlist notr="true">
-          <string>摄像机节点 (vtkMRMLCameraNode)</string>
+          <string>vtkMRMLCameraNode</string>
          </stringlist>
         </property>
        </widget>
@@ -114,7 +115,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../qSlicerModulesCore.qrc" />
+  <include location="../qSlicerModulesCore.qrc"/>
  </resources>
  <connections>
   <connection>

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerErrorReportDialog</class>
  <widget class="QDialog" name="qSlicerErrorReportDialog">
@@ -16,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>报告错误和请求增强功能</string>
+   <string>Report bugs and request enhancements</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
    <property name="fieldGrowthPolicy">
@@ -25,7 +26,7 @@
    <item row="0" column="0" colspan="2">
     <widget class="QLabel" name="InstructionsLabel">
      <property name="text">
-      <string>&amp;lt;html&amp;gt;&amp;lt;head/&amp;gt;&amp;lt;body&amp;gt;&amp;lt;p&amp;gt;&amp;lt;span style=" font-weight:600;"&amp;gt;问题和功能请求：&amp;lt;/span&amp;gt;访问 &amp;lt;a href="https://discourse.slicer.org"&amp;gt;&amp;lt;span style=" text-decoration: underline;"&amp;gt;Slicer 论坛&amp;lt;/span&amp;gt;&amp;lt;/a&amp;gt;.&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;&amp;lt;span style=" font-weight:600;"&amp;gt;错误报告：&amp;lt;/span&amp;gt;&amp;lt;a href="https://discourse.slicer.org/new-topic?body=Problem%20report%20for%20[appname-version-platform]:%20[please%20describe%20expected%20and%20actual%20behavior]&amp;amp;category=support"&amp;gt;&amp;lt;span style=" text-decoration: underline;"&amp;gt;在 Slicer 论坛发布新主题&amp;lt;/span&amp;gt;&amp;lt;/a&amp;gt;以告知我们您的问题，或向 &amp;lt;a href="https://issues.slicer.org"&amp;gt;&amp;lt;span style=" text-decoration: underline;"&amp;gt;3D Slicer 错误跟踪器&amp;lt;/span&amp;gt;&amp;lt;/a&amp;gt;提交错误报告。描述导致错误的步骤，并附上日志消息。&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;&amp;lt;span style=" font-weight:600;"&amp;gt;警告 - 如果您处理患者数据：&amp;lt;/span&amp;gt;请检查日志消息中是否包含可能识别患者的信息。将日志消息发送给特定人员，而不是在邮件列表或网站上公开分享。&amp;lt;/p&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Questions and feature requests:&lt;/span&gt; visit the &lt;a href=&quot;https://discourse.slicer.org&quot;&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Slicer forum&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Bug reports: &lt;/span&gt;&lt;a href=&quot;https://discourse.slicer.org/new-topic?body=Problem%20report%20for%20[appname-version-platform]:%20[please%20describe%20expected%20and%20actual%20behavior]&amp;amp;category=support&quot;&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;post a new topic to the Slicer forum&lt;/span&gt;&lt;/a&gt; to tell us about your problem or submit a bug report to the &lt;a href=&quot;https://issues.slicer.org&quot;&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;3D Slicer bugtracker&lt;/span&gt;&lt;/a&gt;. Describe the steps that lead to the error and also attach log messages.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Warning - if you work with patient data:&lt;/span&gt; Check that the log messages do not contain any information that may identify a patient. Send the log messages to specific people instead of sharing them publicly on a mailing list or website.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="textFormat">
       <enum>Qt::RichText</enum>
@@ -41,7 +42,7 @@
    <item row="1" column="0">
     <widget class="QLabel" name="RecentLogFilesLabel">
      <property name="text">
-      <string>最近的日志文件：</string>
+      <string>Recent log files:</string>
      </property>
     </widget>
    </item>
@@ -69,7 +70,7 @@
      <item>
       <widget class="ctkPushButton" name="LogCopyToClipboardPushButton">
        <property name="text">
-        <string>复制日志到剪贴板</string>
+        <string>Copy log to clipboard</string>
        </property>
        <property name="autoDefault">
         <bool>false</bool>
@@ -79,7 +80,7 @@
      <item>
       <widget class="ctkPushButton" name="LogFileOpenPushButton">
        <property name="text">
-        <string>在编辑器中打开日志</string>
+        <string>Open log in editor</string>
        </property>
        <property name="autoDefault">
         <bool>false</bool>
@@ -89,7 +90,7 @@
      <item>
       <widget class="ctkPushButton" name="LogOpenFileLocationPushButton">
        <property name="text">
-        <string>打开日志位置</string>
+        <string>Open log location</string>
        </property>
        <property name="autoDefault">
         <bool>false</bool>
@@ -99,7 +100,7 @@
      <item>
       <widget class="QCheckBox" name="LogFileEditCheckBox">
        <property name="text">
-        <string>编辑日志</string>
+        <string>Edit Log</string>
        </property>
       </widget>
      </item>
@@ -131,7 +132,7 @@
    <item row="3" column="0">
     <widget class="QLabel" name="RecentLogFilesLabel_2">
      <property name="text">
-      <string>日志文件内容：</string>
+      <string>Log file content:</string>
      </property>
     </widget>
    </item>
@@ -145,8 +146,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../SlicerApp.qrc" />
-  <include location="../../../QTGUI/Resources/qSlicerBaseQTGUI.qrc" />
+  <include location="../SlicerApp.qrc"/>
+  <include location="../../../QTGUI/Resources/qSlicerBaseQTGUI.qrc"/>
  </resources>
- <connections />
+ <connections/>
 </ui>

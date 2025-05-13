@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLColorPickerWidget</class>
  <widget class="qMRMLWidget" name="qMRMLColorPickerWidget">
@@ -10,18 +11,18 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>颜色选择器</string>
+   <string>Color Picker</string>
   </property>
   <layout class="QGridLayout" name="gridLayout" columnstretch="0,0">
    <item row="0" column="0">
     <widget class="QLabel" name="ColorTableLabel">
      <property name="text">
-      <string>颜色节点：</string>
+      <string>Color node:</string>
      </property>
     </widget>
    </item>
    <item row="0" column="1">
-    <widget class="qMRMLColorTableComboBox" name="ColorTableComboBox" />
+    <widget class="qMRMLColorTableComboBox" name="ColorTableComboBox"/>
    </item>
    <item row="2" column="0" colspan="2">
     <widget class="qMRMLColorListView" name="MRMLColorListView">
@@ -43,7 +44,7 @@
     </widget>
    </item>
    <item row="4" column="1">
-    <widget class="ctkSearchBox" name="SearchBox" />
+    <widget class="ctkSearchBox" name="SearchBox"/>
    </item>
   </layout>
  </widget>
@@ -75,7 +76,7 @@
    <header>ctkSearchBox.h</header>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>ColorTableComboBox</sender>

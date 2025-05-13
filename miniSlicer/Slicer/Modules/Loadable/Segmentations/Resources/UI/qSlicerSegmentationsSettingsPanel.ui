@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerSegmentationsSettingsPanel</class>
  <widget class="ctkSettingsPanel" name="qSlicerSegmentationsSettingsPanel">
@@ -10,26 +11,26 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>分割设置面板</string>
+   <string>SegmentationsSettingsPanel</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
    <item row="0" column="0">
     <widget class="QLabel" name="AutoOpacitiesLabel">
      <property name="toolTip">
-      <string>在从文件加载时自动设置分割的透明度，以避免一个分割遮挡另一个分割</string>
+      <string>Automatically set opacities of the segments when loading from file based on which contains which, so that no segment obscures another</string>
      </property>
      <property name="text">
-      <string>自动分割透明度：</string>
+      <string>Automatic segment opacities:</string>
      </property>
     </widget>
    </item>
    <item row="0" column="1">
     <widget class="QCheckBox" name="AutoOpacitiesCheckBox">
      <property name="toolTip">
-      <string>自动设置分割的透明度，以避免一个分割遮挡另一个分割</string>
+      <string>Automatically set opacities of the segments when loading from file based on which contains which, so that no segment obscures another</string>
      </property>
      <property name="text">
-      <string />
+      <string/>
      </property>
      <property name="checked">
       <bool>true</bool>
@@ -39,20 +40,20 @@
    <item row="1" column="0">
     <widget class="QLabel" name="SurfaceSmoothingLabel">
      <property name="toolTip">
-      <string>在新的分割中启用二进制标签图到封闭表面的转换时的表面平滑。平滑可以改善3D视图和导出模型的外观，但会显著减慢分割编辑的速度。</string>
+      <string>Enable surface smoothing during binary labelmap to closed surface conversion in new segmentations. Smoothing improves appearance in 3D views and exported models but makes segment editing considerably slower.</string>
      </property>
      <property name="text">
-      <string>默认启用表面平滑：</string>
+      <string>Enable surface smoothing by default:</string>
      </property>
     </widget>
    </item>
    <item row="1" column="1">
     <widget class="QCheckBox" name="SurfaceSmoothingCheckBox">
      <property name="toolTip">
-      <string>在新的分割中启用二进制标签图到封闭表面的转换时的表面平滑。平滑可以改善3D视图和导出模型的外观，但会显著减慢分割编辑的速度。</string>
+      <string>Enable surface smoothing during binary labelmap to closed surface conversion in new segmentations. Smoothing improves appearance in 3D views and exported models but makes segment editing considerably slower.</string>
      </property>
      <property name="text">
-      <string />
+      <string/>
      </property>
      <property name="checked">
       <bool>true</bool>
@@ -62,20 +63,24 @@
    <item row="2" column="0">
     <widget class="QLabel" name="UseTerminologyLabel">
      <property name="toolTip">
-      <string>如果启用，双击分割表中的分割名称或颜色将打开术语选择器。否则，名称和颜色可以直接编辑。默认情况下为真。</string>
+      <string>If enabled, double-clicking the segment name or color in the segment tables opens the terminology selector. Otherwise the name and color can be simply edited. True by default.
+
+Note: This applies to segment tables in Segment Editor and Segmentations modules, but other modules may choose to use custom setting that is not controlled by this checkbox.</string>
      </property>
      <property name="text">
-      <string>使用标准术语描述分割：</string>
+      <string>Use standard terminology for segments:</string>
      </property>
     </widget>
    </item>
    <item row="2" column="1">
     <widget class="QCheckBox" name="UseTerminologyCheckBox">
      <property name="toolTip">
-      <string>如果启用，双击分割表中的分割名称或颜色将打开术语选择器。否则，名称和颜色可以直接编辑。默认情况下为真。注意：这适用于分割编辑器和分割模块中的分割表，但其他模块可能选择使用不受此复选框控制的自定义设置。</string>
+      <string>If enabled, double-clicking the segment name or color in the segment tables opens the terminology selector. Otherwise the name and color can be simply edited. True by default.
+
+Note: This applies to segment tables in Segment Editor and Segmentations modules, but other modules may choose to use custom setting that is not controlled by this checkbox.</string>
      </property>
      <property name="text">
-      <string />
+      <string/>
      </property>
      <property name="checked">
       <bool>true</bool>
@@ -85,54 +90,54 @@
    <item row="3" column="0">
     <widget class="QLabel" name="label">
      <property name="toolTip">
-      <string>该术语将作为默认值用于空分割中的新分割。</string>
+      <string>This terminology will be used by default for new segments in an empty segmentation.</string>
      </property>
      <property name="text">
-      <string>默认术语条目：</string>
+      <string>Default terminology entry:</string>
      </property>
     </widget>
    </item>
    <item row="3" column="1">
     <widget class="ctkPushButton" name="EditDefaultTerminologyEntryPushButton">
      <property name="toolTip">
-      <string>该术语将作为默认值用于空分割中的新分割。</string>
+      <string>This terminology will be used by default for new segments in an empty segmentation.</string>
      </property>
      <property name="text">
-      <string>（设置）</string>
+      <string>(set)</string>
      </property>
     </widget>
    </item>
    <item row="4" column="0">
     <widget class="QLabel" name="label_3">
      <property name="toolTip">
-      <string>在其他分割区域的默认编辑模式。</string>
+      <string>Default mode of editing in areas of other segments.</string>
      </property>
      <property name="text">
-      <string>默认覆盖模式：</string>
+      <string>Default overwrite mode:</string>
      </property>
     </widget>
    </item>
    <item row="4" column="1">
     <widget class="ctkComboBox" name="DefaultOverwriteModeComboBox">
      <property name="toolTip">
-      <string>其他分割区域的默认编辑模式。</string>
+      <string>Default mode of editing in areas of other segments.</string>
      </property>
     </widget>
    </item>
    <item row="5" column="0">
     <widget class="QLabel" name="label_2">
      <property name="toolTip">
-      <string>此选项控制当用户编辑当前不可见的分割时应用程序应如何处理。旨在防止对隐藏分割的无意更改。</string>
+      <string>This option controls what the application should do if the user edits a segment that is currently not visible. It is meant to prevent unintentional changes to hidden segments.</string>
      </property>
      <property name="text">
-      <string>编辑隐藏分割： </string>
+      <string>Edit hidden segments: </string>
      </property>
     </widget>
    </item>
    <item row="5" column="1">
     <widget class="ctkComboBox" name="AllowEditingHiddenSegmentComboBox">
      <property name="toolTip">
-      <string>此选项控制当用户编辑当前不可见的分割时应用程序应如何处理。旨在防止对隐藏分割的无意更改。</string>
+      <string>This option controls what the application should do if the user edits a segment that is currently not visible. It is meant to prevent unintentional changes to hidden segments.</string>
      </property>
     </widget>
    </item>
@@ -169,6 +174,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

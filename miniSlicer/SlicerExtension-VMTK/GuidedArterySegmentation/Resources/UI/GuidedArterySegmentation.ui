@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>GuidedArterySegmentation</class>
  <widget class="qMRMLWidget" name="GuidedArterySegmentation">
@@ -15,7 +16,7 @@
      <item row="0" column="0">
       <widget class="QLabel" name="parameterSetLabel">
        <property name="text">
-        <string>参数集：</string>
+        <string>Parameter set:</string>
        </property>
       </widget>
      </item>
@@ -39,21 +40,21 @@
           </sizepolicy>
          </property>
          <property name="toolTip">
-          <string>参数集将定义一个命名研究的参数分组。</string>
+          <string>A parameter set groups parameters that define a named study distinctly.</string>
          </property>
          <property name="nodeTypes">
           <stringlist notr="true">
-           <string>脚本模块节点 (vtkMRMLScriptedModuleNode)</string>
+           <string>vtkMRMLScriptedModuleNode</string>
           </stringlist>
          </property>
          <property name="showHidden">
           <bool>true</bool>
          </property>
          <property name="hideChildNodeTypes">
-          <stringlist notr="true" />
+          <stringlist notr="true"/>
          </property>
          <property name="baseName">
-          <string notr="true">引导动脉分割</string>
+          <string notr="true">GuidedArterySegmentation</string>
          </property>
          <property name="noneEnabled">
           <bool>false</bool>
@@ -62,7 +63,7 @@
           <bool>true</bool>
          </property>
          <property name="interactionNodeSingletonTag">
-          <string notr="true" />
+          <string notr="true"/>
          </property>
          <property name="selectNodeUponCreation">
           <bool>true</bool>
@@ -84,7 +85,7 @@
           </size>
          </property>
          <property name="toolTip">
-          <string>如果有输入分割和体积，更新分割编辑器和切片视图。</string>
+          <string>Update the segment editor and the slice views with the input segmentation and volume if any.</string>
          </property>
          <property name="text">
           <string>↺</string>
@@ -104,30 +105,32 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>输入</string>
+      <string>Inputs</string>
      </property>
      <layout class="QFormLayout" name="formLayout_2">
       <item row="0" column="0">
        <widget class="QLabel" name="inputCurveLabel">
         <property name="locale">
-         <locale language="English" country="UnitedStates" />
+         <locale language="English" country="UnitedStates"/>
         </property>
         <property name="text">
-         <string>输入曲线：</string>
+         <string>Input curve:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="qMRMLNodeComboBox" name="inputCurveSelector">
         <property name="toolTip">
-         <string>选择一个输入标记曲线节点。\n\n控制点假定位于对比的腔道上。</string>
+         <string>Pick an input markups curve node.
+
+The control points are assumed to be on the contrasted lumen.</string>
         </property>
         <property name="locale">
-         <locale language="English" country="UnitedStates" />
+         <locale language="English" country="UnitedStates"/>
         </property>
         <property name="nodeTypes">
          <stringlist notr="true">
-          <string>标记曲线节点 (vtkMRMLMarkupsCurveNode)</string>
+          <string>vtkMRMLMarkupsCurveNode</string>
          </stringlist>
         </property>
         <property name="showChildNodeTypes">
@@ -153,20 +156,22 @@
       <item row="7" column="0">
        <widget class="QLabel" name="tubeDiameterSpinBoxLabel">
         <property name="locale">
-         <locale language="English" country="UnitedStates" />
+         <locale language="English" country="UnitedStates"/>
         </property>
         <property name="text">
-         <string>管径：</string>
+         <string>Tube diameter:</string>
         </property>
        </widget>
       </item>
       <item row="7" column="1">
        <widget class="QDoubleSpinBox" name="tubeDiameterSpinBox">
         <property name="toolTip">
-         <string>指定一个略高于目标动脉最大估计直径的值。\n\n如果下面指定了 Shape::Tube 节点，则忽略此参数。</string>
+         <string>Specify a value slightly above the maximum estimated diameter of the target artery.
+
+If a Shape::Tube node is specified below, this parameter is ignored.</string>
         </property>
         <property name="locale">
-         <locale language="English" country="UnitedStates" />
+         <locale language="English" country="UnitedStates"/>
         </property>
         <property name="decimals">
          <number>1</number>
@@ -185,21 +190,21 @@
       <item row="4" column="0">
        <widget class="QLabel" name="outputSegmentationSelectorLabel">
         <property name="text">
-         <string>分割：</string>
+         <string>Segmentation:</string>
         </property>
        </widget>
       </item>
       <item row="4" column="1">
        <widget class="qMRMLNodeComboBox" name="outputSegmentationSelector">
         <property name="toolTip">
-         <string>选择一个输出分割</string>
+         <string>Select an output segmentation</string>
         </property>
         <property name="locale">
-         <locale language="English" country="UnitedStates" />
+         <locale language="English" country="UnitedStates"/>
         </property>
         <property name="nodeTypes">
          <stringlist notr="true">
-          <string>分割节点 (vtkMRMLSegmentationNode)</string>
+          <string>vtkMRMLSegmentationNode</string>
          </stringlist>
         </property>
         <property name="noneEnabled">
@@ -221,14 +226,14 @@
         <item>
          <widget class="qMRMLNodeComboBox" name="inputSliceNodeSelector">
           <property name="toolTip">
-           <string>选择一个切片视图。将使用背景体积节点。请小心使用正确的体积节点。</string>
+           <string>Pick a slice view. The background volume node will be used. Please be careful to use the right volume node.</string>
           </property>
           <property name="locale">
-           <locale language="English" country="UnitedStates" />
+           <locale language="English" country="UnitedStates"/>
           </property>
           <property name="nodeTypes">
            <stringlist notr="true">
-            <string>切片节点 (vtkMRMLSliceNode)</string>
+            <string>vtkMRMLSliceNode</string>
            </stringlist>
           </property>
           <property name="noneEnabled">
@@ -250,10 +255,10 @@
       <item row="2" column="0">
        <widget class="QLabel" name="inputSliceNodeLabel">
         <property name="locale">
-         <locale language="English" country="UnitedStates" />
+         <locale language="English" country="UnitedStates"/>
         </property>
         <property name="text">
-         <string>切片节点：</string>
+         <string>Slice node:</string>
         </property>
        </widget>
       </item>
@@ -262,20 +267,20 @@
         <item>
          <widget class="QLabel" name="regionInfoLabel">
           <property name="toolTip">
-           <string>理想情况下，输出分割中应该只有一个区域。</string>
+           <string>Ideally, there should be only one region in the output segment.</string>
           </property>
           <property name="text">
-           <string />
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QToolButton" name="fixRegionToolButton">
           <property name="toolTip">
-           <string>如果分割有多个区域，此功能将用一个具有单个区域的新分割替换输入分割。它是从输入分割的最大区域创建的。</string>
+           <string>If the segment has more than one region, this function replaces the input segment by a new segment having a single region. It is created from the largest region of the input segment.</string>
           </property>
           <property name="text">
-           <string>修复</string>
+           <string>Fix</string>
           </property>
          </widget>
         </item>
@@ -293,10 +298,10 @@
       </sizepolicy>
      </property>
      <property name="locale">
-      <locale language="English" country="UnitedStates" />
+      <locale language="English" country="UnitedStates"/>
      </property>
      <property name="title">
-      <string>替代范围</string>
+      <string>Alternative extent</string>
      </property>
      <property name="flat">
       <bool>true</bool>
@@ -311,7 +316,8 @@
       <item>
        <widget class="QLabel" name="extentLabel">
         <property name="text">
-         <string>使用 Shape::Tube 节点来限制周向范围，而不是固定直径的管。</string>
+         <string>Use a Shape::Tube node to limit the circumferential
+extent, instead of a fixed diameter tube.</string>
         </property>
        </widget>
       </item>
@@ -320,22 +326,24 @@
         <item row="0" column="0">
          <widget class="QLabel" name="inputShapeNodeLabel">
           <property name="text">
-           <string>管节点：</string>
+           <string>Tube node:</string>
           </property>
          </widget>
         </item>
         <item row="0" column="1">
          <widget class="qMRMLNodeComboBox" name="inputShapeSelector">
           <property name="toolTip">
-           <string>将感兴趣区域限制为此 Shape::Tube 节点。\n\n如果指定，则上面的常规管径将被忽略。</string>
+           <string>Limit the region of interest to this Shape::Tube node.
+
+If specified, the regular tube diameter above is ignored.</string>
           </property>
           <property name="nodeTypes">
            <stringlist notr="true">
-            <string>标记形状节点 (vtkMRMLMarkupsShapeNode)</string>
+            <string>vtkMRMLMarkupsShapeNode</string>
            </stringlist>
           </property>
           <property name="hideChildNodeTypes">
-           <stringlist notr="true" />
+           <stringlist notr="true"/>
           </property>
           <property name="noneEnabled">
            <bool>true</bool>
@@ -350,7 +358,7 @@
            <bool>true</bool>
           </property>
           <property name="interactionNodeSingletonTag">
-           <string notr="true" />
+           <string notr="true"/>
           </property>
           <property name="selectNodeUponCreation">
            <bool>false</bool>
@@ -371,10 +379,10 @@
       </sizepolicy>
      </property>
      <property name="locale">
-      <locale language="English" country="UnitedStates" />
+      <locale language="English" country="UnitedStates"/>
      </property>
      <property name="title">
-      <string>泛洪填充参数</string>
+      <string>Flood filling parameters</string>
      </property>
      <property name="flat">
       <bool>true</bool>
@@ -392,20 +400,20 @@
        <item row="0" column="0">
         <widget class="QLabel" name="intensityToleranceLabel">
          <property name="locale">
-          <locale language="English" country="UnitedStates" />
+          <locale language="English" country="UnitedStates"/>
          </property>
          <property name="text">
-          <string>强度容忍度：</string>
+          <string>Intensity tolerance:</string>
          </property>
         </widget>
        </item>
        <item row="0" column="1">
         <widget class="QSpinBox" name="intensityToleranceSpinBox">
          <property name="toolTip">
-          <string>选择强度范围在控制点位置 +/- 此容忍度之间的连接体素。</string>
+          <string>Select connected voxels with intensity range between the one at a control point's position +/- this tolerance.</string>
          </property>
          <property name="locale">
-          <locale language="English" country="UnitedStates" />
+          <locale language="English" country="UnitedStates"/>
          </property>
          <property name="minimum">
           <number>1</number>
@@ -424,17 +432,18 @@
        <item row="1" column="0">
         <widget class="QLabel" name="neighbourhoodSizeLabel">
          <property name="text">
-          <string>邻域大小：</string>
+          <string>Neighbourhood size:</string>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
         <widget class="QDoubleSpinBox" name="neighbourhoodSizeDoubleSpinBox">
          <property name="toolTip">
-          <string>仅当邻域中的所有体素具有相似强度时，才会添加区域。使用较高的值可以防止泄漏。使用较低的值可以捕捉更细的细节。\n</string>
+          <string>Regions are added only if all voxels in the neighbourhood have similar intensities. Use higher values prevent leakage. Use lower values to allow capturing finer details.
+</string>
          </property>
          <property name="locale">
-          <locale language="English" country="UnitedStates" />
+          <locale language="English" country="UnitedStates"/>
          </property>
          <property name="decimals">
           <number>1</number>
@@ -476,17 +485,19 @@
    <item>
     <widget class="QCheckBox" name="extractCenterlinesCheckBox">
      <property name="text">
-      <string>提取中心线</string>
+      <string>Extract centerlines</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="ctkMenuButton" name="applyButton">
      <property name="toolTip">
-      <string>创建一个分割，并可选择性地创建中心线模型和中心线曲线。将替换上次运行的输出节点。\n\n如果提取了中心线，可以选择性地用其最大区域替换分割，如果它包含多个区域。</string>
+      <string>Create a segmentation and optionally a centerline model and a centerline curve. Output nodes from the last run will be replaced.
+
+If centerlines are extracted, optionally replace the segment by its largest region if it contains more than one region.</string>
      </property>
      <property name="text">
-      <string>应用</string>
+      <string>Apply</string>
      </property>
     </widget>
    </item>
@@ -523,7 +534,7 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>GuidedArterySegmentation</sender>

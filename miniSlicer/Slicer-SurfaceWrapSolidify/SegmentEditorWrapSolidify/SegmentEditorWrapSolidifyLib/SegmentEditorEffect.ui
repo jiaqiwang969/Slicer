@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>SegmentEditorWrapSolidify</class>
  <widget class="qMRMLWidget" name="SegmentEditorWrapSolidify">
@@ -148,7 +149,7 @@
          <string>在原始分段存在表面裂纹处，在创建的外壳中保留间隙。如果薄裂纹未保留，请增加重新网格化过采样。</string>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
@@ -167,7 +168,7 @@
          <double>20.000000000000000</double>
         </property>
         <property name="quantity">
-         <string>长度</string>
+         <string>length</string>
         </property>
        </widget>
       </item>
@@ -209,7 +210,7 @@
         </property>
         <property name="nodeTypes">
          <stringlist>
-          <string>模型节点 (vtkMRMLModelNode)</string>
+          <string>vtkMRMLModelNode</string>
          </stringlist>
         </property>
         <property name="baseName">
@@ -445,7 +446,7 @@
          <double>100.000000000000000</double>
         </property>
         <property name="quantity">
-         <string>长度</string>
+         <string>length</string>
         </property>
        </widget>
       </item>
@@ -484,7 +485,7 @@
          <double>100.000000000000000</double>
         </property>
         <property name="quantity">
-         <string>长度</string>
+         <string>length</string>
         </property>
        </widget>
       </item>
@@ -540,7 +541,7 @@
    <header>qMRMLSegmentSelectorWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>SegmentEditorWrapSolidify</sender>

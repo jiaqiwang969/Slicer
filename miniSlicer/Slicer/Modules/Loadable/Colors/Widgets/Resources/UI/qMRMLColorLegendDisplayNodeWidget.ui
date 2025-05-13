@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLColorLegendDisplayNodeWidget</class>
  <widget class="qMRMLWidget" name="qMRMLColorLegendDisplayNodeWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>颜色图例</string>
+   <string>Color Legend</string>
   </property>
   <property name="windowIcon">
    <iconset>
@@ -32,7 +33,7 @@
    <item row="0" column="0">
     <widget class="QLabel" name="VisibilityLabel">
      <property name="text">
-      <string>可见性：</string>
+      <string>Visibility:</string>
      </property>
     </widget>
    </item>
@@ -54,17 +55,17 @@
    <item row="1" column="0">
     <widget class="QLabel" name="DisplayedOnViewLabel">
      <property name="text">
-      <string>视图：</string>
+      <string>View:</string>
      </property>
     </widget>
    </item>
    <item row="1" column="1">
-    <widget class="qMRMLDisplayNodeViewComboBox" name="DisplayNodeViewComboBox" />
+    <widget class="qMRMLDisplayNodeViewComboBox" name="DisplayNodeViewComboBox"/>
    </item>
    <item row="2" column="0">
     <widget class="QLabel" name="TitleTextLabel">
      <property name="text">
-      <string>标题：</string>
+      <string>Title:</string>
      </property>
     </widget>
    </item>
@@ -74,14 +75,14 @@
       <bool>true</bool>
      </property>
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
    <item row="3" column="0">
     <widget class="QLabel" name="LabelTextLabel">
      <property name="text">
-      <string>标签文本：</string>
+      <string>Label text:</string>
      </property>
     </widget>
    </item>
@@ -96,29 +97,29 @@
         </sizepolicy>
        </property>
        <property name="toolTip">
-        <string>将数值显示为标签文本</string>
+        <string>Show numeric value as label text</string>
        </property>
        <property name="text">
-        <string>值</string>
+        <string>Value</string>
        </property>
        <property name="checked">
         <bool>true</bool>
        </property>
        <attribute name="buttonGroup">
-        <string notr="true">标签文本按钮组</string>
+        <string notr="true">LabelTextButtonGroup</string>
        </attribute>
       </widget>
      </item>
      <item>
       <widget class="QRadioButton" name="UseColorNameAsLabelTextRadioButton">
        <property name="toolTip">
-        <string>将颜色名称显示为标签文本</string>
+        <string>Show color name as label text</string>
        </property>
        <property name="text">
-        <string>颜色名称</string>
+        <string>Color name</string>
        </property>
        <attribute name="buttonGroup">
-        <string notr="true">标签文本按钮组</string>
+        <string notr="true">LabelTextButtonGroup</string>
        </attribute>
       </widget>
      </item>
@@ -127,14 +128,14 @@
    <item row="4" column="0">
     <widget class="QLabel" name="NumberOfLabelsLabel">
      <property name="text">
-      <string>标签数量：</string>
+      <string>Number of labels:</string>
      </property>
     </widget>
    </item>
    <item row="4" column="1">
     <widget class="QSpinBox" name="NumberOfLabelsSpinBox">
      <property name="toolTip">
-      <string>要显示的标签数量。仅在使用数值作为标签文本时适用（而非颜色名称）。</string>
+      <string>Number of labels to display. Only applicable if values are used as label text (not color name).</string>
      </property>
      <property name="maximum">
       <number>64</number>
@@ -147,14 +148,14 @@
    <item row="5" column="0">
     <widget class="QLabel" name="MaxNumberOfColorsLabel">
      <property name="text">
-      <string>颜色数量：</string>
+      <string>Number of colors:</string>
      </property>
     </widget>
    </item>
    <item row="5" column="1">
     <widget class="QSpinBox" name="MaxNumberOfColorsSpinBox">
      <property name="toolTip">
-      <string>显示的最大颜色数量。减少数量以查看离散颜色而非连续颜色渐变。仅在使用数值作为标签文本时适用（而非颜色名称）。</string>
+      <string>Maximum number of colors displayed. Reduce the number to see discrete colors instead of a continuous color gradient. Only applicable if values are used as label text (not color name).</string>
      </property>
      <property name="minimum">
       <number>2</number>
@@ -170,7 +171,7 @@
    <item row="6" column="0">
     <widget class="QLabel" name="ColorLegendOrientationLabel">
      <property name="text">
-      <string>方向：</string>
+      <string>Orientation:</string>
      </property>
     </widget>
    </item>
@@ -185,23 +186,23 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>垂直</string>
+        <string>Vertical</string>
        </property>
        <property name="checked">
         <bool>true</bool>
        </property>
        <attribute name="buttonGroup">
-        <string notr="true">颜色图例方向按钮组</string>
+        <string notr="true">ColorLegendOrientationButtonGroup</string>
        </attribute>
       </widget>
      </item>
      <item>
       <widget class="QRadioButton" name="HorizontalOrientationRadioButton">
        <property name="text">
-        <string>水平</string>
+        <string>Horizontal</string>
        </property>
        <attribute name="buttonGroup">
-        <string notr="true">颜色图例方向按钮组</string>
+        <string notr="true">ColorLegendOrientationButtonGroup</string>
        </attribute>
       </widget>
      </item>
@@ -210,7 +211,7 @@
    <item row="7" column="0">
     <widget class="QLabel" name="PositionWithinViewLabel">
      <property name="text">
-      <string>位置：</string>
+      <string>Position:</string>
      </property>
     </widget>
    </item>
@@ -219,17 +220,17 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="toolTip">
-        <string>颜色图例的水平位置</string>
+        <string>Horizontal position of the color legend</string>
        </property>
        <property name="text">
-        <string extracomment="abbreviation of &quot;horizontal&quot;">水平：</string>
+        <string extracomment="abbreviation of &quot;horizontal&quot;">H:</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="ctkDoubleSlider" name="PositionXSlider">
        <property name="toolTip">
-        <string>颜色图例的水平位置</string>
+        <string>Horizontal position of the color legend</string>
        </property>
        <property name="singleStep">
         <double>0.010000000000000</double>
@@ -248,17 +249,17 @@
      <item>
       <widget class="QLabel" name="label_2">
        <property name="toolTip">
-        <string>颜色图例的垂直位置</string>
+        <string>Vertical position of the color legend</string>
        </property>
        <property name="text">
-        <string extracomment="abbreviation of &quot;vertical&quot;">垂直：</string>
+        <string extracomment="abbreviation of &quot;vertical&quot;">V:</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="ctkDoubleSlider" name="PositionYSlider">
        <property name="toolTip">
-        <string>颜色图例的垂直位置</string>
+        <string>Vertical position of the color legend</string>
        </property>
        <property name="singleStep">
         <double>0.010000000000000</double>
@@ -279,7 +280,7 @@
    <item row="8" column="0">
     <widget class="QLabel" name="DimensionsLabel">
      <property name="text">
-      <string>尺寸：</string>
+      <string>Size:</string>
      </property>
     </widget>
    </item>
@@ -288,17 +289,17 @@
      <item>
       <widget class="QLabel" name="label_4">
        <property name="toolTip">
-        <string>颜色图例的短边长度，相对于视图大小</string>
+        <string>Short side length of the color legend, relative to view size</string>
        </property>
        <property name="text">
-        <string extracomment="abbreviation of &quot;short&quot;">短边：</string>
+        <string extracomment="abbreviation of &quot;short&quot;">S:</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="ctkDoubleSlider" name="ShortSideSizeSlider">
        <property name="toolTip">
-        <string>颜色图例的短边长度，相对于视图大小</string>
+        <string>Short side length of the color legend, relative to view size</string>
        </property>
        <property name="singleStep">
         <double>0.010000000000000</double>
@@ -317,17 +318,17 @@
      <item>
       <widget class="QLabel" name="label_3">
        <property name="toolTip">
-        <string>颜色图例的长边长度，相对于视图大小</string>
+        <string>Long side length of the color legend, relative to view size</string>
        </property>
        <property name="text">
-        <string extracomment="abbreviation of &quot;long&quot;">长边：</string>
+        <string extracomment="abbreviation of &quot;long&quot;">L:</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="ctkDoubleSlider" name="LongSideSizeSlider">
        <property name="toolTip">
-        <string>颜色图例的长边长度，相对于视图大小</string>
+        <string>Long side length of the color legend, relative to view size</string>
        </property>
        <property name="singleStep">
         <double>0.010000000000000</double>
@@ -348,7 +349,7 @@
    <item row="9" column="0" colspan="2">
     <widget class="ctkCollapsibleGroupBox" name="TitlePropertiesGroupBox">
      <property name="title">
-      <string>标题属性</string>
+      <string>Title properties</string>
      </property>
      <property name="collapsed">
       <bool>true</bool>
@@ -367,7 +368,7 @@
    <item row="10" column="0" colspan="2">
     <widget class="ctkCollapsibleGroupBox" name="LabelPropertiesGroupBox">
      <property name="title">
-      <string>标签属性</string>
+      <string>Label properties</string>
      </property>
      <property name="collapsed">
       <bool>true</bool>
@@ -376,7 +377,7 @@
       <item row="0" column="0" colspan="2">
        <widget class="ctkVTKTextPropertyWidget" name="LabelTextPropertyWidget">
         <property name="textLabel">
-         <string>格式：</string>
+         <string>Format:</string>
         </property>
         <property name="showSize" stdset="0">
          <bool>false</bool>
@@ -451,7 +452,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../../../../../Libs/MRML/Widgets/Resources/qMRMLWidgets.qrc" />
+  <include location="../../../../../../Libs/MRML/Widgets/Resources/qMRMLWidgets.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -472,7 +473,7 @@
   </connection>
  </connections>
  <buttongroups>
-  <buttongroup name="ColorLegendOrientationButtonGroup" />
-  <buttongroup name="LabelTextButtonGroup" />
+  <buttongroup name="ColorLegendOrientationButtonGroup"/>
+  <buttongroup name="LabelTextButtonGroup"/>
  </buttongroups>
 </ui>

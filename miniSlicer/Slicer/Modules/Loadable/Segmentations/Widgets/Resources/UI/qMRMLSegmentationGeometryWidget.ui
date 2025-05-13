@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLSegmentationGeometryWidget</class>
  <widget class="qMRMLWidget" name="qMRMLSegmentationGeometryWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>分割几何小部件</string>
+   <string>SegmentationGeometryWidget</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -55,7 +56,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label_SourceGeometryNode">
         <property name="text">
-         <string>源几何体：</string>
+         <string>Source geometry:</string>
         </property>
        </widget>
       </item>
@@ -63,10 +64,10 @@
        <widget class="qMRMLNodeComboBox" name="MRMLNodeComboBox_SourceGeometryNode">
         <property name="nodeTypes">
          <stringlist notr="true">
-          <string>标量体积节点 (vtkMRMLScalarVolumeNode)</string>
-          <string>分割节点 (vtkMRMLSegmentationNode)</string>
-          <string>模型节点 (vtkMRMLModelNode)</string>
-          <string>标注区域节点 (vtkMRMLMarkupsROINode)</string>
+          <string>vtkMRMLScalarVolumeNode</string>
+          <string>vtkMRMLSegmentationNode</string>
+          <string>vtkMRMLModelNode</string>
+          <string>vtkMRMLMarkupsROINode</string>
          </stringlist>
         </property>
         <property name="noneEnabled">
@@ -79,14 +80,14 @@
          <bool>false</bool>
         </property>
         <property name="noneDisplay">
-         <string>显示当前分割标签图几何体。点击此处更改</string>
+         <string>Showing current segmentation labelmap geometry. Click here to change</string>
         </property>
        </widget>
       </item>
       <item row="1" column="0" colspan="2">
        <widget class="QGroupBox" name="groupBox_VolumeSpacingOptions">
         <property name="title">
-         <string>体积间距选项</string>
+         <string>Volume spacing options</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_2">
          <property name="leftMargin">
@@ -110,17 +111,17 @@
          <item row="0" column="0">
           <widget class="QLabel" name="label_OversamplingFactor">
            <property name="toolTip">
-            <string>将体积的每个体素分割为沿每个方向的多个体素。当需要提高分辨率时非常有用</string>
+            <string>Split each voxel of the volume to this many voxels along each direction. Useful when increasing the resolution is needed</string>
            </property>
            <property name="text">
-            <string>超采样因子：</string>
+            <string>Oversampling factor:</string>
            </property>
           </widget>
          </item>
          <item row="0" column="1">
           <widget class="ctkDoubleSpinBox" name="DoubleSpinBox_OversamplingFactor">
            <property name="toolTip">
-            <string>将体积的每个体素分割为沿每个方向的多个体素。当需要提高分辨率时非常有用</string>
+            <string>Split each voxel of the volume to this many voxels along each direction. Useful when increasing the resolution is needed</string>
            </property>
            <property name="minimum">
             <double>0.050000000000000</double>
@@ -139,20 +140,20 @@
          <item row="1" column="0">
           <widget class="QLabel" name="label_IsotropicSpacing">
            <property name="toolTip">
-            <string>重新采样体积以获得各向同性间距，这意味着体素将是立方体。使用最小间距。如果体积有拉长的体素，这非常有用。</string>
+            <string>Resample the volume to have isotropic spacing, which means the voxels will be cubes. Use smallest spacing. Useful if the volume has elongated voxels.</string>
            </property>
            <property name="text">
-            <string>各向同性间距：</string>
+            <string>Isotropic spacing:</string>
            </property>
           </widget>
          </item>
          <item row="1" column="1">
           <widget class="QCheckBox" name="checkBox_IsotropicSpacing">
            <property name="toolTip">
-            <string>重新采样体积以获得各向同性间距，这意味着体素将是立方体。使用最小间距。如果体积有拉长的体素，这非常有用。</string>
+            <string>Resample the volume to have isotropic spacing, which means the voxels will be cubes. Use smallest spacing. Useful if the volume has elongated voxels.</string>
            </property>
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
@@ -165,7 +166,7 @@
    <item>
     <widget class="QGroupBox" name="groupBox_SegmentationLabelmapGeometry">
      <property name="title">
-      <string>分割标签图几何体</string>
+      <string>Segmentation labelmap geometry</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
       <property name="leftMargin">
@@ -189,7 +190,7 @@
       <item row="4" column="0">
        <widget class="QLabel" name="label_Origin">
         <property name="text">
-         <string>原点：</string>
+         <string>Origin:</string>
         </property>
        </widget>
       </item>
@@ -205,7 +206,7 @@
          <set>ctkDoubleSpinBox::DecimalsByKey|ctkDoubleSpinBox::DecimalsByShortcuts|ctkDoubleSpinBox::DecimalsByValue|ctkDoubleSpinBox::InsertDecimals|ctkDoubleSpinBox::ReplaceDecimals</set>
         </property>
         <property name="quantity">
-         <string notr="true">长度</string>
+         <string notr="true">length</string>
         </property>
        </widget>
       </item>
@@ -231,7 +232,7 @@
       <item row="6" column="0">
        <widget class="QLabel" name="label_Directions">
         <property name="text">
-         <string>方向：</string>
+         <string>Directions:</string>
         </property>
        </widget>
       </item>
@@ -281,7 +282,7 @@
          </font>
         </property>
         <property name="text">
-         <string notr="true" extracomment="Placeholder only">错误信息</string>
+         <string notr="true" extracomment="Placeholder only">Error message</string>
         </property>
         <property name="wordWrap">
          <bool>true</bool>
@@ -291,14 +292,14 @@
       <item row="1" column="0">
        <widget class="QLabel" name="label_Spacing">
         <property name="text">
-         <string>间距：</string>
+         <string>Spacing:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="0">
        <widget class="QLabel" name="label_Dimensions">
         <property name="text">
-         <string>尺寸：</string>
+         <string>Dimensions:</string>
         </property>
        </widget>
       </item>
@@ -311,7 +312,7 @@
          <number>2</number>
         </property>
         <property name="quantity">
-         <string notr="true">长度</string>
+         <string notr="true">length</string>
         </property>
        </widget>
       </item>
@@ -328,20 +329,20 @@
       <item row="7" column="0" colspan="2">
        <widget class="QGroupBox" name="groupBox_AdditionalOptions">
         <property name="title">
-         <string>额外选项</string>
+         <string>Additional Options</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_4">
          <item row="0" column="0">
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>填充输出：</string>
+            <string>Pad output:</string>
            </property>
           </widget>
          </item>
          <item row="0" column="1">
           <widget class="QCheckBox" name="CheckBox_PadSegmentation">
            <property name="text">
-            <string />
+            <string/>
            </property>
            <property name="iconSize">
             <size>
@@ -409,7 +410,7 @@
    <header>ctkMatrixWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>qMRMLSegmentationGeometryWidget</sender>

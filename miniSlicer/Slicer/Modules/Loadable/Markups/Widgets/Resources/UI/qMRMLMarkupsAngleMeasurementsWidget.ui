@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLMarkupsAngleMeasurementsWidget</class>
  <widget class="QWidget" name="qMRMLMarkupsAngleMeasurementsWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>角度属性</string>
+   <string>Angle Properties</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">
@@ -28,7 +29,7 @@
    <item>
     <widget class="ctkCollapsibleButton" name="angleMeasurementModeCollapsibleButton" native="true">
      <property name="text" stdset="0">
-      <string>角度设置</string>
+      <string>Angle Settings</string>
      </property>
      <property name="checked" stdset="0">
       <bool>false</bool>
@@ -46,28 +47,28 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label_8">
         <property name="text">
-         <string>测量模式：</string>
+         <string>Measurement mode:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="QComboBox" name="angleMeasurementModeComboBox">
         <property name="toolTip">
-         <string>&amp;lt;html&amp;gt;&amp;lt;head/&amp;gt;&amp;lt;body&amp;gt;&amp;lt;p&amp;gt;- 最小：最小非定向角度，范围为 [0..180)&amp;lt;br/&amp;gt;- 定向有符号：定向角度 [-180..180)，使用右手法则的旋转轴&amp;lt;br/&amp;gt;- 定向正：定向角度 [0..360)，使用右手法则的旋转轴&amp;lt;/p&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;- Minimal: minimal non-oriented angle, between [0..180)&lt;br/&gt;- Oriented signed: oriented angle [-180..180), using rotation axis in right-hand rule&lt;br/&gt;- Oriented positive: oriented angle [0..360), using rotation axis in right-hand rule&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <item>
          <property name="text">
-          <string>最小</string>
+          <string>Minimal</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>定向有符号</string>
+          <string>Oriented signed</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>定向正</string>
+          <string>Oriented positive</string>
          </property>
         </item>
        </widget>
@@ -75,14 +76,14 @@
       <item row="1" column="0">
        <widget class="QLabel" name="label_9">
         <property name="text">
-         <string>旋转轴：</string>
+         <string>Rotation axis:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="qMRMLCoordinatesWidget" name="rotationAxisCoordinatesWidget" native="true">
         <property name="toolTip">
-         <string>RAS坐标系中的旋转轴方向。用于定义使用右手法则的定向角度模式中的方向。</string>
+         <string>Rotation axis direction in RAS coordinate system. Used for defining direction in oriented angle modes using right hand rule.</string>
         </property>
         <property name="minimum" stdset="0">
          <double>-1.000000000000000</double>
@@ -115,6 +116,6 @@
    <header>qMRMLCoordinatesWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

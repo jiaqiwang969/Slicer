@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerSimpleMarkupsWidget</class>
  <widget class="qSlicerWidget" name="qSlicerSimpleMarkupsWidget">
@@ -16,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>标记控制点</string>
+   <string>Markup Control Points</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">
@@ -49,7 +50,7 @@
        </property>
        <property name="nodeTypes">
         <stringlist notr="true">
-         <string>标记基准节点 (vtkMRMLMarkupsFiducialNode)</string>
+         <string>vtkMRMLMarkupsFiducialNode</string>
         </stringlist>
        </property>
        <property name="showHidden">
@@ -85,7 +86,7 @@
     </layout>
    </item>
    <item>
-    <widget class="QTableWidget" name="MarkupsControlPointsTableWidget" />
+    <widget class="QTableWidget" name="MarkupsControlPointsTableWidget"/>
    </item>
   </layout>
  </widget>
@@ -110,9 +111,9 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../../Resources/qSlicerMarkupsModule.qrc" />
-  <include location="../../../../../../Libs/MRML/Widgets/Resources/qMRMLWidgets.qrc" />
-  <include location="../../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc" />
+  <include location="../../../Resources/qSlicerMarkupsModule.qrc"/>
+  <include location="../../../../../../Libs/MRML/Widgets/Resources/qMRMLWidgets.qrc"/>
+  <include location="../../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc"/>
  </resources>
  <connections>
   <connection>

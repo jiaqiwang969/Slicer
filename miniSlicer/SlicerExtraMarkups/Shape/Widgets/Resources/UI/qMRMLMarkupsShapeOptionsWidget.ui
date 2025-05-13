@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLMarkupsShapeOptionsWidget</class>
  <widget class="QWidget" name="qMRMLMarkupsShapeOptionsWidget">
@@ -10,11 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>表单</string>
+   <string>Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="qMRMLMarkupsShapeWidget" name="MarkupsShapeWidget" native="true" />
+    <widget class="qMRMLMarkupsShapeWidget" name="MarkupsShapeWidget" native="true"/>
    </item>
   </layout>
  </widget>
@@ -26,6 +27,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

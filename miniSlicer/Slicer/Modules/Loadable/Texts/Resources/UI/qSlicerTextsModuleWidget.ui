@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerTextsModuleWidget</class>
  <widget class="qSlicerWidget" name="qSlicerTextsModuleWidget">
@@ -16,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>文本</string>
+   <string>Texts</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../qSlicerTextsModule.qrc">
@@ -40,7 +41,7 @@
      <item row="1" column="0">
       <widget class="QLabel" name="TextNodeLabel">
        <property name="text">
-        <string>文本节点：</string>
+        <string>Text node:</string>
        </property>
       </widget>
      </item>
@@ -48,7 +49,7 @@
       <widget class="qMRMLNodeComboBox" name="TextNodeSelector">
        <property name="nodeTypes">
         <stringlist notr="true">
-         <string>文本节点 (vtkMRMLTextNode)</string>
+         <string>vtkMRMLTextNode</string>
         </stringlist>
        </property>
        <property name="noneEnabled">
@@ -70,7 +71,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>内容</string>
+      <string>Contents</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
@@ -86,7 +87,7 @@
    <item>
     <widget class="ctkCollapsibleButton" name="CollapsibleButton">
      <property name="text">
-      <string>高级</string>
+      <string>Advanced</string>
      </property>
      <property name="collapsed">
       <bool>true</bool>
@@ -95,17 +96,17 @@
       <item>
        <widget class="QCheckBox" name="AutoSaveCheckBox">
         <property name="toolTip">
-         <string>&amp;lt;html&amp;gt;&amp;lt;head/&amp;gt;&amp;lt;body&amp;gt;&amp;lt;p&amp;gt;如果选中，文本节点将在内容编辑时立即更新。如果未选中，文本节点仅在点击“保存”时更新。&amp;lt;/p&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, the text node is immediately updated as the contents are edited. If unchecked, text node is updated only when &amp;quot;Save&amp;quot; is clicked.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
-         <string>自动保存对文本节点的编辑</string>
+         <string>Auto-save edits to the text node</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QCheckBox" name="WordWrapCheckBox">
         <property name="text">
-         <string>启用换行</string>
+         <string>Enable word wrapping</string>
         </property>
         <property name="checked">
          <bool>true</bool>
@@ -166,8 +167,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../qSlicerTextsModule.qrc" />
-  <include location="../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc" />
+  <include location="../qSlicerTextsModule.qrc"/>
+  <include location="../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc"/>
  </resources>
  <connections>
   <connection>

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerDiffusionWeightedVolumeDisplayWidget</class>
  <widget class="qSlicerWidget" name="qSlicerDiffusionWeightedVolumeDisplayWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>DWI 显示属性</string>
+   <string>DWI Display Properties</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">
@@ -28,7 +29,7 @@
    <item>
     <widget class="ctkCollapsibleGroupBox" name="ScalarDisplayGroupBox">
      <property name="title">
-      <string>标量显示</string>
+      <string>Scalar Display</string>
      </property>
      <layout class="QFormLayout" name="formLayout">
       <property name="leftMargin">
@@ -46,12 +47,12 @@
       <item row="0" column="0">
        <widget class="QLabel" name="DWIComponentLabel">
         <property name="text">
-         <string>DWI 组件：</string>
+         <string>DWI Component:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="0" colspan="2">
-       <widget class="qSlicerScalarVolumeDisplayWidget" name="ScalarVolumeDisplayWidget" native="true" />
+       <widget class="qSlicerScalarVolumeDisplayWidget" name="ScalarVolumeDisplayWidget" native="true"/>
       </item>
       <item row="0" column="1">
        <layout class="QHBoxLayout" name="horizontalLayout">
@@ -63,7 +64,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="DWIComponentSpinBox" />
+         <widget class="QSpinBox" name="DWIComponentSpinBox"/>
         </item>
        </layout>
       </item>
@@ -95,7 +96,7 @@
    </slots>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>DWIComponentSlider</sender>

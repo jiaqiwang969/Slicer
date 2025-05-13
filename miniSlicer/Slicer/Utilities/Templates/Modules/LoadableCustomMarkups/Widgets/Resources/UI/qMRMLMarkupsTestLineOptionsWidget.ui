@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLMarkupsTestLineOptionsWidget</class>
  <widget class="QWidget" name="qMRMLMarkupsTestLineOptionsWidget">
@@ -10,11 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>测试线选项</string>
+   <string>Test Line Options</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="qMRMLMarkupsTestLineWidget" name="MarkupsTestLineWidget" native="true" />
+    <widget class="qMRMLMarkupsTestLineWidget" name="MarkupsTestLineWidget" native="true"/>
    </item>
   </layout>
  </widget>
@@ -26,6 +27,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

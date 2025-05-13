@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>VectorToScalarVolume</class>
  <widget class="qMRMLWidget" name="VectorToScalarVolume">
@@ -13,24 +14,24 @@
    <item>
     <widget class="ctkCollapsibleButton" name="selectionCollapsibleButton">
      <property name="text">
-      <string>参数</string>
+      <string>Parameters</string>
      </property>
      <layout class="QFormLayout" name="formLayout_2">
       <item row="0" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>输入向量体积：</string>
+         <string>Input vector volume:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="qMRMLNodeComboBox" name="inputSelector">
         <property name="toolTip">
-         <string>选择算法的输入。</string>
+         <string>Pick the input to the algorithm.</string>
         </property>
         <property name="nodeTypes">
          <stringlist notr="true">
-          <string>向量体积节点 (vtkMRMLVectorVolumeNode)</string>
+          <string>vtkMRMLVectorVolumeNode</string>
          </stringlist>
         </property>
         <property name="showChildNodeTypes">
@@ -47,25 +48,25 @@
       <item row="2" column="0">
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>转换方法：</string>
+         <string>Conversion Method: </string>
         </property>
        </widget>
       </item>
       <item row="3" column="0">
        <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>输出标量体积：</string>
+         <string>Output scalar Volume:</string>
         </property>
        </widget>
       </item>
       <item row="3" column="1">
        <widget class="qMRMLNodeComboBox" name="outputSelector">
         <property name="toolTip">
-         <string>选择算法的输出。</string>
+         <string>Pick the output to the algorithm.</string>
         </property>
         <property name="nodeTypes">
          <stringlist notr="true">
-          <string>标量体积节点 (vtkMRMLScalarVolumeNode)</string>
+          <string>vtkMRMLScalarVolumeNode</string>
          </stringlist>
         </property>
         <property name="showChildNodeTypes">
@@ -73,7 +74,7 @@
         </property>
         <property name="hideChildNodeTypes">
          <stringlist notr="true">
-          <string>向量体积节点 (vtkMRMLVectorVolumeNode)</string>
+          <string>vtkMRMLVectorVolumeNode</string>
          </stringlist>
         </property>
         <property name="noneEnabled">
@@ -96,10 +97,10 @@
       <item row="2" column="1">
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QComboBox" name="methodSelectorComboBox" />
+         <widget class="QComboBox" name="methodSelectorComboBox"/>
         </item>
         <item>
-         <widget class="QSpinBox" name="componentsSpinBox" />
+         <widget class="QSpinBox" name="componentsSpinBox"/>
         </item>
        </layout>
       </item>
@@ -112,7 +113,7 @@
       <bool>false</bool>
      </property>
      <property name="text">
-      <string>应用</string>
+      <string>Apply</string>
      </property>
     </widget>
    </item>
@@ -150,7 +151,7 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>VectorToScalarVolume</sender>

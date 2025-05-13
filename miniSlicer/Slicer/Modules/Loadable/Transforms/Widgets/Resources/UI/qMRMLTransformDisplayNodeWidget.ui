@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLTransformDisplayNodeWidget</class>
  <widget class="qMRMLWidget" name="qMRMLTransformDisplayNodeWidget">
@@ -19,10 +20,10 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>qMRML变换显示节点小部件</string>
+   <string>qMRMLTransformDisplayNodeWidget</string>
   </property>
   <property name="toolTip">
-   <string>变换小部件是否可以移动。</string>
+   <string>Whether the transform widget can be translated.</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_6">
    <property name="leftMargin">
@@ -40,13 +41,13 @@
    <item row="2" column="0" colspan="3">
     <widget class="ctkCollapsibleGroupBox" name="VisualizationCollapsibleGroupBox">
      <property name="title">
-      <string>可视化</string>
+      <string>Visualization</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
       <item row="4" column="0" colspan="2">
        <widget class="ctkCollapsibleGroupBox" name="ColorsSection">
         <property name="title">
-         <string>颜色</string>
+         <string>Colors</string>
         </property>
         <property name="checked">
          <bool>false</bool>
@@ -103,10 +104,10 @@
            <enum>Qt::StrongFocus</enum>
           </property>
           <property name="toolTip">
-           <string>使用图形可视化变换</string>
+           <string>Visualize transform using glyphs</string>
           </property>
           <property name="statusTip">
-           <string />
+           <string/>
           </property>
           <property name="layoutDirection">
            <enum>Qt::LeftToRight</enum>
@@ -118,7 +119,7 @@
            <set>Qt::ImhNone</set>
           </property>
           <property name="text">
-           <string>图形</string>
+           <string>Glyph</string>
           </property>
           <property name="icon">
            <iconset resource="../qSlicerTransformsModuleWidgets.qrc">
@@ -131,7 +132,7 @@
            </size>
           </property>
           <property name="shortcut">
-           <string notr="true" />
+           <string notr="true"/>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -165,10 +166,10 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>使用变形网格可视化变换</string>
+           <string>Visualize transform using a warped grid</string>
           </property>
           <property name="text">
-           <string>网格</string>
+           <string>Grid</string>
           </property>
           <property name="icon">
            <iconset resource="../qSlicerTransformsModuleWidgets.qrc">
@@ -206,10 +207,10 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>通过位移幅度的等高线/等值面轮廓可视化变换</string>
+           <string>Visualize transform by isoline/isosurface contours of the displacement magnitude</string>
           </property>
           <property name="text">
-           <string>等高线</string>
+           <string>Contour</string>
           </property>
           <property name="icon">
            <iconset resource="../qSlicerTransformsModuleWidgets.qrc">
@@ -242,10 +243,10 @@
            </sizepolicy>
           </property>
           <property name="toolTip">
-           <string>在3D视图中显示变换</string>
+           <string>Show transform in the 3D views</string>
           </property>
           <property name="text">
-           <string />
+           <string/>
           </property>
           <property name="checked">
            <bool>true</bool>
@@ -255,10 +256,10 @@
         <item>
          <widget class="QLabel" name="RegionLabel">
           <property name="toolTip">
-           <string>可视化变换节点的参考图像（仅使用大小、方向和位置）</string>
+           <string>Reference image for visualizing transform nodes (will only use size, orientation and position)</string>
           </property>
           <property name="text">
-           <string>区域：</string>
+           <string>Region:</string>
           </property>
          </widget>
         </item>
@@ -274,19 +275,19 @@
            </sizepolicy>
           </property>
           <property name="toolTip">
-           <string>可视化变换节点的区域（仅使用大小、方向和位置）</string>
+           <string>Region for visualizing transform nodes (will only use size, orientation and position)</string>
           </property>
           <property name="nodeTypes">
            <stringlist notr="true">
-            <string>切片节点 (vtkMRMLSliceNode)</string>
-            <string>模型节点 (vtkMRMLModelNode)</string>
-            <string>体积节点 (vtkMRMLVolumeNode)</string>
-            <string>标注区域节点 (vtkMRMLMarkupsROINode)</string>
-            <string>标注平面节点 (vtkMRMLMarkupsPlaneNode)</string>
+            <string>vtkMRMLSliceNode</string>
+            <string>vtkMRMLModelNode</string>
+            <string>vtkMRMLVolumeNode</string>
+            <string>vtkMRMLMarkupsROINode</string>
+            <string>vtkMRMLMarkupsPlaneNode</string>
            </stringlist>
           </property>
           <property name="baseName">
-           <string />
+           <string/>
           </property>
           <property name="noneEnabled">
            <bool>true</bool>
@@ -304,7 +305,7 @@
            <bool>true</bool>
           </property>
           <property name="noneDisplay">
-           <string>选择一个节点</string>
+           <string>Select a node</string>
           </property>
          </widget>
         </item>
@@ -313,14 +314,14 @@
       <item row="0" column="1">
        <widget class="QCheckBox" name="VisibleCheckBox">
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
       <item row="5" column="0" colspan="2">
        <widget class="ctkCollapsibleGroupBox" name="AdvancedParameters">
         <property name="title">
-         <string>高级</string>
+         <string>Advanced</string>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
@@ -335,30 +336,30 @@
             <item row="1" column="0">
              <widget class="QLabel" name="GlyphSpacingLabel">
               <property name="toolTip">
-               <string>图形点之间的距离</string>
+               <string>Distance between the glyph points</string>
               </property>
               <property name="text">
-               <string>间距：</string>
+               <string>Spacing:</string>
               </property>
              </widget>
             </item>
             <item row="2" column="0">
              <widget class="QLabel" name="label">
               <property name="toolTip">
-               <string>用于设置图形大小的位移百分比。100%表示图形大小等于实际位移。</string>
+               <string>Percentage of displacement usef for setting the glyph size. 100% means the glyph size equals the actual displacement.</string>
               </property>
               <property name="text">
-               <string>缩放因子：</string>
+               <string>Scale factor:</string>
               </property>
              </widget>
             </item>
             <item row="3" column="0">
              <widget class="QLabel" name="label_10">
               <property name="toolTip">
-               <string>当位移幅度在此范围内时显示图形</string>
+               <string>Glyphs are shown if the displacement magnitude is within this range</string>
               </property>
               <property name="text">
-               <string>可见范围：</string>
+               <string>Visible range:</string>
               </property>
              </widget>
             </item>
@@ -371,7 +372,7 @@
                </sizepolicy>
               </property>
               <property name="toolTip">
-               <string>图形点之间的距离</string>
+               <string>Distance between the glyph points</string>
               </property>
               <property name="decimals">
                <number>0</number>
@@ -392,7 +393,7 @@
                <double>10.000000000000000</double>
               </property>
               <property name="quantity">
-               <string notr="true">长度</string>
+               <string notr="true">length</string>
               </property>
               <property name="unitAwareProperties">
                <set>qMRMLSliderWidget::Precision|qMRMLSliderWidget::Prefix|qMRMLSliderWidget::Scaling|qMRMLSliderWidget::Suffix</set>
@@ -402,7 +403,7 @@
             <item row="3" column="1" colspan="2">
              <widget class="qMRMLRangeWidget" name="GlyphDisplayRangeMm">
               <property name="toolTip">
-               <string>仅显示位移幅度在此范围内的图形</string>
+               <string>Only those glyphs are shown that have displacement magnitude within this range</string>
               </property>
               <property name="singleStep">
                <double>0.100000000000000</double>
@@ -414,7 +415,7 @@
                <double>100.000000000000000</double>
               </property>
               <property name="suffix">
-               <string />
+               <string/>
               </property>
              </widget>
             </item>
@@ -427,10 +428,10 @@
                </sizepolicy>
               </property>
               <property name="toolTip">
-               <string>选择要使用的图形类型</string>
+               <string>Choose a glyph type to use</string>
               </property>
               <property name="text">
-               <string>图形类型：</string>
+               <string>Glyph type:</string>
               </property>
              </widget>
             </item>
@@ -443,24 +444,24 @@
                </sizepolicy>
               </property>
               <property name="toolTip">
-               <string>选择要使用的图形类型</string>
+               <string>Choose a glyph type to use</string>
               </property>
               <property name="defaultText">
-               <string />
+               <string/>
               </property>
               <item>
                <property name="text">
-                <string>箭头</string>
+                <string>Arrow</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>圆锥</string>
+                <string>Cone</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>球体</string>
+                <string>Sphere</string>
                </property>
               </item>
              </widget>
@@ -474,7 +475,7 @@
                </sizepolicy>
               </property>
               <property name="toolTip">
-               <string>用于设置图形大小的位移百分比。100%表示图形大小等于实际位移。不会影响着色和可见范围。</string>
+               <string>Percentage of displacement used for setting the glyph size. 100% means the glyph size equals the actual displacement. Does not affect coloring and visible range.</string>
               </property>
               <property name="decimals">
                <number>0</number>
@@ -505,7 +506,7 @@
                </sizepolicy>
               </property>
               <property name="title">
-               <string>3D图形设置</string>
+               <string>3D glyph settings</string>
               </property>
               <property name="checkable">
                <bool>true</bool>
@@ -535,17 +536,17 @@
                <item row="0" column="0">
                 <widget class="QLabel" name="GlyphDiameterMmLabel">
                  <property name="toolTip">
-                  <string>调整箭头尖端的底部半径</string>
+                  <string>Adjust radius of base of arrow tip</string>
                  </property>
                  <property name="text">
-                  <string>直径：</string>
+                  <string>Diameter:</string>
                  </property>
                 </widget>
                </item>
                <item row="0" column="1">
                 <widget class="qMRMLSliderWidget" name="GlyphDiameterMm">
                  <property name="toolTip">
-                  <string>小部件的底部直径</string>
+                  <string>Base diameter of the widget</string>
                  </property>
                  <property name="decimals">
                   <number>0</number>
@@ -563,7 +564,7 @@
                   <double>5.000000000000000</double>
                  </property>
                  <property name="quantity">
-                  <string notr="true">长度</string>
+                  <string notr="true">length</string>
                  </property>
                  <property name="unitAwareProperties">
                   <set>qMRMLSliderWidget::Precision|qMRMLSliderWidget::Prefix|qMRMLSliderWidget::Scaling|qMRMLSliderWidget::Suffix</set>
@@ -573,17 +574,17 @@
                <item row="1" column="0">
                 <widget class="QLabel" name="GlyphShaftDiameterLabel">
                  <property name="toolTip">
-                  <string>调整箭头轴的半径</string>
+                  <string>Adjust radius of arrow shaft</string>
                  </property>
                  <property name="text">
-                  <string>轴直径：</string>
+                  <string>Shaft diameter:</string>
                  </property>
                 </widget>
                </item>
                <item row="1" column="1">
                 <widget class="ctkSliderWidget" name="GlyphShaftDiameterPercent">
                  <property name="toolTip">
-                  <string>箭头轴的直径相对于底部直径</string>
+                  <string>Diameter of the arrow shaft relative to the base diameter</string>
                  </property>
                  <property name="singleStep">
                   <double>1.000000000000000</double>
@@ -605,17 +606,17 @@
                <item row="2" column="0">
                 <widget class="QLabel" name="GlyphTipLengthLabel">
                  <property name="toolTip">
-                  <string>调整箭头尖端的比例，作为小数百分比</string>
+                  <string>Adjust how much of the tip the arrow will consist of as a decimal percentage</string>
                  </property>
                  <property name="text">
-                  <string>尖端长度：</string>
+                  <string>Tip length:</string>
                  </property>
                 </widget>
                </item>
                <item row="2" column="1">
                 <widget class="ctkSliderWidget" name="GlyphTipLengthPercent">
                  <property name="toolTip">
-                  <string>箭头尖端的长度占位移的百分比</string>
+                  <string>Length of the arrow tip  as percentage of displacement</string>
                  </property>
                  <property name="decimals">
                   <number>0</number>
@@ -640,17 +641,17 @@
                <item row="3" column="0">
                 <widget class="QLabel" name="GlyphResolutionLabel">
                  <property name="toolTip">
-                  <string>调整图形的分辨率（更高的值生成更平滑的曲线，但可视化可能会更慢）</string>
+                  <string>Adjust resolution of the glyph (higher value generates smoother curved lines but visualization may be slower)</string>
                  </property>
                  <property name="text">
-                  <string>分辨率：</string>
+                  <string>Resolution:</string>
                  </property>
                 </widget>
                </item>
                <item row="3" column="1">
                 <widget class="ctkSliderWidget" name="GlyphResolution">
                  <property name="toolTip">
-                  <string>调整箭头的分辨率（较低的分辨率细节较少，但渲染速度更快）</string>
+                  <string>Adjust resolution of arrow (lower is less detailed but rendered faster)</string>
                  </property>
                  <property name="decimals">
                   <number>0</number>
@@ -678,18 +679,18 @@
             <item row="0" column="0">
              <widget class="QLabel" name="GlyphPointsLabel">
               <property name="text">
-               <string>源点：</string>
+               <string>Source points:</string>
               </property>
              </widget>
             </item>
             <item row="0" column="1" colspan="2">
              <widget class="qMRMLNodeComboBox" name="GlyphPointsNodeComboBox">
               <property name="toolTip">
-               <string>定义图形起始位置的标注节点。如果指定，则3D视图中的“区域”将被忽略。</string>
+               <string>Markups node that defines glyph starting positions. If specified then 3D view 'Region' is ignored.</string>
               </property>
               <property name="nodeTypes">
                <stringlist notr="true">
-                <string>标注节点 (vtkMRMLMarkupsNode)</string>
+                <string>vtkMRMLMarkupsNode</string>
                </stringlist>
               </property>
               <property name="noneEnabled">
@@ -702,7 +703,7 @@
                <bool>true</bool>
               </property>
               <property name="noneDisplay">
-               <string>整个区域</string>
+               <string>Entire region</string>
               </property>
              </widget>
             </item>
@@ -721,10 +722,10 @@
             <item row="0" column="0">
              <widget class="QLabel" name="GridSpacingLabel">
               <property name="toolTip">
-               <string>网格线之间的距离</string>
+               <string>Distance between the gridlines</string>
               </property>
               <property name="text">
-               <string>间距：</string>
+               <string>Spacing:</string>
               </property>
              </widget>
             </item>
@@ -737,7 +738,7 @@
                </sizepolicy>
               </property>
               <property name="toolTip">
-               <string>网格线之间的距离</string>
+               <string>Distance between the gridlines</string>
               </property>
               <property name="decimals">
                <number>1</number>
@@ -758,7 +759,7 @@
                <double>10.000000000000000</double>
               </property>
               <property name="quantity">
-               <string notr="true">长度</string>
+               <string notr="true">length</string>
               </property>
               <property name="unitAwareProperties">
                <set>qMRMLSliderWidget::Precision|qMRMLSliderWidget::Prefix|qMRMLSliderWidget::Scaling|qMRMLSliderWidget::Suffix</set>
@@ -768,10 +769,10 @@
             <item row="1" column="0">
              <widget class="QLabel" name="GridScaleLabel">
               <property name="toolTip">
-               <string>应用于网格点的位移百分比。100%表示网格根据实际位移变形。</string>
+               <string>Percentage of displacement applied to the gridpoints. 100% means that the grid is deformed with the actual displacement.</string>
               </property>
               <property name="text">
-               <string>缩放因子：</string>
+               <string>Scale factor:</string>
               </property>
              </widget>
             </item>
@@ -784,7 +785,7 @@
                </sizepolicy>
               </property>
               <property name="toolTip">
-               <string>应用于网格点的位移百分比。100%表示网格根据实际位移变形。</string>
+               <string>Percentage of displacement applied to the gridpoints. 100% means that the grid is deformed with the actual displacement.</string>
               </property>
               <property name="decimals">
                <number>1</number>
@@ -809,17 +810,17 @@
             <item row="3" column="0">
              <widget class="QLabel" name="GridLineDiameterLabel">
               <property name="toolTip">
-               <string>3D视图中网格线的厚度</string>
+               <string>Thickness of the gridlines in the 3D view</string>
               </property>
               <property name="text">
-               <string>3D网格线直径：</string>
+               <string>3D gridline diameter:</string>
               </property>
              </widget>
             </item>
             <item row="3" column="1">
              <widget class="qMRMLSliderWidget" name="GridLineDiameterMm">
               <property name="toolTip">
-               <string>3D视图中网格线的厚度</string>
+               <string>Thickness of the gridlines in the 3D view</string>
               </property>
               <property name="decimals">
                <number>1</number>
@@ -840,7 +841,7 @@
                <double>1.000000000000000</double>
               </property>
               <property name="quantity">
-               <string notr="true">长度</string>
+               <string notr="true">length</string>
               </property>
               <property name="unitAwareProperties">
                <set>qMRMLSliderWidget::Precision|qMRMLSliderWidget::Prefix|qMRMLSliderWidget::Scaling|qMRMLSliderWidget::Suffix</set>
@@ -850,17 +851,17 @@
             <item row="4" column="0">
              <widget class="QLabel" name="label_7">
               <property name="toolTip">
-               <string>网格线上的采样点之间的距离。较低的值使网格线更贴近实际位移向量，但需要更多的计算时间。</string>
+               <string>Distance between sample points along the gridlines. Lower values result in gridlines that follow more closely the actual displacement vectors, but require more computation time.</string>
               </property>
               <property name="text">
-               <string>分辨率：</string>
+               <string>Resolution:</string>
               </property>
              </widget>
             </item>
             <item row="4" column="1">
              <widget class="qMRMLSliderWidget" name="GridResolutionMm">
               <property name="toolTip">
-               <string>网格线上的采样点之间的距离。较低的值使网格线更贴近实际位移向量，但需要更多的计算时间。</string>
+               <string>Distance between sample points along the gridlines. Lower values result in gridlines that follow more closely the actual displacement vectors, but require more computation time.</string>
               </property>
               <property name="decimals">
                <number>1</number>
@@ -881,7 +882,7 @@
                <double>5.000000000000000</double>
               </property>
               <property name="quantity">
-               <string notr="true">长度</string>
+               <string notr="true">length</string>
               </property>
               <property name="unitAwareProperties">
                <set>qMRMLSliderWidget::Precision|qMRMLSliderWidget::Prefix|qMRMLSliderWidget::Scaling|qMRMLSliderWidget::Suffix</set>
@@ -891,17 +892,17 @@
             <item row="2" column="0">
              <widget class="QLabel" name="label_8">
               <property name="toolTip">
-               <string>在切片视图中显示未变形的网格</string>
+               <string>Show non-warped grid in the slice view</string>
               </property>
               <property name="text">
-               <string>显示原始网格：</string>
+               <string>Show original grid:</string>
               </property>
              </widget>
             </item>
             <item row="2" column="1">
              <widget class="ctkCheckBox" name="GridShowNonWarped">
               <property name="toolTip">
-               <string>在切片视图中显示未变形的网格</string>
+               <string>Show non-warped grid in the slice view</string>
               </property>
              </widget>
             </item>
@@ -923,23 +924,23 @@
             <item row="0" column="0">
              <widget class="QLabel" name="ContourLevelsLabel">
               <property name="toolTip">
-               <string>定义等高线和等值面的值。值之间用空格分隔。</string>
+               <string>Values defining the isolines and isosurfaces to contour. Values are separated by spaces.</string>
               </property>
               <property name="text">
-               <string>水平 (mm)：</string>
+               <string>Levels (mm):</string>
               </property>
              </widget>
             </item>
             <item row="0" column="1">
              <widget class="QLineEdit" name="ContourLevelsMm">
               <property name="toolTip">
-               <string>定义等高线和等值面的值。值之间用空格分隔。</string>
+               <string>Values defining the isolines and isosurfaces to contour. Values are separated by spaces.</string>
               </property>
               <property name="inputMethodHints">
                <set>Qt::ImhNone</set>
               </property>
               <property name="inputMask">
-               <string />
+               <string/>
               </property>
               <property name="text">
                <string>1 2 3 4</string>
@@ -952,10 +953,10 @@
             <item row="1" column="0">
              <widget class="QLabel" name="ContourDecimationLabel">
               <property name="toolTip">
-               <string>用于离散化位移场的采样距离。较低的值会导致更准确的轮廓，但需要更多的计算时间。</string>
+               <string>Sampling distance for discretizing the displacement field. Lower values result in more accurate contours, but require more computation time.</string>
               </property>
               <property name="text">
-               <string>分辨率：</string>
+               <string>Resolution:</string>
               </property>
              </widget>
             </item>
@@ -968,7 +969,7 @@
                </sizepolicy>
               </property>
               <property name="toolTip">
-               <string>用于离散化位移场的采样距离。较低的值会导致更准确的轮廓，但需要更多的计算时间。</string>
+               <string>Sampling distance for discretizing the displacement field. Lower values result in more accurate contours, but require more computation time.</string>
               </property>
               <property name="decimals">
                <number>1</number>
@@ -989,7 +990,7 @@
                <double>5.000000000000000</double>
               </property>
               <property name="quantity">
-               <string notr="true">长度</string>
+               <string notr="true">length</string>
               </property>
               <property name="unitAwareProperties">
                <set>qMRMLSliderWidget::Precision|qMRMLSliderWidget::Prefix|qMRMLSliderWidget::Scaling|qMRMLSliderWidget::Suffix</set>
@@ -999,17 +1000,17 @@
             <item row="2" column="0">
              <widget class="QLabel" name="label_5">
               <property name="toolTip">
-               <string>3D视图中轮廓等值面的不透明度</string>
+               <string>Opacity of the contour isosurfaces in the 3D view</string>
               </property>
               <property name="text">
-               <string>3D不透明度：</string>
+               <string>3D opacity:</string>
               </property>
              </widget>
             </item>
             <item row="2" column="1">
              <widget class="ctkSliderWidget" name="ContourOpacityPercent">
               <property name="toolTip">
-               <string>3D视图中轮廓等值面的不透明度</string>
+               <string>Opacity of the contour isosurfaces in the 3D view</string>
               </property>
               <property name="decimals">
                <number>0</number>
@@ -1034,17 +1035,17 @@
       <item row="2" column="0">
        <widget class="QLabel" name="label_4">
         <property name="text">
-         <string>3D视图中的可见性：</string>
+         <string>Visibility in 3D view:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="QCheckBox" name="Visible2dCheckBox">
         <property name="toolTip">
-         <string>在切片视图中显示变换</string>
+         <string>Show transform in the slice views</string>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
         <property name="checked">
          <bool>true</bool>
@@ -1054,14 +1055,14 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label_6">
         <property name="text">
-         <string>可见性：</string>
+         <string>Visibility:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>切片视图中的可见性：</string>
+         <string>Visibility in slice view:</string>
         </property>
        </widget>
       </item>
@@ -1084,7 +1085,7 @@
    <item row="0" column="0" colspan="3">
     <widget class="ctkCollapsibleGroupBox" name="InteractionCollapsibleGroupBox">
      <property name="title">
-      <string>交互</string>
+      <string>Interaction</string>
      </property>
      <property name="checked">
       <bool>true</bool>
@@ -1096,7 +1097,7 @@
       <item row="4" column="1">
        <widget class="QCheckBox" name="InteractionVisible2dCheckBox">
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
@@ -1127,10 +1128,10 @@
          <item row="3" column="1">
           <widget class="QCheckBox" name="InteractiveScaling3DCheckBox">
            <property name="toolTip">
-            <string>通过操作3D小部件启用缩放（左键单击并拖动小部件面中心的手柄）</string>
+            <string>Enable scaling by manpulating 3D widget (left click and drag the handle at the center of widget face)</string>
            </property>
            <property name="text">
-            <string />
+            <string/>
            </property>
            <property name="checked">
             <bool>true</bool>
@@ -1140,7 +1141,7 @@
          <item row="1" column="2" alignment="Qt::AlignHCenter">
           <widget class="QCheckBox" name="translateX3DCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
@@ -1157,28 +1158,28 @@
          <item row="2" column="2" alignment="Qt::AlignHCenter">
           <widget class="QCheckBox" name="rotateX3DCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="3" column="5" alignment="Qt::AlignHCenter">
           <widget class="QCheckBox" name="scaleViewPlane3DCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="1" column="5" alignment="Qt::AlignHCenter">
           <widget class="QCheckBox" name="translateViewPlane3DCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="0" column="5">
           <widget class="QLabel" name="label_15">
            <property name="text">
-            <string>视图平面</string>
+            <string>View plane</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -1188,14 +1189,14 @@
          <item row="3" column="2" alignment="Qt::AlignHCenter">
           <widget class="QCheckBox" name="scaleX3DCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="2" column="0">
           <widget class="QLabel" name="InteractiveRotationLabel">
            <property name="text">
-            <string>启用旋转： </string>
+            <string>Enable rotation: </string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1205,14 +1206,14 @@
          <item row="1" column="4" alignment="Qt::AlignHCenter">
           <widget class="QCheckBox" name="translateZ3DCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="2" column="3" alignment="Qt::AlignHCenter">
           <widget class="QCheckBox" name="rotateY3DCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
@@ -1229,17 +1230,17 @@
          <item row="1" column="3" alignment="Qt::AlignHCenter">
           <widget class="QCheckBox" name="translateY3DCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="2" column="1">
           <widget class="QCheckBox" name="InteractiveRotation3DCheckBox">
            <property name="toolTip">
-            <string>通过操作3D小部件启用平移（左键单击并拖动小部件面上的任何位置）</string>
+            <string>Enable translating by manpulating 3D widget (left click and drag anywhere on the widget face)</string>
            </property>
            <property name="text">
-            <string />
+            <string/>
            </property>
            <property name="checked">
             <bool>true</bool>
@@ -1249,7 +1250,7 @@
          <item row="2" column="4" alignment="Qt::AlignHCenter">
           <widget class="QCheckBox" name="rotateZ3DCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
@@ -1266,7 +1267,7 @@
          <item row="3" column="0">
           <widget class="QLabel" name="InteractiveScalingLabel">
            <property name="text">
-            <string>启用缩放： </string>
+            <string>Enable scaling: </string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1276,24 +1277,24 @@
          <item row="2" column="5" alignment="Qt::AlignHCenter">
           <widget class="QCheckBox" name="rotateViewPlane3DCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="3" column="4" alignment="Qt::AlignHCenter">
           <widget class="QCheckBox" name="scaleZ3DCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="1" column="1">
           <widget class="QCheckBox" name="InteractiveTranslation3DCheckBox">
            <property name="toolTip">
-            <string>通过操作3D小部件启用缩放（按住shift +左键单击并拖动小部件面中心的手柄，或左键单击并拖动中心手柄）</string>
+            <string>Enable scaling by manpulating 3D widget (shift +left click and drag the handle at the center of widget face, or left click and drag the center handle)</string>
            </property>
            <property name="text">
-            <string />
+            <string/>
            </property>
            <property name="checked">
             <bool>true</bool>
@@ -1303,7 +1304,7 @@
          <item row="1" column="0">
           <widget class="QLabel" name="InteractiveTranslationLabel">
            <property name="text">
-            <string>启用平移： </string>
+            <string>Enable translation: </string>
            </property>
            <property name="alignment">
             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1313,7 +1314,7 @@
          <item row="3" column="3" alignment="Qt::AlignHCenter">
           <widget class="QCheckBox" name="scaleY3DCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
@@ -1323,7 +1324,7 @@
       <item row="1" column="0">
        <widget class="QLabel" name="label_17">
         <property name="text">
-         <string>3D视图中的可见性：</string>
+         <string>Visibility in 3D view:</string>
         </property>
        </widget>
       </item>
@@ -1342,10 +1343,10 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>在3D视图中显示/隐藏变换小部件。</string>
+         <string>Show/Hide the transform widget in the 3D view.</string>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
         <property name="checked">
          <bool>false</bool>
@@ -1355,28 +1356,28 @@
       <item row="0" column="0">
        <widget class="QLabel" name="InteractionVisibleLabel">
         <property name="text">
-         <string>可见性： </string>
+         <string>Visibility: </string>
         </property>
        </widget>
       </item>
       <item row="4" column="0">
        <widget class="QLabel" name="label_9">
         <property name="text">
-         <string>切片视图中的可见性：</string>
+         <string>Visibility in slice view:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="QCheckBox" name="InteractionVisible3dCheckBox">
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
       <item row="0" column="2">
        <widget class="QPushButton" name="ShowInteractionAdvancedOptionsButton">
         <property name="text">
-         <string>更多选项...</string>
+         <string>More options...</string>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -1410,133 +1411,133 @@
          <item row="2" column="0">
           <widget class="QLabel" name="label_22">
            <property name="text">
-            <string>启用旋转： </string>
+            <string>Enable rotation: </string>
            </property>
           </widget>
          </item>
          <item row="1" column="1">
           <widget class="QCheckBox" name="InteractiveTranslationSliceCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="1" column="0">
           <widget class="QLabel" name="label_21">
            <property name="text">
-            <string>启用平移： </string>
+            <string>Enable translation: </string>
            </property>
           </widget>
          </item>
          <item row="1" column="4" alignment="Qt::AlignHCenter">
           <widget class="QCheckBox" name="translateZSliceCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="2" column="3" alignment="Qt::AlignHCenter">
           <widget class="QCheckBox" name="rotateYSliceCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="3" column="1">
           <widget class="QCheckBox" name="InteractiveScalingSliceCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="2" column="5" alignment="Qt::AlignHCenter">
           <widget class="QCheckBox" name="rotateViewPlaneSliceCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="3" column="3" alignment="Qt::AlignHCenter">
           <widget class="QCheckBox" name="scaleYSliceCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="1" column="2" alignment="Qt::AlignHCenter">
           <widget class="QCheckBox" name="translateXSliceCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="2" column="1">
           <widget class="QCheckBox" name="InteractiveRotationSliceCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="3" column="4" alignment="Qt::AlignHCenter">
           <widget class="QCheckBox" name="scaleZSliceCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="3" column="2" alignment="Qt::AlignHCenter">
           <widget class="QCheckBox" name="scaleXSliceCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="1" column="5" alignment="Qt::AlignHCenter">
           <widget class="QCheckBox" name="translateViewPlaneSliceCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="3" column="0">
           <widget class="QLabel" name="label_23">
            <property name="text">
-            <string>启用缩放： </string>
+            <string>Enable scaling: </string>
            </property>
           </widget>
          </item>
          <item row="2" column="4" alignment="Qt::AlignHCenter">
           <widget class="QCheckBox" name="rotateZSliceCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="3" column="5" alignment="Qt::AlignHCenter">
           <widget class="QCheckBox" name="scaleViewPlaneSliceCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="2" column="2" alignment="Qt::AlignHCenter">
           <widget class="QCheckBox" name="rotateXSliceCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="1" column="3" alignment="Qt::AlignHCenter">
           <widget class="QCheckBox" name="translateYSliceCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="0" column="2">
           <widget class="QLabel" name="label_11">
            <property name="text">
-            <string>用于生成中心线曲线的采样距离</string>
+            <string>X</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -1546,7 +1547,7 @@
          <item row="0" column="3">
           <widget class="QLabel" name="label_16">
            <property name="text">
-            <string>输入</string>
+            <string>Y</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -1556,7 +1557,7 @@
          <item row="0" column="4">
           <widget class="QLabel" name="label_18">
            <property name="text">
-            <string>表面：</string>
+            <string>Z</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -1566,7 +1567,7 @@
          <item row="0" column="5">
           <widget class="QLabel" name="label_19">
            <property name="text">
-            <string>视图平面</string>
+            <string>View plane</string>
            </property>
           </widget>
          </item>
@@ -1576,7 +1577,7 @@
       <item row="6" column="0">
        <widget class="QLabel" name="label_20">
         <property name="text">
-         <string>大小：</string>
+         <string>Size:</string>
         </property>
        </widget>
       </item>
@@ -1592,7 +1593,7 @@
          <string>%</string>
         </property>
         <property name="quantity">
-         <string notr="true" />
+         <string notr="true"/>
         </property>
        </widget>
       </item>
@@ -1657,7 +1658,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../qSlicerTransformsModuleWidgets.qrc" />
+  <include location="../qSlicerTransformsModuleWidgets.qrc"/>
  </resources>
  <connections>
   <connection>

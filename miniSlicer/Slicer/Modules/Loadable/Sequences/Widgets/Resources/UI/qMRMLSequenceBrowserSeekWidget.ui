@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLSequenceBrowserSeekWidget</class>
  <widget class="QWidget" name="qMRMLSequenceBrowserSeekWidget">
@@ -16,13 +17,13 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>qMRML序列浏览器查找小部件</string>
+   <string>qMRMLSequenceBrowserSeekWidget</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
     <widget class="QLabel" name="label_IndexName">
      <property name="text">
-      <string>索引名称</string>
+      <string>Index name</string>
      </property>
     </widget>
    </item>
@@ -72,7 +73,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../../../Resources/qSlicerSequenceBrowserModule.qrc" />
+  <include location="../../../Resources/qSlicerSequenceBrowserModule.qrc"/>
  </resources>
- <connections />
+ <connections/>
 </ui>

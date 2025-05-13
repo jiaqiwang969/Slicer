@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
   <class>qMRMLROIWidget</class>
   <widget class="QWidget" name="qMRMLROIWidget">
@@ -16,7 +17,7 @@
       </sizepolicy>
     </property>
     <property name="windowTitle">
-      <string>ROI 属性</string>
+      <string>ROI Properties</string>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
       <property name="margin">
@@ -27,7 +28,7 @@
           <item row="0" column="0">
             <widget class="QLabel" name="LRRangeLabel">
               <property name="text">
-                <string>左-右范围：</string>
+                <string>L-R Range:</string>
               </property>
               <property name="alignment">
                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -668,14 +669,14 @@
                 </palette>
               </property>
               <property name="quantity">
-                <string notr="true">长度</string>
+                <string notr="true">length</string>
               </property>
             </widget>
           </item>
           <item row="1" column="0">
             <widget class="QLabel" name="PARangeLabel">
               <property name="text">
-                <string>前-后范围：</string>
+                <string>P-A Range:</string>
               </property>
               <property name="alignment">
                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -1314,14 +1315,14 @@
                 </palette>
               </property>
               <property name="quantity">
-                <string notr="true">长度</string>
+                <string notr="true">length</string>
               </property>
             </widget>
           </item>
           <item row="2" column="0">
             <widget class="QLabel" name="ISRangeLabel">
               <property name="text">
-                <string>上-下范围：</string>
+                <string>I-S Range:</string>
               </property>
               <property name="alignment">
                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -1960,7 +1961,7 @@
                 </palette>
               </property>
               <property name="quantity">
-                <string notr="true">长度</string>
+                <string notr="true">length</string>
               </property>
             </widget>
           </item>
@@ -1999,7 +2000,7 @@
           <item>
             <widget class="QLabel" name="DisplayClippingBoxLabel">
               <property name="text">
-                <string>显示裁剪框</string>
+                <string>Display Clipping box</string>
               </property>
             </widget>
           </item>
@@ -2022,7 +2023,7 @@
           <item>
             <widget class="QCheckBox" name="InteractiveModeCheckBox">
               <property name="text">
-                <string>交互模式</string>
+                <string>Interactive Mode</string>
               </property>
               <property name="checked">
                 <bool>true</bool>
@@ -2059,7 +2060,7 @@
     </customwidget>
   </customwidgets>
   <resources>
-    <include location="../qMRMLWidgets.qrc" />
+    <include location="../qMRMLWidgets.qrc"/>
   </resources>
-  <connections />
+  <connections/>
 </ui>

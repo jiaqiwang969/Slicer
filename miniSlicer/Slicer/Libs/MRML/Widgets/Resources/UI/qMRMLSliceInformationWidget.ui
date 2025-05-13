@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLSliceInformationWidget</class>
  <widget class="qMRMLWidget" name="qMRMLSliceInformationWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>切片信息</string>
+   <string>Slice Information</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
    <property name="fieldGrowthPolicy">
@@ -22,14 +23,14 @@
    <item row="0" column="0">
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>布局名称：</string>
+      <string>Layout Name:</string>
      </property>
     </widget>
    </item>
    <item row="0" column="1">
     <widget class="QLineEdit" name="LayoutNameLineEdit">
      <property name="toolTip">
-      <string>切片名称</string>
+      <string>Name of the slice</string>
      </property>
      <property name="readOnly">
       <bool>true</bool>
@@ -39,33 +40,33 @@
    <item row="2" column="0">
     <widget class="QLabel" name="label_3">
      <property name="text">
-      <string>方向：</string>
+      <string>Orientation:</string>
      </property>
     </widget>
    </item>
    <item row="2" column="1">
     <widget class="QComboBox" name="SliceOrientationSelector">
      <property name="toolTip">
-      <string>切片方向 (轴向、矢状、冠状、重格式化)</string>
+      <string>Slice orientation (Axial, Sagittal, Coronal, Reformat)</string>
      </property>
      <item>
       <property name="text">
-       <string>轴向</string>
+       <string>Axial</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>矢状</string>
+       <string>Sagittal</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>冠状</string>
+       <string>Coronal</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>重格式化</string>
+       <string>Reformat</string>
       </property>
      </item>
     </widget>
@@ -73,14 +74,14 @@
    <item row="3" column="0">
     <widget class="QLabel" name="label_4">
      <property name="text">
-      <string>切片可见性：</string>
+      <string>Slice visibility:</string>
      </property>
     </widget>
    </item>
    <item row="3" column="1">
     <widget class="QToolButton" name="SliceVisibilityToggle">
      <property name="toolTip">
-      <string>切换切片在 3D 场景中的可见性</string>
+      <string>Toggle the visibility of the slice in the 3D scene</string>
      </property>
      <property name="text">
       <string>...</string>
@@ -107,14 +108,14 @@
    <item row="4" column="0">
     <widget class="QLabel" name="label_5">
      <property name="text">
-      <string>小部件可见性：</string>
+      <string>Widget visibility:</string>
      </property>
     </widget>
    </item>
    <item row="4" column="1">
     <widget class="QToolButton" name="WidgetVisibilityToggle">
      <property name="toolTip">
-      <string>切换重格式化小部件在 3D 场景中的可见性</string>
+      <string>Toggle the visibility of the reformat widget in the 3D scene</string>
      </property>
      <property name="text">
       <string>...</string>
@@ -141,10 +142,10 @@
    <item row="5" column="0">
     <widget class="QLabel" name="label_6">
      <property name="toolTip">
-      <string>切片的维度。</string>
+      <string>Dimension of the slice.</string>
      </property>
      <property name="text">
-      <string>维度：</string>
+      <string>Dimension:</string>
      </property>
     </widget>
    </item>
@@ -167,10 +168,10 @@
    <item row="6" column="0">
     <widget class="QLabel" name="label_7">
      <property name="toolTip">
-      <string>切片的视野</string>
+      <string>Field of view of slice</string>
      </property>
      <property name="text">
-      <string>视野：</string>
+      <string>Field of view:</string>
      </property>
     </widget>
    </item>
@@ -187,10 +188,10 @@
    <item row="8" column="0">
     <widget class="QLabel" name="label_8">
      <property name="toolTip">
-      <string>灯箱布局（行，列）</string>
+      <string>Layout of the lightbox (rows, columns)</string>
      </property>
      <property name="text">
-      <string>灯箱布局：</string>
+      <string>Lightbox layout:</string>
      </property>
     </widget>
    </item>
@@ -199,7 +200,7 @@
      <item>
       <widget class="QSpinBox" name="LightboxLayoutRowsSpinBox">
        <property name="toolTip">
-        <string>灯箱中的行数</string>
+        <string>Number of rows in the lightbox</string>
        </property>
        <property name="minimum">
         <number>1</number>
@@ -212,7 +213,7 @@
      <item>
       <widget class="QSpinBox" name="LightboxLayoutColumnsSpinBox">
        <property name="toolTip">
-        <string>灯箱中的列数</string>
+        <string>Number of columns in the lightbox</string>
        </property>
        <property name="minimum">
         <number>1</number>
@@ -227,10 +228,10 @@
    <item row="9" column="0">
     <widget class="QLabel" name="label_9">
      <property name="toolTip">
-      <string>切片间距可以由用户或上下文自动或手动设置</string>
+      <string>Slice spacing may be set automatically or manually by the user or context</string>
      </property>
      <property name="text">
-      <string>切片间距模式：</string>
+      <string>Slice spacing mode:</string>
      </property>
     </widget>
    </item>
@@ -242,7 +243,7 @@
      <item>
       <widget class="QRadioButton" name="AutomaticSliceSpacingRadioButton">
        <property name="text">
-        <string>自动</string>
+        <string>Automatic</string>
        </property>
        <property name="checked">
         <bool>true</bool>
@@ -252,7 +253,7 @@
      <item>
       <widget class="QRadioButton" name="PrescribedSliceSpacingRadioButton">
        <property name="text">
-        <string>手动</string>
+        <string>Manual</string>
        </property>
       </widget>
      </item>
@@ -261,7 +262,7 @@
    <item row="10" column="0">
     <widget class="QLabel" name="label_10">
      <property name="text">
-      <string>手动间距：</string>
+      <string>Manual spacing:</string>
      </property>
     </widget>
    </item>
@@ -271,7 +272,7 @@
       <bool>false</bool>
      </property>
      <property name="toolTip">
-      <string>当切片间距由用户或上下文手动设置时使用手动间距</string>
+      <string>Manual spacing is used when slice spacing is set manually by the user or context</string>
      </property>
      <property name="decimals">
       <number>1</number>
@@ -284,14 +285,14 @@
    <item row="7" column="0">
     <widget class="QLabel" name="label_11">
      <property name="text">
-      <string>视图组：</string>
+      <string>View group:</string>
      </property>
     </widget>
    </item>
    <item row="7" column="1">
     <widget class="QSpinBox" name="ViewGroupSpinBox">
      <property name="toolTip">
-      <string>在具有相同组索引的视图中，导航和链接属性是同步的。</string>
+      <string>Navigation and linked properties are synchronized in views that has the same group index.</string>
      </property>
     </widget>
    </item>
@@ -316,7 +317,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../qMRMLWidgets.qrc" />
+  <include location="../qMRMLWidgets.qrc"/>
  </resources>
  <connections>
   <connection>

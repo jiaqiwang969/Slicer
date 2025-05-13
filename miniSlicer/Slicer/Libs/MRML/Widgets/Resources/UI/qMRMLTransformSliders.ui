@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLTransformSliders</class>
  <widget class="qMRMLWidget" name="qMRMLTransformSliders">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>变换</string>
+   <string>Transform</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -22,16 +23,16 @@
    <item>
     <widget class="ctkCollapsibleGroupBox" name="SlidersGroupBox">
      <property name="title">
-      <string>平移</string>
+      <string>Translation</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="0">
        <widget class="QLabel" name="LRLabel">
         <property name="toolTip">
-         <string>左-右</string>
+         <string>Left-Right</string>
         </property>
         <property name="text">
-         <string>左-右</string>
+         <string>LR</string>
         </property>
        </widget>
       </item>
@@ -44,7 +45,7 @@
          </sizepolicy>
         </property>
         <property name="toolTip">
-         <string>L&lt;---&gt;R</string>
+         <string>L&lt;--&gt;R</string>
         </property>
         <property name="minimum">
          <double>-200.000000000000000</double>
@@ -60,10 +61,10 @@
       <item row="1" column="0">
        <widget class="QLabel" name="PALabel">
         <property name="toolTip">
-         <string>后-前</string>
+         <string>Posterior-Anterior</string>
         </property>
         <property name="text">
-         <string>后-前</string>
+         <string>PA</string>
         </property>
        </widget>
       </item>
@@ -76,7 +77,7 @@
          </sizepolicy>
         </property>
         <property name="toolTip">
-         <string>P&lt;---&gt;A</string>
+         <string>P&lt;--&gt;A</string>
         </property>
         <property name="minimum">
          <double>-200.000000000000000</double>
@@ -95,10 +96,10 @@
       <item row="2" column="0">
        <widget class="QLabel" name="ISLabel">
         <property name="toolTip">
-         <string>下-上</string>
+         <string>Inferior-Superior</string>
         </property>
         <property name="text">
-         <string>下-上</string>
+         <string>IS</string>
         </property>
        </widget>
       </item>
@@ -111,7 +112,7 @@
          </sizepolicy>
         </property>
         <property name="toolTip">
-         <string>I&lt;---&gt;S</string>
+         <string>I&lt;--&gt;S</string>
         </property>
         <property name="minimum">
          <double>-200.000000000000000</double>
@@ -163,7 +164,7 @@
            <item>
             <widget class="QLabel" name="MinLabel">
              <property name="text">
-              <string>最小值</string>
+              <string>Min</string>
              </property>
             </widget>
            </item>
@@ -185,7 +186,7 @@
               <double>-200.000000000000000</double>
              </property>
              <property name="quantity">
-              <string notr="true">长度</string>
+              <string notr="true">length</string>
              </property>
              <property name="unitAwareProperties">
               <set>qMRMLSpinBox::Precision|qMRMLSpinBox::Prefix|qMRMLSpinBox::Scaling|qMRMLSpinBox::Suffix</set>
@@ -215,7 +216,7 @@
            <item>
             <widget class="QLabel" name="MaxLabel">
              <property name="text">
-              <string>最大值</string>
+              <string>Max</string>
              </property>
             </widget>
            </item>
@@ -240,7 +241,7 @@
               <double>200.000000000000000</double>
              </property>
              <property name="quantity">
-              <string notr="true">长度</string>
+              <string notr="true">length</string>
              </property>
              <property name="unitAwareProperties">
               <set>qMRMLSpinBox::Precision|qMRMLSpinBox::Prefix|qMRMLSpinBox::Scaling|qMRMLSpinBox::Suffix</set>
@@ -327,7 +328,7 @@
    <header>ctkSliderWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>MinValueSpinBox</sender>

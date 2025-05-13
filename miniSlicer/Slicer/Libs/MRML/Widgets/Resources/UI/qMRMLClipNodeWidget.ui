@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLClipNodeWidget</class>
  <widget class="qMRMLWidget" name="qMRMLClipNodeWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>剪切</string>
+   <string>Clip</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
@@ -28,10 +29,10 @@
    <item row="0" column="2">
     <widget class="QRadioButton" name="IntersectionRadioButton">
      <property name="toolTip">
-      <string>使用由切片平面定义的正空间和/或负空间的交集来剪切模型。</string>
+      <string>Use the intersection of the positive and/or negative spaces defined by the slice planes to clip the model.</string>
      </property>
      <property name="text">
-      <string>交集</string>
+      <string>Intersection</string>
      </property>
      <property name="icon">
       <iconset resource="../qMRMLWidgets.qrc">
@@ -42,10 +43,10 @@
    <item row="0" column="1">
     <widget class="QRadioButton" name="UnionRadioButton">
      <property name="toolTip">
-      <string>使用由切片平面定义的正空间和/或负空间的并集来剪切模型。</string>
+      <string>Use the union of the positive and/or negative spaces defined by the slice planes to clip the model.</string>
      </property>
      <property name="text">
-      <string>并集</string>
+      <string>Union</string>
      </property>
      <property name="icon">
       <iconset resource="../qMRMLWidgets.qrc">
@@ -59,10 +60,10 @@
    <item row="0" column="0">
     <widget class="QLabel" name="ClippingTypeLabel">
      <property name="toolTip">
-      <string>当使用多个切片平面时，此选项控制使用正空间和/或负空间的并集或交集来剪切模型。模型中选定空间内的部分被保留，选定空间外的部分被剪切掉。</string>
+      <string>When more than one slice plane is used, this option controls if it's the union or intersection of the positive and/or negative spaces that is used to clip the model. The parts of the model inside the selected space is kept, parts outside of the selection are clipped away.</string>
      </property>
      <property name="text">
-      <string>剪切类型：</string>
+      <string>Clipping Type:</string>
      </property>
     </widget>
    </item>
@@ -101,7 +102,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../qMRMLWidgets.qrc" />
+  <include location="../qMRMLWidgets.qrc"/>
  </resources>
- <connections />
+ <connections/>
 </ui>

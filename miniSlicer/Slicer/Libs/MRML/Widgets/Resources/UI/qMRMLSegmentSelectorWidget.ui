@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLSegmentSelectorWidget</class>
  <widget class="qMRMLWidget" name="qMRMLSegmentSelectorWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>qMRML分割选择器小部件</string>
+   <string>qMRMLSegmentSelectorWidget</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
@@ -102,14 +103,14 @@
          <item row="0" column="0">
           <widget class="QLabel" name="label_Segment">
            <property name="text">
-            <string>分割： </string>
+            <string>Segment: </string>
            </property>
           </widget>
          </item>
          <item row="1" column="0" colspan="3">
           <widget class="QLabel" name="label_Message">
            <property name="text">
-            <string notr="true" extracomment="just a placeholder">消息标签</string>
+            <string notr="true" extracomment="just a placeholder">Messages label</string>
            </property>
           </widget>
          </item>
@@ -123,7 +124,7 @@
     <widget class="qMRMLNodeComboBox" name="MRMLNodeComboBox_Segmentation">
      <property name="nodeTypes">
       <stringlist notr="true">
-       <string>分割节点 (vtkMRMLSegmentationNode)</string>
+       <string>vtkMRMLSegmentationNode</string>
       </stringlist>
      </property>
      <property name="addEnabled">
@@ -154,7 +155,7 @@
    <header>ctkCheckableComboBox.h</header>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>qMRMLSegmentSelectorWidget</sender>

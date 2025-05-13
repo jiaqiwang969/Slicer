@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerSettingsPythonPanel</class>
  <widget class="ctkSettingsPanel" name="qSlicerSettingsPythonPanel">
@@ -16,7 +17,7 @@
    <item>
     <widget class="QGroupBox" name="GeneralGroupBox">
      <property name="title">
-      <string>一般</string>
+      <string>General</string>
      </property>
      <property name="flat">
       <bool>true</bool>
@@ -28,14 +29,14 @@
       <item row="0" column="0">
        <widget class="QLabel" name="EditorLabel">
         <property name="text">
-         <string>.py 文件的编辑器：</string>
+         <string>Editor for .py files:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="ctkPathLineEdit" name="EditorPathLineEdit">
         <property name="toolTip">
-         <string>选择一个可执行文件来编辑 .py 文件。如果留空，则将启动与 .py 文件关联的默认程序。</string>
+         <string>Select an executable for editing .py files. If left empty then the default program associated with .py files will be launched.</string>
         </property>
         <property name="settingKey">
          <string>PythonEditor</string>
@@ -48,7 +49,7 @@
    <item>
     <widget class="QGroupBox" name="ShellDisplayGroupBox">
      <property name="title">
-      <string>Python 控制台</string>
+      <string>Python Console</string>
      </property>
      <property name="flat">
       <bool>true</bool>
@@ -60,14 +61,14 @@
       <item row="0" column="0">
        <widget class="QLabel" name="DockableWindowLabel">
         <property name="text">
-         <string>在可停靠窗口中显示：</string>
+         <string>Display in dockable window:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="ctkCheckBox" name="DockableWindowCheckBox">
         <property name="toolTip">
-         <string>在可以放置在主窗口内的窗口中显示 Python 控制台。如果禁用，则 Python 控制台将作为独立窗口显示。</string>
+         <string>Display Python console in a window that can be placed inside the main window. If disabled then the Python Console is displayed as an independent window.</string>
         </property>
         <property name="checked">
          <bool>true</bool>
@@ -77,28 +78,28 @@
       <item row="1" column="0">
        <widget class="QLabel" name="PromptFontLabel">
         <property name="text">
-         <string>字体：</string>
+         <string>Font:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="ctkFontButton" name="ConsoleFontButton">
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="LogLevelLabel">
         <property name="text">
-         <string>日志级别：</string>
+         <string>Log level:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
        <widget class="QComboBox" name="ConsoleLogLevelComboBox">
         <property name="toolTip">
-         <string>此级别及以上的日志消息将在 Python 控制台中显示。</string>
+         <string>Log messages at this level and above are displayed in the Python console.</string>
         </property>
        </widget>
       </item>
@@ -143,6 +144,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

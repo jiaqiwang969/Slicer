@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerDTISliceDisplayWidget</class>
  <widget class="qSlicerWidget" name="qSlicerDTISliceDisplayWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>扩散张量体积切片显示</string>
+   <string>Diffusion Tensor Volume Slice Display</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
    <property name="fieldGrowthPolicy">
@@ -31,21 +32,21 @@
    <item row="0" column="0">
     <widget class="QLabel" name="GlyphVisibilityLabel">
      <property name="text">
-      <string>可见性：</string>
+      <string>Visibility:</string>
      </property>
     </widget>
    </item>
    <item row="0" column="1">
     <widget class="QCheckBox" name="GlyphVisibilityCheckBox">
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
    <item row="1" column="0">
     <widget class="QLabel" name="GlypthOpacityLabel">
      <property name="text">
-      <string>不透明度：</string>
+      <string>Opacity:</string>
      </property>
     </widget>
    </item>
@@ -68,7 +69,7 @@
    <item row="2" column="0">
     <widget class="QLabel" name="GlyphColorTableLabel">
      <property name="text">
-      <string>标量颜色映射：</string>
+      <string>Scalar ColorMap:</string>
      </property>
     </widget>
    </item>
@@ -76,7 +77,7 @@
     <widget class="qMRMLColorTableComboBox" name="GlyphScalarColorTableComboBox">
      <property name="hideChildNodeTypes">
       <stringlist notr="true">
-       <string>扩散张量显示属性节点 (vtkMRMLDiffusionTensorDisplayPropertiesNode)</string>
+       <string>vtkMRMLDiffusionTensorDisplayPropertiesNode</string>
       </stringlist>
      </property>
     </widget>
@@ -84,24 +85,24 @@
    <item row="3" column="0">
     <widget class="QLabel" name="GlyphColorByScalarLabel">
      <property name="text">
-      <string>按标量着色：</string>
+      <string>Color by Scalar:</string>
      </property>
     </widget>
    </item>
    <item row="3" column="1">
-    <widget class="qMRMLScalarInvariantComboBox" name="GlyphColorByScalarComboBox" />
+    <widget class="qMRMLScalarInvariantComboBox" name="GlyphColorByScalarComboBox"/>
    </item>
    <item row="4" column="0">
     <widget class="QLabel" name="GlyphScalarRangeLabel">
      <property name="text">
-      <string>标量范围：</string>
+      <string>Scalar Range:</string>
      </property>
     </widget>
    </item>
    <item row="5" column="0">
     <widget class="QLabel" name="GlyphGeometryLabel">
      <property name="text">
-      <string>符号类型：</string>
+      <string>Glyph Type:</string>
      </property>
     </widget>
    </item>
@@ -109,17 +110,17 @@
     <widget class="QComboBox" name="GlyphGeometryComboBox">
      <item>
       <property name="text">
-       <string>线</string>
+       <string>Lines</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>管</string>
+       <string>Tubes</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>椭球体</string>
+       <string>Ellipsoids</string>
       </property>
      </item>
     </widget>
@@ -127,7 +128,7 @@
    <item row="6" column="0">
     <widget class="QLabel" name="GlyphScaleLabel">
      <property name="text">
-      <string>缩放因子：</string>
+      <string>Scale Factor:</string>
      </property>
     </widget>
    </item>
@@ -153,7 +154,7 @@
    <item row="7" column="0">
     <widget class="QLabel" name="GlyphSpacingLabel">
      <property name="text">
-      <string>间距：</string>
+      <string>Spacing:</string>
      </property>
     </widget>
    </item>
@@ -195,7 +196,7 @@
        <item row="0" column="0">
         <widget class="QLabel" name="LineEigenVectorLabel">
          <property name="text">
-          <string>符号特征向量：</string>
+          <string>Glyph EigenVector:</string>
          </property>
         </widget>
        </item>
@@ -203,17 +204,17 @@
         <widget class="QComboBox" name="LineEigenVectorComboBox">
          <item>
           <property name="text">
-           <string>主</string>
+           <string>Major</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>中间</string>
+           <string>Middle</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>次要</string>
+           <string>Minor</string>
           </property>
          </item>
         </widget>
@@ -237,7 +238,7 @@
        <item row="0" column="0">
         <widget class="QLabel" name="TubeEigenVectorLabel">
          <property name="text">
-          <string>符号特征向量：</string>
+          <string>Glyph EigenVector:</string>
          </property>
         </widget>
        </item>
@@ -245,24 +246,24 @@
         <widget class="QComboBox" name="TubeEigenVectorComboBox">
          <item>
           <property name="text">
-           <string>主</string>
+           <string>Major</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>中间</string>
+           <string>Middle</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>次要</string>
+           <string>Minor</string>
           </property>
          </item>
         </widget>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="EllipsoidPropertiesPage" />
+     <widget class="QWidget" name="EllipsoidPropertiesPage"/>
     </widget>
    </item>
    <item row="4" column="1">
@@ -270,10 +271,10 @@
      <item>
       <widget class="QCheckBox" name="GlyphManualScalarRangeCheckBox">
        <property name="toolTip">
-        <string>手动或自动标量范围</string>
+        <string>Manual or Auto scalar range</string>
        </property>
        <property name="text">
-        <string />
+        <string/>
        </property>
       </widget>
      </item>
@@ -322,7 +323,7 @@
    <header>ctkSliderWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>qSlicerDTISliceDisplayWidget</sender>

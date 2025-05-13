@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerSubjectHierarchySettingsPanel</class>
  <widget class="ctkSettingsPanel" name="qSlicerSubjectHierarchySettingsPanel">
@@ -10,13 +11,13 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>主题层次结构设置面板</string>
+   <string>SubjectHierarchySettingsPanel</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
     <widget class="QGroupBox" name="OperationGroupBox">
      <property name="title">
-      <string>操作</string>
+      <string>Operation</string>
      </property>
      <property name="flat">
       <bool>true</bool>
@@ -25,17 +26,17 @@
       <item row="0" column="0">
        <widget class="QLabel" name="AutoDeleteSubjectHierarchyChildrenEnabledLabel">
         <property name="toolTip">
-         <string>从主题层次结构中删除项下的整个分支。</string>
+         <string>Delete whole branch under the deleted item from subject hierarchy.</string>
         </property>
         <property name="text">
-         <string>自动删除主题层次结构子项：</string>
+         <string>Automatically delete subject hierarchy children:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="QCheckBox" name="AutoDeleteSubjectHierarchyChildrenEnabledCheckBox">
         <property name="toolTip">
-         <string>自动删除从场景中移除的节点的主题层次结构子项。</string>
+         <string>Automatically delete subject hierarchy children for nodes removed from the scene.</string>
         </property>
         <property name="text">
          <string> </string>
@@ -48,14 +49,14 @@
    <item row="1" column="0">
     <widget class="QGroupBox" name="DisplayGroupBox">
      <property name="title">
-      <string>显示</string>
+      <string>Display</string>
      </property>
      <property name="flat">
       <bool>true</bool>
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <item row="3" column="0" colspan="5">
-       <layout class="QHBoxLayout" name="horizontalLayout" />
+       <layout class="QHBoxLayout" name="horizontalLayout"/>
       </item>
       <item row="1" column="3">
        <widget class="QLabel" name="StudyDateTagLabel">
@@ -66,7 +67,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>  研究日期：</string>
+         <string>  Study date:</string>
         </property>
        </widget>
       </item>
@@ -79,49 +80,49 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>  出生日期：</string>
+         <string>  Birth date:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="2">
        <widget class="QCheckBox" name="PatientIDTagCheckBox">
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
       <item row="0" column="4">
        <widget class="QCheckBox" name="PatientBirthDateTagCheckBox">
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
       <item row="1" column="2">
        <widget class="QCheckBox" name="StudyIDTagCheckBox">
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
       <item row="0" column="0">
        <widget class="QLabel" name="PatientTagsLabel">
         <property name="text">
-         <string>项目名称中的患者标签：</string>
+         <string>Patient tags in item name:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="StudyTagsLabel">
         <property name="text">
-         <string>项目名称中的研究标签：</string>
+         <string>Study tags in item name:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="4">
        <widget class="QCheckBox" name="StudyDateTagCheckBox">
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
@@ -134,7 +135,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>选择一个模型或分割节点</string>
+         <string>ID:</string>
         </property>
        </widget>
       </item>
@@ -147,27 +148,27 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>端点：</string>
+         <string>ID:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="UseTerminologyLabel">
         <property name="toolTip">
-         <string>如果启用，双击颜色列将打开术语选择器。否则，可以通过简单的颜色选择器编辑颜色。默认值为真。</string>
+         <string>If enabled, double-clicking the color column opens the terminology selector. Otherwise the color can be edited via simple color selector. True by default.</string>
         </property>
         <property name="text">
-         <string>使用标准术语：</string>
+         <string>Use standard terminology:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
        <widget class="QCheckBox" name="UseTerminologyCheckBox">
         <property name="toolTip">
-         <string>如果启用，双击颜色列将打开术语选择器。否则，可以通过简单的颜色选择器编辑颜色。默认值为真。</string>
+         <string>If enabled, double-clicking the color column opens the terminology selector. Otherwise the color can be edited via simple color selector. True by default.</string>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
         <property name="checked">
          <bool>true</bool>
@@ -213,6 +214,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

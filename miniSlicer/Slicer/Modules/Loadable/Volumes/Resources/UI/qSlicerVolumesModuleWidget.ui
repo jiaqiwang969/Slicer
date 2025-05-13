@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerVolumesModuleWidget</class>
  <widget class="qSlicerWidget" name="qSlicerVolumesModuleWidget">
@@ -13,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>体积</string>
+   <string>Volumes</string>
   </property>
   <property name="windowIcon">
    <iconset>
@@ -72,7 +73,7 @@
         </property>
         <property name="nodeTypes">
          <stringlist notr="true">
-          <string>体积节点 (vtkMRMLVolumeNode)</string>
+          <string>vtkMRMLVolumeNode</string>
          </stringlist>
         </property>
         <property name="idColumnVisible">
@@ -86,9 +87,9 @@
         </property>
         <property name="pluginAllowList">
          <stringlist notr="true">
-          <string>体积</string>
-          <string>文件夹</string>
-          <string>可见性</string>
+          <string>Volumes</string>
+          <string>Folder</string>
+          <string>Visibility</string>
          </stringlist>
         </property>
        </widget>
@@ -99,14 +100,14 @@
    <item>
     <widget class="ctkCollapsibleButton" name="InfoCollapsibleButton">
      <property name="text">
-      <string>体积信息</string>
+      <string>Volume Information</string>
      </property>
      <property name="checked">
       <bool>false</bool>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="qMRMLVolumeInfoWidget" name="MRMLVolumeInfoWidget" />
+       <widget class="qMRMLVolumeInfoWidget" name="MRMLVolumeInfoWidget"/>
       </item>
       <item>
        <widget class="QFrame" name="ConvertVolumeFrame">
@@ -132,7 +133,7 @@
          <item>
           <widget class="QLabel" name="ConvertVolumeLabel">
            <property name="text">
-            <string>转换为标签图：</string>
+            <string>Convert to LabelMap:</string>
            </property>
           </widget>
          </item>
@@ -156,7 +157,7 @@
           <widget class="qMRMLNodeComboBox" name="ConvertVolumeTargetSelector">
            <property name="nodeTypes">
             <stringlist notr="true">
-             <string>标签图体积节点 (vtkMRMLLabelMapVolumeNode)</string>
+             <string>vtkMRMLLabelMapVolumeNode</string>
             </stringlist>
            </property>
            <property name="noneEnabled">
@@ -166,14 +167,14 @@
             <bool>true</bool>
            </property>
            <property name="noneDisplay">
-            <string>替换当前节点</string>
+            <string>Replace current node</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QPushButton" name="ConvertVolumeButton">
            <property name="text">
-            <string>转换</string>
+            <string>Convert</string>
            </property>
           </widget>
          </item>
@@ -186,14 +187,14 @@
    <item>
     <widget class="ctkCollapsibleButton" name="DisplayCollapsibleButton">
      <property name="text">
-      <string>显示</string>
+      <string>Display</string>
      </property>
      <property name="collapsed">
       <bool>false</bool>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
-       <widget class="qSlicerVolumeDisplayWidget" name="VolumeDisplayWidget" />
+       <widget class="qSlicerVolumeDisplayWidget" name="VolumeDisplayWidget"/>
       </item>
      </layout>
     </widget>
@@ -204,7 +205,7 @@
       <bool>true</bool>
      </property>
      <property name="text">
-      <string>颜色图例</string>
+      <string>Color Legend</string>
      </property>
      <property name="checked">
       <bool>false</bool>
@@ -292,7 +293,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../qSlicerVolumesModule.qrc" />
+  <include location="../qSlicerVolumesModule.qrc"/>
  </resources>
  <connections>
   <connection>

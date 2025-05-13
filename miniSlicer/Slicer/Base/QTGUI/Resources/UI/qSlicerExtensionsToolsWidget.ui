@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerExtensionsToolsWidget</class>
  <widget class="QWidget" name="qSlicerExtensionsToolsWidget">
@@ -10,16 +11,16 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>扩展工具</string>
+   <string>Extensions tools</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
     <widget class="QToolButton" name="CheckForUpdatesButton">
      <property name="toolTip">
-      <string>查询扩展服务器以检查已安装扩展的更新</string>
+      <string>Query the Extensions Server if there are updates for any of the installed extensions</string>
      </property>
      <property name="text">
-      <string>检查更新</string>
+      <string>Check for updates</string>
      </property>
      <property name="icon">
       <iconset>
@@ -34,10 +35,10 @@
    <item>
     <widget class="QToolButton" name="InstallUpdatesButton">
      <property name="toolTip">
-      <string>更新所有扩展到扩展服务器上可用的最新版本</string>
+      <string>Updates all extensions with the latest version available on the Extensions Server</string>
      </property>
      <property name="text">
-      <string>更新所有</string>
+      <string>Update all</string>
      </property>
      <property name="icon">
       <iconset>
@@ -52,10 +53,10 @@
    <item>
     <widget class="QToolButton" name="InstallBookmarkedButton">
      <property name="toolTip">
-      <string>安装所有书签扩展</string>
+      <string>Install all the bookmarked extensions</string>
      </property>
      <property name="text">
-      <string>安装书签</string>
+      <string>Install bookmarked</string>
      </property>
      <property name="icon">
       <iconset>
@@ -70,10 +71,10 @@
    <item>
     <widget class="QToolButton" name="InstallFromFileButton">
      <property name="toolTip">
-      <string>从一个或多个扩展包文件安装扩展</string>
+      <string>Install extensions from one or more extension package files</string>
      </property>
      <property name="text">
-      <string>从文件安装...</string>
+      <string>Install from file...</string>
      </property>
      <property name="icon">
       <iconset>
@@ -118,10 +119,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>自动检查更新</string>
+    <string>Automatically check for updates</string>
    </property>
    <property name="toolTip">
-    <string>定期检查更新的扩展。</string>
+    <string>Periodically check for updated extensions.</string>
    </property>
   </action>
   <action name="AutoUpdateInstallAction">
@@ -129,34 +130,34 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>自动安装更新</string>
+    <string>Automatically install updates</string>
    </property>
    <property name="toolTip">
-    <string>自动安装更新的扩展</string>
+    <string>Automatically install updated extensions</string>
    </property>
   </action>
   <action name="CheckForUpdatesAction">
    <property name="text">
-    <string>检查更新</string>
+    <string>Check for updates</string>
    </property>
    <property name="toolTip">
-    <string>查询扩展服务器以检查已安装扩展的更新</string>
+    <string>Query the Extensions Server if there are updates for any of the installed extensions</string>
    </property>
   </action>
   <action name="EditBookmarksAction">
    <property name="text">
-    <string>编辑书签...</string>
+    <string>Edit bookmarks...</string>
    </property>
    <property name="toolTip">
-    <string>在文本框中编辑书签列表</string>
+    <string>Edit list of bookmarks in a text field</string>
    </property>
   </action>
   <action name="OpenExtensionsCatalogWebsiteAction">
    <property name="text">
-    <string>打开扩展目录网站...</string>
+    <string>Open Extensions Catalog website...</string>
    </property>
    <property name="toolTip">
-    <string>在默认浏览器中打开扩展目录网站。用于下载离线使用的扩展包。</string>
+    <string>Open Extensions Catalog website in the default web browser. Useful for downloading extension packages for offline use.</string>
    </property>
   </action>
   <action name="AutoInstallDependenciesAction">
@@ -164,10 +165,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>自动安装依赖项</string>
+    <string>Automatically install dependencies</string>
    </property>
    <property name="toolTip">
-    <string>安装扩展时自动安装所需的附加扩展</string>
+    <string>Automatically install required additional extensions when installing an extension</string>
    </property>
   </action>
  </widget>
@@ -179,7 +180,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../qSlicerBaseQTGUI.qrc" />
+  <include location="../qSlicerBaseQTGUI.qrc"/>
  </resources>
- <connections />
+ <connections/>
 </ui>

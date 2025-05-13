@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>ExtractCenterline</class>
  <widget class="qMRMLWidget" name="ExtractCenterline">
@@ -10,31 +11,31 @@
    </rect>
   </property>
   <property name="toolTip">
-   <string>用于生成中心线曲线的采样距离</string>
+   <string>Sampling distance used for generating centerline curve</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
    <item row="1" column="0" colspan="2">
     <widget class="ctkCollapsibleButton" name="inputsCollapsibleButton">
      <property name="text">
-      <string>输入</string>
+      <string>Inputs</string>
      </property>
      <layout class="QFormLayout" name="formLayout_2">
       <item row="0" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>表面：</string>
+         <string>Surface:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="qMRMLNodeComboBox" name="inputSurfaceSelector">
         <property name="toolTip">
-         <string>树的输入表面模型。如果计算速度慢，请在高级部分调整预处理参数。</string>
+         <string>Input surface model of the tree. If computation is slow adjust preprocessing parameters in advanced section.</string>
         </property>
         <property name="nodeTypes">
          <stringlist notr="true">
-          <string>模型节点 (vtkMRMLModelNode)</string>
-          <string>分割节点 (vtkMRMLSegmentationNode)</string>
+          <string>vtkMRMLModelNode</string>
+          <string>vtkMRMLSegmentationNode</string>
          </stringlist>
         </property>
         <property name="showChildNodeTypes">
@@ -50,14 +51,14 @@
          <bool>true</bool>
         </property>
         <property name="noneDisplay">
-         <string>选择一个模型或分割节点</string>
+         <string>Select a model or segmentation node</string>
         </property>
        </widget>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="label_9">
         <property name="text">
-         <string>端点：</string>
+         <string>Endpoints:</string>
         </property>
        </widget>
       </item>
@@ -66,18 +67,18 @@
         <item>
          <widget class="qMRMLNodeComboBox" name="endPointsMarkupsSelector">
           <property name="toolTip">
-           <string>分支端点。“未选择”的控制点用作源，“已选择”的控制点用作目标。</string>
+           <string>Branch endpoints. &quot;Unselected&quot; control points are used as sources, &quot;selected&quot; control points are used as targets.</string>
           </property>
           <property name="nodeTypes">
            <stringlist notr="true">
-            <string>标记基准节点 (vtkMRMLMarkupsFiducialNode)</string>
+            <string>vtkMRMLMarkupsFiducialNode</string>
            </stringlist>
           </property>
           <property name="showChildNodeTypes">
            <bool>false</bool>
           </property>
           <property name="baseName">
-           <string>端点</string>
+           <string>Endpoints</string>
           </property>
           <property name="noneEnabled">
            <bool>true</bool>
@@ -97,12 +98,12 @@
          </widget>
         </item>
         <item>
-         <widget class="qSlicerMarkupsPlaceWidget" name="endPointsMarkupsPlaceWidget" />
+         <widget class="qSlicerMarkupsPlaceWidget" name="endPointsMarkupsPlaceWidget"/>
         </item>
         <item>
          <widget class="ctkPushButton" name="autoDetectEndPointsPushButton">
           <property name="text">
-           <string>自动检测</string>
+           <string>Auto-detect</string>
           </property>
          </widget>
         </item>
@@ -121,25 +122,25 @@
    <item row="0" column="0">
     <widget class="QLabel" name="parameterSetLabel">
      <property name="text">
-      <string>参数集：</string>
+      <string>Paremeter set: </string>
      </property>
     </widget>
    </item>
    <item row="0" column="1">
     <widget class="qMRMLNodeComboBox" name="parameterNodeSelector">
      <property name="toolTip">
-      <string>选择节点以存储参数集</string>
+      <string>Pick node to store parameter set</string>
      </property>
      <property name="nodeTypes">
       <stringlist notr="true">
-       <string>脚本模块节点 (vtkMRMLScriptedModuleNode)</string>
+       <string>vtkMRMLScriptedModuleNode</string>
       </stringlist>
      </property>
      <property name="showHidden">
       <bool>true</bool>
      </property>
      <property name="baseName">
-      <string>提取中心线</string>
+      <string>ExtractCenterline</string>
      </property>
      <property name="renameEnabled">
       <bool>true</bool>
@@ -162,37 +163,37 @@
    <item row="2" column="0" colspan="2">
     <widget class="ctkCollapsibleButton" name="outputsCollapsibleButton">
      <property name="text">
-      <string>输出</string>
+      <string>Outputs</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="ctkCollapsibleGroupBox" name="CollapsibleGroupBox">
         <property name="title">
-         <string>网络</string>
+         <string>Network</string>
         </property>
         <layout class="QFormLayout" name="formLayout_5">
          <item row="0" column="0">
           <widget class="QLabel" name="label_10">
            <property name="text">
-            <string>网络模型：</string>
+            <string>Network model:</string>
            </property>
           </widget>
          </item>
          <item row="0" column="1">
           <widget class="qMRMLNodeComboBox" name="outputNetworkModelSelector">
            <property name="toolTip">
-            <string>快速中心线网络提取的结果。</string>
+            <string>Result of quick centerline network extraction.</string>
            </property>
            <property name="nodeTypes">
             <stringlist notr="true">
-             <string>模型节点 (vtkMRMLModelNode)</string>
+             <string>vtkMRMLModelNode</string>
             </stringlist>
            </property>
            <property name="showChildNodeTypes">
             <bool>false</bool>
            </property>
            <property name="baseName">
-            <string>网络模型</string>
+            <string>Network model</string>
            </property>
            <property name="noneEnabled">
             <bool>true</bool>
@@ -214,25 +215,25 @@
          <item row="2" column="0">
           <widget class="QLabel" name="label_16">
            <property name="text">
-            <string>网络属性：</string>
+            <string>Network properties:</string>
            </property>
           </widget>
          </item>
          <item row="2" column="1">
           <widget class="qMRMLNodeComboBox" name="outputNetworkPropertiesTableSelector">
            <property name="toolTip">
-            <string>包含中心线定量分析的表格（半径、长度、曲率、扭转等）</string>
+            <string>Table containing quantitative analysis of centerline (radius, length, curvature, torsion, etc.)</string>
            </property>
            <property name="nodeTypes">
             <stringlist notr="true">
-             <string>表格节点 (vtkMRMLTableNode)</string>
+             <string>vtkMRMLTableNode</string>
             </stringlist>
            </property>
            <property name="showChildNodeTypes">
             <bool>false</bool>
            </property>
            <property name="baseName">
-            <string>网络属性</string>
+            <string>Network properties</string>
            </property>
            <property name="noneEnabled">
             <bool>true</bool>
@@ -254,25 +255,25 @@
          <item row="1" column="0">
           <widget class="QLabel" name="label_17">
            <property name="text">
-            <string>网络曲线：</string>
+            <string>Network curve:</string>
            </property>
           </widget>
          </item>
          <item row="1" column="1">
           <widget class="qMRMLNodeComboBox" name="outputNetworkCurveSelector">
            <property name="toolTip">
-            <string>中心线提取结果作为标记曲线的层次结构。</string>
+            <string>Centerline extraction result as a hierarchy of markups curves.</string>
            </property>
            <property name="nodeTypes">
             <stringlist notr="true">
-             <string>标记曲线节点 (vtkMRMLMarkupsCurveNode)</string>
+             <string>vtkMRMLMarkupsCurveNode</string>
             </stringlist>
            </property>
            <property name="showChildNodeTypes">
             <bool>false</bool>
            </property>
            <property name="baseName">
-            <string>网络曲线</string>
+            <string>Network curve</string>
            </property>
            <property name="noneEnabled">
             <bool>true</bool>
@@ -297,31 +298,31 @@
       <item>
        <widget class="ctkCollapsibleGroupBox" name="CollapsibleGroupBox_2">
         <property name="title">
-         <string>树</string>
+         <string>Tree</string>
         </property>
         <layout class="QFormLayout" name="formLayout_6">
          <item row="0" column="0">
           <widget class="QLabel" name="label_11">
            <property name="text">
-            <string>中心线模型：</string>
+            <string>Centerline model:</string>
            </property>
           </widget>
          </item>
          <item row="0" column="1">
           <widget class="qMRMLNodeComboBox" name="outputCenterlineModelSelector">
            <property name="toolTip">
-            <string>中心线提取结果作为模型。</string>
+            <string>Centerline extraction result as a model.</string>
            </property>
            <property name="nodeTypes">
             <stringlist notr="true">
-             <string>模型节点 (vtkMRMLModelNode)</string>
+             <string>vtkMRMLModelNode</string>
             </stringlist>
            </property>
            <property name="showChildNodeTypes">
             <bool>false</bool>
            </property>
            <property name="baseName">
-            <string>中心线模型</string>
+            <string>Centerline model</string>
            </property>
            <property name="noneEnabled">
             <bool>true</bool>
@@ -343,25 +344,25 @@
          <item row="1" column="0">
           <widget class="QLabel" name="label_15">
            <property name="text">
-            <string>中心线曲线：</string>
+            <string>Centerline curve:</string>
            </property>
           </widget>
          </item>
          <item row="1" column="1">
           <widget class="qMRMLNodeComboBox" name="outputCenterlineCurveSelector">
            <property name="toolTip">
-            <string>中心线提取结果作为标记曲线的层次结构。</string>
+            <string>Centerline extraction result as a hierarchy of markups curves.</string>
            </property>
            <property name="nodeTypes">
             <stringlist notr="true">
-             <string>标记曲线节点 (vtkMRMLMarkupsCurveNode)</string>
+             <string>vtkMRMLMarkupsCurveNode</string>
             </stringlist>
            </property>
            <property name="showChildNodeTypes">
             <bool>false</bool>
            </property>
            <property name="baseName">
-            <string>中心线曲线</string>
+            <string>Centerline curve</string>
            </property>
            <property name="noneEnabled">
             <bool>true</bool>
@@ -383,25 +384,25 @@
          <item row="2" column="0">
           <widget class="QLabel" name="label_14">
            <property name="text">
-            <string>中心线属性：</string>
+            <string>Centerline properties:</string>
            </property>
           </widget>
          </item>
          <item row="2" column="1">
           <widget class="qMRMLNodeComboBox" name="outputCenterlinePropertiesTableSelector">
            <property name="toolTip">
-            <string>包含中心线定量分析的表格（半径、长度、曲率、扭转等）</string>
+            <string>Table containing quantitative analysis of centerline (radius, length, curvature, torsion, etc.)</string>
            </property>
            <property name="nodeTypes">
             <stringlist notr="true">
-             <string>表格节点 (vtkMRMLTableNode)</string>
+             <string>vtkMRMLTableNode</string>
             </stringlist>
            </property>
            <property name="showChildNodeTypes">
             <bool>false</bool>
            </property>
            <property name="baseName">
-            <string>中心线定量</string>
+            <string>Centerline quantification</string>
            </property>
            <property name="noneEnabled">
             <bool>true</bool>
@@ -429,7 +430,7 @@
    <item row="3" column="0" colspan="2">
     <widget class="ctkCollapsibleButton" name="advancedCollapsibleButton">
      <property name="text">
-      <string>高级</string>
+      <string>Advanced</string>
      </property>
      <property name="collapsed">
       <bool>true</bool>
@@ -438,17 +439,17 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label_4">
         <property name="text">
-         <string>预处理输入表面：</string>
+         <string>Preprocess input surface:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="QCheckBox" name="preprocessInputSurfaceModelCheckBox">
         <property name="toolTip">
-         <string>输入表面模型被减少到请求的目标点数（加快计算速度），或细分（以提高计算精度）。</string>
+         <string>Input surface model is reduced to the requested target point count (making computation faster), or subdivided (to make computations more accurate).</string>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
         <property name="checked">
          <bool>true</bool>
@@ -458,7 +459,7 @@
       <item row="1" column="0">
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>目标点数：</string>
+         <string>Target point count:</string>
         </property>
         <property name="indent">
          <number>10</number>
@@ -468,7 +469,7 @@
       <item row="1" column="1">
        <widget class="ctkSliderWidget" name="targetKPointCountWidget">
         <property name="toolTip">
-         <string>预处理表面中首选的点数。</string>
+         <string>Preferred number of points in the preprocessed surface.</string>
         </property>
         <property name="decimals">
          <number>1</number>
@@ -493,7 +494,7 @@
       <item row="2" column="0">
        <widget class="QLabel" name="label_5">
         <property name="text">
-         <string>简化强度：</string>
+         <string>Decimation aggressiveness:</string>
         </property>
         <property name="indent">
          <number>10</number>
@@ -503,7 +504,7 @@
       <item row="2" column="1">
        <widget class="ctkSliderWidget" name="decimationAggressivenessWidget">
         <property name="toolTip">
-         <string>较低的值更好地保持网格完整性，但可能无法将点数减少到所需水平。</string>
+         <string>Lower values preserve the mesh integrity better but it may not be possible to reduce number of points to the desired level.</string>
         </property>
         <property name="decimals">
          <number>2</number>
@@ -525,7 +526,7 @@
       <item row="3" column="0">
        <widget class="QLabel" name="label_6">
         <property name="text">
-         <string>细分：</string>
+         <string>Subdivide:</string>
         </property>
         <property name="indent">
          <number>10</number>
@@ -535,17 +536,17 @@
       <item row="3" column="1">
        <widget class="QCheckBox" name="subdivideInputSurfaceModelCheckBox">
         <property name="toolTip">
-         <string>细分网格以提高计算精度（以增加计算时间为代价）。</string>
+         <string>Subdivide the mesh to make computation more accurate (at the cost of increased computation time).</string>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
       <item row="4" column="0">
        <widget class="QLabel" name="label_8">
         <property name="text">
-         <string>输出预处理表面：</string>
+         <string>Output preprocessed surface:</string>
         </property>
         <property name="indent">
          <number>10</number>
@@ -555,18 +556,18 @@
       <item row="4" column="1">
        <widget class="qMRMLNodeComboBox" name="outputPreprocessedSurfaceModelSelector">
         <property name="toolTip">
-         <string>保存预处理结果。对质量检查和加快重复计算非常有用：预处理表面可以用作输入表面（然后可以禁用“预处理输入表面”选项）。</string>
+         <string>Save preprocessing result. Useful for quality checks and for making repeated computations faster: preprocessed surface can be used as input surface (and &quot;Preprocess input surface&quot; option can then be disabled).</string>
         </property>
         <property name="nodeTypes">
          <stringlist notr="true">
-          <string>模型节点 (vtkMRMLModelNode)</string>
+          <string>vtkMRMLModelNode</string>
          </stringlist>
         </property>
         <property name="showChildNodeTypes">
          <bool>false</bool>
         </property>
         <property name="baseName">
-         <string>预处理模型</string>
+         <string>Preprocessed model</string>
         </property>
         <property name="noneEnabled">
          <bool>true</bool>
@@ -588,32 +589,32 @@
       <item row="5" column="0">
        <widget class="QLabel" name="label_13">
         <property name="text">
-         <string>网格错误检查结果：</string>
+         <string>Mesh error check results:</string>
         </property>
        </widget>
       </item>
       <item row="6" column="0">
        <widget class="QLabel" name="label_12">
         <property name="text">
-         <string>输出Voronoi图：</string>
+         <string>Output Voronoi diagram:</string>
         </property>
        </widget>
       </item>
       <item row="6" column="1">
        <widget class="qMRMLNodeComboBox" name="outputVoronoiDiagramModelSelector">
         <property name="toolTip">
-         <string>Voronoi图（类似于中面）用于计算端点之间的中心线路径。对质量检查和显示可以稳健放置端点的模型非常有用。</string>
+         <string>Voronoi diagram (similar to medial surface) that is used for computing centerline path between endpoints. It is useful for quality checks and for showing a model where endpoints can be robustly placed on.</string>
         </property>
         <property name="nodeTypes">
          <stringlist notr="true">
-          <string>模型节点 (vtkMRMLModelNode)</string>
+          <string>vtkMRMLModelNode</string>
          </stringlist>
         </property>
         <property name="showChildNodeTypes">
          <bool>false</bool>
         </property>
         <property name="baseName">
-         <string>Voronoi图</string>
+         <string>Voronoi diagram</string>
         </property>
         <property name="noneEnabled">
          <bool>true</bool>
@@ -635,18 +636,18 @@
       <item row="5" column="1">
        <widget class="qMRMLNodeComboBox" name="outputMeshErrorsMarkupsSelector">
         <property name="toolTip">
-         <string>网格错误检查的结果。目前唯一的检查是是否存在非流形边。</string>
+         <string>Result of mesh error checks. Currently the only check is for presence of non-manifold edges.</string>
         </property>
         <property name="nodeTypes">
          <stringlist notr="true">
-          <string>标记基准节点 (vtkMRMLMarkupsFiducialNode)</string>
+          <string>vtkMRMLMarkupsFiducialNode</string>
          </stringlist>
         </property>
         <property name="showChildNodeTypes">
          <bool>false</bool>
         </property>
         <property name="baseName">
-         <string>网格错误</string>
+         <string>Mesh errors</string>
         </property>
         <property name="noneEnabled">
          <bool>true</bool>
@@ -668,7 +669,7 @@
       <item row="7" column="0">
        <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>曲线采样距离：</string>
+         <string>Curve sampling distance:</string>
         </property>
        </widget>
       </item>
@@ -678,7 +679,7 @@
          <double>1.000000000000000</double>
         </property>
         <property name="quantity">
-         <string>长度</string>
+         <string>length</string>
         </property>
         <property name="unitAwareProperties">
          <set>qMRMLSpinBox::MaximumValue|qMRMLSpinBox::Precision|qMRMLSpinBox::Prefix|qMRMLSpinBox::Suffix</set>
@@ -691,10 +692,10 @@
    <item row="4" column="0" colspan="2">
     <widget class="QPushButton" name="applyButton">
      <property name="toolTip">
-      <string>运行算法。</string>
+      <string>Run the algorithm.</string>
      </property>
      <property name="text">
-      <string>应用</string>
+      <string>Apply</string>
      </property>
     </widget>
    </item>
@@ -762,7 +763,7 @@
    <header>qMRMLSegmentSelectorWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>ExtractCenterline</sender>

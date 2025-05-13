@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLPlotChartPropertiesWidget</class>
  <widget class="qMRMLWidget" name="qMRMLPlotChartPropertiesWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>图表属性</string>
+   <string>Plot Chart Properties</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
    <property name="fieldGrowthPolicy">
@@ -31,7 +32,7 @@
    <item row="0" column="0">
     <widget class="QLabel" name="plotDataSeriesLabel">
      <property name="text">
-      <string>绘图数据系列：</string>
+      <string>Plot data series:</string>
      </property>
     </widget>
    </item>
@@ -41,11 +42,11 @@
       <enum>Qt::TabFocus</enum>
      </property>
      <property name="toolTip">
-      <string>向当前图表添加/移除绘图数据系列。</string>
+      <string>Add/Remove plots data series to/from the current chart.</string>
      </property>
      <property name="nodeTypes">
       <stringlist notr="true">
-       <string>绘图系列节点 (vtkMRMLPlotSeriesNode)</string>
+       <string>vtkMRMLPlotSeriesNode</string>
       </stringlist>
      </property>
      <property name="noneEnabled">
@@ -68,17 +69,17 @@
    <item row="1" column="0">
     <widget class="QLabel" name="chartTitleLabel">
      <property name="text">
-      <string>图表标题：</string>
+      <string>Chart title:</string>
      </property>
     </widget>
    </item>
    <item row="1" column="1">
     <widget class="QLineEdit" name="titleLineEdit">
      <property name="toolTip">
-      <string>输入图表的标题。</string>
+      <string>Enter a title for the chart.</string>
      </property>
      <property name="text">
-      <string />
+      <string/>
      </property>
      <property name="dragEnabled">
       <bool>false</bool>
@@ -91,24 +92,24 @@
    <item row="4" column="0">
     <widget class="QLabel" name="xAxisTitleLabel">
      <property name="text">
-      <string>X 轴标题：</string>
+      <string>X axis title:</string>
      </property>
     </widget>
    </item>
    <item row="4" column="1">
     <widget class="QLineEdit" name="xAxisLabelLineEdit">
      <property name="toolTip">
-      <string>输入 X 轴的标签。</string>
+      <string>Enter a label for the X-axis.</string>
      </property>
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
    <item row="5" column="0">
     <widget class="QLabel" name="xAxisRangeLabel">
      <property name="text">
-      <string>X 轴范围：</string>
+      <string>X axis range:</string>
      </property>
     </widget>
    </item>
@@ -117,10 +118,10 @@
      <item>
       <widget class="QCheckBox" name="xAxisManualRangeCheckBox">
        <property name="toolTip">
-        <string>启用对该图表所有视图的 X 轴范围手动设置</string>
+        <string>Enable manual setting of X axis range for all views of this chart</string>
        </property>
        <property name="text">
-        <string />
+        <string/>
        </property>
       </widget>
      </item>
@@ -167,7 +168,7 @@
    <item row="7" column="0">
     <widget class="QLabel" name="yAxisRangeLabel">
      <property name="text">
-      <string>Y 轴范围：</string>
+      <string>Y axis range:</string>
      </property>
     </widget>
    </item>
@@ -176,10 +177,10 @@
      <item>
       <widget class="QCheckBox" name="yAxisManualRangeCheckBox">
        <property name="toolTip">
-        <string>启用对该图表所有视图的 Y 轴范围手动设置</string>
+        <string>Enable manual setting of Y axis range for all views of this chart</string>
        </property>
        <property name="text">
-        <string />
+        <string/>
        </property>
       </widget>
      </item>
@@ -226,17 +227,17 @@
    <item row="6" column="0">
     <widget class="QLabel" name="yAxisTitleLabel">
      <property name="text">
-      <string>Y 轴标题：</string>
+      <string>Y axis title:</string>
      </property>
     </widget>
    </item>
    <item row="6" column="1">
     <widget class="QLineEdit" name="yAxisLabelLineEdit">
      <property name="toolTip">
-      <string>输入 Y 轴的标签。</string>
+      <string>Enter a label for the Y-axis.</string>
      </property>
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
@@ -244,17 +245,17 @@
     <widget class="QComboBox" name="fontTypeComboBox">
      <item>
       <property name="text">
-       <string>Arial 字体</string>
+       <string>Arial</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Times 字体</string>
+       <string>Times</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Courier 字体</string>
+       <string>Courier</string>
       </property>
      </item>
     </widget>
@@ -262,14 +263,14 @@
    <item row="9" column="0">
     <widget class="QLabel" name="fontTypeLabel">
      <property name="text">
-      <string>字体类型：</string>
+      <string>Font Type:</string>
      </property>
     </widget>
    </item>
    <item row="10" column="0">
     <widget class="QLabel" name="titleFontSizeLabel">
      <property name="text">
-      <string>图表标题字体大小：</string>
+      <string>Chart title font size:</string>
      </property>
     </widget>
    </item>
@@ -283,7 +284,7 @@
    <item row="12" column="0">
     <widget class="QLabel" name="axisTitleFontSizeLabel">
      <property name="text">
-      <string>轴标题字体大小：</string>
+      <string>Axis title font size:</string>
      </property>
     </widget>
    </item>
@@ -297,7 +298,7 @@
    <item row="13" column="0">
     <widget class="QLabel" name="axisLabelFontSizeLabel">
      <property name="text">
-      <string>轴标签字体大小：</string>
+      <string>Axis label font size:</string>
      </property>
     </widget>
    </item>
@@ -311,28 +312,28 @@
    <item row="2" column="0">
     <widget class="QLabel" name="legendVisibleLabel">
      <property name="text">
-      <string>图例可见性：</string>
+      <string>Legend visibility:</string>
      </property>
     </widget>
    </item>
    <item row="2" column="1">
     <widget class="QCheckBox" name="legendVisibleCheckBox">
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
    <item row="3" column="0">
     <widget class="QLabel" name="gridVisibleLabel">
      <property name="text">
-      <string>网格可见性：</string>
+      <string>Grid visibility:</string>
      </property>
     </widget>
    </item>
    <item row="11" column="0">
     <widget class="QLabel" name="legendFontSizeLabel">
      <property name="text">
-      <string>图例字体大小：</string>
+      <string>Legend font size:</string>
      </property>
     </widget>
    </item>
@@ -346,7 +347,7 @@
    <item row="8" column="0">
     <widget class="QLabel" name="logScaleLabel">
      <property name="text">
-      <string>对数刻度：</string>
+      <string>Logarithmic scale:</string>
      </property>
     </widget>
    </item>
@@ -355,14 +356,14 @@
      <item>
       <widget class="QCheckBox" name="xAxisLogScaleCheckBox">
        <property name="text">
-        <string>X 轴</string>
+        <string>X axis</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QCheckBox" name="yAxisLogScaleCheckBox">
        <property name="text">
-        <string>Y 轴</string>
+        <string>Y axis</string>
        </property>
       </widget>
      </item>
@@ -384,7 +385,7 @@
    <item row="3" column="1">
     <widget class="QCheckBox" name="gridVisibleCheckBox">
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
@@ -422,7 +423,7 @@
   <tabstop>xAxisManualRangeCheckBox</tabstop>
   <tabstop>yAxisManualRangeCheckBox</tabstop>
  </tabstops>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>xAxisManualRangeCheckBox</sender>

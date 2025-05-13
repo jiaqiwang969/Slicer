@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLVolumePropertyNodeWidget</class>
  <widget class="QWidget" name="qMRMLVolumePropertyNodeWidget">
@@ -10,14 +11,14 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>体积属性节点</string>
+   <string>Volume Property Node</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="margin">
     <number>0</number>
    </property>
    <item>
-    <widget class="ctkVTKVolumePropertyWidget" name="VolumePropertyWidget" />
+    <widget class="ctkVTKVolumePropertyWidget" name="VolumePropertyWidget"/>
    </item>
   </layout>
  </widget>
@@ -28,6 +29,6 @@
    <header>ctkVTKVolumePropertyWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

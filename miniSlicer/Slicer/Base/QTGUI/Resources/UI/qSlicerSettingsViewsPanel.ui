@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerSettingsViewsPanel</class>
  <widget class="ctkSettingsPanel" name="qSlicerSettingsViewsPanel">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>视图设置</string>
+   <string>ViewsSettings</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
@@ -37,7 +38,7 @@
        <item>
         <widget class="ctkCollapsibleGroupBox" name="CollapsibleGroupBox">
          <property name="title">
-          <string>切片查看器默认设置</string>
+          <string>Slice viewer defaults</string>
          </property>
          <layout class="QFormLayout" name="formLayout_2">
           <property name="fieldGrowthPolicy">
@@ -46,14 +47,14 @@
           <item row="0" column="0">
            <widget class="QLabel" name="SliceOrientationMarkerLabel">
             <property name="text">
-             <string>方向标记：</string>
+             <string>Orientation marker:</string>
             </property>
            </widget>
           </item>
           <item row="0" column="1">
            <layout class="QHBoxLayout" name="horizontalLayout_2">
             <item>
-             <widget class="ctkComboBox" name="SliceOrientationMarkerTypeComboBox" />
+             <widget class="ctkComboBox" name="SliceOrientationMarkerTypeComboBox"/>
             </item>
             <item>
              <widget class="ctkComboBox" name="SliceOrientationMarkerSizeComboBox">
@@ -62,17 +63,17 @@
               </property>
               <item>
                <property name="text">
-                <string>小</string>
+                <string>small</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>中</string>
+                <string>medium</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>大</string>
+                <string>large</string>
                </property>
               </item>
              </widget>
@@ -82,7 +83,7 @@
           <item row="1" column="0">
            <widget class="QLabel" name="SliceRulerLabel">
             <property name="text">
-             <string>尺子：</string>
+             <string>Ruler:</string>
             </property>
            </widget>
           </item>
@@ -90,17 +91,17 @@
            <widget class="ctkComboBox" name="SliceRulerTypeComboBox">
             <item>
              <property name="text">
-              <string>无</string>
+              <string>none</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>瘦</string>
+              <string>thin</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>厚</string>
+              <string>thick</string>
              </property>
             </item>
            </widget>
@@ -108,7 +109,7 @@
           <item row="2" column="0">
            <widget class="QLabel" name="SliceViewOrientationLabel">
             <property name="text">
-             <string>视图方向：</string>
+             <string>View orientation:</string>
             </property>
            </widget>
           </item>
@@ -122,14 +123,14 @@
           <item row="3" column="0">
            <widget class="QLabel" name="SliceViewOrientationLabel_2">
             <property name="text">
-             <string>在 3D 中显示切片边缘：</string>
+             <string>Show slice edge in 3D:</string>
             </property>
            </widget>
           </item>
           <item row="3" column="1">
            <widget class="ctkCheckBox" name="SliceEdgeVisibility3DCheckBox">
             <property name="toolTip">
-             <string>在 3D 视图中显示切片时显示彩色边框。</string>
+             <string>Show colored frame around the slice when displayed in 3D views.</string>
             </property>
             <property name="checked">
              <bool>true</bool>
@@ -142,7 +143,7 @@
        <item>
         <widget class="ctkCollapsibleGroupBox" name="CollapsibleGroupBox_2">
          <property name="title">
-          <string>3D 查看器默认设置</string>
+          <string>3D viewer defaults</string>
          </property>
          <layout class="QFormLayout" name="formLayout_3">
           <property name="fieldGrowthPolicy">
@@ -151,7 +152,7 @@
           <item row="0" column="0">
            <widget class="QLabel" name="ThreeDBoxVisibilityLabel">
             <property name="text">
-             <string>显示 3D 立方体：</string>
+             <string>Show 3D cube:</string>
             </property>
            </widget>
           </item>
@@ -165,7 +166,7 @@
           <item row="1" column="0">
            <widget class="QLabel" name="ThreeDAxisLabelsVisibilityLabel">
             <property name="text">
-             <string>显示 3D 坐标轴标签：</string>
+             <string>Show 3D axis label:</string>
             </property>
            </widget>
           </item>
@@ -179,7 +180,7 @@
           <item row="2" column="0">
            <widget class="QLabel" name="ThreeDOrientationMarkerLabel">
             <property name="text">
-             <string>方向标记：</string>
+             <string>Orientation marker:</string>
             </property>
            </widget>
           </item>
@@ -189,22 +190,22 @@
              <widget class="ctkComboBox" name="ThreeDOrientationMarkerTypeComboBox">
               <item>
                <property name="text">
-                <string>无</string>
+                <string>none</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>立方体</string>
+                <string>cube</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>人</string>
+                <string>human</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>坐标轴</string>
+                <string>axes</string>
                </property>
               </item>
              </widget>
@@ -216,17 +217,17 @@
               </property>
               <item>
                <property name="text">
-                <string>小</string>
+                <string>small</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>中</string>
+                <string>medium</string>
                </property>
               </item>
               <item>
                <property name="text">
-                <string>大</string>
+                <string>large</string>
                </property>
               </item>
              </widget>
@@ -236,17 +237,17 @@
           <item row="3" column="0">
            <widget class="QLabel" name="label">
             <property name="text">
-             <string>使用正投影：</string>
+             <string>Use orthographic projection:</string>
             </property>
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="ctkCheckBox" name="ThreeDUseOrthographicProjectionCheckBox" />
+           <widget class="ctkCheckBox" name="ThreeDUseOrthographicProjectionCheckBox"/>
           </item>
           <item row="4" column="0">
            <widget class="QLabel" name="ThreeDRulerTypeLabel">
             <property name="text">
-             <string>尺子：</string>
+             <string>Ruler:</string>
             </property>
            </widget>
           </item>
@@ -256,21 +257,21 @@
              <bool>false</bool>
             </property>
             <property name="toolTip">
-             <string>尺子仅在使用正投影模式时显示。</string>
+             <string>Ruler is only displayed if orthographic projection mode is used.</string>
             </property>
             <item>
              <property name="text">
-              <string>无</string>
+              <string>none</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>瘦</string>
+              <string>thin</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>厚</string>
+              <string>thick</string>
              </property>
             </item>
            </widget>
@@ -278,14 +279,14 @@
           <item row="5" column="0">
            <widget class="QLabel" name="ThreeDUseDepthPeelingLabel">
             <property name="text">
-             <string>使用深度剥离：</string>
+             <string>Use depth peeling:</string>
             </property>
            </widget>
           </item>
           <item row="5" column="1">
            <widget class="ctkCheckBox" name="ThreeDUseDepthPeelingCheckBox">
             <property name="toolTip">
-             <string>启用深度剥离可以改善透明模型的渲染，但会增加计算成本。</string>
+             <string>Enabling depth peeling improves rendering of transparent models at the cost of higher computational cost.</string>
             </property>
             <property name="checked">
              <bool>true</bool>
@@ -295,14 +296,14 @@
           <item row="6" column="0">
            <widget class="QLabel" name="ThreeDShadowsVisibilityLabel">
             <property name="text">
-             <string>阴影可见性：</string>
+             <string>Shadows visibility:</string>
             </property>
            </widget>
           </item>
           <item row="6" column="1">
            <widget class="ctkCheckBox" name="ThreeDShadowsVisibilityCheckBox">
             <property name="toolTip">
-             <string>默认显示阴影以改善深度感知</string>
+             <string>Show shadows by default to improve depth perception</string>
             </property>
             <property name="checked">
              <bool>false</bool>
@@ -312,7 +313,7 @@
           <item row="7" column="0">
            <widget class="QLabel" name="ThreeDAmbientShadowsSizeScaleLabel">
             <property name="text">
-             <string>尺寸比例：</string>
+             <string>Size scale:</string>
             </property>
             <property name="indent">
              <number>10</number>
@@ -341,7 +342,7 @@
           <item row="8" column="0">
            <widget class="QLabel" name="ThreeDAmbientShadowsVolumeOpacityThresholdLabel">
             <property name="text">
-             <string>体积不透明度阈值：</string>
+             <string>Volume opacity threshold:</string>
             </property>
             <property name="indent">
              <number>10</number>
@@ -369,14 +370,14 @@
              <double>0.250000000000000</double>
             </property>
             <property name="suffix" stdset="0">
-             <string />
+             <string/>
             </property>
            </widget>
           </item>
           <item row="10" column="0">
            <widget class="QLabel" name="ThreeDAmbientShadowsIntensityScaleLabel">
             <property name="text">
-             <string>强度比例：</string>
+             <string>Intensity scale:</string>
             </property>
             <property name="indent">
              <number>10</number>
@@ -408,7 +409,7 @@
           <item row="11" column="0">
            <widget class="QLabel" name="ThreeDAmbientShadowsIntensityShiftLabel">
             <property name="text">
-             <string>强度偏移：</string>
+             <string>Intensity offset:</string>
             </property>
             <property name="indent">
              <number>10</number>
@@ -445,7 +446,7 @@
          <item>
           <widget class="QLabel" name="MSAALabel">
            <property name="text">
-            <string>多重采样 (MSAA)：</string>
+            <string>Multi-sampling (MSAA):</string>
            </property>
           </widget>
          </item>
@@ -458,7 +459,11 @@
             </sizepolicy>
            </property>
            <property name="toolTip">
-            <string>&lt;DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;</string>
+            <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Use multisampling for full-screen anti-aliasing.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
          </item>
@@ -515,7 +520,7 @@
    <header>ctkSliderWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>ThreeDUseOrthographicProjectionCheckBox</sender>

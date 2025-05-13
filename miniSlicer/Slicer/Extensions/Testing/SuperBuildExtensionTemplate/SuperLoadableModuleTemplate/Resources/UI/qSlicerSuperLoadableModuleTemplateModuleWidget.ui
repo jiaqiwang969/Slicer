@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerSuperLoadableModuleTemplateModuleWidget</class>
  <widget class="qSlicerWidget" name="qSlicerSuperLoadableModuleTemplateModuleWidget">
@@ -10,17 +11,17 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Slicer超级可加载模块模板</string>
+   <string>SlicerSuperLoadableModuleTemplate</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="ctkCollapsibleButton" name="CTKCollapsibleButton" native="true">
      <property name="text" stdset="0">
-      <string>显示</string>
+      <string>Display</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
-       <widget class="qSlicerSuperLoadableModuleTemplateFooBarWidget" name="FooBar" native="true" />
+       <widget class="qSlicerSuperLoadableModuleTemplateFooBarWidget" name="FooBar" native="true"/>
       </item>
      </layout>
     </widget>
@@ -60,6 +61,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

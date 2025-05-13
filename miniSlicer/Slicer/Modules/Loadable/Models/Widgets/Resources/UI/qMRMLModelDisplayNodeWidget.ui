@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLModelDisplayNodeWidget</class>
  <widget class="qMRMLWidget" name="qMRMLModelDisplayNodeWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>模型显示属性</string>
+   <string>Model Display Properties</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <property name="leftMargin">
@@ -28,7 +29,7 @@
    <item row="1" column="0">
     <widget class="ctkCollapsibleGroupBox" name="RepresentationCollapsibleGroupBox">
      <property name="title">
-      <string>三维显示</string>
+      <string>3D Display</string>
      </property>
      <property name="collapsed">
       <bool>false</bool>
@@ -40,7 +41,7 @@
       <item row="1" column="0">
        <widget class="QLabel" name="RepresentationLabel">
         <property name="text">
-         <string>表示：</string>
+         <string>Representation:</string>
         </property>
        </widget>
       </item>
@@ -48,22 +49,22 @@
        <widget class="QComboBox" name="RepresentationComboBox">
         <item>
          <property name="text">
-          <string>点</string>
+          <string>Points</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>线框</string>
+          <string>Wireframe</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>表面</string>
+          <string>Surface</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>带边缘的表面</string>
+          <string>Surface with Edges</string>
          </property>
         </item>
        </widget>
@@ -71,28 +72,28 @@
       <item row="2" column="0">
        <widget class="QLabel" name="CullingLabel">
         <property name="text">
-         <string>可见面：</string>
+         <string>Visible Sides:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
        <widget class="QComboBox" name="ShowFacesComboBox">
         <property name="toolTip">
-         <string>全部：推荐用于开放表面。前面：推荐用于更快地渲染封闭的不透明表面。后面：用于渲染开放表面的背面，颜色不同。</string>
+         <string>All: recommended for open surface. Front: recommended for faster rendering of closed opaque surfaces. Back: Useful for rendering backface of open surfaces with different color.</string>
         </property>
         <item>
          <property name="text">
-          <string>全部</string>
+          <string>All</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>正面</string>
+          <string>Front-facing</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>背面</string>
+          <string>Back-facing</string>
          </property>
         </item>
        </widget>
@@ -100,7 +101,7 @@
       <item row="3" column="0">
        <widget class="QLabel" name="ClippingLabel">
         <property name="text">
-         <string>剪裁：</string>
+         <string>Clipping:</string>
         </property>
        </widget>
       </item>
@@ -109,10 +110,10 @@
         <item>
          <widget class="QCheckBox" name="ClippingCheckBox">
           <property name="toolTip">
-           <string>根据剪裁平面设置隐藏模型的一部分。</string>
+           <string>Hide part of the model according to Clipping Planes settings.</string>
           </property>
           <property name="text">
-           <string />
+           <string/>
           </property>
          </widget>
         </item>
@@ -125,10 +126,10 @@
            </sizepolicy>
           </property>
           <property name="toolTip">
-           <string>配置剪裁平面</string>
+           <string>Configure clipping planes</string>
           </property>
           <property name="text">
-           <string>配置...</string>
+           <string>Configure...</string>
           </property>
          </widget>
         </item>
@@ -150,7 +151,7 @@
       <item row="4" column="0" colspan="2">
        <widget class="ctkCollapsibleGroupBox" name="Advanced3dCollapsibleGroupBox">
         <property name="title">
-         <string>高级</string>
+         <string>Advanced</string>
         </property>
         <property name="collapsed">
          <bool>true</bool>
@@ -162,7 +163,7 @@
          <item row="0" column="0">
           <widget class="QLabel" name="PointSizeLabel">
            <property name="text">
-            <string>点大小：</string>
+            <string>Point Size:</string>
            </property>
           </widget>
          </item>
@@ -182,7 +183,7 @@
          <item row="1" column="0">
           <widget class="QLabel" name="LineWidthLabel">
            <property name="text">
-            <string>线宽：</string>
+            <string>Line Width:</string>
            </property>
           </widget>
          </item>
@@ -202,31 +203,31 @@
          <item row="3" column="0">
           <widget class="QLabel" name="EdgeColorLabel">
            <property name="text">
-            <string>边缘颜色：</string>
+            <string>Edge Color:</string>
            </property>
           </widget>
          </item>
          <item row="3" column="1">
-          <widget class="ctkColorPickerButton" name="EdgeColorPickerButton" />
+          <widget class="ctkColorPickerButton" name="EdgeColorPickerButton"/>
          </item>
          <item row="4" column="0">
           <widget class="QLabel" name="LightingLabel">
            <property name="text">
-            <string>光照：</string>
+            <string>Lighting:</string>
            </property>
           </widget>
          </item>
          <item row="4" column="1">
           <widget class="QCheckBox" name="LightingCheckBox">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="5" column="0">
           <widget class="QLabel" name="InterpolationLabel">
            <property name="text">
-            <string>插值：</string>
+            <string>Interpolation:</string>
            </property>
           </widget>
          </item>
@@ -234,22 +235,22 @@
           <widget class="QComboBox" name="InterpolationComboBox">
            <item>
             <property name="text">
-             <string>平坦</string>
+             <string>Flat</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>自动检测</string>
+             <string>Gouraud</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>参数集：</string>
+             <string>Phong</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>选择节点以存储参数集</string>
+             <string>PBR</string>
             </property>
            </item>
           </widget>
@@ -270,10 +271,10 @@
          <item row="2" column="0">
           <widget class="QLabel" name="label_2">
            <property name="toolTip">
-            <string>背面颜色的色调、饱和度和亮度偏移到正面颜色</string>
+            <string>Backface color hue, saturation, and brightess offset to frontface color</string>
            </property>
            <property name="text">
-            <string>背面颜色偏移：</string>
+            <string>Backface Color Offset:</string>
            </property>
           </widget>
          </item>
@@ -282,7 +283,7 @@
            <item>
             <widget class="ctkDoubleSpinBox" name="BackfaceHueOffsetSpinBox">
              <property name="toolTip">
-              <string>颜色色调偏移</string>
+              <string>Color hue offset</string>
              </property>
              <property name="decimalsOption">
               <set>ctkDoubleSpinBox::DecimalsByShortcuts|ctkDoubleSpinBox::ReplaceDecimals</set>
@@ -301,7 +302,7 @@
            <item>
             <widget class="ctkDoubleSpinBox" name="BackfaceSaturationOffsetSpinBox">
              <property name="toolTip">
-              <string>颜色饱和度偏移</string>
+              <string>Color saturation offset</string>
              </property>
              <property name="decimalsOption">
               <set>ctkDoubleSpinBox::DecimalsByShortcuts|ctkDoubleSpinBox::InsertDecimals|ctkDoubleSpinBox::ReplaceDecimals</set>
@@ -320,7 +321,7 @@
            <item>
             <widget class="ctkDoubleSpinBox" name="BackfaceBrightnessOffsetSpinBox">
              <property name="toolTip">
-              <string>颜色饱和度偏移</string>
+              <string>Color saturation offset</string>
              </property>
              <property name="decimalsOption">
               <set>ctkDoubleSpinBox::DecimalsByShortcuts|ctkDoubleSpinBox::InsertDecimals|ctkDoubleSpinBox::ReplaceDecimals</set>
@@ -347,7 +348,7 @@
    <item row="2" column="0">
     <widget class="ctkCollapsibleGroupBox" name="SliceDisplayCollapsibleGroupBox">
      <property name="title">
-      <string>切片显示</string>
+      <string>Slice Display</string>
      </property>
      <layout class="QFormLayout" name="formLayout_6">
       <property name="fieldGrowthPolicy">
@@ -356,21 +357,21 @@
       <item row="0" column="0">
        <widget class="QLabel" name="SliceIntersectionVisibilityLabel">
         <property name="text">
-         <string>可见性：</string>
+         <string>Visibility:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="QCheckBox" name="SliceIntersectionVisibilityCheckBox">
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="SliceIntersectionOpacityLabel">
         <property name="text">
-         <string>不透明度：</string>
+         <string>Opacity:</string>
         </property>
        </widget>
       </item>
@@ -402,28 +403,28 @@
       <item row="2" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>模式：</string>
+         <string>Mode:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
        <widget class="QComboBox" name="SliceDisplayModeComboBox">
         <property name="toolTip">
-         <string>交集：显示模型与切片的交集。投影：显示投影在切片平面上的完整模型，使用实色。彩色投影：显示投影在切片平面上的完整模型，按距离切片平面着色（覆盖活动标量选择）。</string>
+         <string>Intersection: shows intersection of the model with the slice. Projection: shows the full model projected on the slice plane with solid color. Colored projection: shows the full model projected on the slice plane, colored by distance from the slice plane (overrides Active scalar selection).</string>
         </property>
         <item>
          <property name="text">
-          <string>交集</string>
+          <string>Intersection</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>投影</string>
+          <string>Projection</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>距离编码投影</string>
+          <string>Distance encoded projection</string>
          </property>
         </item>
        </widget>
@@ -431,14 +432,14 @@
       <item row="3" column="0">
        <widget class="QLabel" name="SliceIntersectionThicknessLabel">
         <property name="text">
-         <string>线宽：</string>
+         <string>Line Width:</string>
         </property>
        </widget>
       </item>
       <item row="3" column="1">
        <widget class="QSpinBox" name="SliceIntersectionThicknessSpinBox">
         <property name="suffix">
-         <string> 像素</string>
+         <string> px</string>
         </property>
         <property name="minimum">
          <number>0</number>
@@ -454,14 +455,14 @@
       <item row="4" column="0">
        <widget class="QLabel" name="DistanceToColorLabel">
         <property name="text">
-         <string>颜色表：</string>
+         <string>Color Table:</string>
         </property>
        </widget>
       </item>
       <item row="4" column="1">
        <widget class="qMRMLColorTableComboBox" name="DistanceToColorNodeComboBox">
         <property name="toolTip">
-         <string>颜色表，将切片平面到颜色的距离进行映射。选择“距离编码投影”模式时使用。</string>
+         <string>Color table that maps distance from slice plane to colors. Used when 'Distance encoded projection' mode is chosen.</string>
         </property>
        </widget>
       </item>
@@ -471,7 +472,7 @@
    <item row="3" column="0">
     <widget class="ctkCollapsibleGroupBox" name="ScalarsGroupBox">
      <property name="title">
-      <string>标量</string>
+      <string>Scalars</string>
      </property>
      <property name="checked">
       <bool>false</bool>
@@ -481,7 +482,7 @@
      </property>
      <layout class="QGridLayout" name="gridLayout" columnstretch="0,0">
       <item row="0" column="0" colspan="2">
-       <widget class="qMRMLScalarsDisplayWidget" name="ScalarsDisplayWidget" />
+       <widget class="qMRMLScalarsDisplayWidget" name="ScalarsDisplayWidget"/>
       </item>
      </layout>
     </widget>
@@ -489,20 +490,20 @@
    <item row="0" column="0">
     <widget class="ctkCollapsibleGroupBox" name="CollapsibleGroupBox">
      <property name="title">
-      <string>可见性</string>
+      <string>Visibility</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
       <item row="1" column="1">
        <widget class="qMRMLDisplayNodeViewComboBox" name="DisplayNodeViewComboBox">
         <property name="toolTip">
-         <string>选择显示此节点的视图。所有未选中将在所有 3D 和 2D 视图中显示。</string>
+         <string>Select views in which to show this node. All unchecked shows in all 3D and 2D views.</string>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="DisplayNodeViewLabel">
         <property name="text">
-         <string>视图：</string>
+         <string>View:</string>
         </property>
        </widget>
       </item>
@@ -516,7 +517,7 @@
       <item row="2" column="0">
        <widget class="QLabel" name="ColorLabel">
         <property name="text">
-         <string>颜色：</string>
+         <string>Color:</string>
         </property>
        </widget>
       </item>
@@ -525,14 +526,14 @@
         <item>
          <widget class="QCheckBox" name="VisibilityCheckBox">
           <property name="text">
-           <string />
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="OpacityLabel">
           <property name="text">
-           <string>不透明度：</string>
+           <string>Opacity:</string>
           </property>
          </widget>
         </item>
@@ -554,7 +555,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="VisibilityLabel">
         <property name="text">
-         <string>可见性：</string>
+         <string>Visibility:</string>
         </property>
        </widget>
       </item>
@@ -630,7 +631,7 @@
    <header>ctkSliderWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>qMRMLModelDisplayNodeWidget</sender>

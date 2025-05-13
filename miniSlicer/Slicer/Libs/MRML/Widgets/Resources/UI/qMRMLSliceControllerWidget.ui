@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLSliceControllerWidget</class>
  <widget class="ctkPopupWidget" name="qMRMLSliceControllerWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>切片控制器</string>
+   <string>Slice Controller</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
@@ -56,11 +57,11 @@
       </size>
      </property>
      <property name="toolTip">
-      <string>选择标签图</string>
+      <string>Select the label map</string>
      </property>
      <property name="nodeTypes" stdset="0">
       <stringlist notr="true">
-       <string>标签图体积节点 (vtkMRMLLabelMapVolumeNode)</string>
+       <string>vtkMRMLLabelMapVolumeNode</string>
       </stringlist>
      </property>
      <property name="noneEnabled" stdset="0">
@@ -86,7 +87,7 @@
       <bool>false</bool>
      </property>
      <property name="text">
-      <string />
+      <string/>
      </property>
      <property name="autoRaise">
       <bool>true</bool>
@@ -99,7 +100,7 @@
       <bool>false</bool>
      </property>
      <property name="text">
-      <string />
+      <string/>
      </property>
      <property name="popupMode">
       <enum>QToolButton::ToolButtonPopupMode::MenuButtonPopup</enum>
@@ -184,11 +185,11 @@
       </size>
      </property>
      <property name="toolTip">
-      <string>选择前景</string>
+      <string>Select the foreground</string>
      </property>
      <property name="nodeTypes" stdset="0">
       <stringlist notr="true">
-       <string>体积节点 (vtkMRMLVolumeNode)</string>
+       <string>vtkMRMLVolumeNode</string>
       </stringlist>
      </property>
      <property name="noneEnabled" stdset="0">
@@ -324,11 +325,11 @@
       </size>
      </property>
      <property name="toolTip">
-      <string>选择背景</string>
+      <string>Select the background</string>
      </property>
      <property name="nodeTypes" stdset="0">
       <stringlist notr="true">
-       <string>体积节点 (vtkMRMLVolumeNode)</string>
+       <string>vtkMRMLVolumeNode</string>
       </stringlist>
      </property>
      <property name="noneEnabled" stdset="0">
@@ -360,7 +361,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string />
+      <string/>
      </property>
      <property name="pixmap">
       <pixmap resource="../qMRMLWidgets.qrc">:/Icons/SliceViewerLB.png</pixmap>
@@ -379,7 +380,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string />
+      <string/>
      </property>
      <property name="pixmap">
       <pixmap resource="../qMRMLWidgets.qrc">:/Icons/SliceViewerFG.png</pixmap>
@@ -398,7 +399,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string />
+      <string/>
      </property>
      <property name="pixmap">
       <pixmap resource="../qMRMLWidgets.qrc">:/Icons/SliceViewerBG.png</pixmap>
@@ -447,10 +448,10 @@
         <item>
          <widget class="QToolButton" name="SliceLinkButton">
           <property name="toolTip">
-           <string>链接切片视图。同步同一视图组中所有切片视图的属性。</string>
+           <string>Link slice views. Synchronizes properties of all slice views in the same view group.</string>
           </property>
           <property name="text">
-           <string />
+           <string/>
           </property>
           <property name="icon">
            <iconset resource="../qMRMLWidgets.qrc">
@@ -471,7 +472,7 @@
         <item>
          <widget class="QToolButton" name="SliceVisibilityButton">
           <property name="toolTip">
-           <string>切换3D视图中的切片可见性。</string>
+           <string>Toggle slice visibility in the 3D view.</string>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -502,29 +503,29 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>切片方向（轴向、矢状、冠状、重格式化）。</string>
+           <string>Slice orientation (Axial, Sagittal, Coronal, Reformat).</string>
           </property>
           <property name="sizeAdjustPolicy">
            <enum>QComboBox::SizeAdjustPolicy::AdjustToContents</enum>
           </property>
           <item>
            <property name="text">
-            <string>轴向</string>
+            <string>Axial</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>矢状</string>
+            <string>Sagittal</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>冠状</string>
+            <string>Coronal</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>重格式化</string>
+            <string>Reformat</string>
            </property>
           </item>
          </widget>
@@ -532,7 +533,7 @@
         <item>
          <widget class="QToolButton" name="LightBoxToolButton">
           <property name="toolTip">
-           <string>灯箱视图。</string>
+           <string>Lightbox view.</string>
           </property>
           <property name="icon">
            <iconset resource="../qMRMLWidgets.qrc">
@@ -549,7 +550,7 @@
         <item>
          <widget class="QToolButton" name="ShowReformatWidgetToolButton">
           <property name="toolTip">
-           <string>在3D视图中显示重格式化小部件</string>
+           <string>Show reformat widget in 3D view</string>
           </property>
           <property name="icon">
            <iconset resource="../qMRMLWidgets.qrc">
@@ -581,10 +582,10 @@
         <item>
          <widget class="QToolButton" name="SliceSpacingButton">
           <property name="toolTip">
-           <string>切片间距可以由用户或上下文自动或手动设置</string>
+           <string>Slice spacing may be set automatically or manually by the user or context</string>
           </property>
           <property name="text">
-           <string />
+           <string/>
           </property>
           <property name="icon">
            <iconset resource="../qMRMLWidgets.qrc">
@@ -612,7 +613,7 @@
         <item>
          <widget class="QToolButton" name="OrientationMarkerButton">
           <property name="toolTip">
-           <string>显示方向标记</string>
+           <string>Show orientation marker</string>
           </property>
           <property name="icon">
            <iconset resource="../qMRMLWidgets.qrc">
@@ -646,7 +647,7 @@
         <item>
          <widget class="QToolButton" name="EnableSlabReconstructionButton">
           <property name="toolTip">
-           <string>启用厚层重建 (TSR)。TSR用于合并一定范围内的连续切片。</string>
+           <string>Enable Thick Slab Reconstruction (TSR). TSR is used to merge contiguous slices within a certain range.</string>
           </property>
           <property name="icon">
            <iconset resource="../qMRMLWidgets.qrc">
@@ -663,7 +664,7 @@
         <item>
          <widget class="QToolButton" name="SliceMoreOptionButton">
           <property name="toolTip">
-           <string>高级选项</string>
+           <string>Advanced options</string>
           </property>
           <property name="icon">
            <iconset resource="../qMRMLWidgets.qrc">
@@ -713,7 +714,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string />
+      <string/>
      </property>
      <property name="pixmap">
       <pixmap resource="../qMRMLWidgets.qrc">:/Icons/SliceViewerSEG.png</pixmap>
@@ -726,10 +727,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>热链接</string>
+    <string>Hot linked</string>
    </property>
    <property name="toolTip">
-    <string>设置链接行为为热链接控件。当开启时，切片交互会立即影响其他切片。当关闭时，切片交互在交互完成后影响其他切片。</string>
+    <string>Set linking behavior to hot linked controls. When on, Slice interactions affect other slices immediately. When off, Slice interactions affect other slices after the interaction completes.</string>
    </property>
   </action>
   <action name="actionFit_to_window">
@@ -738,10 +739,10 @@
      <normaloff>:/Icons/SlicesFitToWindow.png</normaloff>:/Icons/SlicesFitToWindow.png</iconset>
    </property>
    <property name="text">
-    <string>适应窗口</string>
+    <string>Fit to window</string>
    </property>
    <property name="toolTip">
-    <string>重置视野。调整切片视图的视野以匹配最低体积层的范围（背景，然后是前景，再然后是标签）。</string>
+    <string>Reset field of view. Adjusts the slice view's field of view to match the extent of lowest volume layer (background, then foreground, then label).</string>
    </property>
   </action>
   <action name="actionRotate_to_volume_plane">
@@ -750,10 +751,10 @@
      <normaloff>:/Icons/SlicerRotateToPixelSpace.png</normaloff>:/Icons/SlicerRotateToPixelSpace.png</iconset>
    </property>
    <property name="text">
-    <string>旋转到体积平面</string>
+    <string>Rotate to volume plane</string>
    </property>
    <property name="toolTip">
-    <string>旋转到体积平面</string>
+    <string>Rotate to volume plane</string>
    </property>
   </action>
   <action name="actionLabelMapOutline">
@@ -769,10 +770,10 @@
      <normalon>:/Icons/SlicesLabelOutline.png</normalon>:/Icons/SlicesLabelNoOutline.png</iconset>
    </property>
    <property name="text">
-    <string>隐藏标签图轮廓</string>
+    <string>Hide labelmap outlines</string>
    </property>
    <property name="toolTip">
-    <string>在显示标签图体积的区域轮廓或填充之间切换。</string>
+    <string>Toggle between showing label map volume with regions outlined or filled.</string>
    </property>
   </action>
   <action name="actionShow_reformat_widget">
@@ -785,7 +786,7 @@
      <normalon>:/Icons/SliceWidgetOn.png</normalon>:/Icons/SliceWidgetOff.png</iconset>
    </property>
    <property name="text">
-    <string>显示重格式化小部件</string>
+    <string>Show reformat widget</string>
    </property>
   </action>
   <action name="actionEnable_slab_reconstruction_widget">
@@ -793,7 +794,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>启用厚层重建</string>
+    <string>Enable Thick Slab Reconstruction</string>
    </property>
   </action>
   <action name="actionSlabReconstructionInteractive">
@@ -801,7 +802,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>交互式</string>
+    <string>Interactive</string>
    </property>
   </action>
   <action name="actionOrientationMarkerTypeCube">
@@ -809,7 +810,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>立方体</string>
+    <string>Cube</string>
    </property>
   </action>
   <action name="actionOrientationMarkerTypeHuman">
@@ -817,7 +818,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>人</string>
+    <string>Human</string>
    </property>
   </action>
   <action name="actionOrientationMarkerTypeAxes">
@@ -825,7 +826,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>坐标轴</string>
+    <string>Axes</string>
    </property>
   </action>
   <action name="actionCompositingAlpha_blend">
@@ -833,7 +834,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>alpha混合</string>
+    <string>Alpha blend</string>
    </property>
   </action>
   <action name="actionCompositingReverse_alpha_blend">
@@ -841,7 +842,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>反向alpha混合</string>
+    <string>Reverse alpha blend</string>
    </property>
   </action>
   <action name="actionCompositingAdd">
@@ -849,7 +850,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>加</string>
+    <string>Add</string>
    </property>
   </action>
   <action name="actionCompositingSubtract">
@@ -857,7 +858,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>减</string>
+    <string>Subtract</string>
    </property>
   </action>
   <action name="actionSliceSpacingModeAutomatic">
@@ -870,7 +871,7 @@
      <normalon>:/Icons/SlicerAutomaticSliceSpacing.png</normalon>:/Icons/SlicerManualSliceSpacing.png</iconset>
    </property>
    <property name="text">
-    <string>自动</string>
+    <string>Automatic</string>
    </property>
   </action>
   <action name="actionSliceModelModeVolumes">
@@ -878,7 +879,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>视野，间距匹配体积</string>
+    <string>FOV, Spacing match Volumes</string>
    </property>
   </action>
   <action name="actionSliceModelMode2D">
@@ -886,7 +887,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>视野，间距匹配2D</string>
+    <string>FOV, Spacing match 2D</string>
    </property>
   </action>
   <action name="actionSliceModelMode2D_Volumes">
@@ -894,7 +895,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>视野匹配2D，间距匹配体积</string>
+    <string>FOV matches 2D, Spacing matches Volumes</string>
    </property>
   </action>
   <action name="actionSliceModelModeVolumes_2D">
@@ -902,7 +903,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>视野匹配体积，间距匹配2D视图</string>
+    <string>FOV matches Volumes, Spacing matches 2D View</string>
    </property>
   </action>
   <action name="actionLightbox1x1_view">
@@ -910,7 +911,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>1x1视图</string>
+    <string>1x1 view</string>
    </property>
   </action>
   <action name="actionLightbox1x2_view">
@@ -918,7 +919,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>1x2视图</string>
+    <string>1x2 view</string>
    </property>
   </action>
   <action name="actionLightbox1x3_view">
@@ -926,7 +927,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>1x3视图</string>
+    <string>1x3 view</string>
    </property>
   </action>
   <action name="actionLightbox1x4_view">
@@ -934,7 +935,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>1x4视图</string>
+    <string>1x4 view</string>
    </property>
   </action>
   <action name="actionLightbox1x6_view">
@@ -942,7 +943,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>1x6视图</string>
+    <string>1x6 view</string>
    </property>
   </action>
   <action name="actionLightbox1x8_view">
@@ -950,7 +951,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>1x8视图</string>
+    <string>1x8 view</string>
    </property>
   </action>
   <action name="actionLightbox2x2_view">
@@ -958,7 +959,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>2x2视图</string>
+    <string>2x2 view</string>
    </property>
   </action>
   <action name="actionLightbox3x3_view">
@@ -966,7 +967,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>3x3视图</string>
+    <string>3x3 view</string>
    </property>
   </action>
   <action name="actionLightbox6x6_view">
@@ -974,7 +975,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>6x6视图</string>
+    <string>6x6 view</string>
    </property>
   </action>
   <action name="actionAdjustDisplayForeground_volume">
@@ -982,7 +983,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>前景体积</string>
+    <string>Foreground volume</string>
    </property>
   </action>
   <action name="actionAdjustDisplayBackground_volume">
@@ -990,7 +991,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>背景体积</string>
+    <string>Background volume</string>
    </property>
   </action>
   <action name="actionAdjustDisplayLabel_map_volume">
@@ -998,7 +999,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>标签图体积</string>
+    <string>Label map volume</string>
    </property>
   </action>
   <action name="actionForegroundInterpolation">
@@ -1014,7 +1015,7 @@
      <normalon>:/Icons/SliceInterpolationOn.png</normalon>:/Icons/SliceInterpolationOff.png</iconset>
    </property>
    <property name="text">
-    <string>插值前景</string>
+    <string>Interpolate foreground</string>
    </property>
   </action>
   <action name="actionBackgroundInterpolation">
@@ -1030,7 +1031,7 @@
      <normalon>:/Icons/SliceInterpolationOn.png</normalon>:/Icons/SliceInterpolationOff.png</iconset>
    </property>
    <property name="text">
-    <string>插值背景</string>
+    <string>Interpolate background</string>
    </property>
   </action>
   <action name="actionLabelMapVisibility">
@@ -1046,10 +1047,10 @@
      <normalon>:/Icons/VisibleOff.png</normalon>:/Icons/VisibleOn.png</iconset>
    </property>
    <property name="text">
-    <string>显示标签图</string>
+    <string>Show LabelMap</string>
    </property>
    <property name="toolTip">
-    <string>切换标签图可见性</string>
+    <string>Toggle labelmap visibility</string>
    </property>
   </action>
   <action name="actionForegroundVisibility">
@@ -1065,10 +1066,10 @@
      <normalon>:/Icons/VisibleOff.png</normalon>:/Icons/VisibleOn.png</iconset>
    </property>
    <property name="text">
-    <string>显示前景</string>
+    <string>Show Foreground</string>
    </property>
    <property name="toolTip">
-    <string>切换前景可见性</string>
+    <string>Toggle foreground visibility</string>
    </property>
   </action>
   <action name="actionBackgroundVisibility">
@@ -1084,10 +1085,10 @@
      <normalon>:/Icons/VisibleOff.png</normalon>:/Icons/VisibleOn.png</iconset>
    </property>
    <property name="text">
-    <string>显示背景</string>
+    <string>Show Background</string>
    </property>
    <property name="toolTip">
-    <string>切换背景可见性</string>
+    <string>Toggle background visibility</string>
    </property>
   </action>
   <action name="actionShow_in_3D">
@@ -1100,10 +1101,10 @@
      <normalon>:/Icons/VisibleOn.png</normalon>:/Icons/VisibleOff.png</iconset>
    </property>
    <property name="text">
-    <string>在3D中显示</string>
+    <string>Show in 3D</string>
    </property>
    <property name="toolTip">
-    <string>切换3D视图中的切片可见性</string>
+    <string>Toggle slice visibility in 3D view</string>
    </property>
   </action>
   <action name="actionLockNormalToCamera">
@@ -1111,10 +1112,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>锁定法线到相机</string>
+    <string>Lock Normal To Camera</string>
    </property>
    <property name="toolTip">
-    <string>锁定重格式化小部件的法线到相机。</string>
+    <string>Lock reformat widget's normal to the camera one. </string>
    </property>
   </action>
   <action name="actionOrientationMarkerTypeNone">
@@ -1122,10 +1123,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>无方向标记</string>
+    <string>No orientation marker</string>
    </property>
    <property name="toolTip">
-    <string>隐藏方向标记</string>
+    <string>Hide orientation marker</string>
    </property>
   </action>
   <action name="actionOrientationMarkerSizeSmall">
@@ -1133,10 +1134,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>小</string>
+    <string>Small</string>
    </property>
    <property name="toolTip">
-    <string>将方向标记大小设置为小</string>
+    <string>Set orientation marker size to small</string>
    </property>
   </action>
   <action name="actionOrientationMarkerSizeMedium">
@@ -1144,10 +1145,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>中</string>
+    <string>Medium</string>
    </property>
    <property name="toolTip">
-    <string>将方向标记大小设置为中</string>
+    <string>Set orientation marker size to small to medium</string>
    </property>
   </action>
   <action name="actionOrientationMarkerSizeLarge">
@@ -1155,10 +1156,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>大</string>
+    <string>Large</string>
    </property>
    <property name="toolTip">
-    <string>将方向标记大小设置为大</string>
+    <string>Set orientation marker size to large</string>
    </property>
   </action>
   <action name="actionRulerTypeNone">
@@ -1166,10 +1167,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>无标尺</string>
+    <string>No ruler</string>
    </property>
    <property name="toolTip">
-    <string>隐藏标尺</string>
+    <string>Hide ruler</string>
    </property>
   </action>
   <action name="actionRulerTypeThin">
@@ -1177,10 +1178,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>细</string>
+    <string>Thin</string>
    </property>
    <property name="toolTip">
-    <string>显示细标尺</string>
+    <string>Show thin ruler</string>
    </property>
   </action>
   <action name="actionRulerTypeThick">
@@ -1188,10 +1189,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>粗</string>
+    <string>Thick</string>
    </property>
    <property name="toolTip">
-    <string>显示粗标尺</string>
+    <string>Show thick ruler</string>
    </property>
   </action>
   <action name="actionRulerColorWhite">
@@ -1199,7 +1200,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>白色标尺</string>
+    <string>White ruler</string>
    </property>
   </action>
   <action name="actionRulerColorBlack">
@@ -1207,7 +1208,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>黑色标尺</string>
+    <string>Black ruler</string>
    </property>
   </action>
   <action name="actionRulerColorYellow">
@@ -1215,7 +1216,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>黄色标尺</string>
+    <string>Yellow ruler</string>
    </property>
   </action>
   <action name="actionSlabReconstructionMax">
@@ -1223,10 +1224,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>最大</string>
+    <string>Max</string>
    </property>
    <property name="toolTip">
-    <string>将层重建类型设置为最大</string>
+    <string>Set slab reconstruction type to Max</string>
    </property>
   </action>
   <action name="actionSlabReconstructionMin">
@@ -1234,10 +1235,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>最小</string>
+    <string>Min</string>
    </property>
    <property name="toolTip">
-    <string>将层重建类型设置为最小</string>
+    <string>Set slab reconstruction type to Min</string>
    </property>
   </action>
   <action name="actionSlabReconstructionMean">
@@ -1245,10 +1246,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>平均</string>
+    <string>Mean</string>
    </property>
    <property name="toolTip">
-    <string>将层重建类型设置为平均</string>
+    <string>Set slab reconstruction type to Mean</string>
    </property>
   </action>
   <action name="actionSlabReconstructionSum">
@@ -1256,10 +1257,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>总和</string>
+    <string>Sum</string>
    </property>
    <property name="toolTip">
-    <string>将层重建类型设置为总和</string>
+    <string>Set slab reconstruction type to Sum</string>
    </property>
   </action>
   <action name="actionSegmentationOutlineFill">
@@ -1268,10 +1269,10 @@
      <normaloff>:/Icons/SlicesLabelOutlineAndFill.png</normaloff>:/Icons/SlicesLabelOutlineAndFill.png</iconset>
    </property>
    <property name="text">
-    <string>切换分割轮廓/填充</string>
+    <string>Toggle segmentation outline/fill</string>
    </property>
    <property name="toolTip">
-    <string>在仅显示分割轮廓、轮廓和填充、仅填充状态之间切换</string>
+    <string>Toggle between segmentation outline only, outline and fill, and fill only states</string>
    </property>
   </action>
   <action name="actionSegmentationVisibility">
@@ -1287,10 +1288,10 @@
      <normalon>:/Icons/VisibleOff.png</normalon>:/Icons/VisibleOn.png</iconset>
    </property>
    <property name="text">
-    <string>显示分割</string>
+    <string>Show Segmentation</string>
    </property>
    <property name="toolTip">
-    <string>切换分割可见性</string>
+    <string>Toggle segmentation visibility</string>
    </property>
   </action>
   <action name="actionClipToBackground">
@@ -1298,10 +1299,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>裁剪到背景</string>
+    <string>Clip to background</string>
    </property>
    <property name="toolTip">
-    <string>控制图层混合是否会裁剪渲染到背景体积</string>
+    <string>Control if the layers blending would clip the rendering to the background volume</string>
    </property>
   </action>
   <action name="actionSliceEdgeVisibility3D">
@@ -1317,10 +1318,10 @@
      <normalon>:/Icons/VisibleOn.png</normalon>:/Icons/VisibleOff.png</iconset>
    </property>
    <property name="text">
-    <string>显示切片边缘</string>
+    <string>Show slice edge</string>
    </property>
    <property name="toolTip">
-    <string>在3D视图中显示切片边缘</string>
+    <string>Show slice edge in the 3D view</string>
    </property>
   </action>
  </widget>
@@ -1370,8 +1371,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../qMRMLWidgets.qrc" />
-  <include location="../qMRMLWidgets.qrc" />
+  <include location="../qMRMLWidgets.qrc"/>
+  <include location="../qMRMLWidgets.qrc"/>
  </resources>
  <connections>
   <connection>

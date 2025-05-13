@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLMarkupsShapeWidget</class>
  <widget class="QWidget" name="qMRMLMarkupsShapeWidget">
@@ -16,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>表单</string>
+   <string>Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">
@@ -34,7 +35,7 @@
    <item>
     <widget class="ctkCollapsibleButton" name="shapeCollapsibleButton">
      <property name="text">
-      <string>形状设置</string>
+      <string>Shape Settings</string>
      </property>
      <property name="checked">
       <bool>true</bool>
@@ -54,49 +55,55 @@
         <item row="1" column="0">
          <widget class="QLabel" name="shapeNameLabel">
           <property name="text">
-           <string>形状：</string>
+           <string>Shape:</string>
           </property>
          </widget>
         </item>
         <item row="2" column="0">
          <widget class="QLabel" name="radiusModeLabel">
           <property name="text">
-           <string>半径模式：</string>
+           <string>Radius
+mode:</string>
           </property>
          </widget>
         </item>
         <item row="2" column="1">
          <widget class="QComboBox" name="radiusModeComboBox">
           <property name="toolTip">
-           <string>中心：第一个控制点是中心，线长度是其半径。\n周长：两个控制点位于周长上，线长度是直径。</string>
+           <string>Centered : first control point is the center, the line length is its radius.
+Circumferential : both control points lie on the circumference, the line length is the diameter.
+</string>
           </property>
          </widget>
         </item>
         <item row="3" column="1">
          <widget class="QComboBox" name="drawModeComboBox">
           <property name="toolTip">
-           <string>交集：绘制切片视图与 3D 空间中形状的交集。\n\n投影：绘制控制点在切片视图上的投影。</string>
+           <string>Intersection : draw the intersection of a slice view with the shape in 3D space.
+
+Projection : draw the projection of control points on a slice view.</string>
           </property>
          </widget>
         </item>
         <item row="3" column="0">
          <widget class="QLabel" name="drawModeLabel">
           <property name="text">
-           <string>切片视图模式：</string>
+           <string>Slice view
+mode:</string>
           </property>
          </widget>
         </item>
         <item row="4" column="0">
          <widget class="QLabel" name="resolutionLabel">
           <property name="text">
-           <string>分辨率：</string>
+           <string>Resolution:</string>
           </property>
          </widget>
         </item>
         <item row="4" column="1">
          <widget class="ctkSliderWidget" name="resolutionSliderWidget">
           <property name="toolTip">
-           <string />
+           <string/>
           </property>
           <property name="decimals">
            <number>0</number>
@@ -121,12 +128,12 @@
         <item row="1" column="1">
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
-           <widget class="QComboBox" name="shapeNameComboBox" />
+           <widget class="QComboBox" name="shapeNameComboBox"/>
           </item>
           <item>
            <widget class="QToolButton" name="tubeMenuOptionButton">
             <property name="toolTip">
-             <string>菜单</string>
+             <string>Menu</string>
             </property>
             <property name="text">
              <string>◈</string>
@@ -153,11 +160,11 @@
          <item row="0" column="1">
           <widget class="qMRMLNodeComboBox" name="resliceInputSelector">
            <property name="toolTip">
-            <string>使用此节点在单个切片中显示有意义的控制点。</string>
+            <string>Use this node to show meaningful control points in a single slice.</string>
            </property>
            <property name="nodeTypes">
             <stringlist>
-             <string>切片节点 (vtkMRMLSliceNode)</string>
+             <string>vtkMRMLSliceNode</string>
             </stringlist>
            </property>
            <property name="noneEnabled">
@@ -177,10 +184,10 @@
          <item row="0" column="0">
           <widget class="QPushButton" name="reslicePushButton">
            <property name="toolTip">
-            <string>重新切片所选节点以在单个切片中显示有意义的控制点。</string>
+            <string>Reslice the selected node to show meaningful control points in a single slice.</string>
            </property>
            <property name="text">
-            <string>重新切片：</string>
+            <string>Reslice:</string>
            </property>
           </widget>
          </item>
@@ -192,42 +199,43 @@
         <item row="5" column="0">
          <widget class="QLabel" name="parametricCrossSectionRadiusLabel">
           <property name="text">
-           <string>横截面半径：</string>
+           <string>Cross-section
+radius:</string>
           </property>
          </widget>
         </item>
         <item row="3" column="0">
          <widget class="QLabel" name="parametricRadiusLabel">
           <property name="text">
-           <string>半径：</string>
+           <string>Radius:</string>
           </property>
          </widget>
         </item>
         <item row="4" column="0">
          <widget class="QLabel" name="parametricRingRadiusLabel">
           <property name="text">
-           <string>环半径：</string>
+           <string>Ring radius:</string>
           </property>
          </widget>
         </item>
         <item row="2" column="0">
          <widget class="QLabel" name="parametricN2Label">
           <property name="text">
-           <string>N2：</string>
+           <string>N2:</string>
           </property>
          </widget>
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="parametricN1Label">
           <property name="text">
-           <string>N1：</string>
+           <string>N1:</string>
           </property>
          </widget>
         </item>
         <item row="0" column="0">
          <widget class="QLabel" name="parametricNLabel">
           <property name="text">
-           <string>N：</string>
+           <string>N:</string>
           </property>
          </widget>
         </item>
@@ -343,10 +351,10 @@
            </sizepolicy>
           </property>
           <property name="toolTip">
-           <string>如果有，显示标量分布为颜色渐变。</string>
+           <string>Show the scalar distribution as a color gradient, if any.</string>
           </property>
           <property name="text">
-           <string>标量可见性</string>
+           <string>Scalar visibility</string>
           </property>
           <property name="checkable">
            <bool>true</bool>
@@ -362,10 +370,12 @@
            </sizepolicy>
           </property>
           <property name="toolTip">
-           <string>调整参数形状，使每个控制点与中心等距。\n\n活动控制点与中心的距离作为参考。单击轴控制点使其成为活动控制点。</string>
+           <string>Resize the parametric shape such that each control point is at equidistance from rhe centre.
+
+The distance of the active control point from the centre is used as reference. Click on a axis control point to make it the active control point.</string>
           </property>
           <property name="text">
-           <string>各向同性缩放</string>
+           <string>Isotropic rescaling</string>
           </property>
          </widget>
         </item>
@@ -380,7 +390,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>高级参数</string>
+         <string>Advanced parameters</string>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
@@ -388,14 +398,14 @@
            <item row="1" column="0">
             <widget class="QLabel" name="parametricsULabel">
              <property name="text">
-              <string>U：</string>
+              <string>U:</string>
              </property>
             </widget>
            </item>
            <item row="2" column="0">
             <widget class="QLabel" name="parametricsVLabel">
              <property name="text">
-              <string>V：</string>
+              <string>V:</string>
              </property>
             </widget>
            </item>
@@ -416,12 +426,12 @@
            <item row="0" column="0">
             <widget class="QLabel" name="parametricScalarModeLabel">
              <property name="text">
-              <string>标量模式：</string>
+              <string>Scalar mode:</string>
              </property>
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QComboBox" name="parametricScalarModeComboBox" />
+            <widget class="QComboBox" name="parametricScalarModeComboBox"/>
            </item>
           </layout>
          </item>
@@ -434,7 +444,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>顺时针排序</string>
+            <string>Clockwise ordering</string>
            </property>
            <property name="checkable">
             <bool>true</bool>
@@ -444,7 +454,7 @@
          <item>
           <widget class="ctkCollapsibleButton" name="parametricsMoreCollapsibleButton">
            <property name="text">
-            <string>更多</string>
+            <string>More</string>
            </property>
            <property name="flat">
             <bool>true</bool>
@@ -455,7 +465,7 @@
               <item row="0" column="0">
                <widget class="QLabel" name="parametricsWLabel">
                 <property name="text">
-                 <string>W：</string>
+                 <string>W:</string>
                 </property>
                </widget>
               </item>
@@ -479,7 +489,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>扭曲U</string>
+                 <string>TwistU</string>
                 </property>
                 <property name="checkable">
                  <bool>true</bool>
@@ -495,7 +505,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>连接V</string>
+                 <string>JoinV</string>
                 </property>
                 <property name="checkable">
                  <bool>true</bool>
@@ -511,7 +521,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>连接U</string>
+                 <string>JoinU</string>
                 </property>
                 <property name="checkable">
                  <bool>true</bool>
@@ -527,7 +537,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>扭曲V</string>
+                 <string>TwistV</string>
                 </property>
                 <property name="checkable">
                  <bool>true</bool>
@@ -543,7 +553,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>连接W</string>
+                 <string>JoinW</string>
                 </property>
                 <property name="checkable">
                  <bool>true</bool>
@@ -559,7 +569,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>扭曲W</string>
+                 <string>TwistW</string>
                 </property>
                 <property name="checkable">
                  <bool>true</bool>
@@ -608,7 +618,7 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>resliceMRMLWidget</sender>

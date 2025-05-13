@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerVolumeRenderingModuleWidget</class>
  <widget class="qSlicerWidget" name="qSlicerVolumeRenderingModuleWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>体积渲染</string>
+   <string>Volume Rendering</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <property name="leftMargin">
@@ -65,7 +66,7 @@
         </property>
         <property name="nodeTypes">
          <stringlist notr="true">
-          <string>体积节点 (vtkMRMLVolumeNode)</string>
+          <string>vtkMRMLVolumeNode</string>
          </stringlist>
         </property>
         <property name="idColumnVisible">
@@ -79,9 +80,9 @@
         </property>
         <property name="pluginAllowList">
          <stringlist notr="true">
-          <string>体积</string>
-          <string>文件夹</string>
-          <string>可见性</string>
+          <string>Volumes</string>
+          <string>Folder</string>
+          <string>Visibility</string>
          </stringlist>
         </property>
        </widget>
@@ -95,7 +96,7 @@
       <bool>true</bool>
      </property>
      <property name="text">
-      <string>输入</string>
+      <string>Inputs</string>
      </property>
      <property name="checked">
       <bool>false</bool>
@@ -122,7 +123,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="ROINodeLabel">
         <property name="text">
-         <string>感兴趣区域 (ROI)：</string>
+         <string>ROI:</string>
         </property>
        </widget>
       </item>
@@ -130,7 +131,7 @@
        <widget class="qMRMLNodeComboBox" name="ROINodeComboBox">
         <property name="nodeTypes">
          <stringlist notr="true">
-          <string>ROI 节点 (vtkMRMLMarkupsROINode)</string>
+          <string>vtkMRMLMarkupsROINode</string>
          </stringlist>
         </property>
         <property name="noneEnabled">
@@ -144,7 +145,7 @@
       <item row="1" column="0">
        <widget class="QLabel" name="VolumePropertyNodeLabel">
         <property name="text">
-         <string>属性：</string>
+         <string>Property:</string>
         </property>
        </widget>
       </item>
@@ -152,7 +153,7 @@
        <widget class="qMRMLNodeComboBox" name="VolumePropertyNodeComboBox">
         <property name="nodeTypes">
          <stringlist notr="true">
-          <string>体积属性节点 (vtkMRMLVolumePropertyNode)</string>
+          <string>vtkMRMLVolumePropertyNode</string>
          </stringlist>
         </property>
         <property name="noneEnabled">
@@ -166,12 +167,12 @@
       <item row="2" column="0">
        <widget class="QLabel" name="ViewNodeLabel">
         <property name="text">
-         <string>视图：</string>
+         <string>View:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="qMRMLDisplayNodeViewComboBox" name="ViewCheckableNodeComboBox" />
+       <widget class="qMRMLDisplayNodeViewComboBox" name="ViewCheckableNodeComboBox"/>
       </item>
      </layout>
     </widget>
@@ -179,7 +180,7 @@
    <item>
     <widget class="ctkCollapsibleButton" name="DisplayCollapsibleButton">
      <property name="text">
-      <string>显示</string>
+      <string>Display</string>
      </property>
      <property name="collapsed">
       <bool>false</bool>
@@ -203,14 +204,14 @@
       <item row="0" column="0">
        <widget class="QLabel" name="CropLabel_2">
         <property name="text">
-         <string>可见性：</string>
+         <string>Visibility:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="ctkCheckBox" name="VisibilityCheckBox">
         <property name="text">
-         <string />
+         <string/>
         </property>
         <property name="indicatorIcon">
          <iconset resource="../../../../../Libs/MRML/Widgets/Resources/qMRMLWidgets.qrc">
@@ -226,12 +227,12 @@
        </widget>
       </item>
       <item row="1" column="0" colspan="2">
-       <widget class="qSlicerVolumeRenderingPresetComboBox" name="PresetComboBox" />
+       <widget class="qSlicerVolumeRenderingPresetComboBox" name="PresetComboBox"/>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="CropLabel">
         <property name="text">
-         <string>裁剪：</string>
+         <string>Crop:</string>
         </property>
        </widget>
       </item>
@@ -243,7 +244,7 @@
            <bool>false</bool>
           </property>
           <property name="text">
-           <string>启用</string>
+           <string>Enable</string>
           </property>
          </widget>
         </item>
@@ -253,7 +254,7 @@
            <bool>false</bool>
           </property>
           <property name="text">
-           <string>显示 ROI</string>
+           <string>Display ROI</string>
           </property>
           <property name="indicatorIcon">
            <iconset resource="../../../../../Libs/MRML/Widgets/Resources/qMRMLWidgets.qrc">
@@ -274,7 +275,7 @@
            <bool>false</bool>
           </property>
           <property name="text">
-           <string>适应体积</string>
+           <string>Fit to Volume</string>
           </property>
           <property name="icon">
            <iconset resource="../../../../../Libs/MRML/Widgets/Resources/qMRMLWidgets.qrc">
@@ -287,7 +288,7 @@
       <item row="3" column="0">
        <widget class="QLabel" name="RenderingMethodLabel">
         <property name="text">
-         <string>渲染：</string>
+         <string>Rendering:</string>
         </property>
        </widget>
       </item>
@@ -301,7 +302,7 @@
       <item row="4" column="0" colspan="2">
        <widget class="ctkCollapsibleGroupBox" name="CollapsibleGroupBox">
         <property name="title">
-         <string>剪裁</string>
+         <string>Clipping</string>
         </property>
         <property name="checked">
          <bool>false</bool>
@@ -311,7 +312,7 @@
         </property>
         <layout class="QGridLayout" name="gridLayout">
          <item row="3" column="0" colspan="3">
-          <widget class="qMRMLClipNodeWidget" name="MRMLClipNodeWidget" />
+          <widget class="qMRMLClipNodeWidget" name="MRMLClipNodeWidget"/>
          </item>
          <item row="1" column="0">
           <widget class="QLabel" name="ClippingLabel">
@@ -319,14 +320,14 @@
             <bool>false</bool>
            </property>
            <property name="text">
-            <string>剪裁：</string>
+            <string>Clipping:</string>
            </property>
           </widget>
          </item>
          <item row="0" column="0">
           <widget class="QLabel" name="ClipNodeLabel">
            <property name="text">
-            <string>剪裁节点：</string>
+            <string>Clip node:</string>
            </property>
           </widget>
          </item>
@@ -336,7 +337,7 @@
             <bool>false</bool>
            </property>
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
@@ -344,14 +345,14 @@
           <widget class="qMRMLNodeComboBox" name="ClipNodeSelector">
            <property name="nodeTypes">
             <stringlist notr="true">
-             <string>剪裁节点 (vtkMRMLClipNode)</string>
+             <string>vtkMRMLClipNode</string>
             </stringlist>
            </property>
            <property name="showHidden">
             <bool>true</bool>
            </property>
            <property name="hideChildNodeTypes">
-            <stringlist notr="true" />
+            <stringlist notr="true"/>
            </property>
            <property name="noneEnabled">
             <bool>true</bool>
@@ -360,7 +361,7 @@
             <bool>true</bool>
            </property>
            <property name="interactionNodeSingletonTag">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
@@ -370,7 +371,7 @@
             <bool>false</bool>
            </property>
            <property name="text">
-            <string>软边缘：</string>
+            <string>Soft edge:</string>
            </property>
           </widget>
          </item>
@@ -389,7 +390,7 @@
             <double>10.000000000000000</double>
            </property>
            <property name="quantity">
-            <string notr="true" />
+            <string notr="true"/>
            </property>
           </widget>
          </item>
@@ -405,7 +406,7 @@
       <bool>true</bool>
      </property>
      <property name="text">
-      <string>高级...</string>
+      <string>Advanced...</string>
      </property>
      <property name="checked">
       <bool>true</bool>
@@ -433,20 +434,20 @@
         </property>
         <widget class="QWidget" name="TechniquesTab">
          <attribute name="title">
-          <string>技术</string>
+          <string>Techniques</string>
          </attribute>
          <layout class="QFormLayout" name="formLayout_5">
           <item row="1" column="0">
            <widget class="QLabel" name="MemorySizeLabel">
             <property name="text">
-             <string>GPU 内存大小：</string>
+             <string>GPU memory size:</string>
             </property>
            </widget>
           </item>
           <item row="1" column="1">
            <widget class="qSlicerGPUMemoryComboBox" name="MemorySizeComboBox">
             <property name="toolTip">
-             <string>分配给图形卡的体积渲染的内存量。“默认”可以在设置中修改。</string>
+             <string>Amount of memory allocated for volume rendering on the graphic card. &quot;Default&quot; can be modified in the settings.</string>
             </property>
             <property name="currentIndex">
              <number>-1</number>
@@ -456,7 +457,7 @@
           <item row="2" column="0">
            <widget class="QLabel" name="QualityControlLabel">
             <property name="text">
-             <string>质量：</string>
+             <string>Quality:</string>
             </property>
            </widget>
           </item>
@@ -470,7 +471,7 @@
           <item row="3" column="0">
            <widget class="QLabel" name="FramerateLabel">
             <property name="text">
-             <string>交互速度：</string>
+             <string>Interactive speed:</string>
             </property>
            </widget>
           </item>
@@ -489,14 +490,14 @@
              <double>8.000000000000000</double>
             </property>
             <property name="suffix">
-             <string>帧每秒</string>
+             <string> fps</string>
             </property>
            </widget>
           </item>
           <item row="5" column="0" colspan="2">
            <widget class="ctkCollapsibleGroupBox" name="AdvancedGroupBox">
             <property name="title">
-             <string>高级渲染属性</string>
+             <string>Advanced rendering properties</string>
             </property>
             <layout class="QFormLayout" name="formLayout_7">
              <property name="fieldGrowthPolicy">
@@ -527,17 +528,17 @@
           <item row="4" column="0">
            <widget class="QLabel" name="FramerateLabel_2">
             <property name="text">
-             <string>自动释放资源：</string>
+             <string>Auto-release resources:</string>
             </property>
            </widget>
           </item>
           <item row="4" column="1">
            <widget class="QCheckBox" name="AutoReleaseGraphicsResourcesCheckBox">
             <property name="toolTip">
-             <string>当不可见时立即从图形内存中卸载体积。减少内存使用，但使切换体积可见性变慢。</string>
+             <string>Immediately unload volumes from graphics memory when not visible. Reduces memory usage but makes toggling volume visibility slower.</string>
             </property>
             <property name="text">
-             <string />
+             <string/>
             </property>
            </widget>
           </item>
@@ -545,7 +546,7 @@
         </widget>
         <widget class="QWidget" name="VolumePropertyTab">
          <attribute name="title">
-          <string>体积属性</string>
+          <string>Volume properties</string>
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <property name="leftMargin">
@@ -574,7 +575,7 @@
                </sizepolicy>
               </property>
               <property name="text">
-               <string>与体积模块同步</string>
+               <string>Synchronize with Volumes module</string>
               </property>
               <property name="flat">
                <bool>false</bool>
@@ -587,10 +588,10 @@
             <item>
              <widget class="QCheckBox" name="IgnoreVolumesThresholdCheckBox">
               <property name="toolTip">
-               <string>不使用阈值。改为从窗/级别范围设置不透明度渐变。</string>
+               <string>Don't use threshold values. Set opacity ramp from the Window/Level range instead.</string>
               </property>
               <property name="text">
-               <string>忽略阈值</string>
+               <string>Ignore threshold</string>
               </property>
              </widget>
             </item>
@@ -617,14 +618,14 @@
         </widget>
         <widget class="QWidget" name="ROITab">
          <attribute name="title">
-          <string>感兴趣区域 (ROI)</string>
+          <string>ROI</string>
          </attribute>
          <layout class="QFormLayout" name="formLayout_3">
           <property name="fieldGrowthPolicy">
            <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
           </property>
           <item row="0" column="0" colspan="2">
-           <widget class="qMRMLMarkupsROIWidget" name="MarkupsROIWidget" />
+           <widget class="qMRMLMarkupsROIWidget" name="MarkupsROIWidget"/>
           </item>
          </layout>
         </widget>
@@ -759,8 +760,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../../Markups/Resources/qSlicerMarkupsModule.qrc" />
-  <include location="../../../../../Libs/MRML/Widgets/Resources/qMRMLWidgets.qrc" />
+  <include location="../../../Markups/Resources/qSlicerMarkupsModule.qrc"/>
+  <include location="../../../../../Libs/MRML/Widgets/Resources/qMRMLWidgets.qrc"/>
  </resources>
  <connections>
   <connection>

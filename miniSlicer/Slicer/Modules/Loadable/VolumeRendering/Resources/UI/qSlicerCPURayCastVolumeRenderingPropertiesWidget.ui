@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerCPURayCastVolumeRenderingPropertiesWidget</class>
  <widget class="QWidget" name="qSlicerCPURayCastVolumeRenderingPropertiesWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>GPU 光线投射</string>
+   <string>GPU RayCast</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
    <property name="leftMargin">
@@ -28,19 +29,19 @@
    <item row="0" column="0">
     <widget class="QLabel" name="RenderingTechniqueLabel">
      <property name="text">
-      <string>技术：</string>
+      <string>Technique:</string>
      </property>
     </widget>
    </item>
    <item row="0" column="1">
     <widget class="QComboBox" name="RenderingTechniqueComboBox">
      <property name="toolTip">
-      <string>选择当前体积可见视图的光线投射技术</string>
+      <string>Select ray casting technique for the views where the current volume is visible</string>
      </property>
     </widget>
    </item>
   </layout>
  </widget>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

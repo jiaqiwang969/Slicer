@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLMarkupsTestLineWidget</class>
  <widget class="QWidget" name="qMRMLMarkupsTestLineWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>测试线属性</string>
+   <string>Test Line Properties</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">
@@ -28,7 +29,7 @@
    <item>
     <widget class="ctkCollapsibleButton" name="lineTestCollapsibleButton" native="true">
      <property name="text" stdset="0">
-      <string>测试线设置</string>
+      <string>Test Line Settings</string>
      </property>
      <property name="checked" stdset="0">
       <bool>false</bool>
@@ -46,7 +47,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="qMRMLMarkupsTestLineWidgetLabel">
         <property name="text">
-         <string>这是一个测试小部件中的测试标签！</string>
+         <string>This is a test label in a test widget!</string>
         </property>
        </widget>
       </item>
@@ -63,6 +64,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

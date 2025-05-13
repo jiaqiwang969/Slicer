@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>ArterialCalcificationPreProcessor</class>
  <widget class="qMRMLWidget" name="ArterialCalcificationPreProcessor">
@@ -15,7 +16,7 @@
      <item row="0" column="0">
       <widget class="QLabel" name="parameterSetLabel">
        <property name="text">
-        <string>参数集：</string>
+        <string>Parameter set:</string>
        </property>
       </widget>
      </item>
@@ -39,21 +40,21 @@
           </sizepolicy>
          </property>
          <property name="toolTip">
-          <string>参数集将定义一个命名研究的参数分组。</string>
+          <string>A parameter set groups parameters that define a named study distinctly.</string>
          </property>
          <property name="nodeTypes">
           <stringlist notr="true">
-           <string>脚本模块节点 (vtkMRMLScriptedModuleNode)</string>
+           <string>vtkMRMLScriptedModuleNode</string>
           </stringlist>
          </property>
          <property name="showHidden">
           <bool>true</bool>
          </property>
          <property name="hideChildNodeTypes">
-          <stringlist notr="true" />
+          <stringlist notr="true"/>
          </property>
          <property name="baseName">
-          <string notr="true">动脉钙化预处理器</string>
+          <string notr="true">ArterialCalcificationPreProcessor</string>
          </property>
          <property name="noneEnabled">
           <bool>false</bool>
@@ -62,7 +63,7 @@
           <bool>true</bool>
          </property>
          <property name="interactionNodeSingletonTag">
-          <string notr="true" />
+          <string notr="true"/>
          </property>
          <property name="selectNodeUponCreation">
           <bool>true</bool>
@@ -84,7 +85,7 @@
           </size>
          </property>
          <property name="toolTip">
-          <string>如果有输入分割和体积，更新分割编辑器和切片视图。</string>
+          <string>Update the segment editor and the slice views with the input segmentation and volume if any.</string>
          </property>
          <property name="text">
           <string>↺</string>
@@ -98,20 +99,20 @@
    <item>
     <widget class="ctkCollapsibleButton" name="inputsCollapsibleButton">
      <property name="text">
-      <string>输入</string>
+      <string>Inputs</string>
      </property>
      <layout class="QFormLayout" name="formLayout">
       <item row="0" column="0">
        <widget class="QLabel" name="inputSegmentSelectorLabel">
         <property name="text">
-         <string>分割：</string>
+         <string>Segmentation:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="qMRMLSegmentSelectorWidget" name="inputSegmentSelector">
         <property name="toolTip">
-         <string>选择一个输入腔段。</string>
+         <string>Select an input lumen segment.</string>
         </property>
         <property name="noneEnabled">
          <bool>true</bool>
@@ -124,22 +125,22 @@
       <item row="1" column="0">
        <widget class="QLabel" name="inputVolumeLabel">
         <property name="text">
-         <string>体积：</string>
+         <string>Volume:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="qMRMLNodeComboBox" name="inputVolumeSelector">
         <property name="toolTip">
-         <string>选择所选段的源体积节点。</string>
+         <string>Select the source volume node of the selected segment.</string>
         </property>
         <property name="nodeTypes">
          <stringlist notr="true">
-          <string>标量体积节点 (vtkMRMLScalarVolumeNode)</string>
+          <string>vtkMRMLScalarVolumeNode</string>
          </stringlist>
         </property>
         <property name="hideChildNodeTypes">
-         <stringlist notr="true" />
+         <stringlist notr="true"/>
         </property>
         <property name="noneEnabled">
          <bool>true</bool>
@@ -154,24 +155,24 @@
          <bool>true</bool>
         </property>
         <property name="interactionNodeSingletonTag">
-         <string notr="true" />
+         <string notr="true"/>
         </property>
        </widget>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="inputMarginLabel">
         <property name="text">
-         <string>边距：</string>
+         <string>Margin:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
        <widget class="QDoubleSpinBox" name="inputMarginSpinBox">
         <property name="toolTip">
-         <string>在此边距内对腔周围的钙化进行分割。</string>
+         <string>Segment calcification around the lumen within this margin.</string>
         </property>
         <property name="suffix">
-         <string>毫米</string>
+         <string> mm</string>
         </property>
         <property name="decimals">
          <number>1</number>
@@ -203,10 +204,10 @@
    <item>
     <widget class="ctkMenuButton" name="applyButton">
      <property name="toolTip">
-      <string>运行算法。</string>
+      <string>Run the algorithm.</string>
      </property>
      <property name="text">
-      <string>应用</string>
+      <string>Apply</string>
      </property>
     </widget>
    </item>
@@ -242,7 +243,7 @@
    <header>qMRMLSegmentSelectorWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>ArterialCalcificationPreProcessor</sender>

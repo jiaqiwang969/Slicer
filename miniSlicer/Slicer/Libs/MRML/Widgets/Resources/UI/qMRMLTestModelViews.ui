@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>Form</class>
  <widget class="QWidget" name="Form">
@@ -10,17 +11,17 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>表单</string>
+   <string>Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="qMRMLSceneFactoryWidget" name="MRMLSceneFactoryWidget" />
+    <widget class="qMRMLSceneFactoryWidget" name="MRMLSceneFactoryWidget"/>
    </item>
    <item>
     <widget class="qMRMLNodeComboBox" name="MRMLNodeComboBox">
      <property name="nodeTypes">
       <stringlist notr="true">
-       <string>相机节点 (vtkMRMLCameraNode)</string>
+       <string>vtkMRMLCameraNode</string>
       </stringlist>
      </property>
      <property name="showChildNodeTypes">
@@ -106,7 +107,7 @@
    <header>qMRMLSceneFactoryWidgetPlugin.h</header>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>MRMLSceneFactoryWidget</sender>

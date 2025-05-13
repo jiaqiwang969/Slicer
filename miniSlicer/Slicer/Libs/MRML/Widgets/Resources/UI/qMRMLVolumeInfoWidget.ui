@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLVolumeInfoWidget</class>
  <widget class="qMRMLWidget" name="qMRMLVolumeInfoWidget">
@@ -16,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>卷信息</string>
+   <string>Volume Information</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
    <property name="leftMargin">
@@ -34,7 +35,7 @@
    <item row="0" column="0">
     <widget class="QLabel" name="ImageDimensionsLabel">
      <property name="text">
-      <string>图像尺寸：</string>
+      <string>Image Dimensions:</string>
      </property>
     </widget>
    </item>
@@ -54,7 +55,7 @@
    <item row="1" column="0">
     <widget class="QLabel" name="ImageSpacingLabel">
      <property name="text">
-      <string>图像间距：</string>
+      <string>Image Spacing:</string>
      </property>
     </widget>
    </item>
@@ -76,7 +77,7 @@
       <string>0,0,0</string>
      </property>
      <property name="quantity">
-      <string notr="true">长度</string>
+      <string notr="true">length</string>
      </property>
      <property name="unitAwareProperties">
       <set>qMRMLCoordinatesWidget::Precision|qMRMLCoordinatesWidget::Prefix|qMRMLCoordinatesWidget::Scaling|qMRMLCoordinatesWidget::Suffix</set>
@@ -86,7 +87,7 @@
    <item row="2" column="0">
     <widget class="QLabel" name="ImageOriginLabel">
      <property name="text">
-      <string>图像原点：</string>
+      <string>Image Origin:</string>
      </property>
     </widget>
    </item>
@@ -105,7 +106,7 @@
       <double>1000000000.000000000000000</double>
      </property>
      <property name="quantity">
-      <string notr="true">长度</string>
+      <string notr="true">length</string>
      </property>
      <property name="unitAwareProperties">
       <set>qMRMLCoordinatesWidget::Precision|qMRMLCoordinatesWidget::Prefix|qMRMLCoordinatesWidget::Scaling|qMRMLCoordinatesWidget::Suffix</set>
@@ -115,7 +116,7 @@
    <item row="3" column="0">
     <widget class="QLabel" name="IJKToRASDirectionLabel">
      <property name="text">
-      <string>IJK 到 RAS 方向矩阵：</string>
+      <string>IJK to RAS Direction Matrix:</string>
      </property>
     </widget>
    </item>
@@ -153,17 +154,17 @@
    <item row="4" column="1">
     <widget class="QPushButton" name="CenterVolumePushButton">
      <property name="toolTip">
-      <string>设置一个父变换，使卷心位于原点。固定变换以永久改变卷的位置。</string>
+      <string>Set a parent transform to the volume that center it on the origin. Harden the transform to permanently change the volume position.</string>
      </property>
      <property name="text">
-      <string>中心卷</string>
+      <string>Center Volume</string>
      </property>
     </widget>
    </item>
    <item row="5" column="0">
     <widget class="QLabel" name="ScanOrderLabel">
      <property name="text">
-      <string>扫描顺序：</string>
+      <string>Scan Order:</string>
      </property>
     </widget>
    </item>
@@ -172,19 +173,19 @@
      <item>
       <widget class="QLabel" name="ScanOrderValueLabel">
        <property name="text">
-        <string />
+        <string/>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="ScanOrderComboBox" />
+      <widget class="QComboBox" name="ScanOrderComboBox"/>
      </item>
     </layout>
    </item>
    <item row="6" column="0">
     <widget class="QLabel" name="NumberOfScalarsLabel">
      <property name="text">
-      <string>标量数量：</string>
+      <string>Number of Scalars:</string>
      </property>
     </widget>
    </item>
@@ -193,7 +194,7 @@
      <item>
       <widget class="QLabel" name="NumberOfScalarsValueLabel">
        <property name="text">
-        <string />
+        <string/>
        </property>
       </widget>
      </item>
@@ -212,7 +213,7 @@
    <item row="7" column="0">
     <widget class="QLabel" name="ScalarTypeLabel">
      <property name="text">
-      <string>标量类型：</string>
+      <string>Scalar Type:</string>
      </property>
     </widget>
    </item>
@@ -224,47 +225,47 @@
      <item>
       <widget class="QLabel" name="ScalarTypeValueLabel">
        <property name="text">
-        <string />
+        <string/>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="ScalarTypeComboBox" />
+      <widget class="QComboBox" name="ScalarTypeComboBox"/>
      </item>
     </layout>
    </item>
    <item row="8" column="0">
     <widget class="QLabel" name="ScalarRangeLabel">
      <property name="text">
-      <string>标量范围：</string>
+      <string>Scalar Range:</string>
      </property>
     </widget>
    </item>
    <item row="8" column="1">
     <widget class="QLabel" name="ScalarRangeValueLabel">
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
    <item row="9" column="0">
     <widget class="QLabel" name="VolumeTypeLabel">
      <property name="text">
-      <string>卷类型：</string>
+      <string>Volume type:</string>
      </property>
     </widget>
    </item>
    <item row="9" column="1">
     <widget class="QLabel" name="VolumeTagLabel">
      <property name="text">
-      <string>卷标签</string>
+      <string>VolumeTag</string>
      </property>
     </widget>
    </item>
    <item row="10" column="0">
     <widget class="QLabel" name="FileNameLabel">
      <property name="text">
-      <string>文件名：</string>
+      <string>File Name:</string>
      </property>
     </widget>
    </item>
@@ -278,7 +279,7 @@
    <item row="11" column="0">
     <widget class="QLabel" name="WindowLevelPresetsLabel">
      <property name="text">
-      <string>窗口/级别预设：</string>
+      <string>Window/Level Presets:</string>
      </property>
     </widget>
    </item>
@@ -323,7 +324,7 @@
    <header>ctkMatrixWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>qMRMLVolumeInfoWidget</sender>

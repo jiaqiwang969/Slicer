@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerMarkupsModule</class>
  <widget class="qSlicerWidget" name="qSlicerMarkupsModule">
@@ -16,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>标注</string>
+   <string>Markups</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
@@ -24,7 +25,7 @@
      <item>
       <widget class="QGroupBox" name="createMarkupsGroupBox">
        <property name="title">
-        <string>创建标注：</string>
+        <string>Create Markups:</string>
        </property>
       </widget>
      </item>
@@ -77,29 +78,29 @@
         <bool>false</bool>
        </property>
        <property name="text">
-        <string>显示</string>
+        <string>Display</string>
        </property>
        <property name="collapsed">
         <bool>true</bool>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
-         <widget class="qMRMLMarkupsDisplayNodeWidget" name="markupsDisplayWidget" />
+         <widget class="qMRMLMarkupsDisplayNodeWidget" name="markupsDisplayWidget"/>
         </item>
         <item>
          <widget class="ctkCollapsibleGroupBox" name="ColorLegendCollapsibleGroupBox">
           <property name="toolTip">
-           <string>选定标量部分的颜色表的颜色图例。</string>
+           <string>Color legend for the Color Table selected in Scalars section.</string>
           </property>
           <property name="title">
-           <string>颜色图例</string>
+           <string>Color Legend</string>
           </property>
           <property name="collapsed">
            <bool>true</bool>
           </property>
           <layout class="QGridLayout" name="gridLayout_2">
            <item row="0" column="0">
-            <widget class="qMRMLColorLegendDisplayNodeWidget" name="ColorLegendDisplayNodeWidget" />
+            <widget class="qMRMLColorLegendDisplayNodeWidget" name="ColorLegendDisplayNodeWidget"/>
            </item>
           </layout>
          </widget>
@@ -109,20 +110,20 @@
           <item>
            <widget class="QPushButton" name="saveToDefaultDisplayPropertiesPushButton">
             <property name="toolTip">
-             <string>将当前显示属性设置保存为默认值，重启 Slicer 时将保存（请参见应用程序设置）</string>
+             <string>Save current display property settings to defaults, will be saved for when Slicer restarts (see Application Settings)</string>
             </property>
             <property name="text">
-             <string>保存为默认值</string>
+             <string>Save to Defaults</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="resetToDefaultDisplayPropertiesPushButton">
             <property name="toolTip">
-             <string>使用默认显示属性。</string>
+             <string>Use default display properties.</string>
             </property>
             <property name="text">
-             <string>重置为默认值</string>
+             <string>Reset to Defaults</string>
             </property>
            </widget>
           </item>
@@ -134,7 +135,7 @@
      <item>
       <widget class="ctkCollapsibleButton" name="controlPointsCollapsibleButton">
        <property name="text">
-        <string>控制点</string>
+        <string>Control Points</string>
        </property>
        <property name="collapsed">
         <bool>true</bool>
@@ -143,7 +144,7 @@
         <item row="0" column="0">
          <widget class="QLabel" name="label_3">
           <property name="text">
-           <string>交互：</string>
+           <string>Interaction: </string>
           </property>
          </widget>
         </item>
@@ -170,10 +171,10 @@
              </size>
             </property>
             <property name="toolTip">
-             <string>启用/禁用切片和 3D 视图中的所有交互。</string>
+             <string>Enable/disable all interactions in slice and 3D views.</string>
             </property>
             <property name="text">
-             <string />
+             <string/>
             </property>
             <property name="icon">
              <iconset>
@@ -202,10 +203,10 @@
              </size>
             </property>
             <property name="toolTip">
-             <string>输出</string>
+             <string>Lock the number of points allowed in the active markup.</string>
             </property>
             <property name="text">
-             <string />
+             <string/>
             </property>
             <property name="icon">
              <iconset>
@@ -218,7 +219,7 @@
         <item row="1" column="0">
          <widget class="QLabel" name="label">
           <property name="text">
-           <string>跳过切片：</string>
+           <string>Jump Slices:</string>
           </property>
          </widget>
         </item>
@@ -231,21 +232,21 @@
            </sizepolicy>
           </property>
           <property name="toolTip">
-           <string>偏移：设置切片平面位置。居中：设置切片平面位置并将切片视图居中于控制点。</string>
+           <string>Offset: set slice plane position. Centered: set slice plane position and center the slice view on the control point.</string>
           </property>
           <item>
            <property name="text">
-            <string>无</string>
+            <string>none</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>偏移</string>
+            <string>offset</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>居中</string>
+            <string>centered</string>
            </property>
           </item>
          </widget>
@@ -253,17 +254,17 @@
         <item row="2" column="0">
          <widget class="QLabel" name="label_2">
           <property name="text">
-           <string>显示切片交集：</string>
+           <string>Show Slice Intersections:</string>
           </property>
          </widget>
         </item>
         <item row="2" column="1">
          <widget class="ctkCheckBox" name="sliceIntersectionsVisibilityCheckBox">
           <property name="toolTip">
-           <string>显示其他切片平面如何与每个切片平面相交。</string>
+           <string>Show how the other slice planes intersect each slice plane.</string>
           </property>
           <property name="text">
-           <string />
+           <string/>
           </property>
          </widget>
         </item>
@@ -290,7 +291,7 @@
              </size>
             </property>
             <property name="toolTip">
-             <string>切换列表中所有控制点的可见性标志。使用下拉菜单将所有设置为可见或不可见。</string>
+             <string>Toggle visibility flag on all control points in the list. Use the drop down menu to set all to visible or invisible.</string>
             </property>
            </widget>
           </item>
@@ -315,7 +316,7 @@
              </size>
             </property>
             <property name="toolTip">
-             <string>切换列表中所有控制点的选中标志。使用下拉菜单将所有设置为选中或未选中。</string>
+             <string>Toggle selected flag on all control points in the list. Use the drop down menu to set all to selected or deselected.</string>
             </property>
            </widget>
           </item>
@@ -340,7 +341,7 @@
              </size>
             </property>
             <property name="toolTip">
-             <string>切换列表中所有控制点的锁定标志。使用下拉菜单将所有设置为锁定或解锁。</string>
+             <string>Toggle lock flag on all control points in the list. Use the drop down menu to set all to locked or unlocked.</string>
             </property>
            </widget>
           </item>
@@ -368,10 +369,10 @@
              </size>
             </property>
             <property name="toolTip">
-             <string>跳过在活动列表中放置高亮的控制点（将清除当前位置信息）。</string>
+             <string>Skip placement of highlighted control point(s) from the active list (will clear current position).</string>
             </property>
             <property name="text">
-             <string />
+             <string/>
             </property>
             <property name="icon">
              <iconset resource="../qSlicerMarkupsModule.qrc">
@@ -403,10 +404,10 @@
              </size>
             </property>
             <property name="toolTip">
-             <string>清除活动列表中高亮控制点的位置信息（控制点不会被删除）。</string>
+             <string>Clear the position of highlighted control point(s) from the active list (the control points will not be deleted).</string>
             </property>
             <property name="text">
-             <string />
+             <string/>
             </property>
             <property name="icon">
              <iconset resource="../qSlicerMarkupsModule.qrc">
@@ -438,10 +439,10 @@
              </size>
             </property>
             <property name="toolTip">
-             <string>从活动列表中删除高亮的控制点</string>
+             <string>Delete the highlighted control point(s) from the active list</string>
             </property>
             <property name="text">
-             <string />
+             <string/>
             </property>
             <property name="icon">
              <iconset resource="../qSlicerMarkupsModule.qrc">
@@ -473,7 +474,7 @@
              </size>
             </property>
             <property name="toolTip">
-             <string>从活动列表中移除所有控制点</string>
+             <string>Remove all control points from the active list</string>
             </property>
             <property name="icon">
              <iconset resource="../qSlicerMarkupsModule.qrc">
@@ -487,7 +488,7 @@
              <bool>true</bool>
             </property>
             <property name="text">
-             <string>剪切</string>
+             <string>Cut</string>
             </property>
            </widget>
           </item>
@@ -497,7 +498,7 @@
              <bool>true</bool>
             </property>
             <property name="text">
-             <string>复制</string>
+             <string>Copy</string>
             </property>
            </widget>
           </item>
@@ -507,7 +508,7 @@
              <bool>true</bool>
             </property>
             <property name="text">
-             <string>粘贴</string>
+             <string>Paste</string>
             </property>
            </widget>
           </item>
@@ -516,7 +517,7 @@
         <item row="4" column="0">
          <widget class="QLabel" name="label_coords">
           <property name="text">
-           <string>坐标：  </string>
+           <string>Coordinates:  </string>
           </property>
          </widget>
         </item>
@@ -529,21 +530,21 @@
            </sizepolicy>
           </property>
           <property name="toolTip">
-           <string>设置控制点位置的可见性和坐标系统。</string>
+           <string>Set visibility and coordinate system of control point positions.</string>
           </property>
           <item>
            <property name="text">
-            <string>世界</string>
+            <string>World</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>本地</string>
+            <string>Local</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>隐藏</string>
+            <string>Hide</string>
            </property>
           </item>
          </widget>
@@ -563,10 +564,10 @@
            </size>
           </property>
           <property name="toolTip">
-           <string>当前活动标注节点中的控制点。右键单击一行以进行删除、跳过、复制、移动。</string>
+           <string>The control points in the currently active markups node. Right click in a row for delete, jump, copy, move.</string>
           </property>
           <property name="accessibleName">
-           <string>活动标注控制点表</string>
+           <string>active markup control point table</string>
           </property>
           <property name="alternatingRowColors">
            <bool>true</bool>
@@ -579,10 +580,10 @@
         <item row="6" column="0" colspan="2">
          <widget class="ctkCollapsibleGroupBox" name="advancedCollapsibleButton">
           <property name="toolTip">
-           <string>显示、命名、体积交互、上下移动、添加</string>
+           <string>Display, naming, volume interactions, moving up/down, adding</string>
           </property>
           <property name="title">
-           <string>高级</string>
+           <string>Advanced</string>
           </property>
           <property name="collapsed">
            <bool>true</bool>
@@ -611,10 +612,10 @@
                 </size>
                </property>
                <property name="toolTip">
-                <string>将高亮的控制点在列表中向上移动一个位置</string>
+                <string>Move a highlighted control point up one spot in the list</string>
                </property>
                <property name="text">
-                <string />
+                <string/>
                </property>
                <property name="icon">
                 <iconset resource="../qSlicerMarkupsModule.qrc">
@@ -643,10 +644,10 @@
                 </size>
                </property>
                <property name="toolTip">
-                <string>将高亮的控制点在列表中向下移动一个位置</string>
+                <string>Move a highlighted control point down one spot in the list</string>
                </property>
                <property name="text">
-                <string />
+                <string/>
                </property>
                <property name="icon">
                 <iconset resource="../qSlicerMarkupsModule.qrc">
@@ -675,7 +676,7 @@
                 </size>
                </property>
                <property name="toolTip">
-                <string>在原点向活动列表添加一个新的控制点</string>
+                <string>Add a new control point to the active list, at origin</string>
                </property>
                <property name="icon">
                 <iconset resource="../qSlicerMarkupsModule.qrc">
@@ -688,43 +689,43 @@
            <item>
             <widget class="ctkCollapsibleGroupBox" name="namingCollapsibleGroupBox">
              <property name="title">
-              <string>命名</string>
+              <string>Naming</string>
              </property>
              <layout class="QGridLayout" name="gridLayout">
               <item row="2" column="0">
                <widget class="QLabel" name="nameFormatLabel">
                 <property name="toolTip">
-                 <string>网络</string>
+                 <string>Include %N for list name, %d for number.</string>
                 </property>
                 <property name="text">
-                 <string>名称格式</string>
+                 <string>Name Format</string>
                 </property>
                </widget>
               </item>
               <item row="2" column="1">
                <widget class="QLineEdit" name="nameFormatLineEdit">
                 <property name="toolTip">
-                 <string>创建新控制点名称的格式，使用 sprintf 格式样式。%N 被替换为列表名称，%S 被替换为标注的短名称，%d 被替换为整数。</string>
+                 <string>Format for creating names of new control points, using sprintf format style. %N is replaced by the list name, %S is replaced by the markup's short name and %d by an integer.</string>
                 </property>
                </widget>
               </item>
               <item row="2" column="3">
                <widget class="QPushButton" name="resetNameFormatToDefaultPushButton">
                 <property name="toolTip">
-                 <string>将名称格式字段重置为默认值。</string>
+                 <string>Reset the name format field to the default value.</string>
                 </property>
                 <property name="text">
-                 <string>重置</string>
+                 <string>Reset</string>
                 </property>
                </widget>
               </item>
               <item row="2" column="2">
                <widget class="QPushButton" name="renameAllWithCurrentNameFormatPushButton">
                 <property name="toolTip">
-                 <string>根据当前名称格式重命名此列表中的所有控制点，尽量保留数字。</string>
+                 <string>Rename all control points in this list according to the current name format, trying to preserve numbers.</string>
                 </property>
                 <property name="text">
-                 <string>应用</string>
+                 <string>Apply</string>
                 </property>
                </widget>
               </item>
@@ -743,7 +744,7 @@
         <bool>false</bool>
        </property>
        <property name="text">
-        <string>测量</string>
+        <string>Measurements</string>
        </property>
        <property name="collapsed">
         <bool>true</bool>
@@ -752,14 +753,14 @@
         <item>
          <widget class="QLabel" name="measurementsLabel">
           <property name="text">
-           <string>无测量</string>
+           <string>No measurement</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="ctkCollapsibleGroupBox" name="MeasurementSettingsCollapsibleGroupBox">
           <property name="title">
-           <string>测量设置</string>
+           <string>Measurement settings</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_8">
            <property name="leftMargin">
@@ -806,8 +807,8 @@
              <attribute name="verticalHeaderVisible">
               <bool>false</bool>
              </attribute>
-             <column />
-             <column />
+             <column/>
+             <column/>
             </widget>
            </item>
           </layout>
@@ -819,7 +820,7 @@
      <item>
       <widget class="qMRMLCollapsibleButton" name="exportImportCollapsibleButton">
        <property name="text">
-        <string>导出/导入表</string>
+        <string>Export/import Table</string>
        </property>
        <property name="collapsed">
         <bool>true</bool>
@@ -828,7 +829,7 @@
         <item row="0" column="0">
          <widget class="QLabel" name="label_4">
           <property name="text">
-           <string>操作：</string>
+           <string>Operation:</string>
           </property>
          </widget>
         </item>
@@ -837,14 +838,14 @@
           <item>
            <widget class="QRadioButton" name="tableExportRadioButton">
             <property name="text">
-             <string>导出</string>
+             <string>Export</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QRadioButton" name="tableImportRadioButton">
             <property name="text">
-             <string>导入</string>
+             <string>Import</string>
             </property>
            </widget>
           </item>
@@ -853,7 +854,7 @@
         <item row="1" column="0">
          <widget class="QLabel" name="exportImportTableLabel">
           <property name="text">
-           <string>表：</string>
+           <string>Table:</string>
           </property>
          </widget>
         </item>
@@ -861,7 +862,7 @@
          <widget class="qMRMLNodeComboBox" name="exportedImportedNodeComboBox">
           <property name="nodeTypes">
            <stringlist notr="true">
-            <string>网络模型：</string>
+            <string>vtkMRMLTableNode</string>
            </stringlist>
           </property>
           <property name="editEnabled">
@@ -875,14 +876,14 @@
         <item row="3" column="0" colspan="2">
          <widget class="QPushButton" name="exportImportPushButton">
           <property name="text">
-           <string>应用</string>
+           <string>Apply</string>
           </property>
          </widget>
         </item>
         <item row="2" column="0" colspan="2">
          <widget class="ctkCollapsibleGroupBox" name="CollapsibleGroupBox">
           <property name="title">
-           <string>高级</string>
+           <string>Advanced</string>
           </property>
           <property name="collapsed">
            <bool>true</bool>
@@ -909,7 +910,7 @@
            <item row="0" column="0">
             <widget class="QLabel" name="label_5">
              <property name="text">
-              <string>导出坐标系统：</string>
+              <string>Export coordinate system:</string>
              </property>
             </widget>
            </item>
@@ -918,14 +919,14 @@
              <item>
               <widget class="QRadioButton" name="rasExportRadioButton">
                <property name="text">
-                <string>快速中心线网络提取的结果。</string>
+                <string>RAS</string>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QRadioButton" name="lpsExportRadioButton">
                <property name="text">
-                <string>网络属性：</string>
+                <string>LPS</string>
                </property>
               </widget>
              </item>
@@ -1028,7 +1029,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../qSlicerMarkupsModule.qrc" />
+  <include location="../qSlicerMarkupsModule.qrc"/>
  </resources>
  <connections>
   <connection>

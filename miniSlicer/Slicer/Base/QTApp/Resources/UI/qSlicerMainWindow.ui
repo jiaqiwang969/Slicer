@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerMainWindow</class>
  <widget class="QMainWindow" name="qSlicerMainWindow">
@@ -9,8 +10,8 @@
     <height>570</height>
    </rect>
   </property>
-  <widget class="QWidget" name="CentralWidget" />
-  <widget class="QStatusBar" name="StatusBar" />
+  <widget class="QWidget" name="CentralWidget"/>
+  <widget class="QStatusBar" name="StatusBar"/>
   <widget class="QDockWidget" name="PanelDockWidget">
    <property name="features">
     <set>QDockWidget::DockWidgetClosable|QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
@@ -19,7 +20,7 @@
     <set>Qt::LeftDockWidgetArea|Qt::RightDockWidgetArea</set>
    </property>
    <property name="windowTitle">
-    <string>模块面板</string>
+    <string>Module Panel</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
@@ -48,7 +49,7 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="qSlicerModulePanel" name="ModulePanel" />
+      <widget class="qSlicerModulePanel" name="ModulePanel"/>
      </item>
      <item>
       <widget class="ctkCollapsibleButton" name="DataProbeCollapsibleWidget">
@@ -59,12 +60,12 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>数据探针</string>
+        <string>Data Probe</string>
        </property>
        <property name="collapsedHeight">
         <number>0</number>
        </property>
-       <layout class="QHBoxLayout" name="horizontalLayout" />
+       <layout class="QHBoxLayout" name="horizontalLayout"/>
       </widget>
      </item>
     </layout>
@@ -72,7 +73,7 @@
   </widget>
   <widget class="QToolBar" name="MainToolBar">
    <property name="windowTitle">
-    <string>加载/保存</string>
+    <string>Load/Save</string>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -80,13 +81,13 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="FileLoadDataAction" />
-   <addaction name="LoadDICOMAction" />
-   <addaction name="FileSaveSceneAction" />
+   <addaction name="FileLoadDataAction"/>
+   <addaction name="LoadDICOMAction"/>
+   <addaction name="FileSaveSceneAction"/>
   </widget>
   <widget class="QToolBar" name="ModuleToolBar">
    <property name="windowTitle">
-    <string>收藏模块</string>
+    <string>Favorite Modules</string>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -97,7 +98,7 @@
   </widget>
   <widget class="QToolBar" name="UndoRedoToolBar">
    <property name="windowTitle">
-    <string>撤销重做工具栏</string>
+    <string>Undo Redo ToolBar</string>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -108,7 +109,7 @@
   </widget>
   <widget class="QToolBar" name="ViewToolBar">
    <property name="windowTitle">
-    <string>布局选择</string>
+    <string>Layout Selection</string>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -122,7 +123,7 @@
     <bool>false</bool>
    </property>
    <property name="windowTitle">
-    <string>鼠标交互</string>
+    <string>Mouse Interaction</string>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -133,7 +134,7 @@
   </widget>
   <widget class="qSlicerViewersToolBar" name="ViewersToolBar">
    <property name="windowTitle">
-    <string>十字准星选择</string>
+    <string>Crosshair Selection</string>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -144,7 +145,7 @@
   </widget>
   <widget class="QToolBar" name="DialogToolBar">
    <property name="windowTitle">
-    <string>扩展</string>
+    <string>Extensions</string>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -152,11 +153,11 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="ViewExtensionsManagerAction" />
+   <addaction name="ViewExtensionsManagerAction"/>
   </widget>
   <widget class="QToolBar" name="LayoutToolBar">
    <property name="windowTitle">
-    <string>布局工具栏</string>
+    <string>Layout ToolBar</string>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -164,33 +165,33 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="ViewLayoutConventionalAction" />
-   <addaction name="ViewLayoutConventionalWidescreenAction" />
-   <addaction name="ViewLayoutConventionalPlotAction" />
-   <addaction name="ViewLayoutFourUpAction" />
-   <addaction name="ViewLayoutFourUpPlotAction" />
-   <addaction name="ViewLayoutDual3DAction" />
-   <addaction name="ViewLayoutTriple3DAction" />
-   <addaction name="ViewLayoutOneUp3DAction" />
-   <addaction name="ViewLayout3DTableAction" />
-   <addaction name="ViewLayoutOneUpPlotAction" />
-   <addaction name="ViewLayoutOneUpRedSliceAction" />
-   <addaction name="ViewLayoutOneUpYellowSliceAction" />
-   <addaction name="ViewLayoutOneUpGreenSliceAction" />
-   <addaction name="ViewLayoutTabbed3DAction" />
-   <addaction name="ViewLayoutTabbedSliceAction" />
-   <addaction name="ViewLayoutCompareAction" />
-   <addaction name="ViewLayoutCompareWidescreenAction" />
-   <addaction name="ViewLayoutCompareGridAction" />
-   <addaction name="ViewLayoutThreeOverThreeAction" />
-   <addaction name="ViewLayoutThreeOverThreePlotAction" />
-   <addaction name="ViewLayoutFourOverFourAction" />
-   <addaction name="ViewLayoutSideBySideAction" />
-   <addaction name="ViewLayoutFourByThreeSliceAction" />
-   <addaction name="ViewLayoutFourByTwoSliceAction" />
-   <addaction name="ViewLayoutFiveByTwoSliceAction" />
-   <addaction name="ViewLayoutThreeByThreeSliceAction" />
-   <addaction name="ViewLayoutDualMonitorFourUpViewAction" />
+   <addaction name="ViewLayoutConventionalAction"/>
+   <addaction name="ViewLayoutConventionalWidescreenAction"/>
+   <addaction name="ViewLayoutConventionalPlotAction"/>
+   <addaction name="ViewLayoutFourUpAction"/>
+   <addaction name="ViewLayoutFourUpPlotAction"/>
+   <addaction name="ViewLayoutDual3DAction"/>
+   <addaction name="ViewLayoutTriple3DAction"/>
+   <addaction name="ViewLayoutOneUp3DAction"/>
+   <addaction name="ViewLayout3DTableAction"/>
+   <addaction name="ViewLayoutOneUpPlotAction"/>
+   <addaction name="ViewLayoutOneUpRedSliceAction"/>
+   <addaction name="ViewLayoutOneUpYellowSliceAction"/>
+   <addaction name="ViewLayoutOneUpGreenSliceAction"/>
+   <addaction name="ViewLayoutTabbed3DAction"/>
+   <addaction name="ViewLayoutTabbedSliceAction"/>
+   <addaction name="ViewLayoutCompareAction"/>
+   <addaction name="ViewLayoutCompareWidescreenAction"/>
+   <addaction name="ViewLayoutCompareGridAction"/>
+   <addaction name="ViewLayoutThreeOverThreeAction"/>
+   <addaction name="ViewLayoutThreeOverThreePlotAction"/>
+   <addaction name="ViewLayoutFourOverFourAction"/>
+   <addaction name="ViewLayoutSideBySideAction"/>
+   <addaction name="ViewLayoutFourByThreeSliceAction"/>
+   <addaction name="ViewLayoutFourByTwoSliceAction"/>
+   <addaction name="ViewLayoutFiveByTwoSliceAction"/>
+   <addaction name="ViewLayoutThreeByThreeSliceAction"/>
+   <addaction name="ViewLayoutDualMonitorFourUpViewAction"/>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -203,107 +204,107 @@
    </property>
    <widget class="QMenu" name="FileMenu">
     <property name="title">
-     <string>&amp;文件</string>
+     <string>&amp;File</string>
     </property>
     <widget class="QMenu" name="RecentlyLoadedMenu">
      <property name="title">
-      <string>最近</string>
+      <string>Recent</string>
      </property>
     </widget>
-    <addaction name="FileAddDataAction" />
-    <addaction name="RecentlyLoadedMenu" />
-    <addaction name="separator" />
-    <addaction name="FileSaveSceneAction" />
-    <addaction name="separator" />
-    <addaction name="FileCloseSceneAction" />
-    <addaction name="separator" />
-    <addaction name="FileExitAction" />
+    <addaction name="FileAddDataAction"/>
+    <addaction name="RecentlyLoadedMenu"/>
+    <addaction name="separator"/>
+    <addaction name="FileSaveSceneAction"/>
+    <addaction name="separator"/>
+    <addaction name="FileCloseSceneAction"/>
+    <addaction name="separator"/>
+    <addaction name="FileExitAction"/>
    </widget>
    <widget class="QMenu" name="EditMenu">
     <property name="title">
-     <string>&amp;编辑</string>
+     <string>&amp;Edit</string>
     </property>
-    <addaction name="CutAction" />
-    <addaction name="CopyAction" />
-    <addaction name="PasteAction" />
-    <addaction name="separator" />
-    <addaction name="EditRecordMacroAction" />
-    <addaction name="EditPlayMacroAction" />
-    <addaction name="separator" />
-    <addaction name="EditApplicationSettingsAction" />
+    <addaction name="CutAction"/>
+    <addaction name="CopyAction"/>
+    <addaction name="PasteAction"/>
+    <addaction name="separator"/>
+    <addaction name="EditRecordMacroAction"/>
+    <addaction name="EditPlayMacroAction"/>
+    <addaction name="separator"/>
+    <addaction name="EditApplicationSettingsAction"/>
    </widget>
    <widget class="QMenu" name="ViewMenu">
     <property name="title">
-     <string>&amp;视图</string>
+     <string>&amp;View</string>
     </property>
     <widget class="QMenu" name="LayoutMenu">
      <property name="title">
-      <string>布局</string>
+      <string>Layout</string>
      </property>
      <property name="icon">
       <iconset resource="../../../../Libs/MRML/Widgets/Resources/qMRMLWidgets.qrc">
        <normaloff>:/Icons/LayoutChooseView.png</normaloff>:/Icons/LayoutChooseView.png</iconset>
      </property>
-     <addaction name="ViewLayoutConventionalAction" />
-     <addaction name="ViewLayoutConventionalWidescreenAction" />
-     <addaction name="ViewLayoutConventionalPlotAction" />
-     <addaction name="ViewLayoutFourUpAction" />
-     <addaction name="ViewLayoutFourUpTableAction" />
-     <addaction name="ViewLayoutFourUpPlotAction" />
-     <addaction name="ViewLayoutFourUpPlotTableAction" />
-     <addaction name="ViewLayoutDual3DAction" />
-     <addaction name="ViewLayoutTriple3DAction" />
-     <addaction name="ViewLayoutOneUp3DAction" />
-     <addaction name="ViewLayout3DTableAction" />
-     <addaction name="ViewLayoutOneUpPlotAction" />
-     <addaction name="ViewLayoutOneUpRedSliceAction" />
-     <addaction name="ViewLayoutOneUpYellowSliceAction" />
-     <addaction name="ViewLayoutOneUpGreenSliceAction" />
-     <addaction name="ViewLayoutTabbed3DAction" />
-     <addaction name="ViewLayoutTabbedSliceAction" />
-     <addaction name="ViewLayoutCompareAction" />
-     <addaction name="ViewLayoutCompareWidescreenAction" />
-     <addaction name="ViewLayoutCompareGridAction" />
-     <addaction name="ViewLayoutThreeOverThreeAction" />
-     <addaction name="ViewLayoutThreeOverThreePlotAction" />
-     <addaction name="ViewLayoutFourOverFourAction" />
-     <addaction name="ViewLayoutTwoOverTwoAction" />
-     <addaction name="ViewLayoutSideBySideAction" />
-     <addaction name="ViewLayoutFourByThreeSliceAction" />
-     <addaction name="ViewLayoutFourByTwoSliceAction" />
-     <addaction name="ViewLayoutThreeByThreeSliceAction" />
-     <addaction name="ViewLayoutDualMonitorFourUpViewAction" />
+     <addaction name="ViewLayoutConventionalAction"/>
+     <addaction name="ViewLayoutConventionalWidescreenAction"/>
+     <addaction name="ViewLayoutConventionalPlotAction"/>
+     <addaction name="ViewLayoutFourUpAction"/>
+     <addaction name="ViewLayoutFourUpTableAction"/>
+     <addaction name="ViewLayoutFourUpPlotAction"/>
+     <addaction name="ViewLayoutFourUpPlotTableAction"/>
+     <addaction name="ViewLayoutDual3DAction"/>
+     <addaction name="ViewLayoutTriple3DAction"/>
+     <addaction name="ViewLayoutOneUp3DAction"/>
+     <addaction name="ViewLayout3DTableAction"/>
+     <addaction name="ViewLayoutOneUpPlotAction"/>
+     <addaction name="ViewLayoutOneUpRedSliceAction"/>
+     <addaction name="ViewLayoutOneUpYellowSliceAction"/>
+     <addaction name="ViewLayoutOneUpGreenSliceAction"/>
+     <addaction name="ViewLayoutTabbed3DAction"/>
+     <addaction name="ViewLayoutTabbedSliceAction"/>
+     <addaction name="ViewLayoutCompareAction"/>
+     <addaction name="ViewLayoutCompareWidescreenAction"/>
+     <addaction name="ViewLayoutCompareGridAction"/>
+     <addaction name="ViewLayoutThreeOverThreeAction"/>
+     <addaction name="ViewLayoutThreeOverThreePlotAction"/>
+     <addaction name="ViewLayoutFourOverFourAction"/>
+     <addaction name="ViewLayoutTwoOverTwoAction"/>
+     <addaction name="ViewLayoutSideBySideAction"/>
+     <addaction name="ViewLayoutFourByThreeSliceAction"/>
+     <addaction name="ViewLayoutFourByTwoSliceAction"/>
+     <addaction name="ViewLayoutThreeByThreeSliceAction"/>
+     <addaction name="ViewLayoutDualMonitorFourUpViewAction"/>
     </widget>
     <widget class="QMenu" name="WindowToolBarsMenu">
      <property name="title">
-      <string>&amp;工具栏</string>
+      <string>&amp;Toolbars</string>
      </property>
     </widget>
     <widget class="QMenu" name="AppearanceMenu">
      <property name="title">
-      <string>&amp;外观</string>
+      <string>&amp;Appearance</string>
      </property>
-     <addaction name="ShowStatusBarAction" />
-     <addaction name="separator" />
-     <addaction name="WindowToolbarsResetToDefaultAction" />
+     <addaction name="ShowStatusBarAction"/>
+     <addaction name="separator"/>
+     <addaction name="WindowToolbarsResetToDefaultAction"/>
     </widget>
-    <addaction name="LayoutMenu" />
-    <addaction name="WindowToolBarsMenu" />
-    <addaction name="AppearanceMenu" />
-    <addaction name="separator" />
-    <addaction name="ViewExtensionsManagerAction" />
-    <addaction name="ModuleHomeAction" />
-    <addaction name="separator" />
+    <addaction name="LayoutMenu"/>
+    <addaction name="WindowToolBarsMenu"/>
+    <addaction name="AppearanceMenu"/>
+    <addaction name="separator"/>
+    <addaction name="ViewExtensionsManagerAction"/>
+    <addaction name="ModuleHomeAction"/>
+    <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="HelpMenu">
     <property name="title">
-     <string>&amp;帮助</string>
+     <string>&amp;Help</string>
     </property>
    </widget>
-   <addaction name="FileMenu" />
-   <addaction name="EditMenu" />
-   <addaction name="ViewMenu" />
-   <addaction name="HelpMenu" />
+   <addaction name="FileMenu"/>
+   <addaction name="EditMenu"/>
+   <addaction name="ViewMenu"/>
+   <addaction name="HelpMenu"/>
   </widget>
   <action name="FileLoadSceneAction">
    <property name="icon">
@@ -311,10 +312,10 @@
      <normaloff>:/Icons/Small/SlicerLoadScene.png</normaloff>:/Icons/Small/SlicerLoadScene.png</iconset>
    </property>
    <property name="text">
-    <string>加载场景</string>
+    <string>Load Scene</string>
    </property>
    <property name="toolTip">
-    <string>打开文件浏览器以选择要加载的场景（mrml、xcat 或 xml）。它首先清除 Slicer 中的任何现有场景并重置应用程序状态。</string>
+    <string>Raise a file browser to select a scene (mrml, xcat or xml) to load. It first clears any existing scene in Slicer and resets the application state.</string>
    </property>
   </action>
   <action name="FileLoadDataAction">
@@ -323,10 +324,10 @@
      <normaloff>:/Icons/Small/SlicerLoadData.png</normaloff>:/Icons/Small/SlicerLoadData.png</iconset>
    </property>
    <property name="text">
-    <string>加载数据</string>
+    <string>Load Data</string>
    </property>
    <property name="toolTip">
-    <string>打开一个“添加数据”小部件，允许您选择单个数据集以添加到现有场景中。当您想要一次加载许多不同的数据类型（体积、模型等）时，此加载选项最为有用，这些数据类型可能尚未由场景文件描述。</string>
+    <string>Raise an &quot;Add Data&quot; widget that allows you to select individual datasets to add to the existing scene. This load option is most useful when you want to load many different data types at once (volumes, models, etc.) which may not yet be described by a scene file.</string>
    </property>
   </action>
   <action name="LoadDICOMAction">
@@ -335,10 +336,10 @@
      <normaloff>:/Icons/Small/SlicerLoadDICOM.png</normaloff>:/Icons/Small/SlicerLoadDICOM.png</iconset>
    </property>
    <property name="text">
-    <string>加载 DICOM</string>
+    <string>Load DICOM</string>
    </property>
    <property name="toolTip">
-    <string>打开 DICOM 模块以加载 DICOM 数据集。</string>
+    <string>Raise the DICOM module for loading DICOM datasets.</string>
    </property>
    <property name="visible">
     <bool>false</bool>
@@ -350,10 +351,10 @@
      <normaloff>:/Icons/Medium/SlicerAddScene.png</normaloff>:/Icons/Medium/SlicerAddScene.png</iconset>
    </property>
    <property name="text">
-    <string>导入场景</string>
+    <string>Import Scene</string>
    </property>
    <property name="toolTip">
-    <string>打开文件浏览器以导航并选择要添加到现有场景的场景文件。场景不会被清除。</string>
+    <string>Raise a file browser to navigate and select a scene file to be added to the existing scene. The scene is not cleared.</string>
    </property>
   </action>
   <action name="FileAddDataAction">
@@ -362,10 +363,10 @@
      <normaloff>:/Icons/Small/SlicerLoadData.png</normaloff>:/Icons/Small/SlicerLoadData.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;添加数据</string>
+    <string>&amp;Add Data</string>
    </property>
    <property name="toolTip">
-    <string>打开一个“添加数据”小部件，允许您选择单个数据集以添加到现有场景中。当您想要一次加载许多不同的数据类型（体积、模型等）时，此加载选项最为有用，这些数据类型可能尚未由场景文件描述。</string>
+    <string>Raise an &quot;Add Data&quot; widget that allows you to select individual datasets to add to the existing scene. This load option is most useful when you want to load many different data types at once (volumes, models, etc.) which may not yet be described by a scene file.</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
@@ -377,10 +378,10 @@
      <normaloff>:/Icons/Medium/SlicerAddVolume.png</normaloff>:/Icons/Medium/SlicerAddVolume.png</iconset>
    </property>
    <property name="text">
-    <string>添加体积</string>
+    <string>Add Volume</string>
    </property>
    <property name="toolTip">
-    <string>打开一个“添加体积”小部件，允许您选择一个体积数据集以添加到现有场景中。“体积选项”面板可用于明确如何加载和显示所选数据集。</string>
+    <string>Raise an &quot;Add Volume&quot; widget that allows you to select a volumetric dataset to add to the existing scene. The &quot;Volume Options&quot; panel can be used to clarify how a selected dataset should be loaded and displayed.</string>
    </property>
   </action>
   <action name="FileAddTransformAction">
@@ -389,10 +390,10 @@
      <normaloff>:/Icons/Medium/SlicerAddTransform.png</normaloff>:/Icons/Medium/SlicerAddTransform.png</iconset>
    </property>
    <property name="text">
-    <string>添加变换</string>
+    <string>Add Transform</string>
    </property>
    <property name="toolTip">
-    <string>打开一个标准文件浏览器，允许您选择一个变换以添加到现有场景中。</string>
+    <string>Raise a standard file browser that allows you to select a transform to the existing scene.</string>
    </property>
   </action>
   <action name="FileSaveSceneAction">
@@ -401,10 +402,10 @@
      <normaloff>:/Icons/Small/SlicerSave.png</normaloff>:/Icons/Small/SlicerSave.png</iconset>
    </property>
    <property name="text">
-    <string>保存数据</string>
+    <string>Save Data</string>
    </property>
    <property name="toolTip">
-    <string>显示“保存数据”小部件，提供许多保存场景和/或单个数据集的选项。</string>
+    <string>Display the &quot;Save Data&quot; widget, which offers many options for saving a scene and/or individual datasets.</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
@@ -416,10 +417,10 @@
      <normaloff>:/Icons/Small/SlicerSave.png</normaloff>:/Icons/Small/SlicerSave.png</iconset>
    </property>
    <property name="text">
-    <string>保存场景到目录</string>
+    <string>Save Scene To Directory</string>
    </property>
    <property name="toolTip">
-    <string>正在建设中：将当前场景保存到一个独立的目录。</string>
+    <string>UNDER CONSTRUCTION: Save the current scene to a stand alone directory.</string>
    </property>
   </action>
   <action name="SDBSaveToMRBAction">
@@ -428,10 +429,10 @@
      <normaloff>:/Icons/Small/SlicerSave.png</normaloff>:/Icons/Small/SlicerSave.png</iconset>
    </property>
    <property name="text">
-    <string>保存场景到 MRB 文件</string>
+    <string>Save Scene to MRB File</string>
    </property>
    <property name="toolTip">
-    <string>创建一个包含场景的医学现实包。</string>
+    <string>Create a Medical Reality Bundle containing the scene.</string>
    </property>
   </action>
   <action name="FileCloseSceneAction">
@@ -440,10 +441,10 @@
      <normaloff>:/Icons/Small/SlicerCloseScene.png</normaloff>:/Icons/Small/SlicerCloseScene.png</iconset>
    </property>
    <property name="text">
-    <string>关闭场景</string>
+    <string>Close Scene</string>
    </property>
    <property name="toolTip">
-    <string>关闭当前场景并重置应用程序状态。 </string>
+    <string>Close the current scene and reset the application state. </string>
    </property>
    <property name="shortcut">
     <string>Ctrl+W</string>
@@ -451,10 +452,10 @@
   </action>
   <action name="FileExitAction">
    <property name="text">
-    <string>退出</string>
+    <string>E&amp;xit</string>
    </property>
    <property name="toolTip">
-    <string>退出应用程序</string>
+    <string>Quit the application</string>
    </property>
   </action>
   <action name="EditUndoAction">
@@ -463,10 +464,10 @@
      <normaloff>:/Icons/Small/SlicerUndo.png</normaloff>:/Icons/Small/SlicerUndo.png</iconset>
    </property>
    <property name="text">
-    <string>撤销</string>
+    <string>Undo</string>
    </property>
    <property name="toolTip">
-    <string>撤销可撤销命令的历史，从最后到第一个。</string>
+    <string>Undo the history of undoable commands, from last to first.</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Z</string>
@@ -478,10 +479,10 @@
      <normaloff>:/Icons/Small/SlicerRedo.png</normaloff>:/Icons/Small/SlicerRedo.png</iconset>
    </property>
    <property name="text">
-    <string>重做</string>
+    <string>Redo</string>
    </property>
    <property name="toolTip">
-    <string>重做最近撤销的命令历史，从最后到第一个。</string>
+    <string>Redo the history of commands most recently undone, from last to first.</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Y</string>
@@ -493,10 +494,10 @@
      <normaloff>:/Icons/ExtensionDefaultIcon.png</normaloff>:/Icons/ExtensionDefaultIcon.png</iconset>
    </property>
    <property name="text">
-    <string>扩展管理器</string>
+    <string>Extensions Manager</string>
    </property>
    <property name="toolTip">
-    <string>打开“扩展管理器”向导，提供有关可用扩展的状态和信息</string>
+    <string>Raise the &quot;Extensions Manager&quot; wizard that provides status and information about available extensions</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+4</string>
@@ -504,18 +505,18 @@
   </action>
   <action name="ViewCacheRemoteIOManagerAction">
    <property name="text">
-    <string>缓存 &amp; 远程 I/O 管理器</string>
+    <string>Cache &amp; Remote I/O Manager</string>
    </property>
    <property name="toolTip">
-    <string>缓存和远程数据处理接口提供有关所有远程数据传输的状态和信息，并允许对本地缓存进行一些控制。</string>
+    <string>The Cache and Remote Data Handling interface provides status and information about all remote data transfers, and allows some control over the local cache.</string>
    </property>
   </action>
   <action name="FileFavoriteModulesAction">
    <property name="text">
-    <string>收藏模块</string>
+    <string>Favorite Modules</string>
    </property>
    <property name="toolTip">
-    <string>打开设置到模块面板，在那里可以定义收藏模块。</string>
+    <string>Open settings to the Modules panel where Favorite Modules can be defined.</string>
    </property>
   </action>
   <action name="EditApplicationSettingsAction">
@@ -524,10 +525,10 @@
      <normaloff>:/Images/SlicerAdvancedGear-Original.png</normaloff>:/Images/SlicerAdvancedGear-Original.png</iconset>
    </property>
    <property name="text">
-    <string>应用程序设置</string>
+    <string>Application Settings</string>
    </property>
    <property name="toolTip">
-    <string>应用程序设置提供控制应用程序用户界面首选项的选项，以便在会话之间保留。</string>
+    <string>The Application Settings provides options for controlling the application's user interface preferences into the application registry, so they are preserved across sessions.</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+2</string>
@@ -539,10 +540,10 @@
      <normaloff>:/Icons/Small/SlicerEditCut.png</normaloff>:/Icons/Small/SlicerEditCut.png</iconset>
    </property>
    <property name="text">
-    <string>剪切</string>
+    <string>Cut</string>
    </property>
    <property name="toolTip">
-    <string>剪切当前选定的项目并放入剪贴板</string>
+    <string>Cut currently selected item and place in clipboard</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+X</string>
@@ -554,10 +555,10 @@
      <normaloff>:/Icons/Small/SlicerEditCopy.png</normaloff>:/Icons/Small/SlicerEditCopy.png</iconset>
    </property>
    <property name="text">
-    <string>复制</string>
+    <string>Copy</string>
    </property>
    <property name="toolTip">
-    <string>复制当前选定的项目到剪贴板</string>
+    <string>Copy currently selected item to clipboard</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+C</string>
@@ -569,10 +570,10 @@
      <normaloff>:/Icons/Small/SlicerEditPaste.png</normaloff>:/Icons/Small/SlicerEditPaste.png</iconset>
    </property>
    <property name="text">
-    <string>粘贴</string>
+    <string>Paste</string>
    </property>
    <property name="toolTip">
-    <string>粘贴剪贴板的当前内容</string>
+    <string>Paste the current contents of the clipboard</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+V</string>
@@ -586,10 +587,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>&amp;最大化视图</string>
+    <string>&amp;Maximize view</string>
    </property>
    <property name="toolTip">
-    <string>最大化/最小化当前视图。</string>
+    <string>Maximize/Minimize the current view.</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+6</string>
@@ -597,23 +598,23 @@
   </action>
   <action name="FeedbackReportUsabilityIssueAction">
    <property name="text">
-    <string>反馈：报告可用性问题 (www)</string>
+    <string>Feedback: report usability issue (www)</string>
    </property>
    <property name="toolTip">
-    <string>在 Slicer 论坛 (https://discourse.slicer.org) 创建一个主题以报告任何可用性问题并提出解决建议。</string>
+    <string>Create a topic at the Slicer forum (https://discourse.slicer.org) to report any usability issues and make suggestions how to address them.</string>
    </property>
   </action>
   <action name="FeedbackMakeFeatureRequestAction">
    <property name="text">
-    <string>反馈：提出功能请求 (www)</string>
+    <string>Feedback: make a feature request (www)</string>
    </property>
    <property name="toolTip">
-    <string>在 Slicer 论坛 (https://discourse.slicer.org) 创建一个主题以请求新功能。</string>
+    <string>Create a topic at the Slicer forum (https://discourse.slicer.org) to request a new feature.</string>
    </property>
   </action>
   <action name="DebugLoadModuleAction">
    <property name="text">
-    <string>加载模块</string>
+    <string>Load Module</string>
    </property>
   </action>
   <action name="ViewLayoutConventionalAction">
@@ -622,7 +623,7 @@
      <normaloff>:/Icons/LayoutConventionalView.png</normaloff>:/Icons/LayoutConventionalView.png</iconset>
    </property>
    <property name="text">
-    <string>常规</string>
+    <string>Conventional</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
@@ -634,7 +635,7 @@
      <normaloff>:/Icons/LayoutFourUpView.png</normaloff>:/Icons/LayoutFourUpView.png</iconset>
    </property>
    <property name="text">
-    <string>四分屏</string>
+    <string>Four-Up</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
@@ -646,7 +647,7 @@
      <normaloff>:/Icons/LayoutDual3DView.png</normaloff>:/Icons/LayoutDual3DView.png</iconset>
    </property>
    <property name="text">
-    <string>双 3D</string>
+    <string>Dual 3D</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
@@ -658,7 +659,7 @@
      <normaloff>:/Icons/LayoutOneUp3DView.png</normaloff>:/Icons/LayoutOneUp3DView.png</iconset>
    </property>
    <property name="text">
-    <string>仅 3D</string>
+    <string>3D only</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
@@ -670,7 +671,7 @@
      <normaloff>:/Icons/Layout3DTableView.png</normaloff>:/Icons/Layout3DTableView.png</iconset>
    </property>
    <property name="text">
-    <string>3D 表格</string>
+    <string>3D Table</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
@@ -682,7 +683,7 @@
      <normaloff>:/Icons/LayoutOneUpRedSliceView.png</normaloff>:/Icons/LayoutOneUpRedSliceView.png</iconset>
    </property>
    <property name="text">
-    <string>仅红色切片</string>
+    <string>Red slice only</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
@@ -694,7 +695,7 @@
      <normaloff>:/Icons/LayoutOneUpYellowSliceView.png</normaloff>:/Icons/LayoutOneUpYellowSliceView.png</iconset>
    </property>
    <property name="text">
-    <string>仅黄色切片</string>
+    <string>Yellow slice only</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
@@ -706,7 +707,7 @@
      <normaloff>:/Icons/LayoutOneUpGreenSliceView.png</normaloff>:/Icons/LayoutOneUpGreenSliceView.png</iconset>
    </property>
    <property name="text">
-    <string>仅绿色切片</string>
+    <string>Green slice only</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
@@ -718,7 +719,7 @@
      <normaloff>:/Icons/LayoutTabbed3DView.png</normaloff>:/Icons/LayoutTabbed3DView.png</iconset>
    </property>
    <property name="text">
-    <string>标签 3D</string>
+    <string>Tabbed 3D</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
@@ -730,7 +731,7 @@
      <normaloff>:/Icons/LayoutTabbedSliceView.png</normaloff>:/Icons/LayoutTabbedSliceView.png</iconset>
    </property>
    <property name="text">
-    <string>标签切片</string>
+    <string>Tabbed slice</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
@@ -742,7 +743,7 @@
      <normaloff>:/Icons/LayoutCompareView.png</normaloff>:/Icons/LayoutCompareView.png</iconset>
    </property>
    <property name="text">
-    <string>比较</string>
+    <string>Compare</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
@@ -754,10 +755,10 @@
      <normaloff>:/Icons/LayoutSideBySideCompareView.png</normaloff>:/Icons/LayoutSideBySideCompareView.png</iconset>
    </property>
    <property name="text">
-    <string>比较宽屏</string>
+    <string>Compare Widescreen</string>
    </property>
    <property name="toolTip">
-    <string>比较宽屏</string>
+    <string>Compare Widescreen</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
@@ -769,10 +770,10 @@
      <normaloff>:/Icons/LayoutTwoOverTwoView.png</normaloff>:/Icons/LayoutTwoOverTwoView.png</iconset>
    </property>
    <property name="text">
-    <string>二比二</string>
+    <string>Two over two</string>
    </property>
    <property name="toolTip">
-    <string>二比二布局</string>
+    <string>Two over Two Layout</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
@@ -784,10 +785,10 @@
      <normaloff>:/Icons/Medium/SlicerHome.png</normaloff>:/Icons/Medium/SlicerHome.png</iconset>
    </property>
    <property name="text">
-    <string>首页</string>
+    <string>Home</string>
    </property>
    <property name="toolTip">
-    <string>收藏模块以便于访问</string>
+    <string>Favorite module for easy access</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+H</string>
@@ -802,7 +803,7 @@
      <normaloff>:/Icons/LayoutConventionalWidescreenView.png</normaloff>:/Icons/LayoutConventionalWidescreenView.png</iconset>
    </property>
    <property name="text">
-    <string>常规宽屏</string>
+    <string>Conventional Widescreen</string>
    </property>
   </action>
   <action name="ViewLayoutTriple3DAction">
@@ -811,7 +812,7 @@
      <normaloff>:/Icons/LayoutTriple3DView.png</normaloff>:/Icons/LayoutTriple3DView.png</iconset>
    </property>
    <property name="text">
-    <string>三重 3D</string>
+    <string>Triple 3D</string>
    </property>
   </action>
   <action name="ViewLayoutThreeOverThreeAction">
@@ -820,7 +821,7 @@
      <normaloff>:/Icons/LayoutThreeOverThreeView.png</normaloff>:/Icons/LayoutThreeOverThreeView.png</iconset>
    </property>
    <property name="text">
-    <string>三比三</string>
+    <string>Three over three</string>
    </property>
   </action>
   <action name="ViewLayoutFourOverFourAction">
@@ -829,7 +830,7 @@
      <normaloff>:/Icons/LayoutFourOverFourView.png</normaloff>:/Icons/LayoutFourOverFourView.png</iconset>
    </property>
    <property name="text">
-    <string>四比四</string>
+    <string>Four over four</string>
    </property>
   </action>
   <action name="ViewLayoutCompare_2_viewersAction">
@@ -838,7 +839,7 @@
      <normaloff>:/Icons/LayoutCompareView.png</normaloff>:/Icons/LayoutCompareView.png</iconset>
    </property>
    <property name="text">
-    <string>2 个查看器</string>
+    <string>2 viewers</string>
    </property>
   </action>
   <action name="ViewLayoutCompare_3_viewersAction">
@@ -847,7 +848,7 @@
      <normaloff>:/Icons/LayoutCompareView.png</normaloff>:/Icons/LayoutCompareView.png</iconset>
    </property>
    <property name="text">
-    <string>3 个查看器</string>
+    <string>3 viewers</string>
    </property>
   </action>
   <action name="ViewLayoutCompare_4_viewersAction">
@@ -856,7 +857,7 @@
      <normaloff>:/Icons/LayoutCompareView.png</normaloff>:/Icons/LayoutCompareView.png</iconset>
    </property>
    <property name="text">
-    <string>4 个查看器</string>
+    <string>4 viewers</string>
    </property>
   </action>
   <action name="ViewLayoutCompare_5_viewersAction">
@@ -865,7 +866,7 @@
      <normaloff>:/Icons/LayoutCompareView.png</normaloff>:/Icons/LayoutCompareView.png</iconset>
    </property>
    <property name="text">
-    <string>5 个查看器</string>
+    <string>5 viewers</string>
    </property>
   </action>
   <action name="ViewLayoutCompare_6_viewersAction">
@@ -874,7 +875,7 @@
      <normaloff>:/Icons/LayoutCompareView.png</normaloff>:/Icons/LayoutCompareView.png</iconset>
    </property>
    <property name="text">
-    <string>6 个查看器</string>
+    <string>6 viewers</string>
    </property>
   </action>
   <action name="ViewLayoutCompare_7_viewersAction">
@@ -883,7 +884,7 @@
      <normaloff>:/Icons/LayoutCompareView.png</normaloff>:/Icons/LayoutCompareView.png</iconset>
    </property>
    <property name="text">
-    <string>7 个查看器</string>
+    <string>7 viewers</string>
    </property>
   </action>
   <action name="ViewLayoutCompare_8_viewersAction">
@@ -892,7 +893,7 @@
      <normaloff>:/Icons/LayoutCompareView.png</normaloff>:/Icons/LayoutCompareView.png</iconset>
    </property>
    <property name="text">
-    <string>8 个查看器</string>
+    <string>8 viewers</string>
    </property>
   </action>
   <action name="ViewLayoutCompareWidescreen_2_viewersAction">
@@ -901,7 +902,7 @@
      <normaloff>:/Icons/LayoutSideBySideCompareView.png</normaloff>:/Icons/LayoutSideBySideCompareView.png</iconset>
    </property>
    <property name="text">
-    <string>2 个查看器</string>
+    <string>2 viewers</string>
    </property>
   </action>
   <action name="ViewLayoutCompareWidescreen_3_viewersAction">
@@ -910,7 +911,7 @@
      <normaloff>:/Icons/LayoutSideBySideCompareView.png</normaloff>:/Icons/LayoutSideBySideCompareView.png</iconset>
    </property>
    <property name="text">
-    <string>3 个查看器</string>
+    <string>3 viewers</string>
    </property>
   </action>
   <action name="ViewLayoutCompareWidescreen_4_viewersAction">
@@ -919,7 +920,7 @@
      <normaloff>:/Icons/LayoutSideBySideCompareView.png</normaloff>:/Icons/LayoutSideBySideCompareView.png</iconset>
    </property>
    <property name="text">
-    <string>4 个查看器</string>
+    <string>4 viewers</string>
    </property>
   </action>
   <action name="ViewLayoutCompareWidescreen_5_viewersAction">
@@ -928,7 +929,7 @@
      <normaloff>:/Icons/LayoutSideBySideCompareView.png</normaloff>:/Icons/LayoutSideBySideCompareView.png</iconset>
    </property>
    <property name="text">
-    <string>5 个查看器</string>
+    <string>5 viewers</string>
    </property>
   </action>
   <action name="ViewLayoutCompareWidescreen_6_viewersAction">
@@ -937,7 +938,7 @@
      <normaloff>:/Icons/LayoutSideBySideCompareView.png</normaloff>:/Icons/LayoutSideBySideCompareView.png</iconset>
    </property>
    <property name="text">
-    <string>6 个查看器</string>
+    <string>6 viewers</string>
    </property>
   </action>
   <action name="ViewLayoutCompareWidescreen_7_viewersAction">
@@ -946,7 +947,7 @@
      <normaloff>:/Icons/LayoutSideBySideCompareView.png</normaloff>:/Icons/LayoutSideBySideCompareView.png</iconset>
    </property>
    <property name="text">
-    <string>7 个查看器</string>
+    <string>7 viewers</string>
    </property>
   </action>
   <action name="ViewLayoutCompareWidescreen_8_viewersAction">
@@ -955,7 +956,7 @@
      <normaloff>:/Icons/LayoutSideBySideCompareView.png</normaloff>:/Icons/LayoutSideBySideCompareView.png</iconset>
    </property>
    <property name="text">
-    <string>8 个查看器</string>
+    <string>8 viewers</string>
    </property>
   </action>
   <action name="ViewLayoutCompareGridAction">
@@ -964,7 +965,7 @@
      <normaloff>:/Icons/LayoutCompareViewGrid.png</normaloff>:/Icons/LayoutCompareViewGrid.png</iconset>
    </property>
    <property name="text">
-    <string>比较网格</string>
+    <string>Compare Grid</string>
    </property>
   </action>
   <action name="ViewLayoutCompareGrid_2x2_viewersAction">
@@ -973,7 +974,7 @@
      <normaloff>:/Icons/LayoutCompareViewGrid.png</normaloff>:/Icons/LayoutCompareViewGrid.png</iconset>
    </property>
    <property name="text">
-    <string>2x2 个查看器</string>
+    <string>2x2 viewers</string>
    </property>
   </action>
   <action name="ViewLayoutCompareGrid_3x3_viewersAction">
@@ -982,7 +983,7 @@
      <normaloff>:/Icons/LayoutCompareViewGrid.png</normaloff>:/Icons/LayoutCompareViewGrid.png</iconset>
    </property>
    <property name="text">
-    <string>3x3 个查看器</string>
+    <string>3x3 viewers</string>
    </property>
   </action>
   <action name="ViewLayoutCompareGrid_4x4_viewersAction">
@@ -991,12 +992,12 @@
      <normaloff>:/Icons/LayoutCompareViewGrid.png</normaloff>:/Icons/LayoutCompareViewGrid.png</iconset>
    </property>
    <property name="text">
-    <string>4x4 个查看器</string>
+    <string>4x4 viewers</string>
    </property>
   </action>
   <action name="EditRecordMacroAction">
    <property name="text">
-    <string>录制宏</string>
+    <string>Record Macro</string>
    </property>
    <property name="visible">
     <bool>false</bool>
@@ -1004,7 +1005,7 @@
   </action>
   <action name="EditPlayMacroAction">
    <property name="text">
-    <string>播放宏</string>
+    <string>Play Macro</string>
    </property>
    <property name="visible">
     <bool>false</bool>
@@ -1016,7 +1017,7 @@
      <normaloff>:/Icons/LayoutSideBySideView.png</normaloff>:/Icons/LayoutSideBySideView.png</iconset>
    </property>
    <property name="text">
-    <string>并排</string>
+    <string>Side by side</string>
    </property>
   </action>
   <action name="ViewLayoutFourByThreeSliceAction">
@@ -1025,10 +1026,10 @@
      <normaloff>:/Icons/LayoutFourByThreeSliceView.png</normaloff>:/Icons/LayoutFourByThreeSliceView.png</iconset>
    </property>
    <property name="text">
-    <string>四比三切片</string>
+    <string>Four by three slice</string>
    </property>
    <property name="toolTip">
-    <string>四比三切片</string>
+    <string>Four by three slice</string>
    </property>
   </action>
   <action name="ViewLayoutFourByTwoSliceAction">
@@ -1037,10 +1038,10 @@
      <normaloff>:/Icons/LayoutFourByTwoSliceView.png</normaloff>:/Icons/LayoutFourByTwoSliceView.png</iconset>
    </property>
    <property name="text">
-    <string>四比二切片</string>
+    <string>Four by two slice</string>
    </property>
    <property name="toolTip">
-    <string>四比二切片</string>
+    <string>Four by two slice</string>
    </property>
   </action>
   <action name="ViewLayoutFiveByTwoSliceAction">
@@ -1049,10 +1050,10 @@
      <normaloff>:/Icons/LayoutFiveByTwoSliceView.png</normaloff>:/Icons/LayoutFiveByTwoSliceView.png</iconset>
    </property>
    <property name="text">
-    <string>五比二切片</string>
+    <string>Five by two slice</string>
    </property>
    <property name="toolTip">
-    <string>五比二切片</string>
+    <string>Five by two slice</string>
    </property>
   </action>
   <action name="ViewLayoutThreeByThreeSliceAction">
@@ -1061,10 +1062,10 @@
      <normaloff>:/Icons/LayoutThreeByThreeSliceView.png</normaloff>:/Icons/LayoutThreeByThreeSliceView.png</iconset>
    </property>
    <property name="text">
-    <string>三比三切片</string>
+    <string>Three by three slice</string>
    </property>
    <property name="toolTip">
-    <string>三比三切片</string>
+    <string>Three by three slice</string>
    </property>
   </action>
   <action name="ViewLayoutDualMonitorFourUpViewAction">
@@ -1073,10 +1074,10 @@
      <normaloff>:/Icons/LayoutDualMonitorFourUpView.png</normaloff>:/Icons/LayoutDualMonitorFourUpView.png</iconset>
    </property>
    <property name="text">
-    <string>双监视器四分屏</string>
+    <string>Dual-monitor Four-Up</string>
    </property>
    <property name="toolTip">
-    <string>双监视器四分屏</string>
+    <string>Dual-monitor Four-Up</string>
    </property>
   </action>
   <action name="ViewLayoutOneUpPlotAction">
@@ -1085,10 +1086,10 @@
      <normaloff>:/Icons/LayoutOneUpQuantitativeView.png</normaloff>:/Icons/LayoutOneUpQuantitativeView.png</iconset>
    </property>
    <property name="text">
-    <string>仅绘图</string>
+    <string>Plot only</string>
    </property>
    <property name="toolTip">
-    <string>绘图视图</string>
+    <string>Plot view</string>
    </property>
    <property name="iconVisibleInMenu">
     <bool>true</bool>
@@ -1159,7 +1160,7 @@
   </action>
   <action name="WindowToolbarsResetToDefaultAction">
    <property name="text">
-    <string>重置为默认</string>
+    <string>Reset to default</string>
    </property>
   </action>
   <action name="ShowStatusBarAction">
@@ -1170,7 +1171,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>显示状态栏</string>
+    <string>Show Status Bar</string>
    </property>
   </action>
  </widget>
@@ -1205,8 +1206,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../../QTGUI/Resources/qSlicerBaseQTGUI.qrc" />
-  <include location="../../../../Libs/MRML/Widgets/Resources/qMRMLWidgets.qrc" />
+  <include location="../../../QTGUI/Resources/qSlicerBaseQTGUI.qrc"/>
+  <include location="../../../../Libs/MRML/Widgets/Resources/qMRMLWidgets.qrc"/>
  </resources>
- <connections />
+ <connections/>
 </ui>

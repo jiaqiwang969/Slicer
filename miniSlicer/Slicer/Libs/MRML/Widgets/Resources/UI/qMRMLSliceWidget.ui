@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLSliceWidget</class>
  <widget class="qMRMLWidget" name="qMRMLSliceWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>qMRML切片小部件</string>
+   <string>qMRMLSliceWidget</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <property name="spacing">
@@ -108,7 +109,7 @@
    <header>qMRMLSliceView.h</header>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>qMRMLSliceWidget</sender>

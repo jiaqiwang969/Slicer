@@ -41,4 +41,8 @@ temp
 miniSlicer/build
 result
 develop
-script
+script/tmp_all
+script/temp
+
+# Do not ignore .env files
+!.env

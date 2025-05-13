@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLSceneFactoryWidget</class>
  <widget class="QWidget" name="SceneFactoryWidget">
@@ -10,20 +11,20 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>场景工厂</string>
+   <string>Scene Factory</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0" colspan="2">
     <widget class="QPushButton" name="NewSceneButton">
      <property name="text">
-      <string>新建场景</string>
+      <string>New Scene</string>
      </property>
     </widget>
    </item>
    <item row="1" column="0" colspan="2">
     <widget class="QPushButton" name="DeleteSceneButton">
      <property name="text">
-      <string>删除场景</string>
+      <string>Delete Scene</string>
      </property>
     </widget>
    </item>
@@ -40,7 +41,7 @@
       <bool>false</bool>
      </property>
      <property name="text">
-      <string>新建节点</string>
+      <string>New Node</string>
      </property>
     </widget>
    </item>
@@ -57,12 +58,12 @@
       <bool>false</bool>
      </property>
      <property name="text">
-      <string>删除节点</string>
+      <string>Delete Node</string>
      </property>
     </widget>
    </item>
   </layout>
  </widget>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

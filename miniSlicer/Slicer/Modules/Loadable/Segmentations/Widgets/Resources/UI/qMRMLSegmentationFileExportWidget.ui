@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLSegmentationFileExportWidget</class>
  <widget class="qMRMLWidget" name="qMRMLSegmentationFileExportWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>qMRML分割文件导出小部件</string>
+   <string>qMRMLSegmentationFileExportWidget</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <property name="leftMargin">
@@ -31,7 +32,7 @@
    <item row="3" column="0">
     <widget class="QLabel" name="VisibleSegmentsOnlyLabel">
      <property name="text">
-      <string>仅可见分割：</string>
+      <string>Visible segments only: </string>
      </property>
     </widget>
    </item>
@@ -41,7 +42,7 @@
       <enum>Qt::TabFocus</enum>
      </property>
      <property name="toolTip">
-      <string>调整导出模型的大小。导出模型中的点坐标将乘以此数字。默认情况下，Slicer 使用毫米作为坐标单位。</string>
+      <string>Adjust the exported model size. Point coordinates in the exported model will be multiplied by this number. By default Slicer uses millimeter unit for coordinates.</string>
      </property>
      <property name="decimals">
       <number>3</number>
@@ -68,7 +69,7 @@
      <item>
       <widget class="QCheckBox" name="UseColorTableValuesCheckBox">
        <property name="text">
-        <string />
+        <string/>
        </property>
       </widget>
      </item>
@@ -76,7 +77,7 @@
       <widget class="qMRMLNodeComboBox" name="ColorTableNodeSelector">
        <property name="nodeTypes">
         <stringlist notr="true">
-         <string>颜色表节点 (vtkMRMLColorTableNode)</string>
+         <string>vtkMRMLColorTableNode</string>
         </stringlist>
        </property>
        <property name="noneEnabled">
@@ -95,23 +96,23 @@
    <item row="2" column="0">
     <widget class="QLabel" name="DestinationFoldeLabel">
      <property name="text">
-      <string>目标文件夹：</string>
+      <string>Destination folder: </string>
      </property>
     </widget>
    </item>
    <item row="10" column="1">
     <widget class="QComboBox" name="CoordinateSystemComboBox">
      <property name="toolTip">
-      <string>输出模型的 XYZ 轴映射到 LPS（左后上）或 RAS（右前上）患者轴方向。LPS 更常用。</string>
+      <string>Output model XYZ axes are mapped to LPS (left-posterior-superior) or RAS (right-anterior-superior) patient axis directions. LPS is used more commonly.</string>
      </property>
      <item>
       <property name="text">
-       <string>LPS（左后上）</string>
+       <string>LPS</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>RAS（右前上）</string>
+       <string>RAS</string>
       </property>
      </item>
     </widget>
@@ -119,21 +120,21 @@
    <item row="12" column="0">
     <widget class="QLabel" name="UseColorTableValuesLabel">
      <property name="text">
-      <string>使用颜色表值：</string>
+      <string>Use color table values:</string>
      </property>
     </widget>
    </item>
    <item row="5" column="0">
     <widget class="QLabel" name="FileFormatLabel">
      <property name="text">
-      <string>文件格式：</string>
+      <string>File format:</string>
      </property>
     </widget>
    </item>
    <item row="10" column="0">
     <widget class="QLabel" name="CoordinateSystemLabel">
      <property name="text">
-      <string>坐标系统：</string>
+      <string>Coordinate system: </string>
      </property>
     </widget>
    </item>
@@ -146,24 +147,24 @@
       </sizepolicy>
      </property>
      <property name="toolTip">
-      <string>仅导出当前可见的分割。</string>
+      <string>Only export those segments that are currently visible.</string>
      </property>
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
    <item row="7" column="0">
     <widget class="QLabel" name="MergeIntoSingleFileLabel">
      <property name="text">
-      <string>合并为单个文件：</string>
+      <string>Merge into single file:</string>
      </property>
     </widget>
    </item>
    <item row="15" column="0" colspan="2">
     <widget class="QPushButton" name="ExportToFilesButton">
      <property name="text">
-      <string>导出</string>
+      <string>Export</string>
      </property>
     </widget>
    </item>
@@ -176,10 +177,10 @@
       </sizepolicy>
      </property>
      <property name="toolTip">
-      <string>导出完成后打开目标文件夹。</string>
+      <string>Open destination folder when export is completed.</string>
      </property>
      <property name="text">
-      <string />
+      <string/>
      </property>
      <property name="checked">
       <bool>true</bool>
@@ -207,10 +208,10 @@
      <item>
       <widget class="QToolButton" name="ShowDestinationFolderButton">
        <property name="toolTip">
-        <string>浏览目标文件夹</string>
+        <string>Browse to destination folder</string>
        </property>
        <property name="text">
-        <string />
+        <string/>
        </property>
        <property name="icon">
         <iconset resource="../../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc">
@@ -223,7 +224,7 @@
    <item row="9" column="0">
     <widget class="QLabel" name="SizeScaleLabel">
      <property name="text">
-      <string>尺寸比例：</string>
+      <string>Size scale:</string>
      </property>
     </widget>
    </item>
@@ -235,10 +236,10 @@
         <bool>false</bool>
        </property>
        <property name="toolTip">
-        <string>将所有分割导出到单个 OBJ 文件。对于 OBJ 文件始终启用，因为可以根据材料区分分割。</string>
+        <string>Export all segments to a single OBJ file. It is always enabled for OBJ files, as segments can be distinguished based on their material.</string>
        </property>
        <property name="text">
-        <string />
+        <string/>
        </property>
        <property name="checked">
         <bool>true</bool>
@@ -254,10 +255,10 @@
         </sizepolicy>
        </property>
        <property name="toolTip">
-        <string>将所有分割导出到单个输出 STL 文件。</string>
+        <string>Export all segments to a single output STL file.</string>
        </property>
        <property name="text">
-        <string />
+        <string/>
        </property>
       </widget>
      </item>
@@ -266,7 +267,7 @@
    <item row="11" column="1">
     <widget class="QCheckBox" name="UseCompressionCheckBox">
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
@@ -274,22 +275,22 @@
     <widget class="QComboBox" name="FileFormatComboBox">
      <item>
       <property name="text">
-       <string>STL（立体光刻）</string>
+       <string>STL</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>OBJ（对象文件）</string>
+       <string>OBJ</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>NRRD（命名的原始数据）</string>
+       <string>NRRD</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>NIFTI（医学图像格式）</string>
+       <string>NIFTI</string>
       </property>
      </item>
     </widget>
@@ -297,21 +298,21 @@
    <item row="11" column="0">
     <widget class="QLabel" name="UseCompressionLabel">
      <property name="text">
-      <string>使用压缩：</string>
+      <string>Use compression:</string>
      </property>
     </widget>
    </item>
    <item row="13" column="0">
     <widget class="QLabel" name="ShowDestinationFolderOnExportCompleteLabel">
      <property name="text">
-      <string>显示目标文件夹：</string>
+      <string>Show destination folder:</string>
      </property>
     </widget>
    </item>
    <item row="4" column="0">
     <widget class="QLabel" name="ReferenceVolumeLabel">
      <property name="text">
-      <string>参考体积：</string>
+      <string>Reference volume:</string>
      </property>
     </widget>
    </item>
@@ -319,7 +320,7 @@
     <widget class="qMRMLNodeComboBox" name="ReferenceVolumeComboBox">
      <property name="nodeTypes">
       <stringlist notr="true">
-       <string>体积节点 (vtkMRMLVolumeNode)</string>
+       <string>vtkMRMLVolumeNode</string>
       </stringlist>
      </property>
      <property name="noneEnabled">
@@ -368,7 +369,7 @@
   <tabstop>ExportToFilesButton</tabstop>
  </tabstops>
  <resources>
-  <include location="../../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc" />
+  <include location="../../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc"/>
  </resources>
  <connections>
   <connection>

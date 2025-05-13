@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerMarkupsSettingsPanel</class>
  <widget class="ctkSettingsPanel" name="qSlicerMarkupsSettingsPanel">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>标记设置</string>
+   <string>Markups Settings</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
    <property name="fieldGrowthPolicy">
@@ -19,81 +20,81 @@
    <item row="0" column="0">
     <widget class="QLabel" name="defaultGlyphTypeLabel">
      <property name="text">
-      <string>默认符号类型：</string>
+      <string>Default glyph type:</string>
      </property>
     </widget>
    </item>
    <item row="0" column="1">
     <widget class="QComboBox" name="defaultGlyphTypeComboBox">
      <property name="toolTip">
-      <string>用于标记的符号</string>
+      <string>The symbol used for the markup</string>
      </property>
      <property name="currentIndex">
       <number>12</number>
      </property>
      <item>
       <property name="text">
-       <string>二维顶点</string>
+       <string>Vertex2D</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>二维虚线</string>
+       <string>Dash2D</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>二维交叉</string>
+       <string>Cross2D</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>粗交叉2D</string>
+       <string>ThickCross2D</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>二维三角形</string>
+       <string>Triangle2D</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>二维正方形</string>
+       <string>Square2D</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>二维圆形</string>
+       <string>Circle2D</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>二维菱形</string>
+       <string>Diamond2D</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>二维箭头</string>
+       <string>Arrow2D</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>粗箭头2D</string>
+       <string>ThickArrow2D</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>带钩箭头2D</string>
+       <string>HookedArrow2D</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>星形爆炸2D</string>
+       <string>StarBurst2D</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>三维球体</string>
+       <string>Sphere3D</string>
       </property>
      </item>
     </widget>
@@ -101,7 +102,7 @@
    <item row="1" column="0">
     <widget class="QLabel" name="defaultSelectedColorLabel">
      <property name="text">
-      <string>默认选中颜色：</string>
+      <string>Default selected color:</string>
      </property>
     </widget>
    </item>
@@ -125,7 +126,7 @@
    <item row="2" column="0">
     <widget class="QLabel" name="defaultUnselectedColorLabel">
      <property name="text">
-      <string>默认未选中颜色：</string>
+      <string>Default unselected color:</string>
      </property>
     </widget>
    </item>
@@ -149,14 +150,14 @@
    <item row="4" column="0">
     <widget class="QLabel" name="defaultGlyphScaleLabel">
      <property name="text">
-      <string>默认符号比例：</string>
+      <string>Default glyph scale:</string>
      </property>
     </widget>
    </item>
    <item row="4" column="1">
     <widget class="ctkSliderWidget" name="defaultGlyphScaleSliderWidget">
      <property name="toolTip">
-      <string>默认符号比例</string>
+      <string>Default glyph scale</string>
      </property>
      <property name="singleStep">
       <double>0.100000000000000</double>
@@ -172,14 +173,14 @@
    <item row="5" column="0">
     <widget class="QLabel" name="defaultTextScaleLabel">
      <property name="text">
-      <string>默认文本比例：</string>
+      <string>Default text scale:</string>
      </property>
     </widget>
    </item>
    <item row="5" column="1">
     <widget class="ctkSliderWidget" name="defaultTextScaleSliderWidget">
      <property name="toolTip">
-      <string>默认文本比例</string>
+      <string>Default text scale</string>
      </property>
      <property name="singleStep">
       <double>0.100000000000000</double>
@@ -195,7 +196,7 @@
    <item row="6" column="0">
     <widget class="QLabel" name="defaultOpacityLabel">
      <property name="text">
-      <string>默认不透明度：</string>
+      <string>Default opacity:</string>
      </property>
     </widget>
    </item>
@@ -215,7 +216,7 @@
    <item row="3" column="0">
     <widget class="QLabel" name="defaultActiveColorLabel">
      <property name="text">
-      <string>默认激活颜色：</string>
+      <string>Default active color:</string>
      </property>
     </widget>
    </item>
@@ -246,6 +247,6 @@
    <header>ctkSliderWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLPlotSeriesPropertiesWidget</class>
  <widget class="qMRMLWidget" name="qMRMLPlotSeriesPropertiesWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>绘图系列属性</string>
+   <string>Plot Series Properties</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
    <property name="fieldGrowthPolicy">
@@ -31,7 +32,7 @@
    <item row="1" column="0">
     <widget class="QLabel" name="InputTableLabel">
      <property name="text">
-      <string>输入表：</string>
+      <string>Input Table:</string>
      </property>
     </widget>
    </item>
@@ -41,11 +42,11 @@
       <bool>true</bool>
      </property>
      <property name="toolTip">
-      <string />
+      <string/>
      </property>
      <property name="nodeTypes">
       <stringlist notr="true">
-       <string>表节点 (vtkMRMLTableNode)</string>
+       <string>vtkMRMLTableNode</string>
       </stringlist>
      </property>
      <property name="showHidden">
@@ -71,33 +72,33 @@
    <item row="0" column="0">
     <widget class="QLabel" name="plotTypeLabel">
      <property name="text">
-      <string>绘图类型：</string>
+      <string>Plot Type:</string>
      </property>
     </widget>
    </item>
    <item row="0" column="1">
     <widget class="QComboBox" name="plotTypeComboBox">
      <property name="toolTip">
-      <string />
+      <string/>
      </property>
      <item>
       <property name="text">
-       <string>线</string>
+       <string>line</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>条形</string>
+       <string>bar</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>散点</string>
+       <string>scatter</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>散点条形</string>
+       <string>scatter bar</string>
       </property>
      </item>
     </widget>
@@ -105,74 +106,74 @@
    <item row="2" column="0">
     <widget class="QLabel" name="xAxisLabel">
      <property name="text">
-      <string>X 轴列：</string>
+      <string>X Axis Column:</string>
      </property>
     </widget>
    </item>
    <item row="2" column="1">
     <widget class="QComboBox" name="xAxisComboBox">
      <property name="toolTip">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
    <item row="3" column="0">
     <widget class="QLabel" name="yAxisLabel">
      <property name="text">
-      <string>Y 轴列：</string>
+      <string>Y Axis Column:</string>
      </property>
     </widget>
    </item>
    <item row="3" column="1">
     <widget class="QComboBox" name="yAxisComboBox">
      <property name="toolTip">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
    <item row="4" column="1">
     <widget class="QComboBox" name="labelsComboBox">
      <property name="toolTip">
-      <string>此列包含每个数据点的标签。当鼠标悬停在绘图视图中的数据点上时，标签会显示在工具提示中。</string>
+      <string>This column contains a label for each data point. Label is displayed in the tooltip when the mouse hovers over a data point in the plot view.</string>
      </property>
     </widget>
    </item>
    <item row="5" column="1">
     <widget class="QComboBox" name="markersStyleComboBox">
      <property name="toolTip">
-      <string />
+      <string/>
      </property>
      <property name="currentIndex">
       <number>0</number>
      </property>
      <item>
       <property name="text">
-       <string>无</string>
+       <string>none</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>交叉</string>
+       <string>cross</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>加号</string>
+       <string>plus</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>方形</string>
+       <string>square</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>圆形</string>
+       <string>circle</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>菱形</string>
+       <string>diamond</string>
       </property>
      </item>
     </widget>
@@ -187,36 +188,36 @@
    <item row="7" column="1">
     <widget class="QComboBox" name="lineStyleComboBox">
      <property name="toolTip">
-      <string />
+      <string/>
      </property>
      <item>
       <property name="text">
-       <string>无</string>
+       <string>none</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>实线</string>
+       <string>solid</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>虚线</string>
+       <string>dash</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>点线</string>
+       <string>dot</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>虚线-实线</string>
+       <string>dash-dot</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>虚线-点线</string>
+       <string>dash-dot-dot</string>
       </property>
      </item>
     </widget>
@@ -254,42 +255,42 @@
    <item row="4" column="0">
     <widget class="QLabel" name="labelsLabel">
      <property name="text">
-      <string>标签列：</string>
+      <string>Labels Column:</string>
      </property>
     </widget>
    </item>
    <item row="5" column="0">
     <widget class="QLabel" name="markerStyleLabel">
      <property name="text">
-      <string>标记样式：</string>
+      <string>Markers Style:</string>
      </property>
     </widget>
    </item>
    <item row="6" column="0">
     <widget class="QLabel" name="markersSizeLabel">
      <property name="text">
-      <string>标记大小：</string>
+      <string>Markers Size:</string>
      </property>
     </widget>
    </item>
    <item row="7" column="0">
     <widget class="QLabel" name="lineStyleLabel">
      <property name="text">
-      <string>线条样式：</string>
+      <string>Line Style:</string>
      </property>
     </widget>
    </item>
    <item row="8" column="0">
     <widget class="QLabel" name="lineWidthLabel">
      <property name="text">
-      <string>线条宽度：</string>
+      <string>Line Width:</string>
      </property>
     </widget>
    </item>
    <item row="9" column="0">
     <widget class="QLabel" name="plotSeriesColorLabel">
      <property name="text">
-      <string>颜色：</string>
+      <string>Color:</string>
      </property>
     </widget>
    </item>
@@ -319,7 +320,7 @@
    <header>ctkDoubleSpinBox.h</header>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>qMRMLPlotSeriesPropertiesWidget</sender>

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>CenterlineDisassembly</class>
  <widget class="qMRMLWidget" name="CenterlineDisassembly">
@@ -15,7 +16,7 @@
      <item row="0" column="0">
       <widget class="QLabel" name="parameterSetLabel">
        <property name="text">
-        <string>参数集：</string>
+        <string>Parameter set:</string>
        </property>
       </widget>
      </item>
@@ -25,21 +26,21 @@
         <bool>false</bool>
        </property>
        <property name="toolTip">
-        <string>参数集将定义特定命名研究的参数分组。</string>
+        <string>A parameter set groups parameters that define a named study distinctly.</string>
        </property>
        <property name="nodeTypes">
         <stringlist notr="true">
-         <string>脚本模块节点 (vtkMRMLScriptedModuleNode)</string>
+         <string>vtkMRMLScriptedModuleNode</string>
         </stringlist>
        </property>
        <property name="showHidden">
         <bool>true</bool>
        </property>
        <property name="hideChildNodeTypes">
-        <stringlist notr="true" />
+        <stringlist notr="true"/>
        </property>
        <property name="baseName">
-        <string notr="true">中心线拆解</string>
+        <string notr="true">CenterlineDisassembly</string>
        </property>
        <property name="noneEnabled">
         <bool>false</bool>
@@ -48,7 +49,7 @@
         <bool>true</bool>
        </property>
        <property name="interactionNodeSingletonTag">
-        <string notr="true" />
+        <string notr="true"/>
        </property>
        <property name="selectNodeUponCreation">
         <bool>true</bool>
@@ -60,13 +61,13 @@
    <item>
     <widget class="ctkCollapsibleButton" name="inputsCollapsibleButton">
      <property name="text">
-      <string>输入</string>
+      <string>Inputs</string>
      </property>
      <layout class="QFormLayout" name="formLayout">
       <item row="0" column="0">
        <widget class="QLabel" name="inputSectorLabel">
         <property name="text">
-         <string>中心线模型：</string>
+         <string>Centerline model:</string>
         </property>
        </widget>
       </item>
@@ -76,11 +77,11 @@
          <bool>true</bool>
         </property>
         <property name="toolTip">
-         <string>选择算法的输入。</string>
+         <string>Pick the input to the algorithm.</string>
         </property>
         <property name="nodeTypes">
          <stringlist notr="true">
-          <string>模型节点 (vtkMRMLModelNode)</string>
+          <string>vtkMRMLModelNode</string>
          </stringlist>
         </property>
         <property name="showChildNodeTypes">
@@ -109,14 +110,14 @@
       <item row="1" column="0">
        <widget class="QLabel" name="componentLabel">
         <property name="text">
-         <string>组件：</string>
+         <string>Component:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="ctkCheckableComboBox" name="componentCheckableComboBox">
         <property name="toolTip">
-         <string>选择输出组件。</string>
+         <string>Select the output components.</string>
         </property>
        </widget>
       </item>
@@ -147,10 +148,10 @@
         </sizepolicy>
        </property>
        <property name="toolTip">
-        <string>创建中心线模型</string>
+        <string>Create centerline models</string>
        </property>
        <property name="text">
-        <string>创建模型</string>
+        <string>Create models</string>
        </property>
        <property name="checkable">
         <bool>true</bool>
@@ -160,10 +161,12 @@
      <item>
       <widget class="ctkMenuButton" name="optionCreateCurvesMenuButton">
        <property name="toolTip">
-        <string>创建中心线曲线。\n\n在创建曲线时，可以通过菜单指定名称的可见性。</string>
+        <string>Create centerline curves.
+
+Upon curve creation, the visibility of the names can be specified via the menu.</string>
        </property>
        <property name="text">
-        <string>创建曲线</string>
+        <string>Create curves</string>
        </property>
        <property name="checkable">
         <bool>true</bool>
@@ -178,10 +181,10 @@
       <bool>true</bool>
      </property>
      <property name="toolTip">
-      <string>运行算法。</string>
+      <string>Run the algorithm.</string>
      </property>
      <property name="text">
-      <string>应用</string>
+      <string>Apply</string>
      </property>
     </widget>
    </item>
@@ -217,7 +220,7 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>CenterlineDisassembly</sender>

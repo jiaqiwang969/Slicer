@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerWelcomeModuleWidget</class>
  <widget class="qSlicerWidget" name="qSlicerWelcomeModuleWidget">
@@ -10,13 +11,13 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>欢迎</string>
+   <string>Welcome</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_12">
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>&amp;lt;html&amp;gt;&amp;lt;head/&amp;gt;&amp;lt;body&amp;gt;&amp;lt;p align="center"&amp;gt;&amp;lt;span style=" font-size:22pt; color:#afb7d5;"&amp;gt;欢迎&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:22pt; color:#afb7d5;&quot;&gt;Welcome&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </item>
@@ -55,10 +56,10 @@
         <item>
          <widget class="QPushButton" name="OpenExtensionsManagerButton">
           <property name="toolTip">
-           <string>打开“扩展管理器”向导，以查找、下载和安装 Slicer 扩展。&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;扩展是一个交付包，捆绑一个或多个 Slicer 模块。&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;安装扩展后，相关模块将在模块选择器中可用。</string>
+           <string>Raise the &quot;Extensions Manager&quot; wizard that allows to find, download and install Slicer extensions.&lt;br&gt;&lt;br&gt;An extension is a delivery package bundling together one or more Slicer modules.&lt;br&gt;&lt;br&gt;After installing an extension, the associated modules will be available in the module selector.</string>
           </property>
           <property name="text">
-           <string>安装扩展</string>
+           <string> Install Extensions</string>
           </property>
           <property name="icon">
            <iconset resource="../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc">
@@ -75,7 +76,7 @@
         <item>
          <widget class="QPushButton" name="LoadSampleDataButton">
           <property name="text">
-           <string>下载示例数据</string>
+           <string>Download Sample Data</string>
           </property>
           <property name="icon">
            <iconset resource="../qSlicerWelcomeModule.qrc">
@@ -96,7 +97,7 @@
         <item>
          <widget class="QPushButton" name="LoadNonDicomDataButton">
           <property name="text">
-           <string>添加数据</string>
+           <string>Add Data</string>
           </property>
           <property name="icon">
            <iconset resource="../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc">
@@ -107,7 +108,7 @@
         <item>
          <widget class="QPushButton" name="LoadDicomDataButton">
           <property name="text">
-           <string>添加 DICOM 数据</string>
+           <string>Add DICOM Data</string>
           </property>
           <property name="icon">
            <iconset resource="../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc">
@@ -120,7 +121,7 @@
       <item row="4" column="0">
        <widget class="QPushButton" name="EditApplicationSettingsButton">
         <property name="text">
-         <string>自定义 Slicer</string>
+         <string>Customize Slicer</string>
         </property>
         <property name="icon">
          <iconset resource="../qSlicerWelcomeModule.qrc">
@@ -137,7 +138,7 @@
       <item row="4" column="1">
        <widget class="QPushButton" name="ExploreLoadedDataPushButton">
         <property name="text">
-         <string>探索添加的数据</string>
+         <string>Explore Added Data</string>
         </property>
         <property name="icon">
          <iconset resource="../qSlicerWelcomeModule.qrc">
@@ -154,10 +155,10 @@
       <item row="1" column="0" colspan="2">
        <widget class="QPushButton" name="ApplicationUpdateAvailableButton">
         <property name="toolTip">
-         <string>有新版本的应用程序可用。点击按钮前往下载页面。</string>
+         <string>A new version of the application is available. Click the button to go to the download page.</string>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
@@ -183,7 +184,7 @@
    <item>
     <widget class="ctkCollapsibleButton" name="FeedbackCollapsibleWidget">
      <property name="text">
-      <string>反馈</string>
+      <string>Feedback</string>
      </property>
      <property name="collapsed">
       <bool>false</bool>
@@ -216,7 +217,11 @@
          <enum>Qt::ScrollBarAlwaysOff</enum>
         </property>
         <property name="html">
-         <string>&amp;lt;table border="0" align="center" cellspacing="0" cellpadding="5"&amp;gt;&amp;lt;tr&amp;gt;&amp;lt;td style=" vertical-align:middle;"&amp;gt;&amp;lt;p&amp;gt;&amp;lt;a href="https://discourse.slicer.org"&amp;gt;&amp;lt;img src="qrc:Icons/Chat.png" width="64" style="vertical-align: middle;" /&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;td style=" vertical-align:middle;"&amp;gt;&amp;lt;p&amp;gt;在 &amp;lt;a href="https://discourse.slicer.org"&amp;gt;Slicer 论坛&amp;lt;/a&amp;gt; 与我们分享您的故事，并告诉我们 3D Slicer 如何促进了您的研究。&amp;lt;/p&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&amp;lt;/table&amp;gt;&amp;lt;p&amp;gt;我们始终希望改进 3D Slicer，若您有问题或想提交错误报告，请打开 &amp;lt;b&amp;gt;帮助 -&amp;gt; 报告错误&amp;lt;/b&amp;gt;。&amp;lt;/p&amp;gt;</string>
+         <string>&lt;table border=&quot;0&quot; align=&quot;center&quot; cellspacing=&quot;0&quot; cellpadding=&quot;5&quot;&gt;&lt;tr&gt;
+&lt;td style=&quot; vertical-align:middle;&quot;&gt;&lt;p&gt;&lt;a href=&quot;https://discourse.slicer.org&quot;&gt;&lt;img src=&quot;qrc:Icons/Chat.png&quot; width=&quot;64&quot; style=&quot;vertical-align: middle;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td style=&quot; vertical-align:middle;&quot;&gt;&lt;p&gt;Share your stories with us on the &lt;a href=&quot;https://discourse.slicer.org&quot;&gt;Slicer forum&lt;/a&gt; and let us know about how 3D Slicer has enabled your research.&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;
+&lt;p&gt;We are always interested in improving 3D Slicer, to tell us about your problem or submit a bug report, open &lt;b&gt;Help -&amp;gt; Report a Bug&lt;/b&gt;.&lt;/p&gt;</string>
         </property>
         <property name="openExternalLinks">
          <bool>true</bool>
@@ -232,7 +237,7 @@
    <item>
     <widget class="ctkCollapsibleButton" name="WelcomeAndAboutCollapsibleWidget">
      <property name="text">
-      <string>关于</string>
+      <string>About</string>
      </property>
      <property name="collapsed">
       <bool>false</bool>
@@ -265,7 +270,8 @@
          <enum>Qt::ScrollBarAlwaysOff</enum>
         </property>
         <property name="html">
-         <string>&amp;lt;p&amp;gt;&amp;lt;b&amp;gt;3D Slicer&amp;lt;/b&amp;gt; 是一个免费的开源软件平台，用于医学图像处理和图像数据的 3D 可视化。该模块包含一些基本信息和有用链接，以帮助您开始使用 Slicer。有关更多信息，请访问我们的网站 &amp;lt;a href="https://www.slicer.org"&amp;gt;https://www.slicer.org&amp;lt;/a&amp;gt;.&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;&amp;lt;b&amp;gt;3D Slicer&amp;lt;/b&amp;gt; 根据 BSD 风格许可证分发；有关贡献和软件许可证协议的详细信息，请参见 &amp;lt;a href="https://github.com/Slicer/Slicer/blob/main/License.txt"&amp;gt;3D Slicer 软件许可证协议&amp;lt;/a&amp;gt;。该软件仅为研究目的设计，未经过食品和药物管理局或任何其他机构的审查或批准。&amp;lt;/p&amp;gt;</string>
+         <string>&lt;p&gt;&lt;b&gt;3D Slicer&lt;/b&gt; is a free open source software platform for medical image processing and 3D visualization of image data. This module contains some basic information and useful links to get you started using Slicer. For more information, please visit our website &lt;a href=&quot;https://www.slicer.org&quot;&gt;https://www.slicer.org&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;3D Slicer&lt;/b&gt; is distributed under a BSD-style license; for details about the contribution and software license agreement, please see the &lt;a href=&quot;https://github.com/Slicer/Slicer/blob/main/License.txt&quot;&gt;3D Slicer Software License Agreement&lt;/a&gt;. This software has been designed for research purposes only and has not been reviewed or approved by the Food and Drug Administration, or by any other agency.&lt;/p&gt;</string>
         </property>
         <property name="openExternalLinks">
          <bool>true</bool>
@@ -278,7 +284,7 @@
    <item>
     <widget class="ctkCollapsibleButton" name="OtherUsefulHintsCollapsibleWidget">
      <property name="text">
-      <string>文档与教程</string>
+      <string>Documentation &amp;&amp; Tutorials</string>
      </property>
      <property name="collapsed">
       <bool>false</bool>
@@ -311,7 +317,23 @@
          <enum>Qt::ScrollBarAlwaysOff</enum>
         </property>
         <property name="html">
-         <string>&amp;lt;p&amp;gt;&amp;lt;b&amp;gt;文档&amp;lt;/b&amp;gt;&amp;lt;/p&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://slicer.readthedocs.io/en/latest/"&amp;gt;文档&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://slicer.readthedocs.io/en/latest/user_guide/getting_started.html#quick-start"&amp;gt;快速开始&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://slicer.readthedocs.io/en/latest/user_guide/get_help.html"&amp;gt;获取帮助&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://slicer.readthedocs.io/en/latest/user_guide/user_interface.html"&amp;gt;用户界面&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://slicer.readthedocs.io/en/latest/user_guide/user_interface.html#mouse-keyboard-shortcuts"&amp;gt;鼠标按钮、&amp;quot;热键&amp;quot; 和键盘快捷键&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://slicer.readthedocs.io/en/latest/user_guide/getting_started.html#tutorials"&amp;gt;浏览教程&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;&amp;lt;p&amp;gt;&amp;lt;b&amp;gt;联系我们&amp;lt;/p&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://discourse.slicer.org/"&amp;gt;访问 Slicer 论坛&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://www.linkedin.com/feed/hashtag/?keywords=3dslicer"&amp;gt;在 LinkedIn 上加入我们&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://discourse.slicer.org/c/support/feature-requests/9"&amp;gt;搜索功能请求&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://slicer.readthedocs.io/en/latest/user_guide/get_help.html#i-want-to-report-a-problem"&amp;gt;报告错误&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;&amp;lt;p&amp;gt;&amp;lt;b&amp;gt;关于 3D Slicer&amp;lt;/p&amp;gt;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://github.com/Slicer/Slicer/blob/main/License.txt"&amp;gt;查看许可证&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://slicer.readthedocs.io/en/latest/user_guide/about.html#how-to-cite"&amp;gt;如何引用&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://scholar.google.com/scholar?&amp;amp;as_sdt=1%2C22&amp;amp;as_vis=1&amp;amp;q=%28%223D+Slicer%22+OR+%22slicer+org%22+OR+Slicer3D%29+-Slic3r+&amp;amp;btnG="&amp;gt;Slicer 发表的文献&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;&amp;lt;a href="https://slicer.readthedocs.io/en/latest/user_guide/about.html#acknowledgments"&amp;gt;致谢&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;</string>
+         <string>&lt;p&gt;&lt;b&gt;Documentation&lt;/b&gt;&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://slicer.readthedocs.io/en/latest/&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://slicer.readthedocs.io/en/latest/user_guide/getting_started.html#quick-start&quot;&gt;Quick Start&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://slicer.readthedocs.io/en/latest/user_guide/get_help.html&quot;&gt;Get Help&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://slicer.readthedocs.io/en/latest/user_guide/user_interface.html&quot;&gt;User Interface&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://slicer.readthedocs.io/en/latest/user_guide/user_interface.html#mouse-keyboard-shortcuts&quot;&gt;Mouse Buttons, &amp;quot;Hot-keys&amp;quot; and Keyboard Shortcuts&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://slicer.readthedocs.io/en/latest/user_guide/getting_started.html#tutorials&quot;&gt;Browse Tutorials&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
+&lt;p&gt;&lt;b&gt;Contact Us&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://discourse.slicer.org/&quot;&gt;Visit the Slicer Forum&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.linkedin.com/feed/hashtag/?keywords=3dslicer&quot;&gt;Join Us on LinkedIn&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://discourse.slicer.org/c/support/feature-requests/9&quot;&gt;Search Feature Requests&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://slicer.readthedocs.io/en/latest/user_guide/get_help.html#i-want-to-report-a-problem&quot;&gt;Report a Bug&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
+&lt;p&gt;&lt;b&gt;About 3D Slicer&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/Slicer/Slicer/blob/main/License.txt&quot;&gt;View License&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://slicer.readthedocs.io/en/latest/user_guide/about.html#how-to-cite&quot;&gt;How to Cite&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://scholar.google.com/scholar?&amp;amp;as_sdt=1%2C22&amp;amp;as_vis=1&amp;amp;q=%28%223D+Slicer%22+OR+%22slicer+org%22+OR+Slicer3D%29+-Slic3r+&amp;amp;btnG=&quot;&gt;Slicer Publications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://slicer.readthedocs.io/en/latest/user_guide/about.html#acknowledgments&quot;&gt;Acknowledgments&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</string>
         </property>
         <property name="openExternalLinks">
          <bool>true</bool>
@@ -327,10 +349,10 @@
    <item>
     <widget class="ctkCollapsibleButton" name="AutomaticUpdatesCollapsibleWidget">
      <property name="toolTip">
-      <string>点击按钮立即检查更新。请注意，将记录匿名使用统计信息。</string>
+      <string>Click the button to check for updates now. Note that anonymized usage statistics will be recorded.</string>
      </property>
      <property name="text">
-      <string>更新</string>
+      <string>Updates</string>
      </property>
      <property name="collapsed">
       <bool>false</bool>
@@ -354,7 +376,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>检查更新： </string>
+         <string>Check for updates: </string>
         </property>
        </widget>
       </item>
@@ -366,10 +388,10 @@
         <item>
          <widget class="QCheckBox" name="CheckForUpdatesAutomaticallyCheckBox">
           <property name="toolTip">
-           <string>定期检查更新。请注意，将记录匿名使用统计信息。如果复选框显示为部分选中，则表示仅对应用程序或扩展检查自动更新，而不是两者 - 点击复选框以启用/禁用所有自动更新检查。</string>
+           <string>Periodically check for updates. Note that anonymized usage statistics will be recorded. If the box appears as partially checked it means that automatic updates are only checked for the application or for extensions, but not both - click the checkbox to enable/disable all automatic update checks.</string>
           </property>
           <property name="text">
-           <string>自动</string>
+           <string>Automatically</string>
           </property>
          </widget>
         </item>
@@ -382,10 +404,10 @@
            </sizepolicy>
           </property>
           <property name="toolTip">
-           <string>点击按钮立即检查更新。请注意，将记录匿名使用统计信息。</string>
+           <string>Click the button to check for updates now. Note that anonymized usage statistics will be recorded.</string>
           </property>
           <property name="text">
-           <string>立即检查</string>
+           <string>Check now</string>
           </property>
          </widget>
         </item>
@@ -394,7 +416,7 @@
       <item row="1" column="0">
        <widget class="QLabel" name="label_4">
         <property name="text">
-         <string>应用程序更新： </string>
+         <string>Application update: </string>
         </property>
        </widget>
       </item>
@@ -410,10 +432,10 @@
          </sizepolicy>
         </property>
         <property name="toolTip">
-         <string />
+         <string/>
         </property>
         <property name="text">
-         <string>暂无信息可用。</string>
+         <string>No information is available.</string>
         </property>
         <property name="iconSize">
          <size>
@@ -426,7 +448,7 @@
       <item row="2" column="0">
        <widget class="QLabel" name="label_5">
         <property name="text">
-         <string>扩展更新： </string>
+         <string>Extension updates: </string>
         </property>
        </widget>
       </item>
@@ -436,10 +458,10 @@
          <bool>false</bool>
         </property>
         <property name="toolTip">
-         <string>打开“扩展管理器”向导，以查找、下载和安装 Slicer 扩展。&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;扩展是一个交付包，捆绑一个或多个 Slicer 模块。&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;安装扩展后，相关模块将在模块选择器中可用。</string>
+         <string>Raise the &quot;Extensions Manager&quot; wizard that allows to find, download and install Slicer extensions.&lt;br&gt;&lt;br&gt;An extension is a delivery package bundling together one or more Slicer modules.&lt;br&gt;&lt;br&gt;After installing an extension, the associated modules will be available in the module selector.</string>
         </property>
         <property name="text">
-         <string>暂无信息可用。</string>
+         <string>No information is available.</string>
         </property>
         <property name="iconSize">
          <size>
@@ -471,7 +493,7 @@
    <item>
     <widget class="ctkCollapsibleButton" name="AcknowledgmentCollapsibleWidget">
      <property name="text">
-      <string>致谢</string>
+      <string>Acknowledgment</string>
      </property>
      <property name="collapsed">
       <bool>false</bool>
@@ -504,7 +526,14 @@
          <enum>Qt::ScrollBarAlwaysOff</enum>
         </property>
         <property name="html">
-         <string>&amp;lt;table align="center" cellspacing="0" cellpadding="5"&amp;gt;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;&amp;lt;p align="center"&amp;gt;&amp;lt;a href="https://www.na-mic.org/"&amp;gt;&amp;lt;img src="qrc:Logos/NAMIC.png" width="80" style="vertical-align: middle;" /&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;a href="https://www.na-mic.org/"&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&amp;lt;p align="center"&amp;gt;&amp;lt;a href="https://nac.spl.harvard.edu/"&amp;gt;&amp;lt;img src="qrc:Logos/NAC.png" style="vertical-align: middle;" /&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;a href="https://nac.spl.harvard.edu/"&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;&amp;lt;p align="center"&amp;gt;&amp;lt;a href="https://www.ncigt.org/"&amp;gt;&amp;lt;img src="qrc:Logos/NCIGT.png" style="vertical-align: middle;" /&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;a href="https://www.ncigt.org/"&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;&amp;lt;td&amp;gt;&amp;lt;p align="center"&amp;gt;&amp;lt;a href="https://www.spl.harvard.edu/"&amp;gt;&amp;lt;img src="qrc:Logos/SPL.png" style="vertical-align: middle;" /&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;a href="https://www.spl.harvard.edu/"&amp;gt;&amp;lt;/a&amp;gt;&amp;lt;/p&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&amp;lt;/table&amp;gt;&amp;lt;p&amp;gt;3D Slicer 的开发得到了 &amp;lt;a href="https://www.na-mic.org/"&amp;gt;NA-MIC&amp;lt;/a&amp;gt;、&amp;lt;a href="https://nac.spl.harvard.edu/"&amp;gt;NAC&amp;lt;/a&amp;gt;、&amp;lt;a href="https://www.ncigt.org/"&amp;gt;NCIGT&amp;lt;/a&amp;gt;、&amp;lt;a href="https://www.spl.harvard.edu"&amp;gt;SPL&amp;lt;/a&amp;gt; 和 &amp;lt;a href="https://slicer.readthedocs.io/en/latest/user_guide/about.html#acknowledgments"&amp;gt;Slicer 社区&amp;lt;/a&amp;gt;的支持。详细信息请见 &amp;lt;a href="https://www.slicer.org"&amp;gt;https://www.slicer.org&amp;lt;/a&amp;gt;.&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;我们还要衷心感谢 Slicer 用户社区的成员，他们帮助我们设计了这个欢迎模块的内容，并且他们的反馈持续改善了功能、可用性和 Slicer 用户体验。&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;该模块由 Kitware, Inc. 的 Jean-Christophe Fillion-Robin 和 Julien Finet 以及 Brigham and Women's Hospital 的 Wendy Plesniak、Sonia Pujol、Steve Pieper 和 Ron Kikinis 开发。&amp;lt;/p&amp;gt;</string>
+         <string>&lt;table align=&quot;center&quot; cellspacing=&quot;0&quot; cellpadding=&quot;5&quot;&gt;&lt;tr&gt;&lt;td&gt;&lt;p align=&quot;center&quot;&gt;
+&lt;a href=&quot;https://www.na-mic.org/&quot;&gt;&lt;img src=&quot;qrc:Logos/NAMIC.png&quot; width=&quot;80&quot; style=&quot;vertical-align: middle;&quot; /&gt;&lt;/a&gt;&lt;a href=&quot;https://www.na-mic.org/&quot;&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p align=&quot;center&quot;&gt;&lt;a href=&quot;https://nac.spl.harvard.edu/&quot;&gt;&lt;img src=&quot;qrc:Logos/NAC.png&quot; style=&quot;vertical-align: middle;&quot; /&gt;&lt;/a&gt;&lt;a href=&quot;https://nac.spl.harvard.edu/&quot;&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p align=&quot;center&quot;&gt;&lt;a href=&quot;https://www.ncigt.org/&quot;&gt;&lt;img src=&quot;qrc:Logos/NCIGT.png&quot; style=&quot;vertical-align: middle;&quot; /&gt;&lt;/a&gt;&lt;a href=&quot;https://www.ncigt.org/&quot;&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p align=&quot;center&quot;&gt;&lt;a href=&quot;https://www.spl.harvard.edu/&quot;&gt;&lt;img src=&quot;qrc:Logos/SPL.png&quot; style=&quot;vertical-align: middle;&quot; /&gt;&lt;/a&gt;&lt;a href=&quot;https://www.spl.harvard.edu/&quot;&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;p&gt;Development of 3D Slicer is supported by &lt;a href=&quot;https://www.na-mic.org/&quot;&gt;NA-MIC&lt;/a&gt;, &lt;a href=&quot;https://nac.spl.harvard.edu/&quot;&gt;NAC&lt;/a&gt;, &lt;a href=&quot;https://www.ncigt.org/&quot;&gt;NCIGT&lt;/a&gt;, &lt;a href=&quot;https://www.spl.harvard.edu&quot;&gt;SPL&lt;/a&gt; and the &lt;a href=&quot;https://slicer.readthedocs.io/en/latest/user_guide/about.html#acknowledgments&quot;&gt;Slicer Community&lt;/a&gt;. See &lt;a href=&quot;https://www.slicer.org&quot;&gt;https://www.slicer.org&lt;/a&gt; for details.&lt;/p&gt;
+&lt;p&gt;We would also like to express our sincere thanks to members of the Slicer User Community who have helped us to design the contents of this Welcome Module, and whose feedback continues to improve functionality, usability and Slicer user experience.&lt;/p&gt;
+&lt;p&gt;This module was developed by Jean-Christophe Fillion-Robin and Julien Finet at Kitware, Inc., and by Wendy Plesniak, Sonia Pujol, Steve Pieper and Ron Kikinis at Brigham and Women's Hospital.&lt;/p&gt;</string>
         </property>
         <property name="openExternalLinks">
          <bool>true</bool>
@@ -535,7 +564,7 @@
    </item>
   </layout>
  </widget>
- <layoutdefault spacing="0" margin="0" />
+ <layoutdefault spacing="0" margin="0"/>
  <customwidgets>
   <customwidget>
    <class>qSlicerWidget</class>
@@ -556,9 +585,9 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../qSlicerWelcomeModule.qrc" />
-  <include location="../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc" />
-  <include location="../../../../../Resources/qSlicer.qrc" />
+  <include location="../qSlicerWelcomeModule.qrc"/>
+  <include location="../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc"/>
+  <include location="../../../../../Resources/qSlicer.qrc"/>
  </resources>
- <connections />
+ <connections/>
 </ui>

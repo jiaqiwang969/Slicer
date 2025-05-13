@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerModelsModuleWidget</class>
  <widget class="qSlicerWidget" name="qSlicerModelsModuleWidget">
@@ -16,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>模型</string>
+   <string>Models</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">
@@ -57,7 +58,7 @@
         <item>
          <widget class="ctkSearchBox" name="FilterModelSearchBox">
           <property name="placeholderText">
-           <string>按名称过滤...</string>
+           <string>Filter by name...</string>
           </property>
           <property name="showSearchIcon">
            <bool>true</bool>
@@ -67,10 +68,10 @@
         <item>
          <widget class="QPushButton" name="hideAllModelsButton">
           <property name="toolTip">
-           <string>关闭所有模型的可见性（不包括层次结构）</string>
+           <string>Turn the visibility off on all models (does not include hierarchies)</string>
           </property>
           <property name="text">
-           <string />
+           <string/>
           </property>
           <property name="icon">
            <iconset>
@@ -81,10 +82,10 @@
         <item>
          <widget class="QPushButton" name="showAllModelsButton">
           <property name="toolTip">
-           <string>打开所有模型的可见性（不包括层次结构）</string>
+           <string>Turns visibility on for all models (does not include hierarchies)</string>
           </property>
           <property name="text">
-           <string />
+           <string/>
           </property>
           <property name="icon">
            <iconset>
@@ -110,7 +111,7 @@
         </property>
         <property name="hideChildNodeTypes">
          <stringlist notr="true">
-          <string>注释节点 (vtkMRMLAnnotationNode)</string>
+          <string>vtkMRMLAnnotationNode</string>
          </stringlist>
         </property>
        </widget>
@@ -121,14 +122,14 @@
    <item>
     <widget class="ctkCollapsibleButton" name="InformationButton">
      <property name="text">
-      <string>信息</string>
+      <string>Information</string>
      </property>
      <property name="collapsed">
       <bool>true</bool>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="qMRMLModelInfoWidget" name="MRMLModelInfoWidget" />
+       <widget class="qMRMLModelInfoWidget" name="MRMLModelInfoWidget"/>
       </item>
      </layout>
     </widget>
@@ -142,7 +143,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>显示</string>
+      <string>Display</string>
      </property>
      <property name="collapsed">
       <bool>false</bool>
@@ -164,17 +165,17 @@
       <item>
        <widget class="ctkCollapsibleGroupBox" name="ColorLegendCollapsibleGroupBox">
         <property name="toolTip">
-         <string>颜色表的颜色图例，选择在标量部分。</string>
+         <string>Color legend for the Color Table selected in Scalars section.</string>
         </property>
         <property name="title">
-         <string>颜色图例</string>
+         <string>Color Legend</string>
         </property>
         <property name="collapsed">
          <bool>true</bool>
         </property>
         <layout class="QGridLayout" name="gridLayout">
          <item row="0" column="0">
-          <widget class="qMRMLColorLegendDisplayNodeWidget" name="ColorLegendDisplayNodeWidget" />
+          <widget class="qMRMLColorLegendDisplayNodeWidget" name="ColorLegendDisplayNodeWidget"/>
          </item>
         </layout>
        </widget>
@@ -185,7 +186,7 @@
    <item>
     <widget class="ctkCollapsibleButton" name="ClippingButton">
      <property name="text">
-      <string>剪裁</string>
+      <string>Clipping</string>
      </property>
      <property name="checked">
       <bool>true</bool>
@@ -203,18 +204,18 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>剪裁节点：</string>
+         <string>Clip node:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="0" colspan="3">
-       <widget class="qMRMLClipNodeWidget" name="MRMLClipNodeWidget" />
+       <widget class="qMRMLClipNodeWidget" name="MRMLClipNodeWidget"/>
       </item>
       <item row="0" column="1" colspan="2">
        <widget class="qMRMLNodeComboBox" name="ClipModelsNodeComboBox">
         <property name="nodeTypes">
          <stringlist notr="true">
-          <string>剪裁节点 (vtkMRMLClipNode)</string>
+          <string>vtkMRMLClipNode</string>
          </stringlist>
         </property>
         <property name="showHidden">
@@ -233,12 +234,12 @@
          <bool>true</bool>
         </property>
         <property name="interactionNodeSingletonTag">
-         <string notr="true" />
+         <string notr="true"/>
         </property>
        </widget>
       </item>
       <item row="1" column="0" colspan="3">
-       <widget class="qMRMLClipNodeDisplayWidget" name="MRMLClipNodeDisplayWidget" />
+       <widget class="qMRMLClipNodeDisplayWidget" name="MRMLClipNodeDisplayWidget"/>
       </item>
      </layout>
     </widget>
@@ -333,7 +334,7 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>qSlicerModelsModuleWidget</sender>

@@ -1,0 +1,177 @@
+% !TeX program = xelatex
+\documentclass[12pt]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xeCJK}
+\usepackage{hyperref}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily,breaklines=true}
+
+\title{miniSlicer 本地化流水线\\（用户指南 + 白皮书）}
+\author{miniSlicer i18n 团队}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+本文旨在给\textbf{最终使用者}（而非脚本开发者）一个\emph{一站式说明}：\emph{为什么}需要本地化流水线、\emph{能解决什么痛点}、\emph{怎样一步步使用}，以及\emph{如何按需扩展到新的替换场景}。同 时也为二次开发者附上架构细节与测试准则。
+\end{abstract}
+
+%────────────────────────────
+\section{为什么需要这条流水线？}
+\subsection{背景场景}
+\begin{itemize}
+  \item miniSlicer 及其扩展模块以英文界面为主，阻碍中文科研/教学场景推广。
+  \item Qt Linguist 对大型脚本模块支持有限，且增量维护困难。
+  \item LLM 出现后，批量高质量翻译成为可能，但缺少\textbf{安全、可回滚、可配置}的落地方案。
+\end{itemize}
+
+\subsection{核心痛点}
+\begin{enumerate}
+  \item \textbf{文件量大}：数千个 \texttt{.ui} + 数万行源码，手工不可行。
+  \item \textbf{格式脆弱}：XML / C++ 任何格式错误都导致编译或运行崩溃。
+  \item \textbf{需求多变}：今天翻译 \lstinline|<string>|，明天改模块 title，后天又要处理 \lstinline|tr("...")|。
+  \item \textbf{缺乏增量}：UI 每次改动都需重跑，耗时且浪费 token。
+\end{enumerate}
+
+%────────────────────────────
+\section{方案概览}
+\begin{enumerate}
+  \item \textbf{可逆占位符}：以少见字符"¥"+10 位数字包夹，保证翻译文本定位唯一可还原。
+  \item \textbf{配置驱动（rules.yaml）}：把"\emph{要替换哪些字符串}"写进 YAML；脚本通用，不再硬编码正则。
+  \item \textbf{四步流水线}：\textbf{标记}→\textbf{翻译}→\textbf{写回}→\textbf{清理与验证}。
+  \item \textbf{增量与测试}：基于 git diff 仅处理新增英文；\lstinline|pytest| 单元测试验证规则。
+\end{enumerate}
+
+图~\ref{fig:pipeline} 给出整体数据流。
+
+% TODO: 可加入 \\includegraphics[width=0.9\textwidth]{pipeline.pdf}
+\begin{center}
+\fbox{\parbox{0.9\textwidth}{\centering 占位符→LLM→sed→安全写回 的流水线示意图}}
+\end{center}
+\label{fig:pipeline}
+
+%────────────────────────────
+\section{一分钟上手（Quick Start）}
+\begin{enumerate}
+  \item \textbf{准备环境}
+    \begin{enumerate}
+      \item Python 3.9+ 或 Nix；
+      \item 设置 \lstinline|OPENAI_API_KEY|；
+      \item 可选：安装 \lstinline|xmllint|\ 进行 XML 校验。
+    \end{enumerate}
+  \item \textbf{克隆仓库 + 进入脚本目录}
+    \lstinline|git clone ... && cd script|
+  \item \textbf{运行命令}
+  \begin{lstlisting}
+make translate         # 一键翻译 UI + 源码（根据 rules.yaml）
+make fix              # 兜底清除 ¥XXXXXXXXXX¥ 占位符
+  \end{lstlisting}
+  \item \textbf{查看效果}：启动 miniSlicer；若仍有英文，可查看 \texttt{tmp\_*/report.log} 确认规则是否遗漏。
+\end{enumerate}
+
+%────────────────────────────
+\section{可配置规则（rules.yaml）详解}
+\subsection{YAML 结构}
+\begin{lstlisting}
+- name: qt_ui_string          # 规则名称
+  ext: [ui]                  # 文件后缀
+  mode: xml_xpath            # 抽取方式
+  xpath: .//string           # XPath 表达式
+
+- name: python_title
+  ext: [py]
+  mode: regex
+  pattern: "(?P<prefix>\\.parent\\.title\\s*=\\s*(?:_?\\(\\s*)?[\'\"])(?P<text>[^\'\"]+)(?P<suffix>[\'\"])"
+
+- name: cxx_tr
+  ext: [cpp,cxx,h,hpp]
+  mode: regex
+  pattern: "(?P<prefix>(?:::\\w+)?tr\\(\\s*[\'\"])(?P<text>[^\'\"]+)(?P<suffix>[\'\"])"
+\end{lstlisting}
+
+\subsection{自定义规则流程}
+\begin{enumerate}
+  \item 复制 \texttt{rules.yaml}，修改或新增条目；
+  \item 可运行 \lstinline|make dry_run RULES=my.yaml| 查看命中统计；
+  \item 调整无误后再执行 \lstinline|make translate RULES=my.yaml|。
+\end{enumerate}
+
+可在\texttt{rules.yaml} 内同时声明 UI XPath 与源码正则，流水线一次性完成两类翻译，无需区分"UI/源代码"子命令。
+
+%────────────────────────────
+\section{流水线分步解析}
+\subsection{Step 1 生成占位符}
+脚本 \texttt{generate\_placeholders.py} 读取 \texttt{rules.yaml}，对每条规则：
+\begin{itemize}
+  \item 按 \textbf{ext} 过滤文件；
+  \item 根据 \textbf{mode} 调用 XML/XPath 或正则；
+  \item 对需要翻译的文本加前缀 \verb|¥0000001234¥ | 并复制到临时目录；
+  \item 统计命中数写入 report，方便快速review。
+\end{itemize}
+
+\subsection{Step 2 调用 LLM 翻译}
+\begin{itemize}
+  \item 将所有带占位符行拼成 \texttt{all\_strings.txt}，按 \texttt{CHUNK\_SIZE} 分块；
+  \item 使用统一 Prompt（可在 \texttt{translate\_prompt.txt} 自定义风格）；
+  \item 输出 sed 单行命令列表。
+\end{itemize}
+
+\subsection{Step 3 安全写回}
+\begin{itemize}
+  \item 解析 sed → {id: 中文} 映射；
+  \item 对 XML 用 DOM，源码用正则，回写中文并保持格式；
+  \item 使用 \texttt{xmllint / black / clang-format}（若存在）二次校验。
+\end{itemize}
+
+\subsection{Step 4 清理与验证}
+运行 \texttt{fix\_placeholders.py} 根据规则定义的清理策略，确保仓库无遗留 \verb|¥数字¥|。若仍检测到→脚本报错退出 CI。
+
+%────────────────────────────
+\section{常见问题 \& 解决方案}
+\begin{longtable}{p{5cm} p{9cm}}
+\hline
+症状 / 日志片段 & 可能原因与处理 \\ \hline
+\texttt{Invalid API key} & 环境变量 \texttt{OPENAI\_API\_KEY} 未设置或过期。\\
+XML ParseError & 翻译文本含未转义字符 \verb|&|；执行 \lstinline|make fix| 重新清理并验证。\\
+regex 未命中 & 在 rules.yaml 新增/修正 \texttt{pattern}。\\
+CI 报 "impure-derivations" & 记得在 Garnix/Nix 加上 \texttt{--extra-experimental-features impure-derivations}。\\
+\hline
+\end{longtable}
+
+%────────────────────────────
+\section{进阶扩展}
+\begin{enumerate}
+  \item \textbf{多语言输出}：规则可加 \texttt{lang: ja}，脚本多次调用 LLM 生成多语目录。
+  \item \textbf{术语表驱动}：Prompt 中注入术语表，保证专业词一致。
+  \item \textbf{CI Bot}：失败自动在 PR 留评论列出未翻译行，方便 reviewers。
+  \item \textbf{可视化报告}：生成 \texttt{html} 展示规则命中率、示例 diff。
+\end{enumerate}
+
+%────────────────────────────
+\section{内部实现（给开发者）}
+\begin{itemize}
+  \item 脚本目录结构与调用关系图；
+  \item 依赖列表（仅标准库 + 可选 \texttt{requests, tqdm} 等）；
+  \item 单元测试：\texttt{tests/test\_rules.py} 用示例文件断言标记/清理对等；
+  \item 性能：对 10k 文件标记 <30s，写回 O(文件数)。
+\end{itemize}
+
+%────────────────────────────
+\section{贡献指南}
+\begin{enumerate}
+  \item 提交新规则：需附 \texttt{examples/} 用例 + 单测；
+  \item 代码遵循 \texttt{black 23.7}；
+  \item PR 模板见 \texttt{.github/};
+\end{enumerate}
+
+%────────────────────────────
+\section{许可证与免责声明}
+\begin{itemize}
+  \item miniSlicer 基于 APL 2.0；脚本遵循 MIT。\newline
+  \item 翻译内容由 OpenAI 生成，作者不保证绝对准确性，使用前请专业复核。
+\end{itemize}
+
+\end{document} 

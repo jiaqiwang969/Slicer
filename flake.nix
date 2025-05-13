@@ -45,21 +45,29 @@
       in
       {
         # --- Development Shells ---
-        # Load shell definitions from nix/shells.nix
-        devShells = pkgs.callPackage ./nix/shells.nix {
-          # Pass necessary arguments
+        # Load shell definitions and仅暴露真正 derivations，避免将 `override*` 等函数作为输出
+        devShells = let
+          shellsAll = pkgs.callPackage ./nix/shells.nix {
           inherit pkgs myCgal myJinja2Github;
-          lib = pkgs.lib; # Pass lib explicitly if needed within shells.nix
+            lib = pkgs.lib;
+          };
+        in {
+          default = shellsAll.default;
+          python  = shellsAll.python;
         };
 
         # --- Packages ---
-        # Load package definitions from nix/packages.nix
-        packages = pkgs.callPackage ./nix/packages.nix {
-          # Pass necessary arguments
+        # Load package definitions并只导出派生本身，去除 override* 函数键
+        packages = let
+          pkgAll = pkgs.callPackage ./nix/packages.nix {
           inherit pkgs myCgal;
-          lib = pkgs.lib;       # Pass lib explicitly
-          stdenv = pkgs.stdenv; # Pass stdenv explicitly
-          src = projectSrc;     # Pass the cleaned project source
+            lib = pkgs.lib;
+            stdenv = pkgs.stdenv;
+            src = projectSrc;
+          };
+        in {
+          Slicer = pkgAll.Slicer;
+          miniSlicer = pkgAll.miniSlicer;
         };
 
         # --- Default Package ---

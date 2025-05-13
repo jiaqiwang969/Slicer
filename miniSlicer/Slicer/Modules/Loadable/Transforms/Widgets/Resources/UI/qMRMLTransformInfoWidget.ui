@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLTransformInfoWidget</class>
  <widget class="QWidget" name="qMRMLTransformInfoWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>变换信息</string>
+   <string>Transform Information</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <property name="margin">
@@ -19,7 +20,7 @@
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>变换到父级：</string>
+      <string>Transform to parent:</string>
      </property>
     </widget>
    </item>
@@ -44,7 +45,7 @@
      <item>
       <widget class="QLabel" name="TransformToParentInfoTextBrowser">
        <property name="text">
-        <string>暂无可用信息。</string>
+        <string>No information available.</string>
        </property>
        <property name="wordWrap">
         <bool>true</bool>
@@ -56,7 +57,7 @@
    <item>
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>从父级变换：</string>
+      <string>Transform from parent:</string>
      </property>
     </widget>
    </item>
@@ -81,7 +82,7 @@
      <item>
       <widget class="QLabel" name="TransformFromParentInfoTextBrowser">
        <property name="text">
-        <string>暂无可用信息。</string>
+        <string>No information available.</string>
        </property>
       </widget>
      </item>
@@ -92,7 +93,7 @@
         <item>
           <widget class="QLabel" name="ViewerDisplacementVectorRAS">
             <property name="text">
-              <string>观察者RAS</string>
+              <string>ViewerRAS</string>
             </property>
           </widget>
         </item>
@@ -100,6 +101,6 @@
     </item>
   </layout>
  </widget>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

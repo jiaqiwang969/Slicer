@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerViewControllersModuleWidget</class>
  <widget class="qSlicerWidget" name="qSlicerViewControllersModuleWidget">
@@ -10,31 +11,31 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>视图控制器</string>
+   <string>View Controllers</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
     <widget class="ctkCollapsibleButton" name="SliceControllersCollapsibleButton">
      <property name="text">
-      <string>切片控制器</string>
+      <string>Slice Controllers</string>
      </property>
-     <layout class="QVBoxLayout" name="SliceControllersLayout" />
+     <layout class="QVBoxLayout" name="SliceControllersLayout"/>
     </widget>
    </item>
    <item>
     <widget class="ctkCollapsibleButton" name="ThreeDViewControllersCollapsibleButton">
      <property name="text">
-      <string>3D视图控制器</string>
+      <string>3D View Controllers</string>
      </property>
-     <layout class="QVBoxLayout" name="ThreeDViewControllersLayout" />
+     <layout class="QVBoxLayout" name="ThreeDViewControllersLayout"/>
     </widget>
    </item>
    <item>
     <widget class="ctkCollapsibleButton" name="PlotViewControllersCollapsibleButton">
      <property name="text">
-      <string>绘图视图控制器</string>
+      <string>Plot View Controllers</string>
      </property>
-     <layout class="QVBoxLayout" name="PlotViewControllersLayout" />
+     <layout class="QVBoxLayout" name="PlotViewControllersLayout"/>
     </widget>
    </item>
    <item>
@@ -43,7 +44,7 @@
       <bool>true</bool>
      </property>
      <property name="text">
-      <string>高级</string>
+      <string>Advanced</string>
      </property>
      <property name="collapsed">
       <bool>false</bool>
@@ -60,13 +61,13 @@
            <bool>true</bool>
           </property>
           <property name="toolTip">
-           <string>从当前场景中选择一个视图。每个元素对应一个特定的控件。视图节点与3D渲染控件相连。绘图视图与绘图控件相连。切片（红色、绿色、黄色）与2D渲染控件相连。</string>
+           <string>Select a view from the current scene. Each element corresponds to a specific widget. View nodes are connected with 3D rendering widgets. PlotView with Plotting widgets. Slices (Red, Green, Yellow) with 2D rendering widgets.</string>
           </property>
           <property name="nodeTypes">
            <stringlist notr="true">
-            <string>切片节点 (vtkMRMLSliceNode)</string>
-            <string>视图节点 (vtkMRMLViewNode)</string>
-            <string>绘图视图节点 (vtkMRMLPlotViewNode)</string>
+            <string>vtkMRMLSliceNode</string>
+            <string>vtkMRMLViewNode</string>
+            <string>vtkMRMLPlotViewNode</string>
            </stringlist>
           </property>
           <property name="showHidden">
@@ -83,17 +84,17 @@
         <item row="0" column="0">
          <widget class="QLabel" name="label">
           <property name="text">
-           <string>视图节点：</string>
+           <string>View Node:</string>
           </property>
          </widget>
         </item>
        </layout>
       </item>
       <item>
-       <widget class="qMRMLSliceInformationWidget" name="MRMLSliceInformationWidget" />
+       <widget class="qMRMLSliceInformationWidget" name="MRMLSliceInformationWidget"/>
       </item>
       <item>
-       <widget class="qMRMLThreeDViewInformationWidget" name="MRMLThreeDViewInformationWidget" />
+       <widget class="qMRMLThreeDViewInformationWidget" name="MRMLThreeDViewInformationWidget"/>
       </item>
      </layout>
     </widget>
@@ -150,7 +151,7 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>qSlicerViewControllersModuleWidget</sender>

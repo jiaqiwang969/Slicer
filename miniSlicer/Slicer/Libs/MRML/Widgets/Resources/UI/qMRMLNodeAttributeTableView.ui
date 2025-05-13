@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLNodeAttributeTableView</class>
  <widget class="QWidget" name="qMRMLNodeAttributeTableView">
@@ -22,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>qMRML节点属性表视图</string>
+   <string>qMRMLNodeAttributeTableView</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
@@ -65,18 +66,18 @@
      </attribute>
      <column>
       <property name="text">
-       <string>属性名称</string>
+       <string>Attribute Name</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>属性值</string>
+       <string>Attribute Value</string>
       </property>
      </column>
     </widget>
    </item>
   </layout>
  </widget>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

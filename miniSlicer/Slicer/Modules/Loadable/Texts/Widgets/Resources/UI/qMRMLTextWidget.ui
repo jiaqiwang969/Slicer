@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLTextWidget</class>
  <widget class="qSlicerWidget" name="qMRMLTextWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>文本属性</string>
+   <string>Text Properties</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -27,7 +28,7 @@
      <item>
       <widget class="QPushButton" name="EditButton">
        <property name="text">
-        <string>编辑</string>
+        <string>Edit</string>
        </property>
        <property name="iconSize">
         <size>
@@ -43,7 +44,7 @@
         <bool>true</bool>
        </property>
        <property name="text">
-        <string>取消</string>
+        <string>Cancel</string>
        </property>
       </widget>
      </item>
@@ -53,7 +54,7 @@
         <bool>true</bool>
        </property>
        <property name="text">
-        <string>保存</string>
+        <string>Save</string>
        </property>
       </widget>
      </item>
@@ -69,6 +70,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>

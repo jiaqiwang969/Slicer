@@ -1,0 +1,164 @@
+- name: python_title
+  ext: [py]
+  mode: regex
+  pattern: |
+    (?P<prefix>\.parent\.title\s*=\s*(?:_?\(\s*)?['"])(?P<text>[^'"\n]+?)(?P<suffix>['"])
+  prompt: |
+    【python_title】
+    代码行示例 `self.parent.title = "¥ID¥ English"`（或带 `_()`）。仅翻译引号内英文，保留代码结构。
+    【示例】
+    输入
+    ###FILE:MyModule/My.py###
+    self.parent.title = _("¥0000000001¥ Language Tools")
+    self.parent.title = "¥0000000002¥ Volume Rendering"
+    self.parent.title = _("¥0000000003¥ Segment Editor")
+    ###FILE:SlicerSurfaceToolbox/SurfaceToolbox/SurfaceToolbox.py###
+    self.parent.title = _("¥0000001477¥ Surface Toolbox")
+    self.parent.title = "¥0000001480¥ Mesh Processing"
+    
+    输出
+    sed -i -e 's|¥0000000001¥ Language Tools|¥0000000001¥ 语言工具|g' "MyModule/My.py"
+    sed -i -e 's|¥0000000002¥ Volume Rendering|¥0000000002¥ 体积渲染|g' "MyModule/My.py"
+    sed -i -e 's|¥0000000003¥ Segment Editor|¥0000000003¥ 分割编辑器|g' "MyModule/My.py"
+    sed -i -e 's|¥0000001477¥ Surface Toolbox|¥0000001477¥ 表面工具箱|g' "SlicerSurfaceToolbox/SurfaceToolbox/SurfaceToolbox.py"
+    sed -i -e 's|¥0000001480¥ Mesh Processing|¥0000001480¥ 网格处理|g' "SlicerSurfaceToolbox/SurfaceToolbox/SurfaceToolbox.py"
+
+- name: cxx_tr
+  ext: [cpp,cxx,h,hpp]
+  mode: regex
+  pattern: |
+    (?P<prefix>(?:\w+::)*tr\(\s*['"])(?P<text>[^'"\n]+?)(?P<suffix>['"])
+  prompt: |
+    【cxx_tr】
+    C++ 源码行示例 `SomeClass::tr("¥ID¥ English")` 或 `tr("¥ID¥ English")`。仅翻译引号内英文。
+    【示例】
+    输入
+    ###FILE:Base/QTApp/qSlicerApplicationHelper.cxx###
+      QString message = tr("¥0000000002¥ Graphics capability of this computer is not sufficient to ")
+    ###FILE:Slicer/Modules/Loadable/SubjectHierarchy/Widgets/qSlicerSubjectHierarchyViewContextMenuPlugin.cxx###
+      QAction* maximizeViewAction = new QAction(tr("¥0000001043¥ Maximize view"), q);
+      maximizeViewAction->setToolTip(tr("¥0000001044¥ Show this view maximized in the view layout"));
+    ###FILE:Slicer/Modules/Loadable/SubjectHierarchy/Widgets/qMRMLSubjectHierarchyTreeView.cxx###
+      QAction* renameAction = new QAction(tr("¥0000001018¥ Rename"), this);
+      QAction* deleteAction = new QAction(tr("¥0000001019¥ Delete"), this);
+      QAction* editPropertiesAction = new QAction(tr("¥0000001020¥ Edit properties..."), this);
+    
+    输出
+    sed -i -e 's|¥0000000002¥ Graphics capability of this computer is not sufficient to |¥0000000002¥ 此计算机的图形处理能力不足以|g' "Base/QTApp/qSlicerApplicationHelper.cxx"
+    sed -i -e 's|¥0000001043¥ Maximize view|¥0000001043¥ 最大化视图|g' "Slicer/Modules/Loadable/SubjectHierarchy/Widgets/qSlicerSubjectHierarchyViewContextMenuPlugin.cxx"
+    sed -i -e 's|¥0000001044¥ Show this view maximized in the view layout|¥0000001044¥ 在视图布局中最大化显示此视图|g' "Slicer/Modules/Loadable/SubjectHierarchy/Widgets/qSlicerSubjectHierarchyViewContextMenuPlugin.cxx"
+    sed -i -e 's|¥0000001018¥ Rename|¥0000001018¥ 重命名|g' "Slicer/Modules/Loadable/SubjectHierarchy/Widgets/qMRMLSubjectHierarchyTreeView.cxx"
+    sed -i -e 's|¥0000001019¥ Delete|¥0000001019¥ 删除|g' "Slicer/Modules/Loadable/SubjectHierarchy/Widgets/qMRMLSubjectHierarchyTreeView.cxx"
+    sed -i -e 's|¥0000001020¥ Edit properties...|¥0000001020¥ 编辑属性...|g' "Slicer/Modules/Loadable/SubjectHierarchy/Widgets/qMRMLSubjectHierarchyTreeView.cxx"
+
+- name: qt_ui_string
+  ext: [ui]
+  mode: xml_xpath
+  xpath: .//string
+  prompt: |
+    【qt_ui_string】
+    Qt Designer .ui 文件中的 `<string>` 标签文本，仅翻译占位符后的英文。
+    【示例】
+    输入
+    ###FILE:Modules/UI/Home.ui###
+    <string>¥0000000003¥ Output nodes</string>
+    <string>¥0000000004¥ vtkMRMLModelNode</string>
+    <string>¥0000000005¥ 已是中文</string>
+    
+    输出
+    sed -i -e 's|¥0000000003¥ Output nodes|¥0000000003¥ 输出节点|g' "Modules/UI/Home.ui"
+    sed -i -e 's|¥0000000004¥ vtkMRMLModelNode|¥0000000004¥ 模型节点 (vtkMRMLModelNode)|g' "Modules/UI/Home.ui"
+    sed -i -e 's|¥0000000005¥ 已是中文|¥0000000005¥ 已是中文|g' "Modules/UI/Home.ui"
+
+- name: xml_title
+  ext: [xml]
+  mode: xml_xpath
+  xpath: .//title
+  prompt: |
+    【xml_title】
+    Slicer CLI 或其他 .xml 文件中的 `<title>` 标签文本，仅翻译占位符后的英文。
+    【示例】
+    输入
+    ###FILE:Slicer/Modules/CLI/PETStandardUptakeValueComputation/PETStandardUptakeValueComputation.xml###
+    <title>¥0000000001¥ PET Standard Uptake Value Computation</title>
+    ###FILE:Slicer/Modules/CLI/LabelMapSmoothing/LabelMapSmoothing.xml###
+    <title>¥0000000002¥ Label Map Smoothing</title>
+    ###FILE:Utilities/Templates/Modules/CLI/TemplateKey.xml###
+    <title>¥0000000003¥ TemplateKey</title>
+
+    输出
+    sed -i -e 's|¥0000000001¥ PET Standard Uptake Value Computation|¥0000000001¥ PET 标准摄取值计算|g' "Slicer/Modules/CLI/PETStandardUptakeValueComputation/PETStandardUptakeValueComputation.xml"
+    sed -i -e 's|¥0000000002¥ Label Map Smoothing|¥0000000002¥ 标签图平滑|g' "Slicer/Modules/CLI/LabelMapSmoothing/LabelMapSmoothing.xml"
+    sed -i -e 's|¥0000000003¥ TemplateKey|¥0000000003¥ 模板键|g' "Utilities/Templates/Modules/CLI/TemplateKey.xml"
+
+- name: cxx_title_macro
+  ext: [cpp,cxx,h,hpp]
+  mode: regex
+  pattern: |
+    (?P<prefix>qSlicerGetTitleMacro\(\s*['"])(?P<text>[^'"\n]+?)(?P<suffix>['"])
+  prompt: |
+    【cxx_title_macro】
+    C++ 源/头文件中的 `qSlicerGetTitleMacro("¥ID¥ English")`，仅翻译引号内英文。
+    【示例】
+    输入
+    ###FILE:SlicerExtension-VMTK/StenosisMeasurement3D/qSlicerStenosisMeasurement3DModule.h###
+    qSlicerGetTitleMacro("¥0000002001¥ Stenosis measurement: 3D");
+    ###FILE:SlicerExtension-VMTK/BranchClipper/qSlicerBranchClipperModule.h###
+    qSlicerGetTitleMacro("¥0000002002¥ Branch clipper");
+
+    输出
+    sed -i -e 's|¥0000002001¥ Stenosis measurement: 3D|¥0000002001¥ 狭窄测量：3D|g' "SlicerExtension-VMTK/StenosisMeasurement3D/qSlicerStenosisMeasurement3DModule.h"
+    sed -i -e 's|¥0000002002¥ Branch clipper|¥0000002002¥ 血管分支剪切|g' "SlicerExtension-VMTK/BranchClipper/qSlicerBranchClipperModule.h"
+
+- name: python_help_ack
+  ext: [py]
+  mode: regex_block
+  pattern: |
+    (?P<prefix>parent\.(?:helpText|acknowledgementText)\s*=\s*"""[\r\n]+)(?P<text>[\s\S]*?)(?P<suffix>\s*""")
+  prompt: |
+    【python_help_ack】
+    Python 模块三引号说明文字：`parent.helpText = """ ... """` 或 `acknowledgementText`。
+    仅翻译英文句子，保持换行与缩进。
+    【示例】
+    输入
+    ###FILE:Modules/Scripted/SceneViews/SceneViewsSelfTest.py###
+    parent.helpText = """
+        ¥0000003001¥ Self test for MRB and Scene Views multiple save.
+        ¥0000003002¥ No module interface here, only used in SelfTests module
+        """
+
+    ###FILE:Modules/Scripted/SceneViews/SceneViewsSelfTest.py###
+    parent.acknowledgementText = """
+        ¥0000003003¥ This test was developed by
+        ¥0000003004¥ Nicole Aucoin, BWH
+        ¥0000003005¥ and was partially funded by NIH grant 3P41RR013218.
+        """
+
+    输出
+    sed -i -e 's|¥0000003001¥ Self test for MRB and Scene Views multiple save.|¥0000003001¥ 用于 MRB 与场景视图多次保存的自检。|g' "Modules/Scripted/SceneViews/SceneViewsSelfTest.py"
+    sed -i -e 's|¥0000003002¥ No module interface here, only used in SelfTests module|¥0000003002¥ 无模块界面，仅供 SelfTests 使用|g' "Modules/Scripted/SceneViews/SceneViewsSelfTest.py"
+    sed -i -e 's|¥0000003003¥ This test was developed by|¥0000003003¥ 此测试由以下人员开发|g' "Modules/Scripted/SceneViews/SceneViewsSelfTest.py"
+    sed -i -e 's|¥0000003004¥ Nicole Aucoin, BWH|¥0000003004¥ Nicole Aucoin，BWH|g' "Modules/Scripted/SceneViews/SceneViewsSelfTest.py"
+    sed -i -e 's|¥0000003005¥ and was partially funded by NIH grant 3P41RR013218.|¥0000003005¥ 并得到 NIH 资助 (3P41RR013218) 部分支持。|g' "Modules/Scripted/SceneViews/SceneViewsSelfTest.py"
+
+- name: python_categories
+  ext: [py]
+  mode: regex
+  pattern: |
+    (?P<prefix>(?:self\.)?parent\.categories\s*=\s*\[\s*['"])(?P<text>[^'"\n]+?)(?P<suffix>['"])
+  prompt: |
+    【python_categories】
+    Python 模块中的分类列表 `parent.categories = ["¥ID¥ Category", ...]`。
+    仅翻译每个字符串内的英文分类名。
+    【示例】
+    输入
+    ###FILE:SlicerExtension-VMTK/CrossSectionAnalysis/CrossSectionAnalysis.py###
+    self.parent.categories = ["¥0000004001¥ Vascular Modeling Toolkit"]
+
+    ###FILE:SlicerExtension-VMTK/GuidedArterySegmentation/GuidedArterySegmentation.py###
+    self.parent.categories = ["¥0000004002¥ Vascular Modeling Toolkit", "¥0000004003¥ Segmentation"]
+
+    输出
+    sed -i -e 's|¥0000004001¥ Vascular Modeling Toolkit|¥0000004001¥ 血管建模工具箱|g' "SlicerExtension-VMTK/CrossSectionAnalysis/CrossSectionAnalysis.py"
+    sed -i -e 's|¥0000004002¥ Vascular Modeling Toolkit|¥0000004002¥ 血管建模工具箱|g' "SlicerExtension-VMTK/GuidedArterySegmentation/GuidedArterySegmentation.py"
+    sed -i -e 's|¥0000004003¥ Segmentation|¥0000004003¥ 分割|g' "SlicerExtension-VMTK/GuidedArterySegmentation/GuidedArterySegmentation.py"

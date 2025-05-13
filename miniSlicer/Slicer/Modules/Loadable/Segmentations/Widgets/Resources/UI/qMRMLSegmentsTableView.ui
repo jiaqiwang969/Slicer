@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLSegmentsTableView</class>
  <widget class="QWidget" name="qMRMLSegmentsTableView">
@@ -16,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>qMRML分割表视图</string>
+   <string>qMRMLSegmentsTableView</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
@@ -46,7 +47,7 @@
       </font>
      </property>
      <property name="text">
-      <string>未选择节点</string>
+      <string>No node selected</string>
      </property>
     </widget>
    </item>
@@ -111,7 +112,7 @@
       <item>
        <widget class="ctkSearchBox" name="FilterLineEdit">
         <property name="placeholderText">
-         <string>过滤</string>
+         <string>Filter</string>
         </property>
         <property name="showSearchIcon">
          <bool>true</bool>
@@ -121,10 +122,10 @@
       <item>
        <widget class="QPushButton" name="ShowNotStartedButton">
         <property name="toolTip">
-         <string>显示/隐藏未开始的分割</string>
+         <string>Show/Hide not started segments</string>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
         <property name="icon">
          <iconset resource="../qSlicerSegmentationsModuleWidgets.qrc">
@@ -144,10 +145,10 @@
       <item>
        <widget class="QPushButton" name="ShowInProgressButton">
         <property name="toolTip">
-         <string>显示/隐藏进行中的分割</string>
+         <string>Show/Hide in progress segments</string>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
         <property name="icon">
          <iconset resource="../qSlicerSegmentationsModuleWidgets.qrc">
@@ -167,10 +168,10 @@
       <item>
        <widget class="QPushButton" name="ShowCompletedButton">
         <property name="toolTip">
-         <string>显示/隐藏已完成的分割</string>
+         <string>Show/Hide completed segments</string>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
         <property name="icon">
          <iconset resource="../qSlicerSegmentationsModuleWidgets.qrc">
@@ -190,10 +191,10 @@
       <item>
        <widget class="QPushButton" name="ShowFlaggedButton">
         <property name="toolTip">
-         <string>显示/隐藏标记的分割</string>
+         <string>Show/Hide flagged segments</string>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
         <property name="icon">
          <iconset resource="../qSlicerSegmentationsModuleWidgets.qrc">
@@ -223,7 +224,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../qSlicerSegmentationsModuleWidgets.qrc" />
+  <include location="../qSlicerSegmentationsModuleWidgets.qrc"/>
  </resources>
- <connections />
+ <connections/>
 </ui>

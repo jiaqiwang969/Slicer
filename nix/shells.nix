@@ -215,6 +215,12 @@ CMake Helper Usage (run from project root):
 "
       echo "Compiler cache (ccache) enabled."
       echo "CCACHE_DIR: $CCACHE_DIR"
+
+      if [ -f .env ]; then
+        set -a
+        . ./.env
+        set +a
+      fi
     '';
   };
 
@@ -234,16 +240,24 @@ CMake Helper Usage (run from project root):
       pkgs.python3Packages.cookiecutter
       myJinja2Github             # Custom jinja2-github
       pkgs.libxml2
+      pkgs.python3Packages.pyyaml  # ← 新增
     ];
 
     shellHook = ''
       echo "=== Python Development Environment ==="
-      echo "Python Version: $(python --version)"
-      echo "Packages available: matplotlib, numpy, trimesh, rtree, cookiecutter, jinja2-github"
+      python --version
+      # 动态列出安装的包名称（忽略版本号）
+      if command -v pip &>/dev/null; then
+        pkg_list=$(pip list --format=columns | tail -n +3 | awk '{print $1}' | paste -sd', ' -)
+        echo "Available packages: $pkg_list"
+      fi
       echo "===================================="
-      # Optional venv setup:
-      # if [ ! -d ".venv" ]; then python -m venv .venv; fi
-      # source .venv/bin/activate
+
+      if [ -f .env ]; then
+        set -a
+        . ./.env
+        set +a
+      fi
     '';
   };
 

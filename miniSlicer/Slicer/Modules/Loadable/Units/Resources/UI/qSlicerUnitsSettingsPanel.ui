@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerUnitsSettingsPanel</class>
  <widget class="ctkSettingsPanel" name="qSlicerUnitsSettingsPanel">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>单位设置</string>
+   <string>Units Settings</string>
   </property>
   <layout class="QGridLayout" name="GridLayout">
    <item row="0" column="0">
@@ -22,7 +23,11 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>&amp;lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&amp;gt;</string>
+      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; color:#ff0000;&quot;&gt;Warning:&lt;/span&gt; Changing the properties of the unit only change the display, not the value !&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </item>
@@ -35,10 +40,11 @@
       </sizepolicy>
      </property>
      <property name="toolTip">
-      <string>显示所有单位的属性。</string>
+      <string>Show all the units' properties.
+This should only used by advanced users who understand the consequences of changing a unit's property.</string>
      </property>
      <property name="text">
-      <string>显示高级选项</string>
+      <string>Show advanced options</string>
      </property>
      <property name="checked">
       <bool>true</bool>
@@ -76,7 +82,7 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <layout class="QVBoxLayout" name="QuantitiesLayout" />
+        <layout class="QVBoxLayout" name="QuantitiesLayout"/>
        </item>
       </layout>
      </widget>
@@ -108,7 +114,7 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>ShowAllCheckBox</sender>

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLSegmentationDisplayNodeWidget</class>
  <widget class="qMRMLWidget" name="qMRMLSegmentationDisplayNodeWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>qMRML分割显示节点小部件</string>
+   <string>qMRMLSegmentationDisplayNodeWidget</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <property name="leftMargin">
@@ -47,14 +48,14 @@
    <item row="0" column="2">
     <widget class="QLabel" name="label_OverallOpacity">
      <property name="text">
-      <string>整体不透明度：</string>
+      <string>Overall opacity:</string>
      </property>
     </widget>
    </item>
    <item row="3" column="0" colspan="4">
     <widget class="ctkCollapsibleGroupBox" name="CollapsibleGroupBox_Advanced">
      <property name="title">
-      <string>高级</string>
+      <string>Advanced</string>
      </property>
      <property name="checked">
       <bool>false</bool>
@@ -79,19 +80,19 @@
        <number>4</number>
       </property>
       <item row="0" column="1">
-       <widget class="qMRMLDisplayNodeViewComboBox" name="DisplayNodeViewComboBox" />
+       <widget class="qMRMLDisplayNodeViewComboBox" name="DisplayNodeViewComboBox"/>
       </item>
       <item row="0" column="0">
        <widget class="QLabel" name="label_Views">
         <property name="text">
-         <string>视图：</string>
+         <string>Views:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="QSpinBox" name="spinBox_SliceIntersectionThickness">
         <property name="suffix">
-         <string>像素</string>
+         <string> px</string>
         </property>
         <property name="maximum">
          <number>10</number>
@@ -101,45 +102,45 @@
       <item row="3" column="0">
        <widget class="QLabel" name="label_Representation2D">
         <property name="text">
-         <string>2D视图中的表示：</string>
+         <string>Representation in 2D views:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
        <widget class="QComboBox" name="comboBox_DisplayedRepresentation3D">
         <property name="toolTip">
-         <string>在3D中显示的表示（仅限模型）</string>
+         <string>Representation that is shown in 3D (models only)</string>
         </property>
        </widget>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="label_Representation3D">
         <property name="toolTip">
-         <string>在3D中作为模型显示的表示，如果存在则在2D中作为切片交集显示</string>
+         <string>Representation that is shown as a model in 3D and as slice intersections in 2D if exists</string>
         </property>
         <property name="text">
-         <string>3D视图中的表示：</string>
+         <string>Representation in 3D views:</string>
         </property>
        </widget>
       </item>
       <item row="3" column="1">
        <widget class="QComboBox" name="comboBox_DisplayedRepresentation2D">
         <property name="toolTip">
-         <string>在2D切片视图中显示的表示</string>
+         <string>Representation that is shown in the 2D slice views</string>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_SliceIntersectionThickness">
         <property name="text">
-         <string>切片交集厚度：</string>
+         <string>Slice intersection thickness:</string>
         </property>
        </widget>
       </item>
       <item row="4" column="0" colspan="2">
        <widget class="QGroupBox" name="groupBox_SelectedSegment">
         <property name="title">
-         <string>选定的分段</string>
+         <string>Selected segment</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_3">
          <property name="leftMargin">
@@ -160,28 +161,28 @@
          <item row="2" column="0">
           <widget class="QLabel" name="label_SliceOutline_SelectedSegment">
            <property name="text">
-            <string>切片轮廓：</string>
+            <string>Slice outline:</string>
            </property>
           </widget>
          </item>
          <item row="1" column="2">
           <widget class="QCheckBox" name="checkBox_VisibilitySliceFill_SelectedSegment">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="1" column="0">
           <widget class="QLabel" name="label_SliceFill_SelectedSegment">
            <property name="text">
-            <string>切片填充：</string>
+            <string>Slice fill:</string>
            </property>
           </widget>
          </item>
          <item row="2" column="2">
           <widget class="QCheckBox" name="checkBox_VisibilitySliceOutline_SelectedSegment">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
@@ -194,7 +195,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>可见性</string>
+            <string>Visibility</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -220,21 +221,21 @@
          <item row="3" column="2">
           <widget class="QCheckBox" name="checkBox_Visibility3D_SelectedSegment">
            <property name="text">
-            <string />
+            <string/>
            </property>
           </widget>
          </item>
          <item row="3" column="0">
           <widget class="QLabel" name="label_3D_SelectedSegment">
            <property name="text">
-            <string>3D视图：</string>
+            <string>3D:</string>
            </property>
           </widget>
          </item>
          <item row="1" column="3">
           <widget class="ctkSliderWidget" name="SliderWidget_OpacitySliceFill_SelectedSegment">
            <property name="toolTip">
-            <string>相对于其他分段的值。最终的不透明度取决于每个分段的不透明度和整体不透明度（如上所述）</string>
+            <string>Value relative to other segments. The final opacity depends both on the per-segment opacity and the overall opacity (above)</string>
            </property>
            <property name="singleStep">
             <double>0.050000000000000</double>
@@ -253,7 +254,7 @@
          <item row="2" column="3">
           <widget class="ctkSliderWidget" name="SliderWidget_OpacitySliceOutline_SelectedSegment">
            <property name="toolTip">
-            <string>相对于其他分段的值。最终的不透明度取决于每个分段的不透明度和整体不透明度（如上所述）</string>
+            <string>Value relative to other segments. The final opacity depends both on the per-segment opacity and the overall opacity (above)</string>
            </property>
            <property name="singleStep">
             <double>0.050000000000000</double>
@@ -272,7 +273,7 @@
          <item row="3" column="3">
           <widget class="ctkSliderWidget" name="SliderWidget_Opacity3D_SelectedSegment">
            <property name="toolTip">
-            <string>相对于其他分段的值。最终的不透明度取决于每个分段的不透明度和整体不透明度（如上所述）</string>
+            <string>Value relative to other segments. The final opacity depends both on the per-segment opacity and the overall opacity (above)</string>
            </property>
            <property name="singleStep">
             <double>0.050000000000000</double>
@@ -297,7 +298,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>不透明度</string>
+            <string>Opacity</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -319,7 +320,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
@@ -353,7 +354,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>切片填充：</string>
+         <string>Slice fill:</string>
         </property>
        </widget>
       </item>
@@ -366,14 +367,14 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>切片轮廓：</string>
+         <string>Slice outline:</string>
         </property>
        </widget>
       </item>
       <item row="4" column="0">
        <widget class="QLabel" name="label_3D">
         <property name="text">
-         <string>3D视图：</string>
+         <string>3D:</string>
         </property>
        </widget>
       </item>
@@ -386,7 +387,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>不透明度</string>
+         <string>Opacity</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -460,7 +461,7 @@
       <item row="2" column="2">
        <widget class="QCheckBox" name="checkBox_VisibilitySliceFill">
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
@@ -473,7 +474,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>可见性</string>
+         <string>Visibility</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -483,14 +484,14 @@
       <item row="3" column="2">
        <widget class="QCheckBox" name="checkBox_VisibilitySliceOutline">
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
       <item row="4" column="2">
        <widget class="QCheckBox" name="checkBox_Visibility3D">
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
@@ -500,21 +501,21 @@
    <item row="0" column="0">
     <widget class="QLabel" name="label_Visible">
      <property name="text">
-      <string>整体可见性：</string>
+      <string>Overall visibility:</string>
      </property>
     </widget>
    </item>
    <item row="4" column="0" colspan="4">
     <widget class="ctkCollapsibleGroupBox" name="CollapsibleGroupBox">
      <property name="title">
-      <string>剪裁</string>
+      <string>Clipping</string>
      </property>
      <property name="collapsed">
       <bool>true</bool>
      </property>
      <layout class="QGridLayout" name="gridLayout_4">
       <item row="3" column="0" colspan="3">
-       <widget class="qMRMLClipNodeWidget" name="SlicerWidget_ClipNodeProperties" />
+       <widget class="qMRMLClipNodeWidget" name="SlicerWidget_ClipNodeProperties"/>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_ClipNode">
@@ -525,7 +526,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>剪裁节点：</string>
+         <string>Clip node:</string>
         </property>
        </widget>
       </item>
@@ -533,25 +534,25 @@
        <widget class="qMRMLNodeComboBox" name="MRMLNodeComboBox_Clip">
         <property name="nodeTypes">
          <stringlist notr="true">
-          <string>剪裁节点 (vtkMRMLClipNode)</string>
+          <string>vtkMRMLClipNode</string>
          </stringlist>
         </property>
         <property name="showHidden">
          <bool>true</bool>
         </property>
         <property name="hideChildNodeTypes">
-         <stringlist notr="true" />
+         <stringlist notr="true"/>
         </property>
         <property name="noneEnabled">
          <bool>true</bool>
         </property>
         <property name="interactionNodeSingletonTag">
-         <string notr="true" />
+         <string notr="true"/>
         </property>
        </widget>
       </item>
       <item row="2" column="0" colspan="3">
-       <widget class="qMRMLClipNodeDisplayWidget" name="SlicerWidget_ClipNodeDisplayProperties" />
+       <widget class="qMRMLClipNodeDisplayWidget" name="SlicerWidget_ClipNodeDisplayProperties"/>
       </item>
      </layout>
     </widget>
@@ -603,7 +604,7 @@
    <header>ctkSliderWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>qMRMLSegmentationDisplayNodeWidget</sender>

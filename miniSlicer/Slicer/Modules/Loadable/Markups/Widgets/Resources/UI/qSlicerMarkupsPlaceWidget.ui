@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerMarkupsPlaceWidget</class>
  <widget class="qSlicerWidget" name="qSlicerMarkupsPlaceWidget">
@@ -16,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>放置标记</string>
+   <string>Place markups</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <property name="margin">
@@ -31,7 +32,7 @@
       </sizepolicy>
      </property>
      <property name="toolTip">
-      <string>选择显示颜色。</string>
+      <string>Select the display color.</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -53,7 +54,7 @@
         <enum>QToolButton::MenuButtonPopup</enum>
       </property>
       <property name="toolTip">
-      <string>放置控制点</string>
+      <string>Place a control point</string>
      </property>
      <property name="text">
       <string>...</string>
@@ -79,7 +80,7 @@
       <enum>QToolButton::MenuButtonPopup</enum>
      </property>
      <property name="toolTip">
-      <string>删除最后添加的控制点</string>
+      <string>Delete last added control point</string>
      </property>
      <property name="text">
       <string>...</string>
@@ -99,7 +100,7 @@
       </sizepolicy>
      </property>
      <property name="toolTip">
-      <string>点击获取更多选项</string>
+      <string>Click for more options</string>
      </property>
      <property name="text">
       <string>...</string>
@@ -119,10 +120,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>放置多个控制点</string>
+    <string>Place multiple control points</string>
    </property>
    <property name="toolTip">
-    <string>放置多个控制点</string>
+    <string>Place multiple control points</string>
    </property>
   </action>
   <action name="ActionDeleteAll">
@@ -131,10 +132,10 @@
      <normaloff>:/Icons/MarkupsDeleteAllRows.png</normaloff>:/Icons/MarkupsDeleteAllRows.png</iconset>
    </property>
    <property name="text">
-    <string>删除所有控制点</string>
+    <string>Delete all control points</string>
    </property>
    <property name="toolTip">
-    <string>删除列表中的所有控制点</string>
+    <string>Delete all control points in the list</string>
    </property>
   </action>
   <action name="ActionUnsetLast">
@@ -143,10 +144,10 @@
      <normaloff>:/Icons/MarkupsUnset.png</normaloff>:/Icons/MarkupsUnset.png</iconset>
    </property>
     <property name="text">
-    <string>清除最后控制点位置</string>
+    <string>Clear last control point position</string>
    </property>
    <property name="toolTip">
-    <string>清除最后放置的控制点的位置（控制点不会被删除）。</string>
+    <string>Clear the position of the last control point placed (the control point will not be deleted).</string>
    </property>
   </action>
   <action name="ActionUnsetAll">
@@ -156,10 +157,10 @@
     </iconset>
    </property>
    <property name="text">
-    <string>清除所有控制点位置</string>
+    <string>Clear all control point positions</string>
    </property>
    <property name="toolTip">
-    <string>清除列表中所有控制点的位置（控制点不会被删除）。</string>
+    <string>Clear the position of all control points in the list (the control points will not be deleted).</string>
    </property>
   </action>
   <action name="ActionVisibility">
@@ -169,10 +170,10 @@
      <normalon>:/Icons/Small/SlicerVisible.png</normalon>:/Icons/Small/SlicerInvisible.png</iconset>
    </property>
    <property name="text">
-    <string>可见性</string>
+    <string>Visibility</string>
    </property>
    <property name="toolTip">
-    <string>切换标记可见性</string>
+    <string>Toggle markup visibility</string>
    </property>
   </action>
   <action name="ActionLocked">
@@ -182,10 +183,10 @@
      <normalon>:/Icons/Small/SlicerLock.png</normalon>:/Icons/Small/SlicerUnlock.png</iconset>
    </property>
    <property name="text">
-    <string>锁定</string>
+    <string>Locked</string>
    </property>
    <property name="toolTip">
-    <string>切换控制点位置锁定</string>
+    <string>Toggle control point positions lock</string>
    </property>
   </action>
   <action name="ActionFixedNumberOfControlPoints">
@@ -195,10 +196,10 @@
      <normalon>:/Icons/Small/SlicerPointNumberLock.png</normalon>:/Icons/Small/SlicerPointNumberUnlock.png</iconset>
    </property>
    <property name="text">
-    <string>控制点数量锁定</string>
+    <string>Control point number locked</string>
    </property>
    <property name="toolTip">
-    <string>切换控制点数量锁定。如果锁定，则无法添加或删除控制点。可以取消设置控制点的位置，而不是删除。</string>
+    <string>Toggle control point number lock. If locked then it is not possible to add or delete control points. Instead of deleting, position control points can be unset.</string>
    </property>
   </action>
  </widget>
@@ -216,9 +217,9 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../../../../../Libs/MRML/Widgets/Resources/qMRMLWidgets.qrc" />
-  <include location="../../../Resources/qSlicerMarkupsModule.qrc" />
-  <include location="../../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc" />
+  <include location="../../../../../../Libs/MRML/Widgets/Resources/qMRMLWidgets.qrc"/>
+  <include location="../../../Resources/qSlicerMarkupsModule.qrc"/>
+  <include location="../../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc"/>
  </resources>
- <connections />
+ <connections/>
 </ui>

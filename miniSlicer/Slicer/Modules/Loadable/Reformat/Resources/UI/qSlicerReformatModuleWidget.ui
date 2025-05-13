@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerReformatModuleWidget</class>
  <widget class="qSlicerWidget" name="qSlicerReformatModuleWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>重新格式化</string>
+   <string>Reformat</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_4">
    <item row="0" column="0">
@@ -21,7 +22,7 @@
         <bool>false</bool>
        </property>
        <property name="text">
-        <string>切片：</string>
+        <string>Slice:</string>
        </property>
        <property name="tristate">
         <bool>false</bool>
@@ -46,7 +47,7 @@
        </property>
        <property name="nodeTypes">
         <stringlist notr="true">
-         <string>切片节点 (vtkMRMLSliceNode)</string>
+         <string>vtkMRMLSliceNode</string>
         </stringlist>
        </property>
        <property name="showHidden">
@@ -72,7 +73,7 @@
         <bool>false</bool>
        </property>
        <property name="toolTip">
-        <string>在 3D 视图中显示重新格式化小部件</string>
+        <string>Show reformat widget in 3D view</string>
        </property>
        <property name="icon">
         <iconset resource="../../../../../Libs/MRML/Widgets/Resources/qMRMLWidgets.qrc">
@@ -104,7 +105,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>显示与编辑</string>
+      <string>Display &amp;&amp; Edit</string>
      </property>
      <property name="contentsLineWidth">
       <number>0</number>
@@ -113,7 +114,7 @@
       <item>
        <widget class="ctkCollapsibleGroupBox" name="OffsetSlidersGroupBox">
         <property name="title">
-         <string>偏移</string>
+         <string>Offset</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_2">
          <property name="leftMargin">
@@ -193,7 +194,7 @@
       <item>
        <widget class="ctkCollapsibleGroupBox" name="OriginCoordinatesGroupBox">
         <property name="title">
-         <string>原点</string>
+         <string>Origin</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_3">
          <property name="leftMargin">
@@ -211,13 +212,13 @@
          <item row="0" column="0">
           <widget class="QGroupBox" name="CoordinateReferenceGroupBox">
            <property name="title">
-            <string>坐标参考</string>
+            <string>Coordinate Reference</string>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout">
             <item>
              <widget class="QRadioButton" name="OnPlaneRadioButton">
               <property name="text">
-               <string>在平面上</string>
+               <string>On Plane</string>
               </property>
               <property name="checked">
                <bool>true</bool>
@@ -227,7 +228,7 @@
             <item>
              <widget class="QRadioButton" name="InVolumeRadioButton">
               <property name="text">
-               <string>在体积内</string>
+               <string>In Volume</string>
               </property>
              </widget>
             </item>
@@ -250,10 +251,10 @@
              <number>0</number>
             </property>
             <item>
-             <widget class="ctkDoubleSpinBox" name="OnPlaneXdoubleSpinBox" />
+             <widget class="ctkDoubleSpinBox" name="OnPlaneXdoubleSpinBox"/>
             </item>
             <item>
-             <widget class="ctkDoubleSpinBox" name="OnPlaneYdoubleSpinBox" />
+             <widget class="ctkDoubleSpinBox" name="OnPlaneYdoubleSpinBox"/>
             </item>
            </layout>
           </widget>
@@ -261,12 +262,12 @@
          <item row="3" column="0">
           <widget class="QPushButton" name="CenterPushButton">
            <property name="text">
-            <string>中心</string>
+            <string>Center</string>
            </property>
           </widget>
          </item>
          <item row="2" column="0">
-          <widget class="ctkCoordinatesWidget" name="InVolumeCoordinatesWidget" />
+          <widget class="ctkCoordinatesWidget" name="InVolumeCoordinatesWidget"/>
          </item>
         </layout>
        </widget>
@@ -274,7 +275,7 @@
       <item>
        <widget class="ctkCollapsibleGroupBox" name="RotationSlidersGroupBox">
         <property name="title">
-         <string>方向</string>
+         <string>Orientation</string>
         </property>
         <layout class="QGridLayout" name="gridLayout">
          <property name="leftMargin">
@@ -298,7 +299,7 @@
             </sizepolicy>
            </property>
            <property name="toolTip">
-            <string>在当前切片平面内围绕切片法线旋转切片</string>
+            <string>Rotate the slice in the current slice plane, around the slice normal</string>
            </property>
            <property name="minimum">
             <double>-200.000000000000000</double>
@@ -311,7 +312,7 @@
          <item row="10" column="0">
           <widget class="QLabel" name="PALabel">
            <property name="text">
-            <string>垂直：</string>
+            <string>Vertical:</string>
            </property>
            <property name="indent">
             <number>12</number>
@@ -321,7 +322,7 @@
          <item row="11" column="0">
           <widget class="QLabel" name="ISLabel">
            <property name="text">
-            <string>在平面内：</string>
+            <string>In-Plane:</string>
            </property>
            <property name="indent">
             <number>12</number>
@@ -333,21 +334,21 @@
            <item>
             <widget class="QPushButton" name="NormalToLRPushButton">
              <property name="text">
-              <string>法线指向左右</string>
+              <string>Normal to LR</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="NormalToPAPushButton">
              <property name="text">
-              <string>法线指向前后</string>
+              <string>Normal to PA</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="NormalToISPushButton">
              <property name="text">
-              <string>法线指向上下</string>
+              <string>Normal to IS</string>
              </property>
             </widget>
            </item>
@@ -356,17 +357,17 @@
          <item row="1" column="1">
           <widget class="QPushButton" name="RotateToVolumePlanePushButton">
            <property name="toolTip">
-            <string>将切片视图旋转以与显示体积的轴对齐</string>
+            <string>Rotate the slice view to be aligned with the axes of the displayed volume</string>
            </property>
            <property name="text">
-            <string>旋转到体积平面</string>
+            <string>Rotate to volume plane</string>
            </property>
           </widget>
          </item>
          <item row="7" column="0">
           <widget class="QLabel" name="Normal_2">
            <property name="text">
-            <string>旋转：</string>
+            <string>Rotation:</string>
            </property>
           </widget>
          </item>
@@ -379,7 +380,7 @@
             </sizepolicy>
            </property>
            <property name="toolTip">
-            <string>围绕切片垂直轴旋转</string>
+            <string>Rotate around the slice vertical axis</string>
            </property>
            <property name="decimals">
             <number>2</number>
@@ -401,7 +402,7 @@
             </sizepolicy>
            </property>
            <property name="toolTip">
-            <string>围绕切片水平轴旋转</string>
+            <string>Rotate around the slice horizontal axis</string>
            </property>
            <property name="decimals">
             <number>2</number>
@@ -417,21 +418,21 @@
          <item row="0" column="0">
           <widget class="QLabel" name="Resetlabel">
            <property name="text">
-            <string>重置为：</string>
+            <string>Reset to:</string>
            </property>
           </widget>
          </item>
          <item row="4" column="0">
           <widget class="QLabel" name="Normal">
            <property name="text">
-            <string>法线：</string>
+            <string>Normal:</string>
            </property>
           </widget>
          </item>
          <item row="9" column="0">
           <widget class="QLabel" name="LRLabel">
            <property name="text">
-            <string>水平：</string>
+            <string>Horizontal:</string>
            </property>
            <property name="indent">
             <number>12</number>
@@ -468,29 +469,29 @@
          <item row="0" column="1">
           <widget class="ctkComboBox" name="SliceOrientationSelector">
            <property name="toolTip">
-            <string>切片方向（轴向、矢状、冠状、重新格式化）。</string>
+            <string>Slice orientation (Axial, Sagittal, Coronal, Reformat).</string>
            </property>
            <property name="currentIndex">
             <number>0</number>
            </property>
            <item>
             <property name="text">
-             <string>轴向</string>
+             <string>Axial</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>矢状</string>
+             <string>Sagittal</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>冠状</string>
+             <string>Coronal</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>重新格式化</string>
+             <string>Reformat</string>
             </property>
            </item>
           </widget>
@@ -514,7 +515,7 @@
          <item row="6" column="1">
           <widget class="ctkCheckablePushButton" name="NormalToCameraCheckablePushButton">
            <property name="text">
-            <string>法线指向相机</string>
+            <string>Normal to Camera</string>
            </property>
            <property name="checkable">
             <bool>false</bool>
@@ -548,40 +549,40 @@
            <item>
             <widget class="QPushButton" name="FlipHorizontalPushButton">
              <property name="toolTip">
-              <string>水平翻转切片视图（左右）</string>
+              <string>Flip slice view horizontally (left-right)</string>
              </property>
              <property name="text">
-              <string>水平翻转</string>
+              <string>Flip H</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="FlipVerticalPushButton">
              <property name="toolTip">
-              <string>垂直翻转切片视图（上下）</string>
+              <string>Flip slice view vertically (upside-down)</string>
              </property>
              <property name="text">
-              <string>垂直翻转</string>
+              <string>Flip V</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="RotateClockwisePushButton">
              <property name="toolTip">
-              <string>顺时针旋转切片视图 90 度</string>
+              <string>Rotate slice view clockwise by 90 degrees</string>
              </property>
              <property name="text">
-              <string>顺时针旋转</string>
+              <string>Rotate CW</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="RotateCounterClockwisePushButton">
              <property name="toolTip">
-              <string>逆时针旋转切片视图 90 度</string>
+              <string>Rotate slice view counterclockwise by 90 degrees</string>
              </property>
              <property name="text">
-              <string>逆时针旋转</string>
+              <string>Rotate CCW</string>
              </property>
             </widget>
            </item>
@@ -612,10 +613,10 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>锁定法线到相机</string>
+    <string>Lock Normal To Camera</string>
    </property>
    <property name="toolTip">
-    <string>锁定重新格式化小部件的法线到相机。</string>
+    <string>Lock reformat widget's normal to the camera one. </string>
    </property>
   </action>
  </widget>
@@ -691,7 +692,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../../../../Libs/MRML/Widgets/Resources/qMRMLWidgets.qrc" />
+  <include location="../../../../../Libs/MRML/Widgets/Resources/qMRMLWidgets.qrc"/>
  </resources>
  <connections>
   <connection>

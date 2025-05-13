@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>SurfaceToolbox</class>
  <widget class="qMRMLWidget" name="SurfaceToolbox">
@@ -13,24 +14,24 @@
    <item>
     <widget class="ctkCollapsibleButton" name="inputsCollapsibleButton">
      <property name="text">
-      <string>表面工具箱</string>
+      <string>Surface Toolbox</string>
      </property>
      <layout class="QFormLayout" name="formLayout_2">
       <item row="0" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>输入模型：</string>
+         <string>Input model:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="qMRMLNodeComboBox" name="inputModelSelector">
         <property name="toolTip">
-         <string>选择输入模型</string>
+         <string>Select the input model</string>
         </property>
         <property name="nodeTypes">
          <stringlist>
-          <string>模型节点 (vtkMRMLModelNode)</string>
+          <string>vtkMRMLModelNode</string>
          </stringlist>
         </property>
         <property name="showChildNodeTypes">
@@ -50,25 +51,25 @@
       <item row="2" column="0">
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>输出模型：</string>
+         <string>Output model:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
        <widget class="qMRMLNodeComboBox" name="outputModelSelector">
         <property name="toolTip">
-         <string>选择输出模型</string>
+         <string>Select the output model</string>
         </property>
         <property name="nodeTypes">
          <stringlist>
-          <string>模型节点 (vtkMRMLModelNode)</string>
+          <string>vtkMRMLModelNode</string>
          </stringlist>
         </property>
         <property name="showChildNodeTypes">
          <bool>false</bool>
         </property>
         <property name="baseName">
-         <string>模型</string>
+         <string>Model</string>
         </property>
         <property name="noneEnabled">
          <bool>true</bool>
@@ -93,10 +94,10 @@
    <item>
     <widget class="QPushButton" name="cleanerButton">
      <property name="toolTip">
-      <string>合并重合点</string>
+      <string>Merge coincident points</string>
      </property>
      <property name="text">
-      <string>清理</string>
+      <string>Clean</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -109,10 +110,10 @@
    <item>
     <widget class="QPushButton" name="remeshButton">
      <property name="toolTip">
-      <string>使用 ACVD 算法进行均匀重网格化</string>
+      <string>Uniform remesh using ACVD algorithm</string>
      </property>
      <property name="text">
-      <string>均匀重网格化</string>
+      <string>Uniform remesh</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -134,14 +135,14 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label_12">
         <property name="text">
-         <string>点的数量：</string>
+         <string>Number of points:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="ctkSliderWidget" name="remeshClustersSlider">
         <property name="toolTip">
-         <string>输出网格中所需的点数。使用更高的数字以保留更多细节。“k”表示千（例如，10k表示10000个输出点）。</string>
+         <string>Desired number of points in the output mesh. Use higher number to preserve more details. &quot;k&quot; means thousand (i.e., 10k means 10000 output points).</string>
         </property>
         <property name="decimals">
          <number>1</number>
@@ -162,21 +163,21 @@
          <double>10.000000000000000</double>
         </property>
         <property name="suffix">
-         <string>千</string>
+         <string>k</string>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_11">
         <property name="text">
-         <string>子划分：</string>
+         <string>Subdivide:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="ctkSliderWidget" name="remeshSubdivideSlider">
         <property name="toolTip">
-         <string>在重网格化之前对子划分每个单元格此次数。每次细分为每个输入三角形创建4个三角形。如果所需的点数高于输入网格中的点数，或者输入网格中有一些过大的单元格，则需要此操作。</string>
+         <string>Subdivide each cells this number of times before remesh. Each subdivision creates 4 triangles for each input triangle. This is needed if the required number of desired points is higher than the number of points in the input mesh, or there are some too large cells in the input mesh.</string>
         </property>
         <property name="decimals">
          <number>0</number>
@@ -201,7 +202,7 @@
    <item>
     <widget class="QPushButton" name="decimationButton">
      <property name="text">
-      <string>减面</string>
+      <string>Decimate</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -223,14 +224,14 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label_6">
         <property name="text">
-         <string>减少：</string>
+         <string>Reduction:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="ctkSliderWidget" name="reductionSlider">
         <property name="toolTip">
-         <string>指定所需的多边形总数的减少（例如，如果减少设置为0.9，则此过滤器将尝试将数据集减少到其原始大小的10％）。</string>
+         <string>Specifies the desired reduction in the total number of polygons (e.g., if Reduction is set to 0.9, this filter will try to reduce the data set to 10% of its original size).</string>
         </property>
         <property name="singleStep">
          <double>0.010000000000000</double>
@@ -249,17 +250,17 @@
       <item row="1" column="0">
        <widget class="QLabel" name="label_7">
         <property name="text">
-         <string>边界删除：</string>
+         <string>Boundary deletion:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="QCheckBox" name="boundaryDeletionCheckBox">
         <property name="toolTip">
-         <string>如果禁用，则边界不会被减面修改（它使用DecimatePro算法，往往会产生更多形状不良的三角形）。</string>
+         <string>If disabled then boundaries will not be modified by decimation (it uses DecimatePro algorithm, which tends to create more ill-shaped triangles).</string>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
@@ -269,7 +270,7 @@
    <item>
     <widget class="QPushButton" name="smoothingButton">
      <property name="text">
-      <string>平滑</string>
+      <string>Smooth</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -291,7 +292,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label_8">
         <property name="text">
-         <string>方法：</string>
+         <string>Method:</string>
         </property>
        </widget>
       </item>
@@ -299,7 +300,7 @@
        <widget class="QComboBox" name="smoothingMethodComboBox">
         <item>
          <property name="text">
-          <string>拉普拉斯</string>
+          <string>Laplace</string>
          </property>
         </item>
         <item>
@@ -312,14 +313,14 @@
       <item row="1" column="0">
        <widget class="QLabel" name="laplaceIterationsLabel">
         <property name="text">
-         <string>迭代次数：</string>
+         <string>Iterations:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="ctkSliderWidget" name="laplaceIterationsSlider">
         <property name="toolTip">
-         <string>确定平滑迭代的最大次数。更高的值允许更多的平滑。通常，小的松弛因子和较大的迭代次数比较大的松弛因子和较小的迭代次数更稳定。</string>
+         <string>Determines the maximum number of smoothing iterations. Higher value allows more smoothing. In general, small relaxation factors and large numbers of iterations are more stable than larger relaxation factors and smaller numbers of iterations.</string>
         </property>
         <property name="decimals">
          <number>0</number>
@@ -341,14 +342,14 @@
       <item row="2" column="0">
        <widget class="QLabel" name="laplaceRelaxationLabel">
         <property name="text">
-         <string>松弛：</string>
+         <string>Relaxation:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
        <widget class="ctkSliderWidget" name="laplaceRelaxationSlider">
         <property name="toolTip">
-         <string>指定每次迭代中点可能被移动的程度。更高的值会导致更多的平滑。</string>
+         <string>Specifies how much points may be displaced during each iteration. Higher value results in more smoothing.</string>
         </property>
         <property name="decimals">
          <number>1</number>
@@ -370,14 +371,14 @@
       <item row="3" column="0">
        <widget class="QLabel" name="taubinIterationsLabel">
         <property name="text">
-         <string>迭代次数：</string>
+         <string>Iterations:</string>
         </property>
        </widget>
       </item>
       <item row="3" column="1">
        <widget class="ctkSliderWidget" name="taubinIterationsSlider">
         <property name="toolTip">
-         <string>确定平滑迭代的最大次数。更高的值允许更精确的平滑。通常10-20次迭代就足够了。</string>
+         <string>Determines the maximum number of smoothing iterations. Higher value allows more accurate smoothing. Typically 10-20 iterations are enough.</string>
         </property>
         <property name="decimals">
          <number>0</number>
@@ -399,14 +400,14 @@
       <item row="4" column="0">
        <widget class="QLabel" name="taubinPassBandLabel">
         <property name="text">
-         <string>通带：</string>
+         <string>Pass band:</string>
         </property>
        </widget>
       </item>
       <item row="4" column="1">
        <widget class="ctkSliderWidget" name="taubinPassBandSlider">
         <property name="toolTip">
-         <string>介于0和2之间的数字。较低的值会产生更多的平滑。</string>
+         <string>Number between 0 and 2. Lower values produce more smoothing.</string>
         </property>
         <property name="decimals">
          <number>4</number>
@@ -428,17 +429,17 @@
       <item row="5" column="0">
        <widget class="QLabel" name="label_9">
         <property name="text">
-         <string>边界平滑：</string>
+         <string>Boundary smoothing:</string>
         </property>
        </widget>
       </item>
       <item row="5" column="1">
        <widget class="QCheckBox" name="boundarySmoothingCheckBox">
         <property name="toolTip">
-         <string>如果禁用，则边界不会被减面修改（它使用DecimatePro算法，往往会产生更多形状不良的三角形）。</string>
+         <string>If disabled then boundaries will not be modified by decimation (it uses DecimatePro algorithm, which tends to create more ill-shaped triangles).</string>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
@@ -448,7 +449,7 @@
    <item>
     <widget class="QPushButton" name="fillHolesButton">
      <property name="text">
-      <string>填充孔</string>
+      <string>Fill holes</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -470,14 +471,14 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label_10">
         <property name="text">
-         <string>最大孔大小：</string>
+         <string>Maximum hole size:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="ctkSliderWidget" name="fillHolesSizeSlider">
         <property name="toolTip">
-         <string>指定将被填充的孔的最大大小。这表示为包含孔的边界外接球的半径。请注意，这是一个近似区域；实际区域无法在三角化孔之前计算。</string>
+         <string>Specifies the maximum size of holes that will be filled. This is represented as a radius to the bounding circumsphere containing the hole. Note that this is an approximate area; the actual area cannot be computed without first triangulating the hole.</string>
         </property>
         <property name="decimals">
          <number>1</number>
@@ -502,7 +503,7 @@
    <item>
     <widget class="QPushButton" name="normalsButton">
      <property name="text">
-      <string>计算表面法线</string>
+      <string>Compute surface normals</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -524,51 +525,51 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label_21">
         <property name="text">
-         <string>自动定向法线：</string>
+         <string>Auto-orient normals:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="QCheckBox" name="autoOrientNormalsCheckBox">
         <property name="toolTip">
-         <string>将法线从封闭表面向外定向</string>
+         <string>Orient the normals outwards from closed surface</string>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_22">
         <property name="text">
-         <string>翻转法线：</string>
+         <string>Flip normals:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="label_23">
         <property name="text">
-         <string>分裂：</string>
+         <string>Splitting:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="QCheckBox" name="flipNormalsCheckBox">
         <property name="toolTip">
-         <string>从当前或自动定向状态翻转法线方向</string>
+         <string>Flip normal direction from its current or auto-oriented state</string>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
        <widget class="QCheckBox" name="splittingCheckBox">
         <property name="toolTip">
-         <string>允许法线的急剧变化，当相邻面之间的角度超过阈值（特征角）时。</string>
+         <string>Allow sharp change in normals where angle between neighbor faces is above a threshold (feature angle).</string>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
@@ -578,7 +579,7 @@
          <bool>false</bool>
         </property>
         <property name="toolTip">
-         <string>如果相邻面之间的角度大于此值，则法线不会在相邻面之间平滑。</string>
+         <string>Normal will not be smoothed between neighbor faces if their angle is larger than this value.</string>
         </property>
         <property name="decimals">
          <number>0</number>
@@ -600,7 +601,7 @@
       <item row="3" column="0">
        <widget class="QLabel" name="label_20">
         <property name="text">
-         <string>用于分裂的特征角：</string>
+         <string>Feature angle for splitting:</string>
         </property>
        </widget>
       </item>
@@ -610,7 +611,7 @@
    <item>
     <widget class="QPushButton" name="mirrorButton">
      <property name="text">
-      <string>镜像</string>
+      <string>Mirror</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -632,51 +633,51 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label_24">
         <property name="text">
-         <string>X 轴：</string>
+         <string>X axis:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="QCheckBox" name="mirrorXCheckBox">
         <property name="toolTip">
-         <string>沿其 X 轴翻转模型</string>
+         <string>Flip model along its X axis</string>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_25">
         <property name="text">
-         <string>Y 轴：</string>
+         <string>Y axis:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="QCheckBox" name="mirrorYCheckBox">
         <property name="toolTip">
-         <string>沿其 Y 轴翻转模型</string>
+         <string>Flip model along its Y axis</string>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="label_26">
         <property name="text">
-         <string>Z 轴：</string>
+         <string>Z axis:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
        <widget class="QCheckBox" name="mirrorZCheckBox">
         <property name="toolTip">
-         <string>沿其 Z 轴翻转模型</string>
+         <string>Flip model along its Z axis</string>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
@@ -686,7 +687,7 @@
    <item>
     <widget class="QPushButton" name="scaleMeshButton">
      <property name="text">
-      <string>缩放</string>
+      <string>Scale</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -708,14 +709,14 @@
       <item row="0" column="0">
        <widget class="QLabel" name="laplaceIterationsLabel_2">
         <property name="text">
-         <string>X 轴缩放：</string>
+         <string>Scale X:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="ctkSliderWidget" name="scaleXSlider">
         <property name="toolTip">
-         <string>指定沿轴的所需缩放。</string>
+         <string>Specifies the desired scale along an axis.</string>
         </property>
         <property name="decimals">
          <number>2</number>
@@ -737,21 +738,21 @@
       <item row="1" column="0">
        <widget class="QLabel" name="laplaceRelaxationLabel_2">
         <property name="text">
-         <string>Y 轴缩放：</string>
+         <string>Scale Y:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="taubinIterationsLabel_2">
         <property name="text">
-         <string>Z 轴缩放：</string>
+         <string>Scale Z:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="ctkSliderWidget" name="scaleYSlider">
         <property name="toolTip">
-         <string>指定沿轴的所需缩放。</string>
+         <string>Specifies the desired scale along an axis.</string>
         </property>
         <property name="decimals">
          <number>2</number>
@@ -773,7 +774,7 @@
       <item row="2" column="1">
        <widget class="ctkSliderWidget" name="scaleZSlider">
         <property name="toolTip">
-         <string>指定沿轴的所需缩放。</string>
+         <string>Specifies the desired scale along an axis.</string>
         </property>
         <property name="decimals">
          <number>2</number>
@@ -798,7 +799,7 @@
    <item>
     <widget class="QPushButton" name="translateMeshButton">
      <property name="text">
-      <string>平移</string>
+      <string>Translate</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -820,14 +821,14 @@
       <item row="1" column="0">
        <widget class="QLabel" name="laplaceIterationsLabel_3">
         <property name="text">
-         <string>X 轴平移：</string>
+         <string>Translate X:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="ctkSliderWidget" name="translationXSlider">
         <property name="toolTip">
-         <string>指定沿轴的所需平移。</string>
+         <string>Specifies the desired translation along an axis.</string>
         </property>
         <property name="decimals">
          <number>2</number>
@@ -852,21 +853,21 @@
       <item row="2" column="0">
        <widget class="QLabel" name="laplaceRelaxationLabel_3">
         <property name="text">
-         <string>Y 轴平移：</string>
+         <string>Translate Y:</string>
         </property>
        </widget>
       </item>
       <item row="3" column="0">
        <widget class="QLabel" name="taubinIterationsLabel_3">
         <property name="text">
-         <string>Z 轴平移：</string>
+         <string>Translate Z:</string>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
        <widget class="ctkSliderWidget" name="translationYSlider">
         <property name="toolTip">
-         <string>指定沿轴的所需平移。</string>
+         <string>Specifies the desired translation along an axis.</string>
         </property>
         <property name="decimals">
          <number>2</number>
@@ -891,7 +892,7 @@
       <item row="3" column="1">
        <widget class="ctkSliderWidget" name="translationZSlider">
         <property name="toolTip">
-         <string>指定沿轴的所需平移。</string>
+         <string>Specifies the desired translation along an axis.</string>
         </property>
         <property name="decimals">
          <number>2</number>
@@ -916,17 +917,17 @@
       <item row="0" column="0">
        <widget class="QLabel" name="laplaceIterationsLabel_5">
         <property name="text">
-         <string>中心：</string>
+         <string>Center:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="QCheckBox" name="translateToOriginCheckBox">
         <property name="toolTip">
-         <string>通过将模型的边界框中心平移到原点来居中模型</string>
+         <string>Center the model by translating its bounding box center to the origin</string>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
@@ -936,10 +937,10 @@
    <item>
     <widget class="QPushButton" name="extractEdgesButton">
      <property name="toolTip">
-      <string>提取边界边缘</string>
+      <string>Extract boundary edges</string>
      </property>
      <property name="text">
-      <string>提取边缘</string>
+      <string>Extract edges</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -961,41 +962,41 @@
       <item row="0" column="0">
        <widget class="QLabel" name="laplaceIterationsLabel_4">
         <property name="text">
-         <string>边界边缘：</string>
+         <string>Boundary edges:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="QCheckBox" name="extractEdgesBoundaryCheckBox">
         <property name="toolTip">
-         <string>由一个多边形或线单元使用的边</string>
+         <string>edges used by one polygon or a line cell</string>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="laplaceRelaxationLabel_4">
         <property name="text">
-         <string>特征边缘：</string>
+         <string>Feature edges:</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="QCheckBox" name="extractEdgesFeatureCheckBox">
         <property name="toolTip">
-         <string>由两个三角形使用的边，且其二面角大于指定的特征角</string>
+         <string>edges used by two triangles and whose dihedral angle is larger than the specified feature angle</string>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="taubinIterationsLabel_5">
         <property name="text">
-         <string>特征角：</string>
+         <string>Feature angle:</string>
         </property>
         <property name="indent">
          <number>10</number>
@@ -1005,7 +1006,7 @@
       <item row="2" column="1">
        <widget class="ctkSliderWidget" name="extractEdgesFeatureAngleSlider">
         <property name="toolTip">
-         <string>考虑边为特征边的最小角度</string>
+         <string>minimum angle to consider an edge to be a feature edge</string>
         </property>
         <property name="decimals">
          <number>2</number>
@@ -1030,34 +1031,34 @@
       <item row="3" column="0">
        <widget class="QLabel" name="taubinIterationsLabel_6">
         <property name="text">
-         <string>流形边缘：</string>
+         <string>Manifold edges:</string>
         </property>
        </widget>
       </item>
       <item row="3" column="1">
        <widget class="QCheckBox" name="extractEdgesManifoldCheckBox">
         <property name="toolTip">
-         <string>由恰好两个多边形使用的边</string>
+         <string>edges used by exactly two polygons</string>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
       <item row="4" column="0">
        <widget class="QLabel" name="taubinIterationsLabel_4">
         <property name="text">
-         <string>非流形边缘：</string>
+         <string>Non-manifold edges:</string>
         </property>
        </widget>
       </item>
       <item row="4" column="1">
        <widget class="QCheckBox" name="extractEdgesNonManifoldCheckBox">
         <property name="toolTip">
-         <string>由三个或更多多边形使用</string>
+         <string>used by three or more polygons</string>
         </property>
         <property name="text">
-         <string />
+         <string/>
         </property>
        </widget>
       </item>
@@ -1067,10 +1068,10 @@
    <item>
     <widget class="QPushButton" name="connectivityButton">
      <property name="toolTip">
-      <string>保留最大的连通组件。</string>
+      <string>Keep largest connected component.</string>
      </property>
      <property name="text">
-      <string>提取最大组件</string>
+      <string>Extract largest component</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -1088,10 +1089,10 @@
      <item>
       <widget class="QPushButton" name="toggleModelsButton">
        <property name="toolTip">
-        <string>显示原始模型。</string>
+        <string>Show original model.</string>
        </property>
        <property name="text">
-        <string>切换模型</string>
+        <string>Toggle models</string>
        </property>
        <property name="checkable">
         <bool>false</bool>
@@ -1101,10 +1102,10 @@
      <item>
       <widget class="QPushButton" name="applyButton">
        <property name="toolTip">
-        <string>执行选定的处理步骤。</string>
+        <string>Perform selected processing steps.</string>
        </property>
        <property name="text">
-        <string>应用</string>
+        <string>Apply</string>
        </property>
       </widget>
      </item>
@@ -1149,7 +1150,7 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>SurfaceToolbox</sender>

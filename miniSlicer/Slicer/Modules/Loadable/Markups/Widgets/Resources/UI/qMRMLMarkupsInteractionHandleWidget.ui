@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLMarkupsInteractionHandleWidget</class>
  <widget class="qMRMLWidget" name="qMRMLMarkupsInteractionHandleWidget">
@@ -16,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>交互手柄</string>
+   <string>Interaction Handles</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
@@ -40,7 +41,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>启用平移：</string>
+      <string>Enable translation:</string>
      </property>
     </widget>
    </item>
@@ -53,7 +54,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>包含中心线定量分析的表格（半径、长度、曲率、扭转等）</string>
+      <string>Y</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -63,28 +64,28 @@
    <item row="1" column="6" alignment="Qt::AlignHCenter">
     <widget class="QCheckBox" name="translateYCheckBox">
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
    <item row="5" column="7" alignment="Qt::AlignHCenter">
     <widget class="QCheckBox" name="scaleZCheckBox">
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
    <item row="3" column="7" alignment="Qt::AlignHCenter">
     <widget class="QCheckBox" name="rotateZCheckBox">
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
    <item row="5" column="5" alignment="Qt::AlignHCenter">
     <widget class="QCheckBox" name="scaleXCheckBox">
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
@@ -97,7 +98,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>网络曲线：</string>
+      <string>X</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -113,7 +114,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>中心线提取结果作为标记曲线的层次结构。</string>
+      <string>Z</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -129,14 +130,14 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
    <item row="13" column="0">
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>尺寸：</string>
+      <string>Size:</string>
      </property>
     </widget>
    </item>
@@ -149,7 +150,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>更多选项...</string>
+      <string>More options...</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -165,14 +166,14 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
    <item row="5" column="8" alignment="Qt::AlignHCenter">
     <widget class="QCheckBox" name="scaleViewPlaneCheckBox">
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
@@ -192,7 +193,7 @@
    <item row="3" column="6" alignment="Qt::AlignHCenter">
     <widget class="QCheckBox" name="rotateYCheckBox">
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
@@ -205,14 +206,14 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>可见性：</string>
+      <string>Visibility:</string>
      </property>
     </widget>
    </item>
    <item row="1" column="7" alignment="Qt::AlignHCenter">
     <widget class="QCheckBox" name="translateZCheckBox">
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
@@ -225,7 +226,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
@@ -238,7 +239,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>视图平面</string>
+      <string>View plane</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -248,14 +249,14 @@
    <item row="1" column="8" alignment="Qt::AlignHCenter">
     <widget class="QCheckBox" name="translateViewPlaneCheckBox">
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
    <item row="3" column="5" alignment="Qt::AlignHCenter">
     <widget class="QCheckBox" name="rotateXCheckBox">
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
@@ -281,7 +282,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>启用缩放：</string>
+      <string>Enable scaling:</string>
      </property>
     </widget>
    </item>
@@ -291,7 +292,7 @@
       <enum>Qt::LeftToRight</enum>
      </property>
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
@@ -304,7 +305,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>启用旋转：</string>
+      <string>Enable rotation:</string>
      </property>
     </widget>
    </item>
@@ -317,14 +318,14 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
    <item row="5" column="6" alignment="Qt::AlignHCenter">
     <widget class="QCheckBox" name="scaleYCheckBox">
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
@@ -344,7 +345,7 @@
    <item row="3" column="8" alignment="Qt::AlignHCenter">
     <widget class="QCheckBox" name="rotateViewPlaneCheckBox">
      <property name="text">
-      <string />
+      <string/>
      </property>
     </widget>
    </item>
@@ -363,7 +364,7 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>moreOptionsCheckBox</sender>

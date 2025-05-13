@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerStenosisMeasurement3DModuleWidget</class>
  <widget class="qSlicerWidget" name="qSlicerStenosisMeasurement3DModuleWidget">
@@ -29,7 +30,7 @@
        </property>
        <property name="nodeTypes">
         <stringlist notr="true">
-         <string>标记形状节点 (vtkMRMLMarkupsShapeNode)</string>
+         <string>vtkMRMLMarkupsShapeNode</string>
         </stringlist>
        </property>
        <property name="baseName">
@@ -61,7 +62,7 @@
        </property>
        <property name="nodeTypes">
         <stringlist notr="true">
-         <string>标记点节点 (vtkMRMLMarkupsFiducialNode)</string>
+         <string>vtkMRMLMarkupsFiducialNode</string>
         </stringlist>
        </property>
        <property name="baseName">
@@ -124,7 +125,7 @@
    <item>
     <widget class="ctkCollapsibleButton" name="resultCollapsibleButton">
      <property name="toolTip">
-      <string />
+      <string/>
      </property>
      <property name="text">
       <string>结果</string>
@@ -142,7 +143,7 @@
         <item row="0" column="1">
          <widget class="QLabel" name="wallResultLabel">
           <property name="text">
-           <string />
+           <string/>
           </property>
          </widget>
         </item>
@@ -156,7 +157,7 @@
         <item row="1" column="1">
          <widget class="QLabel" name="lumenResultLabel">
           <property name="text">
-           <string />
+           <string/>
           </property>
          </widget>
         </item>
@@ -170,7 +171,7 @@
         <item row="2" column="1">
          <widget class="QLabel" name="lesionResultLabel">
           <property name="text">
-           <string />
+           <string/>
           </property>
          </widget>
         </item>
@@ -184,7 +185,7 @@
         <item row="3" column="1">
          <widget class="QLabel" name="stenosisResultLabel">
           <property name="text">
-           <string />
+           <string/>
           </property>
          </widget>
         </item>
@@ -198,7 +199,7 @@
         <item row="4" column="1">
          <widget class="QLabel" name="lengthResultLabel">
           <property name="text">
-           <string />
+           <string/>
           </property>
          </widget>
         </item>
@@ -229,7 +230,7 @@
              </property>
              <property name="nodeTypes">
               <stringlist notr="true">
-               <string>模型节点 (vtkMRMLModelNode)</string>
+               <string>vtkMRMLModelNode</string>
               </stringlist>
              </property>
              <property name="baseName">
@@ -260,7 +261,7 @@
              </property>
              <property name="nodeTypes">
               <stringlist notr="true">
-               <string>模型节点 (vtkMRMLModelNode)</string>
+               <string>vtkMRMLModelNode</string>
               </stringlist>
              </property>
              <property name="baseName">
@@ -344,7 +345,7 @@
    <header>qMRMLSegmentSelectorWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>qSlicerStenosisMeasurement3DModuleWidget</sender>

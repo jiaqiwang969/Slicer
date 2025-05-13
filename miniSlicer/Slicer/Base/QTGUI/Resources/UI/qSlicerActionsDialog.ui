@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerActionsDialog</class>
  <widget class="QDialog" name="qSlicerActionsDialog">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>操作</string>
+   <string>Actions</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <property name="margin">
@@ -23,7 +24,7 @@
      </property>
      <widget class="QWidget" name="ActionsTab">
       <attribute name="title">
-       <string>快捷键</string>
+       <string>Shortcuts</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
        <property name="margin">
@@ -40,7 +41,7 @@
      </widget>
      <widget class="QWidget" name="WikiTab">
       <attribute name="title">
-       <string>更多...</string>
+       <string>More...</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
        <property name="margin">
@@ -72,7 +73,7 @@
    <header>ctkActionsWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>buttonBox</sender>

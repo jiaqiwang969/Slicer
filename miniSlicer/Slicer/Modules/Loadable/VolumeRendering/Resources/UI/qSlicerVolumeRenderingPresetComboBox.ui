@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerVolumeRenderingPresetComboBox</class>
  <widget class="qSlicerWidget" name="qSlicerVolumeRenderingPresetComboBox">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>体积渲染预设</string>
+   <string>Volume Rendering Presets</string>
   </property>
   <layout class="QFormLayout" name="formLayout_2">
    <property name="fieldGrowthPolicy">
@@ -31,27 +32,27 @@
    <item row="0" column="0">
     <widget class="QLabel" name="PresetsLabel">
      <property name="text">
-      <string>预设：</string>
+      <string>Preset:</string>
      </property>
     </widget>
    </item>
    <item row="0" column="1">
-    <widget class="qSlicerPresetComboBox" name="PresetComboBox" />
+    <widget class="qSlicerPresetComboBox" name="PresetComboBox"/>
    </item>
    <item row="1" column="0">
     <widget class="QLabel" name="label">
      <property name="toolTip">
-      <string>移动传输函数</string>
+      <string>Shift transfer functions</string>
      </property>
      <property name="text">
-      <string>移动：</string>
+      <string>Shift:</string>
      </property>
     </widget>
    </item>
    <item row="1" column="1">
     <widget class="ctkDoubleSlider" name="PresetOffsetSlider">
      <property name="toolTip">
-      <string>移动传输函数</string>
+      <string>Shift transfer functions</string>
      </property>
      <property name="value">
       <double>0.500000000000000</double>
@@ -98,7 +99,7 @@
    <header>ctkDoubleSlider.h</header>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>qSlicerVolumeRenderingPresetComboBox</sender>

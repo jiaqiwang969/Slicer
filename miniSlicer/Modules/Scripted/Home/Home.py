@@ -419,9 +419,7 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
                             print("DEBUG: Segment Editor Widget added to layout and made visible.")
                         else:
                             # 如果在 UI 中未能获取到布局，则在运行时创建一个新的垂直布局并添加到 groupBox
-                            print(
-                                f"INFO: segmentEditorDisplayGroupBox.layout() is {type(target_layout).__name__ if target_layout else 'None'}. Programmatically creating and setting QVBoxLayout for it."
-                            )
+                            print(f"INFO: segmentEditorDisplayGroupBox.layout() is {type(target_layout).__name__ if target_layout else 'None'}. Programmatically creating and setting QVBoxLayout for it.")
                             new_layout = qt.QVBoxLayout(segment_editor_groupbox)
                             new_layout.setObjectName("segmentEditorLayout_auto")
                             new_layout.addWidget(self.segmentEditorWidget)
@@ -1137,7 +1135,7 @@ class HomeLogic(ScriptedLoadableModuleLogic):
                     threeDWidget = layoutManager.threeDWidget(threeDViewIndex)
                     if threeDWidget:
                         threeDView = threeDWidget.threeDView()
-                threeDView.resetFocalPoint()
+                        threeDView.resetFocalPoint()
             
             return loaded_node, f"STL 文件 '{stl_file_path}' 已成功导入为 '{loaded_node.GetName()}'."
 
@@ -1231,18 +1229,19 @@ class HomeLogic(ScriptedLoadableModuleLogic):
                             if math.sin(view_angle_rad / 2.0) > 1e-6: # Avoid division by zero for tiny angles
                                 new_distance = bounds_radius / math.sin(view_angle_rad / 2.0)
                             else:
-                                new_distance = bounds_radius * 5  # Fallback if angle is too small, pull back further
-
+                                new_distance = bounds_radius * 5 # Fallback if angle is too small, pull back further
+                            
                             if vtk_camera.GetParallelProjection():
                                 # For parallel projection, adjust parallel scale
                                 # Parallel scale is half of the viewport height in world coordinates.
                                 # We want the largest dimension of the bounds to fit.
-                                vtk_camera.SetParallelScale(max(height, width) / 2.0)  # A common approach
+                                vtk_camera.SetParallelScale(max(height, width) / 2.0) # A common approach
                                 # Or more precisely, if fitting to bounds_radius in the view angle context:
                                 # vtk_camera.SetParallelScale(bounds_radius)
                             else:
-                                # For perspective projection, we'll apply new_distance below via position update.
-                                pass
+                                # For perspective projection, set the distance
+                                # The new_distance calculation is for perspective.
+                                pass # new_distance will be used below
 
                             # Get view plane normal (direction from focal point to camera)
                             view_plane_normal = list(vtk_camera.GetViewPlaneNormal())

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLModelInfoWidget</class>
  <widget class="QWidget" name="qMRMLModelInfoWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>模型信息</string>
+   <string>Model Information</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
    <property name="margin">
@@ -19,7 +20,7 @@
    <item row="0" column="0">
     <widget class="QLabel" name="MeshTypeLabel">
      <property name="text">
-      <string>网格类型：</string>
+      <string>Mesh Type:</string>
      </property>
     </widget>
    </item>
@@ -33,7 +34,7 @@
    <item row="1" column="0">
     <widget class="QLabel" name="SurfaceAreaLabel">
      <property name="text">
-      <string>表面积：</string>
+      <string>Surface Area:</string>
      </property>
     </widget>
    </item>
@@ -43,7 +44,7 @@
       <bool>false</bool>
      </property>
      <property name="suffix">
-      <string>平方毫米</string>
+      <string>mm^2</string>
      </property>
      <property name="maximum">
       <double>1000000000.000000000000000</double>
@@ -53,7 +54,7 @@
    <item row="2" column="0">
     <widget class="QLabel" name="VolumeAreaLabel">
      <property name="text">
-      <string>体积：</string>
+      <string>Volume:</string>
      </property>
     </widget>
    </item>
@@ -63,7 +64,7 @@
       <bool>false</bool>
      </property>
      <property name="suffix">
-      <string>立方毫米</string>
+      <string>mm^3</string>
      </property>
      <property name="maximum">
       <double>1000000000.000000000000000</double>
@@ -73,7 +74,7 @@
    <item row="3" column="0">
     <widget class="QLabel" name="NumberOfPointsLabel">
      <property name="text">
-      <string>点数：</string>
+      <string>Number of Points:</string>
      </property>
     </widget>
    </item>
@@ -90,7 +91,7 @@
    <item row="5" column="0">
     <widget class="QLabel" name="NumberOfPointsScalarsLabel">
      <property name="text">
-      <string>点标量数：</string>
+      <string>Number of Points Scalars:</string>
      </property>
     </widget>
    </item>
@@ -107,7 +108,7 @@
    <item row="6" column="0">
     <widget class="QLabel" name="NumberOfCellsScalarsLabel">
      <property name="text">
-      <string>单元标量数：</string>
+      <string>Number of Cells Scalars:</string>
      </property>
     </widget>
    </item>
@@ -124,7 +125,7 @@
    <item row="7" column="0">
     <widget class="QLabel" name="FileNameLabel">
      <property name="text">
-      <string>文件名：</string>
+      <string>Filename:</string>
      </property>
     </widget>
    </item>
@@ -191,7 +192,7 @@
         <item row="0" column="1">
          <widget class="QLabel" name="NumberOfVertsLabel">
           <property name="text">
-           <string>顶点</string>
+           <string>Verts</string>
           </property>
          </widget>
         </item>
@@ -208,7 +209,7 @@
         <item row="1" column="1">
          <widget class="QLabel" name="NumberOfLinesLabel">
           <property name="text">
-           <string>线段</string>
+           <string>Lines</string>
           </property>
          </widget>
         </item>
@@ -235,21 +236,21 @@
         <item row="0" column="3">
          <widget class="QLabel" name="NumberOfPolysLabel">
           <property name="text">
-           <string>多边形</string>
+           <string>Polys</string>
           </property>
          </widget>
         </item>
         <item row="1" column="3">
          <widget class="QLabel" name="NumberOfStripsLabel">
           <property name="text">
-           <string>条带</string>
+           <string>Strips</string>
           </property>
          </widget>
         </item>
         <item row="2" column="2" colspan="2">
          <widget class="QLabel" name="MaxCellSizeLabel">
           <property name="text">
-           <string>最大单元大小</string>
+           <string>Max cell size</string>
           </property>
          </widget>
         </item>
@@ -271,7 +272,7 @@
    <item row="4" column="0">
     <widget class="QLabel" name="NumberOfCellsLabel">
      <property name="text">
-      <string>单元数：</string>
+      <string>Number of Cells:</string>
      </property>
     </widget>
    </item>
@@ -289,7 +290,7 @@
    <header>ctkDoubleSpinBox.h</header>
   </customwidget>
  </customwidgets>
- <resources />
+ <resources/>
  <connections>
   <connection>
    <sender>ExpandButton</sender>

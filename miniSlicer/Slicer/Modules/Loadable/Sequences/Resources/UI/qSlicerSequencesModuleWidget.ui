@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qSlicerSequencesModuleWidget</class>
  <widget class="qSlicerWidget" name="qSlicerSequencesModuleWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>序列</string>
+   <string>Sequences</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -20,7 +21,7 @@
      </property>
      <widget class="QWidget" name="browseSequenceTab">
       <attribute name="title">
-       <string>浏览</string>
+       <string>Browse</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
@@ -28,7 +29,7 @@
          <item>
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>序列浏览器：</string>
+            <string>Sequence browser:</string>
            </property>
           </widget>
          </item>
@@ -36,11 +37,11 @@
           <widget class="qMRMLNodeComboBox" name="MRMLNodeComboBox_ActiveBrowser">
            <property name="nodeTypes">
             <stringlist notr="true">
-             <string>序列浏览器节点 (vtkMRMLSequenceBrowserNode)</string>
+             <string>vtkMRMLSequenceBrowserNode</string>
             </stringlist>
            </property>
            <property name="baseName">
-            <string>序列浏览器</string>
+            <string>SequenceBrowser</string>
            </property>
            <property name="renameEnabled">
             <bool>true</bool>
@@ -52,17 +53,17 @@
        <item>
         <widget class="ctkCollapsibleButton" name="InputSection">
          <property name="text">
-          <string>浏览</string>
+          <string>Browsing</string>
          </property>
          <property name="collapsedHeight">
           <number>6</number>
          </property>
          <layout class="QGridLayout" name="gridLayout">
           <item row="3" column="0" colspan="2">
-           <widget class="qMRMLSequenceBrowserSeekWidget" name="sequenceBrowserSeekWidget" />
+           <widget class="qMRMLSequenceBrowserSeekWidget" name="sequenceBrowserSeekWidget"/>
           </item>
           <item row="2" column="0" colspan="2">
-           <widget class="qMRMLSequenceBrowserPlayWidget" name="sequenceBrowserPlayWidget" />
+           <widget class="qMRMLSequenceBrowserPlayWidget" name="sequenceBrowserPlayWidget"/>
           </item>
          </layout>
         </widget>
@@ -70,7 +71,7 @@
        <item>
         <widget class="ctkCollapsibleButton" name="SynchronizedBrowsingSection">
          <property name="text">
-          <string>同步节点</string>
+          <string>Synchronized nodes</string>
          </property>
          <property name="collapsedHeight">
           <number>6</number>
@@ -85,7 +86,7 @@
              <widget class="qMRMLNodeComboBox" name="MRMLNodeComboBox_SynchronizeSequenceNode">
               <property name="nodeTypes">
                <stringlist notr="true">
-                <string>序列节点 (vtkMRMLSequenceNode)</string>
+                <string>vtkMRMLSequenceNode</string>
                </stringlist>
               </property>
               <property name="showChildNodeTypes">
@@ -101,7 +102,7 @@
                <bool>false</bool>
               </property>
               <property name="noneDisplay">
-               <string>(新序列)</string>
+               <string>(new sequence)</string>
               </property>
              </widget>
             </item>
@@ -114,10 +115,10 @@
                </sizepolicy>
               </property>
               <property name="toolTip">
-               <string>将选定的序列添加到浏览器。</string>
+               <string>Add the selected sequence to the browser.</string>
               </property>
               <property name="text">
-               <string />
+               <string/>
               </property>
              </widget>
             </item>
@@ -130,10 +131,10 @@
                </sizepolicy>
               </property>
               <property name="toolTip">
-               <string>从浏览器中移除选定的序列。</string>
+               <string>Remove the selected sequence(s) from the browser.</string>
               </property>
               <property name="text">
-               <string />
+               <string/>
               </property>
              </widget>
             </item>
@@ -158,26 +159,26 @@
             </attribute>
             <column>
              <property name="text">
-              <string>序列</string>
+              <string>Sequence</string>
              </property>
              <property name="toolTip">
-              <string>序列节点的名称。</string>
+              <string>The sequence node's name.</string>
              </property>
             </column>
             <column>
              <property name="text">
-              <string>代理节点</string>
+              <string>Proxy node</string>
              </property>
              <property name="toolTip">
-              <string>序列的“代理”节点（用于播放或录制的节点）。</string>
+              <string>The &quot;proxy&quot; node for the sequence (the node to playback into or record from).</string>
              </property>
             </column>
             <column>
              <property name="text">
-              <string />
+              <string/>
              </property>
              <property name="toolTip">
-              <string>&amp;lt;html&amp;gt;&amp;lt;head/&amp;gt;&amp;lt;body&amp;gt;&amp;lt;p&amp;gt;播放 - 在播放期间用序列节点内容更新代理节点。&amp;lt;/p&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Playback - update proxy node with sequence node contents during playback.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
              <property name="icon">
               <iconset resource="../../Widgets/Resources/qSlicerSequencesModuleWidgets.qrc">
@@ -186,10 +187,10 @@
             </column>
             <column>
              <property name="text">
-              <string />
+              <string/>
              </property>
              <property name="toolTip">
-              <string>&amp;lt;html&amp;gt;&amp;lt;head/&amp;gt;&amp;lt;body&amp;gt;&amp;lt;p&amp;gt;录制 - 在录制期间将代理节点的更改保存到序列节点。&amp;lt;/p&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Record - save proxy node changes into sequence node during recording.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
              <property name="icon">
               <iconset resource="../../Widgets/Resources/qSlicerSequencesModuleWidgets.qrc">
@@ -198,18 +199,18 @@
             </column>
             <column>
              <property name="text">
-              <string>重命名</string>
+              <string>Rename</string>
              </property>
              <property name="toolTip">
-              <string>&amp;lt;html&amp;gt;&amp;lt;head/&amp;gt;&amp;lt;body&amp;gt;&amp;lt;p&amp;gt;使用序列节点名称和索引值设置代理节点名称。&amp;lt;/p&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Set the proxy node name using sequence node name and index value.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </column>
             <column>
              <property name="text">
-              <string>保存更改</string>
+              <string>Save changes</string>
              </property>
              <property name="toolTip">
-              <string>&amp;lt;html&amp;gt;&amp;lt;head/&amp;gt;&amp;lt;body&amp;gt;&amp;lt;p&amp;gt;在不处于播放或录制模式时，将代理节点的当前状态保存到序列中。&amp;lt;/p&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save the proxy node current state into the sequence when not in playback or recording mode.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </column>
            </widget>
@@ -223,7 +224,7 @@
           <bool>true</bool>
          </property>
          <property name="text">
-          <string>绘图</string>
+          <string>Plotting</string>
          </property>
          <property name="checked">
           <bool>false</bool>
@@ -238,7 +239,7 @@
           <item row="0" column="0">
            <widget class="QPushButton" name="pushButton_iCharting">
             <property name="text">
-             <string>启用交互式绘图</string>
+             <string>Enable interactive charting</string>
             </property>
             <property name="checkable">
              <bool>true</bool>
@@ -270,7 +271,7 @@
        <item>
         <widget class="ctkCollapsibleButton" name="AdvancedSection">
          <property name="text">
-          <string>高级</string>
+          <string>Advanced</string>
          </property>
          <property name="checked">
           <bool>false</bool>
@@ -288,38 +289,38 @@
           <item row="0" column="0">
            <widget class="QLabel" name="label_PlaybackItemSkippingEnabled">
             <property name="text">
-             <string>启用播放期间跳过项目：</string>
+             <string>Enable item skip during playback:</string>
             </property>
            </widget>
           </item>
           <item row="0" column="1">
            <widget class="QCheckBox" name="checkBox_PlaybackItemSkippingEnabled">
             <property name="toolTip">
-             <string>如果选中，则在播放期间可能会跳过项目以达到请求的帧率。如果未选中，则在播放期间将显示每个项目，但播放速度可能低于请求的速度。</string>
+             <string>If checked, items may be skipped during playback to reach the requested frame rate. If not checked then each item is displayed during playback but the playback speed may be lower than requested.</string>
             </property>
             <property name="text">
-             <string />
+             <string/>
             </property>
            </widget>
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_RecordMasterOnly">
             <property name="text">
-             <string>仅在主节点上录制：</string>
+             <string>Record on master node only:</string>
             </property>
            </widget>
           </item>
           <item row="1" column="1">
            <widget class="QCheckBox" name="checkBox_RecordMasterOnly">
             <property name="text">
-             <string />
+             <string/>
             </property>
            </widget>
           </item>
           <item row="2" column="0">
            <widget class="QLabel" name="label_MasterSequence">
             <property name="text">
-             <string>主节点：</string>
+             <string>Master node:</string>
             </property>
            </widget>
           </item>
@@ -327,7 +328,7 @@
            <widget class="qMRMLNodeComboBox" name="MRMLNodeComboBox_MasterSequence">
             <property name="nodeTypes">
              <stringlist notr="true">
-              <string>序列节点 (vtkMRMLSequenceNode)</string>
+              <string>vtkMRMLSequenceNode</string>
              </stringlist>
             </property>
             <property name="noneEnabled">
@@ -347,7 +348,7 @@
           <item row="3" column="0">
            <widget class="QLabel" name="label_RecordingFrameRate">
             <property name="text">
-             <string>录制采样模式：</string>
+             <string>Recording sampling mode:</string>
             </property>
            </widget>
           </item>
@@ -355,12 +356,12 @@
            <widget class="QComboBox" name="comboBox_RecordingSamplingMode">
             <item>
              <property name="text">
-              <string extracomment="Record all node changes">最大</string>
+              <string extracomment="Record all node changes">Maximum</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string extracomment="Limit recording frame rate to playback frame rate">限制为播放速率</string>
+              <string extracomment="Limit recording frame rate to playback frame rate">Limited to playback rate</string>
              </property>
             </item>
            </widget>
@@ -368,7 +369,7 @@
           <item row="4" column="0">
            <widget class="QLabel" name="label_IndexDisplayMode">
             <property name="text">
-             <string>索引显示：</string>
+             <string>Index display:</string>
             </property>
            </widget>
           </item>
@@ -376,12 +377,12 @@
            <widget class="QComboBox" name="comboBox_IndexDisplayMode">
             <item>
              <property name="text">
-              <string extracomment="Display item index of master node">索引</string>
+              <string extracomment="Display item index of master node">Index</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string extracomment="Display index value of selected item">索引值</string>
+              <string extracomment="Display index value of selected item">Index value</string>
              </property>
             </item>
            </widget>
@@ -389,14 +390,14 @@
           <item row="5" column="0">
            <widget class="QLabel" name="label_IndexDisplayDecimals">
             <property name="text">
-             <string>索引显示格式：</string>
+             <string>Index display format:</string>
             </property>
            </widget>
           </item>
           <item row="5" column="1">
            <widget class="QLineEdit" name="lineEdit_IndexDisplayFormat">
             <property name="toolTip">
-             <string>以 SPRINTF 格式显示索引字符串。仅替换第一个转换说明符。可用的说明符有：fFgGeEs。</string>
+             <string>Display index string in SPRINTF format. Only the first conversion specification is replaced. Available specifiers are: fFgGeEs.</string>
             </property>
            </widget>
           </item>
@@ -407,7 +408,7 @@
      </widget>
      <widget class="QWidget" name="editSequenceTab">
       <attribute name="title">
-       <string>编辑</string>
+       <string>Edit</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
@@ -419,7 +420,7 @@
           <widget class="qMRMLNodeComboBox" name="MRMLNodeComboBox_Sequence">
            <property name="nodeTypes">
             <stringlist notr="true">
-             <string>序列节点 (vtkMRMLSequenceNode)</string>
+             <string>vtkMRMLSequenceNode</string>
             </stringlist>
            </property>
            <property name="noneEnabled">
@@ -436,12 +437,12 @@
          <item row="0" column="0">
           <widget class="QLabel" name="Label_ActiveNode">
            <property name="text">
-            <string>序列：</string>
+            <string>Sequence:</string>
            </property>
           </widget>
          </item>
          <item row="1" column="0" colspan="2">
-          <widget class="qMRMLSequenceEditWidget" name="SequenceEditWidget" />
+          <widget class="qMRMLSequenceEditWidget" name="SequenceEditWidget"/>
          </item>
         </layout>
        </item>
@@ -500,8 +501,8 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../qSlicerSequencesModule.qrc" />
-  <include location="../../Widgets/Resources/qSlicerSequencesModuleWidgets.qrc" />
+  <include location="../qSlicerSequencesModule.qrc"/>
+  <include location="../../Widgets/Resources/qSlicerSequencesModuleWidgets.qrc"/>
  </resources>
  <connections>
   <connection>

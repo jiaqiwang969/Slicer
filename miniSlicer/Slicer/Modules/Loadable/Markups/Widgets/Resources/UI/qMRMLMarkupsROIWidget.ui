@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>qMRMLMarkupsROIWidget</class>
  <widget class="QWidget" name="qMRMLMarkupsROIWidget">
@@ -10,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>ROI 设置</string>
+   <string>ROI Settings</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">
@@ -28,7 +29,7 @@
    <item>
     <widget class="ctkCollapsibleButton" name="roiSettingsCollapseButton">
      <property name="text">
-      <string>ROI 设置</string>
+      <string>ROI Settings</string>
      </property>
      <property name="collapsed">
       <bool>false</bool>
@@ -45,24 +46,24 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>ROI 类型：</string>
+           <string>ROI type:</string>
           </property>
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QComboBox" name="roiTypeComboBox" />
+         <widget class="QComboBox" name="roiTypeComboBox"/>
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="label">
           <property name="text">
-           <string>由内而外：</string>
+           <string>Inside out:</string>
           </property>
          </widget>
         </item>
         <item row="1" column="1">
          <widget class="QCheckBox" name="insideOutCheckBox">
           <property name="text">
-           <string />
+           <string/>
           </property>
          </widget>
         </item>
@@ -73,7 +74,7 @@
         <item row="0" column="0">
          <widget class="QLabel" name="LRRangeLabel">
           <property name="text">
-           <string>左-右范围：</string>
+           <string>L-R Range:</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -709,14 +710,14 @@
            </palette>
           </property>
           <property name="quantity">
-           <string notr="true">长度</string>
+           <string notr="true">length</string>
           </property>
          </widget>
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="PARangeLabel">
           <property name="text">
-           <string>前-后范围：</string>
+           <string>P-A Range:</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -1352,7 +1353,7 @@
            </palette>
           </property>
           <property name="quantity">
-           <string notr="true">长度</string>
+           <string notr="true">length</string>
           </property>
          </widget>
         </item>
@@ -1985,14 +1986,14 @@
            </palette>
           </property>
           <property name="quantity">
-           <string notr="true">长度</string>
+           <string notr="true">length</string>
           </property>
          </widget>
         </item>
         <item row="2" column="0">
          <widget class="QLabel" name="ISRangeLabel">
           <property name="text">
-           <string>内-外范围：</string>
+           <string>I-S Range:</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -2034,7 +2035,7 @@
         <item>
          <widget class="QLabel" name="DisplayClippingBoxLabel">
           <property name="text">
-           <string>显示 ROI</string>
+           <string>Display ROI</string>
           </property>
          </widget>
         </item>
@@ -2057,7 +2058,7 @@
         <item>
          <widget class="QCheckBox" name="InteractiveModeCheckBox">
           <property name="text">
-           <string>交互模式</string>
+           <string>Interactive Mode</string>
           </property>
           <property name="checked">
            <bool>true</bool>
@@ -2102,6 +2103,6 @@
    <header>ctkRangeWidget.h</header>
   </customwidget>
  </customwidgets>
- <resources />
- <connections />
+ <resources/>
+ <connections/>
 </ui>
