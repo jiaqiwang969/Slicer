@@ -57,28 +57,16 @@
 1.  **确保顶层 `miniSlicer/CMakeLists.txt` 中已移除对旧 `VTL3D_1.0` 路径的 `add_subdirectory` 调用。**
 2.  **清理构建目录 (强烈建议)**:
     ```bash
-    # From your workspace root (/home/jqwang/Work/02-Slicer)
     rm -rf ./build/build-mini
     ```
-3.  **重新配置 CMake (使用你的脚本)**:
+3.  **重新配置 CMake (使用 nix 环境)**:
     ```bash
-    # From your workspace root
-    ./configure_slicer_mini ./miniSlicer ./build/build-mini ./build/install-mini
+    nix develop
+    configure_slicer_mini ./miniSlicer ./build/build-mini ./build/install-mini
     ```
-4.  **构建项目 (或仅构建目标模块)**:
+4.  **构建项目**:
     ```bash
-    # From your workspace root
-    cd ./build/build-mini
-    make -j$(nproc)
-    # 或者只构建 VTL3dViewer 模块及其依赖 (VTL3dGui 会自动作为依赖被构建):
-    # make qSlicerVTL3dViewerModule -j$(nproc)
-    # (如果使用 cmake --build, 目标名可能不同，如 cmake --build . --target qSlicerVTL3dViewerModule)
+    cd ./build/build-mini && make -j$(nproc)
     ```
 
 完成 GUI 嵌入后，后续可进一步开发 Slicer 场景与嵌入的 VTL3d GUI 之间的数据交互功能。
-
-```bash
-nix develop
-configure_slicer_mini ./miniSlicer ./build/build-mini ./build/install-mini
-cd ./build/build-mini && make -j16
-```

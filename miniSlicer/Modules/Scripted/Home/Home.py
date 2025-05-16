@@ -1531,8 +1531,8 @@ class HomeLogic(ScriptedLoadableModuleLogic):
                     # Unit conversion
                     P_out = P / 10.0 if useCm else P.copy()
 
-                    writer.writerow([P_out[0], t_axis[0], scale_val, *local_y])
-                    writer.writerow([P_out[1], t_axis[1], scale_val, *local_z])
+                    writer.writerow([P_out[0], t_axis[1], scale_val, *local_y])
+                    writer.writerow([P_out[1], t_axis[0], scale_val, *local_z])
 
                     # --- 可视化并可选保存 VTK ---
                     if saveVtk:

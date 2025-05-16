@@ -2,7 +2,7 @@
 // This file is part of VocalTractLab3D.
 // Copyright (C) 2022, Peter Birkholz, Dresden, Germany
 // www.vocaltractlab.de
-// author: Peter Birkholz and Rémi Blandin
+// author: Peter Birkholz and Rï¿½mi Blandin
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,8 +26,18 @@
 #include <wx/dialog.h>
 
 #include "Data.h"
-#include "VocalTractPicture.h"
+#ifdef __WXQT__
+#  include "VocalTractPictureStub.h"
+#else
+#  include "VocalTractPicture.h"
+#endif
 #include "EmaConfigDialog.h"
+
+#ifdef __WXQT__
+  typedef VocalTractPictureStub SimplePicture;
+#else
+  typedef VocalTractPicture     SimplePicture;
+#endif
 
 // ****************************************************************************
 /// This dialog displays the vocal tract picture.
@@ -41,7 +51,7 @@ class VocalTractDialog : public wxDialog
 
 public:
   static VocalTractDialog *getInstance(wxWindow *parent = NULL);
-  VocalTractPicture *getVocalTractPicture();
+  SimplePicture *getVocalTractPicture();
   void setUpdateRequestReceiver(wxWindow *updateRequestReceiver1, 
     wxWindow* updateRequestReceiver2);
   void updateWidgets();
@@ -64,7 +74,7 @@ private:
   wxBoxSizer *topLevelSizer;
   wxBoxSizer *controlSizer;
 
-  VocalTractPicture *picVocalTract;
+  SimplePicture *picVocalTract;
   wxButton *showHideControlsButton;
   wxPanel *controlPanel;
 

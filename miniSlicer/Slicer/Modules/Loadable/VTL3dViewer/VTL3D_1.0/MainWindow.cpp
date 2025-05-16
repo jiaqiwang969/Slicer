@@ -34,6 +34,31 @@
 #include <wx/clipbrd.h>
 #include <wx/busyinfo.h>
 
+// For logging - ensure these are available or adapt as needed
+#include <QDebug> 
+#include <QDateTime>
+#include <QFile>
+#include <QTextStream>
+#include <QStandardPaths>
+
+// Logging function specific to MainWindow.cpp, appending to the same global log
+static void writeMainWindowLog(const QString& message)
+{
+  QString logPath = QStandardPaths::writableLocation(QStandardPaths::TempLocation) + "/VTL3dViewerDebug.log";
+  QFile logFile(logPath);
+  if (logFile.open(QIODevice::Append | QIODevice::Text))
+  {
+    QTextStream stream(&logFile);
+    // Add a [MainWindow] prefix to distinguish from [Factory] logs
+    stream << QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz") << " [MainWindow] - " << message << "\\n";
+    logFile.close();
+  }
+  else
+  {
+    std::cerr << "MainWindow Log (file error): " << message.toStdString() << std::endl;
+  }
+}
+
 using namespace std;
 
 // ****************************************************************************
@@ -242,57 +267,96 @@ END_EVENT_TABLE()
 
 MainWindow::MainWindow()
 {
-  // Init the audio device
-  
-  printf("Trying to initialize sound ... ");
-  initSound(SAMPLING_RATE);
-  printf("done.\n");
+  writeMainWindowLog("MainWindow constructor started.");
+  try {
+    // Init the audio device
+    writeMainWindowLog("Attempting to initialize sound (initSound)... ");
+    initSound(SAMPLING_RATE); // External/global function
+    writeMainWindowLog("initSound completed.");
+  } catch (const std::exception& e) {
+    writeMainWindowLog(QString("Exception during initSound: %1").arg(e.what()));
+    // Decide if this is fatal or can be handled
+  } catch (...) {
+    writeMainWindowLog("Unknown exception during initSound.");
+  }
   
   // ****************************************************************
   // Init the variables BEFORE the child widgets.
   // ****************************************************************
-
-  audioFileName = wxFileName("");
-  exportFileName = wxFileName("");
-  data = Data::getInstance();
-  simu3d = Acoustic3dSimulation::getInstance();
-
-  // ****************************************************************
-  // Do some unit testing.
-  // ****************************************************************
-
-//  Matrix::test();
-
+  try {
+    writeMainWindowLog("Initializing member variables (file names, Data, simu3d).");
+    audioFileName = wxFileName("");
+    exportFileName = wxFileName("");
+    writeMainWindowLog("Attempting Data::getInstance()...");
+    data = Data::getInstance(); // Singleton
+    writeMainWindowLog("Data::getInstance() succeeded.");
+    writeMainWindowLog("Attempting Acoustic3dSimulation::getInstance()...");
+    simu3d = Acoustic3dSimulation::getInstance(); // Singleton
+    writeMainWindowLog("Acoustic3dSimulation::getInstance() succeeded.");
+    writeMainWindowLog("Member variables initialized.");
+  } catch (const std::exception& e) {
+    writeMainWindowLog(QString("Exception during member variable initialization (Data/simu3d): %1").arg(e.what()));
+  } catch (...) {
+    writeMainWindowLog("Unknown exception during member variable initialization (Data/simu3d).");
+  }
 
   // ****************************************************************
   // Set window properties and init the widgets.
   // ****************************************************************
+  try {
+    writeMainWindowLog("Attempting wxFrame::Create()...");
+    wxFrame::Create(NULL, wxID_ANY, "VocalTractLab2", wxDefaultPosition, 
+      wxDefaultSize, wxCLOSE_BOX | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | 
+      wxSYSTEM_MENU | wxCAPTION | wxRAISED_BORDER | wxRESIZE_BORDER);
+    writeMainWindowLog("wxFrame::Create() succeeded.");
 
-	wxFrame::Create(NULL, wxID_ANY, "VocalTractLab2", wxDefaultPosition, 
-    wxDefaultSize, wxCLOSE_BOX | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | 
-    wxSYSTEM_MENU | wxCAPTION | wxRAISED_BORDER | wxRESIZE_BORDER);
-
-  // Output the title of the main window.
-
-  this->SetLabel("VocalTractLab2");
+    writeMainWindowLog("Attempting this->SetLabel(\"VocalTractLab2\")...");
+    this->SetLabel("VocalTractLab2");
+    writeMainWindowLog("this->SetLabel() succeeded.");
+  } catch (const std::exception& e) {
+    writeMainWindowLog(QString("Exception during wxFrame::Create or SetLabel: %1").arg(e.what()));
+  } catch (...) {
+    writeMainWindowLog("Unknown exception during wxFrame::Create or SetLabel.");
+  }
 
   // ****************************************************************
   // Init all widgets.
   // ****************************************************************
+  try {
+    writeMainWindowLog("Attempting VocalTractDialog::getInstance()...");
+    VocalTractDialog *vocalTractDialog = VocalTractDialog::getInstance();
+    if(vocalTractDialog) writeMainWindowLog("VocalTractDialog::getInstance() succeeded.");
+    else writeMainWindowLog("VocalTractDialog::getInstance() returned NULL!");
+  } catch (const std::exception& e) {
+    writeMainWindowLog(QString("Exception during VocalTractDialog::getInstance(): %1").arg(e.what()));
+  } catch (...) {
+    writeMainWindowLog("Unknown exception during VocalTractDialog::getInstance().");
+  }
+  
+  try {
+    writeMainWindowLog("Attempting this->initWidgets()...");
+    initWidgets(); // Calls the member function
+    writeMainWindowLog("this->initWidgets() completed.");
+  } catch (const std::exception& e) {
+    writeMainWindowLog(QString("Exception during initWidgets(): %1").arg(e.what()));
+  } catch (...) {
+    writeMainWindowLog("Unknown exception during initWidgets().");
+  }
 
-  // Init the vocal tract dialog before all other widgets/pages,
-  // because the pointer to the vocal tract picture is needed
-  // for the initialization of the pictures on the vocal tract page.
+  try {
+    writeMainWindowLog("Attempting this->SetDoubleBuffered(true)...");
+    this->SetDoubleBuffered(true);
+    writeMainWindowLog("this->SetDoubleBuffered(true) succeeded.");
 
-  VocalTractDialog *vocalTractDialog = VocalTractDialog::getInstance();
-
-  initWidgets();
-
-  // Make the main window double buffered to avoid any flickering
-  // of the child-windows and during resizing.
-  this->SetDoubleBuffered(true);
-
-  this->Maximize();
+    writeMainWindowLog("Attempting this->Maximize()...");
+    this->Maximize();
+    writeMainWindowLog("this->Maximize() succeeded.");
+  } catch (const std::exception& e) {
+    writeMainWindowLog(QString("Exception during SetDoubleBuffered or Maximize: %1").arg(e.what()));
+  } catch (...) {
+    writeMainWindowLog("Unknown exception during SetDoubleBuffered or Maximize.");
+  }
+  writeMainWindowLog("MainWindow constructor finished.");
 }
 
 

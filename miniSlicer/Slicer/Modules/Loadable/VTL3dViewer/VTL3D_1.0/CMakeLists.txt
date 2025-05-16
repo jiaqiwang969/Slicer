@@ -35,6 +35,9 @@ find_package(wxWidgets 3.1 COMPONENTS core base gl adv REQUIRED)
 # Include the wxWidgets use file to initialize various settings
 include(${wxWidgets_USE_FILE})
 
+# Request Qt5 for logging and potential QWidget interaction (even if primarily wx)
+find_package(Qt5 COMPONENTS Core Gui Widgets REQUIRED)
+
 # Request the required CGAL lib
 find_package(CGAL REQUIRED)
 
@@ -50,20 +53,37 @@ elseif(UNIX)
   find_package(OpenAL REQUIRED)
 endif()
 
-
+# Collect source files
 file(GLOB VTL3D_GUI_SRCS
   "Backend/*.h"
   "*.h"
   "Backend/*.cpp"
   "*.cpp"
   "VTL3dFactory.cpp"
+  "AreaFunctionWidget.cpp"
 )
 
-# 从源列表中移除独立可执行入口文件
+# List headers that require MOC processing (contain Q_OBJECT)
+set(VTL3D_GUI_MOC_HDRS
+  AreaFunctionWidget.h
+  # Add other .h files with Q_OBJECT here in the future if any
+)
+
+# Generate MOC files (output will be in VTL3D_GUI_MOC_SRCS variable)
+qt5_wrap_cpp(VTL3D_GUI_MOC_SRCS ${VTL3D_GUI_MOC_HDRS})
+
+# 无论后端如何，始终移除依赖 wxGLCanvas 的 VocalTractPicture.cpp，
+# 以避免与我们为 wxQt 环境提供的 Stub 类重复定义。
+list(REMOVE_ITEM VTL3D_GUI_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/VocalTractPicture.cpp)
+
+# 从源列表中移除独立可执行入口文件（如果存在）
 list(REMOVE_ITEM VTL3D_GUI_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/Application.cpp)
 
 # 构建共享库
-add_library(VTL3dGui SHARED ${VTL3D_GUI_SRCS})
+add_library(VTL3dGui SHARED 
+  ${VTL3D_GUI_SRCS}
+  ${VTL3D_GUI_MOC_SRCS} # Add MOC generated sources
+)
 
 # Public include directory for VTL3dGui target
 # This allows parent CMake (VTL3dViewer) to find VTL3dFactory.h etc.
@@ -71,13 +91,21 @@ add_library(VTL3dGui SHARED ${VTL3D_GUI_SRCS})
 target_include_directories(VTL3dGui PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}> # For the build tree
   $<INSTALL_INTERFACE:include/VTL3dGui>          # For installation (if installed as a separate lib)
+  # Add Qt include directories
+  ${Qt5Core_INCLUDE_DIRS}
+  ${Qt5Gui_INCLUDE_DIRS}
+  ${Qt5Widgets_INCLUDE_DIRS}
 )
+
+# Link common Qt libraries. Mocced files might need QtCore at least.
+set(QT_LINK_LIBS Qt5::Core Qt5::Gui Qt5::Widgets)
 
 if (MSVC)
   target_link_libraries(VTL3dGui PRIVATE
     ${wxWidgets_LIBRARIES}
     CGAL::CGAL # Assumes CGAL provides an imported target
     Eigen3::Eigen # Assumes Eigen3 provides an imported target
+    ${QT_LINK_LIBS}
   )
 elseif(UNIX)
   target_link_libraries(VTL3dGui PRIVATE
@@ -87,6 +115,7 @@ elseif(UNIX)
     OpenGL::GL # Using imported target for OpenGL
     GLUT::GLUT # Using imported target for GLUT
     OpenAL::OpenAL # Using imported target for OpenAL
+    ${QT_LINK_LIBS}
   )
 endif()
 

@@ -29,8 +29,8 @@ class Q_SLICER_QTMODULES_VTL3DVIEWER_EXPORT qSlicerVTL3dViewerModule :
   public qSlicerLoadableModule
 {
   Q_OBJECT
-  Q_PLUGIN_METADATA(IID "org.slicer.modules.loadable.qSlicerLoadableModule/1.0")
-  Q_INTERFACES(qSlicerLoadableModule)
+  Q_PLUGIN_METADATA(IID "org.slicer.modules.loadable.qSlicerLoadableModule/1.0");
+  Q_INTERFACES(qSlicerLoadableModule);
 
 public:
   typedef qSlicerLoadableModule Superclass;

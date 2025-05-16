@@ -2,7 +2,7 @@
 // This file is part of VocalTractLab3D.
 // Copyright (C) 2022, Peter Birkholz, Dresden, Germany
 // www.vocaltractlab.de
-// author: Peter Birkholz and R�mi Blandin
+// author: Peter Birkholz and Rémi Blandin
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,6 +23,18 @@
 #include <wx/statline.h>
 #include <wx/filename.h>
 #include "VocalTractShapesDialog.h"
+
+#ifdef __WXQT__
+#  include "VocalTractPictureStub.h"
+#else
+#  include "VocalTractPicture.h"
+#endif
+
+#ifdef __WXQT__
+  typedef VocalTractPictureStub SimplePicture;
+#else
+  typedef VocalTractPicture     SimplePicture;
+#endif
 
 // IDs of the controls
 
@@ -55,6 +67,26 @@ static const int NUM_SCROLLBAR_STEPS = 500;
 // The single instance of this class.
 
 VocalTractDialog *VocalTractDialog::instance = NULL;
+
+// 添加 Qt 日志支持
+#include <QDebug>
+#include <QDateTime>
+#include <QFile>
+#include <QTextStream>
+#include <QStandardPaths>
+
+static void writeVocalLog(const QString& message)
+{
+  QString logPath = QStandardPaths::writableLocation(QStandardPaths::TempLocation) + "/VTL3dViewerDebug.log";
+  QFile logFile(logPath);
+  if (logFile.open(QIODevice::Append | QIODevice::Text))
+  {
+    QTextStream stream(&logFile);
+    stream << QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz")
+           << " [VocalDialog] - " << message << "\n";
+    logFile.close();
+  }
+}
 
 // ****************************************************************************
 // The event table.
@@ -100,11 +132,17 @@ END_EVENT_TABLE()
 
 VocalTractDialog *VocalTractDialog::getInstance(wxWindow *parent)
 {
+  writeVocalLog("getInstance called, instance " + QString::number((quintptr)instance, 16));
   if (instance == NULL)
   {
+    writeVocalLog("instance is null, creating new VocalTractDialog");
     instance = new VocalTractDialog(parent);
+    writeVocalLog("instance created: " + QString::number((quintptr)instance, 16));
   }
-
+  else
+  {
+    writeVocalLog("instance already exists");
+  }
   return instance;
 }
 
@@ -112,7 +150,7 @@ VocalTractDialog *VocalTractDialog::getInstance(wxWindow *parent)
 // ****************************************************************************
 // ****************************************************************************
 
-VocalTractPicture *VocalTractDialog::getVocalTractPicture()
+SimplePicture *VocalTractDialog::getVocalTractPicture()
 {
   return picVocalTract;
 }
@@ -137,6 +175,7 @@ void VocalTractDialog::setUpdateRequestReceiver(wxWindow* updateRequestReceiver1
 
 void VocalTractDialog::updateWidgets()
 {
+  writeVocalLog("updateWidgets start");
   int i;
   VocalTract *tract = data->vocalTract;
 
@@ -223,6 +262,7 @@ void VocalTractDialog::updateWidgets()
     showHideControlsButton->SetLabel("+");
   }
 
+  writeVocalLog("updateWidgets end");
 }
 
 
@@ -239,26 +279,38 @@ wxDialog(parent, wxID_ANY, wxString("Vocal tract"),
   wxDefaultPosition, wxDefaultSize,
   wxDEFAULT_DIALOG_STYLE | wxSTAY_ON_TOP | wxRESIZE_BORDER)
 {
-  // Do NOT enable double buffering here, because the sometimes the OpenGl 
-  // frame gets black (has its own double buffer?).
+  writeVocalLog("VocalTractDialog constructor entered");
+  try {
+    // Do NOT enable double buffering here, because the sometimes the OpenGl 
+    // frame gets black (has its own double buffer?).
 //  this->SetDoubleBuffered(true);
 
-  this->Move(700, 100);
+    this->Move(700, 100);
 
-  // ****************************************************************
-  // Init the variables first.
-  // ****************************************************************
+    // ****************************************************************
+    // Init the variables first.
+    // ****************************************************************
 
-  data = Data::getInstance();
-  updateRequestReceiver1 = NULL;
-  updateRequestReceiver2 = NULL;
+    data = Data::getInstance();
+    updateRequestReceiver1 = NULL;
+    updateRequestReceiver2 = NULL;
 
-  // ****************************************************************
-  // Init and update the widgets.
-  // ****************************************************************
+    // ****************************************************************
+    // Init and update the widgets.
+    // ****************************************************************
 
-  initWidgets();
-  updateWidgets();
+    writeVocalLog("Calling initWidgets...");
+    initWidgets();
+    writeVocalLog("initWidgets returned");
+    writeVocalLog("Calling updateWidgets...");
+    updateWidgets();
+    writeVocalLog("updateWidgets returned");
+  } catch (const std::exception& e) {
+    writeVocalLog(QString("Exception in constructor: ") + e.what());
+  } catch (...) {
+    writeVocalLog("Unknown exception in constructor");
+  }
+  writeVocalLog("VocalTractDialog constructor exit (end of body)");
 }
 
 
@@ -268,6 +320,7 @@ wxDialog(parent, wxID_ANY, wxString("Vocal tract"),
 
 void VocalTractDialog::initWidgets()
 {
+  writeVocalLog("initWidgets start");
   topLevelSizer = new wxBoxSizer(wxVERTICAL);
 
   wxBoxSizer *sizer = NULL;
@@ -284,16 +337,37 @@ void VocalTractDialog::initWidgets()
   // Create the vocal tract picture and add it to the dialog.
   // ****************************************************************
 
+  writeVocalLog("Creating VocalTractPicture (wxGLCanvas)...");
+#ifdef __WXQT__
+  // 使用 stub 版本避免 OpenGL 崩溃
+  try {
+    picVocalTract = new SimplePicture(this);
+    writeVocalLog("VocalTractPictureStub created successfully");
+  } catch (const std::exception& e) {
+    writeVocalLog(QString("Exception while creating VocalTractPictureStub: ") + e.what());
+  } catch (...) {
+    writeVocalLog("Unknown exception while creating VocalTractPictureStub");
+  }
+#else
   wxGLAttributes openGlArgs;
-  openGlArgs.PlatformDefaults().Defaults().RGBA().DoubleBuffer().Depth(24).EndList(); // Depth(32) causes display error. Possible bug?
-  picVocalTract = new VocalTractPicture(this, data->vocalTract, openGlArgs, this);
-  
+  openGlArgs.PlatformDefaults().Defaults().RGBA().DoubleBuffer().Depth(24).EndList();
+  try {
+    picVocalTract = new SimplePicture(this, data->vocalTract, openGlArgs, this);
+    writeVocalLog("VocalTractPicture created successfully");
+  } catch (const std::exception& e) {
+    writeVocalLog(QString("Exception while creating VocalTractPicture: ") + e.what());
+  } catch (...) {
+    writeVocalLog("Unknown exception while creating VocalTractPicture");
+  }
+#endif
+
   picVocalTract->SetMinSize(this->FromDIP(wxSize(300, 300) ));
 
   picVocalTract->showControlPoints = true;
   picVocalTract->showCenterLine = false;
 
   topLevelSizer->Add(picVocalTract, 1, wxALL |wxGROW, 5);
+  writeVocalLog("picVocalTract added to sizer");
 
   // ****************************************************************
   // Show the button to show/hide the controls.
@@ -461,6 +535,8 @@ void VocalTractDialog::initWidgets()
   // Set the size to start up with.
   picVocalTract->SetMinSize(this->FromDIP(wxSize(400, 400)));
   topLevelSizer->Fit(this);
+
+  writeVocalLog("initWidgets end");
 }
 
 

@@ -41,6 +41,7 @@ qSlicerVTL3dViewerModule::qSlicerVTL3dViewerModule(QObject* _parent)
   : Superclass(_parent)
   , d_ptr(new qSlicerVTL3dViewerModulePrivate(*this))
 {
+  qCritical() << "VTL3dViewerModule constructor CALLED"; // DEBUGGING
 }
 
 //-----------------------------------------------------------------------------
@@ -81,7 +82,7 @@ QIcon qSlicerVTL3dViewerModule::icon() const
 //-----------------------------------------------------------------------------
 QStringList qSlicerVTL3dViewerModule::categories() const
 {
-  return QStringList() << "Examples"; // Or your desired category
+  return QStringList() << "PipeSonic"; // 修改为更容易找到的分类
 }
 
 /*
@@ -95,6 +96,7 @@ QStringList qSlicerVTL3dViewerModule::dependencies() const
 //-----------------------------------------------------------------------------
 void qSlicerVTL3dViewerModule::setup()
 {
+  qCritical() << "VTL3dViewerModule setup() CALLED"; // DEBUGGING
   this->Superclass::setup();
   // Register IOs or other setup tasks here if needed
 }
@@ -102,6 +104,7 @@ void qSlicerVTL3dViewerModule::setup()
 //-----------------------------------------------------------------------------
 qSlicerAbstractModuleRepresentation* qSlicerVTL3dViewerModule::createWidgetRepresentation()
 {
+  qCritical() << "VTL3dViewerModule createWidgetRepresentation() CALLED"; // DEBUGGING
   return new qSlicerVTL3dViewerModuleWidget;
 }
 

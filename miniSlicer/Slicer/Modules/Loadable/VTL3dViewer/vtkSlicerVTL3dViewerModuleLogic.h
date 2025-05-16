@@ -28,11 +28,12 @@
 // STD includes
 
 // #include "vtkSlicerVTL3dViewerModuleLogicExport.h" // Temporarily commented out
+#include "qSlicerVTL3dViewerModuleExport.h"
 
 class vtkSlicerVTL3dViewerModuleLogicPrivate;
 
 // class VTK_SLICER_VTL3DVIEWER_MODULE_LOGIC_EXPORT vtkSlicerVTL3dViewerModuleLogic : // Temporarily commented out export macro
-class vtkSlicerVTL3dViewerModuleLogic :
+class Q_SLICER_QTMODULES_VTL3DVIEWER_EXPORT vtkSlicerVTL3dViewerModuleLogic :
   public vtkSlicerModuleLogic
 {
 public:

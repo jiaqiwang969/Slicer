@@ -10,6 +10,11 @@ include(SlicerMacroBuildLoadableModule)
 add_subdirectory(VTL3D_1.0)
 
 # -----------------------------------------------------------------------------
+# 启用RPATH，确保加载时能找到 VTL3dGui 库
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
+
+# -----------------------------------------------------------------------------
 set(MODULE_NAME VTL3dViewer)
 string(TOUPPER ${MODULE_NAME} MODULE_NAME_UPPER)
 
@@ -50,6 +55,13 @@ endif()
 set(MODULE_TARGET_LIBRARIES VTL3dGui)
 
 # -----------------------------------------------------------------------------
+# Specify additional include directories for this module
+# We need to be able to find "VTL3dFactory.h" which is in the VTL3D_1.0 subdirectory
+set(MODULE_EXTRA_INCLUDE_DIRS
+  ${CMAKE_CURRENT_SOURCE_DIR}/VTL3D_1.0
+  )
+
+# -----------------------------------------------------------------------------
 # Build the Slicer Loadable Module
 slicerMacroBuildLoadableModule(
   NAME ${MODULE_NAME}
@@ -57,6 +69,36 @@ slicerMacroBuildLoadableModule(
   SRCS ${MODULE_SRCS}
   MOC_SRCS ${MODULE_MOC_SRCS}
   TARGET_LIBRARIES ${MODULE_TARGET_LIBRARIES}
+  INCLUDE_DIRECTORIES ${MODULE_EXTRA_INCLUDE_DIRS}
   # MOC_SRCS, UI_SRCS, RESOURCES can be added here if the VTL3dViewer module
   # itself has Qt UI files or additional resources beyond the VTL3dGui library.
-  ) 
+  )
+
+# -----------------------------------------------------------------------------
+# 在模块构建后设置RPATH
+get_target_property(MODULE_LIBRARY_OUTPUT_DIRECTORY 
+  qSlicer${MODULE_NAME}Module 
+  LIBRARY_OUTPUT_DIRECTORY)
+
+get_target_property(VTL3DGUI_LIBRARY_OUTPUT_DIRECTORY 
+  VTL3dGui 
+  LIBRARY_OUTPUT_DIRECTORY)
+
+if(NOT VTL3DGUI_LIBRARY_OUTPUT_DIRECTORY)
+  set(VTL3DGUI_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/VTL3D_1.0")
+endif()
+
+message(STATUS "VTL3dViewer Module output dir: ${MODULE_LIBRARY_OUTPUT_DIRECTORY}")
+message(STATUS "VTL3dGui library output dir: ${VTL3DGUI_LIBRARY_OUTPUT_DIRECTORY}")
+
+# 设置运行时的RPATH,确保可以找到所有依赖
+set_target_properties(qSlicer${MODULE_NAME}Module PROPERTIES
+  INSTALL_RPATH "${MODULE_LIBRARY_OUTPUT_DIRECTORY};${VTL3DGUI_LIBRARY_OUTPUT_DIRECTORY}")
+
+# 创建符号链接确保VTL3dGui库和模块在同一目录
+add_custom_command(TARGET qSlicer${MODULE_NAME}Module POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E echo "Creating symbolic link for VTL3dGui in module directory"
+  COMMAND ${CMAKE_COMMAND} -E create_symlink 
+    "${VTL3DGUI_LIBRARY_OUTPUT_DIRECTORY}/libVTL3dGui.so"
+    "${MODULE_LIBRARY_OUTPUT_DIRECTORY}/libVTL3dGui.so"
+  COMMENT "Creating symbolic link for libVTL3dGui.so") 
