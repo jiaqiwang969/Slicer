@@ -1,0 +1,12 @@
+In order to study the acoustic properties of the vocal tract, it is useful to perform acoustic
+modelling. In most of the physical models used in speech and singing study, the frequency
+range is limited from 0 kHz to about 5 kHz. This limited frequency range which does not cover
+the entire range of perception of the human ear is often used because it is sucient to ensure
+speech recognition and it allows one to use very simple acoustic models. In particular, one can
+assume that plane waves are travelling inside the vocal tract, which means that the acoustic
+pressure varies only along the propagation direction and depends only on the area of the
+cross-sections of the vocal tract [1][4]. Thus, in this case a one-dimensional description with
+an area function of the vocal tract shape is sucient. This allows one to perform simulations
+at a very low computational cost: it is possible to perform real time simulations [5]. However,
+given the limited frequency range used, the quality of the simulations and synthesis is not
+optimal.

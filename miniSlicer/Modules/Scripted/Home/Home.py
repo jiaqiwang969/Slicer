@@ -308,6 +308,9 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
         optionsLayout.addWidget(self.profile_clockwiseCheck)
         optionsLayout.addWidget(self.profile_useCmCheck)
         optionsLayout.addWidget(self.profile_scaleRadiusCheck)
+        # >>> 新增：默认固定参数，隐藏不再使用的复选框 <<<
+        for _chk in (self.profile_clockwiseCheck, self.profile_useCmCheck, self.profile_scaleRadiusCheck):
+            _chk.setVisible(False)
 
         # 执行按钮 & 状态
         runLayout = qt.QHBoxLayout()
@@ -735,7 +738,8 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
 
         os.makedirs(outputDir, exist_ok=True)
 
-        clockwiseContour = self.profile_clockwiseCheck.isChecked()
+        # 固定为逆时针顺序（与取消勾选时一致）
+        clockwiseContour = False
         # 是否使用端点：若端点节点存在且点数≥2，则采用 UI 复选框（目前默认总使用）
         use_curve_endpoints = True
         if endpointsNode is None or endpointsNode.GetNumberOfControlPoints() < 2:
@@ -853,9 +857,10 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
             "endpointsNode": endpointsNode,
             "useEndpoints": use_curve_endpoints,
             "outputDir": outputDir,
+            # 固定导出设置：使用 cm 单位（mm → cm），不按半径归一化。
             "clockwise": clockwiseContour,
-            "useCm": self.profile_useCmCheck.isChecked(),
-            "scaleByRadius": self.profile_scaleRadiusCheck.isChecked(),
+            "useCm": True,
+            "scaleByRadius": False,
         }
 
         # 更新按钮状态
@@ -962,9 +967,11 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
         outputDir = params["outputDir"]
         csvName = self.profile_csvNameLine.text.strip() or "contour_auto.csv"
 
-        clockwise = params["clockwise"]
-        useCm = params["useCm"]
-        scaleByRadius = params["scaleByRadius"]
+        # 固定导出规则：
+        # 1. 坐标始终从 mm → cm（全部除以 10）
+        # 2. 不再根据半径进行归一化，scale_val 恒为 1.0
+        # 3. 保持点原顺序（clockwise 固定为 False）
+        clockwise = False
 
         # ---- 1. 收集曲线 ----
         pattern = re.compile(r"^SliceCurve_(\d{3,})$", re.IGNORECASE)
@@ -1014,21 +1021,16 @@ class HomeWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
                 local_y_ord = (pts_np - pts_np.mean(axis=0)) @ t_axis
                 local_z_ord = (pts_np - pts_np.mean(axis=0)) @ b_axis
 
-                # ---- 5. 计算缩放因子 ----
+                # ---- 5. 计算缩放因子（现固定为 1.0） ----
                 scale_val = 1.0
-                if scaleByRadius:
-                    # 计算投影后多边形面积 (shoelace)
-                    x2d, y2d = local_y_ord, local_z_ord
-                    area2d = 0.5 * abs(_np.dot(x2d, _np.roll(y2d, -1)) - _np.dot(y2d, _np.roll(x2d, -1)))
-                    r_mm = math.sqrt(area2d / math.pi) if area2d > 0 else 1.0
-                    if r_mm > 1e-6:
-                        local_y_ord /= r_mm
-                        local_z_ord /= r_mm
-                    scale_val = r_mm / (10.0 if useCm else 1.0)
 
-                # ---- 6. 导出 ----
+                # ---- 6. 导出：中心点与轮廓坐标统一除以 10 (mm→cm) ----
                 centroid = pts_np.mean(axis=0)
-                P_out = centroid / 10.0 if useCm else centroid.copy()
+                P_out = centroid / 10.0
+
+                # 轮廓点也转换为 cm
+                local_y_ord = local_y_ord / 10.0
+                local_z_ord = local_z_ord / 10.0
 
                 writer.writerow([P_out[0], t_axis[0], scale_val, *_np.round(local_y_ord, 6)])
                 writer.writerow([P_out[1], t_axis[1], scale_val, *_np.round(local_z_ord, 6)])
@@ -1459,6 +1461,9 @@ class HomeLogic(ScriptedLoadableModuleLogic):
             t[-1] = t[-2]
             tangents = np.array([normalize(vec) for vec in t])
 
+            # 统一导出规则：逆时针顺序（不翻转）
+            clockwise = False
+
             # Prepare cutter
             plane = vtk.vtkPlane()
             cutter = vtk.vtkCutter()
@@ -1512,13 +1517,8 @@ class HomeLogic(ScriptedLoadableModuleLogic):
                     local_y = (pts_np - P) @ t_axis
                     local_z = (pts_np - P) @ b_axis
 
-                    # Optional scaling
-                    if scaleByRadius:
-                        r_mm = equivalent_radius(slicePoly)
-                        if r_mm > EPS:
-                            local_y /= r_mm
-                            local_z /= r_mm
-                    scale_val = 1.0 if not scaleByRadius else equivalent_radius(slicePoly) / (10.0 if useCm else 1.0)
+                    # 不进行半径归一化，scale_val 恒为 1.0
+                    scale_val = 1.0
 
                     # Sort by angle
                     angles = np.arctan2(local_z, local_y)
@@ -1528,11 +1528,14 @@ class HomeLogic(ScriptedLoadableModuleLogic):
                     local_y = local_y[sort_idx]
                     local_z = local_z[sort_idx]
 
-                    # Unit conversion
-                    P_out = P / 10.0 if useCm else P.copy()
+                    # 单位转换：始终 mm→cm
+                    P_out = P / 10.0
 
-                    writer.writerow([P_out[0], t_axis[1], scale_val, *local_y])
-                    writer.writerow([P_out[1], t_axis[0], scale_val, *local_z])
+                    local_y = local_y / 10.0
+                    local_z = local_z / 10.0
+
+                    writer.writerow([P_out[0], t_axis[0], scale_val, *local_y])
+                    writer.writerow([P_out[1], t_axis[1], scale_val, *local_z])
 
                     # --- 可视化并可选保存 VTK ---
                     if saveVtk:
