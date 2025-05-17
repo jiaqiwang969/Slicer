@@ -296,7 +296,7 @@ void Acoustic3dSimulation::generateLogFileHeader(bool cleanLog) {
 
   ofstream log;
   if (cleanLog) {
-    log.open("log.txt", ofstream::out | ofstream::trunc);
+    log.open("log.txt", std::ios::app);
     log.close();
   }
 
@@ -772,6 +772,18 @@ void Acoustic3dSimulation::computeJunctionMatrices(int segIdx)
             }
           }
         }
+      }
+      {
+        std::ofstream flog("log.txt", std::ios::app);
+        flog << "[F_DBG] buildF segIdx=" << segIdx
+             << "  curID="  << m_crossSections[segIdx]->index()
+             << "  nextID=" << m_crossSections[nextSec]->index()
+             << "  rows="   << F.rows() << "  cols=" << F.cols()
+             << "  maxAbs=" << F.cwiseAbs().maxCoeff()
+             << "  minAbs=" << F.cwiseAbs().minCoeff();
+        if (F.rows()==0 || F.cwiseAbs().maxCoeff() < 1e-12)
+            flog << "  **EMPTY_OR_ZERO**";
+        flog << std::endl;
       }
       matrixF.push_back(F);
     }
@@ -6174,7 +6186,7 @@ bool Acoustic3dSimulation::exportTransferFucntions(string fileName, enum tfType 
   log << fileName << endl;
 
   ofstream ofs;
-  ofs.open(fileName, ofstream::out | ofstream::trunc);
+  ofs.open(fileName, std::ios::app);
 
   for (int i(0); i < m_tfFreqs.size(); i++)
   {
@@ -6221,7 +6233,7 @@ bool Acoustic3dSimulation::exportAcousticField(string fileName)
   log << fileName << endl;
 
   ofstream ofs;
-  ofs.open(fileName, ofstream::out | ofstream::trunc);
+  ofs.open(fileName, std::ios::app);
 
   stringstream txtField;
   if (m_simuParams.showAmplitude)

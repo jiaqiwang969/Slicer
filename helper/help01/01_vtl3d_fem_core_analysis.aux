@@ -2,104 +2,174 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand*\HyPL@Entry[1]{}
 \HyPL@Entry{0<</S/D>>}
-\@writefile{toc}{\contentsline {section}{\numberline {1}引言}{1}{section.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2}软件架构概述 (基于 Blandin et al., 2022 [1])}{1}{section.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3}理论基础：考虑曲率和面积变化的波动方程 (对应论文 Sec. II.B)}{3}{section.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}几何变换 (对应论文 Sec. II.B.1)}{3}{subsection.3.1}\protected@file@percent }
-\newlabel{eq:coord_transform}{{1}{3}{几何变换 (对应论文 Sec. II.B.1)}{equation.3.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}变换后的波动方程 (对应论文 Sec. II.B.2)}{3}{subsection.3.2}\protected@file@percent }
-\newlabel{eq:H_matrix}{{2}{3}{变换后的波动方程 (对应论文 Sec. II.B.2)}{equation.3.2}{}}
-\newlabel{eq:wave_transformed}{{3}{3}{变换后的波动方程 (对应论文 Sec. II.B.2)}{equation.3.3}{}}
-\newlabel{eq:bc_transformed}{{4}{3}{变换后的波动方程 (对应论文 Sec. II.B.2)}{equation.3.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}一阶演化方程形式}{4}{subsection.3.3}\protected@file@percent }
-\newlabel{eq:q_definition}{{5}{4}{一阶演化方程形式}{equation.3.5}{}}
-\newlabel{eq:pde_first_order}{{6}{4}{一阶演化方程形式}{equation.3.6}{}}
-\newlabel{eq:bc_q}{{7}{4}{一阶演化方程形式}{equation.3.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}多模态分解与耦合方程组 (对应论文 Sec. II.B.3)}{4}{section.4}\protected@file@percent }
-\newlabel{eq:modal_decomp}{{8}{4}{多模态分解与耦合方程组 (对应论文 Sec. II.B.3)}{equation.4.8}{}}
-\newlabel{eq:orthogonality}{{9}{4}{多模态分解与耦合方程组 (对应论文 Sec. II.B.3)}{equation.4.9}{}}
-\newlabel{eq:ode_coupled}{{10}{4}{多模态分解与耦合方程组 (对应论文 Sec. II.B.3)}{equation.4.10}{}}
-\newlabel{eq:M1_def}{{11}{4}{多模态分解与耦合方程组 (对应论文 Sec. II.B.3)}{equation.4.11}{}}
-\newlabel{eq:M2_def}{{12}{4}{多模态分解与耦合方程组 (对应论文 Sec. II.B.3)}{equation.4.12}{}}
-\newlabel{eq:M3_def}{{13}{4}{多模态分解与耦合方程组 (对应论文 Sec. II.B.3)}{equation.4.13}{}}
-\newlabel{eq:M4_def}{{14}{4}{多模态分解与耦合方程组 (对应论文 Sec. II.B.3)}{equation.4.14}{}}
-\newlabel{eq:C_matrix}{{15}{5}{多模态分解与耦合方程组 (对应论文 Sec. II.B.3)}{equation.4.15}{}}
-\newlabel{eq:D_matrix}{{16}{5}{多模态分解与耦合方程组 (对应论文 Sec. II.B.3)}{equation.4.16}{}}
-\newlabel{eq:E_matrix}{{17}{5}{多模态分解与耦合方程组 (对应论文 Sec. II.B.3)}{equation.4.17}{}}
-\newlabel{eq:K2_matrix}{{18}{5}{多模态分解与耦合方程组 (对应论文 Sec. II.B.3)}{equation.4.18}{}}
-\newlabel{eq:KR2_matrix}{{19}{5}{多模态分解与耦合方程组 (对应论文 Sec. II.B.3)}{equation.4.19}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}横向模式的定义：多模态分解的基础}{5}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}FEM 离散化}{6}{section.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}从 FEM 矩阵到多模态矩阵：投影关系}{6}{subsection.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}弱形式}{7}{subsection.6.2}\protected@file@percent }
-\newlabel{eq:weak_form}{{20}{7}{弱形式}{equation.6.20}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}基函数离散化}{7}{subsection.6.3}\protected@file@percent }
-\newlabel{eq:fem_approx}{{21}{7}{基函数离散化}{equation.6.21}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}广义特征值问题}{7}{subsection.6.4}\protected@file@percent }
-\newlabel{eq:gev_problem}{{22}{8}{广义特征值问题}{equation.6.22}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7}\texttt  {computeModes} 中的实现：与论文 [1] 的联系}{8}{section.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}矩阵组装 (对应论文 Eq. 32, 33)}{8}{subsection.7.1}\protected@file@percent }
-\newlabel{lst:assembly}{{1}{8}{组装质量矩阵和刚度矩阵}{lstlisting.1}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {1}组装质量矩阵和刚度矩阵}{8}{lstlisting.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}求解特征问题 (对应论文 Eq. 31)}{9}{subsection.7.2}\protected@file@percent }
-\newlabel{lst:solver}{{2}{9}{求解广义特征值问题}{lstlisting.2}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {2}求解广义特征值问题}{9}{lstlisting.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}提取模式结果 (对应论文 Sec. II.C.1)}{9}{subsection.7.3}\protected@file@percent }
-\newlabel{lst:results}{{3}{10}{提取特征值和特征向量}{lstlisting.3}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {3}提取特征值和特征向量}{10}{lstlisting.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {8}多模态矩阵的计算：为传播模型 [1] (Eq. \eqref  {eq:ode_coupled}) 做准备}{11}{section.8}\protected@file@percent }
-\newlabel{lst:interm_matrices}{{4}{11}{组装用于多模态矩阵的中间积分矩阵}{lstlisting.4}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {4}组装用于多模态矩阵的中间积分矩阵}{11}{lstlisting.4}\protected@file@percent }
-\newlabel{lst:final_matrices}{{5}{13}{计算最终的多模态矩阵}{lstlisting.5}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {5}计算最终的多模态矩阵}{13}{lstlisting.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {9}段间连接 (对应论文 Sec. II.C.2)}{14}{section.9}\protected@file@percent }
-\newlabel{eq:junction_p}{{23}{14}{段间连接 (对应论文 Sec. II.C.2)}{equation.9.23}{}}
-\newlabel{eq:junction_q}{{24}{14}{段间连接 (对应论文 Sec. II.C.2)}{equation.9.24}{}}
-\newlabel{eq:F_matrix}{{25}{14}{段间连接 (对应论文 Sec. II.C.2)}{equation.9.25}{}}
-\newlabel{eq:impedance_junction}{{26}{14}{段间连接 (对应论文 Sec. II.C.2)}{equation.9.26}{}}
-\newlabel{eq:admittance_junction}{{27}{14}{段间连接 (对应论文 Sec. II.C.2)}{equation.9.27}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {10}轴向传播数值解法 (对应论文 Sec. II.C.3)}{14}{section.10}\protected@file@percent }
-\newlabel{eq:transfer_matrix}{{28}{14}{轴向传播数值解法 (对应论文 Sec. II.C.3)}{equation.10.28}{}}
-\newlabel{eq:magnus4}{{29}{14}{轴向传播数值解法 (对应论文 Sec. II.C.3)}{equation.10.29}{}}
-\newlabel{eq:impedance_prop}{{32}{15}{轴向传播数值解法 (对应论文 Sec. II.C.3)}{equation.10.32}{}}
-\newlabel{eq:admittance_prop}{{33}{15}{轴向传播数值解法 (对应论文 Sec. II.C.3)}{equation.10.33}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {11}边界条件与结果计算 (对应论文 Sec. II.D)}{15}{section.11}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {12}声道几何表示与处理：从 CSV 导入到应用}{16}{section.12}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.1}引言}{16}{subsection.12.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.2}输入数据：CSV 文件格式与约定}{16}{subsection.12.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {12.2.1}文件结构}{16}{subsubsection.12.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {12.2.2}坐标系约定}{17}{subsubsection.12.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {12.2.3}缩放因子 \(l(x)\)}{17}{subsubsection.12.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.3}数据解析与初步处理 (\texttt  {extractContoursFromCsvFile})}{17}{subsection.12.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.4}核心处理：几何变换与参数计算 (\texttt  {createCrossSections})}{17}{subsection.12.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {12.4.1}几何变换：局部居中与全局补偿}{18}{subsubsection.12.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{a. 动机与前提:}{18}{paragraph*.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{b. 步骤 1：局部轮廓 Z 轴居中:}{18}{paragraph*.2}\protected@file@percent }
-\newlabel{eq:local_shift}{{34}{18}{b. 步骤 1：局部轮廓 Z 轴居中:}{equation.12.34}{}}
-\@writefile{toc}{\contentsline {paragraph}{代码对应 (Eq. \eqref  {eq:local_shift}):}{18}{paragraph*.3}\protected@file@percent }
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {6}局部轮廓 Z 轴居中代码实现}{18}{lstlisting.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{c. 步骤 2：全局中心线点位置补偿调整:}{18}{paragraph*.4}\protected@file@percent }
-\newlabel{eq:global_adjust}{{35}{18}{c. 步骤 2：全局中心线点位置补偿调整:}{equation.12.35}{}}
-\@writefile{toc}{\contentsline {paragraph}{代码对应 (Eq. \eqref  {eq:global_adjust}):}{18}{paragraph*.5}\protected@file@percent }
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {7}全局中心点补偿调整代码实现}{19}{lstlisting.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{d. 示例：非居中矩形}{19}{paragraph*.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {12.4.2}其他计算}{19}{subsubsection.12.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{代码对应 (曲率半径):}{20}{paragraph*.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{代码对应 (曲率角度):}{20}{paragraph*.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.5}对象实例化与最终存储 (\texttt  {addCrossSectionFEM} 与 \texttt  {buildMesh})}{21}{subsection.12.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.6}应用：数据显示 (\texttt  {SegmentsPicture} 与 \texttt  {PropModesPicture})}{21}{subsection.12.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {12.6.1}横截面视图 (\texttt  {PropModesPicture})}{21}{subsubsection.12.6.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces 截面 102 的 Z 轴居中效果示意图 (由 Python 模拟脚本生成)。图中显示了原始局部轮廓（浅红色虚线）、原始 Z 轴中心（紫色星号）、居中后的局部轮廓（深蓝色实线）、局部坐标原点/居中后的 Z 轴中心（黑色点）以及该截面的入口法线方向（绿色箭头）。}}{22}{figure.1}\protected@file@percent }
-\newlabel{fig:cross_section_centering}{{1}{22}{截面 102 的 Z 轴居中效果示意图 (由 Python 模拟脚本生成)。图中显示了原始局部轮廓（浅红色虚线）、原始 Z 轴中心（紫色星号）、居中后的局部轮廓（深蓝色实线）、局部坐标原点/居中后的 Z 轴中心（黑色点）以及该截面的入口法线方向（绿色箭头）。}{figure.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {12.6.2}矢状面视图 (\texttt  {SegmentsPicture})}{22}{subsubsection.12.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{代码对应 (直线出口点):}{22}{paragraph*.9}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{代码对应 (曲线出口点):}{23}{paragraph*.10}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{代码对应 (入口下点):}{23}{paragraph*.11}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{代码对应 (入口上点):}{24}{paragraph*.12}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{代码对应 (出口下点):}{24}{paragraph*.13}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{代码对应 (出口上点):}{24}{paragraph*.14}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.7}工作流程概览}{25}{subsection.12.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {12.7.1}流程图}{25}{subsubsection.12.7.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {12.7.2}步骤总结}{25}{subsubsection.12.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A}矩形截面解析解公式}{3}{appendix.A}\protected@file@percent }
+\newlabel{app:rect_analytical}{{A}{3}{矩形截面解析解公式}{appendix.A}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {B}引言}{3}{appendix.B}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {C}软件架构概述 (基于 Blandin et al., 2022 [1])}{3}{appendix.C}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {D}理论基础：考虑曲率和面积变化的波动方程 (对应论文 Sec. II.B)}{5}{appendix.D}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.1}几何变换 (对应论文 Sec. II.B.1)}{5}{subsection.D.1}\protected@file@percent }
+\newlabel{eq:coord_transform}{{1}{5}{几何变换 (对应论文 Sec. II.B.1)}{equation.D.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.2}变换后的波动方程 (对应论文 Sec. II.B.2)}{6}{subsection.D.2}\protected@file@percent }
+\newlabel{eq:H_matrix}{{2}{6}{变换后的波动方程 (对应论文 Sec. II.B.2)}{equation.D.2}{}}
+\newlabel{eq:wave_transformed}{{3}{6}{变换后的波动方程 (对应论文 Sec. II.B.2)}{equation.D.3}{}}
+\newlabel{eq:bc_transformed}{{4}{6}{变换后的波动方程 (对应论文 Sec. II.B.2)}{equation.D.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {D.3}一阶演化方程形式}{6}{subsection.D.3}\protected@file@percent }
+\newlabel{eq:q_definition}{{5}{6}{一阶演化方程形式}{equation.D.5}{}}
+\newlabel{eq:pde_first_order}{{6}{6}{一阶演化方程形式}{equation.D.6}{}}
+\newlabel{eq:bc_q}{{7}{6}{一阶演化方程形式}{equation.D.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {E}多模态分解与耦合方程组 (对应论文 Sec. II.B.3)}{6}{appendix.E}\protected@file@percent }
+\newlabel{eq:modal_decomp}{{8}{6}{多模态分解与耦合方程组 (对应论文 Sec. II.B.3)}{equation.E.8}{}}
+\newlabel{eq:orthogonality}{{9}{7}{多模态分解与耦合方程组 (对应论文 Sec. II.B.3)}{equation.E.9}{}}
+\newlabel{eq:ode_coupled}{{10}{7}{多模态分解与耦合方程组 (对应论文 Sec. II.B.3)}{equation.E.10}{}}
+\newlabel{eq:M1_def}{{11}{7}{多模态分解与耦合方程组 (对应论文 Sec. II.B.3)}{equation.E.11}{}}
+\newlabel{eq:M2_def}{{12}{7}{多模态分解与耦合方程组 (对应论文 Sec. II.B.3)}{equation.E.12}{}}
+\newlabel{eq:M3_def}{{13}{7}{多模态分解与耦合方程组 (对应论文 Sec. II.B.3)}{equation.E.13}{}}
+\newlabel{eq:M4_def}{{14}{7}{多模态分解与耦合方程组 (对应论文 Sec. II.B.3)}{equation.E.14}{}}
+\newlabel{eq:C_matrix}{{15}{7}{多模态分解与耦合方程组 (对应论文 Sec. II.B.3)}{equation.E.15}{}}
+\newlabel{eq:D_matrix}{{16}{7}{多模态分解与耦合方程组 (对应论文 Sec. II.B.3)}{equation.E.16}{}}
+\newlabel{eq:E_matrix}{{17}{7}{多模态分解与耦合方程组 (对应论文 Sec. II.B.3)}{equation.E.17}{}}
+\newlabel{eq:K2_matrix}{{18}{7}{多模态分解与耦合方程组 (对应论文 Sec. II.B.3)}{equation.E.18}{}}
+\newlabel{eq:KR2_matrix}{{19}{7}{多模态分解与耦合方程组 (对应论文 Sec. II.B.3)}{equation.E.19}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {F}横向模式的定义：多模态分解的基础}{8}{appendix.F}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {G}FEM 离散化}{8}{appendix.G}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {G.1}从 FEM 矩阵到多模态矩阵：投影关系}{8}{subsection.G.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {G.2}弱形式}{9}{subsection.G.2}\protected@file@percent }
+\newlabel{eq:weak_form}{{20}{9}{弱形式}{equation.G.20}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {G.3}基函数离散化}{9}{subsection.G.3}\protected@file@percent }
+\newlabel{eq:fem_approx}{{21}{9}{基函数离散化}{equation.G.21}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {G.4}广义特征值问题}{10}{subsection.G.4}\protected@file@percent }
+\newlabel{eq:gev_problem}{{22}{10}{广义特征值问题}{equation.G.22}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {H}\texttt  {computeModes} 中的实现：与论文 [1] 的联系}{10}{appendix.H}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {H.1}矩阵组装 (对应论文 Eq. 32, 33)}{11}{subsection.H.1}\protected@file@percent }
+\newlabel{lst:assembly}{{1}{11}{组装质量矩阵和刚度矩阵}{lstlisting.1}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {1}组装质量矩阵和刚度矩阵}{11}{lstlisting.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {H.2}求解特征问题 (对应论文 Eq. 31)}{12}{subsection.H.2}\protected@file@percent }
+\newlabel{lst:solver}{{2}{12}{求解广义特征值问题}{lstlisting.2}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {2}求解广义特征值问题}{12}{lstlisting.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {H.3}提取模式结果 (对应论文 Sec. II.C.1)}{12}{subsection.H.3}\protected@file@percent }
+\newlabel{lst:results}{{3}{12}{提取特征值和特征向量}{lstlisting.3}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {3}提取特征值和特征向量}{12}{lstlisting.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {I}多模态矩阵的计算：为传播模型 [1] (Eq. \eqref  {eq:ode_coupled}) 做准备}{13}{appendix.I}\protected@file@percent }
+\newlabel{lst:interm_matrices}{{4}{14}{组装用于多模态矩阵的中间积分矩阵}{lstlisting.4}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4}组装用于多模态矩阵的中间积分矩阵}{14}{lstlisting.4}\protected@file@percent }
+\newlabel{lst:final_matrices}{{5}{15}{计算最终的多模态矩阵}{lstlisting.5}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {5}计算最终的多模态矩阵}{15}{lstlisting.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {J}段间连接 (对应论文 Sec. II.C.2)}{16}{appendix.J}\protected@file@percent }
+\newlabel{eq:junction_p}{{23}{16}{段间连接 (对应论文 Sec. II.C.2)}{equation.J.23}{}}
+\newlabel{eq:junction_q}{{24}{16}{段间连接 (对应论文 Sec. II.C.2)}{equation.J.24}{}}
+\newlabel{eq:F_matrix}{{25}{16}{段间连接 (对应论文 Sec. II.C.2)}{equation.J.25}{}}
+\newlabel{eq:impedance_junction}{{26}{17}{段间连接 (对应论文 Sec. II.C.2)}{equation.J.26}{}}
+\newlabel{eq:admittance_junction}{{27}{17}{段间连接 (对应论文 Sec. II.C.2)}{equation.J.27}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {K}轴向传播数值解法 (对应论文 Sec. II.C.3)}{17}{appendix.K}\protected@file@percent }
+\newlabel{eq:transfer_matrix}{{28}{17}{轴向传播数值解法 (对应论文 Sec. II.C.3)}{equation.K.28}{}}
+\newlabel{eq:magnus4}{{29}{17}{轴向传播数值解法 (对应论文 Sec. II.C.3)}{equation.K.29}{}}
+\newlabel{eq:impedance_prop}{{32}{17}{轴向传播数值解法 (对应论文 Sec. II.C.3)}{equation.K.32}{}}
+\newlabel{eq:admittance_prop}{{33}{17}{轴向传播数值解法 (对应论文 Sec. II.C.3)}{equation.K.33}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {L}边界条件与结果计算 (对应论文 Sec. II.D)}{17}{appendix.L}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {M}声道几何表示与处理：从 CSV 导入到应用}{18}{appendix.M}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {M.1}引言}{18}{subsection.M.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {M.2}输入数据：CSV 文件格式与约定}{19}{subsection.M.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {M.2.1}文件结构}{19}{subsubsection.M.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {M.2.2}坐标系约定}{19}{subsubsection.M.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {M.2.3}缩放因子 \(l(x)\)}{19}{subsubsection.M.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {M.3}数据解析与初步处理 (\texttt  {extractContoursFromCsvFile})}{20}{subsection.M.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {M.4}核心处理：几何变换与参数计算 (\texttt  {createCrossSections})}{20}{subsection.M.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {M.4.1}几何变换：局部居中与全局补偿}{20}{subsubsection.M.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{a. 动机与前提:}{20}{paragraph*.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{b. 步骤 1：局部轮廓 Z 轴居中:}{20}{paragraph*.3}\protected@file@percent }
+\newlabel{eq:local_shift}{{34}{20}{b. 步骤 1：局部轮廓 Z 轴居中:}{equation.M.34}{}}
+\@writefile{toc}{\contentsline {paragraph}{代码对应 (Eq. \eqref  {eq:local_shift}):}{21}{paragraph*.4}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {6}局部轮廓 Z 轴居中代码实现}{21}{lstlisting.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{c. 步骤 2：全局中心线点位置补偿调整:}{21}{paragraph*.5}\protected@file@percent }
+\newlabel{eq:global_adjust}{{35}{21}{c. 步骤 2：全局中心线点位置补偿调整:}{equation.M.35}{}}
+\@writefile{toc}{\contentsline {paragraph}{代码对应 (Eq. \eqref  {eq:global_adjust}):}{21}{paragraph*.6}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {7}全局中心点补偿调整代码实现}{21}{lstlisting.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{d. 示例：非居中矩形}{21}{paragraph*.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {M.4.2}其他计算}{22}{subsubsection.M.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{代码对应 (曲率半径):}{22}{paragraph*.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{代码对应 (曲率角度):}{23}{paragraph*.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {M.5}对象实例化与最终存储 (\texttt  {addCrossSectionFEM} 与 \texttt  {buildMesh})}{23}{subsection.M.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {M.6}应用：数据显示 (\texttt  {SegmentsPicture} 与 \texttt  {PropModesPicture})}{24}{subsection.M.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {M.6.1}横截面视图 (\texttt  {PropModesPicture})}{24}{subsubsection.M.6.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces 截面 102 的 Z 轴居中效果示意图 (由 Python 模拟脚本生成)。图中显示了原始局部轮廓（浅红色虚线）、原始 Z 轴中心（紫色星号）、居中后的局部轮廓（深蓝色实线）、局部坐标原点/居中后的 Z 轴中心（黑色点）以及该截面的入口法线方向（绿色箭头）。}}{24}{figure.1}\protected@file@percent }
+\newlabel{fig:cross_section_centering}{{1}{24}{截面 102 的 Z 轴居中效果示意图 (由 Python 模拟脚本生成)。图中显示了原始局部轮廓（浅红色虚线）、原始 Z 轴中心（紫色星号）、居中后的局部轮廓（深蓝色实线）、局部坐标原点/居中后的 Z 轴中心（黑色点）以及该截面的入口法线方向（绿色箭头）。}{figure.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {M.6.2}矢状面视图 (\texttt  {SegmentsPicture})}{24}{subsubsection.M.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{代码对应 (直线出口点):}{25}{paragraph*.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{代码对应 (曲线出口点):}{25}{paragraph*.11}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{代码对应 (入口下点):}{26}{paragraph*.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{代码对应 (入口上点):}{26}{paragraph*.13}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{代码对应 (出口下点):}{26}{paragraph*.14}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{代码对应 (出口上点):}{27}{paragraph*.15}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {M.7}工作流程概览}{28}{subsection.M.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {M.7.1}流程图}{28}{subsubsection.M.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {M.7.2}步骤总结}{28}{subsubsection.M.7.2}\protected@file@percent }
 \bibcite{Blandin2022}{1}
-\gdef \@abspage@last{26}
+\@writefile{toc}{\contentsline {section}{\numberline {N}阅读指南与章节概览}{29}{appendix.N}\protected@file@percent }
+\newlabel{sec:roadmap}{{N}{29}{阅读指南与章节概览}{appendix.N}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {N.1}十环节思维链}{29}{subsection.N.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {N.2}全文章节结构}{30}{subsection.N.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces 章节对照表}}{30}{table.1}\protected@file@percent }
+\newlabel{tab:chap-structure}{{1}{30}{章节对照表}{table.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {O}几何切片与局部坐标（对应论文 Sec.~II.A）}{30}{appendix.O}\protected@file@percent }
+\newlabel{sec:segmentation}{{O}{30}{几何切片与局部坐标（对应论文 Sec.~II.A）}{appendix.O}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {O.1}CSV 字段 \textrightarrow {} 临时容器}{31}{subsection.O.1}\protected@file@percent }
+\newlabel{lst:csv_extract}{{8}{31}{extractContoursFromCsvFile 关键片段}{lstlisting.8}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {8}extractContoursFromCsvFile 关键片段}{31}{lstlisting.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {O.2}局部 Z-轴居中 \& 全局补偿}{31}{subsection.O.2}\protected@file@percent }
+\newlabel{lst:center_shift}{{9}{31}{局部居中与全局补偿实现}{lstlisting.9}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {9}局部居中与全局补偿实现}{31}{lstlisting.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {O.3}段长度与曲率参数}{31}{subsection.O.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {O.4}实例：截面 102 的变换前后}{32}{subsection.O.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {P}二维 FEM 横向模式与特征值求解（对应论文 Sec.~II.B.2, App.~V-A）}{32}{appendix.P}\protected@file@percent }
+\newlabel{sec:FEM_modes}{{P}{32}{二维 FEM 横向模式与特征值求解（对应论文 Sec.~II.B.2, App.~V-A）}{appendix.P}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {P.1}弱式回顾 \& 矩阵记号}{32}{subsection.P.1}\protected@file@percent }
+\newlabel{eq:weak_form}{{41}{32}{弱式回顾 \& 矩阵记号}{equation.P.41}{}}
+\@writefile{toc}{\contentsline {paragraph}{符号对照表}{32}{paragraph*.17}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {P.2}网格密度选择与误差评估}{32}{subsection.P.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {P.3}特征求解器调用细节}{33}{subsection.P.3}\protected@file@percent }
+\newlabel{lst:eigensolve}{{10}{33}{特征求解核心}{lstlisting.10}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {10}特征求解核心}{33}{lstlisting.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {P.4}模式后处理与符号约定}{33}{subsection.P.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {P.5}投影生成 $C,D,E,K^{R2}$}{33}{subsection.P.5}\protected@file@percent }
+\newlabel{lst:projection}{{11}{33}{投影矩阵计算示意}{lstlisting.11}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {11}投影矩阵计算示意}{33}{lstlisting.11}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {P.6}单段验证脚本}{33}{subsection.P.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {Q}段内传播与 Magnus--Möbius 递推（对应论文 Sec.~II.B.3, Eq.~(48)--(52)）}{33}{appendix.Q}\protected@file@percent }
+\newlabel{sec:propagate}{{Q}{33}{段内传播与 Magnus--Möbius 递推（对应论文 Sec.~II.B.3, Eq.~(48)--(52)）}{appendix.Q}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {Q.1}传播矩阵 $\mathbf  M(x)$ 拼装}{34}{subsection.Q.1}\protected@file@percent }
+\newlabel{lst:Mbuild}{{12}{34}{片段：构建 M 子块}{lstlisting.12}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {12}片段：构建 M 子块}{34}{lstlisting.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {Q.2}四阶 Magnus 展开实现}{34}{subsection.Q.2}\protected@file@percent }
+\newlabel{lst:magnus4}{{13}{34}{matrixExp.magnus4()}{lstlisting.13}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {13}matrixExp.magnus4()}{34}{lstlisting.13}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {Q.3}阻抗与导纳的 Möbius 更新}{34}{subsection.Q.3}\protected@file@percent }
+\newlabel{lst:blocks}{{14}{34}{extractBlocks()}{lstlisting.14}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {14}extractBlocks()}{34}{lstlisting.14}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {Q.4}数值稳定性与步长选择}{34}{subsection.Q.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {R}段间接口散射矩阵 $\mathbf  F$ 及崩溃根因}{35}{appendix.R}\protected@file@percent }
+\newlabel{sec:interface}{{R}{35}{段间接口散射矩阵 $\mathbf F$ 及崩溃根因}{appendix.R}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {R.1}$\mathbf  F$ 的理论定义与代码生成}{35}{subsection.R.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{实现文件}{35}{paragraph*.18}\protected@file@percent }
+\newlabel{lst:Fcompute}{{15}{35}{getMatrixF 核心片段}{lstlisting.15}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {15}getMatrixF 核心片段}{35}{lstlisting.15}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {R.1.1}几何包含判定}{35}{subsubsection.R.1.1}\protected@file@percent }
+\newlabel{lst:contain}{{16}{35}{containCheck()}{lstlisting.16}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {16}containCheck()}{35}{lstlisting.16}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {R.2}接口阻抗/导纳递推再次回顾}{36}{subsection.R.2}\protected@file@percent }
+\newlabel{lst:Zupdate}{{17}{36}{接口递推代码}{lstlisting.17}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {17}接口递推代码}{36}{lstlisting.17}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {R.3}崩溃复现与 gdb 栈}{36}{subsection.R.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {R.4}根因分析}{36}{subsection.R.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {R.5}修复思路概览}{36}{subsection.R.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {S}补丁实现与验证}{37}{appendix.S}\protected@file@percent }
+\newlabel{sec:patch}{{S}{37}{补丁实现与验证}{appendix.S}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {S.1}代码改动总览}{37}{subsection.S.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {S.2}补丁 1：安全降级}{37}{subsection.S.2}\protected@file@percent }
+\newlabel{lst:patch1}{{18}{37}{CrossSection2dFEM.cpp 补丁}{lstlisting.18}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {18}CrossSection2dFEM.cpp 补丁}{37}{lstlisting.18}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {S.3}补丁 2：接口使用端断言}{37}{subsection.S.3}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {19}propagateImpedAdmit.cpp 补丁}{37}{lstlisting.19}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {S.4}编译与单元测试}{37}{subsection.S.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {S.5}长期方案：精确交集虚段}{37}{subsection.S.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {S.6}性能影响评估}{38}{subsection.S.6}\protected@file@percent }
+\gdef \@abspage@last{38}

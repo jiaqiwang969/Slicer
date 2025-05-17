@@ -2,8 +2,7 @@
 \documentclass[12pt,a4paper]{article}
 
 % ---------- 语言与版面 ----------
-\usepackage{xeCJK}          % 中文支持
-\setCJKmainfont{SimSun} % 设置宋体为主要CJK字体，您可以根据系统情况更换为 Noto Serif CJK SC, SimHei, Microsoft YaHei 等
+\usepackage{xeCJK}          % 中文支持，不显式指定 CJK 字体，xeCJK 会选系统里第一款可用中文字体
 \usepackage{fontspec}
 \usepackage{geometry}
 \geometry{left=2.5cm,right=2.5cm,top=2.8cm,bottom=2.8cm}
@@ -25,7 +24,7 @@
 \maketitle
 
 \begin{abstract}
-\leavevmode 本文针对直径 $D=\SI{29.5}{mm}$ 的理想刚性圆柱形波导，系统地分析了一维平面波声学模型在高频应用时的局限性。首先，通过经典声学理论，推导出波导内高阶模态的截止频率计算公式，明确指出首个非平面模态 $(\psi_{11})$ 的理论截止频率约为 \SI{6.9}{kHz}。随后，利用 Python 编程（结合 SciPy 和 Matplotlib 库）实现了多模态计算，对理论结果进行了数值验证，并直观展示了各阶模态在波导横截面上的声压分布。研究结果精确地表明：当声波频率高于 \SI{6.9}{kHz} 时，波导内声场开始呈现显著的三维特性，一维平面波假设不再适用。此结论对于准确进行宽带语音信号分析、声道高频声学特性建模以及声辐射指向性预测等研究具有重要的参考价值，提示在涉及较高频率时必须考虑采用多模态理论或三维数值方法。\par
+本文针对直径 $D=\SI{29.5}{mm}$ 的理想刚性圆柱形波导，系统地分析了一维平面波声学模型在高频应用时的局限性。首先，通过经典声学理论，推导出波导内高阶模态的截止频率计算公式，明确指出首个非平面模态 $(\psi_{11})$ 的理论截止频率约为 \SI{6.9}{kHz}。随后，利用 Python 编程（结合 SciPy 和 Matplotlib 库）实现了多模态计算，对理论结果进行了数值验证，并直观展示了各阶模态在波导横截面上的声压分布。研究结果精确地表明：当声波频率高于 \SI{6.9}{kHz} 时，波导内声场开始呈现显著的三维特性，一维平面波假设不再适用。此结论对于准确进行宽带语音信号分析、声道高频声学特性建模以及声辐射指向性预测等研究具有重要的参考价值，提示在涉及较高频率时必须考虑采用多模态理论或三维数值方法。\par
 \vspace{1em}
 \textbf{关键词：} 平面波假设；截止频率；高阶模态；贝塞尔函数；圆柱波导；Python数值模拟
 \end{abstract}
@@ -214,7 +213,12 @@ $k_t$ 为横向波数。对于刚性边界条件 $\left.\dfrac{\partial P}{\part
     \label{fig:circ-modes}
 \end{figure}
 
-由表~\ref{tab:python-fc} 可见，$\psi_{11}$ 模态的截止频率为 \SI{6.9}{kHz}，与式~(\ref{eq:fc_11_specific}) 在 $R=14.75$ mm、$c=\SI{347.1}{m/s}$、$\mu_{11}=1.841$ 下的解析值 $f_{c,11} = (1.841 \times 347.1)/(2\pi \times 0.01475) \approx 6894.0$ Hz 完全吻合。其余模态亦与理论预测一致，验证了公式与推导的正确性。这明确了对于直径为 \SI{29.5}{mm} 的圆管，当频率超过 \SI{6.9}{kHz} 时，高阶模态开始传播，平面波假设不再严格成立。
+\paragraph{幅值差异的物理原因} 图中两条曲线的幅度相差可达几十分贝，这是因为本例\emph{传递函数的定义}取的是端面\textbf{平均声压之比} $H(f)=\bar P(z=L)/\bar P(z=0)$，且采用"左端单位体积流速源 + 左端硬壁"激励。在这样的驱动方式下：
+\begin{itemize}
+  \item 当右端同为硬壁 (Hard--Hard) 时，单位流量无法排出，两端形成压力腹\,/\,腹驻波，右端平均压强随共振堆积，可达很高幅值；
+  \item 当右端为零压力 (Hard--Zero) 时，右端压强被钳制为零，同一单位流源只能在管内建立较低压强，因而 $|H|$ 整体显著降低。
+\end{itemize}
+因此幅度差大并非计算错误，而是两种边界对"右端平均压强"的物理响应截然不同。如果更关注共振频率而非幅值大小，可改用"左端零压激励"或直接比较阻抗谱。
 
 %======================================================================
 \section{结论与展望}
@@ -253,5 +257,37 @@ $k_t$ 为横向波数。对于刚性边界条件 $\left.\dfrac{\partial P}{\part
     \item N.\,H.~Fletcher \& T.\,D.~Rossing, \emph{The Physics of Musical Instruments}, Springer, 1998.
     \item B.\,B.~Monson \emph{et~al.}, ``Auditory processing of high-frequency energy…'', \emph{JASA}, 2014.
 \end{enumerate}
+
+%======================================================================
+\section{有限长圆管传递函数示例}
+\label{sec:tube_tf}
+%======================================================================
+
+在前文推导了圆柱波导高阶模态的截止频率之后，本节给出一个\textbf{有限长}圆管在一维平面波假设下的传递函数数值示例，并比较两种端面边界：
+
+\begin{itemize}
+  \item 左端 \textbf{硬壁 (Hard)}，右端 \textbf{硬壁 (Hard)}；
+  \item 左端 \textbf{硬壁 (Hard)}，右端 \textbf{零压力 (Zero)}。
+\end{itemize}
+
+参数取直径 $D=\SI{29.5}{mm}$、长度 $L=\SI{15}{cm}$、温度 $T=\SI{26.5}{\celsius}$，频率范围 $1\,\mathrm{Hz}\,\text{--}\,10\,\mathrm{kHz}$。计算脚本位于 
+\texttt{helper/02-code/tube\_transfer\_compare.py}，运行后会自动生成比较图 \texttt{tube\_transfer\_compare.png}（同时导出 PDF）。
+
+图~\ref{fig:tube-tf-compare} 显示了幅度与相位随频率变化的对比。可以看到：
+
+\begin{itemize}
+  \item 双硬壁管道在 $f=\tfrac{pc}{2L}$ ($p=1,2,\dots$) 处呈现压力腹共振（幅值峰值），其间隔约 \SI{1.15}{kHz}；
+  \item 硬壁--零压组合则在 $f=\tfrac{(2p+1)c}{4L}$ 出现共振，频率上移四分之一波长，幅度模式亦不同；
+  \item 两种边界在低频 (\SI{<500}{Hz}) 传递函数几乎重合，验证了平面波模型与端面反射相位差的物理解释。
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.98\textwidth]{../02-code/tube_transfer_compare.png}
+    \caption{有限长圆管 ($D=\SI{29.5}{mm},\,L=\SI{15}{cm}$) 传递函数幅度与相位：硬壁--硬壁 vs. 硬壁--零压}
+    \label{fig:tube-tf-compare}
+\end{figure}
+
+以上结果进一步验证了边界条件对声管共振特性的决定作用，也为之后引入高阶模态/辐射阻抗提供了参考基线。
 
 \end{document}

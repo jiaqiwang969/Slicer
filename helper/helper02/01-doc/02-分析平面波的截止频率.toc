@@ -12,6 +12,8 @@
 \contentsline {section}{\numberline {3}Python 数值验证（$D=29.5$ mm）}{6}{section.3}%
 \contentsline {subsection}{\numberline {3.1}计算结果}{6}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}模态形状图}{6}{subsection.3.2}%
+\contentsline {paragraph}{幅值差异的物理原因}{6}{section*.2}%
 \contentsline {section}{\numberline {4}结论与展望}{7}{section.4}%
-\contentsline {section}{\numberline {5}参考公式速查}{7}{section.5}%
+\contentsline {section}{\numberline {5}参考公式速查}{8}{section.5}%
 \contentsline {section}{\numberline {6}参考文献}{8}{section.6}%
+\contentsline {section}{\numberline {7}有限长圆管传递函数示例}{8}{section.7}%

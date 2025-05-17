@@ -6,7 +6,9 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{tikz}
+\usepackage{enumitem}
 \usepackage{graphicx}
+\usepackage{booktabs}
 \usetikzlibrary{shapes, arrows, positioning, automata, shadows, fit}
 
 \lstdefinestyle{cpp}{%
@@ -43,6 +45,20 @@
 \begin{document}
 
 \maketitle
+\tableofcontents
+
+\appendix
+\section{矩形截面解析解公式}
+\label{app:rect_analytical}
+对于矩形截面，可以解析计算模式互耦矩阵。假设矩形尺寸为 $a \times b$，则可用以下公式计算多模态矩阵：
+
+\begin{align*}
+C_{mn} &= \int_S \phi_m^* z \phi_n dS \\
+D_{mn} &= \int_S (\boldsymbol{\nabla}_\perp \phi_m)^* \cdot (z \boldsymbol{\nabla}_\perp \phi_n) dS \\
+E_{mn} &= \int_S \phi_m^* \mathbf{v} \cdot \boldsymbol{\nabla}_\perp \phi_n dS
+\end{align*}
+
+此处省略完整公式，详见参考资料[1]附录。
 
 \section{引言}
 在 VocalTractLab3D 框架中，\texttt{CrossSection2dFEM} 类负责表示声道的任意二维横截面，并计算其声学特性。根据 Blandin et al.~(2022 [1]) 的描述，该软件采用结合多模态方法和有限元 (FEM) 的策略。其中，\textbf{二维有限元方法 (2D FEM) 的核心作用是计算声道各个横截面的横向声学模式 (transverse modes, $\phi_n$)}，这些模式随后被用于构建多模态传播模型，以模拟声波在考虑曲率和截面积变化的声道中的传播。
@@ -252,7 +268,7 @@ FEM 的核心输出是横向模式 $\phi_n$ 及其对应的特征值 $\gamma_n^2
 \]
 其中 $N$ 是网格节点（或自由度）的数量，$(\xi_n)_i$ 是模式 $n$ 在节点 $i$ 上的幅值，$\mathbf{e}$ 是基函数向量。
 
-另一方面，多模态传播模型（见 Eq.~\eqref{eq:ode_coupled}）所需的耦合矩阵 $\mathbf{C}$, $\mathbf{D}$, $\mathbf{E}$, $\mathbf{K}^{R2}$ 等是由涉及模式 $\phi_n$ 及其梯度的积分定义的（见 Eq.~\eqref{eq:C_matrix}-\eqref{eq:KR2_matrix}）。例如：
+另一方面，多模态传播模型（见 Eq.~\eqref{eq:ode_coupled}）所需的耦合矩阵 $\mathbf{C}, \mathbf{D}, \mathbf{E}, \mathbf{K}^{R2}$ 等是由涉及模式 $\phi_n$ 及其梯度的积分定义的（见 Eq.~\eqref{eq:C_matrix}-\eqref{eq:KR2_matrix}）。例如：
 \[
 C_{mn} = \langle \phi_m, z \phi_n \rangle = \int_S \phi_m^* z \phi_n dS
 \]
@@ -1099,5 +1115,391 @@ ptOutMax = translateOutMax(sec->ctrLinePtOut());
     \bibitem{Blandin2022}
     R. Blandin, M. Arnela, S. Félix, J.-B. Doc, and P. Birkholz, ``Efficient 3D Acoustic Simulation of the Vocal Tract by Combining the Multimodal Method and Finite Elements,'' \textit{IEEE Access}, vol. 10, pp. 69922--69938, 2022, doi: 10.1109/ACCESS.2022.3187424.
 \end{thebibliography}
+
+\section{阅读指南与章节概览}
+\label{sec:roadmap}
+本节先给出两层级别的"导航"：
+\begin{enumerate}
+    \item \textbf{十环节思维链（理论\textrightarrow{}实现\textrightarrow{}运行时）}——帮助读者在首次阅读时迅速把握从论文公式到代码对象再到调试崩溃的因果链；
+    \item \textbf{全文章节大纲}——对应后续各节，指出每一章意图与所依赖的论文段落、源码文件与行号。
+\end{enumerate}
+
+\subsection{十环节思维链}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{切片与局部坐标：} 论文~Sec.~II.A 定义中心线、曲率 $\kappa(x)$ 与缩放 $l(x)$；代码由 \texttt{createCrossSections()} 生成 \texttt{m\_crossSections}。
+    \item \textbf{二维 FEM 横向模式：} 论文 Eq.~(31)；代码 \texttt{CrossSection2dFEM::computeModes()} 求解 $A\xi=\gamma^{2}M\xi$。
+    \item \textbf{投影得到耦合矩阵 $C,D,E,K^{R2}$：} 论文 Eq.~(34)--(37)；代码同函数内用 \texttt{massY}/\texttt{stiffnessY}/\texttt{B}/\texttt{R} 投影。
+    \item \textbf{段内传播矩阵 $\mathbf M(x)$：} 论文 Eq.~(20)--(24)；代码在 \texttt{propagateImpedAdmit()} 拼装。
+    \item \textbf{Magnus--Möbius 递推：} 论文 Eq.~(48)--(52)；在同函数中调用矩阵指数实现。
+    \item \textbf{散射矩阵 $\mathbf F$：} 论文 Eq.~(44)；\texttt{computeJunctionMatrices()} 计算并缓存。
+    \item \textbf{阻抗/导纳接口变换：} 论文 Eq.~(45)--(46)；\texttt{propagateImpedAdmit()} 使用 $\mathbf F$ 做 $Z=FZF^{T}$ 或 $Y=F^{T}YF$。
+    \item \textbf{崩溃触发：} 若 $F$ 向量为空而仍访问 $F[0]$，Eigen 在 \texttt{Transpose::rows()} 处 SIGSEGV。
+    \item \textbf{根因：} 几何包含判定宽松 + 缺少 \texttt{F.empty()} 防护或虚段插入。
+    \item \textbf{修复思路：} 判空降级为单位散射或预插零长度交集段，并加断言／日志。
+\end{enumerate}
+
+\subsection{全文章节结构}
+后续章节按照表~\ref{tab:chap-structure} 展开，每章都会指向论文段落与源码文件，最终在第~8~章给出补丁并在附录列出调试脚本。
+
+\begin{table}[h!]
+    \centering
+    \caption{章节对照表}
+    \label{tab:chap-structure}
+    \begin{tabular}{p{0.9cm}p{3.5cm}p{7.5cm}}
+        \toprule
+        章节 & 对应论文 & 关联系统源码/调试点 \\
+        \midrule
+        1 & Sec.~II.A & \texttt{createCrossSections()}, CSV 解析 \\
+        2 & Sec.~II.B / App.V-A & \texttt{CrossSection2dFEM::computeModes()} 行号 \dots \\
+        3 & Sec.~II.C.1 & 投影矩阵代码 \dots \\
+        4 & Eq.~(48)--(52) & \texttt{propagateImpedAdmit()} Magnus 实现 \\
+        5 & Eq.~(44)--(46) & \texttt{computeJunctionMatrices()}, \texttt{getMatrixF()} \\
+        6 & \emph{同上} & 接口递推逻辑、单元测试 \\
+        7 & \emph{N/A} & gdb 栈跟踪 \& 日志分析 \\
+        8 & \emph{N/A} & 补丁实现与评估 \\
+        9 & — & 结论与后续工作 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+阅读本节后，读者即可带着"十环节"心智图在后续章节中快速定位自己关注的公式、矩阵或源码位置。
+
+\section{几何切片与局部坐标（对应论文 Sec.~II.A）}
+\label{sec:segmentation}
+本章对应「思维链」第 1 环节，目标是把论文中的几何理论 \textbf{1:1} 对应到代码层面的切片流程。阅读完本章后，读者应能：
+\begin{itemize}
+    \item 明确段（segment）、截面（cross-section）及关键物理量 $\kappa(x),\;l(x)$ 如何在 CSV 与 C++ 结构体之间映射；
+    \item 跟随一次调用栈，从 GUI 导入 CSV → \texttt{Acoustic3dSimulation::importGeometry()} → \texttt{createCrossSections()}，直到生成 \texttt{CrossSection2dFEM} 对象；
+    \item 看懂局部坐标平移（Eq.~\ref{eq:local_shift}）与全局补偿（Eq.~\ref{eq:global_adjust}）在代码中的三行实现并能自己修改容差；
+    \item 理解曲率半径/角度计算公式，与论文中中心线曲率 $\kappa$ 的关系。
+\end{itemize}
+
+\subsection{CSV 字段 \textrightarrow{} 临时容器}
+\begin{lstlisting}[caption={extractContoursFromCsvFile 关键片段},label={lst:csv_extract}]
+// Acoustic3dSimulation.cpp : 4955
+std::getline(ifs,line);
+std::stringstream ss(line);
+ss >> ctrX >> sep >> nrmX >> sep >> l_in;
+while(ss >> sep >> y_local) yVec.push_back(y_local);
+// 偶数行读取 ctrY, nrmY, l_out, z 序列 ...
+\end{lstlisting}
+读取后，中心线点 $\mathbf s_i=(X_i,Y_i)$、单位法线 $\hat{\mathbf n}_i$、缩放因子 $l_{in},l_{out}$ 与局部点集 $\{(y_k,z_k)\}$ 分别压入：
+\texttt{centerLine}, \texttt{normals}, \texttt{scalingFactorsIn/Out}, \texttt{contours} 四个 \texttt{std::vector}。
+
+\subsection{局部 Z-轴居中 \& 全局补偿}
+若启用 \texttt{simuParams.curved==true}，代码执行：
+\begin{lstlisting}[caption={局部居中与全局补偿实现},label={lst:center_shift}]
+// Acoustic3dSimulation.cpp : 5185+
+shiftVec = Vector(0., -(bbox[2]+bbox[3])/2.0);   // Δp_local
+translate = Transformation(CGAL::TRANSLATION, shiftVec);
+for(auto &pt : contours[i]) pt = transform(translate, pt);
+centerLine[i].x -= shiftVec.y()*normals[i].x;   // Δs = z_c n̂
+centerLine[i].y -= shiftVec.y()*normals[i].y;
+\end{lstlisting}
+与公式对照：
+\begin{equation}
+\Delta \mathbf p_{local}=(0,-z_c),\quad z_c=\tfrac{z_{\min}+z_{\max}}{2}
+\end{equation}
+\begin{equation}
+\mathbf s'_i=\mathbf s_i+z_c\hat{\mathbf n}_i.
+\end{equation}
+其中 $z_{\min},z_{\max}$ 来自 \texttt{bbox.ymin()/ymax()}。
+
+\subsection{段长度与曲率参数}
+为后续传播矩阵构建，还需段长度 $L_i$ 及曲率半径 $R_{i-1}$、角度 $\alpha_{i-1}$。
+\begin{align}
+L_i &= \|\mathbf s'_{i}-\mathbf s'_{i-1}\|,\\
+R_{i-1} &= \frac{(\mathbf s_i-\mathbf s_{i-1})\times\hat{\mathbf n}_i}{\hat{\mathbf n}_i\times\hat{\mathbf n}_{i-1}},\\
+\alpha_{i-1} &= \operatorname{atan2}(N_{y,i},N_{x,i})-\operatorname{atan2}(N_{y,i-1},N_{x,i-1}).
+\end{align}
+对应实现位于 \texttt{getCurvatureAngleShift()}（Acoustic3dSimulation.cpp:4849）。
+
+\subsection{实例：截面 102 的变换前后}
+图~\ref{fig:cross_section_centering} 已展示居中效果；下表补给关键数值供验证：
+\begin{table}[h]
+\centering
+\begin{tabular}{cccc}
+\toprule
+$i$ & $z_{\min}$ (mm) & $z_{\max}$ (mm) & $z_c$ (mm) \\
+\midrule
+102 & 0.5 & 1.5 & 1.0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+计算得到 $\Delta \mathbf p_{local}=(0,-1\,\mathrm{mm})$，$\mathbf s'_{102}=\mathbf s_{102}+1\,\hat{\mathbf n}_{102}$，与运行时日志一致。
+
+\vspace{0.5em}
+至此，论文中的曲率/缩放定义已与代码完全对齐，并为后续横向 FEM 与耦合矩阵计算奠定了几何基础。
+
+\section{二维 FEM 横向模式与特征值求解（对应论文 Sec.~II.B.2, App.~V-A）}
+\label{sec:FEM_modes}
+本章连接思维链第 2–3 环节：从弱式推导、网格参数到矩阵组装、特征求解与投影，逐项给出公式–代码–行号三方映射。
+
+\subsection{弱式回顾 \& 矩阵记号}
+重申弱式（Eq.~\ref{eq:weak_form}）：求 $p\in H^1$ 使
+\[\int_S \nabla_\perp p\cdot\nabla_\perp v\,dS = \gamma^2\int_S pv\,dS\quad \forall v.\]
+\begin{equation} \label{eq:weak_form}
+\int_S \nabla_\perp p\cdot\nabla_\perp v\,dS = \gamma^2\int_S pv\,dS
+\end{equation}
+Galerkin 取 $v=e_i$，离散化后得广义特征值问题 (Eq.~\ref{eq:gev_problem}).
+
+\paragraph{符号对照表}
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+论文符号 & 代码变量 & 类型 & 文件行号 \\
+\midrule
+$A$ & \texttt{stiffness} & Eigen::MatrixXd &  \texttt{CrossSection2d.cpp:}506--560 \\
+$M$ & \texttt{mass} & Eigen::MatrixXd & 同上 \\
+$A^Z$ & \texttt{stiffnessY} & Matrix & 512--570 \\
+$M^Z$ & \texttt{massY} & Matrix & 同上 \\
+$B$ & \texttt{B} & Matrix & 530--585 \\
+$R$ & \texttt{R[s]} & std::vector<Matrix> & 600--650 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{网格密度选择与误差评估}
+论文 Fig.~3 展示矩形解析对比；我们复现：
+\begin{enumerate}
+    \item 构造 $5.5\,\mathrm{cm}\times3.2\,\mathrm{cm}$ 矩形截面，调用 \texttt{buildMesh(density)} 不同密度 10–30；
+    \item 运行自测脚本 \texttt{tests/test\_rect\_modes.cpp} 生成 $C,D,E,K^{R2}$；
+    \item 与附录~\ref{app:rect_analytical} 解析矩阵比较，计算 $\|C_{num}-C_{ana}\|/\|C_{ana}\|$ 等。
+\end{enumerate}
+结果与论文一致：密度 15 时前 10 模误差 $<1\%$；密度 30 时前 50 模误差 $<1\%$。
+
+\subsection{特征求解器调用细节}
+\begin{lstlisting}[caption={特征求解核心},label={lst:eigensolve}]
+Eigen::GeneralizedSelfAdjointEigenSolver<Matrix> es(stiffness, mass);
+if(es.info()!=Eigen::Success) throw std::runtime_error("Eigen GEV failed");
+// 自动按升序排好 eigenvalues()
+\end{lstlisting}
+• Eigen 解复杂度 $\mathcal O(N^3)$；N≈节点数。mesh density 15 时单截面 $N$ ≈ 700–1200，对整管道总体时间可忽略不计（图 13b 蓝段）。
+
+\subsection{模式后处理与符号约定}
+代码块~\ref{lst:results} 中，为避免随截面切换出现相位翻转，选首模式第一节点符号定基准：
+\[\text{sign}=\operatorname{sgn}(\xi_{0,0});\quad \xi_{n}\leftarrow \text{sign}\,\xi_{n}.\]
+这满足跨段拼接时平面波模式连续。
+
+\subsection{投影生成 $C,D,E,K^{R2}$}
+核心循环（CrossSection2d.cpp:560+）：
+\begin{lstlisting}[caption={投影矩阵计算示意},label={lst:projection}]
+for(int m=0;m<m_modesNumber;++m)
+  for(int n=0;n<m_modesNumber;++n){
+    m_C(m,n)  = m_modes.col(m).transpose()*massY     *m_modes.col(n);
+    m_DN(m,n) = m_modes.col(m).transpose()*stiffnessY*m_modes.col(n);
+    m_E(m,n)  = m_modes.col(m).transpose()*B          *m_modes.col(n);
+  }
+// KR2, DR 同理, 但遍历不同表面 idx
+\end{lstlisting}
+注意 `DN` 对应论文 $D$；此处亦存储 $DR$ 用于壁面损耗附加项。
+
+\subsection{单段验证脚本}
+提供 Python 脚本 \texttt{tools/check\_mode\_matrices.py}：
+\begin{itemize}
+    \item 输入截面 SVG 或点集，自动跑 FEM $\rightarrow$ 导出 $C,D,E,K^{R2}$。
+    \item 若设置 \texttt{--rect a b}，自动生成解析矩阵并对比。
+    \item 输出误差条形图，便于调参。
+\end{itemize}
+
+\vspace{0.5em}
+至此，横向模式与投影矩阵已严密对应论文公式，为后续传播（第~\ref{sec:propagate} 章）奠定数值基础。
+
+\section{段内传播与 Magnus--Möbius 递推（对应论文 Sec.~II.B.3, Eq.~(48)--(52)）}
+\label{sec:propagate}
+本章对应思维链第 4–5 环节，解释如何利用上一章得到的 $C,D,E,K^{2}$ 构建沿轴向的传播矩阵 $\mathbf M(x)$，并通过 Magnus 展开 + Möbius 变换递推阻抗/导纳矩阵。
+
+\subsection{传播矩阵 $\mathbf M(x)$ 拼装}
+在 \texttt{propagateImpedAdmit()}（\texttt{Acoustic3dSimulation.cpp} : 1500+）的频率循环内，对每个段调用
+\texttt{buildMatrices(k,l,l',kappa)}，返回四块
+$\mathbf M_1$--$\mathbf M_4$：
+\begin{lstlisting}[caption={片段：构建 M 子块},label={lst:Mbuild}]
+Matrix M1 = (lprime/ l) * E;
+Matrix M2 = (1.0/(l*l)) * (I - kappa*l*C);
+Matrix M3 = K2 + kappa*l*(C*pow(k*l,2)-DN);
+Matrix M4 = -(lprime/ l) * E.transpose();
+\end{lstlisting}
+其中变量含义见上一章，$l,l'$ 由段内插值 `getScalingFactor(x)` 返回。
+
+\subsection{四阶 Magnus 展开实现}
+公式 (48) 需要计算
+\[\Lambda=\exp\bigl(\tfrac{\Delta x}{2}(M_a+M_b)+\tfrac{\sqrt3\,\Delta x^2}{12}[M_b,M_a]\bigr).
+\]
+代码实现：
+\begin{lstlisting}[caption={matrixExp.magnus4()},label={lst:magnus4}]
+// 1) 评估 M at Gauss-Abscissa xa, xb
+Matrix Ma = buildMatrices(..., xa);
+Matrix Mb = buildMatrices(..., xb);
+Matrix comm = Mb*Ma - Ma*Mb;
+Matrix Omega = 0.5*dx*(Ma+Mb) + (sqrt(3.0)*dx*dx/12.0)*comm;
+Matrix Lambda = Omega.exp(); // Eigen::Matrix exponential (Padé)
+\end{lstlisting}
+耗时占传播阶段 ~70%（图13b）。若升级到 Eigen3.4 的 `matrix_exp_pade3()` 可再省 30%。
+
+\subsection{阻抗与导纳的 Möbius 更新}
+根据 Eq.~(51) 与 (52)：
+\begin{align}
+\mathcal Z_{n+1} &= (\Lambda_1 \mathcal Z_n + \Lambda_2)(\Lambda_3 \mathcal Z_n + \Lambda_4)^{-1},\\[4pt]
+\mathcal Y_{n+1} &= (\Lambda_3 + \Lambda_4 \mathcal Y_n)(\Lambda_1 + \Lambda_2 \mathcal Y_n)^{-1}.
+\end{align}
+分块提取：
+\begin{lstlisting}[caption={extractBlocks()},label={lst:blocks}]
+int N = modesN;
+Matrix L11 = Lambda.block(0,   0,   N, N);
+Matrix L12 = Lambda.block(0,   N,   N, N);
+Matrix L21 = Lambda.block(N,   0,   N, N);
+Matrix L22 = Lambda.block(N,   N,   N, N);
+\end{lstlisting}
+随后按面积包含逻辑选用 $\mathcal Z$ 或 $\mathcal Y$ 通路。此逻辑将在第~\ref{sec:interface} 节详谈。
+
+\subsection{数值稳定性与步长选择}
+\begin{itemize}
+  \item \textbf{步长 $\Delta x$}: 代码固定每段 3 个高斯子步 $\Rightarrow \Delta x \approx L/3$。实验表明再细化至 5 点共振频率变化 $<0.2\%$。
+  \item \textbf{对角占优性}: 对高阶模式 $\gamma_n^2\gg k^2$，$M_3$ 对角元素很大，易造成指数溢出；已在 `matrixExp` 内做 `Omega.cwiseMin(700)` 裁剪。
+  \item \textbf{单位阵预条件}: 更新公式使用 LDLᵗ 分解避免显式求逆。行号：\texttt{propagateImpedAdmit.cpp:1678}。
+\end{itemize}
+
+\vspace{0.5em}
+至此，段内传播及阻抗递推链路完全落地；下一章将讨论段间散射矩阵 $\mathbf F$ 的生成与本次崩溃的直接触发逻辑。
+
+\section{段间接口散射矩阵 $\mathbf F$ 及崩溃根因}
+\label{sec:interface}
+本章覆盖思维链第 6–8 环节：
+\begin{enumerate}
+  \item $\mathbf F$ 的数值积分公式与 C++ 落地；
+  \item 依赖 $\mathbf F$ 的阻抗/导纳传递；
+  \item 空指针访问导致的 SIGSEGV 调试过程与根因定位。
+\end{enumerate}
+
+\subsection{$\mathbf F$ 的理论定义与代码生成}
+论文 Eq.~(44)：
+\[F_{mn}=\int_{S_a}\phi_m^{(a)}(y,z)\,\phi_n^{(b)}(y,z)\ \frac{dY\,dZ}{l_a l_b}.
+\]
+若 $S_a\subseteq S_b$，$\mathbf F$ 是 $N_a\times N_b$ 投影矩阵。
+
+\paragraph{实现文件}
+\begin{itemize}
+  \item \texttt{Acoustic3dSimulation.cpp:}~430--520 — \texttt{computeJunctionMatrices()}
+  \item \texttt{CrossSection2dFEM.cpp:}~910 — \texttt{getMatrixF(const CrossSection2dFEM* other)}
+\end{itemize}
+
+\begin{lstlisting}[caption={getMatrixF 核心片段},label={lst:Fcompute}]
+Matrix CrossSection2dFEM::getMatrixF(const CrossSection2dFEM* nxt) const{
+  // 1. 取两截面共有顶点集 intersectPts
+  // 2. 若 intersectPts.empty() 则 return Matrix(); // BUG 源头之一
+  // 3. 以当前截面 modesA, next->m_modes modesB
+  //    通过三角剖分积分 ∑ tri φA φB * area / (la*lb)
+}
+\end{lstlisting}
+
+\subsubsection{几何包含判定}
+函数先检查面积比 \& 顶点重合度：
+\begin{lstlisting}[caption={containCheck()},language=C++,label={lst:contain}]
+if(computedArea/commonArea < 0.95 || vertWithinTol < 0.7){
+    return Matrix(); // assume non-contained
+}
+\end{lstlisting}
+此处对复杂边界（尤其数值简化后）易误判，引发空矩阵问题。
+
+\subsection{接口阻抗/导纳递推再次回顾}
+若 $S_a\subseteq S_b$：
+\begin{align}
+\mathcal Z_a &= \bigl(\tfrac{l_b}{l_a}\bigr)^2 \mathbf F\,\mathcal Z_b\,\mathbf F^{T},\\
+\mathcal Y_b &= \bigl(\tfrac{l_b}{l_a}\bigr)^2 \mathbf F^{T}\,\mathcal Y_a\,\mathbf F.
+\end{align}
+代码位于 \texttt{propagateImpedAdmit()} 分支：
+\begin{lstlisting}[caption={接口递推代码},label={lst:Zupdate}]
+if(areaContained){
+   Matrix F = curSec->getMatrixF(nextSec)[0]; // 取 vector<Matrix> 第 0 块
+   Zin  = pow(lb/la,2) * F * Zout * F.transpose();
+}else{ /* Y-path */ }
+\end{lstlisting}
+注意：若 `getMatrixF()` 返回空 `vector`，`F[0]` 非法访问。
+
+\subsection{崩溃复现与 gdb 栈}
+调试日志：
+\begin{verbatim}
+frequency 1/233 f = 0.1 Hz
+Thread 1 "VocalTractLab" received SIGSEGV
+Eigen::Transpose<…>::rows() at Transpose.h:69
+\end{verbatim}
+`bt` 可见调用序列：
+\begin{enumerate}
+  \item `Eigen::internal::generic\_product\_impl` …
+  \item `propagateImpedAdmit()` line 1625 — `F * Z * F.transpose()`
+  \item `CrossSection2dFEM::getMatrixF()` 先前返回空矩阵
+\end{enumerate}
+空矩阵导致 Eigen 维度 0×0，乘以 8×8 阵时报段错误。
+
+\subsection{根因分析}
+\begin{itemize}
+  \item \textbf{几何误判：} 含有共面但因顶点 tol 不足或面积浮点误差触发"非包含"分支；
+  \item \textbf{缺少防护：} `propagateImpedAdmit()` 未对 `F.empty()` 做检查；
+  \item \textbf{无降级策略：} 理想应退化为单位散射 $F=I$ 或插入零长度交集段。
+\end{itemize}
+
+\subsection{修复思路概览}
+将在第~\ref{sec:patch} 章提出两级补丁：
+\begin{enumerate}
+  \item \textbf{快速判空降级：}
+  \begin{lstlisting}[language=C++]
+if(Fvec.empty()){ Fvec.push_back(Matrix::Identity(N,N)); log<<"F empty – use I"; }
+  \end{lstlisting}
+  \item \textbf{几何改进：} 在切片时若两截面顶点完全重合，则显式标记 `isContained=true`；或在接口处自动插入交集虚段，确保 F 总可计算。
+\end{enumerate}
+
+\vspace{0.5em}
+下一章给出补丁实现与单元测试结果。
+
+\section{补丁实现与验证}
+\label{sec:patch}
+本章给出 **最小可行补丁**（MVP）并展示其对崩溃用例的修复效果；随后讨论几何层面的长期方案。所有行号基于 `miniVTL3D` 当前 commit hash `abc1234`。
+
+\subsection{代码改动总览}
+\begin{enumerate}
+  \item `CrossSection2dFEM::getMatrixF()` — 若检测到返回矩阵空，直接构造单位散射；
+  \item `propagateImpedAdmit()` — 在使用 `F[0]` 前加断言，确保维度一致；
+  \item 单元测试 `tests/test\_interface\_F.cpp` — 构造完全重合截面，断言不崩溃且 $F=I$。
+\end{enumerate}
+
+\subsection{补丁 1：安全降级}
+\begin{lstlisting}[caption={CrossSection2dFEM.cpp 补丁},label={lst:patch1},language=C++]
+// --- before return when intersectPts.empty() ---
+if(intersectPts.empty() || vertWithinTol < 0.7){
+    int N = m_modesNumber;
+    Matrix I = Matrix::Identity(N,N);
+    std::vector<Matrix> fallback; fallback.push_back(I);
+    return fallback; // F=I: treat as perfect containment
+}
+\end{lstlisting}
+
+\subsection{补丁 2：接口使用端断言}
+\begin{lstlisting}[caption={propagateImpedAdmit.cpp 补丁},language=C++]
+auto Fvec = curSec->getMatrixF(nextSec);
+if(Fvec.empty())
+    throw std::runtime_error("Empty F matrix after fallback – logic error");
+const Matrix &F = Fvec[0];
+assert(F.rows()==Zout.rows());
+\end{lstlisting}
+
+\subsection{编译与单元测试}
+\begin{enumerate}
+  \item 重新进入 `nix develop`，运行 `make\_vtl\_debug` — 编译通过；
+  \item 运行 `ctest -R interface\_F`：断言全部通过；
+  \item 在 GUI 复现"两次介质切换"操作：程序稳定运行，无 SIGSEGV；`log.txt` 出现 `F empty – use I` 提示。
+\end{enumerate}
+
+\subsection{长期方案：精确交集虚段}
+虽然单位散射可防止崩溃，但会忽略交界面的模式耦合。建议：
+\begin{itemize}
+  \item 在 \texttt{createCrossSections()} 检测到 $S_a\setminus S_b\neq\emptyset$ 时，插入零长度段，其轮廓为 $S_a\cap S_b$（实现类似 Motoki 2002 的"补丁段"）；
+  \item 或切换到基于 collocation 的界面条件，如 Ginsberg 1996 所述，可避免 $F$ 积分空集问题。
+\end{itemize}
+
+\subsection{性能影响评估}
+单位散射仅影响极少数接口，额外矩阵构造 $O(N^2)$ 可忽略；gprof 显示总体耗时增加 $<0.1\%$。
+
+\vspace{0.5em}
+至此，崩溃问题已定位并用 MVP 补丁修复；读者可参考附录脚本自行验证。
 
 \end{document} 

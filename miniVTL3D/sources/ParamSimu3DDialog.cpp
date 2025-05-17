@@ -26,6 +26,7 @@
 #include <wx/filename.h>
 #include <wx/statline.h>
 #include "Backend/SoundSpeed.h"
+#include <wx/scrolwin.h>
 
 // ****************************************************************************
 // IDs.
@@ -578,6 +579,10 @@ ParamSimu3DDialog::ParamSimu3DDialog(wxWindow* parent) :
 
 void ParamSimu3DDialog::initWidgets()
 {
+    // 创建可滚动窗口，所有控件放在内部
+    wxScrolledWindow* scrollWin = new wxScrolledWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxVSCROLL);
+    scrollWin->SetScrollRate(5, 5);
+
     wxBoxSizer* topLevelSizer = new wxBoxSizer(wxVERTICAL);
     wxStaticBoxSizer* sz = NULL;
     wxBoxSizer* lineSizer = NULL;
@@ -588,7 +593,7 @@ void ParamSimu3DDialog::initWidgets()
     // Geometry options
     ///////////////////////////////////////////////////////////////////
 
-    sz = new wxStaticBoxSizer(wxVERTICAL, this, "Geometry options");
+    sz = new wxStaticBoxSizer(wxVERTICAL, scrollWin, "Geometry options");
 
     // ****************************************************************
     // Select the geometrical features
@@ -596,13 +601,13 @@ void ParamSimu3DDialog::initWidgets()
 
     lineSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    chkCurv = new wxCheckBox(this, IDB_CHK_CURV, "Curved");
+    chkCurv = new wxCheckBox(scrollWin, IDB_CHK_CURV, "Curved");
     lineSizer->Add(chkCurv, 1, wxALL, 2);
 
-    chkVarArea = new wxCheckBox(this, IDB_CHK_VAR_AREA, "Varying area");
+    chkVarArea = new wxCheckBox(scrollWin, IDB_CHK_VAR_AREA, "Varying area");
     lineSizer->Add(chkVarArea, 1, wxALL, 2);
 
-    lstScalingFacMethods = new wxComboBox(this, IDL_SCALING_FAC_METHOD, "", wxDefaultPosition,
+    lstScalingFacMethods = new wxComboBox(scrollWin, IDL_SCALING_FAC_METHOD, "", wxDefaultPosition,
       this->FromDIP(wxSize(10, -1)), wxArrayString(), wxCB_DROPDOWN | wxCB_READONLY);
     lineSizer->Add(lstScalingFacMethods, 1, wxALL, 3);
 
@@ -617,7 +622,7 @@ void ParamSimu3DDialog::initWidgets()
     ///////////////////////////////////////////////////////////////////
 
     topLevelSizer->AddSpacer(10);
-    sz = new wxStaticBoxSizer(wxVERTICAL, this, "Mode computation options");
+    sz = new wxStaticBoxSizer(wxVERTICAL, scrollWin, "Mode computation options");
 
     // ****************************************************************
     // Set mesh density.
@@ -625,10 +630,10 @@ void ParamSimu3DDialog::initWidgets()
 
     lineSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    label = new wxStaticText(this, wxID_ANY, "Mesh density (elements per length): ");
+    label = new wxStaticText(scrollWin, wxID_ANY, "Mesh density (elements per length): ");
     lineSizer->Add(label, 12, wxALL | wxALIGN_CENTER, 3);
 
-    txtMeshDensity = new wxTextCtrl(this, IDE_MESH_DENSITY, "", wxDefaultPosition,
+    txtMeshDensity = new wxTextCtrl(scrollWin, IDE_MESH_DENSITY, "", wxDefaultPosition,
       wxSize(10, -1), wxTE_PROCESS_ENTER);
     lineSizer->Add(txtMeshDensity, 3, wxALL, 3);
 
@@ -642,10 +647,10 @@ void ParamSimu3DDialog::initWidgets()
 
     lineSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    label = new wxStaticText(this, wxID_ANY, "Maximal cut-off frequency (Hz): ");
+    label = new wxStaticText(scrollWin, wxID_ANY, "Maximal cut-off frequency (Hz): ");
     lineSizer->Add(label, 4, wxALL | wxALIGN_CENTER, 3);
 
-    txtMaxCutOnFreq = new wxTextCtrl(this, IDE_MAX_CUT_ON, "", wxDefaultPosition,
+    txtMaxCutOnFreq = new wxTextCtrl(scrollWin, IDE_MAX_CUT_ON, "", wxDefaultPosition,
       wxSize(60, -1), wxTE_PROCESS_ENTER);
     lineSizer->Add(txtMaxCutOnFreq, 1, wxALL, 3);
 
@@ -660,7 +665,7 @@ void ParamSimu3DDialog::initWidgets()
     ///////////////////////////////////////////////////////////////////
 
     topLevelSizer->AddSpacer(10);
-    sz = new wxStaticBoxSizer(wxVERTICAL, this, "Physical constants");
+    sz = new wxStaticBoxSizer(wxVERTICAL, scrollWin, "Physical constants");
 
     // ****************************************************************
     // Set temperature or sound speed.
@@ -668,23 +673,26 @@ void ParamSimu3DDialog::initWidgets()
 
     lineSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    label = new wxStaticText(this, wxID_ANY, wxString::FromUTF8("Temperature (\xc2\xb0""C): "));
+    label = new wxStaticText(scrollWin, wxID_ANY, wxString::FromUTF8("Temperature (\xc2\xb0""C): "));
     lineSizer->Add(label, 6, wxALL | wxALIGN_CENTER, 3);
 
-    txtTemperature = new wxTextCtrl(this, IDE_TEMPERATURE, "", wxDefaultPosition,
+    txtTemperature = new wxTextCtrl(scrollWin, IDE_TEMPERATURE, "", wxDefaultPosition,
       wxSize(10, -1), wxTE_PROCESS_ENTER);
     lineSizer->Add(txtTemperature, 4, wxALL, 3);
 
     lineSizer->AddStretchSpacer(2);
 
-    label = new wxStaticText(this, wxID_ANY, "Sound speed (m/s): ");
+    label = new wxStaticText(scrollWin, wxID_ANY, "Sound speed (m/s): ");
     lineSizer->Add(label, 6, wxALL | wxALIGN_CENTER, 3);
 
-    txtSndSpeed = new wxTextCtrl(this, IDE_SND_SPEED, "", wxDefaultPosition,
+    txtSndSpeed = new wxTextCtrl(scrollWin, IDE_SND_SPEED, "", wxDefaultPosition,
       wxSize(10, -1), wxTE_PROCESS_ENTER);
     lineSizer->Add(txtSndSpeed, 4, wxALL, 3);
 
     lineSizer->AddStretchSpacer(2);
+
+    // 将温度 / 声速 行加入物理常量分组
+    sz->Add(lineSizer, 0, wxEXPAND | wxLEFT | wxRIGHT, 10);
 
     // ****************************************************************
     // Medium selection + sea parameters
@@ -692,24 +700,24 @@ void ParamSimu3DDialog::initWidgets()
 
     lineSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    label = new wxStaticText(this, wxID_ANY, "Medium");
+    label = new wxStaticText(scrollWin, wxID_ANY, "Medium");
     lineSizer->Add(label, 4, wxALL | wxALIGN_CENTER, 3);
 
-    lstMedium = new wxComboBox(this, IDL_MEDIUM_SELECT, "", wxDefaultPosition,
+    lstMedium = new wxComboBox(scrollWin, IDL_MEDIUM_SELECT, "", wxDefaultPosition,
       this->FromDIP(wxSize(10, -1)), wxArrayString(), wxCB_DROPDOWN | wxCB_READONLY);
     lineSizer->Add(lstMedium, 4, wxALL, 3);
 
-    label = new wxStaticText(this, wxID_ANY, "Salinity (psu)");
+    label = new wxStaticText(scrollWin, wxID_ANY, "Salinity (psu)");
     lineSizer->Add(label, 4, wxALL | wxALIGN_CENTER, 3);
 
-    txtSalinity = new wxTextCtrl(this, IDE_SALINITY, "", wxDefaultPosition,
+    txtSalinity = new wxTextCtrl(scrollWin, IDE_SALINITY, "", wxDefaultPosition,
       wxSize(10, -1), wxTE_PROCESS_ENTER);
     lineSizer->Add(txtSalinity, 3, wxALL, 3);
 
-    label = new wxStaticText(this, wxID_ANY, "Depth (m)");
+    label = new wxStaticText(scrollWin, wxID_ANY, "Depth (m)");
     lineSizer->Add(label, 4, wxALL | wxALIGN_CENTER, 3);
 
-    txtDepth = new wxTextCtrl(this, IDE_DEPTH, "", wxDefaultPosition,
+    txtDepth = new wxTextCtrl(scrollWin, IDE_DEPTH, "", wxDefaultPosition,
       wxSize(10, -1), wxTE_PROCESS_ENTER);
     lineSizer->Add(txtDepth, 3, wxALL, 3);
 
@@ -722,7 +730,7 @@ void ParamSimu3DDialog::initWidgets()
     ///////////////////////////////////////////////////////////////////
 
     topLevelSizer->AddSpacer(10);
-    sz = new wxStaticBoxSizer(wxVERTICAL, this, "Numerical scheme options");
+    sz = new wxStaticBoxSizer(wxVERTICAL, scrollWin, "Numerical scheme options");
 
     // ****************************************************************
     // Select the numerical scheme
@@ -730,10 +738,10 @@ void ParamSimu3DDialog::initWidgets()
 
     lineSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    chkStraight = new wxCheckBox(this, IDB_CHK_STRAIGHT, "Straight");
+    chkStraight = new wxCheckBox(scrollWin, IDB_CHK_STRAIGHT, "Straight");
     lineSizer->Add(chkStraight, 1, wxALL, 2);
 
-    chkMagnus = new wxCheckBox(this, IDB_CHK_MAGNUS, "Magnus");
+    chkMagnus = new wxCheckBox(scrollWin, IDB_CHK_MAGNUS, "Magnus");
     lineSizer->Add(chkMagnus, 1, wxALL, 2);
 
     sz->Add(lineSizer, 0, wxLEFT | wxRIGHT | wxEXPAND, 10);
@@ -744,10 +752,10 @@ void ParamSimu3DDialog::initWidgets()
 
     lineSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    label = new wxStaticText(this, wxID_ANY, "Number of integration steps: ");
+    label = new wxStaticText(scrollWin, wxID_ANY, "Number of integration steps: ");
     lineSizer->Add(label, 4, wxALL | wxALIGN_CENTER, 3);
 
-    txtNumIntegrationStep = new wxTextCtrl(this, IDE_NUM_INTEGRATION, "", wxDefaultPosition,
+    txtNumIntegrationStep = new wxTextCtrl(scrollWin, IDE_NUM_INTEGRATION, "", wxDefaultPosition,
       wxSize(10, -1), wxTE_PROCESS_ENTER);
     lineSizer->Add(txtNumIntegrationStep, 1, wxALL, 3);
 
@@ -762,7 +770,7 @@ void ParamSimu3DDialog::initWidgets()
     ///////////////////////////////////////////////////////////////////
 
     topLevelSizer->AddSpacer(10);
-    sz = new wxStaticBoxSizer(wxVERTICAL, this, "Boundary conditions options");
+    sz = new wxStaticBoxSizer(wxVERTICAL, scrollWin, "Boundary conditions options");
 
     // ****************************************************************
     // Select mouth boundary condition
@@ -770,10 +778,10 @@ void ParamSimu3DDialog::initWidgets()
 
     lineSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    label = new wxStaticText(this, wxID_ANY, "Mouth boundary condition ");
+    label = new wxStaticText(scrollWin, wxID_ANY, "Mouth boundary condition ");
     lineSizer->Add(label, 2, wxALL | wxALIGN_CENTER, 3);
 
-    lstMouthBcond = new wxComboBox(this, IDL_MOUTH_BCOND, "", wxDefaultPosition,
+    lstMouthBcond = new wxComboBox(scrollWin, IDL_MOUTH_BCOND, "", wxDefaultPosition,
       this->FromDIP(wxSize(10, -1)), wxArrayString(), wxCB_DROPDOWN | wxCB_READONLY);
     lineSizer->Add(lstMouthBcond, 1, wxALL, 3);
 
@@ -787,10 +795,10 @@ void ParamSimu3DDialog::initWidgets()
 
     lineSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    label = new wxStaticText(this, wxID_ANY, "Percentage of wall losses: ");
+    label = new wxStaticText(scrollWin, wxID_ANY, "Percentage of wall losses: ");
     lineSizer->Add(label, 4, wxALL | wxALIGN_CENTER, 3);
 
-    txtPercLoss = new wxTextCtrl(this, IDE_PERCENT_LOSSES, "", wxDefaultPosition,
+    txtPercLoss = new wxTextCtrl(scrollWin, IDE_PERCENT_LOSSES, "", wxDefaultPosition,
       wxSize(10, -1), wxTE_PROCESS_ENTER);
     lineSizer->Add(txtPercLoss, 1, wxALL | wxALIGN_CENTER, 3);
 
@@ -804,11 +812,11 @@ void ParamSimu3DDialog::initWidgets()
 
     lineSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    chkViscoThermLoss = new wxCheckBox(this, IDB_CHK_FDEP_LOSSES,
+    chkViscoThermLoss = new wxCheckBox(scrollWin, IDB_CHK_FDEP_LOSSES,
       "Visco-thermal losses");
     lineSizer->Add(chkViscoThermLoss, 1, wxALL, 2);
 
-    chkWallLosses = new wxCheckBox(this, IDB_CHK_WALL_LOSSES,
+    chkWallLosses = new wxCheckBox(scrollWin, IDB_CHK_WALL_LOSSES,
       "Soft walls");
     lineSizer->Add(chkWallLosses, 1, wxALL, 2);
 
@@ -820,7 +828,7 @@ void ParamSimu3DDialog::initWidgets()
 
     lineSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    chkWallAdmittance = new wxCheckBox(this, IDB_CHK_WALL_ADMITTANCE,
+    chkWallAdmittance = new wxCheckBox(scrollWin, IDB_CHK_WALL_ADMITTANCE,
       "Constant wall admittance");
     lineSizer->Add(chkWallAdmittance, 0, wxALL, 2);
 
@@ -830,19 +838,19 @@ void ParamSimu3DDialog::initWidgets()
 
     lineSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    label = new wxStaticText(this, wxID_ANY, "Real part");
+    label = new wxStaticText(scrollWin, wxID_ANY, "Real part");
     lineSizer->Add(label, 6, wxALL, 2);
 
-    txtWallAdmitReal = new wxTextCtrl(this, IDE_WALL_ADMIT_REAL, "", wxDefaultPosition,
+    txtWallAdmitReal = new wxTextCtrl(scrollWin, IDE_WALL_ADMIT_REAL, "", wxDefaultPosition,
       wxSize(10, -1), wxTE_PROCESS_ENTER);
     lineSizer->Add(txtWallAdmitReal, 4, wxALL | wxALIGN_CENTER, 2);
 
     lineSizer->AddStretchSpacer(2);
 
-    label = new wxStaticText(this, wxID_ANY, "Imaginary part");
+    label = new wxStaticText(scrollWin, wxID_ANY, "Imaginary part");
     lineSizer->Add(label, 6, wxALL, 2);
 
-    txtWallAdmitImag = new wxTextCtrl(this, IDE_WALL_ADMIT_IMAG, "", wxDefaultPosition,
+    txtWallAdmitImag = new wxTextCtrl(scrollWin, IDE_WALL_ADMIT_IMAG, "", wxDefaultPosition,
       wxSize(10, -1), wxTE_PROCESS_ENTER);
     lineSizer->Add(txtWallAdmitImag, 4, wxALL | wxALIGN_CENTER, 2);
 
@@ -857,7 +865,7 @@ void ParamSimu3DDialog::initWidgets()
     ///////////////////////////////////////////////////////////////////
 
     topLevelSizer->AddSpacer(10);
-    sz = new wxStaticBoxSizer(wxVERTICAL, this, "Transfer functions options");
+    sz = new wxStaticBoxSizer(wxVERTICAL, scrollWin, "Transfer functions options");
 
     // ****************************************************************
     // Set the section containing the noise source
@@ -865,10 +873,10 @@ void ParamSimu3DDialog::initWidgets()
 
     lineSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    label = new wxStaticText(this, wxID_ANY, "Index of noise source section: ");
+    label = new wxStaticText(scrollWin, wxID_ANY, "Index of noise source section: ");
     lineSizer->Add(label, 4, wxALL | wxALIGN_CENTER, 3);
 
-    txtSecNoiseSource = new wxTextCtrl(this, IDE_SEC_NOISE_SOURCE, "", wxDefaultPosition,
+    txtSecNoiseSource = new wxTextCtrl(scrollWin, IDE_SEC_NOISE_SOURCE, "", wxDefaultPosition,
       wxSize(10, -1), wxTE_PROCESS_ENTER);
     lineSizer->Add(txtSecNoiseSource, 1, wxALL, 3);
 
@@ -882,10 +890,10 @@ void ParamSimu3DDialog::initWidgets()
 
     lineSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    label = new wxStaticText(this, wxID_ANY, "Maximal simulated frequency (Hz): ");
+    label = new wxStaticText(scrollWin, wxID_ANY, "Maximal simulated frequency (Hz): ");
     lineSizer->Add(label, 4, wxALL | wxALIGN_CENTER, 3);
 
-    txtMaxSimFreq = new wxTextCtrl(this, IDE_MAX_SIM_FREQ, "", wxDefaultPosition,
+    txtMaxSimFreq = new wxTextCtrl(scrollWin, IDE_MAX_SIM_FREQ, "", wxDefaultPosition,
         wxSize(10, -1), wxTE_PROCESS_ENTER);
     lineSizer->Add(txtMaxSimFreq, 1, wxALL, 3);
 
@@ -899,10 +907,10 @@ void ParamSimu3DDialog::initWidgets()
 
     lineSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    label = new wxStaticText(this, wxID_ANY, "Frequency steps");
+    label = new wxStaticText(scrollWin, wxID_ANY, "Frequency steps");
     lineSizer->Add(label, 2, wxALL | wxALIGN_CENTER, 3);
 
-    lstFreqRes = new wxComboBox(this, IDL_FREQ_RES, "", wxDefaultPosition,
+    lstFreqRes = new wxComboBox(scrollWin, IDL_FREQ_RES, "", wxDefaultPosition,
       this->FromDIP(wxSize(10, -1)), wxArrayString(), wxCB_DROPDOWN | wxCB_READONLY);
     lineSizer->Add(lstFreqRes, 1, wxALL, 3);
 
@@ -916,27 +924,27 @@ void ParamSimu3DDialog::initWidgets()
 
     lineSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    label = new wxStaticText(this, wxID_ANY, "Transfer function point (cm)");
+    label = new wxStaticText(scrollWin, wxID_ANY, "Transfer function point (cm)");
     lineSizer->Add(label, 9, wxALL | wxALIGN_CENTER, 3);
 
-    label = new wxStaticText(this, wxID_ANY, " X ");
+    label = new wxStaticText(scrollWin, wxID_ANY, " X ");
     lineSizer->Add(label, 1, wxALL | wxALIGN_CENTER, 3);
 
-    txtTfPointX = new wxTextCtrl(this, IDE_TF_POINT_X, "", wxDefaultPosition,
+    txtTfPointX = new wxTextCtrl(scrollWin, IDE_TF_POINT_X, "", wxDefaultPosition,
       wxSize(10, -1), wxTE_PROCESS_ENTER);
     lineSizer->Add(txtTfPointX, 2, wxALL, 3);
 
-    label = new wxStaticText(this, wxID_ANY, " Y ");
+    label = new wxStaticText(scrollWin, wxID_ANY, " Y ");
     lineSizer->Add(label, 1, wxALL | wxALIGN_CENTER, 3);
 
-    txtTfPointY = new wxTextCtrl(this, IDE_TF_POINT_Y, "", wxDefaultPosition,
+    txtTfPointY = new wxTextCtrl(scrollWin, IDE_TF_POINT_Y, "", wxDefaultPosition,
       wxSize(10, -1), wxTE_PROCESS_ENTER);
     lineSizer->Add(txtTfPointY, 2, wxALL, 3);
 
-    label = new wxStaticText(this, wxID_ANY, " Z ");
+    label = new wxStaticText(scrollWin, wxID_ANY, " Z ");
     lineSizer->Add(label, 1, wxALL | wxALIGN_CENTER, 3);
 
-    txtTfPointZ = new wxTextCtrl(this, IDE_TF_POINT_Z, "", wxDefaultPosition,
+    txtTfPointZ = new wxTextCtrl(scrollWin, IDE_TF_POINT_Z, "", wxDefaultPosition,
       wxSize(10, -1), wxTE_PROCESS_ENTER);
     lineSizer->Add(txtTfPointZ, 2, wxALL, 3);
 
@@ -948,11 +956,11 @@ void ParamSimu3DDialog::initWidgets()
 
     lineSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    chkMultiTFPts = new wxCheckBox(this, IDB_CHK_MULTI_TF_PTS,
+    chkMultiTFPts = new wxCheckBox(scrollWin, IDB_CHK_MULTI_TF_PTS,
       "Multiple transfer function points");
     lineSizer->Add(chkMultiTFPts, 1, wxGROW | wxALL, 3);
 
-    buttonMultiTfPts = new wxButton(this, IDB_LOAD_TF_POINTS,
+    buttonMultiTfPts = new wxButton(scrollWin, IDB_LOAD_TF_POINTS,
       "Load coordinates");
     lineSizer->Add(buttonMultiTfPts, 1, wxGROW | wxALL, 3);
 
@@ -965,7 +973,7 @@ void ParamSimu3DDialog::initWidgets()
     ///////////////////////////////////////////////////////////////////
 
     topLevelSizer->AddSpacer(10);
-    sz = new wxStaticBoxSizer(wxVERTICAL, this, "Acoustic field options");
+    sz = new wxStaticBoxSizer(wxVERTICAL, scrollWin, "Acoustic field options");
 
   // ****************************************************************
   // Select the physical quantity of the acoustic field to compute
@@ -973,15 +981,15 @@ void ParamSimu3DDialog::initWidgets()
 
     lineSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    label = new wxStaticText(this, wxID_ANY, "Physical quantity");
+    label = new wxStaticText(scrollWin, wxID_ANY, "Physical quantity");
     lineSizer->Add(label, 2, wxALL | wxALIGN_CENTER, 3);
 
-    lstFieldPhysicalQuantity = new wxComboBox(this, IDL_FIELD_PHYSICAL_QUANTITY, "", 
+    lstFieldPhysicalQuantity = new wxComboBox(scrollWin, IDL_FIELD_PHYSICAL_QUANTITY, "", 
       wxDefaultPosition, this->FromDIP(wxSize(10, -1)), wxArrayString(), 
       wxCB_DROPDOWN | wxCB_READONLY);
     lineSizer->Add(lstFieldPhysicalQuantity, 1, wxALL, 3);
 
-    lstAmpPhase = new wxComboBox(this, IDL_AMPLITUDE_PHASE, "", wxDefaultPosition,
+    lstAmpPhase = new wxComboBox(scrollWin, IDL_AMPLITUDE_PHASE, "", wxDefaultPosition,
       this->FromDIP(wxSize(10, -1)), wxArrayString(), wxCB_DROPDOWN | wxCB_READONLY);
     lineSizer->Add(lstAmpPhase, 1, wxALL, 3);
 
@@ -993,19 +1001,19 @@ void ParamSimu3DDialog::initWidgets()
 
   lineSizer = new wxBoxSizer(wxHORIZONTAL);
 
-  label = new wxStaticText(this, wxID_ANY, "Frequency (Hz)");
+  label = new wxStaticText(scrollWin, wxID_ANY, "Frequency (Hz)");
   lineSizer->Add(label, 8, wxALL | wxALIGN_CENTER, 3);
 
-  txtFreqComputeField = new wxTextCtrl(this, IDE_FREQ_COMPUTE_FIELD, "", wxDefaultPosition,
+  txtFreqComputeField = new wxTextCtrl(scrollWin, IDE_FREQ_COMPUTE_FIELD, "", wxDefaultPosition,
     wxSize(10, -1), wxTE_PROCESS_ENTER);
   lineSizer->Add(txtFreqComputeField, 3, wxALL, 3);
 
   lineSizer->AddStretchSpacer();
 
-  label = new wxStaticText(this, wxID_ANY, "Resolution (points per cm)");
+  label = new wxStaticText(scrollWin, wxID_ANY, "Resolution (points per cm)");
   lineSizer->Add(label, 8, wxALL | wxALIGN_CENTER, 3);
 
-  txtResolutionField = new wxTextCtrl(this, IDE_RESOLUTION_FIELD, "", wxDefaultPosition,
+  txtResolutionField = new wxTextCtrl(scrollWin, IDE_RESOLUTION_FIELD, "", wxDefaultPosition,
     wxSize(10, -1), wxTE_PROCESS_ENTER);
   lineSizer->Add(txtResolutionField, 3, wxALL, 3);
 
@@ -1019,31 +1027,31 @@ void ParamSimu3DDialog::initWidgets()
 
   lineSizer = new wxBoxSizer(wxHORIZONTAL);
 
-  label = new wxStaticText(this, wxID_ANY, "Min X ");
+  label = new wxStaticText(scrollWin, wxID_ANY, "Min X ");
   lineSizer->Add(label, 1, wxALL | wxALIGN_CENTER, 3);
 
-  txtBboxMinX = new wxTextCtrl(this, IDE_BBOX_MIN_X, "", wxDefaultPosition,
+  txtBboxMinX = new wxTextCtrl(scrollWin, IDE_BBOX_MIN_X, "", wxDefaultPosition,
     wxSize(10, -1), wxTE_PROCESS_ENTER);
   lineSizer->Add(txtBboxMinX, 1, wxALL, 3);
 
-  label = new wxStaticText(this, wxID_ANY, " max X ");
+  label = new wxStaticText(scrollWin, wxID_ANY, " max X ");
   lineSizer->Add(label, 1, wxALL | wxALIGN_CENTER, 3);
 
-  txtBboxMaxX = new wxTextCtrl(this, IDE_BBOX_MAX_X, "", wxDefaultPosition,
+  txtBboxMaxX = new wxTextCtrl(scrollWin, IDE_BBOX_MAX_X, "", wxDefaultPosition,
     wxSize(10, -1), wxTE_PROCESS_ENTER);
   lineSizer->Add(txtBboxMaxX, 1, wxALL, 3);
 
-  label = new wxStaticText(this, wxID_ANY, " min Y ");
+  label = new wxStaticText(scrollWin, wxID_ANY, " min Y ");
   lineSizer->Add(label, 1, wxALL | wxALIGN_CENTER, 3);
 
-  txtBboxMinY = new wxTextCtrl(this, IDE_BBOX_MIN_Y, "", wxDefaultPosition,
+  txtBboxMinY = new wxTextCtrl(scrollWin, IDE_BBOX_MIN_Y, "", wxDefaultPosition,
     wxSize(10, -1), wxTE_PROCESS_ENTER);
   lineSizer->Add(txtBboxMinY, 1, wxALL, 3);
 
-  label = new wxStaticText(this, wxID_ANY, " max Y ");
+  label = new wxStaticText(scrollWin, wxID_ANY, " max Y ");
   lineSizer->Add(label, 1, wxALL | wxALIGN_CENTER, 3);
 
-  txtBboxMaxY = new wxTextCtrl(this, IDE_BBOX_MAX_Y, "", wxDefaultPosition,
+  txtBboxMaxY = new wxTextCtrl(scrollWin, IDE_BBOX_MAX_Y, "", wxDefaultPosition,
     wxSize(10, -1), wxTE_PROCESS_ENTER);
   lineSizer->Add(txtBboxMaxY, 1, wxALL, 3);
 
@@ -1055,7 +1063,7 @@ void ParamSimu3DDialog::initWidgets()
 
   lineSizer = new wxBoxSizer(wxHORIZONTAL);
 
-  chkComputeRad = new wxCheckBox(this, IDB_COMPUTE_RAD_FIELD,
+  chkComputeRad = new wxCheckBox(scrollWin, IDB_COMPUTE_RAD_FIELD,
     "Compute radiated field");
   chkComputeRad->SetValue(m_simuParams.computeRadiatedField);
   lineSizer->Add(chkComputeRad, 0, wxALL, 2);
@@ -1069,21 +1077,21 @@ void ParamSimu3DDialog::initWidgets()
   // ****************************************************************
 
   topLevelSizer->AddSpacer(10);
-  topLevelSizer->Add(new wxStaticLine(this), 1, wxEXPAND | wxALL, 10);
+  topLevelSizer->Add(new wxStaticLine(scrollWin), 1, wxEXPAND | wxALL, 10);
 
   lineSizer = new wxBoxSizer(wxHORIZONTAL);
 
-  button = new wxButton(this, IDB_SET_DEFAULT_PARAMS_FAST,
+  button = new wxButton(scrollWin, IDB_SET_DEFAULT_PARAMS_FAST,
     "Default (fast)");
   lineSizer->Add(button, 1, wxALL, 3);
 
-  button = new wxButton(this, IDB_SET_DEFAULT_PARAMS_ACCURATE,
+  button = new wxButton(scrollWin, IDB_SET_DEFAULT_PARAMS_ACCURATE,
     "Default (accurate)");
   lineSizer->Add(button, 1,  wxALL, 3);
 
   lineSizer->AddStretchSpacer();
 
-  button = new wxButton(this, IDB_CLOSE, "Close");
+  button = new wxButton(scrollWin, IDB_CLOSE, "Close");
   lineSizer->Add(button, 1,  wxALL, 3);
 
   topLevelSizer->Add(lineSizer, 0,  wxALL | wxEXPAND, 10);
@@ -1092,8 +1100,16 @@ void ParamSimu3DDialog::initWidgets()
   // Set the top-level-sizer for this window.
   // ****************************************************************
 
-  this->SetSizer(topLevelSizer);
-  topLevelSizer->Fit(this);
+  // 把布局设置到滚动窗口
+  scrollWin->SetSizer(topLevelSizer);
+  scrollWin->FitInside();
+
+  // 外层再放一个 sizer，用于填充滚动窗口
+  wxBoxSizer* dlgSizer = new wxBoxSizer(wxVERTICAL);
+  dlgSizer->Add(scrollWin, 1, wxEXPAND | wxALL, 0);
+  this->SetSizerAndFit(dlgSizer);
+  this->SetMinSize(wxSize(800, 900)); // 合理的最小尺寸，可根据需要调整
+  this->Layout();
 }
 
 // ****************************************************************************
@@ -1121,6 +1137,10 @@ void ParamSimu3DDialog::OnTemperatureEnter(wxCommandEvent& event)
         m_simuParams.volumicMass = STATIC_PRESSURE_CGS * MOLECULAR_MASS /
             (GAS_CONSTANT * (m_simuParams.temperature + KELVIN_SHIFT));
     }
+
+    // 温度改变 ⇒ 需重新计算模式/辐射阻抗
+    m_simuParams.needToComputeModesAndJunctions = true;
+    m_simuParams.radImpedPrecomputed = false;
   }
 
   updateWidgets();
@@ -1176,6 +1196,10 @@ void ParamSimu3DDialog::OnSndSpeedEnter(wxCommandEvent& event)
         }
         break;
     }
+
+    // 声速手动修改，同样触发重新计算标记
+    m_simuParams.needToComputeModesAndJunctions = true;
+    m_simuParams.radImpedPrecomputed = false;
   }
 
   updateWidgets();
@@ -1859,6 +1883,10 @@ void ParamSimu3DDialog::OnMediumSelect(wxCommandEvent& event)
       (GAS_CONSTANT * (m_simuParams.temperature + KELVIN_SHIFT));
   }
 
+  // 介质切换后必须强制重新计算
+  m_simuParams.needToComputeModesAndJunctions = true;
+  m_simuParams.radImpedPrecomputed = false;
+
   updateWidgets();
 }
 
@@ -1883,6 +1911,10 @@ void ParamSimu3DDialog::OnSalinityEnter(wxCommandEvent& event)
                                     m_simuParams.depth);
     m_simuParams.sndSpeed = c_ms * 100.0;
   }
+
+  m_simuParams.needToComputeModesAndJunctions = true;
+  m_simuParams.radImpedPrecomputed = false;
+
   updateWidgets();
 }
 
@@ -1906,5 +1938,9 @@ void ParamSimu3DDialog::OnDepthEnter(wxCommandEvent& event)
                                     m_simuParams.depth);
     m_simuParams.sndSpeed = c_ms * 100.0;
   }
+
+  m_simuParams.needToComputeModesAndJunctions = true;
+  m_simuParams.radImpedPrecomputed = false;
+
   updateWidgets();
 }

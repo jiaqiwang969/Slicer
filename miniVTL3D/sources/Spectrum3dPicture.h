@@ -2,7 +2,7 @@
 // This file is part of VocalTractLab3D.
 // Copyright (C) 2022, Peter Birkholz, Dresden, Germany
 // www.vocaltractlab.de
-// author: Peter Birkholz and Rémi Blandin
+// author: Peter Birkholz and Rmi Blandin
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -86,6 +86,7 @@ private:
   void OnExportGlottalTf(wxCommandEvent& event);
   void OnEXportNoiseSrcTf(wxCommandEvent& event);
   void OnExportInputImpedance(wxCommandEvent& event);
+  void OnExportAllTf(wxCommandEvent& event);
 
 // ****************************************************************************
 // Declare the event table right at the end

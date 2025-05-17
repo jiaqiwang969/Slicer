@@ -1,0 +1,8 @@
+\contentsline {section}{\numberline {1}引言}{2}{section.1}%
+\contentsline {section}{\numberline {2}圆柱波导声学理论}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}主要物理量与符号}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}截止频率公式}{2}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Python 数值验证}{2}{section.3}%
+\contentsline {section}{\numberline {4}有限长圆管传递函数示例}{2}{section.4}%
+\contentsline {paragraph}{幅值差异说明}{2}{section*.2}%
+\contentsline {section}{\numberline {5}结论与展望}{3}{section.5}%

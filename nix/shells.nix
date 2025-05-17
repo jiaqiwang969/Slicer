@@ -19,6 +19,7 @@ let
       pkgs.gcc    # Using GCC from pkgs (currently 24.05)
       pkgs.git    # Add git for ExternalProject/FetchContent
       pkgs.ccache  # <--- 添加 ccache
+      pkgs.gdb     # 调试器
     ];
 
     buildInputs = [
@@ -271,6 +272,7 @@ CMake Helper Usage (run from project root):
 
     nativeBuildInputs = [
       pkgs.pkg-config pkgs.gnumake pkgs.cmake pkgs.gcc pkgs.git pkgs.ccache
+      pkgs.gdb  # 调试器
     ];
 
     buildInputs = [
@@ -347,7 +349,12 @@ CMake Helper Usage (run from project root):
       # --- VTL3D build aliases ---
       alias make_vtl='(echo "执行 make_vtl" && cd miniVTL3D/sources && mkdir -p build && cd build && cmake .. && make -j$(nproc))'
       alias remake_vtl='(echo "执行 remake_vtl" && cd miniVTL3D/sources/build && make -j$(nproc))'
-      alias clean_vtl='(echo "执行 clean_vtl" && rm -rf miniVTL3D/sources/build)'
+      alias clean_vtl='(echo "执行 clean_vtl: 正在删除 miniVTL3D/sources/build..." && rm -rf miniVTL3D/sources/build && echo "clean_vtl 已完成.")'
+
+      # --- Debug 版本构建 & gdb 运行 ---
+      alias make_vtl_debug='(echo "执行 make_vtl_debug: 以 Debug 模式重新配置并编译..." && cd miniVTL3D/sources && rm -rf build_debug && mkdir -p build_debug && cd build_debug && cmake -DCMAKE_BUILD_TYPE=Debug .. && make -j$(nproc) && echo "make_vtl_debug 已完成. 可执行在 miniVTL3D/sources/build_debug/VocalTractLab")'
+
+      alias run_vtl_gdb='(echo "启动 gdb (Debug build)" && cd miniVTL3D/sources/build_debug && ulimit -c unlimited && gdb ./VocalTractLab)'
 
       echo ""
       echo "======================================================="
@@ -372,6 +379,8 @@ CMake Helper Usage (run from project root):
       echo "  'make_vtl': 进入 miniVTL3D/sources/build, 配置 (cmake ..) 并构建项目."
       echo "  'remake_vtl': 进入 miniVTL3D/sources/build 并运行 'make -j$(nproc)' (不清理,不重新配置)."
       echo "  'clean_vtl': 删除 miniVTL3D/sources/build 目录."
+      echo "  'make_vtl_debug': 以 Debug 模式重新配置并编译 (build_debug)。"
+      echo "  'run_vtl_gdb': 在 build_debug 目录下用 gdb 启动 VocalTractLab。"
       echo ""
       echo "=== VTL3D build environment ready ==="
     '';

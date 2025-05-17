@@ -31,6 +31,7 @@
 static const int IDM_EXPORT_GLOTTAL_TF = 1000;
 static const int IDM_EXPORT_NOISE_SRC_TF = 1001;
 static const int IDM_EXPORT_INPUT_IMPEDANCE = 1002;
+static const int IDM_EXPORT_ALL_TF = 1003;
 
 // ****************************************************************************
 // The event table.
@@ -41,6 +42,7 @@ BEGIN_EVENT_TABLE(Spectrum3dPicture, BasicPicture)
   EVT_MENU(IDM_EXPORT_GLOTTAL_TF, Spectrum3dPicture::OnExportGlottalTf)
   EVT_MENU(IDM_EXPORT_NOISE_SRC_TF, Spectrum3dPicture::OnEXportNoiseSrcTf)
   EVT_MENU(IDM_EXPORT_INPUT_IMPEDANCE, Spectrum3dPicture::OnExportInputImpedance)
+  EVT_MENU(IDM_EXPORT_ALL_TF, Spectrum3dPicture::OnExportAllTf)
 END_EVENT_TABLE()
 
 // ****************************************************************************
@@ -73,8 +75,7 @@ Spectrum3dPicture::Spectrum3dPicture(wxWindow *parent,
     8, 0, false, false, true);
 
   graph.initLogOrdinate(1.0, 5.0,
-    -100.0, -10.0, -100, 
-    10.0, 100.0, 50.0,
+    -100.0, -10.0, -30, 10.0, 200.0, 100.0,
     true, 10);
 
   graph.isLinearOrdinate = false;
@@ -88,6 +89,7 @@ Spectrum3dPicture::Spectrum3dPicture(wxWindow *parent,
   m_contextMenu->Append(IDM_EXPORT_GLOTTAL_TF, "Save the glottal transfer function as txt file");
   m_contextMenu->Append(IDM_EXPORT_NOISE_SRC_TF, "Save the noise transfer function as txt file");
   m_contextMenu->Append(IDM_EXPORT_INPUT_IMPEDANCE, "Save input impedance as txt file");
+  m_contextMenu->Append(IDM_EXPORT_ALL_TF, "Save ALL transfer functions (freq  Glottal  Noise  InputImp)");
 }
 
 // ****************************************************************************
@@ -348,4 +350,40 @@ void Spectrum3dPicture::OnEXportNoiseSrcTf(wxCommandEvent& event)
 void Spectrum3dPicture::OnExportInputImpedance(wxCommandEvent& event)
 {
   exportResult(INPUT_IMPED);
+}
+
+// ****************************************************************************
+// 导出全部 Transfer Function
+// ****************************************************************************
+
+void Spectrum3dPicture::OnExportAllTf(wxCommandEvent& event)
+{
+  wxFileName fileName;
+  wxString name = wxFileSelector("Save ALL transfer functions", fileName.GetPath(),
+    fileName.GetFullName(), ".txt", "(*.txt)|*.txt",
+    wxFD_SAVE | wxFD_OVERWRITE_PROMPT, this);
+  if (name.IsEmpty()) return;
+
+  std::ofstream ofs(name.ToStdString(), std::ios::trunc);
+
+  int graphX, graphY, graphW, graphH;
+  graph.getDimensions(graphX, graphY, graphW, graphH);
+
+  std::vector<double> freqs; freqs.reserve(graphW);
+  for (int i = 0; i < graphW; ++i)
+    freqs.push_back(graph.getAbsXValue(graphX + i));
+
+  std::vector<std::complex<double>> gtf, ntf, itf;
+  simu3d->interpolateTransferFunction(freqs, m_idxPtTf, GLOTTAL, gtf);
+  simu3d->interpolateTransferFunction(freqs, m_idxPtTf, NOISE, ntf);
+  simu3d->interpolateTransferFunction(freqs, m_idxPtTf, INPUT_IMPED, itf);
+
+  for (size_t i = 0; i < freqs.size(); ++i)
+  {
+    ofs << freqs[i] << " "
+        << std::abs(gtf[i]) << " "
+        << std::abs(ntf[i]) << " "
+        << std::abs(itf[i]) << "\n";
+  }
+  ofs.close();
 }

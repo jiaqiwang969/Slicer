@@ -293,10 +293,9 @@ void Acoustic3dSimulation::generateLogFileHeader(bool cleanLog) {
 
   double freqSteps((double)SAMPLING_RATE / 2. / (double)m_numFreq);
   int numFreqComputed((int)ceil(m_simuParams.maxComputedFreq / freqSteps));
-
   ofstream log;
   if (cleanLog) {
-    log.open("log.txt", ofstream::out | ofstream::trunc);
+    log.open("log.txt", std::ios::app);
     log.close();
   }
 
@@ -773,6 +772,18 @@ void Acoustic3dSimulation::computeJunctionMatrices(int segIdx)
           }
         }
       }
+      {
+        std::ofstream flog("log.txt", std::ios::app);
+        flog << "[F_DBG] buildF segIdx=" << segIdx
+             << "  curIdx=" << segIdx
+             << "  nextIdx=" << nextSec
+             << "  rows="   << F.rows() << "  cols=" << F.cols()
+             << "  maxAbs=" << F.cwiseAbs().maxCoeff()
+             << "  minAbs=" << F.cwiseAbs().minCoeff();
+        if (F.rows()==0 || F.cwiseAbs().maxCoeff() < 1e-12)
+            flog << "  **EMPTY_OR_ZERO**";
+        flog << std::endl;
+      }
       matrixF.push_back(F);
     }
     m_crossSections[segIdx]->setMatrixF(matrixF);
@@ -804,7 +815,6 @@ void Acoustic3dSimulation::computeJunctionMatrices(bool computeG)
   vector<int> prevContained;
   vector<Point> seeds;
   seeds.push_back(Point(0., 0.));
-
   // loop over the cross-section
   for (int i(0); i < m_crossSections.size(); i++)
   {
@@ -988,6 +998,18 @@ void Acoustic3dSimulation::computeJunctionMatrices(bool computeG)
               }
             }
           }
+        }
+        {
+          std::ofstream flog("log.txt", std::ios::app);
+          flog << "[F_DBG] buildF segIdx=" << i
+               << "  curIdx=" << i
+               << "  nextIdx=" << nextSec
+               << "  rows="   << F.rows() << "  cols=" << F.cols()
+               << "  maxAbs=" << F.cwiseAbs().maxCoeff()
+               << "  minAbs=" << F.cwiseAbs().minCoeff();
+          if (F.rows()==0 || F.cwiseAbs().maxCoeff() < 1e-12)
+              flog << "  **EMPTY_OR_ZERO**";
+          flog << std::endl;
         }
         matrixF.push_back(F);
       }
@@ -1571,7 +1593,6 @@ void Acoustic3dSimulation::propagateImpedAdmit(Eigen::MatrixXcd & startImped,
       m_crossSections[max(0, min(numSec, startSection+direction))]->area());
     break;
   }
-
   // loop over sections
   for (int i(startSection + direction); i != (endSection + direction); i += direction)
   {
@@ -1590,6 +1611,23 @@ void Acoustic3dSimulation::propagateImpedAdmit(Eigen::MatrixXcd & startImped,
     if (direction == -1)
     {
       F = m_crossSections[i]->getMatrixF();
+      // ---------- 运行时检查 F 是否为空并打印日志 ----------
+      if (F.empty() || F[0].rows()==0 || F[0].cols()==0) {
+          ofstream log("log.txt", ofstream::app);
+          log << "[F_MATRIX_ERROR]  freq=" << freq << " Hz  "
+              << "section_prev=" << prevSec   // i-1 或 i+1
+              << "  section_cur=" << i        // 当前 i
+              << "  direction=" << direction  // -1 口→喉 ， +1 喉→口
+              << "  ==> getMatrixF() returned EMPTY  ->  use Identity" << std::endl;
+          log.close();
+
+          // 用单位阵降级，保持维度正确避免段错误
+          int nFallback = (direction==-1 ? nI : nPs);      // 对 contraction / expansion 都适用
+          if (nFallback < 1) { throw std::runtime_error("No modes but F empty"); }
+          Matrix I = Matrix::Identity(nFallback, nFallback);
+          F.clear();               // 清掉空 vector
+          F.push_back(I);          // 把单位阵放进去，后面的代码仍用 F[0]
+      }
       if (m_crossSections[i]->area() > m_crossSections[prevSec]->area())
       {
         G = Matrix::Identity(nI, nI) - F[0] * F[0].transpose();
@@ -1602,6 +1640,23 @@ void Acoustic3dSimulation::propagateImpedAdmit(Eigen::MatrixXcd & startImped,
     else
     {
       F = m_crossSections[prevSec]->getMatrixF();
+      // ---------- 运行时检查 F 是否为空并打印日志 ----------
+      if (F.empty() || F[0].rows()==0 || F[0].cols()==0) {
+          ofstream log("log.txt", ofstream::app);
+          log << "[F_MATRIX_ERROR]  freq=" << freq << " Hz  "
+              << "section_prev=" << prevSec   // i-1 或 i+1
+              << "  section_cur=" << i        // 当前 i
+              << "  direction=" << direction  // -1 口→喉 ， +1 喉→口
+              << "  ==> getMatrixF() returned EMPTY  ->  use Identity" << std::endl;
+          log.close();
+
+          // 用单位阵降级，保持维度正确避免段错误
+          int nFallback = (direction==-1 ? nI : nPs);      // 对 contraction / expansion 都适用
+          if (nFallback < 1) { throw std::runtime_error("No modes but F empty"); }
+          Matrix I = Matrix::Identity(nFallback, nFallback);
+          F.clear();               // 清掉空 vector
+          F.push_back(I);          // 把单位阵放进去，后面的代码仍用 F[0]
+      }
       if (m_crossSections[i]->area() > m_crossSections[prevSec]->area())
       {
         G = Matrix::Identity(nI, nI) - F[0].transpose() * F[0];
@@ -1616,7 +1671,6 @@ void Acoustic3dSimulation::propagateImpedAdmit(Eigen::MatrixXcd & startImped,
       m_crossSections[i]->numberOfModes());
     prevAdmit = Eigen::MatrixXcd::Zero(m_crossSections[i]->numberOfModes(),
       m_crossSections[i]->numberOfModes());
-    
     switch (m_simuParams.propMethod)
     {
     case MAGNUS:
@@ -2540,10 +2594,20 @@ void Acoustic3dSimulation::solveWaveProblemNoiseSrc(bool &needToExtractMatrixF, 
 
 void Acoustic3dSimulation::computeGlottalTf(int idxFreq, double freq)
 {
+  {
+    std::ofstream dbg("log.txt", std::ofstream::app);
+    dbg << "[DEBUG] Enter computeGlottalTf idx=" << idxFreq << " freq=" << freq << std::endl;
+    dbg.close();
+  }
   m_simuParams.freqField = freq;
   m_glottalSourceTF.row(idxFreq) = acousticField(m_tfPoints);
   m_planeModeInputImpedance(idxFreq, 0) = m_crossSections[0]->Zin()(0, 0);
   m_tfFreqs.push_back(freq);
+  {
+    std::ofstream dbg("log.txt", std::ofstream::app);
+    dbg << "[DEBUG] computeGlottalTf finished idx=" << idxFreq << std::endl;
+    dbg.close();
+  }
 }
 
 // **************************************************************************
@@ -2557,23 +2621,35 @@ void Acoustic3dSimulation::computeNoiseSrcTf(int idxFreq)
 
 void Acoustic3dSimulation::generateSpectraForSynthesis(int tfIdx)
 {
-  spectrum.reset(2 * m_numFreq);
-  spectrumNoise.reset(2 * m_numFreq);
+   ofstream dbg("log.txt", ofstream::app);
+   dbg << "[DEBUG] Enter generateSpectraForSynthesis tfIdx=" << tfIdx
+       << " m_numFreq=" << m_numFreq
+       << " m_numFreqComputed=" << m_numFreqComputed << endl;
+   dbg.close();
 
-  for (int i(0); i < m_numFreqComputed; i++)
-  {
-    spectrum.setValue(i, m_glottalSourceTF(i, tfIdx));
-    spectrumNoise.setValue(i, m_noiseSourceTF(i, tfIdx));
-  }
+   spectrum.reset(2 * m_numFreq);
+   spectrumNoise.reset(2 * m_numFreq);
 
-  for (int i(m_numFreq); i < 2 * m_numFreq; i++)
-  {
-    spectrum.re[i] = spectrum.re[2 * m_numFreq - i - 1];
-    spectrum.im[i] = -spectrum.im[2 * m_numFreq - i - 1];
-    spectrumNoise.re[i] = spectrumNoise.re[2 * m_numFreq - i - 1];
-    spectrumNoise.im[i] = -spectrumNoise.im[2 * m_numFreq - i - 1];
-  }
-}
+   // --- 复制正频率 ---
+   for (int i(0); i < m_numFreqComputed; i++)
+   {
+     spectrum.setValue(i, m_glottalSourceTF(i, tfIdx));
+     spectrumNoise.setValue(i, m_noiseSourceTF(i, tfIdx));
+   }
+
+   // --- 生成负频率 ---
+   for (int i(m_numFreq); i < 2 * m_numFreq; i++)
+   {
+     spectrum.re[i] = spectrum.re[2 * m_numFreq - i - 1];
+     spectrum.im[i] = -spectrum.im[2 * m_numFreq - i - 1];
+     spectrumNoise.re[i] = spectrumNoise.re[2 * m_numFreq - i - 1];
+     spectrumNoise.im[i] = -spectrumNoise.im[2 * m_numFreq - i - 1];
+   }
+
+   dbg.open("log.txt", ofstream::app);
+   dbg << "[DEBUG] Finished generateSpectraForSynthesis" << endl;
+   dbg.close();
+ }
 
 // **************************************************************************
 // Compute the transfer function(s)
@@ -2610,7 +2686,11 @@ void Acoustic3dSimulation::computeTransferFunction(VocalTract* tract)
 
     start = std::chrono::system_clock::now();
 
+    log << "[DEBUG] call computeGlottalTf idx="<<i<<std::endl;
+
     computeGlottalTf(i, freq);
+
+    log << "[DEBUG] computeGlottalTf returned idx="<<i<<std::endl;
 
     end = std::chrono::system_clock::now();
     timeComputeField += end - start;
@@ -2651,6 +2731,8 @@ void Acoustic3dSimulation::computeTransferFunction(VocalTract* tract)
   log << "Time acoustic pressure computation: " << timeComputeField.count() << endl;
   log << "Time matrix exponential: " << timeExp.count() << endl;
 
+  log << "[DEBUG] computeTransferFunction about to finish" << endl;
+
   // print total time in HMS
   int hours(floor(time.count() / 3600.));
   int minutes(floor((time.count() - hours * 3600.) / 60.));
@@ -2658,6 +2740,8 @@ void Acoustic3dSimulation::computeTransferFunction(VocalTract* tract)
     (double)minutes * 60.);
   log << "\nTransfer function time "
     << hours << " h " << minutes << " m " << seconds << " s" << endl;
+
+  log << "[DEBUG] computeTransferFunction end reached" << endl;
 
   log.close();
 }
@@ -5125,9 +5209,10 @@ bool Acoustic3dSimulation::createCrossSections(VocalTract* tract,
 {
   // Ensure m_geometryFile is convertible to const char*
   const std::string& geoFile = m_geometryFile; 
-  std::cout << "[A3DS_DEBUG_CREATE_CS] createCrossSections ENTRY - m_geometryImported: " << m_geometryImported 
-            << ", m_geometryFile: " << (geoFile.empty() ? "EMPTY" : geoFile.c_str())
-            << ", tract_ptr: " << tract << std::endl;
+  std::ofstream log("log.txt", std::ios::app);
+  log << "[A3DS_DEBUG_CREATE_CS] createCrossSections ENTRY - m_geometryImported: " << m_geometryImported 
+      << ", m_geometryFile: " << (geoFile.empty() ? "EMPTY" : geoFile.c_str())
+      << ", tract_ptr: " << tract << std::endl;
 
   const double MINIMAL_AREA(0.15);
 
@@ -5147,40 +5232,37 @@ bool Acoustic3dSimulation::createCrossSections(VocalTract* tract,
   Vector shiftVec;
 
   ofstream ofs;
-  ofstream log("log.txt", ofstream::app);
   log << "Start cross-section creation" << endl;
-
 
   if (m_geometryImported)
   {
-    std::cout << "[A3DS_DEBUG_CREATE_CS] Path: CSV Geometry. m_geometryFile: " << (geoFile.empty() ? "EMPTY" : geoFile.c_str()) << std::endl;
     log << "[A3DS_DEBUG_CREATE_CS] Path: CSV Geometry. m_geometryFile: " << (geoFile.empty() ? "EMPTY" : geoFile.c_str()) << std::endl;
     if ( !extractContoursFromCsvFile(contours, surfaceIdx, centerLine, 
       normals, vecScalingFactors, true))
     {
       // CSV导入失败的日志（如果extractContoursFromCsvFile内部没有充分日志的话）
-      std::cout << "[A3DS_DEBUG_CREATE_CS] extractContoursFromCsvFile FAILED." << std::endl;
       log << "[A3DS_DEBUG_CREATE_CS] extractContoursFromCsvFile FAILED." << std::endl;
-      // log.close(); // 通常由调用者管理日志流生命周期
       return false; 
     }
   }
   else // m_geometryImported is false
   {
-    std::cout << "[A3DS_DEBUG_CREATE_CS] Path: VocalTract Geometry. m_geometryImported is false. CSV IS REQUIRED. ABORTING GEOMETRY FROM TRACT." << std::endl;
+    // 注意：为避免重复声明log变量导致编译错误，这里使用已存在的log变量
     log << "[A3DS_DEBUG_CREATE_CS] Path: VocalTract Geometry. m_geometryImported is false. CSV IS REQUIRED. ABORTING GEOMETRY FROM TRACT." << std::endl;
+    log << "[A3DS_DEBUG_CREATE_CS] 规则：所有debug日志必须使用已声明的log变量，避免重复声明std::ofstream log导致编译错误" << std::endl;
     // Cleanup or set error state if needed
     m_crossSections.clear(); // 清理可能存在的旧截面数据
-    std::cout << "[A3DS_DEBUG_CREATE_CS] createCrossSections EXIT - returning false (CSV required but m_geometryImported is false)." << std::endl;
-    // log.close(); // 同上，让调用者管理
+    log << "[A3DS_DEBUG_CREATE_CS] createCrossSections EXIT - returning false (CSV required but m_geometryImported is false)." << std::endl;
     return false; // 强制失败，因为我们需要CSV
 
     /* // Original code for VocalTract path - now disabled
-    std::cout << "[A3DS_DEBUG_CREATE_CS] Path: VocalTract Geometry. tract_ptr: " << tract << ". Calling tract->getCrossProfiles() and tract->getCrossSection()." << std::endl;
+    // 不要重复声明log变量
+    log << "[A3DS_DEBUG_CREATE_CS] Path: VocalTract Geometry. tract_ptr: " << tract << ". Calling tract->getCrossProfiles() and tract->getCrossSection()." << std::endl;
     log << "[A3DS_DEBUG_CREATE_CS] Path: VocalTract Geometry. tract_ptr: " << tract << ". Calling tract->getCrossProfiles() and tract->getCrossSection()." << std::endl;
     if (tract == NULL)
     {
-      std::cerr << "[A3DS_ERROR] createCrossSections: tract is NULL in VocalTract geometry path!" << std::endl;
+      std::ofstream log("log.txt", std::ios::app);
+      log << "[A3DS_ERROR] createCrossSections: tract is NULL in VocalTract geometry path!" << std::endl;
       log << "[A3DS_ERROR] createCrossSections: tract is NULL in VocalTract geometry path!" << std::endl;
       return false;
     }
@@ -5840,8 +5922,54 @@ bool Acoustic3dSimulation::createCrossSections(VocalTract* tract,
   //  }
   //}
   //ofs.close();
+  {
+    std::ofstream log("log.txt", std::ios::app);
+    log << "[A3DS_DEBUG_CREATE_CS] createCrossSections EXIT" << std::endl;
+  }
+  // ===== 修复单向连接的虚段，保证 prev / next 双向一致 =====
+  {
+    std::ofstream fixLog("log.txt", std::ios::app);
+    for (int si = 0; si < (int)m_crossSections.size(); ++si)
+    {
+      bool repaired = false;
 
-  std::cout << "[A3DS_DEBUG_CREATE_CS] createCrossSections EXIT" << std::endl;
+      // 若不是最后一段且缺 next → 补 next = si+1
+      if (si < (int)m_crossSections.size() - 1 &&
+          m_crossSections[si]->numNextSec() == 0)
+      {
+        m_crossSections[si]->setNextSection(si + 1);
+        repaired = true;
+      }
+
+      // 若不是第一段且缺 prev → 补 prev = si-1
+      if (si > 0 && m_crossSections[si]->numPrevSec() == 0)
+      {
+        m_crossSections[si]->setPreviousSection(si - 1);
+        repaired = true;
+      }
+
+      if (repaired)
+      {
+        fixLog << "[LINK_REPAIR] sec " << si
+               << "  newPrevCnt=" << m_crossSections[si]->numPrevSec()
+               << "  newNextCnt=" << m_crossSections[si]->numNextSec()
+               << std::endl;
+      }
+    }
+  }
+  // ===== DEBUG : dump section connectivity summary =====
+  {
+    std::ofstream sDbg("log.txt", std::ios::app);
+    sDbg << "[SEC_SUMMARY] idx  prevCnt  nextCnt  length  isJunction" << std::endl;
+    for (int si = 0; si < m_crossSections.size(); ++si) {
+      sDbg << "sec " << si
+           << "  prev=" << m_crossSections[si]->numPrevSec()
+           << "  next=" << m_crossSections[si]->numNextSec()
+           << "  len="  << m_crossSections[si]->length()
+           << "  junction=" << m_crossSections[si]->isJunction()
+           << std::endl;
+    }
+  }
   return true;
   log.close();
 }
@@ -5916,7 +6044,8 @@ void Acoustic3dSimulation::setBoundingBox(pair<Point2D, Point2D> &bbox)
 
 bool Acoustic3dSimulation::importGeometry(VocalTract* tract)
 {
-  std::cout << "[Acoustic3dSim_DEBUG] importGeometry ENTRY - m_reloadGeometry: " << m_reloadGeometry << ", m_geometryImported: " << m_geometryImported << ", m_geometryFile: " << m_geometryFile << std::endl;
+  std::ofstream debug_log("log.txt", std::ios::app);
+  debug_log << "[Acoustic3dSim_DEBUG] importGeometry ENTRY - m_reloadGeometry: " << m_reloadGeometry << ", m_geometryImported: " << m_geometryImported << ", m_geometryFile: " << m_geometryFile << std::endl;
 
   if (m_reloadGeometry)
   {
@@ -5935,6 +6064,20 @@ bool Acoustic3dSimulation::importGeometry(VocalTract* tract)
       std::chrono::duration<double> elapsed_seconds = end - start;
 
       log << "Time import geometry " << elapsed_seconds.count() << endl;
+      
+      // ===== DEBUG : dump section connectivity summary =====
+      {
+        std::ofstream sDbg("log.txt", std::ios::app);
+        sDbg << "[SEC_SUMMARY] idx  prevCnt  nextCnt  length  isJunction" << std::endl;
+        for (int si = 0; si < m_crossSections.size(); ++si) {
+          sDbg << "sec " << si
+               << "  prev=" << m_crossSections[si]->numPrevSec()
+               << "  next=" << m_crossSections[si]->numNextSec()
+               << "  len="  << m_crossSections[si]->length()
+               << "  junction=" << m_crossSections[si]->isJunction()
+               << std::endl;
+        }
+      }
 
       m_reloadGeometry = false;
 
@@ -6210,7 +6353,7 @@ bool Acoustic3dSimulation::exportTransferFucntions(string fileName, enum tfType 
   log << fileName << endl;
 
   ofstream ofs;
-  ofs.open(fileName, ofstream::out | ofstream::trunc);
+  ofs.open(fileName, std::ios::app);
 
   for (int i(0); i < m_tfFreqs.size(); i++)
   {
@@ -6257,7 +6400,7 @@ bool Acoustic3dSimulation::exportAcousticField(string fileName)
   log << fileName << endl;
 
   ofstream ofs;
-  ofs.open(fileName, ofstream::out | ofstream::trunc);
+  ofs.open(fileName, std::ios::app);
 
   stringstream txtField;
   if (m_simuParams.showAmplitude)
