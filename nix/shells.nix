@@ -1,18 +1,15 @@
 # This file defines the development shells.
 # It expects pkgs, myCgal, myJinja2Github, and lib to be passed in.
-{
-  pkgs, myCgal, myJinja2Github, lib
-}: {
+{ pkgs, myCgal, myJinja2Github, lib }:
+let
+  wxqtDrv = pkgs.callPackage ./modules/wxqt.nix {
+    qtbase = pkgs.qt5.qtbase;
+    qttools = pkgs.qt5.qttools;
+    libGL   = pkgs.libGL;
+    libGLU  = pkgs.libGLU;
+  };
 
-  # Default C++ development shell
-  default = let
-    wxqtDrv = pkgs.callPackage ./modules/wxqt.nix {
-      qtbase = pkgs.qt5.qtbase;
-      qttools = pkgs.qt5.qttools;
-      libGL   = pkgs.libGL;
-      libGLU  = pkgs.libGLU;
-    };
-  in pkgs.mkShell {
+  defaultShell = pkgs.mkShell {
     name = "vtl3d-env-custom-cgal";
 
     nativeBuildInputs = [
@@ -268,5 +265,122 @@ CMake Helper Usage (run from project root):
     '';
   };
 
-}
+  # Shell for VTL3D (wxGTK GTK3 backend)
+  miniVTL3D = pkgs.mkShell {
+    name = "vtl3d-wxgtk-env";
 
+    nativeBuildInputs = [
+      pkgs.pkg-config pkgs.gnumake pkgs.cmake pkgs.gcc pkgs.git pkgs.ccache
+    ];
+
+    buildInputs = [
+      pkgs.wxGTK32 pkgs.eigen pkgs.boost myCgal pkgs.gmp pkgs.mpfr pkgs.mesa
+      pkgs.freeglut pkgs.openal pkgs.libGL pkgs.libGLU pkgs.glew pkgs.xorg.libXi
+      pkgs.xorg.libXmu pkgs.xorg.libXext pkgs.xorg.libX11 pkgs.libglvnd
+      pkgs.libxkbcommon pkgs.ffmpeg_6 pkgs.ffmpeg_6.dev pkgs.qt5Full
+      pkgs.vulkan-loader pkgs.libxml2
+    ];
+
+    shellHook = ''
+      # --- ccache 配置 ---
+      export CCACHE_DIR="''${XDG_CACHE_HOME:-$HOME/.cache}/ccache-nix"
+      export PATH="${pkgs.wxGTK32}/bin:${pkgs.ccache}/bin:$PATH"
+
+      # 清理变量
+      unset CGAL_DIR BOOST_ROOT CMAKE_PREFIX_PATH WXWIDGETS_CONFIG_EXECUTABLE
+      unset GMP_INCLUDE_DIR GMP_LIBRARIES MPFR_INCLUDE_DIR MPFR_LIBRARIES
+      unset GLUT_INCLUDE_DIR GLUT_glut_LIBRARY OPENAL_INCLUDE_DIR OPENAL_LIBRARY
+      unset CC CXX CMAKE_C_COMPILER_LAUNCHER CMAKE_CXX_COMPILER_LAUNCHER
+
+      # 基础路径
+      export CGAL_DIR="${myCgal}/lib/cmake/CGAL"
+      export BOOST_ROOT="${pkgs.boost}"
+      export BOOST_INCLUDEDIR="${pkgs.boost.dev}/include"
+      export BOOST_LIBRARYDIR="${pkgs.boost}/lib"
+      export wxWidgets_CONFIG_EXECUTABLE="${pkgs.wxGTK32}/bin/wx-config"
+
+      export FFMPEG_INCLUDE_DIR="${pkgs.ffmpeg_6.dev}/include"
+      export FFMPEG_LIBRARIES="${pkgs.ffmpeg_6}/lib"
+      export PKG_CONFIG_PATH="${pkgs.ffmpeg_6.dev}/lib/pkgconfig:$PKG_CONFIG_PATH"
+
+      export CMAKE_PREFIX_PATH="${myCgal}/lib/cmake/CGAL:${pkgs.boost}:${pkgs.wxGTK32}:${pkgs.eigen}:${pkgs.gmp}:${pkgs.mpfr}:${pkgs.freeglut}:${pkgs.openal}:${pkgs.libGL}:${pkgs.libGLU}:${pkgs.glew}:${pkgs.ffmpeg_6}:${pkgs.qt5Full}"
+
+      export GMP_INCLUDE_DIR="${pkgs.gmp.dev}/include"
+      export GMP_LIBRARIES="${pkgs.gmp}/lib/libgmp.so"
+      export MPFR_INCLUDE_DIR="${pkgs.mpfr.dev}/include"
+      export MPFR_LIBRARIES="${pkgs.mpfr}/lib/libmpfr.so"
+
+      export GLUT_INCLUDE_DIR="${pkgs.freeglut.dev}/include"
+      export GLUT_glut_LIBRARY="${pkgs.freeglut}/lib/libglut.so"
+
+      export OPENAL_INCLUDE_DIR="${pkgs.openal}/include"
+      export OPENAL_LIBRARY="${pkgs.openal}/lib/libopenal.so"
+
+      export GL_INCLUDE_PATH="${pkgs.libGL.dev}/include:${pkgs.libGLU.dev}/include"
+      export GL_LIBRARY_PATH="${pkgs.libGL}/lib:${pkgs.libGLU}/lib"
+      export LD_LIBRARY_PATH="${pkgs.libGL}/lib:${pkgs.libGLU}/lib:${pkgs.glew}/lib:${pkgs.ffmpeg_6}/lib:$LD_LIBRARY_PATH"
+      export LD_LIBRARY_PATH="${pkgs.xorg.libX11}/lib:${pkgs.xorg.libXext}/lib:${pkgs.xorg.libXi}/lib:${pkgs.xorg.libXmu}/lib:$LD_LIBRARY_PATH"
+
+      stdcpp_path="$(${pkgs.gcc}/bin/gcc -print-file-name=libstdc++.so)"
+      if [[ -n "$stdcpp_path" && -f "$stdcpp_path" ]]; then
+        export LD_LIBRARY_PATH="$(dirname "$stdcpp_path"):$LD_LIBRARY_PATH"
+      fi
+
+      [[ -z "$DISPLAY" ]] && export DISPLAY=:0
+
+      export XDG_DATA_DIRS="${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}:${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}:$XDG_DATA_DIRS"
+
+      export CMAKE_CXX_STANDARD=14
+      export CMAKE_CXX_STANDARD_REQUIRED=ON
+      export CMAKE_CXX_EXTENSIONS=OFF
+
+      export CMAKE_POLICY_DEFAULT_CMP0144=NEW
+      export CMAKE_POLICY_DEFAULT_CMP0167=NEW
+      export CMAKE_POLICY_DEFAULT_CMP0072=NEW
+
+      run_with_nixgl() {
+        echo "Running (forcing XCB): $@"
+        QT_QPA_PLATFORM=xcb nix run --override-input nixpkgs nixpkgs/nixos-24.05 --impure github:nix-community/nixGL -- "$@"
+      }
+      alias nixGL='run_with_nixgl'
+
+      # --- VTL3D build aliases ---
+      alias make_vtl='(echo "执行 make_vtl" && cd miniVTL3D/sources && mkdir -p build && cd build && cmake .. && make -j$(nproc))'
+      alias remake_vtl='(echo "执行 remake_vtl" && cd miniVTL3D/sources/build && make -j$(nproc))'
+      alias clean_vtl='(echo "执行 clean_vtl" && rm -rf miniVTL3D/sources/build)'
+
+      echo ""
+      echo "======================================================="
+      echo "        VocalTractLab3D 开发环境        "
+      echo "======================================================="
+      echo "Nix Shell 环境已激活."
+      echo ""
+      echo "--- 构建 VocalTractLab3D (本项目) ---"
+      echo "  假设您当前位于 VocalTractLab3D 项目根目录 (例如, /home/jqwang/Work/01-Vocal3D)."
+      echo "  主 CMakeLists.txt 文件预期位于子目录如 'miniVTL3D/sources/' 下."
+      echo ""
+      echo "  1. 进入 VTL3D 源码目录:"
+      echo "     cd miniVTL3D/sources"
+      echo "  2. 创建并进入构建目录:"
+      echo "     mkdir -p build && cd build"
+      echo "  3. 使用 CMake 配置项目:"
+      echo "     cmake .."
+      echo "  4. 编译项目:"
+      echo "     make -j$(nproc)  # 或直接使用 'make'"
+      echo ""
+      echo "--- 本项目自定义构建别名 ---"
+      echo "  'make_vtl': 进入 miniVTL3D/sources/build, 配置 (cmake ..) 并构建项目."
+      echo "  'remake_vtl': 进入 miniVTL3D/sources/build 并运行 'make -j$(nproc)' (不清理,不重新配置)."
+      echo "  'clean_vtl': 删除 miniVTL3D/sources/build 目录."
+      echo ""
+      echo "=== VTL3D build environment ready ==="
+    '';
+  };
+
+in
+{
+  default = defaultShell;
+  miniSlicer = defaultShell;
+  miniVTL3D = miniVTL3D;
+  python = python;
+}

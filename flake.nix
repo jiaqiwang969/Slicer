@@ -48,12 +48,14 @@
         # Load shell definitions and仅暴露真正 derivations，避免将 `override*` 等函数作为输出
         devShells = let
           shellsAll = pkgs.callPackage ./nix/shells.nix {
-          inherit pkgs myCgal myJinja2Github;
+            inherit pkgs myCgal myJinja2Github;
             lib = pkgs.lib;
           };
         in {
-          default = shellsAll.default;
-          python  = shellsAll.python;
+          default     = shellsAll.miniVTL3D;
+          miniVTL3D   = shellsAll.miniVTL3D;
+          miniSlicer  = shellsAll.miniSlicer;
+          python      = shellsAll.python;
         };
 
         # --- Packages ---
@@ -89,8 +91,9 @@
 
   # --- Nix Configuration --- (Optional)
   # Add settings for Nix commands, e.g., binary caches
-  # nixConfig = {
+  nixConfig = {
+    extra-experimental-features = [ "nix-command" "flakes" "impure-derivations" ];
   #   extra-substituters = [ "https://your-cache.cachix.org" ];
   #   extra-trusted-public-keys = [ "your-cache.cachix.org-1:YourPublicKey" ];
-  # };
+  };
 }

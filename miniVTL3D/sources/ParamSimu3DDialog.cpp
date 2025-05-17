@@ -1137,13 +1137,44 @@ void ParamSimu3DDialog::OnSndSpeedEnter(wxCommandEvent& event)
   {
     m_simuParams.sndSpeed = x * 100.;
 
-    if (m_simuParams.medium == simulationParameters::AIR)
+    switch (m_simuParams.medium)
     {
-        // 对空气：根据声速回推温度
+    case simulationParameters::AIR:
+        // 空气：理想气体公式反推温度
         m_simuParams.volumicMass = ADIABATIC_CONSTANT * STATIC_PRESSURE_CGS /
             pow(m_simuParams.sndSpeed, 2);
         m_simuParams.temperature = pow(m_simuParams.sndSpeed, 2) * MOLECULAR_MASS /
             GAS_CONSTANT / ADIABATIC_CONSTANT - KELVIN_SHIFT;
+        break;
+    case simulationParameters::HELIUM:
+        {
+          // Helium:  c = sqrt(gamma * R_specific * (T+273.15))
+          constexpr double gamma = 1.66;
+          constexpr double Rspec = 2077.0; // J/kg/K
+          double c_ms = m_simuParams.sndSpeed / 100.0;
+          m_simuParams.temperature = (c_ms*c_ms)/(gamma*Rspec) - 273.15;
+        }
+        break;
+    case simulationParameters::SEA:
+        {
+          // 近似用牛顿法迭代反求 T
+          double S = m_simuParams.salinity;
+          double Z = m_simuParams.depth;
+          double c_target = m_simuParams.sndSpeed / 100.0;
+          double T = m_simuParams.temperature; // 初值
+          for(int i=0;i<10;++i)
+          {
+            double c_est = vtl3d::soundSpeedSea(T,S,Z);
+            double f = c_est - c_target;
+            if (std::abs(f) < 1e-6) break;
+            // dC/dT (由公式求导)
+            double dcdT = 4.591 - 2*0.05304*T + 3*0.0002374*T*T - 0.01025*(S-35.0) - 7.139e-13 * T * Z*Z*Z;
+            if (std::abs(dcdT) < 1e-6) break;
+            T -= f/dcdT;
+          }
+          m_simuParams.temperature = T;
+        }
+        break;
     }
   }
 
