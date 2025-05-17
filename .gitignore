@@ -43,9 +43,13 @@ result
 develop
 script/tmp_all
 script/temp
-
-# Do not ignore .env files
+# Ignore environment configuration files
+# 忽略环境配置文件，如.env和.env.local等
+# 前面的行（-+.env和-+.env.*）是错误的语法，应该删除
+# 正确的语法是直接使用.env和.env.*来忽略这些文件
 .env
+.env.*
+
 # 排除压缩文件夹
 *.zip
 *.rar
