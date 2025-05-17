@@ -94,6 +94,9 @@ static const int IDB_SHOW_INPUT_IMPED_SPEC        = 7010;
 static const int IDB_PREVIOUS_TF                  = 7011;
 static const int IDB_NEXT_TF                      = 7012;
 
+// New IDB_SAVE_ALL_TF constant
+static const int IDB_SAVE_ALL_TF                  = 7013;
+
 // ****************************************************************************
 // The event table.
 // ****************************************************************************
@@ -149,6 +152,9 @@ BEGIN_EVENT_TABLE(Acoustic3dPage, wxPanel)
   EVT_CHECKBOX(IDB_SHOW_INPUT_IMPED_SPEC, Acoustic3dPage::OnShowInputImpedSpec)
   EVT_BUTTON(IDB_PREVIOUS_TF, Acoustic3dPage::OnPreviousTf)
   EVT_BUTTON(IDB_NEXT_TF, Acoustic3dPage::OnNextTf)
+
+  // New event for saving all transfer functions
+  EVT_BUTTON(IDB_SAVE_ALL_TF, Acoustic3dPage::OnSaveAllTf)
 END_EVENT_TABLE()
 
 // ****************************************************************************
@@ -482,6 +488,10 @@ void Acoustic3dPage::initWidgets(VocalTractPicture* picVocalTract)
 
   chkShowInputImped = new wxCheckBox(bottomPanel, IDB_SHOW_INPUT_IMPED_SPEC, "Input impedance");
   sizer->Add(chkShowInputImped, 0, wxALL, 2);
+
+  // 新增：保存全部 TF 按钮
+  wxButton* btnSaveAllTf = new wxButton(bottomPanel, IDB_SAVE_ALL_TF, "Save TF txt", wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT);
+  sizer->Add(btnSaveAllTf, 0, wxALL, 4);
 
   // text to display the transfer function point coordinates
   wxStaticText* label = new wxStaticText(bottomPanel, wxID_ANY, "Transfer function point:");
@@ -1448,5 +1458,15 @@ void Acoustic3dPage::setPicModeObjectTodisplay(enum objectToDisplay object)
     chkShowContour->SetValue(true);
     picPropModes->setObjectToDisplay(CONTOUR);
     break;
+  }
+}
+
+// ****************************************************************************
+
+void Acoustic3dPage::OnSaveAllTf(wxCommandEvent& event)
+{
+  if (picSpectrum)
+  {
+    picSpectrum->ExportAllTransferFunctions();
   }
 }

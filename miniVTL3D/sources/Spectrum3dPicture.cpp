@@ -75,7 +75,7 @@ Spectrum3dPicture::Spectrum3dPicture(wxWindow *parent,
     8, 0, false, false, true);
 
   graph.initLogOrdinate(1.0, 5.0,
-    -100.0, -10.0, -30, 10.0, 200.0, 100.0,
+    -100.0, -10.0, -30, 10.0, 100.0, 50.0,
     true, 10);
 
   graph.isLinearOrdinate = false;
@@ -386,4 +386,17 @@ void Spectrum3dPicture::OnExportAllTf(wxCommandEvent& event)
         << std::abs(itf[i]) << "\n";
   }
   ofs.close();
+
+  // 弹窗提示保存成功并显示路径
+  wxMessageBox(wxString::Format("Saved ALL transfer functions to:\n%s", name), "Export finished", wxOK | wxICON_INFORMATION, this);
+}
+
+// ****************************************************************************
+// 对外公开的便捷接口
+// ****************************************************************************
+
+void Spectrum3dPicture::ExportAllTransferFunctions()
+{
+  wxCommandEvent dummyEvt;
+  OnExportAllTf(dummyEvt);
 }

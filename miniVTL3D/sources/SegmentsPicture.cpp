@@ -2,7 +2,7 @@
 // This file is part of VocalTractLab3D.
 // Copyright (C) 2022, Peter Birkholz, Dresden, Germany
 // www.vocaltractlab.de
-// author: Peter Birkholz and R�mi Blandin
+// author: Peter Birkholz and R�mi Blandin
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -259,6 +259,9 @@ void SegmentsPicture::draw(wxDC& dc)
         {
           ost << setprecision(1) << fixed;
         }
+
+        // 使用红色字体提高可读性
+        dc.SetTextForeground(wxColour(220,50,32));
 
         for (int i(0); i < 5; i++)
         {

@@ -45,7 +45,7 @@ script/tmp_all
 script/temp
 
 # Do not ignore .env files
-!.env
+.env
 # 排除压缩文件夹
 *.zip
 *.rar
@@ -59,4 +59,25 @@ script/temp
 # 本地临时构建目录
 build-vtl
 build-mini
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.brf
+*.fdb_latexmk
+*.fls
+*.ilg
+*.idx
+*.ind
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+*_minted*
 

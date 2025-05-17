@@ -48,6 +48,9 @@ public:
   void setShowInputImped(bool show) { m_showInputImped = show; }
   void setIdxTfPoint(int idx) { m_idxPtTf = idx; }
 
+  // 新增：暴露导出全部 Transfer Function 的接口，供外部按钮调用
+  void ExportAllTransferFunctions();
+  
   // accessors
   bool showGlottalTf() const { return m_showGlottalTf; }
   bool showNoise() const { return m_showNoiseTf; }

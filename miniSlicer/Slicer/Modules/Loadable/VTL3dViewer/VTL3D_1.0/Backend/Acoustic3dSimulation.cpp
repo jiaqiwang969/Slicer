@@ -5635,8 +5635,34 @@ bool Acoustic3dSimulation::createCrossSections(VocalTract* tract,
           tmpPrevSection.push_back(secIdx - contours[i - 1].size() + cp);
         }
       }
-      // add the list of previous section to connect to the 
-      // current section
+      // add the list of previous section to connect to the current section
+      if (tmpPrevSection.empty()) {
+        // 完全无交且互不包含 → 人工插入 0 长度 junction，使几何连续
+        int cpFallback = std::min(c, (int)contours[i-1].size() - 1);
+        int fallbackIdx = secIdx - contours[i - 1].size() + cpFallback;
+
+        // 记录调试信息
+        {
+          std::ofstream dbg("log.txt", std::ios::app);
+          dbg << "[JUNC_AUTO] build between prevSec=" << fallbackIdx
+              << " and slice=" << i << " contour=" << c << std::endl;
+        }
+
+        // ① 加入到前向列表（供后面 prevSections 使用）
+        tmpPrevSection.push_back(fallbackIdx);
+
+        // ② 在 intContours 中添加复制的当前轮廓，作为 0 长度截面
+        intContours.push_back(cont); // 已经缩放到正确大小
+        std::vector<int> tmpSurfZero(cont.size(), 0);
+        intSurfacesIdx.push_back(tmpSurfZero);
+
+        // ③ 记录映射信息，保持与交界面分支创建流程一致
+        prevSecInt.push_back(fallbackIdx);
+        listNextCont.push_back(c);
+        tmpPrevSection.push_back(secIdx + intSecIdx);
+        intSecIdx++;
+      }
+
       prevSections.push_back(tmpPrevSection);
     }
 

@@ -1605,29 +1605,11 @@ void Acoustic3dSimulation::propagateImpedAdmit(Eigen::MatrixXcd & startImped,
 
     nI = m_crossSections[i]->numberOfModes();
     nPs = m_crossSections[prevSec]->numberOfModes();
-
     // Extract the scaterring matrix and its complementary
     F.clear();
     if (direction == -1)
     {
       F = m_crossSections[i]->getMatrixF();
-      // ---------- 运行时检查 F 是否为空并打印日志 ----------
-      if (F.empty() || F[0].rows()==0 || F[0].cols()==0) {
-          ofstream log("log.txt", ofstream::app);
-          log << "[F_MATRIX_ERROR]  freq=" << freq << " Hz  "
-              << "section_prev=" << prevSec   // i-1 或 i+1
-              << "  section_cur=" << i        // 当前 i
-              << "  direction=" << direction  // -1 口→喉 ， +1 喉→口
-              << "  ==> getMatrixF() returned EMPTY  ->  use Identity" << std::endl;
-          log.close();
-
-          // 用单位阵降级，保持维度正确避免段错误
-          int nFallback = (direction==-1 ? nI : nPs);      // 对 contraction / expansion 都适用
-          if (nFallback < 1) { throw std::runtime_error("No modes but F empty"); }
-          Matrix I = Matrix::Identity(nFallback, nFallback);
-          F.clear();               // 清掉空 vector
-          F.push_back(I);          // 把单位阵放进去，后面的代码仍用 F[0]
-      }
       if (m_crossSections[i]->area() > m_crossSections[prevSec]->area())
       {
         G = Matrix::Identity(nI, nI) - F[0] * F[0].transpose();
@@ -1640,23 +1622,6 @@ void Acoustic3dSimulation::propagateImpedAdmit(Eigen::MatrixXcd & startImped,
     else
     {
       F = m_crossSections[prevSec]->getMatrixF();
-      // ---------- 运行时检查 F 是否为空并打印日志 ----------
-      if (F.empty() || F[0].rows()==0 || F[0].cols()==0) {
-          ofstream log("log.txt", ofstream::app);
-          log << "[F_MATRIX_ERROR]  freq=" << freq << " Hz  "
-              << "section_prev=" << prevSec   // i-1 或 i+1
-              << "  section_cur=" << i        // 当前 i
-              << "  direction=" << direction  // -1 口→喉 ， +1 喉→口
-              << "  ==> getMatrixF() returned EMPTY  ->  use Identity" << std::endl;
-          log.close();
-
-          // 用单位阵降级，保持维度正确避免段错误
-          int nFallback = (direction==-1 ? nI : nPs);      // 对 contraction / expansion 都适用
-          if (nFallback < 1) { throw std::runtime_error("No modes but F empty"); }
-          Matrix I = Matrix::Identity(nFallback, nFallback);
-          F.clear();               // 清掉空 vector
-          F.push_back(I);          // 把单位阵放进去，后面的代码仍用 F[0]
-      }
       if (m_crossSections[i]->area() > m_crossSections[prevSec]->area())
       {
         G = Matrix::Identity(nI, nI) - F[0].transpose() * F[0];
@@ -5641,6 +5606,7 @@ bool Acoustic3dSimulation::createCrossSections(VocalTract* tract,
     // loop over the contours of the current cross-section
     for (int c(0); c < contours[i].size(); c++)
     {
+      int intSecIdxBefore = intSecIdx;   // 记录此轮开始时的数量
       // clean the temporary previous section list
       tmpPrevSection.clear();
 
@@ -5736,8 +5702,45 @@ bool Acoustic3dSimulation::createCrossSections(VocalTract* tract,
           tmpPrevSection.push_back(secIdx - contours[i - 1].size() + cp);
         }
       }
-      // add the list of previous section to connect to the 
-      // current section
+      //--------------------------------------------------
+      // 若 intSecIdx 没有增加 → 说明既没有交界面也没插入
+      // 中间截面 → 主动复制当前轮廓，建立 0 长度 junction
+      //--------------------------------------------------
+      if (intSecIdx == intSecIdxBefore)
+      {
+        int cpFallback   = std::min(c, (int)contours[i-1].size()-1);
+        int prevSecIdx   = secIdx - contours[i-1].size() + cpFallback;
+
+        // 调试
+        {
+          std::ofstream dbg("log.txt", std::ios::app);
+          dbg << "[JUNC_AUTO] slice=" << i
+              << " contour=" << c
+              << " prevSec=" << prevSecIdx
+              << " ⇒ insert 0-len junction" << std::endl;
+        }
+
+        // 复制当前轮廓加入中间截面列表
+        intContours.push_back(cont);
+        intSurfacesIdx.push_back(std::vector<int>(cont.size(),0));
+
+        // 更新映射
+        prevSecInt.push_back(prevSecIdx);
+        listNextCont.push_back(c);
+        tmpPrevSection.push_back(secIdx + intSecIdx);
+
+        intSecIdx++;
+      }
+
+      // 若 tmpPrevSection 仍为空（极端情况），按索引硬连备用
+      if (tmpPrevSection.empty())
+      {
+        int cpFallback = std::min(c, (int)contours[i-1].size()-1);
+        int fallbackIdx = secIdx - contours[i-1].size() + cpFallback;
+        tmpPrevSection.push_back(fallbackIdx);
+      }
+
+      // 把本轮汇总结果压入 prevSections
       prevSections.push_back(tmpPrevSection);
     }
 
@@ -5923,52 +5926,7 @@ bool Acoustic3dSimulation::createCrossSections(VocalTract* tract,
   //}
   //ofs.close();
   {
-    std::ofstream log("log.txt", std::ios::app);
-    log << "[A3DS_DEBUG_CREATE_CS] createCrossSections EXIT" << std::endl;
-  }
-  // ===== 修复单向连接的虚段，保证 prev / next 双向一致 =====
-  {
-    std::ofstream fixLog("log.txt", std::ios::app);
-    for (int si = 0; si < (int)m_crossSections.size(); ++si)
-    {
-      bool repaired = false;
-
-      // 若不是最后一段且缺 next → 补 next = si+1
-      if (si < (int)m_crossSections.size() - 1 &&
-          m_crossSections[si]->numNextSec() == 0)
-      {
-        m_crossSections[si]->setNextSection(si + 1);
-        repaired = true;
-      }
-
-      // 若不是第一段且缺 prev → 补 prev = si-1
-      if (si > 0 && m_crossSections[si]->numPrevSec() == 0)
-      {
-        m_crossSections[si]->setPreviousSection(si - 1);
-        repaired = true;
-      }
-
-      if (repaired)
-      {
-        fixLog << "[LINK_REPAIR] sec " << si
-               << "  newPrevCnt=" << m_crossSections[si]->numPrevSec()
-               << "  newNextCnt=" << m_crossSections[si]->numNextSec()
-               << std::endl;
-      }
-    }
-  }
-  // ===== DEBUG : dump section connectivity summary =====
-  {
-    std::ofstream sDbg("log.txt", std::ios::app);
-    sDbg << "[SEC_SUMMARY] idx  prevCnt  nextCnt  length  isJunction" << std::endl;
-    for (int si = 0; si < m_crossSections.size(); ++si) {
-      sDbg << "sec " << si
-           << "  prev=" << m_crossSections[si]->numPrevSec()
-           << "  next=" << m_crossSections[si]->numNextSec()
-           << "  len="  << m_crossSections[si]->length()
-           << "  junction=" << m_crossSections[si]->isJunction()
-           << std::endl;
-    }
+    std::cout << "[A3DS_DEBUG_CREATE_CS] createCrossSections EXIT" << std::endl;
   }
   return true;
   log.close();
@@ -6064,20 +6022,6 @@ bool Acoustic3dSimulation::importGeometry(VocalTract* tract)
       std::chrono::duration<double> elapsed_seconds = end - start;
 
       log << "Time import geometry " << elapsed_seconds.count() << endl;
-      
-      // ===== DEBUG : dump section connectivity summary =====
-      {
-        std::ofstream sDbg("log.txt", std::ios::app);
-        sDbg << "[SEC_SUMMARY] idx  prevCnt  nextCnt  length  isJunction" << std::endl;
-        for (int si = 0; si < m_crossSections.size(); ++si) {
-          sDbg << "sec " << si
-               << "  prev=" << m_crossSections[si]->numPrevSec()
-               << "  next=" << m_crossSections[si]->numNextSec()
-               << "  len="  << m_crossSections[si]->length()
-               << "  junction=" << m_crossSections[si]->isJunction()
-               << std::endl;
-        }
-      }
 
       m_reloadGeometry = false;
 

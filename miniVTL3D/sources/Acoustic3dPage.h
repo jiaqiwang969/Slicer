@@ -145,6 +145,9 @@ private:
   void OnPreviousTf(wxCommandEvent& event);
   void OnNextTf(wxCommandEvent& event);
 
+  // Save all transfer functions to txt
+  void OnSaveAllTf(wxCommandEvent& event);
+
   void setPicModeObjectTodisplay(enum objectToDisplay object);
 
 // ****************************************************************************
