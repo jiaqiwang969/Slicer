@@ -63,9 +63,9 @@ def compute_modes(D: float, c_speed: float):
         gamma = special.jnp_zeros(n, M_m_max)
         for m, gm in enumerate(gamma, start=1):
             fc = c_speed * gm / (2 * np.pi * R)
-            if fc <= fc_max:
-                modes.append((m, n, gm, fc))
-    modes.sort(key=lambda x: x[3])
+        if fc <= fc_max:
+            modes.append((m, n, gm, fc))
+modes.sort(key=lambda x: x[3])
     return modes, R
 
 
@@ -98,31 +98,31 @@ for medium, cfg in MEDIA.items():
         mask = Rg_full <= R  # 仅保留圆内节点
         Rg = Rg_full[mask]
         Tg = Tg_full[mask]
-        X = (Rg * np.cos(Tg)).ravel()
-        Y = (Rg * np.sin(Tg)).ravel()
-        triang = tri.Triangulation(X, Y)
+X = (Rg * np.cos(Tg)).ravel()
+Y = (Rg * np.sin(Tg)).ravel()
+triang = tri.Triangulation(X, Y)
 
         # 生成模态形状图
-        cols = 4
+cols = 4
         rows = int(np.ceil(len(modes) / cols))
         fig, axes = plt.subplots(rows, cols, figsize=(cols * 3, rows * 3), subplot_kw={"aspect": "equal"})
-        axes = axes.flatten()
+axes = axes.flatten()
 
-        for ax, (m, n, gm, fc) in zip(axes, modes):
-            J = special.jv(n, gm * Rg / R)
+for ax, (m, n, gm, fc) in zip(axes, modes):
+    J = special.jv(n, gm * Rg / R)
             psi = J if n == 0 else J * np.sin(n * Tg)
             ax.scatter(X * 1e3, Y * 1e3, c=psi.ravel(), cmap="seismic", s=4, marker="s", vmin=-1, vmax=1)
             th = np.linspace(0, 2 * np.pi, 720)
             ax.plot(R * np.cos(th) * 1e3, R * np.sin(th) * 1e3, "k", lw=1)
-            ax.set_xticks([])
-            ax.set_yticks([])
+    ax.set_xticks([])
+    ax.set_yticks([])
             ax.set_title(rf"$\psi_{{{n}{m}}}$\n$f_c={fc:.0f}$ Hz", fontsize=8)
 
-        for ax in axes[len(modes):]:
+for ax in axes[len(modes):]:
             ax.axis("off")
 
         fig.suptitle(f"Circular Waveguide Modes (D={D*1e3:.1f} mm, T={T}℃)", fontsize=12)
-        plt.tight_layout()
+plt.tight_layout()
         fname = f"circle_modes_{int(D*1e3)}mm"
         fig.savefig(fname + ".png", dpi=300)
         fig.savefig(fname + ".pdf")

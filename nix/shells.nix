@@ -2,12 +2,12 @@
 # It expects pkgs, myCgal, myJinja2Github, and lib to be passed in.
 { pkgs, myCgal, myJinja2Github, lib }:
 let
-  wxqtDrv = pkgs.callPackage ./modules/wxqt.nix {
-    qtbase = pkgs.qt5.qtbase;
-    qttools = pkgs.qt5.qttools;
-    libGL   = pkgs.libGL;
-    libGLU  = pkgs.libGLU;
-  };
+    wxqtDrv = pkgs.callPackage ./modules/wxqt.nix {
+      qtbase = pkgs.qt5.qtbase;
+      qttools = pkgs.qt5.qttools;
+      libGL   = pkgs.libGL;
+      libGLU  = pkgs.libGLU;
+    };
 
   defaultShell = pkgs.mkShell {
     name = "vtl3d-env-custom-cgal";

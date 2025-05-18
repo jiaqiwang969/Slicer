@@ -81,6 +81,7 @@ static const int IDL_MOUTH_BCOND = 6001;
 static const int IDL_FREQ_RES = 6002;
 static const int IDL_FIELD_PHYSICAL_QUANTITY = 6003;
 static const int IDL_AMPLITUDE_PHASE = 6004;
+static const int IDL_GLOTTIS_BCOND = 6005;
 
 static const int IDB_SET_DEFAULT_PARAMS_FAST = 7002;
 static const int IDB_SET_DEFAULT_PARAMS_ACCURATE = 7003;
@@ -126,6 +127,7 @@ EVT_CHECKBOX(IDB_COMPUTE_RAD_FIELD, ParamSimu3DDialog::OnChkComputeRad)
 
 EVT_COMBOBOX(IDL_SCALING_FAC_METHOD, ParamSimu3DDialog::OnScalingFactMethod)
 EVT_COMBOBOX(IDL_MOUTH_BCOND, ParamSimu3DDialog::OnMouthBcond)
+EVT_COMBOBOX(IDL_GLOTTIS_BCOND, ParamSimu3DDialog::OnGlottisBcond)
 EVT_COMBOBOX(IDL_FREQ_RES, ParamSimu3DDialog::OnFreqRes)
 EVT_COMBOBOX(IDL_FIELD_PHYSICAL_QUANTITY, ParamSimu3DDialog::OnFieldPhysicalQuantity)
 EVT_COMBOBOX(IDL_AMPLITUDE_PHASE, ParamSimu3DDialog::OnAmplitudePhase)
@@ -343,23 +345,24 @@ void ParamSimu3DDialog::updateWidgets()
     m_simuParams.tfPoint.push_back(m_singlePtTf);
   }
 
+  // glottis boundary condition
+  switch (m_glottisBoundaryCond) {
+    case HARD_WALL:        lstGlottisBcond->SetValue(m_listGlottisBcond[0]); break;
+    case ZERO_PRESSURE:    lstGlottisBcond->SetValue(m_listGlottisBcond[1]); break;
+    case IFINITE_WAVGUIDE: lstGlottisBcond->SetValue(m_listGlottisBcond[2]); break;
+    case RADIATION:        lstGlottisBcond->SetValue(m_listGlottisBcond[3]); break;
+    case ADMITTANCE_1:     lstGlottisBcond->SetValue(m_listGlottisBcond[4]); break;
+    default:               lstGlottisBcond->SetValue(m_listGlottisBcond[0]); break; // Default to Hard wall
+  }
   // mouth boundary condition
   switch (m_mouthBoundaryCond)
   {
-  case RADIATION:
-  case IFINITE_WAVGUIDE:
-    lstMouthBcond->SetValue(m_listMouthBcond[0]);
-    break;
-  case HARD_WALL:
-  case ADMITTANCE_1:
-    lstMouthBcond->SetValue(m_listMouthBcond[1]);
-    break;
-  case ZERO_PRESSURE:
-    lstMouthBcond->SetValue(m_listMouthBcond[2]);
-    break;
-  default:
-    lstMouthBcond->SetValue(m_listMouthBcond[0]);
-    break;
+    case HARD_WALL:        lstMouthBcond->SetValue(m_listMouthBcond[0]); break;
+    case ZERO_PRESSURE:    lstMouthBcond->SetValue(m_listMouthBcond[1]); break;
+    case IFINITE_WAVGUIDE: lstMouthBcond->SetValue(m_listMouthBcond[2]); break;
+    case RADIATION:        lstMouthBcond->SetValue(m_listMouthBcond[3]); break;
+    case ADMITTANCE_1:     lstMouthBcond->SetValue(m_listMouthBcond[4]); break;
+    default:               lstMouthBcond->SetValue(m_listMouthBcond[0]); break; // Default to Hard wall
   }
 
   // frequency resolution
@@ -398,7 +401,7 @@ void ParamSimu3DDialog::updateWidgets()
   chkComputeRad->SetValue(m_simuParams.computeRadiatedField);
 
   m_simu3d->setSimulationParameters(m_meshDensity, m_secNoiseSource, 
-		m_simuParams, m_mouthBoundaryCond, m_contInterpMeth);
+		m_simuParams, m_mouthBoundaryCond, m_contInterpMeth, m_glottisBoundaryCond);
 }
 
 // ****************************************************************************
@@ -476,6 +479,7 @@ ParamSimu3DDialog::ParamSimu3DDialog(wxWindow* parent) :
   m_simuParams.spectrumLgthExponent = m_simu3d->spectrumLgthExponent();
   m_tfPtsFromFile = false;
   m_mouthBoundaryCond = m_simu3d->mouthBoundaryCond();
+  m_glottisBoundaryCond = m_simu3d->glottisBoundaryCond(); // 从 simu3d 获取声门默认边界条件
   m_contInterpMeth = m_simu3d->contInterpMeth(); 
 	m_simuParams = m_simu3d->simuParams();
   m_singlePtTf = m_simuParams.tfPoint[0];
@@ -505,9 +509,11 @@ ParamSimu3DDialog::ParamSimu3DDialog(wxWindow* parent) :
 
   // create the list of boundary conditions
   m_listMouthBcond.clear();
-  m_listMouthBcond.push_back("Radiation");
   m_listMouthBcond.push_back("Hard wall");
   m_listMouthBcond.push_back("Zero pressure");
+  m_listMouthBcond.push_back("Radiation");
+  m_listMouthBcond.push_back("Infinite waveguide");
+  m_listMouthBcond.push_back("Admittance_1");
 
   lstMouthBcond->Clear();
   for (int i(0); i < m_listMouthBcond.size(); i++)
@@ -761,7 +767,6 @@ void ParamSimu3DDialog::initWidgets()
     sz->Add(lineSizer, 0, wxLEFT | wxRIGHT | wxEXPAND, 10);
 
     topLevelSizer->Add(sz, 0, wxLEFT | wxRIGHT | wxEXPAND, 10);
-
     ///////////////////////////////////////////////////////////////////
     // Boundary conditions options
     ///////////////////////////////////////////////////////////////////
@@ -775,12 +780,39 @@ void ParamSimu3DDialog::initWidgets()
 
     lineSizer = new wxBoxSizer(wxHORIZONTAL);
 
+    // create the list of boundary conditions
+    m_listMouthBcond = { "Hard wall", "Zero pressure", "Infinite waveguide", "Radiation", "Admittance_1" };
+
     label = new wxStaticText(scrollWin, wxID_ANY, "Mouth boundary condition ");
     lineSizer->Add(label, 2, wxALL | wxALIGN_CENTER, 3);
 
     lstMouthBcond = new wxComboBox(scrollWin, IDL_MOUTH_BCOND, "", wxDefaultPosition,
       this->FromDIP(wxSize(10, -1)), wxArrayString(), wxCB_DROPDOWN | wxCB_READONLY);
+    lstMouthBcond->Clear(); // 清空旧选项
+    for (auto &s : m_listMouthBcond) lstMouthBcond->Append(s);
     lineSizer->Add(lstMouthBcond, 1, wxALL, 3);
+
+    lineSizer->AddStretchSpacer();
+
+    sz->Add(lineSizer, 0, wxLEFT | wxRIGHT | wxEXPAND, 10);
+
+    // ****************************************************************
+    // Select glottis boundary condition
+    // ****************************************************************
+
+    lineSizer = new wxBoxSizer(wxHORIZONTAL);
+
+    // create the list of glottis boundary conditions
+    m_listGlottisBcond = { "Hard wall", "Zero pressure", "Infinite waveguide", "Radiation", "Admittance_1" };
+
+    label = new wxStaticText(scrollWin, wxID_ANY, "Glottis boundary condition ");
+    lineSizer->Add(label, 2, wxALL | wxALIGN_CENTER, 3);
+
+    lstGlottisBcond = new wxComboBox(scrollWin, IDL_GLOTTIS_BCOND, "", wxDefaultPosition,
+      this->FromDIP(wxSize(10, -1)), wxArrayString(), wxCB_DROPDOWN | wxCB_READONLY);
+    lstGlottisBcond->Clear(); // 清空旧选项
+    for (auto &s : m_listGlottisBcond) lstGlottisBcond->Append(s);
+    lineSizer->Add(lstGlottisBcond, 1, wxALL, 3);
 
     lineSizer->AddStretchSpacer();
 
@@ -1630,25 +1662,18 @@ void ParamSimu3DDialog::OnScalingFactMethod(wxCommandEvent& event)
 
 // ****************************************************************************
 // ****************************************************************************
-
 void ParamSimu3DDialog::OnMouthBcond(wxCommandEvent& event)
 {
   auto res = lstMouthBcond->GetSelection();
 
   switch (res)
   {
-  case 0:
-    m_mouthBoundaryCond = RADIATION;
-    break;
-  case 1:
-    m_mouthBoundaryCond = HARD_WALL;
-    break;
-  case 2:
-    m_mouthBoundaryCond = ZERO_PRESSURE;
-    break;
-  default:
-    m_mouthBoundaryCond = RADIATION;
-    break;
+    case 0: m_mouthBoundaryCond = HARD_WALL; break;
+    case 1: m_mouthBoundaryCond = ZERO_PRESSURE; break;
+    case 2: m_mouthBoundaryCond = IFINITE_WAVGUIDE; break;
+    case 3: m_mouthBoundaryCond = RADIATION; break;
+    case 4: m_mouthBoundaryCond = ADMITTANCE_1; break;
+    default: m_mouthBoundaryCond = HARD_WALL; break; // Default to Hard wall
   }
 
   updateWidgets();
@@ -1780,7 +1805,8 @@ void ParamSimu3DDialog::SetDefaultParams(bool fast)
 
   m_simuParams.varyingArea = true;
 
-  m_mouthBoundaryCond = RADIATION;
+  m_mouthBoundaryCond = HARD_WALL;
+  m_glottisBoundaryCond = HARD_WALL;
 
   m_simuParams.percentageLosses = 1.;
 
@@ -1940,4 +1966,35 @@ void ParamSimu3DDialog::OnDepthEnter(wxCommandEvent& event)
   m_simuParams.radImpedPrecomputed = false;
 
   updateWidgets();
+}
+
+// ****************************************************************************
+// ****************************************************************************
+
+void ParamSimu3DDialog::OnGlottisBcond(wxCommandEvent &event)
+{
+  // 根据下拉框索引映射到枚举值
+  int idx = lstGlottisBcond->GetCurrentSelection();
+
+  switch (idx)
+  {
+    case 0: m_glottisBoundaryCond = HARD_WALL; break;
+    case 1: m_glottisBoundaryCond = ZERO_PRESSURE; break;
+    case 2: m_glottisBoundaryCond = IFINITE_WAVGUIDE; break;
+    case 3: m_glottisBoundaryCond = RADIATION; break;
+    case 4: m_glottisBoundaryCond = ADMITTANCE_1; break;
+    default: m_glottisBoundaryCond = HARD_WALL; break; // Default to Hard wall
+  }
+
+  // 将更新写入核心模拟器
+  m_simu3d->setSimulationParameters(
+    m_meshDensity,
+    m_secNoiseSource,
+    m_simuParams,
+    m_mouthBoundaryCond,
+    m_contInterpMeth,
+    m_glottisBoundaryCond);
+
+  updateWidgets();
+  updatePictures();
 }

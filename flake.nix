@@ -48,7 +48,7 @@
         # Load shell definitions and仅暴露真正 derivations，避免将 `override*` 等函数作为输出
         devShells = let
           shellsAll = pkgs.callPackage ./nix/shells.nix {
-            inherit pkgs myCgal myJinja2Github;
+          inherit pkgs myCgal myJinja2Github;
             lib = pkgs.lib;
           };
         in {

@@ -134,15 +134,14 @@ bool similarContours(Polygon_2& cont1, Polygon_2& cont2, double minDist)
 // ****************************************************************************
 // Constructor.
 // ****************************************************************************
-
 Acoustic3dSimulation::Acoustic3dSimulation()
 // initialise the physical constants
   : m_geometryImported(false),
   m_reloadGeometry(true),
   m_meshDensity(5.),
   m_idxSecNoiseSource(25), // for /sh/ 212, for vowels 25
-  m_glottisBoundaryCond(IFINITE_WAVGUIDE),
-  m_mouthBoundaryCond(RADIATION),
+  m_glottisBoundaryCond(HARD_WALL),
+  m_mouthBoundaryCond(HARD_WALL),
   m_contInterpMeth(AREA)
 {
   m_simuParams.temperature = 31.4266; // for 350 m/s
@@ -270,12 +269,14 @@ Acoustic3dSimulation *Acoustic3dSimulation::getInstance()
 
 void Acoustic3dSimulation::setSimulationParameters(double meshDensity,
   int secNoiseSource, struct simulationParameters simuParams, 
-  enum openEndBoundaryCond cond, enum contourInterpolationMethod scalingMethod)
+  enum openEndBoundaryCond mouthCond, enum contourInterpolationMethod scalingMethod,
+  enum openEndBoundaryCond glottisCond)
 {
   m_meshDensity = meshDensity;
   m_idxSecNoiseSource = secNoiseSource;
-  m_mouthBoundaryCond = cond;
+  m_mouthBoundaryCond = mouthCond;
   m_contInterpMeth = scalingMethod;
+  m_glottisBoundaryCond = glottisCond;
   m_simuParams = simuParams;
 
   m_numFreq = 1 << (m_simuParams.spectrumLgthExponent - 1);
@@ -2384,37 +2385,47 @@ void Acoustic3dSimulation::solveWaveProblem(VocalTract* tract, double freq,
   // Propagate impedance, admittance, velocity and pressure
   //******************************************************
 
-  // get the radiation impedance matrix
+  // 获取辐射阻抗矩阵
   mn = m_crossSections.back()->numberOfModes();
   Eigen::MatrixXcd radImped, radAdmit;
   switch (m_mouthBoundaryCond)
   {
+  case HARD_WALL:
+    // 物理含义：v_n = 0 (Neumann)
+    // 数值实现：阻抗极大 (1e10)，导纳极小
+    radImped.setZero(mn, mn);
+    radImped.diagonal() = Eigen::VectorXcd::Constant(mn, complex<double>(1e10, 0.));
+    radAdmit = radImped.inverse();
+    break;
+  case ZERO_PRESSURE:
+    // 物理含义：p = 0 (Dirichlet)
+    // 数值实现：导纳极大 (1e10)，阻抗极小
+    radAdmit.setZero(mn, mn);
+    radAdmit.diagonal() = Eigen::VectorXcd::Constant(mn, complex<double>(1e10, 0.));
+    radImped = radAdmit.inverse();
+    break;
+  case IFINITE_WAVGUIDE:
+    // 物理含义：特征阻抗匹配，无反射
+    // 使用最后一个截面计算特征阻抗/导纳
+    m_crossSections[lastSec]->characteristicImpedance(radImped, freq, m_simuParams);
+    m_crossSections[lastSec]->characteristicAdmittance(radAdmit, freq, m_simuParams);
+    break;
   case RADIATION:
     getRadiationImpedanceAdmittance(radImped, radAdmit, freq, lastSec);
     break;
   case ADMITTANCE_1:
+    // 物理含义：单位导纳。对于口端，使用最后一个截面的 scaleOut() 因子。
     radAdmit.setZero(mn, mn);
     radAdmit.diagonal() = Eigen::VectorXcd::Constant(mn, complex<double>(
-      pow(m_crossSections[lastSec]->scaleOut(), 2), 0.));
+      pow(m_crossSections[lastSec]->scaleOut(), 2), 0.)); // 使用 scaleOut()
     radImped = radAdmit.inverse();
     break;
-  case ZERO_PRESSURE:
-    // 零压力边界条件（Dirichlet 条件）：p = 0
-    // 物理含义：口端声压扰动为零，相当于理想自由辐射但不考虑辐射阻抗
-    // 数值实现：设置极大导纳（1e10）使得阻抗接近零，从而 p ≈ 0，v 不受限制
-    // 适用场景：快速计算、不需要精确辐射特性时的简化模型
-    radAdmit.setZero(mn, mn);
-    radAdmit.diagonal() = Eigen::VectorXcd::Constant(mn, complex<double>(1e10, 0.));
-    radImped = radAdmit.inverse(); // 导纳极大 → 阻抗极小 → p ≈ 0
-    break;
-  case HARD_WALL:
-    // 刚壁边界条件（Neumann 条件）：v_n = 0 或 ∂p/∂n = 0
-    // 物理含义：完全反射的刚性边界，声波不能穿透，法向速度为零
-    // 数值实现：设置极大阻抗（1e10）使得导纳接近零，从而 v ≈ 0，p 不受限制
-    // 适用场景：闭管模拟、数值验证或能量守恒测试
+  default: // 理论上不应执行到
+    std::cerr << "[Debug] mouthBoundaryCond in solveWaveProblem: "
+              << m_mouthBoundaryCond << ". Defaulting to HARD_WALL." << std::endl;
     radImped.setZero(mn, mn);
     radImped.diagonal() = Eigen::VectorXcd::Constant(mn, complex<double>(1e10, 0.));
-    radAdmit = radImped.inverse(); // 阻抗极大 → 导纳极小 → v ≈ 0
+    radAdmit = radImped.inverse();
     break;
   }
 
@@ -2511,25 +2522,56 @@ void Acoustic3dSimulation::solveWaveProblemNoiseSrc(bool &needToExtractMatrixF, 
     {
       upStreamImpAdm = m_crossSections[m_idxSecNoiseSource]->Yout();
     }
-
-    // set glottis boundary condition
+    // 设置声门边界条件
+    int mn(m_crossSections[0]->numberOfModes());
     switch (m_glottisBoundaryCond)
     {
-    case HARD_WALL:
-    {
-      int mn(m_crossSections[0]->numberOfModes());
-      radImped.setZero(mn, mn);
-      radImped.diagonal().setConstant(100000.);
-      radAdmit.setZero(mn, mn);
-      radAdmit.diagonal().setConstant(1. / 100000.);
-      break;
-    }
-    case IFINITE_WAVGUIDE:
-    {
-      m_crossSections[0]->characteristicImpedance(radImped, freq, m_simuParams);
-      m_crossSections[0]->characteristicAdmittance(radAdmit, freq, m_simuParams);
-      break;
-    }
+      case HARD_WALL:
+        // 物理含义：v_n = 0 (Neumann)
+        // 数值实现：阻抗极大 (1e10)，导纳极小
+        radImped.setZero(mn, mn);
+        radImped.diagonal() = Eigen::VectorXcd::Constant(mn, complex<double>(1e10, 0.));
+        radAdmit = radImped.inverse();
+        break;
+      case ZERO_PRESSURE:
+        // 物理含义：p = 0 (Dirichlet)
+        // 数值实现：导纳极大 (1e10)，阻抗极小
+        radAdmit.setZero(mn, mn);
+        radAdmit.diagonal() = Eigen::VectorXcd::Constant(mn, complex<double>(1e10, 0.));
+        radImped = radAdmit.inverse();
+        break;
+      case IFINITE_WAVGUIDE:
+        // 物理含义：特征阻抗匹配，无反射
+        // 使用第一个截面 (0) 计算特征阻抗/导纳
+        m_crossSections[0]->characteristicImpedance(radImped, freq, m_simuParams);
+        m_crossSections[0]->characteristicAdmittance(radAdmit, freq, m_simuParams);
+        break;
+      case RADIATION:
+        // 物理含义：声门端通常不直接辐射到自由场。
+        // 为完备性，使其行为与 IFINITE_WAVGUIDE 类似，并打印警告。
+        // 这是一个不常用的设置，实际辐射阻抗计算 getRadiationImpedanceAdmittance 是针对口端设计的。
+        std::cerr << "[Debug] glottisBoundaryCond set to RADIATION. "
+                  << "Applying IFINITE_WAVGUIDE behavior for glottis in solveWaveProblemNoiseSrc." << std::endl;
+        m_crossSections[0]->characteristicImpedance(radImped, freq, m_simuParams);
+        m_crossSections[0]->characteristicAdmittance(radAdmit, freq, m_simuParams);
+        break;
+      case ADMITTANCE_1:
+        // 物理含义：单位导纳。对于声门端，使用第一个截面的 scaleIn() 因子。
+        // 这是一个不常用的设置。
+        std::cerr << "[Debug] glottisBoundaryCond set to ADMITTANCE_1. "
+                  << "Applying admittance based on m_crossSections[0]->scaleIn() for glottis in solveWaveProblemNoiseSrc." << std::endl;
+        radAdmit.setZero(mn, mn);
+        radAdmit.diagonal() = Eigen::VectorXcd::Constant(mn, complex<double>(
+          pow(m_crossSections[0]->scaleIn(), 2), 0.)); // 使用 scaleIn()
+        radImped = radAdmit.inverse();
+        break;
+      default: // 理论上不应执行到
+        std::cerr << "[Debug] glottisBoundaryCond in solveWaveProblemNoiseSrc: "
+                  << m_glottisBoundaryCond << ". Defaulting to HARD_WALL." << std::endl;
+        radImped.setZero(mn, mn);
+        radImped.diagonal() = Eigen::VectorXcd::Constant(mn, complex<double>(1e10, 0.));
+        radAdmit = radImped.inverse();
+        break;
     }
 
     // propagate impedance and admittance from the glottis to the location

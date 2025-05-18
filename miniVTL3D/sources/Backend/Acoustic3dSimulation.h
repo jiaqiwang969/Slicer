@@ -2,7 +2,7 @@
 // This file is part of VocalTractLab3D.
 // Copyright (C) 2022, Peter Birkholz, Dresden, Germany
 // www.vocaltractlab.de
-// author: Peter Birkholz and Rémi Blandin
+// author: Peter Birkholz and Rï¿½mi Blandin
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -82,7 +82,9 @@ public:
   void setBoundarySpecificAdmittance();
   void setSimulationParameters(double meshDensity, int secNoiseSource,
     struct simulationParameters simuParams,
-    enum openEndBoundaryCond cond, enum contourInterpolationMethod scalingMethod);
+    enum openEndBoundaryCond mouthCond,
+    enum contourInterpolationMethod scalingMethod,
+    enum openEndBoundaryCond glottisCond = IFINITE_WAVGUIDE);
   void setIdxSecNoiseSource(int idx) { m_idxSecNoiseSource = idx; }
   void setGeometryImported(bool isImported) { m_geometryImported = isImported; }
   void setGeometryFile(string fileName) { m_geometryFile = fileName; }
@@ -210,6 +212,7 @@ public:
   int numberOfSegments() const { return m_crossSections.size(); }
   bool radImpedPrecomputed() const { return m_simuParams.radImpedPrecomputed; }
   openEndBoundaryCond mouthBoundaryCond() const {return m_mouthBoundaryCond;}
+  openEndBoundaryCond glottisBoundaryCond() const {return m_glottisBoundaryCond;}
   double freqAcousticField() const {return m_simuParams.freqField;}
   enum physicalQuantity fieldPhysicalQuantity() const { return m_simuParams.fieldPhysicalQuantity; }
   bool showFieldAmplitude() const { return m_simuParams.showAmplitude; }

@@ -739,6 +739,12 @@ x_b &= x_n + (\frac{1}{2} + \frac{\sqrt{3}}{6}) \Delta x
             \[ p_{rad}(\mathbf{r}) = \int_S \frac{j\omega\rho}{2\pi} v_n(y', z') \frac{e^{-jk|\mathbf{r}-\mathbf{r}'|}}{|\mathbf{r}-\mathbf{r}'|} dS' \]
             其中 $v_n$ 是口端的法向速度，需要从 $\mathbf{p}(L)$ 和 $\mathbf{q}(L)$ 计算得到。
         \end{itemize}
+    \item \textbf{内部噪声源段 (Secondary Noise Source):} GUI 中的"Index of noise source section"允许用户选定第 $k$ 个声道段 ($0\le k<N_s$) 作为"湍流噪声激励"的注入位置，它与两端边界条件相互独立。
+        \begin{itemize}
+            \item \textbf{数值实现:} 在 \texttt{Acoustic3dSimulation::solveWaveProblemNoiseSrc} 中读取索引 \texttt{m\_idxSecNoiseSource}。若 $k< N_s-1$，函数首先根据\textbf{声门端}边界条件 (\texttt{m\_glottisBoundaryCond}) 自上游递推获得段 $k$ 的入口阻抗/导纳，然后在该段\textbf{出口}加入单位压力模式 $p_n=1$（平面波）。随后应用段间散射矩阵 $\mathbf{F}$ 将声场耦合到下游并继续传播，最终与口端边界条件共同决定噪声的辐射量。
+            \item \textbf{物理含义:} 该激励代表擦音时的湍流、穿孔/旁腔泄漏气流等"内部声源"。通过改变索引即可快速把噪声源放到不同狭窄处做对比，而不必修改几何或边界设置。
+            \item \textbf{注意:} 当索引设为 $N_s-1$（最后一段）时 if 条件被跳过，相当于"无噪声源"；此时仅保留声门主激励。
+        \end{itemize}
 \end{itemize}
 
 \section{声道几何表示与处理：从 CSV 导入到应用}

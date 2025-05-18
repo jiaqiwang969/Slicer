@@ -91,10 +91,11 @@ private:
   // lists
   wxComboBox* lstScalingFacMethods;
   wxComboBox* lstMouthBcond;
+  wxComboBox* lstGlottisBcond;
   wxComboBox* lstFreqRes;
   wxComboBox* lstFieldPhysicalQuantity;
   wxComboBox* lstAmpPhase;
-  
+    
   // medium selection
   wxComboBox* lstMedium;
   wxTextCtrl* txtSalinity;
@@ -103,9 +104,18 @@ private:
   Acoustic3dSimulation* m_simu3d;
   VocalTract* m_tract;
 
+  // ---------------- 参数缓存 ----------------
   double m_meshDensity;
   int m_secNoiseSource;
+  openEndBoundaryCond m_mouthBoundaryCond;
+  openEndBoundaryCond m_glottisBoundaryCond;
+  contourInterpolationMethod m_contInterpMeth;
+  struct simulationParameters m_simuParams;
+  struct simulationParameters m_simuParamsMagnus;
+  struct simulationParameters m_simuParamsFreqDepLosses;
+  
   vector<string> m_listMouthBcond;
+  vector<string> m_listGlottisBcond;
   vector<string> m_listScalingMethods;
   vector<string> m_listFieldPhysicalQuantity;
   vector<string> m_listAmplitudePhase;
@@ -115,11 +125,6 @@ private:
   vector<string> m_listFreqRes;
   bool m_tfPtsFromFile;
   Point_3 m_singlePtTf;
-  openEndBoundaryCond m_mouthBoundaryCond;
-  contourInterpolationMethod m_contInterpMeth;
-	struct simulationParameters m_simuParams;
-  struct simulationParameters m_simuParamsMagnus;
-  struct simulationParameters m_simuParamsFreqDepLosses;
   double m_maxBbox;
 
 // **************************************************************************
@@ -164,6 +169,7 @@ private:
 
   void OnScalingFactMethod(wxCommandEvent& event);
   void OnMouthBcond(wxCommandEvent& event);
+  void OnGlottisBcond(wxCommandEvent& event);
   void OnFreqRes(wxCommandEvent& event);
   void OnFieldPhysicalQuantity(wxCommandEvent& event);
   void OnAmplitudePhase(wxCommandEvent& event);

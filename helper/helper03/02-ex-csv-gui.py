@@ -274,7 +274,7 @@ def load_and_prepare_section_data(line_odd, line_even):
     if adjusted_contour_y:
         y_min_adj = min(adjusted_contour_y)
         y_max_adj = max(adjusted_contour_y)
-    
+
     # 调用全局函数计算面积和方向
     current_signed_area = polygon_signed_area(adjusted_contour_y, adjusted_contour_z)
     current_orientation = 1 if current_signed_area > 0 else (-1 if current_signed_area < 0 else 0)
