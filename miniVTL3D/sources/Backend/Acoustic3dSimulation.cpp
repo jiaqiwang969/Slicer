@@ -2399,9 +2399,22 @@ void Acoustic3dSimulation::solveWaveProblem(VocalTract* tract, double freq,
     radImped = radAdmit.inverse();
     break;
   case ZERO_PRESSURE:
+    // 零压力边界条件（Dirichlet 条件）：p = 0
+    // 物理含义：口端声压扰动为零，相当于理想自由辐射但不考虑辐射阻抗
+    // 数值实现：设置极大导纳（1e10）使得阻抗接近零，从而 p ≈ 0，v 不受限制
+    // 适用场景：快速计算、不需要精确辐射特性时的简化模型
     radAdmit.setZero(mn, mn);
     radAdmit.diagonal() = Eigen::VectorXcd::Constant(mn, complex<double>(1e10, 0.));
-    radImped = radAdmit.inverse();
+    radImped = radAdmit.inverse(); // 导纳极大 → 阻抗极小 → p ≈ 0
+    break;
+  case HARD_WALL:
+    // 刚壁边界条件（Neumann 条件）：v_n = 0 或 ∂p/∂n = 0
+    // 物理含义：完全反射的刚性边界，声波不能穿透，法向速度为零
+    // 数值实现：设置极大阻抗（1e10）使得导纳接近零，从而 v ≈ 0，p 不受限制
+    // 适用场景：闭管模拟、数值验证或能量守恒测试
+    radImped.setZero(mn, mn);
+    radImped.diagonal() = Eigen::VectorXcd::Constant(mn, complex<double>(1e10, 0.));
+    radAdmit = radImped.inverse(); // 阻抗极大 → 导纳极小 → v ≈ 0
     break;
   }
 
