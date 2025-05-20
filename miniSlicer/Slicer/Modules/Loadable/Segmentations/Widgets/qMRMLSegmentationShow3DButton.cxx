@@ -73,27 +73,27 @@ void qMRMLSegmentationShow3DButtonPrivate::init()
   Q_Q(qMRMLSegmentationShow3DButton);
   q->setIcon(QIcon(":/Icons/MakeModel.png"));
   q->setCheckable(true);
-  q->setText(qMRMLSegmentationShow3DButton::tr("Show 3D"));
+  q->setText(qMRMLSegmentationShow3DButton::tr("显示3D"));
   QObject::connect(q, SIGNAL(toggled(bool)), q, SLOT(onToggled(bool)));
 
-  QMenu* show3DButtonMenu = new QMenu(qMRMLSegmentationShow3DButton::tr("Show 3D"), q);
+  QMenu* show3DButtonMenu = new QMenu(qMRMLSegmentationShow3DButton::tr("显示3D"), q);
 
-  this->SurfaceSmoothingEnabledAction = new QAction(qMRMLSegmentationShow3DButton::tr("Surface smoothing"), show3DButtonMenu);
+  this->SurfaceSmoothingEnabledAction = new QAction(qMRMLSegmentationShow3DButton::tr("表面平滑"), show3DButtonMenu);
   this->SurfaceSmoothingEnabledAction->setToolTip(
-    qMRMLSegmentationShow3DButton::tr("Apply smoothing when converting binary labelmap to closed surface representation."));
+    qMRMLSegmentationShow3DButton::tr("将二值标签图转换为封闭表面表示时应用平滑。"));
   this->SurfaceSmoothingEnabledAction->setCheckable(true);
   show3DButtonMenu->addAction(this->SurfaceSmoothingEnabledAction);
   QObject::connect(this->SurfaceSmoothingEnabledAction, SIGNAL(toggled(bool)), q, SLOT(onEnableSurfaceSmoothingToggled(bool)));
 
-  QMenu* surfaceSmoothingFactorMenu = new QMenu(qMRMLSegmentationShow3DButton::tr("Smoothing factor"), show3DButtonMenu);
+  QMenu* surfaceSmoothingFactorMenu = new QMenu(qMRMLSegmentationShow3DButton::tr("平滑因子"), show3DButtonMenu);
   surfaceSmoothingFactorMenu->setObjectName("surfaceSmoothingFactorMenu");
 
   // Add menu for experimental features
-  QMenu* experimentalMenu = new QMenu(qMRMLSegmentationShow3DButton::tr("Experimental"), show3DButtonMenu);
+  QMenu* experimentalMenu = new QMenu(qMRMLSegmentationShow3DButton::tr("实验性功能"), show3DButtonMenu);
   experimentalMenu->setObjectName("show3DExperimentalMenu");
 
   // Toggle for using surface nets instead of Flying Edges
-  this->SurfaceNetsEnableAction = new QAction(qMRMLSegmentationShow3DButton::tr("Use Surface Nets (fast)"), experimentalMenu);
+  this->SurfaceNetsEnableAction = new QAction(qMRMLSegmentationShow3DButton::tr("使用表面网络（快速）"), experimentalMenu);
   this->SurfaceNetsEnableAction->setToolTip(
     qMRMLSegmentationShow3DButton::tr("Create closed surface using surface nets. By default, flying edges is used. Surface nets are more performant."));
   this->SurfaceNetsEnableAction->setCheckable(true);

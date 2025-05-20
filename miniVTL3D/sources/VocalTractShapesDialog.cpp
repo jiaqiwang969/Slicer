@@ -2,7 +2,7 @@
 // This file is part of VocalTractLab3D.
 // Copyright (C) 2022, Peter Birkholz, Dresden, Germany
 // www.vocaltractlab.de
-// author: Peter Birkholz and R�mi Blandin
+// author: Peter Birkholz and Rémi Blandin
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -141,7 +141,7 @@ void VocalTractShapesDialog::setUpdateRequestReceiver(wxWindow *receiver1, wxWin
 // ****************************************************************************
 
 VocalTractShapesDialog::VocalTractShapesDialog(wxWindow *parent) : 
-  wxDialog(parent, wxID_ANY, wxString("Vocal tract shapes"), 
+  wxDialog(parent, wxID_ANY, wxString::FromUTF8("管道形状设置"), 
     wxDefaultPosition, wxDefaultSize, 
     wxDEFAULT_DIALOG_STYLE | wxFRAME_FLOAT_ON_PARENT | wxRESIZE_BORDER)
 {
@@ -222,10 +222,10 @@ void VocalTractShapesDialog::initWidgets()
   wxFlexGridSizer *varSizer = new wxFlexGridSizer(VocalTract::NUM_PARAMS + 3, 2, 5, 5);
   middleSizer->Add(varSizer, 0, wxGROW | wxALL, 5);
 
-  label = new wxStaticText(scrolledWindow, wxID_ANY, "Variable");
+  label = new wxStaticText(scrolledWindow, wxID_ANY, wxString::FromUTF8("变量"));
   varSizer->Add(label);
 
-  label = new wxStaticText(scrolledWindow, wxID_ANY, "Value");
+  label = new wxStaticText(scrolledWindow, wxID_ANY, wxString::FromUTF8("数值"));
   varSizer->Add(label);
 
   for (i=0; i < VocalTract::NUM_PARAMS; i++)
@@ -257,13 +257,13 @@ void VocalTractShapesDialog::initWidgets()
 
   wxBoxSizer *bottomSizer = new wxBoxSizer(wxHORIZONTAL);
 
-  button = new wxButton(scrolledWindow, IDB_MOVE_UP, "Move up");
+  button = new wxButton(scrolledWindow, IDB_MOVE_UP, wxString::FromUTF8("上移"));
   bottomSizer->Add(button, 0, wxALL, 3);
 
-  button = new wxButton(scrolledWindow, IDB_MOVE_DOWN, "Move down");
+  button = new wxButton(scrolledWindow, IDB_MOVE_DOWN, wxString::FromUTF8("下移"));
   bottomSizer->Add(button, 0, wxALL, 3);
 
-  button = new wxButton(scrolledWindow, IDB_SELECT, "Select");
+  button = new wxButton(scrolledWindow, IDB_SELECT, wxString::FromUTF8("选择"));
   button->SetDefault();
   bottomSizer->Add(button, 0, wxALL, 3);
 
@@ -273,16 +273,16 @@ void VocalTractShapesDialog::initWidgets()
 
   bottomSizer = new wxBoxSizer(wxHORIZONTAL);
 
-  button = new wxButton(scrolledWindow, IDB_ADD, "Add");
+  button = new wxButton(scrolledWindow, IDB_ADD, wxString::FromUTF8("添加"));
   bottomSizer->Add(button, 0, wxALL, 3);
 
-  button = new wxButton(scrolledWindow, IDB_REPLACE, "Replace");
+  button = new wxButton(scrolledWindow, IDB_REPLACE, wxString::FromUTF8("替换"));
   bottomSizer->Add(button, 0, wxALL, 3);
 
-  button = new wxButton(scrolledWindow, IDB_DELETE, "Delete");
+  button = new wxButton(scrolledWindow, IDB_DELETE, wxString::FromUTF8("删除"));
   bottomSizer->Add(button, 0, wxALL, 3);
 
-  button = new wxButton(scrolledWindow, IDB_RENAME, "Rename");
+  button = new wxButton(scrolledWindow, IDB_RENAME, wxString::FromUTF8("重命名"));
   bottomSizer->Add(button, 0, wxALL, 3);
 
   topLevelSizer->Add(bottomSizer, 0, wxGROW);

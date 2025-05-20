@@ -106,29 +106,29 @@ void qSlicerSubjectHierarchySegmentationsPluginPrivate::init()
 {
   Q_Q(qSlicerSubjectHierarchySegmentationsPlugin);
 
-  this->ExportBinaryLabelmapAction = new QAction(qSlicerSubjectHierarchySegmentationsPlugin::tr("Export visible segments to binary labelmap"), q);
+  this->ExportBinaryLabelmapAction = new QAction(qSlicerSubjectHierarchySegmentationsPlugin::tr("将可见分段导出为二值标签图"), q);
   QObject::connect(this->ExportBinaryLabelmapAction, SIGNAL(triggered()), q, SLOT(exportToBinaryLabelmap()));
 
-  this->ExportClosedSurfaceAction = new QAction(qSlicerSubjectHierarchySegmentationsPlugin::tr("Export visible segments to models"), q);
+  this->ExportClosedSurfaceAction = new QAction(qSlicerSubjectHierarchySegmentationsPlugin::tr("将可见分段导出为模型"), q);
   QObject::connect(this->ExportClosedSurfaceAction, SIGNAL(triggered()), q, SLOT(exportToClosedSurface()));
 
-  this->ConvertLabelmapToSegmentationAction = new QAction(qSlicerSubjectHierarchySegmentationsPlugin::tr("Convert labelmap to segmentation node") ,q);
+  this->ConvertLabelmapToSegmentationAction = new QAction(qSlicerSubjectHierarchySegmentationsPlugin::tr("将标签图转换为分割节点"), q);
   QObject::connect(this->ConvertLabelmapToSegmentationAction, SIGNAL(triggered()), q, SLOT(convertLabelmapToSegmentation()));
 
-  this->ConvertModelToSegmentationAction = new QAction(qSlicerSubjectHierarchySegmentationsPlugin::tr("Convert model to segmentation node"), q);
+  this->ConvertModelToSegmentationAction = new QAction(qSlicerSubjectHierarchySegmentationsPlugin::tr("将模型转换为分割节点"), q);
   QObject::connect(this->ConvertModelToSegmentationAction, SIGNAL(triggered()), q, SLOT(convertModelToSegmentation()));
 
-  this->ConvertModelsToSegmentationAction = new QAction(qSlicerSubjectHierarchySegmentationsPlugin::tr("Convert models to segmentation node"), q);
+  this->ConvertModelsToSegmentationAction = new QAction(qSlicerSubjectHierarchySegmentationsPlugin::tr("将多个模型转换为分割节点"), q);
   QObject::connect(this->ConvertModelsToSegmentationAction, SIGNAL(triggered()), q, SLOT(convertModelsToSegmentation()));
 
-  this->CreateBinaryLabelmapRepresentationAction = new QAction(qSlicerSubjectHierarchySegmentationsPlugin::tr("Create binary labelmap representation"), q);
+  this->CreateBinaryLabelmapRepresentationAction = new QAction(qSlicerSubjectHierarchySegmentationsPlugin::tr("创建二值标签图表示"), q);
   QObject::connect(this->CreateBinaryLabelmapRepresentationAction, SIGNAL(triggered()), q, SLOT(createBinaryLabelmapRepresentation()));
-  this->CreateClosedSurfaceRepresentationAction = new QAction(qSlicerSubjectHierarchySegmentationsPlugin::tr("Create closed surface representation"), q);
+  this->CreateClosedSurfaceRepresentationAction = new QAction(qSlicerSubjectHierarchySegmentationsPlugin::tr("创建封闭表面表示"), q);
   QObject::connect(this->CreateClosedSurfaceRepresentationAction, SIGNAL(triggered()), q, SLOT(createClosedSurfaceRepresentation()));
 
-  this->RemoveBinaryLabelmapRepresentationAction = new QAction(qSlicerSubjectHierarchySegmentationsPlugin::tr("Remove binary labelmap representation"), q);
+  this->RemoveBinaryLabelmapRepresentationAction = new QAction(qSlicerSubjectHierarchySegmentationsPlugin::tr("移除二值标签图表示"), q);
   QObject::connect(this->RemoveBinaryLabelmapRepresentationAction, SIGNAL(triggered()), q, SLOT(removeBinaryLabelmapRepresentation()));
-  this->RemoveClosedSurfaceRepresentationAction = new QAction(qSlicerSubjectHierarchySegmentationsPlugin::tr("Remove closed surface representation"), q);
+  this->RemoveClosedSurfaceRepresentationAction = new QAction(qSlicerSubjectHierarchySegmentationsPlugin::tr("移除封闭表面表示"), q);
   QObject::connect(this->RemoveClosedSurfaceRepresentationAction, SIGNAL(triggered()), q, SLOT(removeClosedSurfaceRepresentation()));
 
   this->Toggle2DFillVisibilityAction = new QAction(qSlicerSubjectHierarchySegmentationsPlugin::tr("2D fill visibility"),q);

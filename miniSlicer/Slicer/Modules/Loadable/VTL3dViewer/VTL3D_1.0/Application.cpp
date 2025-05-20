@@ -2,7 +2,7 @@
 // This file is part of VocalTractLab3D.
 // Copyright (C) 2022, Peter Birkholz, Dresden, Germany
 // www.vocaltractlab.de
-// author: Peter Birkholz and R�mi Blandin
+// author: Peter Birkholz and Rémi Blandin
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -87,23 +87,25 @@ bool Application::OnInit()
   // After the vocal tract page and the vocal tract dialog were 
   // initialzed, tell some of the non-modal dialogs about it.
   
-  VocalTractDialog *vocalTractDialog = VocalTractDialog::getInstance();
+  // VocalTractDialog *vocalTractDialog = VocalTractDialog::getInstance(); // Removed
   
-  VocalTractDialog::getInstance()->setUpdateRequestReceiver(mainWindow->vocalTractPage, 
-    mainWindow->acoustic3dPage);
-  PhoneticParamsDialog::getInstance()->setUpdateRequestReceiver(vocalTractDialog);
-  AnatomyParamsDialog::getInstance()->setUpdateRequestReceiver(vocalTractDialog);
-  TransitionDialog::getInstance()->setUpdateRequestReceiver(vocalTractDialog);
-  VocalTractShapesDialog::getInstance()->setUpdateRequestReceiver(vocalTractDialog, 
-    mainWindow->acoustic3dPage);
+  // VocalTractDialog::getInstance()->setUpdateRequestReceiver(mainWindow->acoustic3dPage, nullptr); // Removed
+  // PhoneticParamsDialog::getInstance()->setUpdateRequestReceiver(vocalTractDialog); // Removed
+  // AnatomyParamsDialog::getInstance()->setUpdateRequestReceiver(vocalTractDialog); // Removed
+  // TransitionDialog::getInstance()->setUpdateRequestReceiver(vocalTractDialog); // Removed
+  // VocalTractShapesDialog::getInstance()->setUpdateRequestReceiver(vocalTractDialog, // Removed
+  //  mainWindow->acoustic3dPage);
+  // Assuming VocalTractShapesDialog::setUpdateRequestReceiver might have an overload or needs adjustment
+  VocalTractShapesDialog::getInstance()->setUpdateRequestReceiver(nullptr, mainWindow->acoustic3dPage);
   ParamSimu3DDialog::getInstance()->setUpdateRequestReceiver(mainWindow->acoustic3dPage);
+  // AnnotationDialog::getInstance(NULL)->setUpdateRequestReceiver(NULL); // Removed
 
   // The vocal tract page always handles update requests from the LF pulse dialog.
-  LfPulseDialog::getInstance()->SetParent(mainWindow->vocalTractPage);
+  LfPulseDialog::getInstance()->SetParent(mainWindow->acoustic3dPage);
 
   // Show the vocal tract dialog by default.
-  vocalTractDialog->SetParent(mainWindow);
-  vocalTractDialog->Show(true);
+  // vocalTractDialog->SetParent(mainWindow); // Removed
+  // vocalTractDialog->Show(true); // Removed
 
   return true;
 }

@@ -30,7 +30,6 @@
 
 #include "Data.h"
 #include "GlottisDialog.h"
-#include "VocalTractDialog.h"
 #include "Backend/Dsp.h"
 #include "Backend/XmlNode.h"
 #include "Backend/SoundLib.h"
@@ -92,6 +91,7 @@ Data *Data::getInstance()
 
 void Data::init(const wxString &arg0)
 {
+  std::cout << "[DATA_DEBUG_INIT] Data::init() ENTRY." << std::endl;
   int i;
 
   // ****************************************************************
@@ -110,13 +110,16 @@ void Data::init(const wxString &arg0)
   // ****************************************************************
 
   vocalTract = new VocalTract();
-  vocalTract->calculateAll();
+  std::cout << "[DATA_DEBUG_INIT] Data::init() - new VocalTract() done." << std::endl;
+  // vocalTract->calculateAll(); // Intentionally commented out - expect geometry from speaker file or CSV
+  std::cout << "[DATA_DEBUG_INIT] Data::init() - First vocalTract->calculateAll() WAS SKIPPED." << std::endl;
 
   tlModel = new TlModel();
-  poleZeroPlan = new PoleZeroPlan();
-  anatomyParams = new AnatomyParams();
+  // poleZeroPlan = new PoleZeroPlan(); // Already commented out or removed in previous steps
+  // anatomyParams = new AnatomyParams(); // Removed
 
   updateTlModelGeometry(vocalTract);
+  std::cout << "[DATA_DEBUG_INIT] Data::init() - updateTlModelGeometry() done." << std::endl;
 
   // Phonetic parameters; The range of all these parameters is
   // between 0 and 1.
@@ -285,21 +288,21 @@ void Data::init(const wxString &arg0)
   subglottalInputImpedance = new ImpulseExcitation();
   supraglottalInputImpedance = new ImpulseExcitation();
   transferFunction = new ImpulseExcitation();
-  gesturalScore = new GesturalScore(vocalTract, glottis[selectedGlottis]);
+  // gesturalScore = new GesturalScore(vocalTract, glottis[selectedGlottis]); // Removed
 
   // ****************************************************************
   // Gestural score variables.
   // ****************************************************************
 
-  segmentSequence = new SegmentSequence();
+  // segmentSequence = new SegmentSequence(); // Removed
   gsTimeAxisGraph = new Graph();
-  gesturalScoreFileName = "";
-  segmentSequenceFileName = "";
-  gesturalScoreMark_s = 0.1;
-  gesturalScoreRefMark_s = -1.0;
-  selectedGestureType = GesturalScore::VOWEL_GESTURE;
-  selectedGestureIndex = 0;
-  selectedSegmentIndex = 0;
+  // gesturalScoreFileName = ""; // Removed
+  // segmentSequenceFileName = ""; // Removed
+  // gesturalScoreMark_s = 0.1; // Removed
+  // gesturalScoreRefMark_s = -1.0; // Removed
+  // selectedGestureType = GesturalScore::VOWEL_GESTURE; // GesturalScore class usage removed
+  // selectedGestureIndex = 0; // Removed
+  // selectedSegmentIndex = 0; // Removed
 
   // ****************************************************************
 
@@ -310,8 +313,13 @@ void Data::init(const wxString &arg0)
   // initialized).
   // ****************************************************************
 
+  std::cout << "[DATA_DEBUG_INIT] Data::init() - About to call loadSpeaker()." << std::endl;
   speakerFileName = programPath + "JD2.speaker";
   loadSpeaker(speakerFileName);
+  std::cout << "[DATA_DEBUG_INIT] Data::init() - loadSpeaker() finished." << std::endl;
+
+  updateTlModelGeometry(vocalTract);
+  std::cout << "[DATA_DEBUG_INIT] Data::init() - updateTlModelGeometry() done." << std::endl;
 
   // ****************************************************************
   // Call some initialization functions.
@@ -326,6 +334,7 @@ void Data::init(const wxString &arg0)
   config = new wxFileConfig("VocalTractLab", "Birkholz",  
     programPath + "config.ini", "", wxCONFIG_USE_LOCAL_FILE);
   readConfig();
+  std::cout << "[DATA_DEBUG_INIT] Data::init() EXIT." << std::endl;
 }
 
 
@@ -1409,102 +1418,102 @@ bool Data::calcRadiatedNoiseSpectrum(double noiseSourcePos_cm, double noiseFilte
 /// score.
 // ****************************************************************************
 
-bool Data::exportEmaTrajectories(const wxString &fileName)
-{
-  if (fileName.IsEmpty())
-  {
-    return false;
-  }
+// bool Data::exportEmaTrajectories(const wxString &fileName)
+// {
+//   if (fileName.IsEmpty())
+//   {
+//     return false;
+//   }
 
-  ofstream os(fileName.ToStdString());
-  int i, k;
+//   ofstream os(fileName.ToStdString());
+//   int i, k;
 
-  if (!os)
-  {
-    wxMessageBox(wxString("Could not open ") + fileName + wxString(" for writing."),
-      "Error!");
-    return false;
-  }
+//   if (!os)
+//   {
+//     wxMessageBox(wxString("Could not open ") + fileName + wxString(" for writing."),
+//       "Error!");
+//     return false;
+//   }
 
-  // ****************************************************************
-  // Write the header.
-  // ****************************************************************
+//   // ****************************************************************
+//   // Write the header.
+//   // ****************************************************************
 
-  VocalTract::EmaPoint *p;
-  int numEmaPoints = (int)vocalTract->emaPoints.size();
+//   VocalTract::EmaPoint *p;
+//   int numEmaPoints = (int)vocalTract->emaPoints.size();
 
-  os << "time[s] ";
-  for (i=0; i < numEmaPoints; i++)
-  {
-    p = &vocalTract->emaPoints[i];
-    os << p->name << "-x[cm] " << p->name << "-y[cm] ";
-  }
-  os << endl;
+//   os << "time[s] ";
+//   for (i=0; i < numEmaPoints; i++)
+//   {
+//     p = &vocalTract->emaPoints[i];
+//     os << p->name << "-x[cm] " << p->name << "-y[cm] ";
+//   }
+//   os << endl;
 
-  // ****************************************************************
-  // Keep in mind the current vocal tract state.
-  // ****************************************************************
+//   // ****************************************************************
+//   // Keep in mind the current vocal tract state.
+//   // ****************************************************************
 
-  double oldTractParams[VocalTract::NUM_PARAMS];
-  for (i=0; i < VocalTract::NUM_PARAMS; i++)
-  {
-    oldTractParams[i] = vocalTract->param[i].x;
-  }
+//   double oldTractParams[VocalTract::NUM_PARAMS];
+//   for (i=0; i < VocalTract::NUM_PARAMS; i++)
+//   {
+//     oldTractParams[i] = vocalTract->param[i].x;
+//   }
 
-  // ****************************************************************
-  // Write the data.
-  // ****************************************************************
+//   // ****************************************************************
+//   // Write the data.
+//   // ****************************************************************
 
-  double tractParams[VocalTract::NUM_PARAMS];
-  double glottisParams[256];
-  double t_s;
-  Point3D Q;
+//   double tractParams[VocalTract::NUM_PARAMS];
+//   double glottisParams[256];
+//   double t_s;
+//   Point3D Q;
 
-  const double EMA_SAMPLING_RATE_HZ = 200.0;
-  int numFrames = (int)(gesturalScore->getScoreDuration_s() * EMA_SAMPLING_RATE_HZ);
+//   const double EMA_SAMPLING_RATE_HZ = 200.0;
+//   int numFrames = (int)(gesturalScore->getScoreDuration_s() * EMA_SAMPLING_RATE_HZ);
 
-  os << setprecision(8);
+//   os << setprecision(8);
 
-  for (k=0; k < numFrames; k++)
-  {
-    t_s = (double)k / (double)EMA_SAMPLING_RATE_HZ;
-    gesturalScore->getParams(t_s, tractParams, glottisParams);
+//   for (k=0; k < numFrames; k++)
+//   {
+//     t_s = (double)k / (double)EMA_SAMPLING_RATE_HZ;
+//     gesturalScore->getParams(t_s, tractParams, glottisParams);
 
-    for (i=0; i < VocalTract::NUM_PARAMS; i++)
-    {
-      vocalTract->param[i].x = tractParams[i];
-    }
-    vocalTract->calculateAll();
+//     for (i=0; i < VocalTract::NUM_PARAMS; i++)
+//     {
+//       vocalTract->param[i].x = tractParams[i];
+//     }
+//     vocalTract->calculateAll();
 
-    // Write data to file.
+//     // Write data to file.
 
-    os << t_s << " ";
-    for (i=0; i < numEmaPoints; i++)
-    {
-      Q = vocalTract->getEmaPointCoord(i);
-      os << Q.x << " " << Q.y << " ";
-    }
-    os << endl;
-  }
+//     os << t_s << " ";
+//     for (i=0; i < numEmaPoints; i++)
+//     {
+//       Q = vocalTract->getEmaPointCoord(i);
+//       os << Q.x << " " << Q.y << " ";
+//     }
+//     os << endl;
+//   }
 
-  // ****************************************************************
-  // Set back the old vocal tract state.
-  // ****************************************************************
+//   // ****************************************************************
+//   // Set back the old vocal tract state.
+//   // ****************************************************************
 
-  for (i=0; i < VocalTract::NUM_PARAMS; i++)
-  {
-    vocalTract->param[i].x = oldTractParams[i];
-  }
-  vocalTract->calculateAll();
+//   for (i=0; i < VocalTract::NUM_PARAMS; i++)
+//   {
+//     vocalTract->param[i].x = oldTractParams[i];
+//   }
+//   vocalTract->calculateAll();
 
-  // ****************************************************************
-  // Close the file.
-  // ****************************************************************
+//   // ****************************************************************
+//   // Close the file.
+//   // ****************************************************************
 
-  os.close();
+//   os.close();
 
-  return true;
-}
+//   return true;
+// }
 
 
 // ****************************************************************************
@@ -1512,88 +1521,93 @@ bool Data::exportEmaTrajectories(const wxString &fileName)
 /// frame rate into the given folder.
 // ****************************************************************************
 
-bool Data::exportVocalTractVideoFrames(const wxString &folderName)
-{
-  const int VIDEO_FRAME_RATE = 30;
-  double duration_s = gesturalScore->getDuration_pt() / (double)SAMPLING_RATE;
-  int numFrames = (int)(duration_s*VIDEO_FRAME_RATE);
-  int i;
-  int frameIndex;
-  double time_s;
-  double oldVocalTractParams[VocalTract::NUM_PARAMS];
-  double vocalTractParams[VocalTract::NUM_PARAMS];
-  double glottisParams[256];
+// bool Data::exportVocalTractVideoFrames(const wxString &folderName)
+// {
+//   const int VIDEO_FRAME_RATE = 30;
+//   double duration_s = gesturalScore->getDuration_pt() / (double)SAMPLING_RATE;
+//   int numFrames = (int)(duration_s*VIDEO_FRAME_RATE);
+//   int i;
+//   int frameIndex;
+//   double time_s;
+//   double oldVocalTractParams[VocalTract::NUM_PARAMS];
+//   double vocalTractParams[VocalTract::NUM_PARAMS];
+//   double glottisParams[256];
 
-  // ****************************************************************
-  // Keep in mind the current vocal tract state.
-  // ****************************************************************
+//   // ****************************************************************
+//   // Keep in mind the current vocal tract state.
+//   // ****************************************************************
 
-  for (i=0; i < VocalTract::NUM_PARAMS; i++)
-  {
-    oldVocalTractParams[i] = vocalTract->param[i].x;    
-  }
+//   for (i=0; i < VocalTract::NUM_PARAMS; i++)
+//   {
+//     oldVocalTractParams[i] = vocalTract->param[i].x;    
+//   }
 
-  // ****************************************************************
-  // Save one image file for each video frame.
-  // ****************************************************************
+//   // ****************************************************************
+//   // Save one image file for each video frame.
+//   // ****************************************************************
 
-  for (frameIndex=0; frameIndex < numFrames; frameIndex++)
-  {
-    wxPrintf("frame #: %d\n", frameIndex);
+//   for (frameIndex=0; frameIndex < numFrames; frameIndex++)
+//   {
+//     wxPrintf("frame #: %d\n", frameIndex);
 
-    // Calculate the vocal tract shape at the current frame.
+//     // Calculate the vocal tract shape at the current frame.
 
-    time_s = (double)frameIndex / (double)VIDEO_FRAME_RATE;
-    gesturalScore->getParams(time_s, vocalTractParams, glottisParams);
+//     time_s = (double)frameIndex / (double)VIDEO_FRAME_RATE;
+//     gesturalScore->getParams(time_s, vocalTractParams, glottisParams);
 
-    for (i=0; i < VocalTract::NUM_PARAMS; i++)
-    {
-      vocalTract->param[i].x = vocalTractParams[i];    
-    }
-    vocalTract->calculateAll();
+//     for (i=0; i < VocalTract::NUM_PARAMS; i++)
+//     {
+//       vocalTract->param[i].x = vocalTractParams[i];    
+//     }
+//     vocalTract->calculateAll();
 
-    // Update the vocal tract dialog.
+//     // Update the vocal tract dialog.
 
-    VocalTractDialog *vocalTractDialog = VocalTractDialog::getInstance(NULL);
-    if (vocalTractDialog->IsShownOnScreen() == false)
-    {
-      vocalTractDialog->Show(true);
-    }
-    vocalTractDialog->Refresh();
-    vocalTractDialog->Update();
-    wxYield();
+//     // VocalTractDialog *vocalTractDialog = VocalTractDialog::getInstance(NULL); // Removed
+//     // if (vocalTractDialog->IsShownOnScreen() == false) // Removed
+//     // { // Removed
+//     //   vocalTractDialog->Show(true); // Removed
+//     // } // Removed
+//     // vocalTractDialog->Refresh(); // Removed
+//     // vocalTractDialog->Update(); // Removed
+//     // wxYield(); // Removed as it was tied to dialog update
 
-    // Save the current vocal tract shape as an image (video frame).
-    wxString frameFileName = folderName;
-    wxChar pathSeparator = wxFileName::GetPathSeparator();
-    if (frameFileName.EndsWith( &pathSeparator ) == false)
-    {
-      frameFileName+= pathSeparator;
-    }
-    frameFileName+= "vt" + wxString::Format("%03d", frameIndex) + ".bmp";
-    vocalTractDialog->getVocalTractPicture()->saveImageBmp(frameFileName);
-  }
+//     // Save the current vocal tract shape as an image (video frame).
+//     wxString frameFileName = folderName;
+//     wxChar pathSeparator = wxFileName::GetPathSeparator();
+//     if (frameFileName.EndsWith( &pathSeparator ) == false)
+//     {
+//       frameFileName+= pathSeparator;
+//     }
+//     frameFileName+= "vt" + wxString::Format("%03d", frameIndex) + ".bmp";
+//     // vocalTractDialog->getVocalTractPicture()->saveImageBmp(frameFileName); // Removed
+//     vocalTract->calculateAll();
+
+//     // VocalTractDialog *vocalTractDialog = VocalTractDialog::getInstance(NULL); // Removed
+//     // vocalTractDialog->Refresh(); // Removed
+//     // vocalTractDialog->Update(); // Removed
+//   }
 
 
   // ****************************************************************
   // Restore the old vocal tract state.
   // ****************************************************************
 
-  for (i=0; i < VocalTract::NUM_PARAMS; i++)
-  {
-    vocalTract->param[i].x = oldVocalTractParams[i];
-  }
-  vocalTract->calculateAll();
+//   for (i=0; i < VocalTract::NUM_PARAMS; i++)
+//   {
+//     vocalTract->param[i].x = oldVocalTractParams[i];
+//   }
+//   vocalTract->calculateAll();
 
-  VocalTractDialog *vocalTractDialog = VocalTractDialog::getInstance(NULL);
-  vocalTractDialog->Refresh();
-  vocalTractDialog->Update();
+//   // VocalTractDialog *vocalTractDialog = VocalTractDialog::getInstance(NULL); // Removed
+//   // vocalTractDialog->Refresh(); // Removed
+//   // vocalTractDialog->Update(); // Removed
 
-  wxPrintf("Finished exporting %d video frames for a frame rate of %d Hz.\n", 
-    numFrames, VIDEO_FRAME_RATE);
+//   wxPrintf("Finished exporting %d video frames for a frame rate of %d Hz.\n", 
+//     numFrames, VIDEO_FRAME_RATE);
 
-  return true;
-}
+//   return true;
+// }
 
 
 // ****************************************************************************
@@ -1601,213 +1615,213 @@ bool Data::exportVocalTractVideoFrames(const wxString &folderName)
 /// for every single millisecond in a gestural score.
 // ****************************************************************************
 
-bool Data::exportTransferFunctionsFromScore(const wxString &fileName)
-{
-  const int SPECTRUM_LENGTH = 8192;
-  const int FRAME_RATE = 1000;
-  double duration_s = gesturalScore->getDuration_pt() / (double)SAMPLING_RATE;
-  int numFrames = (int)(duration_s*FRAME_RATE);
-  int i;
-  int frameIndex;
-  double time_s;
-  double oldVocalTractParams[VocalTract::NUM_PARAMS];
-  double vocalTractParams[VocalTract::NUM_PARAMS];
-  double glottisParams[256];
-  ComplexSignal spectrum(SPECTRUM_LENGTH);
+// bool Data::exportTransferFunctionsFromScore(const wxString &fileName)
+// {
+//   const int SPECTRUM_LENGTH = 8192;
+//   const int FRAME_RATE = 1000;
+//   double duration_s = gesturalScore->getDuration_pt() / (double)SAMPLING_RATE;
+//   int numFrames = (int)(duration_s*FRAME_RATE);
+//   int i;
+//   int frameIndex;
+//   double time_s;
+//   double oldVocalTractParams[VocalTract::NUM_PARAMS];
+//   double vocalTractParams[VocalTract::NUM_PARAMS];
+//   double glottisParams[256];
+//   ComplexSignal spectrum(SPECTRUM_LENGTH);
 
-  // ****************************************************************
-  // Keep in mind the current vocal tract state.
-  // ****************************************************************
+//   // ****************************************************************
+//   // Keep in mind the current vocal tract state.
+//   // ****************************************************************
 
-  for (i = 0; i < VocalTract::NUM_PARAMS; i++)
-  {
-    oldVocalTractParams[i] = vocalTract->param[i].x;
-  }
+//   for (i = 0; i < VocalTract::NUM_PARAMS; i++)
+//   {
+//     oldVocalTractParams[i] = vocalTract->param[i].x;
+//   }
 
-  // ****************************************************************
-  // Save one transfer function spectrum every millisecond
-  // (all into the same file).
-  // ****************************************************************
+//   // ****************************************************************
+//   // Save one transfer function spectrum every millisecond
+//   // (all into the same file).
+//   // ****************************************************************
 
-  // Open the text file.
+//   // Open the text file.
 
-  ofstream os(fileName.ToStdString());
+//   ofstream os(fileName.ToStdString());
 
-  if (!os)
-  {
-    wxMessageBox(wxString("Could not open ") + fileName + wxString(" for writing."),
-      "Error!");
-    return false;
-  }
+//   if (!os)
+//   {
+//     wxMessageBox(wxString("Could not open ") + fileName + wxString(" for writing."),
+//       "Error!");
+//     return false;
+//   }
 
-  // Write the header.
+//   // Write the header.
 
-  os << "# This file contains " << numFrames << " volume velocity transfer functions between "
-    "the glottis and the lips for the closed-glottis condition obtained from a gestural score. "
-    "There is one transfer function for every millisecond of the gestural score. "
-    "Each transfer function has 8192 samples that represent the frequencies from 0 to 44100 Hz. "
-    "The samples 0 ... 4095 (= 0 ... 22050 Hz) represent the positive frequencies, and the "
-    "remaining samples the negative frequencies (mirror image of the positive frequency part). "
-    "The frequency resolution of the transfer functions is hence 44100/8192 = 5.38 Hz. "
-    "There are two text lines per transfer function: The first line contains the magnitude "
-    "samples and the second line contains the phase samples in rad." << endl;
+//   os << "# This file contains " << numFrames << " volume velocity transfer functions between "
+//     "the glottis and the lips for the closed-glottis condition obtained from a gestural score. "
+//     "There is one transfer function for every millisecond of the gestural score. "
+//     "Each transfer function has 8192 samples that represent the frequencies from 0 to 44100 Hz. "
+//     "The samples 0 ... 4095 (= 0 ... 22050 Hz) represent the positive frequencies, and the "
+//     "remaining samples the negative frequencies (mirror image of the positive frequency part). "
+//     "The frequency resolution of the transfer functions is hence 44100/8192 = 5.38 Hz. "
+//     "There are two text lines per transfer function: The first line contains the magnitude "
+//     "samples and the second line contains the phase samples in rad." << endl;
   
-  os << setprecision(5);    // 5 post-decimal positions for floating point numbers
+//   os << setprecision(5);    // 5 post-decimal positions for floating point numbers
 
-  // Write all the transfer functions in a loop.
+//   // Write all the transfer functions in a loop.
 
-  wxWindowDisabler disableAll;
-  wxBusyInfo wait("Please wait ...");
+//   wxWindowDisabler disableAll;
+//   wxBusyInfo wait("Please wait ...");
 
-  wxPrintf("Writing %d transfer functions to text file .", numFrames);
+//   wxPrintf("Writing %d transfer functions to text file .", numFrames);
 
-  for (frameIndex = 0; frameIndex < numFrames; frameIndex++)
-  {
-    if ((frameIndex % 10) == 0)
-    {
-      wxPrintf(".");
-    }
+//   for (frameIndex = 0; frameIndex < numFrames; frameIndex++)
+//   {
+//     if ((frameIndex % 10) == 0)
+//     {
+//       wxPrintf(".");
+//     }
 
-    // Calculate the vocal tract shape at the current frame.
+//     // Calculate the vocal tract shape at the current frame.
 
-    time_s = (double)frameIndex / (double)FRAME_RATE;
-    gesturalScore->getParams(time_s, vocalTractParams, glottisParams);
+//     time_s = (double)frameIndex / (double)FRAME_RATE;
+//     gesturalScore->getParams(time_s, vocalTractParams, glottisParams);
 
-    for (i = 0; i < VocalTract::NUM_PARAMS; i++)
-    {
-      vocalTract->param[i].x = vocalTractParams[i];
-    }
-    vocalTract->calculateAll();
+//     for (i = 0; i < VocalTract::NUM_PARAMS; i++)
+//     {
+//       vocalTract->param[i].x = vocalTractParams[i];
+//     }
+//     vocalTract->calculateAll();
 
-    // Update the vocal tract dialog, if it is shown on the screen.
+//     // Update the vocal tract dialog, if it is shown on the screen.
 
-    VocalTractDialog *vocalTractDialog = VocalTractDialog::getInstance(NULL);
-    if (vocalTractDialog->IsShownOnScreen())
-    {
-      vocalTractDialog->Refresh();
-      vocalTractDialog->Update();
-      wxYield();
-    }
+//     // VocalTractDialog *vocalTractDialog = VocalTractDialog::getInstance(NULL); // Removed
+//     // if (vocalTractDialog->IsShownOnScreen()) // Removed
+//     // { // Removed
+//     //   vocalTractDialog->Refresh(); // Removed
+//     //   vocalTractDialog->Update(); // Removed
+//     //   wxYield(); // Removed
+//     // } // Removed
 
-    // Set the latest vocal tract geometry for the transmission line model.   
-    updateTlModelGeometry(vocalTract);
+//     // Set the latest vocal tract geometry for the transmission line model.   
+//     updateTlModelGeometry(vocalTract);
 
-    // Obtain the volume velocity transfer function.
-    tlModel->getSpectrum(TlModel::FLOW_SOURCE_TF, &spectrum, SPECTRUM_LENGTH, Tube::FIRST_PHARYNX_SECTION);
+//     // Obtain the volume velocity transfer function.
+//     tlModel->getSpectrum(TlModel::FLOW_SOURCE_TF, &spectrum, SPECTRUM_LENGTH, Tube::FIRST_PHARYNX_SECTION);
 
-    // Write magnitude.
-    for (i = 0; i < SPECTRUM_LENGTH; i++)
-    {
-      os << spectrum.getMagnitude(i) << " ";
-    }
-    os << endl;
+//     // Write magnitude.
+//     for (i = 0; i < SPECTRUM_LENGTH; i++)
+//     {
+//       os << spectrum.getMagnitude(i) << " ";
+//     }
+//     os << endl;
 
-    // Write phase.
-    for (i = 0; i < SPECTRUM_LENGTH; i++)
-    {
-      os << spectrum.getPhase(i) << " ";
-    }
-    os << endl;
-  }
+//     // Write phase.
+//     for (i = 0; i < SPECTRUM_LENGTH; i++)
+//     {
+//       os << spectrum.getPhase(i) << " ";
+//     }
+//     os << endl;
+//   }
 
-  wxPrintf(" done.\n");
+//   wxPrintf(" done.\n");
 
-  // ****************************************************************
-  // Restore the old vocal tract state.
-  // ****************************************************************
+//   // ****************************************************************
+//   // Restore the old vocal tract state.
+//   // ****************************************************************
 
-  for (i = 0; i < VocalTract::NUM_PARAMS; i++)
-  {
-    vocalTract->param[i].x = oldVocalTractParams[i];
-  }
-  vocalTract->calculateAll();
-  updateTlModelGeometry(vocalTract);
+//   for (i = 0; i < VocalTract::NUM_PARAMS; i++)
+//   {
+//     vocalTract->param[i].x = oldVocalTractParams[i];
+//   }
+//   vocalTract->calculateAll();
+//   updateTlModelGeometry(vocalTract);
 
-  VocalTractDialog *vocalTractDialog = VocalTractDialog::getInstance(NULL);
-  vocalTractDialog->Refresh();
-  vocalTractDialog->Update();
+//   // VocalTractDialog *vocalTractDialog = VocalTractDialog::getInstance(NULL); // Removed
+//   // vocalTractDialog->Refresh(); // Removed
+//   // vocalTractDialog->Update(); // Removed
 
-  return true;
-}
+//   return true;
+// }
 
 // ****************************************************************************
 // Export the cross-sections in text files for every regular 
 // time steps in the gestural score
 // ****************************************************************************
 
-bool Data::exportCrossSectionsFromScore(const wxString& folderName)
-{
-  const int VIDEO_FRAME_RATE = 1000;
-  double duration_s = gesturalScore->getDuration_pt() / (double)SAMPLING_RATE;
-  int numFrames = (int)(duration_s * VIDEO_FRAME_RATE);
-  int i;
-  int frameIndex;
-  double time_s;
-  double oldVocalTractParams[VocalTract::NUM_PARAMS];
-  double vocalTractParams[VocalTract::NUM_PARAMS];
-  double glottisParams[256];
+// bool Data::exportCrossSectionsFromScore(const wxString& folderName)
+// {
+//   const int VIDEO_FRAME_RATE = 1000;
+//   double duration_s = gesturalScore->getDuration_pt() / (double)SAMPLING_RATE;
+//   int numFrames = (int)(duration_s * VIDEO_FRAME_RATE);
+//   int i;
+//   int frameIndex;
+//   double time_s;
+//   double oldVocalTractParams[VocalTract::NUM_PARAMS];
+//   double vocalTractParams[VocalTract::NUM_PARAMS];
+//   double glottisParams[256];
 
-  // ****************************************************************
-  // Keep in mind the current vocal tract state.
-  // ****************************************************************
+//   // ****************************************************************
+//   // Keep in mind the current vocal tract state.
+//   // ****************************************************************
 
-  for (i = 0; i < VocalTract::NUM_PARAMS; i++)
-  {
-    oldVocalTractParams[i] = vocalTract->param[i].x;
-  }
+//   for (i = 0; i < VocalTract::NUM_PARAMS; i++)
+//   {
+//     oldVocalTractParams[i] = vocalTract->param[i].x;
+//   }
 
-  // ****************************************************************
-  // Extract the cross-sections as text file for ich time step
-  // ****************************************************************
+//   // ****************************************************************
+//   // Extract the cross-sections as text file for ich time step
+//   // ****************************************************************
 
-  for (frameIndex = 0; frameIndex < numFrames; frameIndex++)
-  {
-    wxPrintf("frame #: %d\n", frameIndex);
+//   for (frameIndex = 0; frameIndex < numFrames; frameIndex++)
+//   {
+//     wxPrintf("frame #: %d\n", frameIndex);
 
-    // Calculate the vocal tract shape at the current frame.
+//     // Calculate the vocal tract shape at the current frame.
 
-    time_s = (double)frameIndex / (double)VIDEO_FRAME_RATE;
-    gesturalScore->getParams(time_s, vocalTractParams, glottisParams);
+//     time_s = (double)frameIndex / (double)VIDEO_FRAME_RATE;
+//     gesturalScore->getParams(time_s, vocalTractParams, glottisParams);
 
-    for (i = 0; i < VocalTract::NUM_PARAMS; i++)
-    {
-      vocalTract->param[i].x = vocalTractParams[i];
-    }
-    vocalTract->calculateAll();
+//     for (i = 0; i < VocalTract::NUM_PARAMS; i++)
+//     {
+//       vocalTract->param[i].x = vocalTractParams[i];
+//     }
+//     vocalTract->calculateAll();
 
-    // export cross-sections of the current frame
-    wxString frameFileName = folderName;
-    wxChar pathSeparator = wxFileName::GetPathSeparator();
-    if (frameFileName.EndsWith(&pathSeparator) == false)
-    {
-      frameFileName += pathSeparator;
-    }
-    frameFileName += "vt" + wxString::Format("%03d", frameIndex) + ".txt";
-    std::string fileName(frameFileName.mb_str());
+//     // export cross-sections of the current frame
+//     wxString frameFileName = folderName;
+//     wxChar pathSeparator = wxFileName::GetPathSeparator();
+//     if (frameFileName.EndsWith(&pathSeparator) == false)
+//     {
+//       frameFileName += pathSeparator;
+//     }
+//     frameFileName += "vt" + wxString::Format("%03d", frameIndex) + ".txt";
+//     std::string fileName(frameFileName.mb_str());
 
-    if (vocalTract->exportCrossSections(fileName) == false)
-    {
-      wxMessageBox("Failed to export cross section file.", "Error");
-      break;
-    }
-  }
+//     if (vocalTract->exportCrossSections(fileName) == false)
+//     {
+//       wxMessageBox("Failed to export cross section file.", "Error");
+//       break;
+//     }
+//   }
 
-  // ****************************************************************
-  // Restore the old vocal tract state.
-  // ****************************************************************
+//   // ****************************************************************
+//   // Restore the old vocal tract state.
+//   // ****************************************************************
 
-  for (i = 0; i < VocalTract::NUM_PARAMS; i++)
-  {
-    vocalTract->param[i].x = oldVocalTractParams[i];
-  }
-  vocalTract->calculateAll();
+//   for (i = 0; i < VocalTract::NUM_PARAMS; i++)
+//   {
+//     vocalTract->param[i].x = oldVocalTractParams[i];
+//   }
+//   vocalTract->calculateAll();
 
-  VocalTractDialog* vocalTractDialog = VocalTractDialog::getInstance(NULL);
-  vocalTractDialog->Refresh();
-  vocalTractDialog->Update();
+//   // VocalTractDialog* vocalTractDialog = VocalTractDialog::getInstance(NULL); // Removed
+//   // vocalTractDialog->Refresh(); // Removed
+//   // vocalTractDialog->Update(); // Removed
 
-  return true;
-}
+//   return true;
+// }
 
 
 // ****************************************************************************
@@ -1901,7 +1915,7 @@ void Data::optimizeFormantsVowel(wxWindow *updateParent, VocalTract *tract,
   char st[1024];
   wxCommandEvent event(updateRequestEvent);
 
-  VocalTractDialog *vocalTractDialog = VocalTractDialog::getInstance(NULL);
+  // VocalTractDialog *vocalTractDialog = VocalTractDialog::getInstance(NULL); // Removed
 
 
   // ****************************************************************
@@ -2106,13 +2120,13 @@ void Data::optimizeFormantsVowel(wxWindow *updateParent, VocalTract *tract,
       event.SetInt(UPDATE_PICTURES_AND_CONTROLS);
       wxPostEvent(updateParent, event);
 
-      if (vocalTractDialog->IsShown())
-      {
-        vocalTractDialog->Refresh();
-        vocalTractDialog->Update();
-      }
+      // if (vocalTractDialog->IsShown()) // Removed
+      // { // Removed
+      //   vocalTractDialog->Refresh(); // Removed
+      //   vocalTractDialog->Update(); // Removed
+      // } // Removed
 
-      wxYield();
+      // wxYield(); // Removed
     }
 
     doContinue = progressDialog.Update(runCounter);
@@ -2172,7 +2186,7 @@ void Data::optimizeFormantsConsonant(wxWindow *updateParent, VocalTract *tract,
   char st[1024];
   wxCommandEvent event(updateRequestEvent);
 
-  VocalTractDialog *vocalTractDialog = VocalTractDialog::getInstance(NULL);
+  // VocalTractDialog *vocalTractDialog = VocalTractDialog::getInstance(NULL); // Removed
 
 
   // ****************************************************************
@@ -2445,13 +2459,12 @@ void Data::optimizeFormantsConsonant(wxWindow *updateParent, VocalTract *tract,
       event.SetInt(UPDATE_PICTURES_AND_CONTROLS);
       wxPostEvent(updateParent, event);
 
-      if (vocalTractDialog->IsShown())
-      {
-        vocalTractDialog->Refresh();
-        vocalTractDialog->Update();
-      }
-
-      wxYield();
+      // if (vocalTractDialog->IsShown()) // Removed
+      // { // Removed
+      //   vocalTractDialog->Refresh(); // Removed
+      //   vocalTractDialog->Update(); // Removed
+      //   wxYield(); // Removed
+      // } // Removed
     }
 
     doContinue = progressDialog.Update(runCounter);
@@ -2667,7 +2680,7 @@ void Data::createMinVocalTractArea(wxWindow *updateParent, VocalTract *tract, do
   char st[1024];
   wxCommandEvent event(updateRequestEvent);
   
-  VocalTractDialog *vocalTractDialog = VocalTractDialog::getInstance(NULL);
+  // VocalTractDialog *vocalTractDialog = VocalTractDialog::getInstance(NULL); // Removed
 
   // ****************************************************************
   // Determine the change step (increment) for the individual 
@@ -2812,13 +2825,13 @@ void Data::createMinVocalTractArea(wxWindow *updateParent, VocalTract *tract, do
       event.SetInt(UPDATE_PICTURES_AND_CONTROLS);
       wxPostEvent(updateParent, event);
       
-      if (vocalTractDialog->IsShown())
-      {
-        vocalTractDialog->Refresh();
-        vocalTractDialog->Update();
-      }
+      // if (vocalTractDialog->IsShown()) // Removed
+      // { // Removed
+      //   vocalTractDialog->Refresh(); // Removed
+      //   vocalTractDialog->Update(); // Removed
+      // } // Removed
 
-      wxYield();
+      // wxYield(); // Removed
     }
 
     doContinue = progressDialog.Update(numRuns);
@@ -3156,7 +3169,7 @@ TubeSequence *Data::getSelectedTubeSequence()
     case SYNTHESIS_TRANSFER_FUNCTION:             ts = transferFunction; break;
     case SYNTHESIS_LF_VOWEL:                      ts = vowelLf; break;
     case SYNTHESIS_PHONE:                         ts = staticPhone; break;
-    case SYNTHESIS_GESMOD:                        ts = gesturalScore; break;
+    // case SYNTHESIS_GESMOD:                        ts = gesturalScore; break; // Removed
     default: break;
   }
 
@@ -3169,19 +3182,19 @@ TubeSequence *Data::getSelectedTubeSequence()
 /// gesture is selected.
 // ****************************************************************************
 
-Gesture *Data::getSelectedGesture()
-{
-  if ((selectedGestureType >= 0) && (selectedGestureType < GesturalScore::NUM_GESTURE_TYPES))
-  {
-    GestureSequence *s = &gesturalScore->gestures[selectedGestureType];
-    if ((selectedGestureIndex >= 0) && (selectedGestureIndex < s->numGestures()))
-    {
-      return s->getGesture(selectedGestureIndex);
-    }
-  }
+// Gesture *Data::getSelectedGesture()
+// {
+//   if ((selectedGestureType >= 0) && (selectedGestureType < GesturalScore::NUM_GESTURE_TYPES))
+//   {
+//     GestureSequence *s = &gesturalScore->gestures[selectedGestureType];
+//     if ((selectedGestureIndex >= 0) && (selectedGestureIndex < s->numGestures()))
+//     {
+//       return s->getGesture(selectedGestureIndex);
+//     }
+//   }
   
-  return NULL;
-}
+//   return NULL;
+// }
 
 
 // ****************************************************************************
@@ -3219,7 +3232,7 @@ void Data::selectGlottis(int index)
 
   selectedGlottis = index;
   // Also set the glottis for the gestural score !
-  gesturalScore->glottis = glottis[index];
+  // gesturalScore->glottis = glottis[index]; // Removed
 }
 
 
@@ -3239,61 +3252,61 @@ void Data::updateTlModelGeometry(VocalTract *tract)
 /// in the dialogs.
 // ****************************************************************************
 
-void Data::updateModelsFromGesturalScore()
-{
-  int i;
-  int numGlottisParams = (int)gesturalScore->glottis->controlParam.size();
-  double tractParams[VocalTract::NUM_PARAMS];
-  double glottisParams[128];
+// void Data::updateModelsFromGesturalScore()
+// {
+//   int i;
+//   int numGlottisParams = (int)gesturalScore->glottis->controlParam.size();
+//   double tractParams[VocalTrat::NUM_PARAMS];
+//   double glottisParams[128];
 
-  // ****************************************************************
-  // Set the parameters for the glottis and vocal tract model.
-  // ****************************************************************
+//   // ****************************************************************
+//   // Set the parameters for the glottis and vocal tract model.
+//   // ****************************************************************
 
-  gesturalScore->getParams(gesturalScoreMark_s, tractParams, glottisParams);
+//   gesturalScore->getParams(gesturalScoreMark_s, tractParams, glottisParams);
 
-  for (i=0; i < VocalTract::NUM_PARAMS; i++)
-  {
-    gesturalScore->vocalTract->param[i].x = tractParams[i];
-  }
-  gesturalScore->vocalTract->calculateAll();
+//   for (i=0; i < VocalTract::NUM_PARAMS; i++)
+//   {
+//     gesturalScore->vocalTract->param[i].x = tractParams[i];
+//   }
+//   gesturalScore->vocalTract->calculateAll();
 
-  // request reload 3d geometry and recompute modes and junction
-  Acoustic3dSimulation* simu3d = Acoustic3dSimulation::getInstance();
-  simu3d->requestReloadGeometry();
-  simu3d->requestModesAndJunctionComputation();
-  simu3d->setGeometryImported(false);
-  if (simu3d->contInterpMeth() == FROM_FILE)
-  {
-    simu3d->setContourInterpolationMethod(AREA);
-  }
+//   // request reload 3d geometry and recompute modes and junction
+//   Acoustic3dSimulation* simu3d = Acoustic3dSimulation::getInstance();
+//   simu3d->requestReloadGeometry();
+//   simu3d->requestModesAndJunctionComputation();
+//   simu3d->setGeometryImported(false);
+//   if (simu3d->contInterpMeth() == FROM_FILE)
+//   {
+//     simu3d->setContourInterpolationMethod(AREA);
+//   }
 
-  for (i=0; i < numGlottisParams; i++)
-  {
-    gesturalScore->glottis->controlParam[i].x = glottisParams[i];
-  }
-  gesturalScore->glottis->calcGeometry();
+//   for (i=0; i < numGlottisParams; i++)
+//   {
+//     gesturalScore->glottis->controlParam[i].x = glottisParams[i];
+//   }
+//   gesturalScore->glottis->calcGeometry();
 
-  // ****************************************************************
-  // Update the pictures in the glottis/vocal tract dialogs.
-  // ****************************************************************
+//   // ****************************************************************
+//   // Update the pictures in the glottis/vocal tract dialogs.
+//   // ****************************************************************
 
-  GlottisDialog *glottisDialog = GlottisDialog::getInstance();
-  if (glottisDialog->IsShown())
-  {
-    glottisDialog->updateWidgets();
-    glottisDialog->Refresh();
-    glottisDialog->Update();
-  }
+//   // GlottisDialog *glottisDialog = GlottisDialog::getInstance(); // Retain GlottisDialog
+//   // if (glottisDialog->IsShown()) // Retain GlottisDialog
+//   // { // Retain GlottisDialog
+//   //   glottisDialog->updateWidgets(); // Retain GlottisDialog
+//   //   glottisDialog->Refresh(); // Retain GlottisDialog
+//   //   glottisDialog->Update(); // Retain GlottisDialog
+//   // }
 
-  VocalTractDialog *vocalTractDialog = VocalTractDialog::getInstance(NULL);
-  if (vocalTractDialog->IsShown())
-  {
-    vocalTractDialog->updateWidgets();
-    vocalTractDialog->Refresh();
-    vocalTractDialog->Update();
-  }
-}
+//   // VocalTractDialog *vocalTractDialog = VocalTractDialog::getInstance(NULL); // Removed
+//   // if (vocalTractDialog->IsShown()) // Removed
+//   // { // Removed
+//   //   vocalTractDialog->updateWidgets(); // Removed
+//   //   vocalTractDialog->Refresh(); // Removed
+//   //   vocalTractDialog->Update(); // Removed
+//   // } // Removed
+// }
 
 
 // ****************************************************************************
@@ -3415,18 +3428,24 @@ void Data::phoneticParamsToVocalTract()
   }
 
   // Get the coordinates of the vowel shape in the 2D-vowel subspace.
-  GesturalScore::mapToVowelSubspace(vocalTract, vowelParams, alphaTongue, betaTongue, alphaLips, betaLips);
-  GesturalScore::limitVowelSubspaceCoord(alphaTongue, betaTongue, alphaLips, betaLips);
+  // GesturalScore::mapToVowelSubspace(vocalTract, vowelParams, alphaTongue, betaTongue, alphaLips, betaLips); // GesturalScore is removed
+  // GesturalScore::limitVowelSubspaceCoord(alphaTongue, betaTongue, alphaLips, betaLips); // GesturalScore is removed
+  // Fallback: อาจจะต้องตั้งค่า alpha/betaTongue/Lips เป็นค่า default หรือคำนวณด้วยวิธีอื่นที่ไม่依赖 GesturalScore
+  alphaTongue = 0.5; // Example fallback
+  betaTongue = 0.5;  // Example fallback
+  alphaLips = 0.5;   // Example fallback
+  betaLips = 0.5;    // Example fallback
 
   // Get the context-dependent consonsnt targets for /b/, /d/, /g/.
-  GesturalScore::getContextDependentConsonant(vocalTract, "ll-labial-closure", 
-    alphaTongue, betaTongue, alphaLips, betaLips, bParams);
-
-  GesturalScore::getContextDependentConsonant(vocalTract, "tt-alveolar-closure", 
-    alphaTongue, betaTongue, alphaLips, betaLips, dParams);
-
-  GesturalScore::getContextDependentConsonant(vocalTract, "tb-velar-closure", 
-    alphaTongue, betaTongue, alphaLips, betaLips, gParams);
+  // GesturalScore::getContextDependentConsonant(vocalTract, "ll-labial-closure", 
+  //   alphaTongue, betaTongue, alphaLips, betaLips, bParams); // GesturalScore is removed
+  // GesturalScore::getContextDependentConsonant(vocalTract, "tt-alveolar-closure", 
+  //   alphaTongue, betaTongue, alphaLips, betaLips, dParams); // GesturalScore is removed
+  // GesturalScore::getContextDependentConsonant(vocalTract, "tb-velar-closure", 
+  //   alphaTongue, betaTongue, alphaLips, betaLips, gParams); // GesturalScore is removed
+  // Fallback: bParams, dParams, gParams will not be set by GesturalScore logic.
+  // The subsequent logic for mixing these might produce unexpected results or could be simplified/
+  // removed if these consonantal adjustments are no longer desired.
 
   // Get the parameter vector difference between the consonant shapes and the vowel shape.
   
@@ -3574,6 +3593,7 @@ void Data::normalizeAudioAmplitude(int trackIndex)
 
 bool Data::loadSpeaker(const wxString &fileName)
 {
+  std::cout << "[DATA_DEBUG_LOADSPEAKER] Data::loadSpeaker() ENTRY. File: " << fileName.ToStdString() << std::endl;
   speakerFileName = fileName;
 
   // ****************************************************************
@@ -3635,15 +3655,18 @@ bool Data::loadSpeaker(const wxString &fileName)
 
   try
   {
-    vocalTract->readFromXml(fileName.ToStdString());
-    vocalTract->calculateAll();
+    std::cout << "[DATA_DEBUG_LOADSPEAKER] About to call vocalTract->readFromXml()." << std::endl;
+    vocalTract->readFromXml(fileName.ToStdString()); // Reads anatomy and shapes
+    std::cout << "[DATA_DEBUG_LOADSPEAKER] vocalTract->readFromXml() done." << std::endl;
+    // vocalTract->calculateAll(); // Intentionally commented out - CSV pathway is prioritized
+    std::cout << "[DATA_DEBUG_LOADSPEAKER] vocalTract->calculateAll() (based on speaker file) WAS SKIPPED to prioritize CSV." << std::endl;
   }
   catch (std::string st)
   {
     wxMessageBox(wxString(st), 
       wxString("Error reading the anatomy data from ") + fileName + wxString("."));
   }
-
+  std::cout << "[DATA_DEBUG_LOADSPEAKER] Data::loadSpeaker() EXIT." << std::endl;
   return true;
 }
 

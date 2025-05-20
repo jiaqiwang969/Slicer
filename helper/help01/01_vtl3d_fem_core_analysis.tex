@@ -719,7 +719,7 @@ x_b &= x_n + (\frac{1}{2} + \frac{\sqrt{3}}{6}) \Delta x
 
         \item \textbf{零压力条件 (Zero Pressure Condition):}
             \begin{itemize}
-                \item \textbf{理论模型:} 理想化的完全开放端，假设口端声压 $p$ 恒为零（Dirichlet 边界条件）。这忽略了空气的惯性和辐射损失，声波在此边界完全透射（等效于声学软边界，反射系数 R=-1，相位反转）。
+                \item \textbf{理论模型:} 理想化的完全开放端，假设口端声压 $p$ 恒为零（Dirichlet 边界条件）。这是一种声学软边界 (acoustically soft boundary)，忽略了空气的惯性和辐射损失。在此条件下，声波会发生完全反射，其反射系数 R=-1（即入射波与反射波幅值相等，但相位反转180°）。
                 \item \textbf{代码实现:} 在 \texttt{Acoustic3dSimulation::solveWaveProblem} 函数中，当 \texttt{m\_mouthBoundaryCond == ZERO\_PRESSURE} 时，通过将口端导纳矩阵 \texttt{radAdmit} 的对角线元素设置为一个极大值 (例如 $10^{10}$)，然后令阻抗矩阵 \texttt{radImped = radAdmit.inverse()}。这样得到的阻抗值接近于零，从而在数值上近似实现 $p=0$ 的条件，此时粒子速度不受限制。
             \end{itemize}
 

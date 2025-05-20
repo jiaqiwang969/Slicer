@@ -2,7 +2,7 @@
 // This file is part of VocalTractLab3D.
 // Copyright (C) 2022, Peter Birkholz, Dresden, Germany
 // www.vocaltractlab.de
-// author: Peter Birkholz and Rémi Blandin
+// author: Peter Birkholz and RÃ©mi Blandin
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -616,7 +616,11 @@ void PropModesPicture::draw(wxDC& dc)
       }
 		}
 
+    // Print the text on the picture
+    wxColour originalTextColor = dc.GetTextForeground(); // Save original text color
+    dc.SetTextForeground(*wxRED); // Set text color to red
     tbText.printCells(dc);
+    dc.SetTextForeground(originalTextColor); // Restore original text color
 }
 
 // ****************************************************************************

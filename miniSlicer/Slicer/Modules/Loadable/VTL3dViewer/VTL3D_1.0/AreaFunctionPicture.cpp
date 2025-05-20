@@ -2,7 +2,7 @@
 // This file is part of VocalTractLab3D.
 // Copyright (C) 2022, Peter Birkholz, Dresden, Germany
 // www.vocaltractlab.de
-// author: Peter Birkholz and Rémi Blandin
+// author: Peter Birkholz and RÃ©mi Blandin
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
 // ****************************************************************************
 
 #include "AreaFunctionPicture.h"
-#include "VocalTractDialog.h"
+// #include "VocalTractDialog.h" // Removed as it's the target of removal
 #include "Data.h"
 
 #include <sstream>
@@ -527,12 +527,12 @@ void AreaFunctionPicture::OnMouseEvent(wxMouseEvent &event)
 
         // Update the corresponding pictures.
 
-        VocalTractDialog *dialog = VocalTractDialog::getInstance(this);
-        if (dialog->IsShown())
-        {
-          dialog->Refresh();
-          dialog->Update();
-        }
+        // VocalTractDialog *dialog = VocalTractDialog::getInstance(this);
+        // if (dialog->IsShown())
+        // {
+        //   dialog->Refresh();
+        //   dialog->Update();
+        // }
 
         wxCommandEvent event(updateRequestEvent);
         event.SetInt(UPDATE_PICTURES);

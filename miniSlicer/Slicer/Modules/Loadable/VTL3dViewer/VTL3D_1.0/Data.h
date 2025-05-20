@@ -2,7 +2,7 @@
 // This file is part of VocalTractLab3D.
 // Copyright (C) 2022, Peter Birkholz, Dresden, Germany
 // www.vocaltractlab.de
-// author: Peter Birkholz and Rémi Blandin
+// author: Peter Birkholz and Rï¿½mi Blandin
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -48,9 +48,8 @@
 #include "Backend/StaticPhone.h"
 #include "Backend/VowelLf.h"
 #include "Backend/ImpulseExcitation.h"
-#include "Backend/GesturalScore.h"
-#include "Backend/SegmentSequence.h"
-#include "Backend/AnatomyParams.h"
+// #include "Backend/SegmentSequence.h" // Removed
+// #include "Backend/AnatomyParams.h" // Removed
 #include "Backend/Acoustic3dSimulation.h"
 
 #include "Graph.h"
@@ -132,7 +131,6 @@ public:
     SYNTHESIS_TRANSFER_FUNCTION,
     SYNTHESIS_LF_VOWEL,
     SYNTHESIS_PHONE,
-    SYNTHESIS_GESMOD,
     NUM_SYNTHESIS_TYPES
   };
 
@@ -193,7 +191,7 @@ public:
   VocalTract *vocalTract;
   TlModel *tlModel;
   PoleZeroPlan *poleZeroPlan;
-  AnatomyParams *anatomyParams;
+  // AnatomyParams *anatomyParams; // Removed
 
   double transitionPos;    // 0 <= x <= 1
 
@@ -274,7 +272,6 @@ public:
   ImpulseExcitation *subglottalInputImpedance;
   ImpulseExcitation *supraglottalInputImpedance;
   ImpulseExcitation *transferFunction;
-  GesturalScore *gesturalScore;
 
   // The color scale
   static const int NUM_TDS_SCALE_COLORS = 256;
@@ -349,15 +346,15 @@ public:
   // Gestural score variables.
   // ****************************************************************
 
-  SegmentSequence *segmentSequence;
+  // SegmentSequence *segmentSequence; // Removed
   Graph *gsTimeAxisGraph;
-  wxString gesturalScoreFileName;
-  wxString segmentSequenceFileName;
-  double gesturalScoreMark_s;
-  double gesturalScoreRefMark_s;
-  int selectedGestureType;
-  int selectedGestureIndex;
-  int selectedSegmentIndex;
+  // wxString gesturalScoreFileName; // gesturalScore functionality is being removed
+  // wxString segmentSequenceFileName; // Removed
+  // double gesturalScoreMark_s; // gesturalScore functionality is being removed
+  // double gesturalScoreRefMark_s; // gesturalScore functionality is being removed
+  // int selectedGestureType; // gesturalScore functionality is being removed
+  // int selectedGestureIndex; // gesturalScore functionality is being removed
+  // int selectedSegmentIndex; // gesturalScore functionality is being removed
   
 
   // **************************************************************************
@@ -411,13 +408,11 @@ public:
   void resetTdsBuffers();
 
   TubeSequence *getSelectedTubeSequence();
-  Gesture *getSelectedGesture();
   Glottis *getSelectedGlottis();
   int getSelectedGlottisIndex();
   void selectGlottis(int index);
 
   void updateTlModelGeometry(VocalTract *tract);
-  void updateModelsFromGesturalScore();
   void getTubeSectionQuantity(TdsModel *model, int sectionIndex, double &leftValue, double &rightValue);
   void phoneticParamsToVocalTract();
   void normalizeAudioAmplitude(int trackIndex);

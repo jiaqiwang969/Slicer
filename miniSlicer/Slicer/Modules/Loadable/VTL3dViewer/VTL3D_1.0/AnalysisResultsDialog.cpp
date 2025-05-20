@@ -2,7 +2,7 @@
 // This file is part of VocalTractLab3D.
 // Copyright (C) 2022, Peter Birkholz, Dresden, Germany
 // www.vocaltractlab.de
-// author: Peter Birkholz and Rémi Blandin
+// author: Peter Birkholz and Rï¿½mi Blandin
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -77,14 +77,7 @@ void AnalysisResultsDialog::updateWidgets()
   // For which time position shall we show the results?
   // ****************************************************************
 
-  if (data->currentPage == Data::GESTURAL_SCORE_PAGE)
-  {
-    pos_s = data->gesturalScoreMark_s;
-  }
-  else
-  {
-    pos_s = (double)data->mark_pt / (double)SAMPLING_RATE;
-  }
+  pos_s = (double)data->mark_pt / (double)SAMPLING_RATE;
 
   // ****************************************************************
   // F0 values.

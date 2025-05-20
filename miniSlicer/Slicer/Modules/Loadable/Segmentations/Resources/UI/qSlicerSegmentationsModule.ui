@@ -510,7 +510,7 @@
    <item>
     <widget class="ctkCollapsibleButton" name="CollapsibleButton_ImportExportSegment">
      <property name="text">
-      <string>Export/import models and labelmaps</string>
+      <string>导出/导入模型和标签图</string>
      </property>
      <property name="checked">
       <bool>true</bool>
@@ -545,7 +545,7 @@
            <string>Clear selection indicating that a new node should be created</string>
           </property>
           <property name="text">
-           <string/>
+           <string>清除选择（创建新节点）</string>
           </property>
           <property name="icon">
            <iconset resource="../../Widgets/Resources/qSlicerSegmentationsModuleWidgets.qrc">
@@ -558,7 +558,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>Operation:</string>
+         <string>操作：</string>
         </property>
        </widget>
       </item>
@@ -582,14 +582,14 @@
       <item row="1" column="0">
        <widget class="QLabel" name="label_ImportExportType">
         <property name="text">
-         <string>Type:</string>
+         <string>输出类型：</string>
         </property>
        </widget>
       </item>
       <item row="3" column="0">
        <widget class="QLabel" name="label_ImportExportNode">
         <property name="text">
-         <string>Output:</string>
+         <string>输出节点：</string>
         </property>
        </widget>
       </item>
@@ -603,14 +603,14 @@
       <item row="0" column="1">
        <widget class="QRadioButton" name="radioButton_Export">
         <property name="text">
-         <string>Export</string>
+         <string>导出</string>
         </property>
        </widget>
       </item>
       <item row="0" column="2">
        <widget class="QRadioButton" name="radioButton_Import">
         <property name="text">
-         <string>Import</string>
+         <string>输入类型：</string>
         </property>
        </widget>
       </item>
@@ -647,7 +647,7 @@
          <item row="0" column="0">
           <widget class="QLabel" name="label_4">
            <property name="text">
-            <string>Exported segments:</string>
+            <string>导出segments:</string>
            </property>
           </widget>
          </item>
@@ -758,7 +758,7 @@
    <item>
     <widget class="ctkCollapsibleButton" name="CollapsibleButton_ExportToFiles">
      <property name="text">
-      <string>Export to files</string>
+      <string>导出到新标签图</string>
      </property>
      <property name="collapsed">
       <bool>true</bool>

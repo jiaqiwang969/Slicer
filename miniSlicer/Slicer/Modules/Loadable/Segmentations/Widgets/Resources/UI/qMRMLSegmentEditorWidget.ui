@@ -19,7 +19,7 @@
      <item row="1" column="0">
       <widget class="QLabel" name="SourceVolumeNodeLabel">
        <property name="text">
-        <string>Source volume:</string>
+        <string>源体积：</string>
        </property>
       </widget>
      </item>
@@ -45,24 +45,24 @@
         <bool>true</bool>
        </property>
        <property name="noneDisplay">
-        <string>Select source volume to enable editing</string>
+        <string>选择源体积以启用编辑</string>
        </property>
       </widget>
      </item>
      <item row="0" column="0">
       <widget class="QLabel" name="SegmentationNodeLabel">
        <property name="text">
-        <string>Segmentation:</string>
+        <string>分割对象：</string>
        </property>
       </widget>
      </item>
      <item row="1" column="2">
       <widget class="QToolButton" name="SpecifyGeometryButton">
        <property name="toolTip">
-        <string>Specify geometry (grid origin, spacing, axis directions, and default extent) of the edited labelmap representation</string>
+        <string>指定标签图几何信息（原点、间距、轴方向和默认范围）</string>
        </property>
        <property name="text">
-        <string>Specify geometry of the edited labelmap representation</string>
+        <string>指定标签图几何信息</string>
        </property>
        <property name="icon">
         <iconset resource="../qSlicerSegmentationsModuleWidgets.qrc">
@@ -87,10 +87,10 @@
        <item>
         <widget class="QToolButton" name="SliceRotateWarningButton">
          <property name="toolTip">
-          <string>Slice views orientation are not aligned with segmentation. Striping artifacts may appear. Click to align slice views to segmentation.</string>
+          <string>切片视图方向未与分割对齐，可能出现伪影。点击以对齐切片视图。</string>
          </property>
          <property name="text">
-          <string>Slice rotated</string>
+          <string>切片已旋转</string>
          </property>
          <property name="icon">
           <iconset resource="../qSlicerSegmentationsModuleWidgets.qrc">
@@ -110,10 +110,10 @@
      <item>
       <widget class="QPushButton" name="AddSegmentButton">
        <property name="toolTip">
-        <string>Add new empty segment</string>
+        <string>添加新空分割</string>
        </property>
        <property name="text">
-        <string>Add</string>
+        <string>添加</string>
        </property>
        <property name="icon">
         <iconset resource="../qSlicerSegmentationsModuleWidgets.qrc">
@@ -124,10 +124,10 @@
      <item>
       <widget class="QPushButton" name="RemoveSegmentButton">
        <property name="toolTip">
-        <string>Remove selected segment(s)</string>
+        <string>移除所选分割</string>
        </property>
        <property name="text">
-        <string>Remove</string>
+        <string>移除</string>
        </property>
        <property name="icon">
         <iconset resource="../qSlicerSegmentationsModuleWidgets.qrc">
@@ -141,10 +141,10 @@
      <item>
       <widget class="QToolButton" name="SwitchToSegmentationsButton">
        <property name="toolTip">
-        <string>Go to Segmentations module</string>
+        <string>前往分割模块</string>
        </property>
        <property name="text">
-        <string>Segmentations</string>
+        <string>分割</string>
        </property>
        <property name="popupMode">
         <enum>QToolButton::MenuButtonPopup</enum>
@@ -188,10 +188,10 @@
              </sizepolicy>
             </property>
             <property name="toolTip">
-             <string>Undo last editing operation</string>
+             <string>撤销上一步编辑操作</string>
             </property>
             <property name="text">
-             <string>Undo</string>
+             <string>撤销</string>
             </property>
             <property name="icon">
              <iconset resource="../../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc">
@@ -208,10 +208,10 @@
              </sizepolicy>
             </property>
             <property name="toolTip">
-             <string>Redo last editing operation</string>
+             <string>重做上一步编辑操作</string>
             </property>
             <property name="text">
-             <string>Redo</string>
+             <string>重做</string>
             </property>
             <property name="icon">
              <iconset resource="../../../../../../Base/QTGUI/Resources/qSlicerBaseQTGUI.qrc">
@@ -248,7 +248,7 @@
           </sizepolicy>
          </property>
          <property name="windowTitle">
-          <string>Segments Table</string>
+          <string>分割表</string>
          </property>
          <property name="orientations">
           <set>Qt::Vertical</set>
@@ -291,7 +291,7 @@
        <item>
         <widget class="QGroupBox" name="OptionsGroupBox">
          <property name="title">
-          <string>Options</string>
+          <string>选项</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <property name="spacing">
@@ -330,7 +330,7 @@
              <bool>true</bool>
             </property>
             <property name="showDetailsText">
-             <string>Show details.</string>
+             <string>显示详情</string>
             </property>
            </widget>
           </item>
@@ -349,7 +349,7 @@
           </sizepolicy>
          </property>
          <property name="title">
-          <string>Masking</string>
+          <string>掩膜</string>
          </property>
          <layout class="QFormLayout" name="formLayout">
           <property name="horizontalSpacing">
@@ -373,7 +373,7 @@
           <item row="0" column="0">
            <widget class="QLabel" name="MaskModeLabel">
             <property name="text">
-             <string>Editable area:</string>
+             <string>可编辑区域：</string>
             </property>
            </widget>
           </item>
@@ -387,14 +387,14 @@
           <item row="1" column="0">
            <widget class="QLabel" name="SourceVolumeIntensityMaskRangeLabel">
             <property name="text">
-             <string>Editable intensity range:</string>
+             <string>可编辑强度范围：</string>
             </property>
            </widget>
           </item>
           <item row="1" column="1">
            <widget class="ctkCheckBox" name="SourceVolumeIntensityMaskCheckBox">
             <property name="toolTip">
-             <string>Only those regions are allowed to be changed where the source volume intensity is in the specified range</string>
+             <string>仅允许更改源体积强度在指定范围内的区域</string>
             </property>
            </widget>
           </item>
@@ -411,14 +411,14 @@
              <string/>
             </property>
             <property name="text">
-             <string>Modify other segments:</string>
+             <string>修改其他分割：</string>
             </property>
            </widget>
           </item>
           <item row="4" column="1">
            <widget class="QComboBox" name="OverwriteModeComboBox">
             <property name="toolTip">
-             <string>Controls which segments the current segment will overwrite. Segments that are not overwritten may overlap with the selected segment.</string>
+             <string>控制当前分割会覆盖哪些分割。未被覆盖的分割可能与当前分割重叠。</string>
             </property>
             <property name="sizeAdjustPolicy">
              <enum>QComboBox::AdjustToContents</enum>

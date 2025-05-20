@@ -105,6 +105,33 @@ class ExtractCenterlineWidget(ScriptedLoadableModuleWidget, VTKObservationMixin)
         for nodeSelector, roleName in self.nodeSelectors:
             nodeSelector.connect("currentNodeChanged(vtkMRMLNode*)", self.updateParameterNodeFromGUI)
 
+        # Add a new button for getting a straight line
+        self.getStraightLineButton = qt.QPushButton("获取直线")
+        self.getStraightLineButton.toolTip = _("使用选定的端点创建一条直线路径。")
+        # Add the button to the formLayout_2, below the endPointsMarkupsSelector row
+        # The endPointsMarkupsSelector and related widgets are in a QHBoxLayout at row 2, column 1 of formLayout_2.
+        # We will add a new QHBoxLayout at row 3, column 1 for our button.
+        
+        # It seems self.ui does not directly expose formLayout_2.
+        # We need to find it by navigating the widget hierarchy or assume its structure based on the .ui file.
+        # The .ui file shows inputsCollapsibleButton contains formLayout_2.
+        # self.ui.inputsCollapsibleButton is a ctkCollapsibleButton, which is a QWidget.
+        # We can get its layout, which should be formLayout_2.
+        
+        inputsLayout = self.ui.inputsCollapsibleButton.layout() # This should be formLayout_2
+        if inputsLayout and isinstance(inputsLayout, qt.QFormLayout):
+            # Create a new QHBoxLayout to hold the button, to make it aligned similarly to other rows if needed
+            buttonHBoxLayout = qt.QHBoxLayout()
+            buttonHBoxLayout.addWidget(self.getStraightLineButton)
+            
+            # Add the new row for the button.
+            # Row 2, column 0 is "端点:" label. Row 2, column 1 is the horizontalLayout_2 for endpoint selectors.
+            # We add our button at row 3, column 1. We can add an empty label at row 3, column 0 or span columns.
+            # For simplicity, let's add an empty label and then the button layout.
+            inputsLayout.addRow("", buttonHBoxLayout)
+
+        self.getStraightLineButton.clicked.connect(self.onGetStraightLineButtonClicked)
+
         # Initial GUI update
         self.updateGUIFromParameterNode()
 
@@ -375,6 +402,82 @@ class ExtractCenterlineWidget(ScriptedLoadableModuleWidget, VTKObservationMixin)
         qt.QApplication.restoreOverrideCursor()
 
         slicer.util.showStatusMessage(_("Automatic endpoint computation complete."), 3000)
+
+    def onGetStraightLineButtonClicked(self):
+        try:
+            fidNode = self.ui.endPointsMarkupsSelector.currentNode()
+            if not fidNode:
+                slicer.util.warningDisplay("请首先选择一个端点节点 (Markups Fiducial Node)。")
+                return
+
+            n = fidNode.GetNumberOfControlPoints()
+            if n < 2:
+                slicer.util.warningDisplay("所选的端点节点至少需要两个控制点。")
+                return
+
+            # Ensure logic is available (it should be initialized in setup)
+            if not hasattr(self, 'logic') or self.logic is None:
+                self.logic = ExtractCenterlineLogic()
+            
+            sourcePointIndex = self.logic.startPointIndexFromEndPointsMarkupsNode(fidNode)
+            
+            if sourcePointIndex < 0: # Should generally be caught by n < 2 check
+                slicer.util.warningDisplay("无法确定源端点。")
+                return
+
+            targetPointIndex = -1
+
+            if n == 2:
+                # If there are exactly two points, the target is simply the other point
+                targetPointIndex = 1 - sourcePointIndex
+            else:
+                # If more than two points, find the first *selected* point that is not the source
+                for i in range(n):
+                    if i == sourcePointIndex:
+                        continue
+                    if fidNode.GetNthControlPointSelected(i):
+                        targetPointIndex = i
+                        break
+            
+            if targetPointIndex < 0:
+                # If no suitable target point was found (e.g., n > 2 and no other points were selected)
+                slicer.util.warningDisplay("无法根据选择状态确定唯一的目标端点。\\n请确保有一个源端点（通常是未选中的）和一个目标端点（通常是选中的）。")
+                return
+
+            # Check if source and target are the same point (can happen if n=1, though caught earlier, or specific n=2 selection)
+            if sourcePointIndex == targetPointIndex:
+                 slicer.util.warningDisplay("源端点和目标端点是同一个点。无法创建直线。")
+                 return
+
+            point1_coords = [0.0, 0.0, 0.0]
+            point2_coords = [0.0, 0.0, 0.0]
+            
+            fidNode.GetNthControlPointPosition(sourcePointIndex, point1_coords)
+            fidNode.GetNthControlPointPosition(targetPointIndex, point2_coords)
+
+            # === 步骤 2: 创建直线型 Curve 节点 ===
+            baseName = "直线路径"
+            curveNodeName = slicer.mrmlScene.GetUniqueNameByString(baseName)
+            curveNode = slicer.mrmlScene.AddNewNodeByClass("vtkMRMLMarkupsCurveNode", curveNodeName)
+            curveNode.SetCurveTypeToLinear()
+            curveNode.AddControlPoint(point1_coords)
+            curveNode.AddControlPoint(point2_coords)
+
+            # === 步骤 3: 设置曲线显示属性 ===
+            if curveNode.GetDisplayNode() is None:
+                curveNode.CreateDefaultDisplayNodes()
+            
+            displayNode = curveNode.GetDisplayNode()
+            if displayNode:
+                displayNode.SetLineThickness(0.5)    # 细线宽
+                displayNode.SetColor(1.0, 0.0, 0.0)   # 红色
+
+            slicer.util.showStatusMessage("直线路径已创建。", 3000)
+
+        except Exception as e:
+            slicer.util.errorDisplay(f"创建直线路径失败: {e}")
+            import traceback
+            traceback.print_exc()
 
 #
 # ExtractCenterlineLogic

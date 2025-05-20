@@ -1228,7 +1228,7 @@ void qMRMLSegmentsTableView::contextMenuEvent(QContextMenuEvent* event)
   QObject::connect(showFilterAction, SIGNAL(triggered(bool)), this, SLOT(setFilterBarVisible(bool)));
   contextMenu->addAction(showFilterAction);
 
-  QAction* showLayerColumnAction = new QAction(tr("Show layer column"), this);
+  QAction* showLayerColumnAction = new QAction(tr("显示图层列"), this);
   showLayerColumnAction->setCheckable(true);
   showLayerColumnAction->setChecked(this->layerColumnVisible());
   QObject::connect(showLayerColumnAction, SIGNAL(triggered(bool)), this, SLOT(setLayerColumnVisible(bool)));
@@ -1249,21 +1249,21 @@ void qMRMLSegmentsTableView::contextMenuEvent(QContextMenuEvent* event)
 
     contextMenu->addSeparator();
 
-    QAction* visibility3DAction = new QAction(tr("Show in 3D"), this);
+    QAction* visibility3DAction = new QAction(tr("在3D中显示"), this);
     visibility3DAction->setCheckable(true);
     visibility3DAction->setChecked(properties.Visible3D);
     visibility3DAction->setProperty(ID_PROPERTY, segmentID);
     QObject::connect(visibility3DAction, SIGNAL(triggered(bool)), this, SLOT(onVisibility3DActionToggled(bool)));
     contextMenu->addAction(visibility3DAction);
 
-    QAction* visibility2DFillAction = new QAction(tr("Show in 2D as fill"), this);
+    QAction* visibility2DFillAction = new QAction(tr("在2D中显示填充"), this);
     visibility2DFillAction->setCheckable(true);
     visibility2DFillAction->setChecked(properties.Visible2DFill);
     visibility2DFillAction->setProperty(ID_PROPERTY, segmentID);
     connect(visibility2DFillAction, SIGNAL(triggered(bool)), this, SLOT(onVisibility2DFillActionToggled(bool)));
     contextMenu->addAction(visibility2DFillAction);
 
-    QAction* visibility2DOutlineAction = new QAction(tr("Show in 2D as outline"), this);
+    QAction* visibility2DOutlineAction = new QAction(tr("在2D中显示轮廓"), this);
     visibility2DOutlineAction->setCheckable(true);
     visibility2DOutlineAction->setChecked(properties.Visible2DOutline);
     visibility2DOutlineAction->setProperty(ID_PROPERTY, segmentID);
@@ -1287,7 +1287,7 @@ void qMRMLSegmentsTableView::contextMenuEvent(QContextMenuEvent* event)
     }
 
     contextMenu->addSeparator();
-    QAction* clearSelectedSegmentAction = new QAction(tr("Clear selected segments"), this);
+    QAction* clearSelectedSegmentAction = new QAction(tr("清除选中的分段"), this);
     QObject::connect(clearSelectedSegmentAction, SIGNAL(triggered()), this, SLOT(clearSelectedSegments()));
     contextMenu->addAction(clearSelectedSegmentAction);
   }
@@ -1295,7 +1295,7 @@ void qMRMLSegmentsTableView::contextMenuEvent(QContextMenuEvent* event)
   if (this->terminologySelectorOptionVisible())
   {
     contextMenu->addSeparator();
-    QAction* useTerminologyAction = new QAction(tr("Use standard terminology for name and color selection"), this);
+    QAction* useTerminologyAction = new QAction(tr("使用标准术语进行名称和颜色选择"), this);
     useTerminologyAction->setCheckable(true);
     useTerminologyAction->setChecked(QSettings().value(d->UseTerminologySelectorSettingsKey).toBool());
     QObject::connect(useTerminologyAction, SIGNAL(triggered(bool)), this, SLOT(onUseTerminologyActionToggled(bool)));

@@ -423,15 +423,15 @@ void qMRMLSegmentEditorWidgetPrivate::init()
 
   this->SwitchToSegmentationsButton->setIcon(q->style()->standardIcon(QStyle::SP_ArrowRight));
 
-  QMenu* segmentationsButtonMenu = new QMenu(qMRMLSegmentEditorWidget::tr("Segmentations"), this->SwitchToSegmentationsButton);
+  QMenu* segmentationsButtonMenu = new QMenu(qMRMLSegmentEditorWidget::tr("分割"), this->SwitchToSegmentationsButton);
 
-  QAction* importExportAction = new QAction(qMRMLSegmentEditorWidget::tr("Import/export nodes..."), segmentationsButtonMenu);
+  QAction* importExportAction = new QAction(qMRMLSegmentEditorWidget::tr("导入/导出节点..."), segmentationsButtonMenu);
   segmentationsButtonMenu->addAction(importExportAction);
   QObject::connect(importExportAction, SIGNAL(triggered()), q, SLOT(onImportExportActionClicked()));
-  QAction* exportToFileAction = new QAction(qMRMLSegmentEditorWidget::tr("Export to files..."), segmentationsButtonMenu);
+  QAction* exportToFileAction = new QAction(qMRMLSegmentEditorWidget::tr("导出到文件..."), segmentationsButtonMenu);
   segmentationsButtonMenu->addAction(exportToFileAction);
   QObject::connect(exportToFileAction, SIGNAL(triggered()), q, SLOT(onExportToFilesActionClicked()));
-  QAction* exportToColorNodeAction = new QAction(qMRMLSegmentEditorWidget::tr("Export to color table"), segmentationsButtonMenu);
+  QAction* exportToColorNodeAction = new QAction(qMRMLSegmentEditorWidget::tr("导出到颜色表"), segmentationsButtonMenu);
   segmentationsButtonMenu->addAction(exportToColorNodeAction);
   QObject::connect(exportToColorNodeAction, SIGNAL(triggered()), q, SLOT(onExportToColorTableActionClicked()));
 

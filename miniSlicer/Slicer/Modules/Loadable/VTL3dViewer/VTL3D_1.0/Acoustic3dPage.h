@@ -2,7 +2,7 @@
 // This file is part of VocalTractLab3D.
 // Copyright (C) 2022, Peter Birkholz, Dresden, Germany
 // www.vocaltractlab.de
-// author: Peter Birkholz and Rémi Blandin
+// author: Peter Birkholz and Rï¿½mi Blandin
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -105,7 +105,7 @@ private:
   //void OnRunTestDiscontinuity(wxCommandEvent& event);
   //void OnRunTestElephant(wxCommandEvent& event);
   void OnParamSimuDialog(wxCommandEvent& event);
-  void OnVocalTractDialog(wxCommandEvent& event);
+  // void OnVocalTractDialog(wxCommandEvent& event);
   void OnShapesDialog(wxCommandEvent& event);
   void OnImportGeometry(wxCommandEvent& event);
   void OnComputeModes(wxCommandEvent& event);
@@ -144,6 +144,9 @@ private:
   void OnShowInputImpedSpec(wxCommandEvent& event);
   void OnPreviousTf(wxCommandEvent& event);
   void OnNextTf(wxCommandEvent& event);
+
+  // Save all transfer functions to txt
+  void OnSaveAllTf(wxCommandEvent& event);
 
   void setPicModeObjectTodisplay(enum objectToDisplay object);
 

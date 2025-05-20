@@ -2,7 +2,7 @@
 // This file is part of VocalTractLab3D.
 // Copyright (C) 2022, Peter Birkholz, Dresden, Germany
 // www.vocaltractlab.de
-// author: Peter Birkholz and R�mi Blandin
+// author: Peter Birkholz and Rémi Blandin
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 
 #include "Acoustic3dPage.h"
 #include "ParamSimu3DDialog.h"
-#include "VocalTractDialog.h"
+//#include "VocalTractDialog.h"
 #include "Backend/SoundLib.h"
 
 #include <stdio.h>
@@ -94,6 +94,9 @@ static const int IDB_SHOW_INPUT_IMPED_SPEC        = 7010;
 static const int IDB_PREVIOUS_TF                  = 7011;
 static const int IDB_NEXT_TF                      = 7012;
 
+// New IDB_SAVE_ALL_TF constant
+static const int IDB_SAVE_ALL_TF                  = 7013;
+
 // ****************************************************************************
 // The event table.
 // ****************************************************************************
@@ -111,7 +114,7 @@ BEGIN_EVENT_TABLE(Acoustic3dPage, wxPanel)
   //EVT_BUTTON(IDB_RUN_TEST_DISCONTINUITY, Acoustic3dPage::OnRunTestDiscontinuity)
   //EVT_BUTTON(IDB_RUN_TEST_ELEPHANT, Acoustic3dPage::OnRunTestElephant)
   EVT_BUTTON(IDB_PARAM_SIMU_DIALOG, Acoustic3dPage::OnParamSimuDialog)
-  EVT_BUTTON(IDB_VOCAL_TRACT_DIALOG, Acoustic3dPage::OnVocalTractDialog)
+  // EVT_BUTTON(IDB_VOCAL_TRACT_DIALOG, Acoustic3dPage::OnVocalTractDialog)
   EVT_BUTTON(IDB_SHAPES_DIALOG, Acoustic3dPage::OnShapesDialog)
   EVT_BUTTON(IDB_IMPORT_GEOMETRY, Acoustic3dPage::OnImportGeometry)
   EVT_BUTTON(IDB_COMPUTE_MODES, Acoustic3dPage::OnComputeModes)
@@ -149,6 +152,9 @@ BEGIN_EVENT_TABLE(Acoustic3dPage, wxPanel)
   EVT_CHECKBOX(IDB_SHOW_INPUT_IMPED_SPEC, Acoustic3dPage::OnShowInputImpedSpec)
   EVT_BUTTON(IDB_PREVIOUS_TF, Acoustic3dPage::OnPreviousTf)
   EVT_BUTTON(IDB_NEXT_TF, Acoustic3dPage::OnNextTf)
+
+  // New event for saving all transfer functions
+  EVT_BUTTON(IDB_SAVE_ALL_TF, Acoustic3dPage::OnSaveAllTf)
 END_EVENT_TABLE()
 
 // ****************************************************************************
@@ -251,11 +257,11 @@ void Acoustic3dPage::initWidgets(VocalTractPicture* picVocalTract)
 
   wxBoxSizer* leftSizer = new wxBoxSizer(wxVERTICAL);
 
-  button = new wxButton(this, IDB_VOCAL_TRACT_DIALOG, "Show vocal tract");
-  leftSizer->Add(button, 0, wxGROW | wxALL, 3);
+  //button = new wxButton(this, IDB_VOCAL_TRACT_DIALOG, "Show vocal tract");
+  //leftSizer->Add(button, 0, wxGROW | wxALL, 3);
 
-  button = new wxButton(this, IDB_SHAPES_DIALOG, "Vocal tract shapes");
-  leftSizer->Add(button, 0, wxGROW | wxALL, 3);
+  //button = new wxButton(this, IDB_SHAPES_DIALOG, "Vocal tract shapes");
+  //leftSizer->Add(button, 0, wxGROW | wxALL, 3);
 
   button = new wxButton(this, IDB_IMPORT_GEOMETRY, "Import geometry");
   leftSizer->Add(button, 0, wxGROW | wxALL, 3);
@@ -381,7 +387,7 @@ void Acoustic3dPage::initWidgets(VocalTractPicture* picVocalTract)
 
   sizer->AddStretchSpacer(1);
 
-  middleSizer->Add(sizer, 0, wxEXPAND | wxALIGN_CENTER_HORIZONTAL);
+  middleSizer->Add(sizer, 0, wxEXPAND);
 
   topSizer->Add(middleSizer, 1, wxEXPAND | wxALL, 2);
 
@@ -433,7 +439,7 @@ void Acoustic3dPage::initWidgets(VocalTractPicture* picVocalTract)
 
   sizer->AddStretchSpacer(1);
 
-  topRightSizer->Add(sizer, 0, wxEXPAND | wxALIGN_CENTER_HORIZONTAL);
+  topRightSizer->Add(sizer, 0, wxEXPAND);
   topSizer->Add(topRightSizer, 1, wxEXPAND | wxALL, 2);
 
   // ****************************************************************
@@ -482,6 +488,10 @@ void Acoustic3dPage::initWidgets(VocalTractPicture* picVocalTract)
 
   chkShowInputImped = new wxCheckBox(bottomPanel, IDB_SHOW_INPUT_IMPED_SPEC, "Input impedance");
   sizer->Add(chkShowInputImped, 0, wxALL, 2);
+
+  // 新增：保存全部 TF 按钮
+  wxButton* btnSaveAllTf = new wxButton(bottomPanel, IDB_SAVE_ALL_TF, "Save TF txt", wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT);
+  sizer->Add(btnSaveAllTf, 0, wxALL, 4);
 
   // text to display the transfer function point coordinates
   wxStaticText* label = new wxStaticText(bottomPanel, wxID_ANY, "Transfer function point:");
@@ -1069,20 +1079,6 @@ void Acoustic3dPage::OnParamSimuDialog(wxCommandEvent& event)
 // ****************************************************************************
 // ****************************************************************************
 
-void Acoustic3dPage::OnVocalTractDialog(wxCommandEvent& event)
-{
-  VocalTractDialog* dialog = VocalTractDialog::getInstance(this);
-  dialog->Show(true);
-  simu3d->setGeometryImported(false);
-  if (simu3d->contInterpMeth() == FROM_FILE)
-  {
-    simu3d->setContourInterpolationMethod(BOUNDING_BOX);
-  }
-}
-
-// ****************************************************************************
-// ****************************************************************************
-
 void Acoustic3dPage::OnShapesDialog(wxCommandEvent& event)
 {
   VocalTractShapesDialog* dialog = VocalTractShapesDialog::getInstance();
@@ -1462,5 +1458,15 @@ void Acoustic3dPage::setPicModeObjectTodisplay(enum objectToDisplay object)
     chkShowContour->SetValue(true);
     picPropModes->setObjectToDisplay(CONTOUR);
     break;
+  }
+}
+
+// ****************************************************************************
+
+void Acoustic3dPage::OnSaveAllTf(wxCommandEvent& event)
+{
+  if (picSpectrum)
+  {
+    picSpectrum->ExportAllTransferFunctions();
   }
 }

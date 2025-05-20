@@ -24,7 +24,7 @@
 #include "SoundLib.h"
 #include "AudioFile.h"
 #include "Synthesizer.h"
-#include "SegmentSequence.h"
+// #include "SegmentSequence.h" // Removed
 
 #include "GeometricGlottis.h"
 #include "TwoMassModel.h"
@@ -32,7 +32,7 @@
 
 #include "VocalTract.h"
 #include "TdsModel.h"
-#include "GesturalScore.h"
+// #include "GesturalScore.h" // Removed
 #include "XmlHelper.h"
 #include "XmlNode.h"
 #include "TlModel.h"
@@ -1087,6 +1087,7 @@ int vtlApiTest(const char *speakerFileName, double *audio, int *numSamples)
 }
 
 
+/* // Removing vtlSegmentSequenceToGesturalScore due to SegmentSequence and GesturalScore removal
 // ****************************************************************************
 // This function converts a segment sequence file (a TXT file containing the 
 // sequence of speech segments in SAMPA and the associated durations) with the 
@@ -1102,300 +1103,48 @@ int vtlApiTest(const char *speakerFileName, double *audio, int *numSamples)
 
 int vtlSegmentSequenceToGesturalScore(const char *segFileName, const char *gesFileName)
 {
-  if (!vtlApiInitialized)
-  {
-    printf("Error: The API has not been initialized.\n");
-    return 1;
-  }
-
-  // Create and load the segment sequence file.
-  
-  SegmentSequence *segmentSequence = new SegmentSequence();
-  if (segmentSequence->readFromFile(string(segFileName)) == false)
-  {
-    delete segmentSequence;
-    printf("Error in vtlSegmentSequenceToGesturalScore(): Segment sequence file could not be loaded.\n");
-    return 2;
-  }
-
-  // Create and save the gestural score.
-
-  GesturalScore *gesturalScore = new GesturalScore(vocalTract, glottis[selectedGlottis]);
-  gesturalScore->createFromSegmentSequence(segmentSequence);
-  if (gesturalScore->saveGesturesXml(string(gesFileName)) == false)
-  {
-    delete segmentSequence;
-    delete gesturalScore;
-    printf("Error in vtlSegmentSequenceToGesturalScore(): Gestural score file could not be saved.\n");
-    return 3;
-  }
-
-  delete segmentSequence;
-  delete gesturalScore;
-
-  return 0;
+  // ... implementation ...
 }
+*/
 
-
+/* // Removing vtlGesturalScoreToAudio due to GesturalScore removal
 // ****************************************************************************
 // This function directly converts a gestural score to an audio signal or file.
-// Parameters:
-// o gesFileName (in): Name of the gestural score file to synthesize.
-// o wavFileName (in): Name of the audio file with the resulting speech signal.
-//     This can be the empty string "" if you do not want to save a WAV file.
-// o audio (out): The resulting audio signal with sample values in the range 
-//     [-1, +1] and with the sampling rate audioSamplingRate. Make sure that
-//     this buffer is big enough for the synthesized signal. If you are not 
-//     interested in the audio signal, set this pointer to NULL.
-// o numSamples (out): The number of audio samples in the synthesized signal.
-//     If you are not interested in this value, set this pointer to NULL.
-// o enableConsoleOutput (in): Set to 1, if you want to allow output about the
-//   synthesis progress in the console window. Otherwise, set it to 0.
-//
-// Function return value:
-// 0: success.
-// 1: The API was not initialized.
-// 2: Loading the gestural score file failed.
-// 3: Values in the gestural score file are out of range.
-// 4: The WAV file could not be saved.
+// ... (rest of Doxygen comments)
 // ****************************************************************************
 
 int vtlGesturalScoreToAudio(const char *gesFileName, const char *wavFileName,
   double *audio, int *numSamples, int enableConsoleOutput)
 {
-  if (!vtlApiInitialized)
-  {
-    printf("Error: The API has not been initialized.\n");
-    return 1;
-  }
-
-  int i;
-
-  // ****************************************************************
-  // Init and load the gestural score.
-  // ****************************************************************
-
-  GesturalScore *gesturalScore = new GesturalScore(vocalTract, glottis[selectedGlottis]);
-
-  bool allValuesInRange = true;
-  if (gesturalScore->loadGesturesXml(string(gesFileName), allValuesInRange) == false)
-  {
-    printf("Error in vtlGesturalScoreToAudio(): Loading the gestural score file failed!\n");
-    delete gesturalScore;
-    return 2;
-  }
-
-  if (allValuesInRange == false)
-  {
-    printf("Error in vtlGesturalScoreToAudio(): Some values in the gestural score are out of range!\n");
-    delete gesturalScore;
-    return 3;
-  }
-
-  // Important !!!
-  gesturalScore->calcCurves();
-
-  // ****************************************************************
-  // Do the actual synthesis.
-  // ****************************************************************
-
-  vector<double> audioVector;
-  Synthesizer::synthesizeGesturalScore(gesturalScore, tdsModel, audioVector, (bool)enableConsoleOutput);
-  int numVectorSamples = (int)audioVector.size();
-
-  // ****************************************************************
-  // Copy the number of audio samples to the return value numSamples.
-  // ****************************************************************
-
-  if (numSamples != NULL)
-  {
-    *numSamples = numVectorSamples;
-  }
-
-  // ****************************************************************
-  // Copy the synthesized signal into the return buffer audio.
-  // ****************************************************************
-
-  if (audio != NULL)
-  {
-    for (i = 0; i < numVectorSamples; i++)
-    {
-      audio[i] = audioVector[i];
-    }
-  }
-   
-  // ****************************************************************
-  // Save the result as WAV file (if the name is not an empty string).
-  // ****************************************************************
-
-  if (wavFileName[0] != '\0')
-  {
-    AudioFile<double> audioFile;
-    audioFile.setAudioBufferSize(1, numVectorSamples);
-    audioFile.setBitDepth(16);
-    audioFile.setSampleRate(SAMPLING_RATE);
-
-    for (i = 0; i < numVectorSamples; i++)
-    {
-      audioFile.samples[0][i] = audioVector[i];
-    }
-
-    if (audioFile.save(string(wavFileName)) == false)
-    {
-      printf("Error in vtlGesturalScoreToAudio(): The WAV file could not be saved!\n");
-      delete gesturalScore;
-      return 4;
-    }
-  }
-
-  // ****************************************************************
-  // Free the memory and return.
-  // ****************************************************************
-
-  delete gesturalScore;
-  return 0;
+  // ... implementation ...
 }
+*/
 
-
+/* // Removing vtlGesturalScoreToTractSequence due to GesturalScore removal
 // ****************************************************************************
 // This function directly converts a gestural score to a tract sequence file.
-// The latter is a text file containing the parameters of the vocal fold and 
-// vocal tract models in steps of about 2.5 ms.
-
-// Parameters:
-// o gesFileName (in): Name of the gestural score file to convert.
-// o tractSequenceFileName (in): Name of the tract sequence file.
-//
-// Function return value:
-// 0: success.
-// 1: The API was not initialized.
-// 2: Loading the gestural score file failed.
-// 3: Values in the gestural score file are out of range.
-// 4: The tract sequence file could not be saved.
+// ... (rest of Doxygen comments)
 // ****************************************************************************
 
-int vtlGesturalScoreToTractSequence(const char* gesFileName, const char* tractSequenceFileName)
+int vtlGesturalScoreToTractSequence(const char* gesFileName, 
+  const char* tractSequenceFileName)
 {
-  if (!vtlApiInitialized)
-  {
-    printf("Error: The API has not been initialized.\n");
-    return 1;
-  }
-
-  // ****************************************************************
-  // Init and load the gestural score.
-  // ****************************************************************
-
-  GesturalScore* gesturalScore = new GesturalScore(vocalTract, glottis[selectedGlottis]);
-
-  bool allValuesInRange = true;
-  if (gesturalScore->loadGesturesXml(string(gesFileName), allValuesInRange) == false)
-  {
-    printf("Error in vtlGesturalScoreToTractSequence(): Loading the gestural score file failed!\n");
-    delete gesturalScore;
-    return 2;
-  }
-
-  if (allValuesInRange == false)
-  {
-    printf("Error in vtlGesturalScoreToTractSequence(): Some values in the gestural score are out of range!\n");
-    delete gesturalScore;
-    return 3;
-  }
-
-  // Important !!!
-  gesturalScore->calcCurves();
-
-  // ****************************************************************
-  // Do the actual conversion.
-  // ****************************************************************
-
-  bool ok = Synthesizer::gesturalScoreToTractSequenceFile(gesturalScore, string(tractSequenceFileName));
-
-  if (ok == false)
-  {
-    printf("Error in vtlGesturalScoreToTractSequence(): Saving the tract sequence file failed!\n");
-    delete gesturalScore;
-    return 4;
-  }
-   
-  // ****************************************************************
-  // Free the memory and return.
-  // ****************************************************************
-
-  delete gesturalScore;
-  return 0;
+  // ... implementation ...
 }
+*/
 
-
-
+/* // Removing vtlGetGesturalScoreDuration due to GesturalScore removal
 // ****************************************************************************
 // This function gets the duration from a gestural score.
-// Parameters:
-// o gesFileName (in): Name of the gestural score file.
-// o audioFileDuration (out): The number of audio samples, the audio file would
-//   have, if the gestural score was synthesized. This number can be slightly 
-//   larger than the length of the gestural score because the audio is 
-//   synthesized in chunks of a constant size. If not wanted, set to NULL.
-// o gesFileDuration (out): The duration of the gestural score (in samples).
-//   If not wanted, set to NULL.
-//
-// Function return value:
-// 0: success.
-// 1: The API was not initialized.
-// 2: Loading the gestural score file failed.
-// 3: Values in the gestural score file are out of range.
+// ... (rest of Doxygen comments)
 // ****************************************************************************
 
-int vtlGetGesturalScoreDuration(const char* gesFileName, int* numAudioSamples, int* numGestureSamples)
+int vtlGetGesturalScoreDuration(const char* gesFileName, int* numAudioSamples,
+    int* numGestureSamples)
 {
-    if (!vtlApiInitialized)
-    {
-        printf("Error: The API has not been initialized.\n");
-        return 1;
-    }
-
-
-
-    // ****************************************************************
-    // Init and load the gestural score.
-    // ****************************************************************
-
-    GesturalScore* gesturalScore = new GesturalScore(vocalTract, glottis[selectedGlottis]);
-    static const int NUM_CHUNK_SAMPLES = 110;
-
-    bool allValuesInRange = true;
-    if (gesturalScore->loadGesturesXml(string(gesFileName), allValuesInRange) == false)
-    {
-        printf("Error in vtlGesturalScoreToGlottisSignals: Loading the gestural score file failed!\n");
-        delete gesturalScore;
-        return 2;
-    }
-
-    if (allValuesInRange == false)
-    {
-        printf("Error in vtlGesturalScoreToGlottisSignals: Some values in the gestural score are out of range!\n");
-        delete gesturalScore;
-        return 3;
-    }
-
-    // Important !!!
-    gesturalScore->calcCurves();
-
-    if (numGestureSamples != NULL)
-    {
-        *numGestureSamples = gesturalScore->getDuration_pt();
-    }
-
-    if (numAudioSamples != NULL)
-    {
-        *numAudioSamples = ( (int)( ( gesturalScore->getDuration_pt() ) / NUM_CHUNK_SAMPLES ) + 1 )  * NUM_CHUNK_SAMPLES;
-    }
-
-
-    return 0;
+    // ... implementation ...
 }
-
+*/
 
 // ****************************************************************************
 // This function converts a tract sequence file into an audio signal or file.

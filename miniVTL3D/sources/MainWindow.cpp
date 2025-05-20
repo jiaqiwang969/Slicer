@@ -227,13 +227,13 @@ MainWindow::MainWindow()
   // Set window properties and init the widgets.
   // ****************************************************************
 
-	wxFrame::Create(NULL, wxID_ANY, "VocalTractLab2", wxDefaultPosition, 
+	wxFrame::Create(NULL, wxID_ANY, "pipeSonic", wxDefaultPosition, 
     wxDefaultSize, wxCLOSE_BOX | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | 
     wxSYSTEM_MENU | wxCAPTION | wxRAISED_BORDER | wxRESIZE_BORDER);
 
   // Output the title of the main window.
 
-  this->SetLabel("VocalTractLab2");
+  this->SetLabel("pipeSonic");
 
   // ****************************************************************
   // Init all widgets.
@@ -462,7 +462,7 @@ void MainWindow::initWidgets()
   // notebook->AddPage((wxPanel*)vocalTractPage, "Vocal tract", false);
   // notebook->AddPage((wxPanel*)tdsPage, "Time domain simulation", false);
   // notebook->AddPage((wxPanel*)gesturalScorePage, "Gestural score", false);
-  notebook->AddPage((wxPanel*)acoustic3dPage, "3D acoustic simulation", true);																		   
+  notebook->AddPage((wxPanel*)acoustic3dPage, wxString::FromUTF8("三维管道声学仿真"), true);																		   
 
   // ****************************************************************
   // Update all widgets.

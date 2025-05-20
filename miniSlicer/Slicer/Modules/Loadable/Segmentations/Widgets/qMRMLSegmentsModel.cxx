@@ -110,15 +110,15 @@ void qMRMLSegmentsModelPrivate::init()
     }
     else if (i == q->opacityColumn())
     {
-      columnLabels << qMRMLSegmentsModel::tr("Opacity");
+      columnLabels << qMRMLSegmentsModel::tr("不透明度");
     }
     else if (i == q->nameColumn())
     {
-      columnLabels << qMRMLSegmentsModel::tr("Name");
+      columnLabels << qMRMLSegmentsModel::tr("名称");
     }
     else if (i == q->layerColumn())
     {
-      columnLabels << qMRMLSegmentsModel::tr("Layer");
+      columnLabels << qMRMLSegmentsModel::tr("图层");
     }
     else if (i == q->statusColumn())
     {
@@ -127,11 +127,11 @@ void qMRMLSegmentsModelPrivate::init()
   }
   q->setHorizontalHeaderLabels(columnLabels);
 
-  q->horizontalHeaderItem(q->nameColumn())->setToolTip(qMRMLSegmentsModel::tr("Segment name"));
-  q->horizontalHeaderItem(q->visibilityColumn())->setToolTip(qMRMLSegmentsModel::tr("Segment visibility"));
-  q->horizontalHeaderItem(q->colorColumn())->setToolTip(qMRMLSegmentsModel::tr("Segment color"));
-  q->horizontalHeaderItem(q->opacityColumn())->setToolTip(qMRMLSegmentsModel::tr("Segment opacity (3D views)"));
-  q->horizontalHeaderItem(q->statusColumn())->setToolTip(qMRMLSegmentsModel::tr("Segment status"));
+  q->horizontalHeaderItem(q->nameColumn())->setToolTip(qMRMLSegmentsModel::tr("分段名称"));
+  q->horizontalHeaderItem(q->visibilityColumn())->setToolTip(qMRMLSegmentsModel::tr("分段可见性"));
+  q->horizontalHeaderItem(q->colorColumn())->setToolTip(qMRMLSegmentsModel::tr("分段颜色"));
+  q->horizontalHeaderItem(q->opacityColumn())->setToolTip(qMRMLSegmentsModel::tr("分段不透明度（3D视图）"));
+  q->horizontalHeaderItem(q->statusColumn())->setToolTip(qMRMLSegmentsModel::tr("分段状态"));
 
   q->horizontalHeaderItem(q->visibilityColumn())->setIcon(QIcon(":/Icons/Small/SlicerVisibleInvisible.png"));
   q->horizontalHeaderItem(q->colorColumn())->setIcon(QIcon(":/Icons/Colors.png"));

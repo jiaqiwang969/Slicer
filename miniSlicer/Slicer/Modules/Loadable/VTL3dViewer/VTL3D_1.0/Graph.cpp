@@ -2,7 +2,7 @@
 // This file is part of VocalTractLab3D.
 // Copyright (C) 2022, Peter Birkholz, Dresden, Germany
 // www.vocaltractlab.de
-// author: Peter Birkholz and Rémi Blandin
+// author: Peter Birkholz and Rï¿½mi Blandin
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -268,6 +268,7 @@ void Graph::paintAbscissa(wxDC &dc)
   dc.SetPen(wxPen(*wxBLACK, dc.LogicalToDeviceXRel(lineWidth)));
   dc.SetBackgroundMode(wxTRANSPARENT);
   dc.SetFont(font);
+  dc.SetTextForeground(*wxBLACK);
 
   dc.GetTextExtent(unitString, &w, &h);
   int unitLengthInPixels = w + 10;
@@ -440,6 +441,7 @@ void Graph::paintAbscissa(wxDC &dc)
           }
 
           dc.SetPen(wxPen(*wxBLACK, dc.LogicalToDeviceXRel(lineWidth)));
+          dc.SetTextForeground(*wxBLACK);
           dc.DrawText(st, xPos, yPos);
         }
 
@@ -512,6 +514,7 @@ void Graph::paintOrdinate(wxDC &dc)
 
     dc.SetPen(wxPen(*wxBLACK, dc.LogicalToDeviceXRel(lineWidth)));
     dc.SetFont(wxFont(9, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL));
+    dc.SetTextForeground(*wxBLACK);
 
     if (ordinateAtLeftSide)
     { 
@@ -631,16 +634,8 @@ void Graph::paintOrdinate(wxDC &dc)
           if (yPos + charHeight > graphY + graphH - 1) { yPos = graphY + graphH - 1 - charHeight; }
 
           dc.SetPen(wxPen(*wxBLACK, dc.LogicalToDeviceXRel(lineWidth)));
-
-          if (ordinateAtLeftSide)
-          { 
-            dc.GetTextExtent(st, &w, &h);
-            dc.DrawText(st, graphX-8 - w, yPos); 
-          }
-          else
-          { 
-            dc.DrawText(st, graphX + graphW + 8, yPos); 
-          }
+          dc.SetTextForeground(*wxBLACK);
+          dc.DrawText(st, graphX-8 - w, yPos);
         }
       }
     }
@@ -747,6 +742,7 @@ void Graph::paintOrdinate(wxDC &dc)
         {
           d = (double)i*division;
           st = wxString::Format("%d", (int)d);
+          dc.SetTextForeground(*wxBLACK);
 
           yPos-= charHeight/2;
           if (yPos < graphY + charHeight) { yPos = graphY + charHeight; }

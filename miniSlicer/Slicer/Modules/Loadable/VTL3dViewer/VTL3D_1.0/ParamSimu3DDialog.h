@@ -2,7 +2,7 @@
 // This file is part of VocalTractLab3D.
 // Copyright (C) 2022, Peter Birkholz, Dresden, Germany
 // www.vocaltractlab.de
-// author: Peter Birkholz and R�mi Blandin
+// author: Peter Birkholz and R�mi Blandin
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -91,29 +91,40 @@ private:
   // lists
   wxComboBox* lstScalingFacMethods;
   wxComboBox* lstMouthBcond;
+  wxComboBox* lstGlottisBcond;
   wxComboBox* lstFreqRes;
   wxComboBox* lstFieldPhysicalQuantity;
   wxComboBox* lstAmpPhase;
     
+  // medium selection
+  wxComboBox* lstMedium;
+  wxTextCtrl* txtSalinity;
+  wxTextCtrl* txtDepth;
+    
   Acoustic3dSimulation* m_simu3d;
   VocalTract* m_tract;
 
+  // ---------------- 参数缓存 ----------------
   double m_meshDensity;
   int m_secNoiseSource;
+  openEndBoundaryCond m_mouthBoundaryCond;
+  openEndBoundaryCond m_glottisBoundaryCond;
+  contourInterpolationMethod m_contInterpMeth;
+  struct simulationParameters m_simuParams;
+  struct simulationParameters m_simuParamsMagnus;
+  struct simulationParameters m_simuParamsFreqDepLosses;
+  
   vector<string> m_listMouthBcond;
+  vector<string> m_listGlottisBcond;
   vector<string> m_listScalingMethods;
   vector<string> m_listFieldPhysicalQuantity;
   vector<string> m_listAmplitudePhase;
+  vector<string> m_listMedium;
   int m_expSpectrumLgthStart;
   int m_expSpectrumLgthEnd;
   vector<string> m_listFreqRes;
   bool m_tfPtsFromFile;
   Point_3 m_singlePtTf;
-  openEndBoundaryCond m_mouthBoundaryCond;
-  contourInterpolationMethod m_contInterpMeth;
-	struct simulationParameters m_simuParams;
-  struct simulationParameters m_simuParamsMagnus;
-  struct simulationParameters m_simuParamsFreqDepLosses;
   double m_maxBbox;
 
 // **************************************************************************
@@ -158,6 +169,7 @@ private:
 
   void OnScalingFactMethod(wxCommandEvent& event);
   void OnMouthBcond(wxCommandEvent& event);
+  void OnGlottisBcond(wxCommandEvent& event);
   void OnFreqRes(wxCommandEvent& event);
   void OnFieldPhysicalQuantity(wxCommandEvent& event);
   void OnAmplitudePhase(wxCommandEvent& event);
@@ -171,6 +183,11 @@ private:
   // for updating some variables which imply modifying others
   void setMeshDensity(double density);
   void setMaxCutOnFreq(double freq);
+
+  // medium related handlers
+  void OnMediumSelect(wxCommandEvent& event);
+  void OnSalinityEnter(wxCommandEvent& event);
+  void OnDepthEnter(wxCommandEvent& event);
 
 // **************************************************************************
 // Declare the event table.

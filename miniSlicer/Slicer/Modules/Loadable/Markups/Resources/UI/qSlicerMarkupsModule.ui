@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Markups</string>
+   <string>标注</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
@@ -25,7 +25,7 @@
      <item>
       <widget class="QGroupBox" name="createMarkupsGroupBox">
        <property name="title">
-        <string>Create Markups:</string>
+        <string>创建标注：</string>
        </property>
       </widget>
      </item>
@@ -78,7 +78,7 @@
         <bool>false</bool>
        </property>
        <property name="text">
-        <string>Display</string>
+        <string>显示</string>
        </property>
        <property name="collapsed">
         <bool>true</bool>
@@ -90,10 +90,10 @@
         <item>
          <widget class="ctkCollapsibleGroupBox" name="ColorLegendCollapsibleGroupBox">
           <property name="toolTip">
-           <string>Color legend for the Color Table selected in Scalars section.</string>
+           <string>颜色图例</string>
           </property>
           <property name="title">
-           <string>Color Legend</string>
+           <string>颜色图例</string>
           </property>
           <property name="collapsed">
            <bool>true</bool>
@@ -110,20 +110,20 @@
           <item>
            <widget class="QPushButton" name="saveToDefaultDisplayPropertiesPushButton">
             <property name="toolTip">
-             <string>Save current display property settings to defaults, will be saved for when Slicer restarts (see Application Settings)</string>
+             <string>保存为默认</string>
             </property>
             <property name="text">
-             <string>Save to Defaults</string>
+             <string>保存为默认</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="resetToDefaultDisplayPropertiesPushButton">
             <property name="toolTip">
-             <string>Use default display properties.</string>
+             <string>恢复默认</string>
             </property>
             <property name="text">
-             <string>Reset to Defaults</string>
+             <string>恢复默认</string>
             </property>
            </widget>
           </item>
@@ -135,7 +135,7 @@
      <item>
       <widget class="ctkCollapsibleButton" name="controlPointsCollapsibleButton">
        <property name="text">
-        <string>Control Points</string>
+        <string>控制点</string>
        </property>
        <property name="collapsed">
         <bool>true</bool>
@@ -144,7 +144,7 @@
         <item row="0" column="0">
          <widget class="QLabel" name="label_3">
           <property name="text">
-           <string>Interaction: </string>
+           <string>交互：</string>
           </property>
          </widget>
         </item>
@@ -219,7 +219,7 @@
         <item row="1" column="0">
          <widget class="QLabel" name="label">
           <property name="text">
-           <string>Jump Slices:</string>
+           <string>跳转切片：</string>
           </property>
          </widget>
         </item>
@@ -254,7 +254,7 @@
         <item row="2" column="0">
          <widget class="QLabel" name="label_2">
           <property name="text">
-           <string>Show Slice Intersections:</string>
+           <string>显示切片交点：</string>
           </property>
          </widget>
         </item>
@@ -517,7 +517,7 @@
         <item row="4" column="0">
          <widget class="QLabel" name="label_coords">
           <property name="text">
-           <string>Coordinates:  </string>
+           <string>坐标：</string>
           </property>
          </widget>
         </item>
@@ -534,17 +534,17 @@
           </property>
           <item>
            <property name="text">
-            <string>World</string>
+            <string>世界</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>Local</string>
+            <string>局部</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>Hide</string>
+            <string>隐藏</string>
            </property>
           </item>
          </widget>
@@ -583,7 +583,7 @@
            <string>Display, naming, volume interactions, moving up/down, adding</string>
           </property>
           <property name="title">
-           <string>Advanced</string>
+           <string>高级</string>
           </property>
           <property name="collapsed">
            <bool>true</bool>
@@ -689,7 +689,7 @@
            <item>
             <widget class="ctkCollapsibleGroupBox" name="namingCollapsibleGroupBox">
              <property name="title">
-              <string>Naming</string>
+              <string>命名</string>
              </property>
              <layout class="QGridLayout" name="gridLayout">
               <item row="2" column="0">
@@ -698,7 +698,7 @@
                  <string>Include %N for list name, %d for number.</string>
                 </property>
                 <property name="text">
-                 <string>Name Format</string>
+                 <string>名称格式</string>
                 </property>
                </widget>
               </item>
@@ -715,7 +715,7 @@
                  <string>Reset the name format field to the default value.</string>
                 </property>
                 <property name="text">
-                 <string>Reset</string>
+                 <string>重置</string>
                 </property>
                </widget>
               </item>
@@ -725,7 +725,7 @@
                  <string>Rename all control points in this list according to the current name format, trying to preserve numbers.</string>
                 </property>
                 <property name="text">
-                 <string>Apply</string>
+                 <string>应用</string>
                 </property>
                </widget>
               </item>
@@ -744,7 +744,7 @@
         <bool>false</bool>
        </property>
        <property name="text">
-        <string>Measurements</string>
+        <string>测量</string>
        </property>
        <property name="collapsed">
         <bool>true</bool>
@@ -753,14 +753,14 @@
         <item>
          <widget class="QLabel" name="measurementsLabel">
           <property name="text">
-           <string>No measurement</string>
+           <string>无测量</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="ctkCollapsibleGroupBox" name="MeasurementSettingsCollapsibleGroupBox">
           <property name="title">
-           <string>Measurement settings</string>
+           <string>测量设置</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_8">
            <property name="leftMargin">
@@ -820,7 +820,7 @@
      <item>
       <widget class="qMRMLCollapsibleButton" name="exportImportCollapsibleButton">
        <property name="text">
-        <string>Export/import Table</string>
+        <string>导出/导入表格</string>
        </property>
        <property name="collapsed">
         <bool>true</bool>
@@ -829,7 +829,7 @@
         <item row="0" column="0">
          <widget class="QLabel" name="label_4">
           <property name="text">
-           <string>Operation:</string>
+           <string>操作：</string>
           </property>
          </widget>
         </item>
@@ -838,14 +838,14 @@
           <item>
            <widget class="QRadioButton" name="tableExportRadioButton">
             <property name="text">
-             <string>Export</string>
+             <string>导出</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QRadioButton" name="tableImportRadioButton">
             <property name="text">
-             <string>Import</string>
+             <string>导入</string>
             </property>
            </widget>
           </item>
@@ -854,7 +854,7 @@
         <item row="1" column="0">
          <widget class="QLabel" name="exportImportTableLabel">
           <property name="text">
-           <string>Table:</string>
+           <string>表格：</string>
           </property>
          </widget>
         </item>
@@ -876,14 +876,14 @@
         <item row="3" column="0" colspan="2">
          <widget class="QPushButton" name="exportImportPushButton">
           <property name="text">
-           <string>Apply</string>
+           <string>应用</string>
           </property>
          </widget>
         </item>
         <item row="2" column="0" colspan="2">
          <widget class="ctkCollapsibleGroupBox" name="CollapsibleGroupBox">
           <property name="title">
-           <string>Advanced</string>
+           <string>高级</string>
           </property>
           <property name="collapsed">
            <bool>true</bool>
@@ -910,7 +910,7 @@
            <item row="0" column="0">
             <widget class="QLabel" name="label_5">
              <property name="text">
-              <string>Export coordinate system:</string>
+              <string>导出坐标系：</string>
              </property>
             </widget>
            </item>
@@ -919,14 +919,14 @@
              <item>
               <widget class="QRadioButton" name="rasExportRadioButton">
                <property name="text">
-                <string>RAS</string>
+                <string>RAS（右-前-上）</string>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QRadioButton" name="lpsExportRadioButton">
                <property name="text">
-                <string>LPS</string>
+                <string>LPS（左-后-上）</string>
                </property>
               </widget>
              </item>

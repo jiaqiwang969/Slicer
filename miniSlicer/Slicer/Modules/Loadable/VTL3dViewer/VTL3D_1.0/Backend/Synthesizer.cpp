@@ -2,7 +2,7 @@
 // This file is part of VocalTractLab3D.
 // Copyright (C) 2022, Peter Birkholz, Dresden, Germany
 // www.vocaltractlab.de
-// author: Peter Birkholz and Rémi Blandin
+// author: Peter Birkholz and RÃ©mi Blandin
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -284,82 +284,16 @@ void Synthesizer::copySignal(vector<double> &sourceSignal, Signal16 &targetSigna
 }
 
 
+/* // Commenting out synthesizeGesturalScore as GesturalScore is removed
 // ****************************************************************************
 /// Synthesis of a complete gestural score (blocking synthesis).
 // ****************************************************************************
-
-void Synthesizer::synthesizeGesturalScore(GesturalScore *gesturalScore,
+void Synthesizer::synthesizeGesturalScore(GesturalScore *gesturalScore, 
   TdsModel *tdsModel, vector<double> &audio, bool enableConsoleOutput)
 {
-  int i;
-  vector<double> signalPart;
-  Glottis *glottis = gesturalScore->glottis;
-  VocalTract *vocalTract = gesturalScore->vocalTract;
-  double tractParams[VocalTract::NUM_PARAMS];
-  double glottisParams[Glottis::MAX_CONTROL_PARAMS];
-  int scoreLength_pt = gesturalScore->getDuration_pt();
-  int numChunks = (int)(scoreLength_pt / NUM_CHUNCK_SAMPLES) + 1;
-  double pos_s = 0.0;
-
-  Synthesizer *synth = new Synthesizer();
-
-  // ****************************************************************
-  // Save the current state of the glottis and the vocal tract.
-  // ****************************************************************
-
-  glottis->storeControlParams();
-  vocalTract->storeControlParams();
-
-  // Important: Calc. the parameter curves from the gestural score.
-  gesturalScore->calcCurves();
-
-  // ****************************************************************
-  // Generate the audio signal in small sections of about 2.5 ms 
-  // length each (= 110 samples).
-  // ****************************************************************
-
-  synth->init(glottis, vocalTract, tdsModel);
-  audio.resize(0);
-
-  if (enableConsoleOutput)
-  {
-    printf("Synthesis of gestural score startet ");
-  }
-
-  // Get the parameters right at the beginning.
-  gesturalScore->getParams(0.0, tractParams, glottisParams);
-  synth->add(glottisParams, tractParams, 0, signalPart);
-
-  for (i = 1; i <= numChunks; i++)
-  {
-    if (((i & 63) == 0) && (enableConsoleOutput))
-    {
-      printf(".");
-    }
-
-    pos_s = (double)i * NUM_CHUNCK_SAMPLES / SAMPLING_RATE;
-    gesturalScore->getParams(pos_s, tractParams, glottisParams);
-    synth->add(glottisParams, tractParams, NUM_CHUNCK_SAMPLES, signalPart);
-    audio.insert(audio.end(), signalPart.begin(), signalPart.end());
-  }
-
-  if (enableConsoleOutput)
-  {
-    printf(" finished.\n");
-  }
-
-  // ****************************************************************
-  // Restore the current state of the glottis and the vocal tract.
-  // ****************************************************************
-
-  glottis->restoreControlParams();
-  vocalTract->restoreControlParams();
-
-  // Free the memory.
-
-  delete synth;
+  // ... implementation ...
 }
-
+*/
 
 // ****************************************************************************
 /// Synthesis (blocking) of a tube sequence from the data in a TXT file.
@@ -761,207 +695,29 @@ void Synthesizer::synthesizeStaticPhoneme(Glottis *glottis, VocalTract *vocalTra
 }
 
 
+/* // Commenting out gesturalScoreToTractSequenceFile as GesturalScore is removed
 // ****************************************************************************
-/// Generate a text file that contains a sequence of vocal fold and vocal
-/// tract control parameters (in steps of 110 samples or about 2.5 ms)
+/// Generate a text file that contains a sequence of vocal fold and vocal 
+/// tract control parameters (in steps of 110 samples or about 2.5 ms) 
 /// from the given gestural score.
 // ****************************************************************************
-
 bool Synthesizer::gesturalScoreToTractSequenceFile(GesturalScore *gesturalScore, string fileName)
 {
-  int i, k;
-  double tractParams[VocalTract::NUM_PARAMS];
-  double glottisParams[Glottis::MAX_CONTROL_PARAMS];
-  int numGlottisParams = (int)gesturalScore->glottis->controlParam.size();
-  int scoreLength_pt = gesturalScore->getDuration_pt();
-  int numStates = (int)(scoreLength_pt / NUM_CHUNCK_SAMPLES) + 2;
-  double pos_s = 0.0;
-
-  ofstream file;
-  file.open(fileName);
-  if (file.is_open() == false)
-  {
-    printf("Error in gesturalScoreToTractSequenceFile(): The file could not be opened!\n");
-    return false;
-  }
-
-  // Write some header data into the file.
-
-  file << "# The first two lines (below the comment lines) indicate the name of the vocal fold model and the number of states." << endl;
-  file << "# The following lines contain the control parameters of the vocal folds and the vocal tract (states)" << endl;
-  file << "# in steps of 110 audio samples (corresponding to about 2.5 ms for the sampling rate of 44100 Hz)." << endl;
-  file << "# For every step, there is one line with the vocal fold parameters followed by" << endl;
-  file << "# one line with the vocal tract parameters." << endl;
-  file << "#" << endl;
-
-  // Write the name of the glottis model.
-  file << gesturalScore->glottis->getName() << endl;
-
-  // Write the number of states.
-  file << numStates << endl;
-
-  // Important: Calc. the parameter curves from the gestural score.
-  gesturalScore->calcCurves();
-
-  // ****************************************************************
-  // Write the vocal tract and glottis parameters to the file every
-  // 110 samples (about 2.5 ms).
-  // ****************************************************************
-
-  for (i = 0; i < numStates; i++)
-  {
-    pos_s = (double)i * NUM_CHUNCK_SAMPLES / SAMPLING_RATE;
-    gesturalScore->getParams(pos_s, tractParams, glottisParams);
-    
-    // Write the new parameters to the file
-    
-    for (k = 0; k < numGlottisParams; k++)
-    {
-      file << glottisParams[k] << " ";
-    }
-    file << endl;
-
-    for (k = 0; k < VocalTract::NUM_PARAMS; k++)
-    {
-      file << tractParams[k] << " ";
-    }
-    file << endl;
-  }
-
-  // Close the file.
-  file.close();
-
-  return true;
+  // ... implementation ...
 }
+*/
 
-
+/* // Commenting out gesturalScoreToTubeSequenceFile as GesturalScore is removed
 // ****************************************************************************
 /// Generate a text file that contains a sequence of vocal fold control 
 /// parameters and enhanced area functions (in steps of 110 samples or about 
 /// 2.5 ms) from the given gestural score.
 // ****************************************************************************
-
 bool Synthesizer::gesturalScoreToTubeSequenceFile(GesturalScore *gesturalScore, string fileName)
 {
-  int i, k;
-  double tractParams[VocalTract::NUM_PARAMS];
-  double glottisParams[Glottis::MAX_CONTROL_PARAMS];
-  int numGlottisParams = (int)gesturalScore->glottis->controlParam.size();
-  int scoreLength_pt = gesturalScore->getDuration_pt();
-  int numStates = (int)(scoreLength_pt / NUM_CHUNCK_SAMPLES) + 2;
-  double pos_s = 0.0;
-  Tube tube;
-
-  ofstream file;
-  file.open(fileName);
-  if (file.is_open() == false)
-  {
-    printf("Error in gesturalScoreToTubeSequenceFile(): The file could not be opened!\n");
-    return false;
-  }
-
-  // ****************************************************************
-  // Save the current state of the vocal tract.
-  // ****************************************************************
-
-  gesturalScore->vocalTract->storeControlParams();
-
-  // ****************************************************************
-  // Write some header data into the file.
-  // ****************************************************************
-
-  file << "# The first two lines (below the comment lines) indicate the name of the vocal fold model and the number of states." << endl;
-  file << "# The following lines contain a sequence of states of the vocal folds and the tube geometry" << endl;
-  file << "# in steps of 110 audio samples (corresponding to about 2.5 ms for the sampling rate of 44100 Hz)." << endl;
-  file << "# Each state is represented in terms of five lines:" << endl;
-  file << "# Line 1: glottis_param_0 glottis_param_1 ..." << endl;
-  file << "# Line 2: incisor_position_in_cm, velo_pharyngeal_opening_in_cm^2, tongue_tip_side_elevation[-1...1]" << endl;
-  file << "# Line 3: area0 area1 area2 area3 ... (Areas of the tube sections in cm^2 from glottis to mouth)" << endl;
-  file << "# Line 4: length0 length1 length2 length3 ... (Lengths of the tube sections in cm from glottis to mouth)" << endl;
-  file << "# Line 5: artic0 artic1 artic2 artic3 ... (Articulators of the tube sections between glottis and lips : 1 = tongue; 2 = lower incisors; 3 = lower lip; 4 = other)" << endl;
-  file << "#" << endl;
-
-  // Write the name of the glottis model.
-  file << gesturalScore->glottis->getName() << endl;
-
-  // Write the number of states.
-  file << numStates << endl;
-
-  // Important: Calc. the parameter curves from the gestural score.
-  gesturalScore->calcCurves();
-
-  // ****************************************************************
-  // Write the vocal tract and glottis parameters to the file every
-  // 110 samples (about 2.5 ms).
-  // ****************************************************************
-
-  printf("Writing the tube sequence file started ...");
-
-  for (i = 0; i < numStates; i++)
-  {
-    if ((i & 63) == 0)
-    {
-      printf(".");
-    }
-
-    pos_s = (double)i * NUM_CHUNCK_SAMPLES / SAMPLING_RATE;
-    gesturalScore->getParams(pos_s, tractParams, glottisParams);
-
-    // Calculate the vocal tract with the new parameters.
-
-    for (k = 0; k < VocalTract::NUM_PARAMS; k++)
-    {
-      gesturalScore->vocalTract->param[k].x = tractParams[k];
-    }
-    gesturalScore->vocalTract->calculateAll();
-
-    // Transform the vocal tract model into a tube.
-    gesturalScore->vocalTract->getTube(&tube);
-
-    // Write the new parameters to the file
-
-    for (k = 0; k < numGlottisParams; k++)
-    {
-      file << glottisParams[k] << " ";
-    }
-    file << endl;
-
-    file << tube.teethPosition_cm << " " << tube.getVelumOpening_cm2() << " "
-      << tube.tongueTipSideElevation << endl;
-
-    for (k = 0; k < Tube::NUM_PHARYNX_MOUTH_SECTIONS; k++)
-    {
-      file << tube.pharynxMouthSection[k].area_cm2 << " ";
-    }
-    file << endl;
-
-    for (k = 0; k < Tube::NUM_PHARYNX_MOUTH_SECTIONS; k++)
-    {
-      file << tube.pharynxMouthSection[k].length_cm << " ";
-    }
-    file << endl;
-
-    for (k = 0; k < Tube::NUM_PHARYNX_MOUTH_SECTIONS; k++)
-    {
-      file << tube.pharynxMouthSection[k].articulator << " ";
-    }
-    file << endl;
-  }
-
-  // ****************************************************************
-  // Restore the current state of the vocal tract.
-  // ****************************************************************
-
-  gesturalScore->vocalTract->restoreControlParams();
-
-  // Close the file.
-  file.close();
-
-  printf("finished.\n");
-
-  return true;
+  // ... implementation ...
 }
-
+*/
 
 // ****************************************************************************
 /// Parse a text line (string) and obtain the space-separated numeric values.
@@ -985,3 +741,4 @@ bool Synthesizer::parseTextLine(string line, int numValues, double *values)
 }
 
 // ****************************************************************************
+

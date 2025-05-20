@@ -107,20 +107,20 @@ void qMRMLTreeViewPrivate::init()
 
   // rename node
   this->RenameAction =
-    new QAction(qMRMLTreeView::tr("Rename"),this->NodeMenu);
+    new QAction(qMRMLTreeView::tr("重命名"),this->NodeMenu);
   this->NodeMenu->addAction(this->RenameAction);
   QObject::connect(this->RenameAction, SIGNAL(triggered()),
                    q, SLOT(renameCurrentNode()));
 
   // delete node
   this->DeleteAction =
-    new QAction(qMRMLTreeView::tr("Delete"),this->NodeMenu);
+    new QAction(qMRMLTreeView::tr("删除"),this->NodeMenu);
   this->NodeMenu->addAction(this->DeleteAction);
   QObject::connect(this->DeleteAction, SIGNAL(triggered()),
                    q, SLOT(deleteCurrentNode()));
   // EditAction is hidden by default
   this->EditAction =
-    new QAction(qMRMLTreeView::tr("Edit properties..."), this->NodeMenu);
+    new QAction(qMRMLTreeView::tr("编辑属性..."), this->NodeMenu);
   QObject::connect(this->EditAction, SIGNAL(triggered()),
                    q, SLOT(editCurrentNode()));
   this->SceneMenu = new QMenu(q);

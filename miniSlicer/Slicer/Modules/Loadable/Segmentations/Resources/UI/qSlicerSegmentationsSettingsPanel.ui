@@ -103,7 +103,7 @@ Note: This applies to segment tables in Segment Editor and Segmentations modules
       <string>This terminology will be used by default for new segments in an empty segmentation.</string>
      </property>
      <property name="text">
-      <string>(set)</string>
+      <string>（设置）</string>
      </property>
     </widget>
    </item>

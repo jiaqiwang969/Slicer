@@ -1,0 +1,16 @@
+=== 当前中心线 (Markups Curve) ===
+  • Centerline curve (0)   (ID: vtkMRMLMarkupsCurveNode1)
+
+=== 当前中心线 (Model) ===
+  • Centerline model   (ID: vtkMRMLModelNode5)
+
+=== 场景中所有 Model 节点 ===
+   Red Volume Slice   (ID: vtkMRMLModelNode1)
+   Green Volume Slice   (ID: vtkMRMLModelNode2)
+   Yellow Volume Slice   (ID: vtkMRMLModelNode3)
+   s1-01-bahn-tense-a-printable-model   (ID: vtkMRMLModelNode4)
+ ★ Centerline model   (ID: vtkMRMLModelNode5)
+   s1-01-bahn-tense-a-printable-model_solid   (ID: vtkMRMLModelNode8)
+
+[✓] 列表生成完毕 — 以上名称可直接用 slicer.util.getNode("<name>") 获取节点对象
+>>>

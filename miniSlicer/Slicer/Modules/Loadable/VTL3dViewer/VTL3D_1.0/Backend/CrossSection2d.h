@@ -2,7 +2,7 @@
 // This file is part of VocalTractLab3D.
 // Copyright (C) 2022, Peter Birkholz, Dresden, Germany
 // www.vocaltractlab.de
-// author: Peter Birkholz and R�mi Blandin
+// author: Peter Birkholz and Rmi Blandin
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -85,6 +85,11 @@ enum integrationMethodRadiation {
 
 struct simulationParameters
 {
+  // -------- 介质相关参数 --------
+  enum mediumType { AIR, SEA, HELIUM } medium = AIR; // 默认空气
+  double salinity = 35.0;  // psu，仅当 medium==SEA 时使用
+  double depth = 0.0;      // m，仅当 medium==SEA 时使用
+
   double temperature;
   double volumicMass;
   double sndSpeed;

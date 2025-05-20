@@ -1,0 +1,212 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{ctex}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{geometry}
+
+\geometry{a4paper,left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+
+\title{声道轮廓 CSV 提取方法}
+\author{基于 3D Slicer 的实现}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+本文档总结了从 3D Slicer 中提取声道轮廓并转换为 VTL3D/Acoustic3dSimulation 所需 CSV 格式的方法。主要包括 n 个截面（2 个端点和 n-2 个中心线点）的切割、局部坐标系建立、轮廓点处理及规范化 CSV 输出等关键步骤。特别关注了轮廓方向、法线计算和坐标转换中的技术细节，以确保数据连贯性与正确性。
+\end{abstract}
+
+\section{背景}
+
+声学研究中，声道三维模型的二维截面数据对声学仿真具有重要意义。本文介绍的方法从 3D Slicer 环境中导出的封闭腔体模型出发，按照特定格式提取截面轮廓信息，以便于后续声学模拟软件使用。
+
+\subsection{CSV 文件规范}
+
+根据 Acoustic3dSimulation::extractContoursFromCsvFile 函数的需求，CSV 文件格式定义如下：
+
+\begin{itemize}
+  \item 文件由成对的行组成，每对行代表一个声道横截面。
+  \item 奇数行：包含全局 X 坐标和局部 Y 坐标相关数据：
+    \begin{enumerate}
+      \item 中心点全局 X 坐标 (double)
+      \item 法线全局 X 分量 (double)
+      \item 起始端缩放因子 (double)
+      \item 轮廓点局部 Y 坐标序列 (double...)
+    \end{enumerate}
+  \item 偶数行：包含全局 Y 坐标和局部 Z 坐标相关数据：
+    \begin{enumerate}
+      \item 中心点全局 Y 坐标 (double)
+      \item 法线全局 Y 分量 (double)
+      \item 末端缩放因子 (double)
+      \item 轮廓点局部 Z 坐标序列 (double...)
+    \end{enumerate}
+  \item 字段分隔符为分号 (';')
+\end{itemize}
+
+\section{方法概述}
+
+整个提取过程可分为以下几个主要步骤：
+
+\begin{enumerate}
+  \item 组合端点与中心线，得到 n 个采样点
+  \item 计算每个采样点的切向量（法线方向）
+  \item 设置 vtkCutter 对每个点进行切片
+  \item 建立局部坐标系并计算轮廓点局部坐标
+  \item 按极角排序轮廓点
+  \item 按规定格式写入 CSV
+\end{enumerate}
+
+\section{实现细节}
+
+\subsection{中心线采样与切向量}
+
+首先从两个端点（Endpoints）和中心线曲线（Centerline curve）读取控制点，组合为完整的采样点序列：
+
+\begin{equation}
+\text{pts} = [P_{\text{start}}, \text{curve\_pts}, P_{\text{end}}]
+\end{equation}
+
+对每个采样点，使用三点滑动平均计算切向量 $\vec{t}$：
+
+\begin{equation}
+\vec{v}_i = 
+\begin{cases}
+\vec{p}_{i+1} - \vec{p}_i, & i = 0 \\
+\frac{\vec{p}_{i+1} - \vec{p}_{i-1}}{2}, & 0 < i < n-1 \\
+\vec{p}_i - \vec{p}_{i-1}, & i = n-1
+\end{cases}
+\end{equation}
+
+\begin{equation}
+\vec{t}_i = 
+\begin{cases}
+\vec{t}_1, & i = 0 \\
+\frac{\vec{v}_{i-1} + \vec{v}_i + \vec{v}_{i+1}}{3}, & 0 < i < n-1 \\
+\vec{t}_{n-2}, & i = n-1
+\end{cases}
+\end{equation}
+
+然后对每个 $\vec{t}_i$ 进行归一化，得到单位切向量，用作截面法线。
+
+\subsection{局部坐标系建立}
+
+对每个采样点构建局部坐标系 $(\vec{n}, \vec{t}, \vec{b})$，其中：
+
+\begin{itemize}
+  \item $\vec{n}$ 为截面法线（即切向量）
+  \item $\vec{t}$ 为截面内的"局部 Y 轴"
+  \item $\vec{b}$ 为截面内的"局部 Z 轴"
+\end{itemize}
+
+计算方法如下：
+
+\begin{align}
+\vec{n} &= \text{normalize}(\vec{t}_i) \\
+\vec{r} &= 
+\begin{cases}
+(0,0,1), & \text{if } |n_z| < 0.9 \\
+(0,1,0), & \text{otherwise}
+\end{cases} \\
+\vec{t}_{\text{tmp}} &= \vec{n} \times \vec{r} \\
+\vec{t} &= \text{normalize}(\vec{t}_{\text{tmp}} \cdot [1, -1, 1]) \\
+\vec{b} &= \vec{n} \times \vec{t}
+\end{align}
+
+其中，$\vec{t}$ 计算中的乘法 $[1, -1, 1]$ 用于翻转 Y 分量，确保法线在 CSV 中的正确表示。
+
+\subsection{轮廓点提取与排序}
+
+使用 vtkCutter 和平面方程提取每个采样点的轮廓点：
+
+\begin{equation}
+\text{plane}(\vec{x}) = \vec{n} \cdot (\vec{x} - \vec{p}) = 0
+\end{equation}
+
+对每个轮廓点计算局部坐标：
+
+\begin{align}
+\text{local\_y} &= (\vec{pts} - \vec{p}) \cdot \vec{t} \\
+\text{local\_z} &= (\vec{pts} - \vec{p}) \cdot \vec{b}
+\end{align}
+
+为保证轮廓点顺序一致，根据极角排序：
+
+\begin{align}
+\theta_i &= \arctan2(\text{local\_z}_i, \text{local\_y}_i) \\
+\text{sort\_idx} &= \text{argsort}(\theta_i)
+\end{align}
+
+可通过 clockwiseContour 参数选择顺时针或逆时针排序。
+
+\subsection{CSV 格式输出}
+
+将处理后的数据按规定格式写入 CSV：
+
+\begin{itemize}
+  \item 奇数行：$[P_x, t_x, \text{scale}, \text{local\_y}_0, \text{local\_y}_1, ...]$
+  \item 偶数行：$[P_y, t_y, \text{scale}, \text{local\_z}_0, \text{local\_z}_1, ...]$
+\end{itemize}
+
+其中，$t_x$ 和 $t_y$ 分别是局部 Y 轴 $\vec{t}$ 的 X 和 Y 分量，表示截面内的参考方向。
+
+\section{关键技术点}
+
+\subsection{法线方向修正}
+
+最初遇到的主要问题是截面的"法线"方向在 CSV 中的表示：
+\begin{itemize}
+  \item CSV 中的"法线"实际指的是截面平面内的一个基向量（而非法向量）
+  \item 需要确保这个基向量的 Y 分量符号一致
+\end{itemize}
+
+最终通过在 compute\_reference\_axes 函数中对叉积结果的 Y 分量取反解决：
+\begin{equation}
+\vec{t} = \text{normalize}(\vec{n} \times \vec{r} \cdot [1, -1, 1])
+\end{equation}
+
+\subsection{轮廓点排序}
+
+轮廓点必须按顺时针或逆时针排序。通过计算轮廓点在局部坐标系中的极角，再用 argsort 处理：
+\begin{equation}
+\theta_i = \arctan2(\text{local\_z}_i, \text{local\_y}_i)
+\end{equation}
+
+这确保了轮廓点在每个截面内的一致性，便于后续渲染和分析。
+
+\subsection{缩放处理}
+
+脚本支持多种缩放策略：
+\begin{itemize}
+  \item 可选将坐标单位从 mm 转换为 cm
+  \item 可选使用等效半径归一化轮廓点坐标
+  \item 控制是否基于截面面积计算缩放因子
+\end{itemize}
+
+\section{使用说明}
+
+在 3D Slicer Python Console 中执行：
+\begin{verbatim}
+>>> exec(open('/path/to/slicer_extract_contour_csv.py').read())
+\end{verbatim}
+
+关键可调参数包括：
+\begin{itemize}
+  \item fiducialName, curveName, modelName：数据节点名称
+  \item outputDir, csvName：输出位置
+  \item clockwiseContour：轮廓点排序方向
+  \item use\_cm\_unit：单位转换
+  \item scale\_by\_radius：缩放策略
+\end{itemize}
+
+\section{总结}
+
+本文档描述的方法实现了从 3D Slicer 模型到 VTL3D/Acoustic3dSimulation 所需 CSV 格式的准确转换。通过精心设计的局部坐标系建立、轮廓点排序和法线方向处理，解决了坐标转换和数据连贯性的难点。所得 CSV 文件可被下游声学仿真工具直接使用，为声道声学特性研究提供了基础数据。
+
+\end{document} 

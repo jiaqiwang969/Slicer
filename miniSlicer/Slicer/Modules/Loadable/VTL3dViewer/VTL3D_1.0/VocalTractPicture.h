@@ -19,13 +19,6 @@
 //
 // ****************************************************************************
 
-#ifndef __VOCALTRACT_PICTURE_H__
-#define __VOCALTRACT_PICTURE_H__
-
-#ifdef __WXQT__
-#  include "VocalTractPictureStub.h"
-#else
-
 #include <wx/wx.h>
 #include <wx/glcanvas.h>
 #include <GL/gl.h>
@@ -33,6 +26,9 @@
 #include <fstream>
 #include <sstream>
 #include "Backend/VocalTract.h"
+
+#ifndef __VOCALTRACT_PICTURE_H__
+#define __VOCALTRACT_PICTURE_H__
 
 // ****************************************************************************
 // ****************************************************************************
@@ -209,7 +205,5 @@ private:
 };
 
 // ****************************************************************************
-
-#endif // __WXQT__
 
 #endif

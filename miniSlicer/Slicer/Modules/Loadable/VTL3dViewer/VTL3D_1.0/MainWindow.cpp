@@ -34,31 +34,6 @@
 #include <wx/clipbrd.h>
 #include <wx/busyinfo.h>
 
-// For logging - ensure these are available or adapt as needed
-#include <QDebug> 
-#include <QDateTime>
-#include <QFile>
-#include <QTextStream>
-#include <QStandardPaths>
-
-// Logging function specific to MainWindow.cpp, appending to the same global log
-static void writeMainWindowLog(const QString& message)
-{
-  QString logPath = QStandardPaths::writableLocation(QStandardPaths::TempLocation) + "/VTL3dViewerDebug.log";
-  QFile logFile(logPath);
-  if (logFile.open(QIODevice::Append | QIODevice::Text))
-  {
-    QTextStream stream(&logFile);
-    // Add a [MainWindow] prefix to distinguish from [Factory] logs
-    stream << QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz") << " [MainWindow] - " << message << "\\n";
-    logFile.close();
-  }
-  else
-  {
-    std::cerr << "MainWindow Log (file error): " << message.toStdString() << std::endl;
-  }
-}
-
 using namespace std;
 
 // ****************************************************************************
@@ -78,11 +53,6 @@ static const int IDM_SAVE_WAV_EGG           = 1201;
 static const int IDM_LOAD_WAV               = 1203;
 static const int IDM_SAVE_WAV               = 1204;
 static const int IDM_SAVE_WAV_AS_TXT        = 1205;
-static const int IDM_LOAD_SEGMENT_SEQUENCE  = 1208;
-static const int IDM_SAVE_SEGMENT_SEQUENCE  = 1209;
-static const int IDM_IMPORT_SEGMENT_SEQUENCE_ESPS = 1210;
-static const int IDM_LOAD_GESTURAL_SCORE    = 1220;
-static const int IDM_SAVE_GESTURAL_SCORE    = 1221;
 static const int IDM_LOAD_SPEAKER           = 1222;
 static const int IDM_SAVE_SPEAKER           = 1223;
 
@@ -91,15 +61,6 @@ static const int IDM_NORMALIZE_AMPLITUDE    = 2501;
 static const int IDM_SCALE_AMPLITUDE_UP     = 2502;
 static const int IDM_SCALE_AMPLITUDE_DOWN   = 2503;
 static const int IDM_REDUCE_CONSONANT_VARIABILITY = 2504;
-
-static const int IDM_CHANGE_GESTURAL_SCORE_F0_OFFSET = 2510;
-static const int IDM_CHANGE_GESTURAL_SCORE_F0_RANGE = 2511;
-static const int IDM_CHANGE_GESTURAL_SCORE_F0_TARGET_SLOPES = 2513;
-static const int IDM_SUBSTITUTE_GESTURAL_SCORE_GLOTTAL_SHAPES = 2514;
-static const int IDM_CHANGE_GESTURAL_SCORE_SUBGLOTTAL_PRESSURE = 2515;
-static const int IDM_GET_GESTURAL_SCORE_F0_STATISTICS = 2516;
-static const int IDM_CHANGE_GESTURAL_SCORE_DURATION = 2517;
-static const int IDM_CHANGE_GESTURAL_SCORE_TIME_CONSTANTS = 2518;
 
 static const int IDM_EXPORT_AREA_FUNCTION   = 1230;
 static const int IDM_EXPORT_CROSS_SECTIONS = 1231;
@@ -115,10 +76,8 @@ static const int IDM_EXPORT_VIDEO_FRAMES     = 1239;
 static const int IDM_EXPORT_TRANSFER_FUNCTIONS_FROM_SCORE = 1241;
 static const int IDM_EXPORT_CROSS_SECTIONS_FROM_SCORE = 1242;
 
-static const int IDM_SHOW_VOCAL_TRACT_DIALOG  = 1250;
 static const int IDM_SHOW_VOCAL_TRACT_SHAPES  = 1251;
 static const int IDM_SHOW_PHONETIC_PARAMS     = 1252;
-static const int IDM_SHOW_ANATOMY_PARAMS      = 1253;
 static const int IDM_SHOW_FDS_OPTIONS_DIALOG  = 1254;
 static const int IDM_SHOW_TDS_OPTIONS_DIALOG  = 1255;
 static const int IDM_SHOW_VOCAL_FOLD_DIALOG   = 1256;
@@ -127,8 +86,6 @@ static const int IDM_SHOW_LF_MODEL_DIALOG     = 1257;
 static const int IDM_GESTURAL_SCORE_FILE_TO_AUDIO = 1260;
 static const int IDM_TUBE_SEQUENCE_FILE_TO_AUDIO = 1261;
 static const int IDM_TRACT_SEQUENCE_FILE_TO_AUDIO = 1262;
-static const int IDM_GESTURAL_SCORE_TO_TUBE_SEQUENCE_FILE = 1263;
-static const int IDM_GESTURAL_SCORE_TO_TRACT_SEQUENCE_FILE = 1264;
 
 static const int IDM_HERTZ_TO_SEMITONES     = 1270;  
 
@@ -138,24 +95,22 @@ static const int IDM_CLEAR_MAIN_TRACK       = 1301;
 static const int IDM_CLEAR_EGG_TRACK        = 1302;
 static const int IDM_CLEAR_EXTRA_TRACK      = 1303;
 static const int IDM_CLEAR_ALL_TRACKS       = 1304;
-static const int IDM_CLEAR_GESTURAL_SCORE   = 1305;
-static const int IDM_CLEAR_SEGMENT_SEQUENCE = 1306;
 static const int IDM_CLEAR_ANALYSIS_TRACKS  = 1307;
 
 // Accelerator keys
-static const int IDK_CTRL_LEFT              = 1900;
-static const int IDK_CTRL_RIGHT             = 1901;
-static const int IDK_SHIFT_LEFT             = 1902;
-static const int IDK_SHIFT_RIGHT            = 1903;
-static const int IDK_CTRL_LESS              = 1904;
-static const int IDK_CTRL_DELETE            = 1905;
-static const int IDK_CTRL_INSERT            = 1906;
-static const int IDK_F6                     = 1908;
-static const int IDK_F7                     = 1909;
-static const int IDK_F8                     = 1910;
-static const int IDK_F9                     = 1911;
-static const int IDK_F11                    = 1912;
-static const int IDK_F12                    = 1913;
+// static const int IDK_CTRL_LEFT              = 1900; // Removed
+// static const int IDK_CTRL_RIGHT             = 1901; // Removed
+// static const int IDK_SHIFT_LEFT             = 1902; // Removed
+// static const int IDK_SHIFT_RIGHT            = 1903; // Removed
+// static const int IDK_CTRL_LESS              = 1904; // Removed
+// static const int IDK_CTRL_DELETE            = 1905; // Removed
+// static const int IDK_CTRL_INSERT            = 1906; // Removed
+// static const int IDK_F6                     = 1908; // Removed
+// static const int IDK_F7                     = 1909; // Removed
+// static const int IDK_F8                     = 1910; // Removed
+// static const int IDK_F9                     = 1911; // Removed
+// static const int IDK_F11                    = 1912; // Removed
+// static const int IDK_F12                    = 1913; // Removed
 
 
 // ****************************************************************************
@@ -171,11 +126,6 @@ BEGIN_EVENT_TABLE(MainWindow, wxFrame)
   EVT_MENU(IDM_LOAD_WAV, MainWindow::OnLoadWav)
   EVT_MENU(IDM_SAVE_WAV, MainWindow::OnSaveWav)
   EVT_MENU(IDM_SAVE_WAV_AS_TXT, MainWindow::OnSaveWavAsTxt)
-  EVT_MENU(IDM_LOAD_SEGMENT_SEQUENCE, MainWindow::OnLoadSegmentSequence)
-  EVT_MENU(IDM_SAVE_SEGMENT_SEQUENCE, MainWindow::OnSaveSegmentSequence)
-  EVT_MENU(IDM_IMPORT_SEGMENT_SEQUENCE_ESPS, MainWindow::OnImportSegmentSequenceEsps)
-  EVT_MENU(IDM_LOAD_GESTURAL_SCORE, MainWindow::OnLoadGesturalScore)
-  EVT_MENU(IDM_SAVE_GESTURAL_SCORE, MainWindow::OnSaveGesturalScore)
   EVT_MENU(IDM_LOAD_SPEAKER, MainWindow::OnLoadSpeaker)
   EVT_MENU(IDM_SAVE_SPEAKER, MainWindow::OnSaveSpeaker)
   EVT_MENU(wxID_EXIT, MainWindow::OnExit)
@@ -185,15 +135,6 @@ BEGIN_EVENT_TABLE(MainWindow, wxFrame)
   EVT_MENU(IDM_SCALE_AMPLITUDE_UP, MainWindow::OnScaleAmplitudeUp)
   EVT_MENU(IDM_SCALE_AMPLITUDE_DOWN, MainWindow::OnScaleAmplitudeDown)
   EVT_MENU(IDM_REDUCE_CONSONANT_VARIABILITY, MainWindow::OnReduceConsonantVariability)
-
-  EVT_MENU(IDM_CHANGE_GESTURAL_SCORE_F0_OFFSET, MainWindow::OnChangeGesturalScoreF0Offset)
-  EVT_MENU(IDM_CHANGE_GESTURAL_SCORE_F0_RANGE, MainWindow::OnChangeGesturalScoreF0Range)
-  EVT_MENU(IDM_CHANGE_GESTURAL_SCORE_F0_TARGET_SLOPES, MainWindow::OnChangeGesturalScoreF0TargetSlopes)
-  EVT_MENU(IDM_SUBSTITUTE_GESTURAL_SCORE_GLOTTAL_SHAPES, MainWindow::OnSubstituteGesturalScoreGlottalShapes)
-  EVT_MENU(IDM_CHANGE_GESTURAL_SCORE_SUBGLOTTAL_PRESSURE, MainWindow::OnChangeGesturalScoreSubglottalPressure)
-  EVT_MENU(IDM_GET_GESTURAL_SCORE_F0_STATISTICS, MainWindow::OnGetGesturalScoreF0Statistics)
-  EVT_MENU(IDM_CHANGE_GESTURAL_SCORE_DURATION, MainWindow::OnChangeGesturalScoreDuration)
-  EVT_MENU(IDM_CHANGE_GESTURAL_SCORE_TIME_CONSTANTS, MainWindow::OnChangeGesturalScoreTimeConstants)
 
   EVT_MENU(IDM_EXPORT_AREA_FUNCTION, MainWindow::OnExportAreaFunction)
   EVT_MENU(IDM_EXPORT_CROSS_SECTIONS, MainWindow::OnExportCrossSections)
@@ -205,25 +146,20 @@ BEGIN_EVENT_TABLE(MainWindow, wxFrame)
   EVT_MENU(IDM_EXPORT_VT_CONTOUR_SVG, MainWindow::OnExportContourSvg)
   EVT_MENU(IDM_EXPORT_PRIMARY_SPECTRUM, MainWindow::OnExportPrimarySpectrum)
   EVT_MENU(IDM_EXPORT_SECONDARY_SPECTRUM, MainWindow::OnExportSecondarySpectrum)
-  EVT_MENU(IDM_EXPORT_EMA_TRAJECTORIES, MainWindow::OnExportEmaTrajectories)
-  EVT_MENU(IDM_EXPORT_VIDEO_FRAMES, MainWindow::OnExportVocalTractVideoFrames)
-  EVT_MENU(IDM_EXPORT_TRANSFER_FUNCTIONS_FROM_SCORE, MainWindow::OnExportTransferFunctionsFromScore)
-  EVT_MENU(IDM_EXPORT_CROSS_SECTIONS_FROM_SCORE, MainWindow::OnExportCrossSectionsFromScore)
+  // EVT_MENU(IDM_EXPORT_EMA_TRAJECTORIES, MainWindow::OnExportEmaTrajectories)
+  // EVT_MENU(IDM_EXPORT_VIDEO_FRAMES, MainWindow::OnExportVocalTractVideoFrames)
+  // EVT_MENU(IDM_EXPORT_TRANSFER_FUNCTIONS_FROM_SCORE, MainWindow::OnExportTransferFunctionsFromScore)
+  // EVT_MENU(IDM_EXPORT_CROSS_SECTIONS_FROM_SCORE, MainWindow::OnExportCrossSectionsFromScore)
 
-  EVT_MENU(IDM_SHOW_VOCAL_TRACT_DIALOG, MainWindow::OnShowVocalTractDialog)
   EVT_MENU(IDM_SHOW_VOCAL_TRACT_SHAPES, MainWindow::OnShowVocalTractShapes)
   EVT_MENU(IDM_SHOW_PHONETIC_PARAMS, MainWindow::OnShowPhoneticParameters)
-  EVT_MENU(IDM_SHOW_ANATOMY_PARAMS, MainWindow::OnShowAnatomyParameters)
   EVT_MENU(IDM_SHOW_FDS_OPTIONS_DIALOG, MainWindow::OnShowFdsOptionsDialog)
   EVT_MENU(IDM_SHOW_TDS_OPTIONS_DIALOG, MainWindow::OnShowTdsOptionsDialog)
   EVT_MENU(IDM_SHOW_VOCAL_FOLD_DIALOG, MainWindow::OnShowVocalFoldDialog)
   EVT_MENU(IDM_SHOW_LF_MODEL_DIALOG, MainWindow::OnShowLfModelDialog)
 
-  EVT_MENU(IDM_GESTURAL_SCORE_FILE_TO_AUDIO, MainWindow::OnGesturalScoreFileToAudio)
   EVT_MENU(IDM_TUBE_SEQUENCE_FILE_TO_AUDIO, MainWindow::OnTubeSequenceFileToAudio)
   EVT_MENU(IDM_TRACT_SEQUENCE_FILE_TO_AUDIO, MainWindow::OnTractSequenceFileToAudio)
-  EVT_MENU(IDM_GESTURAL_SCORE_TO_TUBE_SEQUENCE_FILE, MainWindow::OnGesturalScoreToTubeSequenceFile)
-  EVT_MENU(IDM_GESTURAL_SCORE_TO_TRACT_SEQUENCE_FILE, MainWindow::OnGesturalScoreToTractSequenceFile)
 
   EVT_MENU(IDM_HERTZ_TO_SEMITONES, MainWindow::OnHertzToSemitones)
 
@@ -241,24 +177,22 @@ BEGIN_EVENT_TABLE(MainWindow, wxFrame)
   EVT_MENU(IDM_CLEAR_EGG_TRACK, MainWindow::OnClearEggTrack)
   EVT_MENU(IDM_CLEAR_EXTRA_TRACK, MainWindow::OnClearExtraTrack)
   EVT_MENU(IDM_CLEAR_ALL_TRACKS, MainWindow::OnClearAudioTracks)
-  EVT_MENU(IDM_CLEAR_GESTURAL_SCORE, MainWindow::OnClearGesturalScore)
-  EVT_MENU(IDM_CLEAR_SEGMENT_SEQUENCE, MainWindow::OnClearSegmentSequence)
   EVT_MENU(IDM_CLEAR_ANALYSIS_TRACKS, MainWindow::OnClearAnalysisTracks)
 
   // Accelerator keys must be handled with a menu event
-  EVT_MENU(IDK_CTRL_LEFT, MainWindow::OnKeyCtrlLeft)
-  EVT_MENU(IDK_CTRL_RIGHT, MainWindow::OnKeyCtrlRight)
-  EVT_MENU(IDK_SHIFT_LEFT, MainWindow::OnKeyShiftLeft)
-  EVT_MENU(IDK_SHIFT_RIGHT, MainWindow::OnKeyShiftRight)
-  EVT_MENU(IDK_CTRL_LESS, MainWindow::OnKeyCtrlLess)
-  EVT_MENU(IDK_CTRL_DELETE, MainWindow::OnKeyCtrlDelete)
-  EVT_MENU(IDK_CTRL_INSERT, MainWindow::OnKeyCtrlInsert)
-  EVT_MENU(IDK_F6, MainWindow::OnKeyF6)
-  EVT_MENU(IDK_F7, MainWindow::OnKeyF7)
-  EVT_MENU(IDK_F8, MainWindow::OnKeyF8)
-  EVT_MENU(IDK_F9, MainWindow::OnKeyF9)
-  EVT_MENU(IDK_F11, MainWindow::OnKeyF11)
-  EVT_MENU(IDK_F12, MainWindow::OnKeyF12)
+  // EVT_MENU(IDK_CTRL_LEFT, MainWindow::OnKeyCtrlLeft) // Removed
+  // EVT_MENU(IDK_CTRL_RIGHT, MainWindow::OnKeyCtrlRight) // Removed
+  // EVT_MENU(IDK_SHIFT_LEFT, MainWindow::OnKeyShiftLeft) // Removed
+  // EVT_MENU(IDK_SHIFT_RIGHT, MainWindow::OnKeyShiftRight) // Removed
+  // EVT_MENU(IDK_CTRL_LESS, MainWindow::OnKeyCtrlLess) // Removed
+  // EVT_MENU(IDK_CTRL_DELETE, MainWindow::OnKeyCtrlDelete) // Removed
+  // EVT_MENU(IDK_CTRL_INSERT, MainWindow::OnKeyCtrlInsert) // Removed
+  // EVT_MENU(IDK_F6, MainWindow::OnKeyF6) // Removed
+  // EVT_MENU(IDK_F7, MainWindow::OnKeyF7) // Removed
+  // EVT_MENU(IDK_F8, MainWindow::OnKeyF8) // Removed
+  // EVT_MENU(IDK_F9, MainWindow::OnKeyF9) // Removed
+  // EVT_MENU(IDK_F11, MainWindow::OnKeyF11) // Removed
+  // EVT_MENU(IDK_F12, MainWindow::OnKeyF12) // Removed
 END_EVENT_TABLE()
 
 
@@ -267,96 +201,57 @@ END_EVENT_TABLE()
 
 MainWindow::MainWindow()
 {
-  writeMainWindowLog("MainWindow constructor started.");
-  try {
-    // Init the audio device
-    writeMainWindowLog("Attempting to initialize sound (initSound)... ");
-    initSound(SAMPLING_RATE); // External/global function
-    writeMainWindowLog("initSound completed.");
-  } catch (const std::exception& e) {
-    writeMainWindowLog(QString("Exception during initSound: %1").arg(e.what()));
-    // Decide if this is fatal or can be handled
-  } catch (...) {
-    writeMainWindowLog("Unknown exception during initSound.");
-  }
+  // Init the audio device
+  
+  printf("Trying to initialize sound ... ");
+  initSound(SAMPLING_RATE);
+  printf("done.\n");
   
   // ****************************************************************
   // Init the variables BEFORE the child widgets.
   // ****************************************************************
-  try {
-    writeMainWindowLog("Initializing member variables (file names, Data, simu3d).");
-    audioFileName = wxFileName("");
-    exportFileName = wxFileName("");
-    writeMainWindowLog("Attempting Data::getInstance()...");
-    data = Data::getInstance(); // Singleton
-    writeMainWindowLog("Data::getInstance() succeeded.");
-    writeMainWindowLog("Attempting Acoustic3dSimulation::getInstance()...");
-    simu3d = Acoustic3dSimulation::getInstance(); // Singleton
-    writeMainWindowLog("Acoustic3dSimulation::getInstance() succeeded.");
-    writeMainWindowLog("Member variables initialized.");
-  } catch (const std::exception& e) {
-    writeMainWindowLog(QString("Exception during member variable initialization (Data/simu3d): %1").arg(e.what()));
-  } catch (...) {
-    writeMainWindowLog("Unknown exception during member variable initialization (Data/simu3d).");
-  }
+
+  audioFileName = wxFileName("");
+  exportFileName = wxFileName("");
+  data = Data::getInstance();
+  simu3d = Acoustic3dSimulation::getInstance();
+
+  // ****************************************************************
+  // Do some unit testing.
+  // ****************************************************************
+
+//  Matrix::test();
+
 
   // ****************************************************************
   // Set window properties and init the widgets.
   // ****************************************************************
-  try {
-    writeMainWindowLog("Attempting wxFrame::Create()...");
-    wxFrame::Create(NULL, wxID_ANY, "VocalTractLab2", wxDefaultPosition, 
-      wxDefaultSize, wxCLOSE_BOX | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | 
-      wxSYSTEM_MENU | wxCAPTION | wxRAISED_BORDER | wxRESIZE_BORDER);
-    writeMainWindowLog("wxFrame::Create() succeeded.");
 
-    writeMainWindowLog("Attempting this->SetLabel(\"VocalTractLab2\")...");
-    this->SetLabel("VocalTractLab2");
-    writeMainWindowLog("this->SetLabel() succeeded.");
-  } catch (const std::exception& e) {
-    writeMainWindowLog(QString("Exception during wxFrame::Create or SetLabel: %1").arg(e.what()));
-  } catch (...) {
-    writeMainWindowLog("Unknown exception during wxFrame::Create or SetLabel.");
-  }
+	wxFrame::Create(NULL, wxID_ANY, "pipeSonic", wxDefaultPosition, 
+    wxDefaultSize, wxCLOSE_BOX | wxMINIMIZE_BOX | wxMAXIMIZE_BOX | 
+    wxSYSTEM_MENU | wxCAPTION | wxRAISED_BORDER | wxRESIZE_BORDER);
+
+  // Output the title of the main window.
+
+  this->SetLabel("pipeSonic");
 
   // ****************************************************************
   // Init all widgets.
   // ****************************************************************
-  try {
-    writeMainWindowLog("Attempting VocalTractDialog::getInstance()...");
-    VocalTractDialog *vocalTractDialog = VocalTractDialog::getInstance();
-    if(vocalTractDialog) writeMainWindowLog("VocalTractDialog::getInstance() succeeded.");
-    else writeMainWindowLog("VocalTractDialog::getInstance() returned NULL!");
-  } catch (const std::exception& e) {
-    writeMainWindowLog(QString("Exception during VocalTractDialog::getInstance(): %1").arg(e.what()));
-  } catch (...) {
-    writeMainWindowLog("Unknown exception during VocalTractDialog::getInstance().");
-  }
-  
-  try {
-    writeMainWindowLog("Attempting this->initWidgets()...");
-    initWidgets(); // Calls the member function
-    writeMainWindowLog("this->initWidgets() completed.");
-  } catch (const std::exception& e) {
-    writeMainWindowLog(QString("Exception during initWidgets(): %1").arg(e.what()));
-  } catch (...) {
-    writeMainWindowLog("Unknown exception during initWidgets().");
-  }
 
-  try {
-    writeMainWindowLog("Attempting this->SetDoubleBuffered(true)...");
-    this->SetDoubleBuffered(true);
-    writeMainWindowLog("this->SetDoubleBuffered(true) succeeded.");
+  // Init the vocal tract dialog before all other widgets/pages,
+  // because the pointer to the vocal tract picture is needed
+  // for the initialization of the pictures on the vocal tract page.
 
-    writeMainWindowLog("Attempting this->Maximize()...");
-    this->Maximize();
-    writeMainWindowLog("this->Maximize() succeeded.");
-  } catch (const std::exception& e) {
-    writeMainWindowLog(QString("Exception during SetDoubleBuffered or Maximize: %1").arg(e.what()));
-  } catch (...) {
-    writeMainWindowLog("Unknown exception during SetDoubleBuffered or Maximize.");
-  }
-  writeMainWindowLog("MainWindow constructor finished.");
+  // VocalTractDialog *vocalTractDialog = VocalTractDialog::getInstance(); // Removed
+
+  initWidgets();
+
+  // Make the main window double buffered to avoid any flickering
+  // of the child-windows and during resizing.
+  this->SetDoubleBuffered(true);
+
+  this->Maximize();
 }
 
 
@@ -369,34 +264,34 @@ void MainWindow::initWidgets()
   // Accellerator keys.
   // ****************************************************************
 
-  int numAccels = 0;
-  wxAcceleratorEntry entries[256];
+  // int numAccels = 0; // Removed
+  // wxAcceleratorEntry entries[256]; // Removed
 
-  entries[numAccels++].Set(wxACCEL_CTRL, WXK_LEFT,  IDK_CTRL_LEFT);
-  entries[numAccels++].Set(wxACCEL_CTRL, WXK_RIGHT, IDK_CTRL_RIGHT);
-  entries[numAccels++].Set(wxACCEL_SHIFT, WXK_LEFT,  IDK_SHIFT_LEFT);
-  entries[numAccels++].Set(wxACCEL_SHIFT, WXK_RIGHT, IDK_SHIFT_RIGHT);
-  entries[numAccels++].Set(wxACCEL_CTRL, (int)'R',  IDB_TOOLBAR_RECORD);
-  entries[numAccels++].Set(wxACCEL_CTRL, (int)'P',  IDB_TOOLBAR_PLAY_ALL);
-  entries[numAccels++].Set(wxACCEL_CTRL, WXK_SPACE, IDB_TOOLBAR_PLAY_PART);
-  entries[numAccels++].Set(wxACCEL_CTRL, (int)'C',  IDB_TOOLBAR_CLEAR);
-  entries[numAccels++].Set(wxACCEL_NORMAL, WXK_F2,  IDM_SAVE_SPEAKER);
-  entries[numAccels++].Set(wxACCEL_NORMAL, WXK_F3,  IDM_LOAD_SPEAKER);
-  entries[numAccels++].Set(wxACCEL_NORMAL, WXK_F4,  IDM_SAVE_SEGMENT_SEQUENCE);
-  entries[numAccels++].Set(wxACCEL_NORMAL, WXK_F5,  IDM_LOAD_SEGMENT_SEQUENCE);
-  entries[numAccels++].Set(wxACCEL_NORMAL, WXK_F6,  IDK_F6);
-  entries[numAccels++].Set(wxACCEL_NORMAL, WXK_F7,  IDK_F7);
-  entries[numAccels++].Set(wxACCEL_NORMAL, WXK_F8,  IDK_F8);
-  entries[numAccels++].Set(wxACCEL_NORMAL, WXK_F9, IDK_F9);
-  entries[numAccels++].Set(wxACCEL_CTRL, (int)'<',  IDK_CTRL_LESS);
-  entries[numAccels++].Set(wxACCEL_CTRL, WXK_DELETE,  IDK_CTRL_DELETE);
-  entries[numAccels++].Set(wxACCEL_CTRL, WXK_INSERT,  IDK_CTRL_INSERT);
-  entries[numAccels++].Set(wxACCEL_CTRL, (int)'N',  IDM_NORMALIZE_AMPLITUDE);
-  entries[numAccels++].Set(wxACCEL_NORMAL, WXK_F11,  IDK_F11);
-  entries[numAccels++].Set(wxACCEL_NORMAL, WXK_F12,  IDK_F12);
+  // entries[numAccels++].Set(wxACCEL_CTRL, WXK_LEFT,  IDK_CTRL_LEFT); // Removed
+  // entries[numAccels++].Set(wxACCEL_CTRL, WXK_RIGHT, IDK_CTRL_RIGHT); // Removed
+  // entries[numAccels++].Set(wxACCEL_SHIFT, WXK_LEFT,  IDK_SHIFT_LEFT); // Removed
+  // entries[numAccels++].Set(wxACCEL_SHIFT, WXK_RIGHT, IDK_SHIFT_RIGHT); // Removed
+  // entries[numAccels++].Set(wxACCEL_CTRL, (int)'R',  IDB_TOOLBAR_RECORD); // Retained for toolbar/menu, accelerator part removed
+  // entries[numAccels++].Set(wxACCEL_CTRL, (int)'P',  IDB_TOOLBAR_PLAY_ALL); // Retained for toolbar/menu, accelerator part removed
+  // entries[numAccels++].Set(wxACCEL_CTRL, WXK_SPACE, IDB_TOOLBAR_PLAY_PART); // Retained for toolbar/menu, accelerator part removed
+  // entries[numAccels++].Set(wxACCEL_CTRL, (int)'C',  IDB_TOOLBAR_CLEAR); // Retained for toolbar/menu, accelerator part removed
+  // entries[numAccels++].Set(wxACCEL_NORMAL, WXK_F2,  IDM_SAVE_SPEAKER); // Retained for toolbar/menu, accelerator part removed
+  // entries[numAccels++].Set(wxACCEL_NORMAL, WXK_F3,  IDM_LOAD_SPEAKER); // Retained for toolbar/menu, accelerator part removed
+  // entries[numAccels++].Set(wxACCEL_NORMAL, WXK_F4,  IDM_SAVE_SEGMENT_SEQUENCE); // Retained for toolbar/menu, accelerator part removed
+  // entries[numAccels++].Set(wxACCEL_NORMAL, WXK_F5,  IDM_LOAD_SEGMENT_SEQUENCE); // Retained for toolbar/menu, accelerator part removed
+  // entries[numAccels++].Set(wxACCEL_NORMAL, WXK_F6,  IDK_F6); // Removed
+  // entries[numAccels++].Set(wxACCEL_NORMAL, WXK_F7,  IDK_F7); // Removed
+  // entries[numAccels++].Set(wxACCEL_NORMAL, WXK_F8,  IDK_F8); // Removed
+  // entries[numAccels++].Set(wxACCEL_NORMAL, WXK_F9, IDK_F9); // Removed
+  // entries[numAccels++].Set(wxACCEL_CTRL, (int)'<',  IDK_CTRL_LESS); // Removed
+  // entries[numAccels++].Set(wxACCEL_CTRL, WXK_DELETE,  IDK_CTRL_DELETE); // Removed
+  // entries[numAccels++].Set(wxACCEL_CTRL, WXK_INSERT,  IDK_CTRL_INSERT); // Removed
+  // entries[numAccels++].Set(wxACCEL_CTRL, (int)'N',  IDM_NORMALIZE_AMPLITUDE); // Retained for toolbar/menu, accelerator part removed
+  // entries[numAccels++].Set(wxACCEL_NORMAL, WXK_F11,  IDK_F11); // Removed
+  // entries[numAccels++].Set(wxACCEL_NORMAL, WXK_F12,  IDK_F12); // Removed
 
-  wxAcceleratorTable accel(numAccels, entries);
-  this->SetAcceleratorTable(accel);
+  // wxAcceleratorTable accel(numAccels, entries); // Removed
+  // this->SetAcceleratorTable(accel); // Removed
 
 
   // ****************************************************************
@@ -409,116 +304,116 @@ void MainWindow::initWidgets()
   // Create the menu.
   // ****************************************************************
 
-  wxMenu *menu = NULL;
-  wxMenu *subMenu = NULL;
+  // wxMenu *menu = NULL;
+  // wxMenu *subMenu = NULL;
   
-  menuBar = new wxMenuBar();
-  menu = new wxMenu();
-  menu->Append(IDM_LOAD_WAV_EGG, "Load WAV+EGG (stereo)");
-  menu->Append(IDM_SAVE_WAV_EGG, "Save WAV+EGG (stereo)");
-  menu->Append(IDM_LOAD_WAV, "Load WAV");
-  menu->Append(IDM_SAVE_WAV, "Save WAV");
-  menu->Append(IDM_SAVE_WAV_AS_TXT, "Save WAV as TXT");
-  menu->AppendSeparator();
-  menu->Append(IDM_LOAD_GESTURAL_SCORE, "Load gestural score");
-  menu->Append(IDM_SAVE_GESTURAL_SCORE, "Save gestural score");
-  menu->AppendSeparator();
-  menu->Append(IDM_LOAD_SEGMENT_SEQUENCE, "Load segment sequence (F5)");
-  menu->Append(IDM_SAVE_SEGMENT_SEQUENCE, "Save segment sequence (F4)");
+  // menuBar = new wxMenuBar();
+  // menu = new wxMenu();
+  // menu->Append(IDM_LOAD_WAV_EGG, "Load WAV+EGG (stereo)");
+  // menu->Append(IDM_SAVE_WAV_EGG, "Save WAV+EGG (stereo)");
+  // menu->Append(IDM_LOAD_WAV, "Load WAV");
+  // menu->Append(IDM_SAVE_WAV, "Save WAV");
+  // menu->Append(IDM_SAVE_WAV_AS_TXT, "Save WAV as TXT");
+  // menu->AppendSeparator();
+  // menu->Append(IDM_LOAD_GESTURAL_SCORE, "Load gestural score");
+  // menu->Append(IDM_SAVE_GESTURAL_SCORE, "Save gestural score");
+  // menu->AppendSeparator();
+  // menu->Append(IDM_LOAD_SEGMENT_SEQUENCE, "Load segment sequence (F5)");
+  // menu->Append(IDM_SAVE_SEGMENT_SEQUENCE, "Save segment sequence (F4)");
 
-  subMenu = new wxMenu();
-  subMenu->Append(IDM_IMPORT_SEGMENT_SEQUENCE_ESPS, "Import from ESPS/waves+ files");
-  menu->AppendSubMenu(subMenu, "Import segment sequence");
+  // subMenu = new wxMenu();
+  // subMenu->Append(IDM_IMPORT_SEGMENT_SEQUENCE_ESPS, "Import from ESPS/waves+ files");
+  // menu->AppendSubMenu(subMenu, "Import segment sequence");
 
-  menu->AppendSeparator();
-  menu->Append(IDM_LOAD_SPEAKER, "Load speaker (F3)");
-  menu->Append(IDM_SAVE_SPEAKER, "Save speaker (F2)");
-  menu->AppendSeparator();
-  menu->Append(wxID_EXIT, "Exit");
+  // menu->AppendSeparator();
+  // menu->Append(IDM_LOAD_SPEAKER, "Load speaker (F3)");
+  // menu->Append(IDM_SAVE_SPEAKER, "Save speaker (F2)");
+  // menu->AppendSeparator();
+  // menu->Append(wxID_EXIT, "Exit");
 
-  menuBar->Append(menu, "File");
+  // menuBar->Append(menu, "File");
 
-  // ****************************************************************
+  // // ****************************************************************
 
-  menu = new wxMenu();
-  menu->Append(IDM_SET_AUDIO_ZERO, "Set audio selection to zero");
-  menu->Append(IDM_NORMALIZE_AMPLITUDE, "Normalize amplitude (Ctrl+N)");
-  menu->Append(IDM_SCALE_AMPLITUDE_UP, "Main track amplitude +20%");
-  menu->Append(IDM_SCALE_AMPLITUDE_DOWN, "Main track amplitude -20%");
-  menu->Append(IDM_REDUCE_CONSONANT_VARIABILITY, "Reduce consonant variability");
+  // menu = new wxMenu();
+  // menu->Append(IDM_SET_AUDIO_ZERO, "Set audio selection to zero");
+  // menu->Append(IDM_NORMALIZE_AMPLITUDE, "Normalize amplitude (Ctrl+N)");
+  // menu->Append(IDM_SCALE_AMPLITUDE_UP, "Main track amplitude +20%");
+  // menu->Append(IDM_SCALE_AMPLITUDE_DOWN, "Main track amplitude -20%");
+  // menu->Append(IDM_REDUCE_CONSONANT_VARIABILITY, "Reduce consonant variability");
 
-  menu->AppendSeparator();
-  menu->Append(IDM_CHANGE_GESTURAL_SCORE_F0_OFFSET, "Change gestural score F0 offset");
-  menu->Append(IDM_CHANGE_GESTURAL_SCORE_F0_RANGE, "Change gestural score F0 range");
-  menu->Append(IDM_CHANGE_GESTURAL_SCORE_F0_TARGET_SLOPES, "Change gestural score F0 target slopes");
-  menu->Append(IDM_SUBSTITUTE_GESTURAL_SCORE_GLOTTAL_SHAPES, "Substitute gestural score glottal shapes");
-  menu->Append(IDM_CHANGE_GESTURAL_SCORE_SUBGLOTTAL_PRESSURE, "Change gestural score subglottal pressure");
-  menu->Append(IDM_GET_GESTURAL_SCORE_F0_STATISTICS, "Get gestural score F0 statistics");
-  menu->AppendSeparator();
-  menu->Append(IDM_CHANGE_GESTURAL_SCORE_DURATION, "Change gestural score duration");
-  menu->Append(IDM_CHANGE_GESTURAL_SCORE_TIME_CONSTANTS, "Change gestural score time constants");
+  // menu->AppendSeparator();
+  // menu->Append(IDM_CHANGE_GESTURAL_SCORE_F0_OFFSET, "Change gestural score F0 offset");
+  // menu->Append(IDM_CHANGE_GESTURAL_SCORE_F0_RANGE, "Change gestural score F0 range");
+  // menu->Append(IDM_CHANGE_GESTURAL_SCORE_F0_TARGET_SLOPES, "Change gestural score F0 target slopes");
+  // menu->Append(IDM_SUBSTITUTE_GESTURAL_SCORE_GLOTTAL_SHAPES, "Substitute gestural score glottal shapes");
+  // menu->Append(IDM_CHANGE_GESTURAL_SCORE_SUBGLOTTAL_PRESSURE, "Change gestural score subglottal pressure");
+  // menu->Append(IDM_GET_GESTURAL_SCORE_F0_STATISTICS, "Get gestural score F0 statistics");
+  // menu->AppendSeparator();
+  // menu->Append(IDM_CHANGE_GESTURAL_SCORE_DURATION, "Change gestural score duration");
+  // menu->Append(IDM_CHANGE_GESTURAL_SCORE_TIME_CONSTANTS, "Change gestural score time constants");
 
-  menuBar->Append(menu, "Edit");
-
-  // ****************************************************************
-
-  menu = new wxMenu();
-  menu->Append(IDM_EXPORT_AREA_FUNCTION, "Area function");
-  menu->Append(IDM_EXPORT_CROSS_SECTIONS, "Cross sections");
-  menu->Append(IDM_EXPORT_VOCAL_TRACT_TO_STL, "Vocal tract geometry in STL");																		 
-  menu->Append(IDM_EXPORT_VT_CONTOUR_SVG, "2D vocal tract contour (SVG)");
-  menu->Append(IDM_EXPORT_WIREFRAME_MODEL_SVG, "3D wireframe vocal tract (SVG)");
-  menu->Append(IDM_EXPORT_VT_MODEL_OBJ, "3D vocal tract shape (OBJ)");
-  menu->Append(IDM_EXPORT_PRIMARY_SPECTRUM, "Primary spectrum");
-  menu->Append(IDM_EXPORT_SECONDARY_SPECTRUM, "User spectrum");
-  menu->Append(IDM_EXPORT_EMA_TRAJECTORIES, "EMA trajectories from gestural score");
-  menu->Append(IDM_EXPORT_VIDEO_FRAMES, "Vocal tract video frames from ges. score");
-  menu->Append(IDM_EXPORT_TRANSFER_FUNCTIONS_FROM_SCORE, "Transfer functions from gestural score");
-  menu->Append(IDM_EXPORT_CROSS_SECTIONS_FROM_SCORE, "Cross sections from gestural score");
-
-
-  menuBar->Append(menu, "Export");
+  // menuBar->Append(menu, "Edit");
 
   // ****************************************************************
 
-  menu = new wxMenu();
-  menu->Append(IDM_SHOW_VOCAL_TRACT_DIALOG, "Vocal tract model");
-  menu->Append(IDM_SHOW_VOCAL_TRACT_SHAPES, "Vocal tract shapes");
-  menu->Append(IDM_SHOW_PHONETIC_PARAMS, "Phonetic parameters");
-  menu->Append(IDM_SHOW_ANATOMY_PARAMS, "Anatomy parameters");
+  // menu = new wxMenu();
+  // menu->Append(IDM_EXPORT_AREA_FUNCTION, "Area function");
+  // menu->Append(IDM_EXPORT_CROSS_SECTIONS, "Cross sections");
+  // menu->Append(IDM_EXPORT_VOCAL_TRACT_TO_STL, "Vocal tract geometry in STL");																		 
+  // menu->Append(IDM_EXPORT_VT_CONTOUR_SVG, "2D vocal tract contour (SVG)");
+  // menu->Append(IDM_EXPORT_WIREFRAME_MODEL_SVG, "3D wireframe vocal tract (SVG)");
+  // menu->Append(IDM_EXPORT_VT_MODEL_OBJ, "3D vocal tract shape (OBJ)");
+  // menu->Append(IDM_EXPORT_PRIMARY_SPECTRUM, "Primary spectrum");
+  // menu->Append(IDM_EXPORT_SECONDARY_SPECTRUM, "User spectrum");
+  // menu->Append(IDM_EXPORT_EMA_TRAJECTORIES, "EMA trajectories from gestural score");
+  // menu->Append(IDM_EXPORT_VIDEO_FRAMES, "Vocal tract video frames from ges. score");
+  // menu->Append(IDM_EXPORT_TRANSFER_FUNCTIONS_FROM_SCORE, "Transfer functions from gestural score");
+  // menu->Append(IDM_EXPORT_CROSS_SECTIONS_FROM_SCORE, "Cross sections from gestural score");
 
-  menu->AppendSeparator();
-  menu->Append(IDM_SHOW_FDS_OPTIONS_DIALOG, "Acoustic model options (freq. domain)");
-  menu->Append(IDM_SHOW_TDS_OPTIONS_DIALOG, "Acoustic model options (time domain)");
-  menu->AppendSeparator();
-  menu->Append(IDM_SHOW_VOCAL_FOLD_DIALOG, "Vocal fold models");
-  menu->Append(IDM_SHOW_LF_MODEL_DIALOG, "LF glottal flow model");
 
-  menuBar->Append(menu, "Synthesis models");
+  // menuBar->Append(menu, "Export");
+
+  // // ****************************************************************
+
+  // menu = new wxMenu();
+  // // menu->Append(IDM_SHOW_VOCAL_TRACT_DIALOG, "Vocal tract model"); // Removed
+  // menu->Append(IDM_SHOW_VOCAL_TRACT_SHAPES, "Vocal tract shapes");
+  // menu->Append(IDM_SHOW_PHONETIC_PARAMS, "Phonetic parameters");
+  // // menu->Append(IDM_SHOW_ANATOMY_PARAMS, "Anatomy parameters"); // Removed
+
+  // menu->AppendSeparator();
+  // menu->Append(IDM_SHOW_FDS_OPTIONS_DIALOG, "Acoustic model options (freq. domain)");
+  // menu->Append(IDM_SHOW_TDS_OPTIONS_DIALOG, "Acoustic model options (time domain)");
+  // menu->AppendSeparator();
+  // menu->Append(IDM_SHOW_VOCAL_FOLD_DIALOG, "Vocal fold models");
+  // menu->Append(IDM_SHOW_LF_MODEL_DIALOG, "LF glottal flow model");
+
+  // menuBar->Append(menu, "Synthesis models");
+
+  // // ****************************************************************
+
+  // menu = new wxMenu();
+  // menu->Append(IDM_GESTURAL_SCORE_FILE_TO_AUDIO, "Ges. score file to audio");
+  // menu->Append(IDM_TUBE_SEQUENCE_FILE_TO_AUDIO, "Tube sequence file to audio");
+  // menu->Append(IDM_TRACT_SEQUENCE_FILE_TO_AUDIO, "Tract sequence file to audio");
+  // menu->AppendSeparator();
+  // menu->Append(IDM_GESTURAL_SCORE_TO_TUBE_SEQUENCE_FILE, "Ges. score to tube sequence file");
+  // menu->Append(IDM_GESTURAL_SCORE_TO_TRACT_SEQUENCE_FILE, "Ges. score to tract sequence file");
+
+  // menuBar->Append(menu, "Synthesis from file");
 
   // ****************************************************************
 
-  menu = new wxMenu();
-  menu->Append(IDM_GESTURAL_SCORE_FILE_TO_AUDIO, "Ges. score file to audio");
-  menu->Append(IDM_TUBE_SEQUENCE_FILE_TO_AUDIO, "Tube sequence file to audio");
-  menu->Append(IDM_TRACT_SEQUENCE_FILE_TO_AUDIO, "Tract sequence file to audio");
-  menu->AppendSeparator();
-  menu->Append(IDM_GESTURAL_SCORE_TO_TUBE_SEQUENCE_FILE, "Ges. score to tube sequence file");
-  menu->Append(IDM_GESTURAL_SCORE_TO_TRACT_SEQUENCE_FILE, "Ges. score to tract sequence file");
+  // menu = new wxMenu();
+  // menu->Append(IDM_HERTZ_TO_SEMITONES, "Hertz <-> semitones");
+  // menu->Append(wxID_ABOUT, "About");
 
-  menuBar->Append(menu, "Synthesis from file");
+  // menuBar->Append(menu, "Help");
 
-  // ****************************************************************
+  // // ****************************************************************
 
-  menu = new wxMenu();
-  menu->Append(IDM_HERTZ_TO_SEMITONES, "Hertz <-> semitones");
-  menu->Append(wxID_ABOUT, "About");
-
-  menuBar->Append(menu, "Help");
-
-  // ****************************************************************
-
-  this->SetMenuBar(menuBar);
+  // this->SetMenuBar(menuBar);
 
   // ****************************************************************
   // Create the toolbar.
@@ -549,8 +444,6 @@ void MainWindow::initWidgets()
   clearContextMenu->Append(IDM_CLEAR_EXTRA_TRACK, "Clear extra track");
   clearContextMenu->AppendSeparator();
   clearContextMenu->Append(IDM_CLEAR_ALL_TRACKS, "Clear audio tracks");
-  clearContextMenu->Append(IDM_CLEAR_GESTURAL_SCORE, "Clear gestural score");
-  clearContextMenu->Append(IDM_CLEAR_SEGMENT_SEQUENCE, "Clear segment sequence");
   clearContextMenu->Append(IDM_CLEAR_ANALYSIS_TRACKS, "Clear F0, GCIs, formant tracks");
 
   // ****************************************************************
@@ -559,16 +452,16 @@ void MainWindow::initWidgets()
 
   notebook = new wxNotebook(this, ID_NOTEBOOK);
 
-  signalPage = new SignalPage(notebook);
-  vocalTractPage = new VocalTractPage(notebook, VocalTractDialog::getInstance(this)->getVocalTractPicture());
-  tdsPage = new TdsPage(notebook);
-  gesturalScorePage = new GesturalScorePage(notebook);
-  acoustic3dPage = new Acoustic3dPage(notebook, VocalTractDialog::getInstance(this)->getVocalTractPicture());																											 
+  // signalPage = new SignalPage(notebook);
+  // vocalTractPage = new VocalTractPage(notebook, VocalTractDialog::getInstance(this)->getVocalTractPicture());
+  // tdsPage = new TdsPage(notebook);
+  // gesturalScorePage = new GesturalScorePage(notebook);
+  acoustic3dPage = new Acoustic3dPage(notebook, nullptr); // Modified: Pass nullptr for VocalTractPicture												 
 
-  notebook->AddPage((wxPanel*)signalPage, "Signals", false);
-  notebook->AddPage((wxPanel*)vocalTractPage, "Vocal tract", false);
-  notebook->AddPage((wxPanel*)tdsPage, "Time domain simulation", false);
-  notebook->AddPage((wxPanel*)gesturalScorePage, "Gestural score", false);
+  // notebook->AddPage((wxPanel*)signalPage, "Signals", false);
+  // notebook->AddPage((wxPanel*)vocalTractPage, "Vocal tract", false);
+  // notebook->AddPage((wxPanel*)tdsPage, "Time domain simulation", false);
+  // notebook->AddPage((wxPanel*)gesturalScorePage, "Gestural score", false);
   notebook->AddPage((wxPanel*)acoustic3dPage, "3D acoustic simulation", true);																		   
 
   // ****************************************************************
@@ -586,6 +479,7 @@ void MainWindow::updateWidgets()
 {
   int prevPage = data->currentPage;
 
+  /* // Commenting out references to removed pages
   if (notebook->GetCurrentPage() == (wxWindow*)signalPage)
   {
     signalPage->updateWidgets();
@@ -611,10 +505,13 @@ void MainWindow::updateWidgets()
     data->currentPage = Data::GESTURAL_SCORE_PAGE;
   }
   else
-  if (notebook->GetCurrentPage() == (wxWindow*)acoustic3dPage)
+  */
+  // Only acoustic3dPage remains
+  if (notebook->GetCurrentPage() == (wxWindow*)acoustic3dPage) // Or simply notebook->GetPageCount() > 0 as it's the only one
   {
     acoustic3dPage->importGeometry();
     acoustic3dPage->updateWidgets();
+    // Potentially set data->currentPage if Acoustic3dPage has a corresponding enum in Data
   }
 
   // ****************************************************************
@@ -830,17 +727,18 @@ void MainWindow::OnCloseWindow(wxCloseEvent &event)
 
     VocalTractShapesDialog::getInstance()->Close(true);
     PhoneticParamsDialog::getInstance()->Close(true);
-    AnatomyParamsDialog::getInstance()->Close(true);
+//    AnatomyParamsDialog::getInstance()->Close(true);
     LfPulseDialog::getInstance()->Close(true);
     TdsOptionsDialog::getInstance()->Close(true);
     FdsOptionsDialog::getInstance()->Close(true);
-    SpectrumOptionsDialog::getInstance(NULL)->Close(true);
+    // SpectrumOptionsDialog::getInstance(NULL)->Close(true); // Already Commented
     GlottisDialog::getInstance()->Close(true);
-    VocalTractDialog::getInstance(this)->Close(true);
+    // VocalTractDialog::getInstance(this)->Close(true); // Removed
     AnalysisResultsDialog::getInstance()->Close(true);
-    AnnotationDialog::getInstance(NULL)->Close(true);
+    // AnnotationDialog::getInstance(NULL)->Close(true); // Already Commented
     PoleZeroDialog::getInstance()->Close(true);
     TransitionDialog::getInstance()->Close(true);
+    // AnatomyParamsDialog::getInstance()->Close(true); // Add this to ensure it's commented
 
     this->Destroy();
     exit(0);
@@ -1142,127 +1040,56 @@ void MainWindow::OnSaveWavAsTxt(wxCommandEvent &event)
 
 
 // ****************************************************************************
-/// Load a segment sequence.
-// ****************************************************************************
-
-void MainWindow::OnLoadSegmentSequence(wxCommandEvent &event)
-{
-  wxFileName fileName(data->segmentSequenceFileName);
-
-  wxString name = wxFileSelector("Load segment sequence", fileName.GetPath(), 
-    fileName.GetFullName(), ".seg", "Segment sequence (*.seg)|*.seg", 
-    wxFD_OPEN | wxFD_FILE_MUST_EXIST, this);
-
-  if (name.empty() == false)
-  {
-    data->segmentSequenceFileName = name;
-    if (data->segmentSequence->readFromFile(name.ToStdString()) == false)
-    {
-      wxMessageBox("Loading the segment sequence failed!", "Error!");
-    }
-    updateWidgets();
-  }
-}
-
-
-// ****************************************************************************
-/// Save a segment sequence.
-// ****************************************************************************
-
-void MainWindow::OnSaveSegmentSequence(wxCommandEvent &event)
-{
-  wxFileName fileName(data->segmentSequenceFileName);
-
-  wxString name = wxFileSelector("Save segment sequence", fileName.GetPath(), 
-    fileName.GetFullName(), ".seg", "Segment sequence (*.seg)|*.seg", 
-    wxFD_SAVE | wxFD_OVERWRITE_PROMPT, this);
-
-  if (name.empty() == false)
-  {
-    data->segmentSequenceFileName = name;
-    if (data->segmentSequence->writeToFile(name.ToStdString()) == false)
-    {
-      wxMessageBox("Saving the segment sequence failed!", "Error!");
-    }
-  }
-}
-
-
-// ****************************************************************************
-/// Import a segment sequence from the ESPS/waves+ software.
-// ****************************************************************************
-
-void MainWindow::OnImportSegmentSequenceEsps(wxCommandEvent &event)
-{
-  wxFileName fileName(data->segmentSequenceFileName);
-
-  wxString name = wxFileSelector("Load phoneme sequence (ESPS/waves+ format)", fileName.GetPath(), 
-    fileName.GetFullName(), "*.*", "All files|*.*", 
-    wxFD_OPEN | wxFD_FILE_MUST_EXIST, this);
-
-  if (name.empty() == false)
-  {
-    data->segmentSequenceFileName = name;
-    if (data->segmentSequence->importFromEsps(name.ToStdString()) == false)
-    {
-      wxMessageBox("Importing the segment sequence failed!", "Error!");
-    }
-    updateWidgets();
-  }
-}
-
-
-// ****************************************************************************
 /// Load a gestural score.
 // ****************************************************************************
 
-void MainWindow::OnLoadGesturalScore(wxCommandEvent &event)
-{
-  wxFileName fileName(data->gesturalScoreFileName);
+// void MainWindow::OnLoadGesturalScore(wxCommandEvent &event)
+// {
+//   wxFileName fileName(data->gesturalScoreFileName);
 
-  wxString name = wxFileSelector("Load gestural score", fileName.GetPath(), 
-    fileName.GetFullName(), ".ges", "Gestural scores (*.ges)|*.ges", 
-    wxFD_OPEN | wxFD_FILE_MUST_EXIST, this);
+//   wxString name = wxFileSelector("Load gestural score", fileName.GetPath(), 
+//     fileName.GetFullName(), ".ges", "Gestural scores (*.ges)|*.ges", 
+//     wxFD_OPEN | wxFD_FILE_MUST_EXIST, this);
 
-  if (name.empty() == false)
-  {
-    bool allValuesInRange = true;
-    data->gesturalScoreFileName = name;
-    if (data->gesturalScore->loadGesturesXml(name.ToStdString(), allValuesInRange) == false)
-    {
-      wxMessageBox("Loading the gestural score failed!", "Error!");
-    }
-    else
-    if (allValuesInRange == false)
-    {
-      wxMessageBox("Some gesture values in the score were out of range and have been constricted.", "Warning!");
-    }
-    updateWidgets();
-  }
-}
+//   if (name.empty() == false)
+//   {
+//     bool allValuesInRange = true;
+//     data->gesturalScoreFileName = name;
+//     if (data->gesturalScore->loadGesturesXml(name.ToStdString(), allValuesInRange) == false)
+//     {
+//       wxMessageBox("Loading the gestural score failed!", "Error!");
+//     }
+//     else
+//     if (allValuesInRange == false)
+//     {
+//       wxMessageBox("Some gesture values in the score were out of range and have been constricted.", "Warning!");
+//     }
+//     updateWidgets();
+//   }
+// }
 
 
 // ****************************************************************************
 /// Save a gestural score.
 // ****************************************************************************
 
-void MainWindow::OnSaveGesturalScore(wxCommandEvent &event)
-{
-  wxFileName fileName(data->gesturalScoreFileName);
+// void MainWindow::OnSaveGesturalScore(wxCommandEvent &event)
+// {
+//   wxFileName fileName(data->gesturalScoreFileName);
 
-  wxString name = wxFileSelector("Save gestural score", fileName.GetPath(), 
-    fileName.GetFullName(), ".ges", "Gestural scores (*.ges)|*.ges", 
-    wxFD_SAVE | wxFD_OVERWRITE_PROMPT, this);
+//   wxString name = wxFileSelector("Save gestural score", fileName.GetPath(), 
+//     fileName.GetFullName(), ".ges", "Gestural scores (*.ges)|*.ges", 
+//     wxFD_SAVE | wxFD_OVERWRITE_PROMPT, this);
 
-  if (name.empty() == false)
-  {
-    data->gesturalScoreFileName = name;
-    if (data->gesturalScore->saveGesturesXml(name.ToStdString()) == false)
-    {
-      wxMessageBox("Saving the gestural score failed!", "Error!");
-    }
-  }
-}
+//   if (name.empty() == false)
+//   {
+//     data->gesturalScoreFileName = name;
+//     if (data->gesturalScore->saveGesturesXml(name.ToStdString()) == false)
+//     {
+//       wxMessageBox("Saving the gestural score failed!", "Error!");
+//     }
+//   }
+// }
 
 // ****************************************************************************
 /// Load speaker data.
@@ -1286,8 +1113,8 @@ void MainWindow::OnLoadSpeaker(wxCommandEvent &event)
     shapesDialog->fillShapeList();
 
     // Update the vocal tract picture.
-    VocalTractDialog *vtDialog = VocalTractDialog::getInstance(this);
-    vtDialog->getVocalTractPicture()->Refresh();
+    // VocalTractDialog *vtDialog = VocalTractDialog::getInstance(this); // Removed
+    // vtDialog->getVocalTractPicture()->Refresh(); // Removed
 
     // Update the glottis dialog.
     GlottisDialog *glottisDialog = GlottisDialog::getInstance();
@@ -1586,230 +1413,230 @@ void MainWindow::OnReduceConsonantVariability(wxCommandEvent &event)
 // ****************************************************************************
 // ****************************************************************************
 
-void MainWindow::OnChangeGesturalScoreF0Offset(wxCommandEvent &event)
-{
-  // Obtain the current F0 statistics.
+// void MainWindow::OnChangeGesturalScoreF0Offset(wxCommandEvent &event)
+// {
+//   // Obtain the current F0 statistics.
 
-  double f0Mean_st;
-  double f0Sd_st;
-  double f0Mean_Hz;
-  double f0Sd_Hz;
-  data->gesturalScore->getF0Statistic(f0Mean_st, f0Sd_st, f0Mean_Hz, f0Sd_Hz);
+//   double f0Mean_st;
+//   double f0Sd_st;
+//   double f0Mean_Hz;
+//   double f0Sd_Hz;
+//   data->gesturalScore->getF0Statistic(f0Mean_st, f0Sd_st, f0Mean_Hz, f0Sd_Hz);
 
-  // ****************************************************************
+//   // ****************************************************************
 
-  wxString text =
-    wxGetTextFromUser("Please enter the number of semitones by which to shift the F0 contour (e.g. 3 or -4.5).",
-    "Enter F0 shift in st", "0.0");
+//   wxString text =
+//     wxGetTextFromUser("Please enter the number of semitones by which to shift the F0 contour (e.g. 3 or -4.5).",
+//     "Enter F0 shift in st", "0.0");
 
-  if (text.IsEmpty())   // The user pressed "Cancel"
-  {
-    return;
-  }
+//   if (text.IsEmpty())   // The user pressed "Cancel"
+//   {
+//     return;
+//   }
 
-  double deltaF0_st = 0.0;
-  if (text.ToDouble(&deltaF0_st) == false)
-  {
-    wxMessageBox("Error: Invalid number!", "Error");
-    return;
-  }
+//   double deltaF0_st = 0.0;
+//   if (text.ToDouble(&deltaF0_st) == false)
+//   {
+//     wxMessageBox("Error: Invalid number!", "Error");
+//     return;
+//   }
 
-  data->gesturalScore->changeF0Offset(deltaF0_st);
-  updateWidgets();
+//   data->gesturalScore->changeF0Offset(deltaF0_st);
+//   updateWidgets();
 
-  // Obtain the new F0 statistics.
+//   // Obtain the new F0 statistics.
 
-  double newF0Mean_st;
-  double newF0Sd_st;
-  double newF0Mean_Hz;
-  double newF0Sd_Hz;
-  data->gesturalScore->getF0Statistic(newF0Mean_st, newF0Sd_st, newF0Mean_Hz, newF0Sd_Hz);
+//   double newF0Mean_st;
+//   double newF0Sd_st;
+//   double newF0Mean_Hz;
+//   double newF0Sd_Hz;
+//   data->gesturalScore->getF0Statistic(newF0Mean_st, newF0Sd_st, newF0Mean_Hz, newF0Sd_Hz);
 
-  wxPrintf("New mean F0 - old mean F0 in st: %2.2f\n", newF0Mean_st - f0Mean_st);
-}
-
-
-// ****************************************************************************
-// ****************************************************************************
-
-void MainWindow::OnChangeGesturalScoreF0Range(wxCommandEvent &event)
-{
-  wxString text =
-    wxGetTextFromUser("Please enter the factor, by which the F0 range shall be changed (e.g. 1.2 for a 20% increase).",
-    "Enter F0 range factor", "1.0");
-
-  if (text.IsEmpty())   // The user pressed "Cancel"
-  {
-    return;
-  }
-
-  double factor = 1.0;
-  if (text.ToDouble(&factor) == false)
-  {
-    wxMessageBox("Error: Invalid number!", "Error");
-    return;
-  }
-
-  data->gesturalScore->changeF0Range(factor);
-  updateWidgets();
-}
+//   wxPrintf("New mean F0 - old mean F0 in st: %2.2f\n", newF0Mean_st - f0Mean_st);
+// }
 
 
 // ****************************************************************************
 // ****************************************************************************
 
-void MainWindow::OnChangeGesturalScoreF0TargetSlopes(wxCommandEvent &event)
-{
-  wxString text =
-  wxGetTextFromUser("Please enter the value in semitones/s by which the F0 target slopes shall be changed (e.g. 30 for a 30 st/s increase).",
-  "Enter F0 slope summand in st/s", "0.0");
+// void MainWindow::OnChangeGesturalScoreF0Range(wxCommandEvent &event)
+// {
+//   wxString text =
+//     wxGetTextFromUser("Please enter the factor, by which the F0 range shall be changed (e.g. 1.2 for a 20% increase).",
+//     "Enter F0 range factor", "1.0");
 
-  if (text.IsEmpty())   // The user pressed "Cancel"
-  {
-    return;
-  }
+//   if (text.IsEmpty())   // The user pressed "Cancel"
+//   {
+//     return;
+//   }
 
-  double summand = 0.0;
-  if (text.ToDouble(&summand) == false)
-  {
-  wxMessageBox("Error: Invalid number!", "Error");
-  return;
-  }
+//   double factor = 1.0;
+//   if (text.ToDouble(&factor) == false)
+//   {
+//     wxMessageBox("Error: Invalid number!", "Error");
+//     return;
+//   }
 
-  data->gesturalScore->changeF0TargetSlope(summand);
-  updateWidgets();
-}
-
-
-// ****************************************************************************
-// ****************************************************************************
-
-void MainWindow::OnSubstituteGesturalScoreGlottalShapes(wxCommandEvent &event)
-{
-  wxString oldShapeName =
-  wxGetTextFromUser("Please enter the name of the glottal shape to substitute (e.g.: modal).",
-  "Enter name of glottal shape to substitute", "");
-
-  if (oldShapeName.IsEmpty())   // The user pressed "Cancel"
-  {
-    return;
-  }
-
-  wxString newShapeName =
-    wxGetTextFromUser("Please enter the name of the new glottal shape (e.g.: breathy).",
-    "Enter name of new glottal shape", "");
-
-  if (newShapeName.IsEmpty())   // The user pressed "Cancel"
-  {
-    return;
-  }
-
-  data->gesturalScore->substituteGlottalShapes(oldShapeName.ToStdString(), newShapeName.ToStdString());
-  updateWidgets();
-}
+//   data->gesturalScore->changeF0Range(factor);
+//   updateWidgets();
+// }
 
 
-// ****************************************************************************
-// ****************************************************************************
+// // ****************************************************************************
+// // ****************************************************************************
 
-void MainWindow::OnChangeGesturalScoreSubglottalPressure(wxCommandEvent &event)
-{
-  wxString text =
-  wxGetTextFromUser("Please enter the factor, by which the subglottal pressure shall be changed (e.g. 1.2 for a 20% increase).",
-  "Enter subglottal pressure factor", "1.0");
+// void MainWindow::OnChangeGesturalScoreF0TargetSlopes(wxCommandEvent &event)
+// {
+//   wxString text =
+//   wxGetTextFromUser("Please enter the value in semitones/s by which the F0 target slopes shall be changed (e.g. 30 for a 30 st/s increase).",
+//   "Enter F0 slope summand in st/s", "0.0");
 
-  if (text.IsEmpty())   // The user pressed "Cancel"
-  {
-    return;
-  }
+//   if (text.IsEmpty())   // The user pressed "Cancel"
+//   {
+//     return;
+//   }
 
-  double factor = 1.0;
-  if (text.ToDouble(&factor) == false)
-  {
-  wxMessageBox("Error: Invalid number!", "Error");
-  return;
-  }
+//   double summand = 0.0;
+//   if (text.ToDouble(&summand) == false)
+//   {
+//   wxMessageBox("Error: Invalid number!", "Error");
+//   return;
+//   }
 
-  data->gesturalScore->changeSubglottalPressure(factor);
-  updateWidgets();
-}
-
-
-// ****************************************************************************
-// ****************************************************************************
-
-void MainWindow::OnGetGesturalScoreF0Statistics(wxCommandEvent &event)
-{
-  double f0Mean_st;
-  double f0Sd_st;
-  double f0Mean_Hz;
-  double f0Sd_Hz;
-
-  data->gesturalScore->getF0Statistic(f0Mean_st, f0Sd_st, f0Mean_Hz, f0Sd_Hz);
-
-  wxString st = wxString::Format(
-    "F0 mean (SD) with a Hz scale: %2.2f (%2.2f) Hz\n"
-    "F0 mean (SD) with a semitone scale: %2.2f (%2.2f) st",
-    f0Mean_Hz,
-    f0Sd_Hz,
-    f0Mean_st,
-    f0Sd_st);
-
-  wxMessageBox(st, "Gestural score F0 statistics");
-}
+//   data->gesturalScore->changeF0TargetSlope(summand);
+//   updateWidgets();
+// }
 
 
-// ****************************************************************************
-// ****************************************************************************
+// // ****************************************************************************
+// // ****************************************************************************
 
-void MainWindow::OnChangeGesturalScoreDuration(wxCommandEvent &event)
-{
-  wxString text =
-    wxGetTextFromUser("Please enter the factor, by which the duration shall be changed (e.g. 1.2 for a 20% increase).",
-    "Enter length factor", "1.0");
+// void MainWindow::OnSubstituteGesturalScoreGlottalShapes(wxCommandEvent &event)
+// {
+//   wxString oldShapeName =
+//   wxGetTextFromUser("Please enter the name of the glottal shape to substitute (e.g.: modal).",
+//   "Enter name of glottal shape to substitute", "");
 
-  if (text.IsEmpty())   // The user pressed "Cancel"
-  {
-    return;
-  }
+//   if (oldShapeName.IsEmpty())   // The user pressed "Cancel"
+//   {
+//     return;
+//   }
 
-  double factor = 1.0;
-  if (text.ToDouble(&factor) == false)
-  {
-    wxMessageBox("Error: Invalid number!", "Error");
-    return;
-  }
+//   wxString newShapeName =
+//     wxGetTextFromUser("Please enter the name of the new glottal shape (e.g.: breathy).",
+//     "Enter name of new glottal shape", "");
 
-  data->gesturalScore->changeDuration(factor);
-  updateWidgets();
-}
+//   if (newShapeName.IsEmpty())   // The user pressed "Cancel"
+//   {
+//     return;
+//   }
+
+//   data->gesturalScore->substituteGlottalShapes(oldShapeName.ToStdString(), newShapeName.ToStdString());
+//   updateWidgets();
+// }
 
 
-// ****************************************************************************
-// ****************************************************************************
+// // ****************************************************************************
+// // ****************************************************************************
 
-void MainWindow::OnChangeGesturalScoreTimeConstants(wxCommandEvent &event)
-{
-  wxString text =
-    wxGetTextFromUser("Please enter the factor, by which all the time constants of "
-    "the gestural score (except for F0) shall be changed (e.g. 1.2 for a 20% increase).",
-    "Enter time constant factor", "1.0");
+// void MainWindow::OnChangeGesturalScoreSubglottalPressure(wxCommandEvent &event)
+// {
+//   wxString text =
+//   wxGetTextFromUser("Please enter the factor, by which the subglottal pressure shall be changed (e.g. 1.2 for a 20% increase).",
+//   "Enter subglottal pressure factor", "1.0");
 
-  if (text.IsEmpty())   // The user pressed "Cancel"
-  {
-    return;
-  }
+//   if (text.IsEmpty())   // The user pressed "Cancel"
+//   {
+//     return;
+//   }
 
-  double factor = 1.0;
-  if (text.ToDouble(&factor) == false)
-  {
-    wxMessageBox("Error: Invalid number!", "Error");
-    return;
-  }
+//   double factor = 1.0;
+//   if (text.ToDouble(&factor) == false)
+//   {
+//   wxMessageBox("Error: Invalid number!", "Error");
+//   return;
+//   }
 
-  data->gesturalScore->changeTimeConstants(factor);
-  updateWidgets();
-}
+//   data->gesturalScore->changeSubglottalPressure(factor);
+//   updateWidgets();
+// }
+
+
+// // ****************************************************************************
+// // ****************************************************************************
+
+// void MainWindow::OnGetGesturalScoreF0Statistics(wxCommandEvent &event)
+// {
+//   double f0Mean_st;
+//   double f0Sd_st;
+//   double f0Mean_Hz;
+//   double f0Sd_Hz;
+
+//   data->gesturalScore->getF0Statistic(f0Mean_st, f0Sd_st, f0Mean_Hz, f0Sd_Hz);
+
+//   wxString st = wxString::Format(
+//     "F0 mean (SD) with a Hz scale: %2.2f (%2.2f) Hz\n"
+//     "F0 mean (SD) with a semitone scale: %2.2f (%2.2f) st",
+//     f0Mean_Hz,
+//     f0Sd_Hz,
+//     f0Mean_st,
+//     f0Sd_st);
+
+//   wxMessageBox(st, "Gestural score F0 statistics");
+// }
+
+
+// // ****************************************************************************
+// // ****************************************************************************
+
+// void MainWindow::OnChangeGesturalScoreDuration(wxCommandEvent &event)
+// {
+//   wxString text =
+//     wxGetTextFromUser("Please enter the factor, by which the duration shall be changed (e.g. 1.2 for a 20% increase).",
+//     "Enter length factor", "1.0");
+
+//   if (text.IsEmpty())   // The user pressed "Cancel"
+//   {
+//     return;
+//   }
+
+//   double factor = 1.0;
+//   if (text.ToDouble(&factor) == false)
+//   {
+//     wxMessageBox("Error: Invalid number!", "Error");
+//     return;
+//   }
+
+//   data->gesturalScore->changeDuration(factor);
+//   updateWidgets();
+// }
+
+
+// // ****************************************************************************
+// // ****************************************************************************
+
+// void MainWindow::OnChangeGesturalScoreTimeConstants(wxCommandEvent &event)
+// {
+//   wxString text =
+//     wxGetTextFromUser("Please enter the factor, by which all the time constants of "
+//     "the gestural score (except for F0) shall be changed (e.g. 1.2 for a 20% increase).",
+//     "Enter time constant factor", "1.0");
+
+//   if (text.IsEmpty())   // The user pressed "Cancel"
+//   {
+//     return;
+//   }
+
+//   double factor = 1.0;
+//   if (text.ToDouble(&factor) == false)
+//   {
+//     wxMessageBox("Error: Invalid number!", "Error");
+//     return;
+//   }
+
+//   data->gesturalScore->changeTimeConstants(factor);
+//   updateWidgets();
+// }
 
 
 // ****************************************************************************
@@ -1889,7 +1716,8 @@ void MainWindow::OnExportWireframeModelSvg(wxCommandEvent &event)
   if (name.empty() == false)
   {
     data->svgFileName = name;
-    VocalTractDialog::getInstance(this)->getVocalTractPicture()->exportTractWireframeSVG(name, -1);
+    // VocalTractDialog::getInstance(this)->getVocalTractPicture()->exportTractWireframeSVG(name, -1); // Removed
+    wxPrintf("Wireframe model export might be affected due to VocalTractDialog removal.\n"); // Placeholder for removed functionality
   }
 }
 
@@ -1912,7 +1740,9 @@ void MainWindow::OnExportModelObj(wxCommandEvent &event)
 
     exportFileName = wxFileName(dialog.GetPath());
 
-    bool renderBothSides = VocalTractDialog::getInstance(this)->getVocalTractPicture()->renderBothSides;
+    // bool renderBothSides = VocalTractDialog::getInstance(this)->getVocalTractPicture()->renderBothSides; // Removed
+    // For now, assuming a default or that saveAsObjFile handles it, or it's no longer needed for this simplified version.
+    bool renderBothSides = true; // Example: providing a default. This might need adjustment.
     data->vocalTract->saveAsObjFile(exportFileName.GetFullPath().ToStdString(), renderBothSides);
   }
   
@@ -1934,9 +1764,13 @@ void MainWindow::OnExportContourSvg(wxCommandEvent &event)
   if (name.empty() == false)
   {
     data->svgFileName = name;
-    VocalTractPicture *pic = VocalTractDialog::getInstance(this)->getVocalTractPicture();
+    // VocalTractPicture *pic = VocalTractDialog::getInstance(this)->getVocalTractPicture(); // Removed
+    // Defaulting showCenterLine and showCutVectors as VocalTractPicture is no longer available.
+    // These might need to be sourced differently or the feature re-evaluated.
+    bool showCenterLine = true; // Example default
+    bool showCutVectors = true; // Example default
     data->vocalTract->exportTractContourSvg(name.ToStdString(), 
-      pic->showCenterLine, pic->showCutVectors);
+      showCenterLine, showCutVectors);
 
 
 //    VocalTractDialog::getInstance(this)->getVocalTractPicture()->exportTractContourSVG(name);
@@ -1988,78 +1822,68 @@ void MainWindow::OnExportSecondarySpectrum(wxCommandEvent &event)
 // ****************************************************************************
 // ****************************************************************************
 
-void MainWindow::OnExportEmaTrajectories(wxCommandEvent &event)
-{
-  wxFileName fileName(data->emaFileName);
+// void MainWindow::OnExportEmaTrajectories(wxCommandEvent &event)
+// {
+//   wxFileName fileName(data->emaFileName);
 
-  wxString name = wxFileSelector("Save EMA trajectories from gestural score", fileName.GetPath(), 
-    fileName.GetFullName(), ".txt", "Text files (*.txt)|*.txt", 
-    wxFD_SAVE | wxFD_OVERWRITE_PROMPT, this);
+//   wxString name = wxFileSelector("Save EMA trajectories from gestural score", fileName.GetPath(), 
+//     fileName.GetFullName(), ".txt", "Text files (*.txt)|*.txt", 
+//     wxFD_SAVE | wxFD_OVERWRITE_PROMPT, this);
 
-  if (name.empty() == false)
-  {
-    data->emaFileName = name;
-    data->exportEmaTrajectories(name);
-  }
-}
-
-
-// ****************************************************************************
-// ****************************************************************************
-
-void MainWindow::OnExportVocalTractVideoFrames(wxCommandEvent &event)
-{
-  wxDirDialog dialog(this, "Select a folder for the video frames");
-  dialog.SetPath(data->videoFramesFolder);
-  if (dialog.ShowModal() == wxID_OK)
-  {
-    data->videoFramesFolder = dialog.GetPath();
-    data->exportVocalTractVideoFrames(dialog.GetPath());
-  }
-}
+//   if (name.empty() == false)
+//   {
+//     data->emaFileName = name;
+//     data->exportEmaTrajectories(name);
+//   }
+// }
 
 
 // ****************************************************************************
 // ****************************************************************************
 
-void MainWindow::OnExportTransferFunctionsFromScore(wxCommandEvent &event)
-{
-  wxFileName fileName(data->spectrumFileName);
-
-  wxString name = wxFileSelector("Save sequence of transfer functions", fileName.GetPath(),
-    fileName.GetFullName(), ".txt", "Text files (*.txt)|*.txt",
-    wxFD_SAVE | wxFD_OVERWRITE_PROMPT, this);
-
-  if (name.empty() == false)
-  {
-    data->spectrumFileName = name;
-    data->exportTransferFunctionsFromScore(name);
-  }
-}
-
-// ****************************************************************************
-// ****************************************************************************
-
-void MainWindow::OnExportCrossSectionsFromScore(wxCommandEvent& event)
-{
-	wxDirDialog dialog(this, "Select a folder for the cross-sections files");
-	dialog.SetPath(data->videoFramesFolder);
-	if (dialog.ShowModal() == wxID_OK)
-	{
-		data->csFilesFolder = dialog.GetPath();
-		data->exportCrossSectionsFromScore(dialog.GetPath());
-	}
-}
+// void MainWindow::OnExportVocalTractVideoFrames(wxCommandEvent &event)
+// {
+//   wxDirDialog dialog(this, "Select a folder for the video frames");
+//   dialog.SetPath(data->videoFramesFolder);
+//   if (dialog.ShowModal() == wxID_OK)
+//   {
+//     data->videoFramesFolder = dialog.GetPath();
+//     data->exportVocalTractVideoFrames(dialog.GetPath());
+//   }
+// }
 
 
 // ****************************************************************************
 // ****************************************************************************
 
-void MainWindow::OnShowVocalTractDialog(wxCommandEvent &event)
-{
-  VocalTractDialog *dialog = VocalTractDialog::getInstance(this);
-  dialog->Show(true);
-}
+// void MainWindow::OnExportTransferFunctionsFromScore(wxCommandEvent &event)
+// {
+//   wxFileName fileName(data->spectrumFileName);
+
+//   wxString name = wxFileSelector("Save sequence of transfer functions", fileName.GetPath(),
+//     fileName.GetFullName(), ".txt", "Text files (*.txt)|*.txt",
+//     wxFD_SAVE | wxFD_OVERWRITE_PROMPT, this);
+
+//   if (name.empty() == false)
+//   {
+//     data->spectrumFileName = name;
+//     data->exportTransferFunctionsFromScore(name);
+//   }
+// }
+
+// ****************************************************************************
+// ****************************************************************************
+
+// void MainWindow::OnExportCrossSectionsFromScore(wxCommandEvent& event)
+// {
+// 	wxDirDialog dialog(this, "Select a folder for the cross-sections files");
+// 	dialog.SetPath(data->videoFramesFolder);
+// 	if (dialog.ShowModal() == wxID_OK)
+// 	{
+// 		data->csFilesFolder = dialog.GetPath();
+// 		data->exportCrossSectionsFromScore(dialog.GetPath());
+// 	}
+// }
 
 
 // ****************************************************************************
@@ -2086,21 +1910,10 @@ void MainWindow::OnShowPhoneticParameters(wxCommandEvent &event)
 // ****************************************************************************
 // ****************************************************************************
 
-void MainWindow::OnShowAnatomyParameters(wxCommandEvent &event)
-{
-  AnatomyParamsDialog *dialog = AnatomyParamsDialog::getInstance();
-  dialog->SetParent(this);
-  dialog->Show(true);
-}
-
-
-// ****************************************************************************
-// ****************************************************************************
-
 void MainWindow::OnShowFdsOptionsDialog(wxCommandEvent &event)
 {
   FdsOptionsDialog *dialog = FdsOptionsDialog::getInstance();
-  dialog->SetParent(vocalTractPage);
+  dialog->SetParent(acoustic3dPage);
   dialog->Show(true);
 }
 
@@ -2139,59 +1952,59 @@ void MainWindow::OnShowLfModelDialog(wxCommandEvent &event)
 // ****************************************************************************
 // ****************************************************************************
 
-void MainWindow::OnGesturalScoreFileToAudio(wxCommandEvent &event)
-{
-  wxFileName fileName(data->gesturalScoreFileName);
+// void MainWindow::OnGesturalScoreFileToAudio(wxCommandEvent &event)
+// {
+//   wxFileName fileName(data->gesturalScoreFileName);
 
-  wxString name = wxFileSelector("Load gestural score", fileName.GetPath(),
-    fileName.GetFullName(), ".ges", "Gestural scores (*.ges)|*.ges",
-    wxFD_OPEN | wxFD_FILE_MUST_EXIST, this);
+//   wxString name = wxFileSelector("Load gestural score", fileName.GetPath(),
+//     fileName.GetFullName(), ".ges", "Gestural scores (*.ges)|*.ges",
+//     wxFD_OPEN | wxFD_FILE_MUST_EXIST, this);
 
-  if (name.empty())
-  {
-    return;
-  }
+//   if (name.empty())
+//   {
+//     return;
+//   }
 
-  data->gesturalScoreFileName = name;
+//   data->gesturalScoreFileName = name;
 
-  // Create a temporary gestural score for the synthesis.
-  GesturalScore *gs = new GesturalScore(data->vocalTract, data->getSelectedGlottis());
+//   // Create a temporary gestural score for the synthesis.
+//   GesturalScore *gs = new GesturalScore(data->vocalTract, data->getSelectedGlottis());
 
-  bool allValuesInRange = true;
+//   bool allValuesInRange = true;
 
-  if (gs->loadGesturesXml(name.ToStdString(), allValuesInRange) == false)
-  {
-    wxMessageBox("Loading the gestural score failed!", "Error!");
-    delete gs;
-    return;
-  }
+//   if (gs->loadGesturesXml(name.ToStdString(), allValuesInRange) == false)
+//   {
+//     wxMessageBox("Loading the gestural score failed!", "Error!");
+//     delete gs;
+//     return;
+//   }
 
-  if (allValuesInRange == false)
-  {
-    wxMessageBox("Some gesture values in the score were out of range and have been constricted.", "Warning!");
-  }
+//   if (allValuesInRange == false)
+//   {
+//     wxMessageBox("Some gesture values in the score were out of range and have been constricted.", "Warning!");
+//   }
 
-  // ****************************************************************
-  // Do the actual synthesis.
-  // ****************************************************************
+//   // ****************************************************************
+//   // Do the actual synthesis.
+//   // ****************************************************************
 
-  vector<double> audio;
-  wxBusyInfo wait("Please wait...");
+//   vector<double> audio;
+//   wxBusyInfo wait("Please wait...");
 
-  Synthesizer::synthesizeGesturalScore(gs, data->tdsModel, audio);
+//   Synthesizer::synthesizeGesturalScore(gs, data->tdsModel, audio);
 
-  data->track[Data::MAIN_TRACK]->setZero();
-  Synthesizer::copySignal(audio, *data->track[Data::MAIN_TRACK], 0);
+//   data->track[Data::MAIN_TRACK]->setZero();
+//   Synthesizer::copySignal(audio, *data->track[Data::MAIN_TRACK], 0);
 
-  // Set the selection to the newly synthesized gestural score.
-  data->selectionMark_pt[0] = 0;
-  data->selectionMark_pt[1] = audio.size() + 8820;  // Include 200 ms silence at the end.
+//   // Set the selection to the newly synthesized gestural score.
+//   data->selectionMark_pt[0] = 0;
+//   data->selectionMark_pt[1] = audio.size() + 8820;  // Include 200 ms silence at the end.
 
-  updateWidgets();
+//   updateWidgets();
 
-  // Delete the temporary gestural score.
-  delete gs;
-}
+//   // Delete the temporary gestural score.
+//   delete gs;
+// }
 
 
 
@@ -2304,47 +2117,47 @@ void MainWindow::OnTractSequenceFileToAudio(wxCommandEvent &event)
 // ****************************************************************************
 // ****************************************************************************
 
-void MainWindow::OnGesturalScoreToTubeSequenceFile(wxCommandEvent &event)
-{
-  wxString name = wxFileSelector("Save tube sequence file", "",
-    "", ".txt", "Text files (*.txt)|*.txt",
-    wxFD_SAVE | wxFD_OVERWRITE_PROMPT, this);
+// void MainWindow::OnGesturalScoreToTubeSequenceFile(wxCommandEvent &event)
+// {
+//   wxString name = wxFileSelector("Save tube sequence file", "",
+//     "", ".txt", "Text files (*.txt)|*.txt",
+//     wxFD_SAVE | wxFD_OVERWRITE_PROMPT, this);
 
-  if (name.empty())
-  {
-    return;
-  }
+//   if (name.empty())
+//   {
+//     return;
+//   }
 
-  if (Synthesizer::gesturalScoreToTubeSequenceFile(data->gesturalScore, name.ToStdString()) == false)
-  {
-    wxMessageBox("The tube sequence file could not be saved.", "Error");
-  }
+//   if (Synthesizer::gesturalScoreToTubeSequenceFile(data->gesturalScore, name.ToStdString()) == false)
+//   {
+//     wxMessageBox("The tube sequence file could not be saved.", "Error");
+//   }
 
-  wxPrintf("The tube sequence file has been successfully saved.\n");
-}
+//   wxPrintf("The tube sequence file has been successfully saved.\n");
+// }
 
 
 // ****************************************************************************
 // ****************************************************************************
 
-void MainWindow::OnGesturalScoreToTractSequenceFile(wxCommandEvent &event)
-{
-  wxString name = wxFileSelector("Save tract sequence file", "",
-    "", ".txt", "Text files (*.txt)|*.txt",
-    wxFD_SAVE | wxFD_OVERWRITE_PROMPT, this);
+// void MainWindow::OnGesturalScoreToTractSequenceFile(wxCommandEvent &event)
+// {
+//   wxString name = wxFileSelector("Save tract sequence file", "",
+//     "", ".txt", "Text files (*.txt)|*.txt",
+//     wxFD_SAVE | wxFD_OVERWRITE_PROMPT, this);
 
-  if (name.empty())
-  {
-    return;
-  }
+//   if (name.empty())
+//   {
+//     return;
+//   }
 
-  if (Synthesizer::gesturalScoreToTractSequenceFile(data->gesturalScore, name.ToStdString()) == false)
-  {
-    wxMessageBox("The tract sequence file could not be saved.", "Error");
-  }
+//   if (Synthesizer::gesturalScoreToTractSequenceFile(data->gesturalScore, name.ToStdString()) == false)
+//   {
+//     wxMessageBox("The tract sequence file could not be saved.", "Error");
+//   }
 
-  wxPrintf("The tract sequence file has been successfully saved.\n");
-}
+//   wxPrintf("The tract sequence file has been successfully saved.\n");
+// }
 
 
 // ****************************************************************************
@@ -2478,8 +2291,8 @@ void MainWindow::OnClearAll(wxCommandEvent &event)
   if (dialog.ShowModal() == wxID_YES)
   {
     OnClearAudioTracks(event);
-    OnClearGesturalScore(event);
-    OnClearSegmentSequence(event);
+    // OnClearGesturalScore(event); // Already commented
+    // OnClearSegmentSequence(event); // Ensure this is commented
     OnClearAnalysisTracks(event);
   }
 }
@@ -2549,21 +2362,11 @@ void MainWindow::OnClearAudioTracks(wxCommandEvent &event)
 // ****************************************************************************
 // ****************************************************************************
 
-void MainWindow::OnClearGesturalScore(wxCommandEvent &event)
-{
-  data->gesturalScore->clear();
-  updateWidgets();
-}
-
-
-// ****************************************************************************
-// ****************************************************************************
-
-void MainWindow::OnClearSegmentSequence(wxCommandEvent &event)
-{
-  data->segmentSequence->clear();
-  updateWidgets();
-}
+// void MainWindow::OnClearSegmentSequence(wxCommandEvent &event)
+// {
+//   data->segmentSequence->clear();
+//   updateWidgets();
+// }
 
 
 // ****************************************************************************
@@ -2583,179 +2386,5 @@ void MainWindow::OnClearAnalysisTracks(wxCommandEvent &event)
 
 
 // ****************************************************************************
-// ****************************************************************************
-
-void MainWindow::OnKeyCtrlLeft(wxCommandEvent &event)
-{
-  if (notebook->GetCurrentPage() == (wxWindow*)signalPage)
-  {
-    signalPage->scrollLeft();
-  }
-  else
-  if (notebook->GetCurrentPage() == (wxWindow*)gesturalScorePage)
-  {
-    gesturalScorePage->scrollLeft();
-  }
-}
-
-// ****************************************************************************
-// ****************************************************************************
-
-void MainWindow::OnKeyCtrlRight(wxCommandEvent &event)
-{
-  if (notebook->GetCurrentPage() == (wxWindow*)signalPage)
-  {
-    signalPage->scrollRight();
-  }
-  else
-  if (notebook->GetCurrentPage() == (wxWindow*)gesturalScorePage)
-  {
-    gesturalScorePage->scrollRight();
-  }
-}
-
-// ****************************************************************************
-// ****************************************************************************
-
-void MainWindow::OnKeyShiftLeft(wxCommandEvent &event)
-{
-  if (notebook->GetCurrentPage() == (wxWindow*)gesturalScorePage)
-  {
-    gesturalScorePage->selectNextLeftSegment();
-  }
-}
-
-// ****************************************************************************
-// ****************************************************************************
-
-void MainWindow::OnKeyShiftRight(wxCommandEvent &event)
-{
-  if (notebook->GetCurrentPage() == (wxWindow*)gesturalScorePage)
-  {
-    gesturalScorePage->selectNextRightSegment();
-  }
-}
-
-// ****************************************************************************
-// ****************************************************************************
-
-void MainWindow::OnKeyCtrlLess(wxCommandEvent &event)
-{
-  if (notebook->GetCurrentPage() == (wxWindow*)gesturalScorePage)
-  {
-    gesturalScorePage->togglePicture();    
-  }
-}
-
-
-// ****************************************************************************
-// ****************************************************************************
-
-void MainWindow::OnKeyCtrlDelete(wxCommandEvent &event)
-{
-  if (notebook->GetCurrentPage() == (wxWindow*)gesturalScorePage)
-  {
-    gesturalScorePage->shortenGesturalScore();    
-  }
-}
-
-
-// ****************************************************************************
-// ****************************************************************************
-
-void MainWindow::OnKeyCtrlInsert(wxCommandEvent &event)
-{
-  if (notebook->GetCurrentPage() == (wxWindow*)gesturalScorePage)
-  {
-    gesturalScorePage->lengthenGesturalScore();    
-  }
-}
-
-
-// ****************************************************************************
-/// The key F6 is for special tasks.
-// ****************************************************************************
-
-void MainWindow::OnKeyF6(wxCommandEvent &event)
-{
-
-/*
-  VocalTractPicture *pic = VocalTractDialog::getInstance(this)->getVocalTractPicture();
-  pic->crossSectionWithTongue = !pic->crossSectionWithTongue;
-  pic->Refresh();
-  wxPrintf("On key F6: vocalTractPicture->crossSectionWithTongue = %d\n", (int)pic->crossSectionWithTongue);
-*/
-}
-
-
-// ****************************************************************************
-/// The key F7 is for special tasks.
-// ****************************************************************************
-
-void MainWindow::OnKeyF7(wxCommandEvent &event)
-{
-
-/*
-  VocalTractPicture *pic = VocalTractDialog::getInstance(this)->getVocalTractPicture();
-  pic->showTongueCrossSections = !pic->showTongueCrossSections;
-  pic->Refresh();
-  wxPrintf("On key F7: vocalTractPicture->showTongueCrossSections = %d\n", (int)pic->showTongueCrossSections);
-*/
-}
-
-
-// ****************************************************************************
-/// The key F8 is for saving the constriction buffer.
-// ****************************************************************************
-
-void MainWindow::OnKeyF8(wxCommandEvent &event)
-{
-
-/*
-  static wxString constrictionBufferFileName = "";
-  wxFileName fileName(constrictionBufferFileName);
-
-  wxString name = wxFileSelector("Save constriction buffer", fileName.GetPath(),
-    fileName.GetFullName(), ".txt", "Text files (*.txt)|*.txt",
-    wxFD_SAVE | wxFD_OVERWRITE_PROMPT, this);
-
-  if (name.empty() == false)
-  {
-    constrictionBufferFileName = name;
-    data->tdsModel->saveConstrictionBuffer(name.ToStdString());
-  }
-*/
-}
-
-
-// ****************************************************************************
-/// The key F9 is for special tasks.
-// ****************************************************************************
-
-void MainWindow::OnKeyF9(wxCommandEvent& event)
-{
-
-}
-
-
-// ****************************************************************************
-/// The key F11 is for special tasks.
-// ****************************************************************************
-
-void MainWindow::OnKeyF11(wxCommandEvent &event)
-{
-
-}
-
-
-// ****************************************************************************
-/// The key F12 is for special tasks.
-// ****************************************************************************
-
-void MainWindow::OnKeyF12(wxCommandEvent &event)
-{
-
-}
-
 // ****************************************************************************
 

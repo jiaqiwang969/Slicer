@@ -2,7 +2,7 @@
 // This file is part of VocalTractLab3D.
 // Copyright (C) 2022, Peter Birkholz, Dresden, Germany
 // www.vocaltractlab.de
-// author: Peter Birkholz and Rémi Blandin
+// author: Peter Birkholz and RÃ©mi Blandin
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -337,6 +337,7 @@ C_EXPORT int vtlSynthBlock(double *tractParams, double *glottisParams,
 C_EXPORT int vtlApiTest(const char *speakerFileName, double *audio, int *numSamples);
 
 
+/* // Removing SegmentSequence and GesturalScore related APIs
 // ****************************************************************************
 // This function converts a segment sequence file (a TXT file containing the 
 // sequence of speech segments in SAMPA and the associated durations) with the 
@@ -421,7 +422,7 @@ C_EXPORT int vtlGesturalScoreToTractSequence(const char* gesFileName,
 
 C_EXPORT int vtlGetGesturalScoreDuration(const char* gesFileName, int* numAudioSamples,
     int* numGestureSamples);
-
+*/
 
 // ****************************************************************************
 // This function converts a tract sequence file into an audio signal or file.

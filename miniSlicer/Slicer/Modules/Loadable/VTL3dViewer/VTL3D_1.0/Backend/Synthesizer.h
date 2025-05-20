@@ -2,7 +2,7 @@
 // This file is part of VocalTractLab3D.
 // Copyright (C) 2022, Peter Birkholz, Dresden, Germany
 // www.vocaltractlab.de
-// author: Peter Birkholz and Rémi Blandin
+// author: Peter Birkholz and Rï¿½mi Blandin
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@
 #include "Tube.h"
 #include "Glottis.h"
 #include "VocalTract.h"
-#include "GesturalScore.h"
+// #include "GesturalScore.h" // Removed as GesturalScore functionality is being removed
 #include "Dsp.h"
 #include "IirFilter.h"
 #include <vector>
@@ -70,8 +70,8 @@ public:
   static void copySignal(vector<double> &sourceSignal, Signal16 &targetSignal, 
     int startPosInTarget);
 
-  static void synthesizeGesturalScore(GesturalScore *gesturalScore, 
-    TdsModel *tdsModel, vector<double> &audio, bool enableConsoleOutput = true);
+  // static void synthesizeGesturalScore(GesturalScore *gesturalScore, // Removed
+  //   TdsModel *tdsModel, vector<double> &audio, bool enableConsoleOutput = true); // Removed
 
   static bool synthesizeTubeSequence(string fileName,
     Glottis *glottis, TdsModel *tdsModel, vector<double> &audio);
@@ -82,8 +82,8 @@ public:
   static void synthesizeStaticPhoneme(Glottis *glottis, VocalTract *vocalTract,
     TdsModel *tdsModel, bool shortLength, bool useConstantF0, vector<double> &audio);
 
-  static bool gesturalScoreToTractSequenceFile(GesturalScore *gesturalScore, string fileName);
-  static bool gesturalScoreToTubeSequenceFile(GesturalScore *gesturalScore, string fileName);
+  // static bool gesturalScoreToTractSequenceFile(GesturalScore *gesturalScore, string fileName); // Removed
+  // static bool gesturalScoreToTubeSequenceFile(GesturalScore *gesturalScore, string fileName); // Removed
 
 
   // **************************************************************************

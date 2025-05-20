@@ -263,12 +263,12 @@ void Acoustic3dPage::initWidgets(VocalTractPicture* picVocalTract)
   //button = new wxButton(this, IDB_SHAPES_DIALOG, "Vocal tract shapes");
   //leftSizer->Add(button, 0, wxGROW | wxALL, 3);
 
-  button = new wxButton(this, IDB_IMPORT_GEOMETRY, "Import geometry");
+  button = new wxButton(this, IDB_IMPORT_GEOMETRY, wxString::FromUTF8("导入几何体"));
   leftSizer->Add(button, 0, wxGROW | wxALL, 3);
 
   leftSizer->AddSpacer(20);
 
-  button = new wxButton(this, IDB_PARAM_SIMU_DIALOG, "Simulation parameters");
+  button = new wxButton(this, IDB_PARAM_SIMU_DIALOG, wxString::FromUTF8("仿真参数"));
   leftSizer->Add(button, 0, wxGROW | wxALL, 3);
 
   //button = new wxButton(this, IDB_RUN_TEST_JUNCTION, "Run test junction");
@@ -288,24 +288,24 @@ void Acoustic3dPage::initWidgets(VocalTractPicture* picVocalTract)
 
   leftSizer->AddSpacer(20);
 
-  button = new wxButton(this, IDB_COMPUTE_MODES, "Compute modes");
+  button = new wxButton(this, IDB_COMPUTE_MODES, wxString::FromUTF8("计算模态"));
   leftSizer->Add(button, 0, wxGROW | wxALL, 3);
 
-  button = new wxButton(this, IDB_COMPUTE_TF, "Compute transfer functions");
+  button = new wxButton(this, IDB_COMPUTE_TF, wxString::FromUTF8("计算传递函数"));
   leftSizer->Add(button, 0, wxGROW | wxALL, 3);
 
-  button = new wxButton(this, IDB_COMPUTE_ACOUSTIC_FIELD, "Compute acoustic field");
+  button = new wxButton(this, IDB_COMPUTE_ACOUSTIC_FIELD, wxString::FromUTF8("计算声场"));
   leftSizer->Add(button, 0, wxGROW | wxALL, 3);
 
   leftSizer->AddSpacer(20);
   
-  button = new wxButton(this, IDB_LF_PULSE, "LF glottal flow pulse");
+  button = new wxButton(this, IDB_LF_PULSE, wxString::FromUTF8("脉冲激励信号流脉冲"));
   leftSizer->Add(button, 0, wxGROW | wxALL, 3);
   
-  button = new wxButton(this, IDB_PLAY_LONG_VOWEL, "Play vowel");
+  button = new wxButton(this, IDB_PLAY_LONG_VOWEL, wxString::FromUTF8("播放响应"));
   leftSizer->Add(button, 0, wxGROW | wxALL, 3);
 
-  button = new wxButton(this, IDB_PLAY_NOISE_SOURCE, "Play noise source");
+  button = new wxButton(this, IDB_PLAY_NOISE_SOURCE, wxString::FromUTF8("播放湍流噪声响应"));
   leftSizer->Add(button, 0, wxGROW | wxALL, 3);
 
 // ****************************************************************
@@ -365,18 +365,18 @@ void Acoustic3dPage::initWidgets(VocalTractPicture* picVocalTract)
 
   sizer->AddStretchSpacer(1);
 
-  chkShowSegments = new wxCheckBox(topPanel, IDB_SHOW_SEGMENTS, "Show segments");
+  chkShowSegments = new wxCheckBox(topPanel, IDB_SHOW_SEGMENTS, wxString::FromUTF8("显示分段"));
   sizer->Add(chkShowSegments, 0, wxALIGN_BOTTOM | wxALL, 2);
   chkShowSegments->SetValue(true);
 
   sizer->AddStretchSpacer(1);
 
-  chkShowField = new wxCheckBox(topPanel, IDB_SHOW_FIELD, "Show field");
+  chkShowField = new wxCheckBox(topPanel, IDB_SHOW_FIELD, wxString::FromUTF8("显示声场"));
   sizer->Add(chkShowField, 0, wxALIGN_BOTTOM | wxALL, 2);
 
   sizer->AddStretchSpacer(1);
 
-  chkShowTfPts = new wxCheckBox(topPanel, IDB_SHOW_TF_PTS, "Show TF points");
+  chkShowTfPts = new wxCheckBox(topPanel, IDB_SHOW_TF_PTS, wxString::FromUTF8("显示传递函数点"));
   sizer->Add(chkShowTfPts, 0, wxALIGN_BOTTOM | wxALL, 2);
   chkShowTfPts->SetValue(true);
 
@@ -387,7 +387,7 @@ void Acoustic3dPage::initWidgets(VocalTractPicture* picVocalTract)
 
   sizer->AddStretchSpacer(1);
 
-  middleSizer->Add(sizer, 0, wxEXPAND | wxALIGN_CENTER_HORIZONTAL);
+  middleSizer->Add(sizer, 0, wxEXPAND);
 
   topSizer->Add(middleSizer, 1, wxEXPAND | wxALL, 2);
 
@@ -411,22 +411,22 @@ void Acoustic3dPage::initWidgets(VocalTractPicture* picVocalTract)
 
   sizer->AddStretchSpacer(1);
 
-  chkShowContour = new wxCheckBox(topPanel, IDB_SHOW_CONTOUR, "Contour");
+  chkShowContour = new wxCheckBox(topPanel, IDB_SHOW_CONTOUR, wxString::FromUTF8("轮廓"));
   sizer->Add(chkShowContour, 0, wxALIGN_BOTTOM | wxALL, 2);
 
   sizer->AddStretchSpacer(1);
 
-  chkShowMesh = new wxCheckBox(topPanel, IDB_SHOW_MESH, "Mesh");
+  chkShowMesh = new wxCheckBox(topPanel, IDB_SHOW_MESH, wxString::FromUTF8("网格"));
   sizer->Add(chkShowMesh, 0, wxALIGN_BOTTOM | wxALL, 2);
 
   sizer->AddStretchSpacer(1);
 
-  chkShowMode = new wxCheckBox(topPanel, IDB_SHOW_MODE, "Modes");
+  chkShowMode = new wxCheckBox(topPanel, IDB_SHOW_MODE, wxString::FromUTF8("模态"));
   sizer->Add(chkShowMode, 0, wxALIGN_BOTTOM | wxALL, 2);
 
   sizer->AddStretchSpacer(1);
 
-  chkShowTransField = new wxCheckBox(topPanel, IDB_SHOW_TRANSVERS_FIELD, "Field");
+  chkShowTransField = new wxCheckBox(topPanel, IDB_SHOW_TRANSVERS_FIELD, wxString::FromUTF8("声场"));
   sizer->Add(chkShowTransField, 0, wxALIGN_BOTTOM | wxALL, 2);
 
   //chkShowF = new wxCheckBox(topPanel, IDB_SHOW_F, "F");
@@ -439,7 +439,7 @@ void Acoustic3dPage::initWidgets(VocalTractPicture* picVocalTract)
 
   sizer->AddStretchSpacer(1);
 
-  topRightSizer->Add(sizer, 0, wxEXPAND | wxALIGN_CENTER_HORIZONTAL);
+  topRightSizer->Add(sizer, 0, wxEXPAND);
   topSizer->Add(topRightSizer, 1, wxEXPAND | wxALL, 2);
 
   // ****************************************************************
@@ -480,21 +480,21 @@ void Acoustic3dPage::initWidgets(VocalTractPicture* picVocalTract)
 
   sizer = new wxBoxSizer(wxVERTICAL);
 
-  chkShowGlottalSourceTf = new wxCheckBox(bottomPanel, IDB_SHOW_GLOTTAL_SOURCE_TF, "Glottal transfer function");
+  chkShowGlottalSourceTf = new wxCheckBox(bottomPanel, IDB_SHOW_GLOTTAL_SOURCE_TF, wxString::FromUTF8("声门传递函数"));
   sizer->Add(chkShowGlottalSourceTf, 0, wxALL, 2);
 
-  chkShowNoiseSourceSpec = new wxCheckBox(bottomPanel, IDB_SHOW_NOISE_SOURCE_SPEC, "Noise transfer function");
+  chkShowNoiseSourceSpec = new wxCheckBox(bottomPanel, IDB_SHOW_NOISE_SOURCE_SPEC, wxString::FromUTF8("噪声传递函数"));
   sizer->Add(chkShowNoiseSourceSpec, 0, wxALL, 2);
 
-  chkShowInputImped = new wxCheckBox(bottomPanel, IDB_SHOW_INPUT_IMPED_SPEC, "Input impedance");
+  chkShowInputImped = new wxCheckBox(bottomPanel, IDB_SHOW_INPUT_IMPED_SPEC, wxString::FromUTF8("输入阻抗"));
   sizer->Add(chkShowInputImped, 0, wxALL, 2);
 
   // 新增：保存全部 TF 按钮
-  wxButton* btnSaveAllTf = new wxButton(bottomPanel, IDB_SAVE_ALL_TF, "Save TF txt", wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT);
+  wxButton* btnSaveAllTf = new wxButton(bottomPanel, IDB_SAVE_ALL_TF, wxString::FromUTF8("保存TF文本"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT);
   sizer->Add(btnSaveAllTf, 0, wxALL, 4);
 
   // text to display the transfer function point coordinates
-  wxStaticText* label = new wxStaticText(bottomPanel, wxID_ANY, "Transfer function point:");
+  wxStaticText* label = new wxStaticText(bottomPanel, wxID_ANY, wxString::FromUTF8("传递函数点："));
   sizer->Add(label, 0, wxALL | wxALIGN_LEFT, 3);
 
   txtTfPoint = new wxStaticText(bottomPanel, wxID_ANY, generateTfPointCoordString());

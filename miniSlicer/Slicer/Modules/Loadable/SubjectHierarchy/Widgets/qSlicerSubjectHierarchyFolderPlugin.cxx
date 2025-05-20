@@ -95,17 +95,17 @@ void qSlicerSubjectHierarchyFolderPluginPrivate::init()
 {
   Q_Q(qSlicerSubjectHierarchyFolderPlugin);
 
-  this->CreateFolderUnderSceneAction = new QAction(qSlicerSubjectHierarchyFolderPlugin::tr("Create new folder"), q);
+  this->CreateFolderUnderSceneAction = new QAction(qSlicerSubjectHierarchyFolderPlugin::tr("新建文件夹"), q);
   qSlicerSubjectHierarchyAbstractPlugin::setActionPosition(this->CreateFolderUnderSceneAction,
     qSlicerSubjectHierarchyAbstractPlugin::SectionFolder, 5);
   QObject::connect(this->CreateFolderUnderSceneAction, SIGNAL(triggered()), q, SLOT(createFolderUnderScene()));
 
-  this->CreateFolderUnderNodeAction = new QAction(qSlicerSubjectHierarchyFolderPlugin::tr("Create child folder"), q);
+  this->CreateFolderUnderNodeAction = new QAction(qSlicerSubjectHierarchyFolderPlugin::tr("新建子文件夹"), q);
   qSlicerSubjectHierarchyAbstractPlugin::setActionPosition(this->CreateFolderUnderNodeAction,
     qSlicerSubjectHierarchyAbstractPlugin::SectionFolder, 6);
   QObject::connect(this->CreateFolderUnderNodeAction, SIGNAL(triggered()), q, SLOT(createFolderUnderCurrentNode()));
 
-  this->ApplyColorToBranchAction = new QAction(qSlicerSubjectHierarchyFolderPlugin::tr("Apply color to all children"), q);
+  this->ApplyColorToBranchAction = new QAction(qSlicerSubjectHierarchyFolderPlugin::tr("应用颜色到所有子项"), q);
   this->ApplyColorToBranchAction->setToolTip(
     qSlicerSubjectHierarchyFolderPlugin::tr("If on, then children items will inherit the display properties (e.g. color or opacity) set to the folder"));
   qSlicerSubjectHierarchyAbstractPlugin::setActionPosition(this->ApplyColorToBranchAction,
@@ -113,7 +113,7 @@ void qSlicerSubjectHierarchyFolderPluginPrivate::init()
   QObject::connect(this->ApplyColorToBranchAction, SIGNAL(toggled(bool)), q, SLOT(onApplyColorToBranchToggled(bool)));
   this->ApplyColorToBranchAction->setCheckable(true);
 
-  this->ShowEmptyFoldersAction = new QAction(qSlicerSubjectHierarchyFolderPlugin::tr("Show empty folders"), q);
+  this->ShowEmptyFoldersAction = new QAction(qSlicerSubjectHierarchyFolderPlugin::tr("显示空文件夹"), q);
   this->ShowEmptyFoldersAction->setToolTip(
     qSlicerSubjectHierarchyFolderPlugin::tr("If on, then folders that do not contain nodes (allowed by any filter) are shown, otherwise not"));
   qSlicerSubjectHierarchyAbstractPlugin::setActionPosition(this->ShowEmptyFoldersAction,

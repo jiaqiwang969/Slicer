@@ -1,0 +1,105 @@
+/* 全局字体和背景 */
+QWidget {
+    font-family: "微软雅黑", "Unifont", "Arial", "sans-serif";
+    font-size: 14px;
+    color: #222;
+    background: #f7f9fa;
+}
+
+/* 按钮样式 */
+QPushButton {
+    background-color: #1976d2;
+    color: white;
+    border-radius: 4px;
+    padding: 6px 14px;
+    border: none;
+    min-height: 28px;
+}
+QPushButton:hover {
+    background-color: #1565c0;
+}
+QPushButton:pressed {
+    background-color: #0d47a1;
+}
+
+/* 标签样式 */
+QLabel {
+    color: #333;
+    font-weight: bold;
+}
+
+/* 输入框和下拉框 */
+QLineEdit, QComboBox {
+    border: 1px solid #b0b0b0;
+    border-radius: 3px;
+    padding: 3px 6px;
+    background: #fff;
+    min-height: 26px;
+}
+QLineEdit:focus, QComboBox:focus {
+    border: 1.5px solid #1976d2;
+}
+
+/* 复选框和单选框 */
+QCheckBox, QRadioButton {
+    spacing: 6px;
+    font-weight: normal;
+    min-height: 22px;
+}
+
+/* 表格高亮 */
+QTableView::item:selected, QListWidget::item:selected {
+    background: #d0eaff;
+    color: #000;
+}
+
+/* 滚动条美化 */
+QScrollBar:vertical {
+    background: #f0f0f0;
+    width: 12px;
+    margin: 0px 0px 0px 0px;
+}
+QScrollBar::handle:vertical {
+    background: #b0b0b0;
+    min-height: 20px;
+    border-radius: 6px;
+}
+QScrollBar:horizontal {
+    background: #f0f0f0;
+    height: 12px;
+    margin: 0px 0px 0px 0px;
+}
+QScrollBar::handle:horizontal {
+    background: #b0b0b0;
+    min-width: 20px;
+    border-radius: 6px;
+}
+
+/* 分割线 */
+QFrame[frameShape="4"] {
+    border: 1px solid #bbb;
+    margin: 4px 0;
+}
+
+/* Tab页签 */
+QTabBar::tab {
+    background: #e3eaf2;
+    color: #222;
+    padding: 6px 18px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    margin-right: 2px;
+}
+QTabBar::tab:selected {
+    background: #1976d2;
+    color: #fff;
+}
+
+/* 工具提示 */
+QToolTip {
+    background: #1976d2;
+    color: #fff;
+    border: none;
+    padding: 6px;
+    border-radius: 4px;
+}

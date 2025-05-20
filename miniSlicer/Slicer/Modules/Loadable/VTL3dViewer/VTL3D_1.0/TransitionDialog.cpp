@@ -2,7 +2,7 @@
 // This file is part of VocalTractLab3D.
 // Copyright (C) 2022, Peter Birkholz, Dresden, Germany
 // www.vocaltractlab.de
-// author: Peter Birkholz and Rémi Blandin
+// author: Peter Birkholz and RÃ©mi Blandin
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
 #include "TransitionDialog.h"
 #include "SilentMessageBox.h"
 #include "Backend/SoundLib.h"
-#include "Backend/GesturalScore.h"
+// #include "Backend/GesturalScore.h" // Removed as GesturalScore functionality is being removed
 
 static const double MIN_ALPHA = 0.0;
 static const double MAX_ALPHA = 1.0;
@@ -413,8 +413,12 @@ bool TransitionDialog::getConsonantAndVowelShape(double *consonantParams,
       vowelParams[i] = vt->shapes[vowelIndex].param[i];
     }
 
-    GesturalScore::mapToVowelSubspace(vt, vowelParams, aTongue, bTongue, aLips, bLips);
-    GesturalScore::limitVowelSubspaceCoord(aTongue, bTongue, aLips, bLips);
+    // GesturalScore::mapToVowelSubspace(vt, vowelParams, aTongue, bTongue, aLips, bLips); // GesturalScore class will be removed
+    // Fallback if GesturalScore is removed:
+    aTongue = 0.0; 
+    bTongue = 0.0; 
+    aLips = 0.0; 
+    bLips = 0.0;
   }
   else
   {
@@ -446,8 +450,12 @@ bool TransitionDialog::getConsonantAndVowelShape(double *consonantParams,
   // alpha and beta values obtained for the context vowel.
   // ****************************************************************
 
-  bool consonantOk = GesturalScore::getContextDependentConsonant(vt, 
-    (const char*)consonant.c_str(), aTongue, bTongue, aLips, bLips, consonantParams);
+  // bool consonantOk = GesturalScore::getContextDependentConsonant(vt, // GesturalScore class will be removed
+  //   (const char*)consonant.c_str(), aTongue, bTongue, aLips, bLips, consonantParams);
+  // Fallback if GesturalScore is removed:
+  bool consonantOk = false; // Assume consonant cannot be determined without GesturalScore
+  // Or, provide a very basic default for consonantParams if possible, e.g.:
+  // for(int i=0; i<VocalTract::NUM_PARAMS; ++i) consonantParams[i] = vt->param[i].neutral;
 
   if (consonantOk == false)
   {
@@ -582,6 +590,13 @@ void TransitionDialog::get2dVowelParams(const wxString &vowel,
   int shapeIndex = vt->getShapeIndex( vowel.ToStdString() );
   if (shapeIndex == -1)
   {
+    for (i=0; i < VocalTract::NUM_PARAMS; i++)
+    {
+      vtParams[i] = vt->shapes[shapeIndex].param[i];
+    }
+    // data->gesturalScore->mapToVowelSubspace(vt, vtParams, alphaTongue, betaTongue, alphaLips, betaLips); // gesturalScore removed
+    // GesturalScore::mapToVowelSubspace(vt, vtParams, alphaTongue, betaTongue, alphaLips, betaLips); // GesturalScore class will be removed
+    // Fallback if GesturalScore::mapToVowelSubspace is removed
     alphaTongue = 0.0;
     betaTongue = 0.0;
     alphaLips = 0.0;
@@ -593,7 +608,13 @@ void TransitionDialog::get2dVowelParams(const wxString &vowel,
     {
       vtParams[i] = vt->shapes[shapeIndex].param[i];
     }
-    data->gesturalScore->mapToVowelSubspace(vt, vtParams, alphaTongue, betaTongue, alphaLips, betaLips);
+    // data->gesturalScore->mapToVowelSubspace(vt, vtParams, alphaTongue, betaTongue, alphaLips, betaLips); // gesturalScore removed
+    // GesturalScore::mapToVowelSubspace(vt, vtParams, alphaTongue, betaTongue, alphaLips, betaLips); // GesturalScore class will be removed
+    // Fallback if GesturalScore::mapToVowelSubspace is removed
+    alphaTongue = 0.0;
+    betaTongue = 0.0;
+    alphaLips = 0.0;
+    betaLips = 0.0;
   }
 }
 

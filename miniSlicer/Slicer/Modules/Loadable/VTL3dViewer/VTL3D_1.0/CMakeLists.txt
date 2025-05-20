@@ -59,13 +59,14 @@ file(GLOB VTL3D_GUI_SRCS
   "*.h"
   "Backend/*.cpp"
   "*.cpp"
+  "VTL3dFactory.h"
   "VTL3dFactory.cpp"
-  "AreaFunctionWidget.cpp"
+  #"AreaFunctionWidget.cpp"
 )
 
 # List headers that require MOC processing (contain Q_OBJECT)
 set(VTL3D_GUI_MOC_HDRS
-  AreaFunctionWidget.h
+  #AreaFunctionWidget.h
   # Add other .h files with Q_OBJECT here in the future if any
 )
 
